@@ -11,3 +11,16 @@ build-artifacts/
 temp-write-test.txt
 studio-pro-extension-csharp/build-check/
 studio-pro-extension-csharp/build-artifacts-run-*/
+
+# Mendix runtime data (keep folder structure, ignore generated content)
+mendix-data/exports/*
+!mendix-data/exports/.gitkeep
+mendix-data/processed/*
+!mendix-data/processed/.gitkeep
+mendix-data/errors/*
+!mendix-data/errors/.gitkeep
+mendix-data/structured/*
+!mendix-data/structured/.gitkeep
+mendix-data/dumps/*
+!mendix-data/dumps/.gitkeep
+mendix-data/*.log
