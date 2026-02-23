@@ -1,0 +1,98 @@
+﻿{
+  "schemaVersion": "2.0",
+  "commitId": "cf7b6eff5226b7f1afe3e1dd64ca0d7cc7f284c8655ff9fead9a69a8b2e60242",
+  "sourceFileName": "2026-02-18T11-23-06.243Z_Smart Expenses app-main.json",
+  "timestamp": "2026-02-18T11:23:06.2434205\u002B00:00",
+  "projectName": "Smart Expenses app-main",
+  "branchName": "main",
+  "userName": "Svroozendaal",
+  "userEmail": "115573006\u002BSvroozendaal@users.noreply.github.com",
+  "entities": [
+    {
+      "type": "Model Analysis",
+      "name": "App.mpr",
+      "action": "Modified"
+    }
+  ],
+  "affectedFiles": [
+    "App.mpr"
+  ],
+  "metrics": {
+    "totalFiles": 1,
+    "added": 0,
+    "modified": 1,
+    "deleted": 0,
+    "renamed": 0
+  },
+  "files": [
+    {
+      "filePath": "App.mpr",
+      "fileName": "App.mpr",
+      "folderPath": "",
+      "status": "Modified",
+      "isStaged": false,
+      "changeKind": "Modified",
+      "isBinaryDiff": true,
+      "diffLineCount": 0,
+      "modelChangeCount": 1,
+      "tags": [
+        "binary-diff",
+        "has-model-changes",
+        "mendix-model",
+        "modified",
+        "unstaged"
+      ]
+    }
+  ],
+  "modelChanges": [
+    {
+      "filePath": "App.mpr",
+      "changeType": "Modified",
+      "elementType": "Model Analysis",
+      "elementName": "App.mpr",
+      "details": "Model analysis unavailable: mx.exe dump-mpr failed with exit code 3. Exception during exporting the model to JSON:\r\nCannot open MPR file .autocommitmessage_0db3425a293d45e9a6ecb9a4d448b82e.mpr in C:\\MendixWorkers\\Smart Expenses app-main, as the existing MPR contents refer to MPR file \u0027App.mpr\u0027"
+    }
+  ],
+  "modelSummary": {
+    "totalModelChanges": 1,
+    "byElementType": [
+      {
+        "key": "Model Analysis",
+        "count": 1
+      }
+    ],
+    "byChangeType": [
+      {
+        "key": "Modified",
+        "count": 1
+      }
+    ],
+    "byFile": [
+      {
+        "key": "App.mpr",
+        "count": 1
+      }
+    ],
+    "microflowActions": [],
+    "domainModel": {
+      "addedEntities": [],
+      "modifiedEntities": [],
+      "attributeChanges": []
+    }
+  },
+  "modelDumpArtifacts": [],
+  "commitMessageContext": {
+    "suggestedType": "chore",
+    "suggestedScopes": [
+      "App"
+    ],
+    "suggestedSubject": "update App change set",
+    "highlights": [
+      "1 file(s) changed (0 added, 1 modified, 0 deleted, 0 renamed).",
+      "Top element changes: Model Analysis x1."
+    ],
+    "risks": [
+      "Binary model file changes detected; plain git diff is unavailable."
+    ]
+  }
+}

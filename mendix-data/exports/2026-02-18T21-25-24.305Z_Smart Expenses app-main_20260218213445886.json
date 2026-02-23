@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0",
+  "timestamp": "2026-02-18T21:25:24.3057167\u002B00:00",
+  "projectName": "Smart Expenses app-main",
+  "branchName": "main",
+  "userName": "Svroozendaal",
+  "userEmail": "simonvRoozendaal@gmail.com",
+  "changes": [
+    {
+      "filePath": "App.mpr",
+      "status": "Modified",
+      "isStaged": false,
+      "diffText": "Binary file changed - diff not available",
+      "modelChanges": [
+        {
+          "changeType": "Added",
+          "elementType": "Entity",
+          "elementName": "SmartExpenses.New_entity",
+          "details": "attributes added (1): newAttribute"
+        },
+        {
+          "changeType": "Modified",
+          "elementType": "Microflow",
+          "elementName": "SmartExpenses.ACT_Balance_Create",
+          "details": "objectCollection updated; flows count 3-\u003E6; actions used (5): ChangeObjectAction x1, CommitAction x1, CreateObjectAction x1, RetrieveAction x1, ShowPageAction x1; action details: ChangeObjectAction: change currentSession (SessionId); CommitAction: commit currentSession; CreateObjectAction: create SmartExpenses.Balance as NewBalance (Balance_FBGProfile); RetrieveAction: retrieve User over association Session_User from currentSession"
+        },
+        {
+          "changeType": "Added",
+          "elementType": "Microflow",
+          "elementName": "SmartExpenses.NEW_MICROFLOW_test",
+          "details": "actions used (3): ChangeObjectAction x1, CommitAction x1, RetrieveAction x1; action details: ChangeObjectAction: change currentSession (SessionId); CommitAction: commit currentSession; RetrieveAction: retrieve User over association Session_User from currentSession"
+        }
+      ],
+      "modelDumpArtifact": {
+        "folderPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-18T21-25-23.625Z_App.mpr_88d639ffb5e34b0286a6bebf582b4a29",
+        "workingDumpPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-18T21-25-23.625Z_App.mpr_88d639ffb5e34b0286a6bebf582b4a29\\working-dump.json",
+        "headDumpPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-18T21-25-23.625Z_App.mpr_88d639ffb5e34b0286a6bebf582b4a29\\head-dump.json"
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0",
+  "timestamp": "2026-02-23T09:22:36.7218492\u002B00:00",
+  "projectName": "SH - MSH sprint 70",
+  "branchName": "Sprint70_20260218",
+  "userName": "Svroozendaal",
+  "userEmail": "115573006\u002BSvroozendaal@users.noreply.github.com",
+  "changes": [
+    {
+      "filePath": "Mijn SelektHuis.mpr",
+      "status": "Modified",
+      "isStaged": false,
+      "diffText": "Binary file changed - diff not available",
+      "modelChanges": [
+        {
+          "changeType": "Modified",
+          "elementType": "Microflow",
+          "elementName": "InterfacesClickHouseConsuming.SE_ActionStatusUpdate",
+          "details": "objectCollection updated; actions used (12): RetrieveAction x4, ChangeListAction x1, ChangeObjectAction x1, CommitAction x1, CreateListAction x1, CreateObjectAction x1, ExportXmlAction x1, ListOperationAction x1, \u002B1 more; action details: RetrieveAction: retrieve ActionList_QuotationPlaced from Portal.Action | retrieve ActionList_SubsequentQuotationPlaced from Portal.Action | retrieve PlanningPhase over association Action_PlanningPhase from IteratorAction | retrieve Trajectory over association PlanningPhase_Trajectory from PlanningPhase; ChangeObjectAction: change IteratorAction (reminderQuotationPlaced=if $IteratorAction/TypeOfActionConfiguration = Portal.Enum_ActionType.QuotationPlaced then true else $IteratorAction/reminderQuotationPlaced, reminderSubsequentQuotationPlaced=if $IteratorAction/TypeOfActionConfiguration = Portal.Enum_ActionType.SubsequentQuotationPlaced then true else $IteratorAction/reminderQuotationPlaced; refreshInClient=false); CommitAction: commit ActionList_toCommit (refreshInClient=false, withEvents=true); CreateObjectAction: create InterfacesClickHouseConsuming.ExportActionStatusUpdate as NewExportActionStatusUpdate (TrajectoryNumber=$Trajectory/Number, TypeOfAction=$IteratorAction/TypeOfActionConfiguration, ActionUniqueKey=$IteratorAction/UniqueKey); MicroflowCallAction: call microflow -\u003E isSucceeded"
+        },
+        {
+          "changeType": "Modified",
+          "elementType": "Microflow",
+          "elementName": "InterfacesClickHousePublishing.PRS_PlanningPhase",
+          "details": "objectCollection updated; actions used (27): MicroflowCallAction x7, RetrieveAction x4, ChangeObjectAction x3, ListOperationAction x3, ChangeListAction x2, CommitAction x2, CreateListAction x2, DeleteAction x2, \u002B2 more; action details: MicroflowCallAction: call microflow -\u003E Action | call microflow -\u003E Document | call microflow -\u003E PlanningPhase; RetrieveAction: retrieve ActionList_DB from Portal.Action | retrieve ActionNPList over association ActionNP_PlanningPhaseNP from IteratorPlanningPhaseNP | retrieve PlanningPhaseList_DB from Portal.PlanningPhase | retrieve Trajectory from Portal.Trajectory; ChangeObjectAction: change Action (UniqueKey=$IteratorActionNP/UniqueKey, Title=$IteratorActionNP/Title, Description=$IteratorActionNP/Description, actionNeeded=$IteratorActionNP/actionNeeded, DeadlineDate=$IteratorActionNP/DeadlineDate, isFinished=$IteratorActionNP/isFinished, FinishedDate=$IteratorActionNP/FinishedDate, DateDescriptionFinished=$IteratorActionNP/DateDescriptionFinished, \u002B5 more; refreshInClient=false) | change PlanningPhase (UniqueKey=$IteratorPlanningPhaseNP/UniqueKey, Title=$IteratorPlanningPhaseNP/Title, isFinished=$IteratorPlanningPhaseNP/isFinished, Description=$IteratorPlanningPhaseNP/Description, FinishedPhaseText=$IteratorPlanningPhaseNP/FinishedPhaseText, SortingNumber=$IteratorPlanningPhaseNP/SortingNumber, PlanningPhase_Trajectory=$Trajectory; refreshInClient=false) | change PlanningPhase (viewType=if $showIndication then Portal.Enum_ViewType.ShowAlert else if ($PlanningPhase/viewType = Portal.Enum_ViewType.ShowAlert and not($showIndication)) then Portal.Enum_ViewType.NotShow...; refreshInClient=false); CommitAction: commit ActionList_New (refreshInClient=false, withEvents=true) | commit PlanningPhaseList_New (refreshInClient=true, withEvents=true); DeleteAction: delete ActionList_ToDelete (refreshInClient=false) | delete PlanningPhaseList_ToDelete (refreshInClient=false); ChangeVariableAction: change variable showIndication=true; CreateVariableAction: create variable showIndication=false"
+        },
+        {
+          "changeType": "Modified",
+          "elementType": "Microflow",
+          "elementName": "Masterdata.SE_KnowledgeBank_RetrieveInformation",
+          "details": "objectCollection updated; flows count 13-\u003E16; actions used (12): CommitAction x2, CreateListAction x2, ChangeListAction x1, CreateObjectAction x1, DeleteAction x1, LogMessageAction x1, MicroflowCallAction x1, RestCallAction x1, \u002B2 more; action details: CommitAction: commit ArticleList (refreshInClient=false, withEvents=true) | commit CategoryList_New (refreshInClient=false, withEvents=true); CreateObjectAction: create Masterdata.Article as NewArticle (Title=$IteratorArtikel/Titel, Content=$IteratorArtikel/Inhoud, ImageURL=$IteratorArtikel/Afbeelding, PublicationDate=toString($IteratorArtikel/Publicatie_datum), Article_Category=$Category); DeleteAction: delete CategoryList_DB (refreshInClient=false); MicroflowCallAction: call microflow -\u003E Category; RetrieveAction: retrieve CategoryList_DB from Masterdata.Category"
+        },
+        {
+          "changeType": "Modified",
+          "elementType": "Page",
+          "elementName": "Portal.KnowledgeBank_Overview",
+          "details": "allowedRoles count 8-\u003E1"
+        }
+      ],
+      "modelDumpArtifact": {
+        "folderPath": "C:\\Workspace\\Mendix-AutoCommitMessage\\mendix-data\\dumps\\2026-02-23T09-22-35.790Z_Mijn SelektHuis.mpr_cdf86103c5494249ba78bf93a3c29f71",
+        "workingDumpPath": "C:\\Workspace\\Mendix-AutoCommitMessage\\mendix-data\\dumps\\2026-02-23T09-22-35.790Z_Mijn SelektHuis.mpr_cdf86103c5494249ba78bf93a3c29f71\\working-dump.json",
+        "headDumpPath": "C:\\Workspace\\Mendix-AutoCommitMessage\\mendix-data\\dumps\\2026-02-23T09-22-35.790Z_Mijn SelektHuis.mpr_cdf86103c5494249ba78bf93a3c29f71\\head-dump.json"
+      }
+    }
+  ]
+}

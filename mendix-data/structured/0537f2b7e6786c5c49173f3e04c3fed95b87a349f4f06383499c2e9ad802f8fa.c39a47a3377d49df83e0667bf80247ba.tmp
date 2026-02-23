@@ -1,0 +1,185 @@
+﻿{
+  "schemaVersion": "2.0",
+  "commitId": "0537f2b7e6786c5c49173f3e04c3fed95b87a349f4f06383499c2e9ad802f8fa",
+  "sourceFileName": "2026-02-18T21-25-24.305Z_Smart Expenses app-main.json",
+  "timestamp": "2026-02-18T21:25:24.3057167\u002B00:00",
+  "projectName": "Smart Expenses app-main",
+  "branchName": "main",
+  "userName": "Svroozendaal",
+  "userEmail": "simonvRoozendaal@gmail.com",
+  "entities": [
+    {
+      "type": "Entity",
+      "name": "SmartExpenses.New_entity",
+      "action": "Added"
+    },
+    {
+      "type": "Microflow",
+      "name": "SmartExpenses.ACT_Balance_Create",
+      "action": "Modified"
+    },
+    {
+      "type": "Microflow",
+      "name": "SmartExpenses.NEW_MICROFLOW_test",
+      "action": "Added"
+    }
+  ],
+  "affectedFiles": [
+    "App.mpr"
+  ],
+  "metrics": {
+    "totalFiles": 1,
+    "added": 0,
+    "modified": 1,
+    "deleted": 0,
+    "renamed": 0
+  },
+  "files": [
+    {
+      "filePath": "App.mpr",
+      "fileName": "App.mpr",
+      "folderPath": "",
+      "status": "Modified",
+      "isStaged": false,
+      "changeKind": "Modified",
+      "isBinaryDiff": true,
+      "diffLineCount": 0,
+      "modelChangeCount": 3,
+      "tags": [
+        "binary-diff",
+        "has-model-changes",
+        "mendix-model",
+        "modified",
+        "unstaged"
+      ]
+    }
+  ],
+  "modelChanges": [
+    {
+      "filePath": "App.mpr",
+      "changeType": "Added",
+      "elementType": "Entity",
+      "elementName": "SmartExpenses.New_entity",
+      "details": "attributes added (1): newAttribute"
+    },
+    {
+      "filePath": "App.mpr",
+      "changeType": "Modified",
+      "elementType": "Microflow",
+      "elementName": "SmartExpenses.ACT_Balance_Create",
+      "details": "objectCollection updated; flows count 3-\u003E6; actions used (5): ChangeObjectAction x1, CommitAction x1, CreateObjectAction x1, RetrieveAction x1, ShowPageAction x1; action details: ChangeObjectAction: change currentSession (SessionId); CommitAction: commit currentSession; CreateObjectAction: create SmartExpenses.Balance as NewBalance (Balance_FBGProfile); RetrieveAction: retrieve User over association Session_User from currentSession"
+    },
+    {
+      "filePath": "App.mpr",
+      "changeType": "Added",
+      "elementType": "Microflow",
+      "elementName": "SmartExpenses.NEW_MICROFLOW_test",
+      "details": "actions used (3): ChangeObjectAction x1, CommitAction x1, RetrieveAction x1; action details: ChangeObjectAction: change currentSession (SessionId); CommitAction: commit currentSession; RetrieveAction: retrieve User over association Session_User from currentSession"
+    }
+  ],
+  "modelSummary": {
+    "totalModelChanges": 3,
+    "byElementType": [
+      {
+        "key": "Microflow",
+        "count": 2
+      },
+      {
+        "key": "Entity",
+        "count": 1
+      }
+    ],
+    "byChangeType": [
+      {
+        "key": "Added",
+        "count": 2
+      },
+      {
+        "key": "Modified",
+        "count": 1
+      }
+    ],
+    "byFile": [
+      {
+        "key": "App.mpr",
+        "count": 3
+      }
+    ],
+    "microflowActions": [
+      {
+        "actionType": "ChangeObjectAction",
+        "count": 2,
+        "examples": [
+          "change currentSession (SessionId)"
+        ]
+      },
+      {
+        "actionType": "CommitAction",
+        "count": 2,
+        "examples": [
+          "commit currentSession"
+        ]
+      },
+      {
+        "actionType": "RetrieveAction",
+        "count": 2,
+        "examples": [
+          "retrieve User over association Session_User from currentSession"
+        ]
+      },
+      {
+        "actionType": "CreateObjectAction",
+        "count": 1,
+        "examples": [
+          "create SmartExpenses.Balance as NewBalance (Balance_FBGProfile)"
+        ]
+      },
+      {
+        "actionType": "ShowPageAction",
+        "count": 1,
+        "examples": []
+      }
+    ],
+    "domainModel": {
+      "addedEntities": [
+        "SmartExpenses.New_entity"
+      ],
+      "modifiedEntities": [],
+      "attributeChanges": [
+        {
+          "entityName": "SmartExpenses.New_entity",
+          "changeType": "Added",
+          "addedAttributes": [
+            "newAttribute"
+          ]
+        }
+      ]
+    }
+  },
+  "modelDumpArtifacts": [
+    {
+      "filePath": "App.mpr",
+      "folderPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-18T21-25-23.625Z_App.mpr_88d639ffb5e34b0286a6bebf582b4a29",
+      "workingDumpPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-18T21-25-23.625Z_App.mpr_88d639ffb5e34b0286a6bebf582b4a29\\working-dump.json",
+      "headDumpPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-18T21-25-23.625Z_App.mpr_88d639ffb5e34b0286a6bebf582b4a29\\head-dump.json"
+    }
+  ],
+  "commitMessageContext": {
+    "suggestedType": "feat",
+    "suggestedScopes": [
+      "SmartExpenses"
+    ],
+    "suggestedSubject": "add 1 domain entity and update related flows",
+    "highlights": [
+      "1 file(s) changed (0 added, 1 modified, 0 deleted, 0 renamed).",
+      "Added domain entities: SmartExpenses.New_entity.",
+      "Entity attributes added: SmartExpenses.New_entity (newAttribute).",
+      "Microflow actions used: ChangeObjectAction x2, CommitAction x2, RetrieveAction x2, CreateObjectAction x1, ShowPageAction x1.",
+      "Top element changes: Microflow x2, Entity x1."
+    ],
+    "risks": [
+      "Binary model file changes detected; plain git diff is unavailable.",
+      "Domain attribute changes may require validation, migration, or backward-compatibility checks."
+    ]
+  }
+}

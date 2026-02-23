@@ -82,3 +82,15 @@ STATUS: COMPLETE
 NEXT_AGENT: Tester
 SUMMARY: Updated extension/parser/data documentation to match the implemented refresh/UI and schema `2.0` behaviour, and added a dedicated `mendix-commit-structuring` skill plus prompt wiring.
 BLOCKERS: Skill auto-validation script requires `PyYAML` in local Python and could not be executed as-is.
+
+## HANDOFF - Prompt Refiner - 2026-02-23T14:26:44+01:00
+STATUS: COMPLETE
+NEXT_AGENT: none
+SUMMARY: Added phase 8 prompt for semantic model-change signal quality planning, including gap analysis scope, target contracts, agent sequence, deliverables, and exit criteria without implementation steps.
+BLOCKERS: none
+
+## HANDOFF - Implementer - 2026-02-23T20:38:42+01:00
+STATUS: COMPLETE
+NEXT_AGENT: Tester
+SUMMARY: Implemented phase 8 semantic model diff improvements in `MendixModelDiffService` to suppress layout-only microflow noise, emit microflow action delta details, and emit page allowed-role kept/removed details with role names.
+BLOCKERS: Verification currently executed through a temporary harness and dump artifacts; end-to-end parser output for old exports still depends on new exports generated with updated extension.
