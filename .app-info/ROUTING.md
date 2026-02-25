@@ -9,6 +9,7 @@ Read this file after `.agents/AGENTS.md` and `.agents/FRAMEWORK.md` to understan
 
 | Folder | Purpose | Key files |
 |---|---|---|
+| `agents/` | App-specific agent extensions | Per-agent `<AGENT>.md` extension files |
 | `app/` | Application identity and vision | `PRODUCT_PLAN.md` |
 | `development/` | Development resources | `prompts/`, `commands/` |
 | `skills/` | App-specific skills and rules | `OVERVIEW.md`, per-skill `SKILL.md` |
@@ -25,10 +26,21 @@ Read this file after `.agents/AGENTS.md` and `.agents/FRAMEWORK.md` to understan
 4. Write produced documentation to `docs/`.
 5. Register completed features in `features/FEATURES.md`.
 
+## Agent Extensions
+
+When an agent from `.agents/agents/` needs app-specific behaviour, place an extension file at:
+
+```
+.app-info/agents/<AGENT>.md
+```
+
+See `.agents/FRAMEWORK.md` for the extension model and `.agents/skills/agent-extender/SKILL.md` for the procedure.
+
 ## Quick Reference
 
 - **Find a prompt**: `development/prompts/OVERVIEW.md`
 - **Find a skill**: `skills/OVERVIEW.md`
+- **Find an agent extension**: `agents/OVERVIEW.md`
 - **Find app context**: `app/PRODUCT_PLAN.md`
 - **Write session state**: `memory/SESSION_STATE.md`
 - **Track features**: `features/FEATURES.md`

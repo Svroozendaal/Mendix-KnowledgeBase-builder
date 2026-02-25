@@ -1,7 +1,24 @@
 {
   "permissions": {
     "allow": [
-      "Bash(LC_ALL=C sort:*)"
+      "Bash(LC_ALL=C sort:*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/AGENTS.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/AI_WORKFLOW.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/FRAMEWORK.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.app-info/ROUTING.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/skills/agent-extender/SKILL.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/agents/STRUCTURE_GUARDIAN.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.app-info/agents/OVERVIEW.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/agents/DESIGNER.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/agents/LIGHT.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.agents/agents/DOCUMENTER.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.app-info/agents/DESIGNER.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.app-info/agents/DEVELOPER.md\":*)",
+      "Bash(__NEW_LINE_52555404ecdd7478__ cat)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.app-info/agents/DEPLOYMENT.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.app-info/agents/DOCUMENTER.md\":*)",
+      "Bash(__NEW_LINE_58835e66a2e0fcce__ cat)",
+      "Bash(\"c:/Workspaces/Mendix-CommitMessage/.app-info/agents/LIGHT.md\":*)"
     ]
   }
 }

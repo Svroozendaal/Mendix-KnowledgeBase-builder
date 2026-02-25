@@ -528,19 +528,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SimonvanRoozendaal\\.nuget\\packages\\": {}
+    "C:\\Users\\Simon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\Mendix-AutoCommitMessage\\studio-pro-extension-csharp\\AutoCommitMessage.csproj",
+      "projectUniqueName": "C:\\Workspaces\\Mendix-CommitMessage\\studio-pro-extension-csharp\\AutoCommitMessage.csproj",
       "projectName": "AutoCommitMessage",
-      "projectPath": "C:\\Workspace\\Mendix-AutoCommitMessage\\studio-pro-extension-csharp\\AutoCommitMessage.csproj",
-      "packagesPath": "C:\\Users\\SimonvanRoozendaal\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\Mendix-AutoCommitMessage\\studio-pro-extension-csharp\\obj\\",
+      "projectPath": "C:\\Workspaces\\Mendix-CommitMessage\\studio-pro-extension-csharp\\AutoCommitMessage.csproj",
+      "packagesPath": "C:\\Users\\Simon\\.nuget\\packages\\",
+      "outputPath": "C:\\Workspaces\\Mendix-CommitMessage\\studio-pro-extension-csharp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\SimonvanRoozendaal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Simon\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0-windows"
@@ -563,7 +563,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0-windows7.0": {
@@ -589,6 +590,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -597,7 +612,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
