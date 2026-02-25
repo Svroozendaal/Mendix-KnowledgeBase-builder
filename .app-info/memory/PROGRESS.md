@@ -77,3 +77,9 @@ SCOPE: Refresh informational documentation and skills for latest extension UI/re
 FILES_CHANGED: studio-pro-extension-csharp/README.md, studio-pro-extension-csharp/info_studio-pro-extension-csharp.md, MendixCommitParser/README.md, mendix-data/README.md, .agents/skills/mendix-model-dump-inspection/SKILL.md, .agents/skills/mendix-studio-pro-10/SKILL.md, .agents/skills/mendix-commit-structuring/SKILL.md, .agents/AGENTS.md, .agents/prompts/PHASE_6_DATA_COLLECTION.md, .agents/prompts/PHASE_7_COMMIT_PARSER_AGENT.md, .agents/agent-memory/DECISIONS_LOG.md, .agents/agent-memory/PROGRESS.md
 VALIDATION: Manual markdown and diff verification completed; `skill-creator` quick validator could not run because `PyYAML` is not installed in the local Python environment (`ModuleNotFoundError: No module named 'yaml'`).
 NOTES: Added a new Phase 7 skill focused on structured output contracts and ensured prompts reference both commit structuring and model dump inspection workflows.
+
+## PROGRESS_ENTRY - 2026-02-23
+SCOPE: Phase 8 semantic change quality implementation for Mendix model diff output.
+FILES_CHANGED: studio-pro-extension-csharp/MendixModelDiffService.cs, development/agent-memory/DECISIONS_LOG.md, development/agent-memory/PROGRESS.md
+VALIDATION: `dotnet build .\\studio-pro-extension-csharp\\AutoCommitMessage.csproj -c Debug` passed; runtime verification via temporary harness calling `MendixModelDiffService.CompareDumps(...)` on `mendix-data/dumps/2026-02-23T09-22-35.790Z_Mijn SelektHuis.mpr_cdf86103c5494249ba78bf93a3c29f71` produced only two semantic changes (`Masterdata.SE_KnowledgeBank_RetrieveInformation`, `Portal.KnowledgeBank_Overview`) with explicit action delta and role detail.
+NOTES: False-positive microflows `InterfacesClickHouseConsuming.SE_ActionStatusUpdate` and `InterfacesClickHousePublishing.PRS_PlanningPhase` were removed by semantic filtering; page role details now include kept and removed role names.

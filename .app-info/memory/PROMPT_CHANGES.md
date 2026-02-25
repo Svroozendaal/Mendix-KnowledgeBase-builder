@@ -29,3 +29,9 @@ REQUESTED_BY: User
 FILES_UPDATED: .agents/prompts/PHASE_6_DATA_COLLECTION.md
 SUMMARY: Expanded phase 6 with explicit workflow alignment, skill defaults, schema and folder contracts, validation coverage, memory-log expectations, and clearer parser hand-off criteria.
 COMPATIBILITY: BACKWARD_COMPATIBLE
+
+## PROMPT_CHANGE - 004 - 2026-02-23
+REQUESTED_BY: User
+FILES_UPDATED: development/prompts/PHASE_8_SEMANTIC_CHANGE_QUALITY.md
+SUMMARY: Added a new phase 8 planning prompt focused on semantic-only Mendix change reporting, explicit per-element delta contracts, gap analysis, parser/source remediation planning, and validation strategy without implementation work.
+COMPATIBILITY: BACKWARD_COMPATIBLE

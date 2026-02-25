@@ -107,3 +107,9 @@ CONTEXT: Informational documentation and agent skills lagged behind implemented 
 DECISION: Align extension docs, data-contract docs, and phase prompts with the current implementation, and add a dedicated `mendix-commit-structuring` skill for Phase 7 schema/process changes.
 RATIONALE: Keeps future agent runs and human operators aligned to the real system contract, reducing regressions caused by stale guidance.
 ALTERNATIVES_REJECTED: Keeping only code-level truth without updating operational and workflow documentation.
+
+## DECISION - 014 - 2026-02-23
+CONTEXT: Structured outputs included false-positive microflow modifications caused by layout-only changes, and page role changes lacked actionable role-level detail.
+DECISION: Implement semantic comparison rules in `MendixModelDiffService` that ignore layout-only microflow noise, keep only semantic model changes, add explicit microflow action delta summaries, and add page `allowedRoles` detail with kept/removed role names.
+RATIONALE: Commit-quality output requires actionable semantic deltas and suppression of non-functional diagram churn.
+ALTERNATIVES_REJECTED: Parser-only heuristic filtering of noisy detail strings without improving source model-diff semantics.
