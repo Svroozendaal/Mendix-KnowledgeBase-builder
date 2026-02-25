@@ -174,4 +174,4 @@ Write-Host "Build output:  $buildOutput"
 if (Test-Path $targetPdb -PathType Leaf) {
     Write-Host "PDB:           $targetPdb"
 }
-Write-Host "Parser hint:   `$env:MENDIX_GIT_DATA_ROOT = '$DataRootPath'"
+Write-Host "Data root hint: `$env:MENDIX_GIT_DATA_ROOT = '$DataRootPath'"
