@@ -33,6 +33,11 @@ public sealed record GitFileChange
     public IReadOnlyList<MendixModelChange>? ModelChanges { get; init; }
 
     /// <summary>
+    /// Gets optional model changes grouped per module and category.
+    /// </summary>
+    public IReadOnlyList<MendixModuleChangeGroup>? ModelChangesByModule { get; init; }
+
+    /// <summary>
     /// Gets optional persisted dump artifact paths for model analysis.
     /// </summary>
     public ModelDumpArtifact? ModelDumpArtifact { get; init; }
@@ -71,5 +76,23 @@ public sealed record ModelDumpArtifact(
     string FolderPath,
     string WorkingDumpPath,
     string HeadDumpPath
+);
+
+/// <summary>
+/// Represents model changes grouped by Mendix module.
+/// </summary>
+/// <param name="Module">Mendix module name derived from element name prefix.</param>
+/// <param name="DomainModel">Changes for Entity elements.</param>
+/// <param name="Microflows">Changes for Microflow elements.</param>
+/// <param name="Pages">Changes for Page elements.</param>
+/// <param name="Nanoflows">Changes for Nanoflow elements.</param>
+/// <param name="Resources">Changes for all other element types.</param>
+public sealed record MendixModuleChangeGroup(
+    string Module,
+    IReadOnlyList<MendixModelChange> DomainModel,
+    IReadOnlyList<MendixModelChange> Microflows,
+    IReadOnlyList<MendixModelChange> Pages,
+    IReadOnlyList<MendixModelChange> Nanoflows,
+    IReadOnlyList<MendixModelChange> Resources
 );
 

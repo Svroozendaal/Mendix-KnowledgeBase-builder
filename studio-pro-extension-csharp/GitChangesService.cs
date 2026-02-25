@@ -93,21 +93,26 @@ public static class GitChangesService
                         fileChange = fileChange with
                         {
                             ModelChanges = modelAnalysis.ModelChanges,
+                            ModelChangesByModule = MendixModelChangeStructurer.GroupByModule(modelAnalysis.ModelChanges),
                             ModelDumpArtifact = modelAnalysis.ModelDumpArtifact,
                         };
                     }
                     catch (Exception exception)
                     {
+                        var analysisUnavailableChanges = new List<MendixModelChange>
+                        {
+                            new(
+                                "Modified",
+                                "Model Analysis",
+                                Path.GetFileName(entry.FilePath),
+                                $"Model analysis unavailable: {exception.Message}"),
+                        };
+
                         fileChange = fileChange with
                         {
-                            ModelChanges = new List<MendixModelChange>
-                            {
-                                new(
-                                    "Modified",
-                                    "Model Analysis",
-                                    Path.GetFileName(entry.FilePath),
-                                    $"Model analysis unavailable: {exception.Message}"),
-                            },
+                            ModelChanges = analysisUnavailableChanges,
+                            ModelChangesByModule =
+                                MendixModelChangeStructurer.GroupByModule(analysisUnavailableChanges),
                         };
                     }
                 }

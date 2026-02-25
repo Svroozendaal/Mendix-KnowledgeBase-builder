@@ -237,6 +237,19 @@ internal static class GitChangesPanelHtml
       font-weight: 600;
       color: #334155;
     }
+    .model-subgroup {
+      margin: 6px 8px 8px 8px;
+      border: 1px solid #e2e8f5;
+      border-radius: 6px;
+      background: #ffffff;
+    }
+    .model-subgroup > summary {
+      cursor: pointer;
+      padding: 6px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+    }
     .model-list {
       margin: 0 0 8px 0;
       padding: 0 22px;
@@ -357,96 +370,199 @@ internal static class GitChangesPanelHtml
       rightContent.appendChild(diffText);
       detailsPanel.appendChild(rightContent);
 
-      function renderModelChanges(selectedChange) {
-        const modelChanges = selectedChange && Array.isArray(selectedChange.ModelChanges)
+      function resolveModuleName(elementName) {
+        const rawName = typeof elementName === "string" ? elementName.trim() : "";
+        if (!rawName) {
+          return "Unknown";
+        }
+
+        const separatorIndex = rawName.indexOf(".");
+        if (separatorIndex <= 0) {
+          return "Unknown";
+        }
+
+        const moduleName = rawName.slice(0, separatorIndex).trim();
+        return moduleName || "Unknown";
+      }
+
+      function resolveModelCategory(elementType) {
+        const type = typeof elementType === "string" ? elementType.trim().toLowerCase() : "";
+        if (type === "entity") {
+          return "DomainModel";
+        }
+        if (type === "microflow") {
+          return "Microflows";
+        }
+        if (type === "page") {
+          return "Pages";
+        }
+        if (type === "nanoflow") {
+          return "Nanoflows";
+        }
+
+        return "Resources";
+      }
+
+      function createModuleBucket(moduleName) {
+        return {
+          Module: moduleName,
+          DomainModel: [],
+          Microflows: [],
+          Pages: [],
+          Nanoflows: [],
+          Resources: [],
+        };
+      }
+
+      function orderModelChanges(changes) {
+        return changes
+          .slice()
+          .sort((a, b) => (a.ElementName || "").localeCompare(b.ElementName || ""));
+      }
+
+      function getModelChangesByModule(selectedChange) {
+        if (!selectedChange) {
+          return [];
+        }
+
+        if (Array.isArray(selectedChange.ModelChangesByModule) && selectedChange.ModelChangesByModule.length > 0) {
+          return selectedChange.ModelChangesByModule
+            .slice()
+            .sort((a, b) => (a.Module || "").localeCompare(b.Module || ""));
+        }
+
+        const modelChanges = Array.isArray(selectedChange.ModelChanges)
           ? selectedChange.ModelChanges
           : [];
+        if (modelChanges.length === 0) {
+          return [];
+        }
+
+        const modules = new Map();
+        modelChanges.forEach((change) => {
+          const moduleName = resolveModuleName(change.ElementName);
+          if (!modules.has(moduleName)) {
+            modules.set(moduleName, createModuleBucket(moduleName));
+          }
+
+          const category = resolveModelCategory(change.ElementType);
+          modules.get(moduleName)[category].push(change);
+        });
+
+        return Array.from(modules.values())
+          .map((moduleGroup) => ({
+            Module: moduleGroup.Module,
+            DomainModel: orderModelChanges(moduleGroup.DomainModel),
+            Microflows: orderModelChanges(moduleGroup.Microflows),
+            Pages: orderModelChanges(moduleGroup.Pages),
+            Nanoflows: orderModelChanges(moduleGroup.Nanoflows),
+            Resources: orderModelChanges(moduleGroup.Resources),
+          }))
+          .sort((a, b) => (a.Module || "").localeCompare(b.Module || ""));
+      }
+
+      function renderModelChangeList(changes) {
+        const list = element("ul", "model-list");
+        changes.forEach((change) => {
+          const item = element("li");
+          const changeClass = modelChangeClass(change.ChangeType);
+          if (changeClass) {
+            item.classList.add(changeClass);
+          }
+
+          const name = change.ElementName || "<unnamed>";
+          const typeLabel = change.ChangeType || "Changed";
+          const details = change.Details && String(change.Details).trim().length > 0
+            ? ` - ${change.Details}`
+            : "";
+          item.textContent = `${name} (${typeLabel})${details}`;
+          list.appendChild(item);
+        });
+
+        return list;
+      }
+
+      function countModuleChanges(moduleGroup) {
+        const domainModel = Array.isArray(moduleGroup.DomainModel) ? moduleGroup.DomainModel.length : 0;
+        const microflows = Array.isArray(moduleGroup.Microflows) ? moduleGroup.Microflows.length : 0;
+        const pages = Array.isArray(moduleGroup.Pages) ? moduleGroup.Pages.length : 0;
+        const nanoflows = Array.isArray(moduleGroup.Nanoflows) ? moduleGroup.Nanoflows.length : 0;
+        const resources = Array.isArray(moduleGroup.Resources) ? moduleGroup.Resources.length : 0;
+        return domainModel + microflows + pages + nanoflows + resources;
+      }
+
+      function appendEmptyModelState(message) {
+        const emptyGroup = element("div", "model-group");
+        const emptyMessage = element("div", null, message);
+        emptyMessage.style.padding = "8px";
+        emptyMessage.style.fontSize = "12px";
+        emptyMessage.style.color = "#475569";
+        emptyGroup.appendChild(emptyMessage);
+        modelChangesContainer.appendChild(emptyGroup);
+      }
+
+      function renderModelChanges(selectedChange) {
         const isMpr = selectedChange &&
           typeof selectedChange.FilePath === "string" &&
           selectedChange.FilePath.toLowerCase().endsWith(".mpr");
+        const groupedModelChanges = getModelChangesByModule(selectedChange);
 
         modelChangesContainer.replaceChildren();
-        modelChangesContainer.appendChild(element("div", "model-title", "Model changes"));
+        modelChangesContainer.appendChild(element("div", "model-title", "Model changes by module"));
         const sourceFile = selectedChange && selectedChange.FilePath
           ? selectedChange.FilePath
           : "No file selected";
         modelChangesContainer.appendChild(element("div", "model-file-label", `Source: ${sourceFile}`));
 
         if (!selectedChange) {
-          const emptyGroup = element("div", "model-group");
-          const emptyMessage = element("div", null, "Select a file to view model changes.");
-          emptyMessage.style.padding = "8px";
-          emptyMessage.style.fontSize = "12px";
-          emptyMessage.style.color = "#475569";
-          emptyGroup.appendChild(emptyMessage);
-          modelChangesContainer.appendChild(emptyGroup);
+          appendEmptyModelState("Select a file to view model changes.");
           return;
         }
 
         if (!isMpr) {
-          const emptyGroup = element("div", "model-group");
-          const emptyMessage = element("div", null, "Model changes are available for .mpr files.");
-          emptyMessage.style.padding = "8px";
-          emptyMessage.style.fontSize = "12px";
-          emptyMessage.style.color = "#475569";
-          emptyGroup.appendChild(emptyMessage);
-          modelChangesContainer.appendChild(emptyGroup);
+          appendEmptyModelState("Model changes are available for .mpr files.");
           return;
         }
 
-        if (modelChanges.length === 0) {
-          const emptyGroup = element("div", "model-group");
-          const emptyMessage = element("div", null, "No model-level changes detected.");
-          emptyMessage.style.padding = "8px";
-          emptyMessage.style.fontSize = "12px";
-          emptyMessage.style.color = "#475569";
-          emptyGroup.appendChild(emptyMessage);
-          modelChangesContainer.appendChild(emptyGroup);
+        if (groupedModelChanges.length === 0) {
+          appendEmptyModelState("No model-level changes detected.");
           return;
         }
 
-        const groups = new Map();
-        modelChanges.forEach((change) => {
-          const key = change.ElementType || "Other";
-          if (!groups.has(key)) {
-            groups.set(key, []);
-          }
-          groups.get(key).push(change);
-        });
+        const categories = [
+          { key: "DomainModel", label: "Domain model" },
+          { key: "Microflows", label: "Microflows" },
+          { key: "Pages", label: "Pages" },
+          { key: "Nanoflows", label: "Nanoflows" },
+          { key: "Resources", label: "Resources" },
+        ];
 
-        Array.from(groups.keys())
-          .sort((a, b) => a.localeCompare(b))
-          .forEach((type) => {
-            const groupChanges = groups.get(type) || [];
-            const groupDetails = element("details", "model-group");
-            groupDetails.open = true;
+        groupedModelChanges.forEach((moduleGroup) => {
+          const moduleName = moduleGroup.Module || "Unknown";
+          const moduleChangeCount = countModuleChanges(moduleGroup);
+          const moduleDetails = element("details", "model-group");
+          moduleDetails.open = true;
+          moduleDetails.appendChild(
+            element("summary", null, `${moduleName}: ${moduleChangeCount} changed`));
 
-            const summary = element("summary", null, `${type}: ${groupChanges.length} changed`);
-            groupDetails.appendChild(summary);
+          categories.forEach((category) => {
+            const categoryChanges = Array.isArray(moduleGroup[category.key])
+              ? moduleGroup[category.key]
+              : [];
+            if (categoryChanges.length === 0) {
+              return;
+            }
 
-            const list = element("ul", "model-list");
-            groupChanges
-              .slice()
-              .sort((a, b) => (a.ElementName || "").localeCompare(b.ElementName || ""))
-              .forEach((change) => {
-                const item = element("li");
-                const changeClass = modelChangeClass(change.ChangeType);
-                if (changeClass) {
-                  item.classList.add(changeClass);
-                }
-
-                const name = change.ElementName || "<unnamed>";
-                const typeLabel = change.ChangeType || "Changed";
-                const details = change.Details && String(change.Details).trim().length > 0
-                  ? ` - ${change.Details}`
-                  : "";
-                item.textContent = `${name} (${typeLabel})${details}`;
-                list.appendChild(item);
-              });
-
-            groupDetails.appendChild(list);
-            modelChangesContainer.appendChild(groupDetails);
+            const categoryDetails = element("details", "model-subgroup");
+            categoryDetails.open = true;
+            categoryDetails.appendChild(
+              element("summary", null, `${category.label}: ${categoryChanges.length} changed`));
+            categoryDetails.appendChild(renderModelChangeList(orderModelChanges(categoryChanges)));
+            moduleDetails.appendChild(categoryDetails);
           });
+
+          modelChangesContainer.appendChild(moduleDetails);
+        });
       }
 
       const rows = [];

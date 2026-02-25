@@ -23,6 +23,7 @@ Use `.agents/skills/agent-extender/SKILL.md` to write a new extension correctly.
 | Deployment | `DEPLOYMENT.md` | WellBased branch policy (development/docs/staging/main), CI/CD workflows, js-loader version bump rule, Cloudways, plugin-only hygiene |
 | Documenter | `DOCUMENTER.md` | WellBased `core/*/info_*.MD` indexing convention, `templates/*/info_*.MD` convention, WordPress entry-point checklist |
 | Light | `LIGHT.md` | App-specific escalation triggers (ACF, constants.php, webhooks), agent handoff map |
+| Commit Message Writer | `COMMIT_MESSAGE_WRITER.md` | Mendix export to technical commit text workflow with rule-gap capture and iterative rule growth |
 
 ## Notes
 

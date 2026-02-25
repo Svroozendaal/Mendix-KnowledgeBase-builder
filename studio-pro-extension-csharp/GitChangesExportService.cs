@@ -58,25 +58,7 @@ internal static class GitChangesExportService
             branchName,
             userName,
             userEmail,
-            payload.Changes.Select(change => new ExportFileChange(
-                    change.FilePath,
-                    change.Status,
-                    change.IsStaged,
-                    change.DiffText,
-                    change.ModelChanges?
-                        .Select(modelChange => new ExportModelChange(
-                            modelChange.ChangeType,
-                            modelChange.ElementType,
-                            modelChange.ElementName,
-                            modelChange.Details))
-                        .ToArray(),
-                    change.ModelDumpArtifact is null
-                        ? null
-                        : new ExportModelDumpArtifact(
-                            change.ModelDumpArtifact.FolderPath,
-                            change.ModelDumpArtifact.WorkingDumpPath,
-                            change.ModelDumpArtifact.HeadDumpPath)))
-                .ToArray());
+            payload.Changes.Select(BuildExportFileChange).ToArray());
 
         EnsureFoldersExist();
 
@@ -108,6 +90,59 @@ internal static class GitChangesExportService
         Directory.CreateDirectory(ExtensionDataPaths.ErrorsFolder);
         Directory.CreateDirectory(ExtensionDataPaths.StructuredFolder);
         Directory.CreateDirectory(ExtensionDataPaths.DumpsFolder);
+    }
+
+    private static ExportFileChange BuildExportFileChange(GitFileChange change)
+    {
+        IReadOnlyList<MendixModuleChangeGroup>? groupedModelChanges = change.ModelChangesByModule;
+        if ((groupedModelChanges is null || groupedModelChanges.Count == 0) &&
+            change.ModelChanges is { Count: > 0 })
+        {
+            groupedModelChanges = MendixModelChangeStructurer.GroupByModule(change.ModelChanges);
+        }
+
+        var exportGroupedModelChanges = groupedModelChanges is null || groupedModelChanges.Count == 0
+            ? null
+            : groupedModelChanges
+                .Select(moduleGroup => new ExportModuleChangeGroup(
+                    moduleGroup.Module,
+                    ToExportModelChanges(moduleGroup.DomainModel),
+                    ToExportModelChanges(moduleGroup.Microflows),
+                    ToExportModelChanges(moduleGroup.Pages),
+                    ToExportModelChanges(moduleGroup.Nanoflows),
+                    ToExportModelChanges(moduleGroup.Resources)))
+                .ToArray();
+
+        var exportDumpArtifact = change.ModelDumpArtifact is null
+            ? null
+            : new ExportModelDumpArtifact(
+                change.ModelDumpArtifact.FolderPath,
+                change.ModelDumpArtifact.WorkingDumpPath,
+                change.ModelDumpArtifact.HeadDumpPath);
+
+        return new ExportFileChange(
+            change.FilePath,
+            change.Status,
+            change.IsStaged,
+            change.DiffText,
+            exportGroupedModelChanges,
+            exportDumpArtifact);
+    }
+
+    private static ExportModelChange[] ToExportModelChanges(IReadOnlyList<MendixModelChange>? modelChanges)
+    {
+        if (modelChanges is null || modelChanges.Count == 0)
+        {
+            return Array.Empty<ExportModelChange>();
+        }
+
+        return modelChanges
+            .Select(modelChange => new ExportModelChange(
+                modelChange.ChangeType,
+                modelChange.ElementType,
+                modelChange.ElementName,
+                modelChange.Details))
+            .ToArray();
     }
 
     private static string ResolveProjectName(string projectPath, string repositoryRoot)
@@ -217,8 +252,16 @@ internal static class GitChangesExportService
         [property: JsonPropertyName("status")] string Status,
         [property: JsonPropertyName("isStaged")] bool IsStaged,
         [property: JsonPropertyName("diffText")] string DiffText,
-        [property: JsonPropertyName("modelChanges")] ExportModelChange[]? ModelChanges = null,
+        [property: JsonPropertyName("modelChangesByModule")] ExportModuleChangeGroup[]? ModelChangesByModule = null,
         [property: JsonPropertyName("modelDumpArtifact")] ExportModelDumpArtifact? ModelDumpArtifact = null);
+
+    private sealed record ExportModuleChangeGroup(
+        [property: JsonPropertyName("module")] string Module,
+        [property: JsonPropertyName("domainModel")] ExportModelChange[] DomainModel,
+        [property: JsonPropertyName("microflows")] ExportModelChange[] Microflows,
+        [property: JsonPropertyName("pages")] ExportModelChange[] Pages,
+        [property: JsonPropertyName("nanoflows")] ExportModelChange[] Nanoflows,
+        [property: JsonPropertyName("resources")] ExportModelChange[] Resources);
 
     private sealed record ExportModelChange(
         [property: JsonPropertyName("changeType")] string ChangeType,

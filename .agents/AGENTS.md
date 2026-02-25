@@ -77,6 +77,7 @@ All app-specific content lives here. Structure is defined in `.app-info/ROUTING.
 | Reviewer | `.agents/agents/REVIEWER.md` | Quality gate and approval |
 | Memory | `.agents/agents/MEMORY.md` | Session continuity and hand-offs |
 | Prompt Refiner | `.agents/agents/PROMPT_REFINER.md` | Prompt quality and consistency |
+| Commit Message Writer | `.agents/agents/COMMIT_MESSAGE_WRITER.md` | Rule-driven transformation of structured change data into technical commit text |
 | Debugger | `.agents/agents/DEBUGGER.md` | Root-cause analysis and fixes |
 | Documenter | `.agents/agents/DOCUMENTER.md` | Documentation quality, upkeep, and module indexing |
 | Light | `.agents/agents/LIGHT.md` | Fast-path for small, low-risk, clearly-scoped tasks |
