@@ -2,6 +2,11 @@
 studio-pro-extension-csharp/obj-build*/
 studio-pro-extension-csharp/bin-build*/
 build-artifacts/
+studio-pro-extension-csharp/bin/
+studio-pro-extension-csharp/obj/
+studio-pro-extension-csharp/build-artifacts/
+studio-pro-extension-csharp/build-artifacts-run-*/
+studio-pro-extension-csharp/build-check/
 
 # Local developer configuration
 .env
@@ -9,8 +14,7 @@ build-artifacts/
 
 # Local throwaway files
 temp-write-test.txt
-studio-pro-extension-csharp/build-check/
-studio-pro-extension-csharp/build-artifacts-run-*/
+tmp*/
 
 # Mendix runtime data (keep folder structure, ignore generated content)
 mendix-data/exports/*
@@ -23,4 +27,5 @@ mendix-data/structured/*
 !mendix-data/structured/.gitkeep
 mendix-data/dumps/*
 !mendix-data/dumps/.gitkeep
+mendix-data/tmp*/
 mendix-data/*.log
