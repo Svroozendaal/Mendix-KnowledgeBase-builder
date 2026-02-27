@@ -85,6 +85,39 @@ internal static class AutoCommitMessagePanelHtml
       border-color: #1d4ed8;
       background: #1d4ed8;
     }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 14px;
+      border-bottom: 1px solid #dce4f2;
+      background: #f8fbff;
+    }
+    .nav-menu {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-btn {
+      border: 1px solid #c5d0e4;
+      background: #ffffff;
+      color: #334155;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .nav-btn.active {
+      border-color: #2563eb;
+      background: #2563eb;
+      color: #ffffff;
+    }
+    .nav-btn:focus-visible {
+      outline: 2px solid #1d4ed8;
+      outline-offset: 1px;
+    }
     .subtitle {
       padding: 8px 14px;
       border-bottom: 1px solid #e4e8f2;
@@ -113,6 +146,48 @@ internal static class AutoCommitMessagePanelHtml
       padding: 14px;
       line-height: 1.45;
       font-size: 13px;
+    }
+    .overview-panel {
+      height: 100%;
+      min-height: 0;
+    }
+    .overview-content {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      gap: 10px;
+      flex: 1;
+    }
+    .overview-hint {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.45;
+    }
+    .overview-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .overview-meta {
+      font-size: 12px;
+      color: #334155;
+      font-weight: 600;
+    }
+    .overview-output {
+      border: 1px solid #d8e0ef;
+      border-radius: 8px;
+      min-height: 280px;
+      max-height: 100%;
+    }
+    .overview-placeholder {
+      border: 1px dashed #c8d5ea;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      color: #475569;
+      background: #fbfdff;
     }
     .layout {
       display: grid;
@@ -297,9 +372,21 @@ internal static class AutoCommitMessagePanelHtml
     const actionQueryKey = "{{ExtensionConstants.ActionQueryKey}}";
     const exportActionValue = "{{ExtensionConstants.ExportActionValue}}";
     const refreshActionValue = "{{ExtensionConstants.RefreshActionValue}}";
+    const generateOverviewActionValue = "{{ExtensionConstants.GenerateOverviewActionValue}}";
     const projectPathQueryKey = "{{ExtensionConstants.ProjectPathQueryKey}}";
     let currentPayload = initialPayload;
     let refreshInProgress = false;
+    let activeView = "model-changes";
+    let overviewInProgress = false;
+    let modelOverviewState = {
+      hasGenerated: false,
+      generatedAtUtc: null,
+      changedFileCount: 0,
+      changedModelFileCount: 0,
+      overviewText: "",
+      message: "",
+      error: "",
+    };
 
     function buildActionUrl(actionName) {
       const query = new URLSearchParams();
@@ -351,6 +438,168 @@ internal static class AutoCommitMessagePanelHtml
       const card = element("div", className ? `card ${className}` : "card");
       card.textContent = content;
       return card;
+    }
+
+    function resetModelOverviewState() {
+      modelOverviewState = {
+        hasGenerated: false,
+        generatedAtUtc: null,
+        changedFileCount: 0,
+        changedModelFileCount: 0,
+        overviewText: "",
+        message: "",
+        error: "",
+      };
+    }
+
+    function formatGeneratedTimestamp(timestamp) {
+      if (!timestamp) {
+        return "";
+      }
+
+      const parsed = new Date(timestamp);
+      if (Number.isNaN(parsed.getTime())) {
+        return String(timestamp);
+      }
+
+      return parsed.toLocaleString();
+    }
+
+    function canGenerateOverview(payload) {
+      if (!payload || payload.IsGitRepo !== true) {
+        return false;
+      }
+
+      if (typeof payload.Error === "string" && payload.Error.trim().length > 0) {
+        return false;
+      }
+
+      return true;
+    }
+
+    function renderModelOverview(payload, statusLine) {
+      const panel = element("section", "panel overview-panel");
+      panel.appendChild(element("div", "panel-title", "Model overview"));
+
+      const overviewContent = element("div", "overview-content");
+      overviewContent.appendChild(element(
+        "div",
+        "overview-hint",
+        "Generate overview to build this page. The full-model parser hook is scaffolded and ready for implementation."));
+
+      const toolbar = element("div", "overview-toolbar");
+      const generateButton = element("button", "btn", "Generate overview");
+      generateButton.type = "button";
+      generateButton.disabled = overviewInProgress || !canGenerateOverview(payload);
+      toolbar.appendChild(generateButton);
+
+      if (modelOverviewState.hasGenerated && modelOverviewState.generatedAtUtc) {
+        const generatedAtLabel = formatGeneratedTimestamp(modelOverviewState.generatedAtUtc);
+        toolbar.appendChild(element("span", "overview-meta", `Generated: ${generatedAtLabel}`));
+      }
+
+      overviewContent.appendChild(toolbar);
+
+      if (!canGenerateOverview(payload)) {
+        overviewContent.appendChild(renderCard(
+          "Overview generation is unavailable until repository analysis succeeds.",
+          "overview-placeholder"));
+      }
+      else if (!modelOverviewState.hasGenerated) {
+        overviewContent.appendChild(renderCard(
+          "No overview has been generated yet.",
+          "overview-placeholder"));
+      }
+      else if (modelOverviewState.error) {
+        overviewContent.appendChild(renderCard(
+          `Overview generation failed: ${modelOverviewState.error}`,
+          "overview-placeholder"));
+      }
+      else {
+        const metrics = element(
+          "div",
+          "overview-meta",
+          `Files in scope: ${modelOverviewState.changedFileCount} | .mpr files in scope: ${modelOverviewState.changedModelFileCount}`);
+        overviewContent.appendChild(metrics);
+
+        const output = element("pre", "overview-output");
+        output.textContent = modelOverviewState.overviewText || "(Overview output is empty)";
+        overviewContent.appendChild(output);
+      }
+
+      generateButton.addEventListener("click", async () => {
+        if (overviewInProgress || !canGenerateOverview(payload)) {
+          return;
+        }
+
+        overviewInProgress = true;
+        generateButton.disabled = true;
+        statusLine.textContent = "Generating model overview...";
+
+        try {
+          const overviewUrl = `${buildActionUrl(generateOverviewActionValue)}&_t=${Date.now()}`;
+          const response = await fetch(overviewUrl, { cache: "no-store" });
+
+          let data = null;
+          try {
+            data = await response.json();
+          } catch {
+            data = null;
+          }
+
+          if (!response.ok || !data || data.success !== true) {
+            const message = data && typeof data.message === "string"
+              ? data.message
+              : `Overview generation failed (HTTP ${response.status})`;
+
+            modelOverviewState = {
+              hasGenerated: true,
+              generatedAtUtc: null,
+              changedFileCount: 0,
+              changedModelFileCount: 0,
+              overviewText: "",
+              message: "",
+              error: message,
+            };
+
+            overviewInProgress = false;
+            render(`Overview generation failed: ${message}`);
+            return;
+          }
+
+          modelOverviewState = {
+            hasGenerated: true,
+            generatedAtUtc: data.generatedAtUtc || null,
+            changedFileCount: Number.isInteger(data.changedFileCount) ? data.changedFileCount : 0,
+            changedModelFileCount: Number.isInteger(data.changedModelFileCount) ? data.changedModelFileCount : 0,
+            overviewText: typeof data.overviewText === "string" ? data.overviewText : "",
+            message: typeof data.message === "string" ? data.message : "",
+            error: "",
+          };
+
+          overviewInProgress = false;
+          const generatedMessage = modelOverviewState.message || "Model overview generated.";
+          render(generatedMessage);
+          return;
+        } catch (error) {
+          const message = error && error.message ? error.message : "Unexpected error";
+          modelOverviewState = {
+            hasGenerated: true,
+            generatedAtUtc: null,
+            changedFileCount: 0,
+            changedModelFileCount: 0,
+            overviewText: "",
+            message: "",
+            error: message,
+          };
+
+          overviewInProgress = false;
+          render(`Overview generation failed: ${message}`);
+        }
+      });
+
+      panel.appendChild(overviewContent);
+      return panel;
     }
 
     function renderChanges(changes) {
@@ -792,12 +1041,31 @@ internal static class AutoCommitMessagePanelHtml
       topbar.appendChild(meta);
       root.appendChild(topbar);
 
+      const navBar = element("div", "nav-bar");
+      const navMenu = element("div", "nav-menu");
+      const modelChangesButton = element("button", "nav-btn", "Model changes");
+      modelChangesButton.type = "button";
+      const modelOverviewButton = element("button", "nav-btn", "Model overview");
+      modelOverviewButton.type = "button";
+      if (activeView === "model-overview") {
+        modelOverviewButton.classList.add("active");
+      } else {
+        modelChangesButton.classList.add("active");
+      }
+      navMenu.appendChild(modelChangesButton);
+      navMenu.appendChild(modelOverviewButton);
+      navBar.appendChild(navMenu);
+      root.appendChild(navBar);
+
       const branchName = payload && payload.BranchName ? payload.BranchName : "-";
       root.appendChild(element("div", "subtitle", `Branch: ${branchName}`));
+      const defaultStatus = activeView === "model-overview"
+        ? "Model overview is generated on demand."
+        : "Ready. Refresh re-runs Git + model analysis.";
       const statusLine = element(
         "div",
         "status-line",
-        statusOverride || "Ready. Refresh re-runs Git + model analysis.");
+        statusOverride || defaultStatus);
       root.appendChild(statusLine);
 
       const content = element("div", "content");
@@ -806,6 +1074,24 @@ internal static class AutoCommitMessagePanelHtml
       function setExportAvailability() {
         exportButton.disabled = !(payload && payload.IsGitRepo === true && Array.isArray(payload.Changes) && payload.Changes.length > 0);
       }
+
+      modelChangesButton.addEventListener("click", () => {
+        if (activeView === "model-changes") {
+          return;
+        }
+
+        activeView = "model-changes";
+        render("Model changes view.");
+      });
+
+      modelOverviewButton.addEventListener("click", () => {
+        if (activeView === "model-overview") {
+          return;
+        }
+
+        activeView = "model-overview";
+        render("Model overview view. Click Generate overview to build output.");
+      });
 
       refreshButton.addEventListener("click", async () => {
         if (refreshInProgress) {
@@ -841,6 +1127,7 @@ internal static class AutoCommitMessagePanelHtml
           }
 
           currentPayload = refreshedPayload;
+          resetModelOverviewState();
           refreshInProgress = false;
           const refreshedAt = new Date().toLocaleTimeString();
           render(`Reloaded change analysis at ${refreshedAt}`);
@@ -885,6 +1172,11 @@ internal static class AutoCommitMessagePanelHtml
           setExportAvailability();
         }
       });
+
+      if (activeView === "model-overview") {
+        content.appendChild(renderModelOverview(payload, statusLine));
+        return;
+      }
 
       if (!payload || payload.IsGitRepo !== true) {
         content.appendChild(renderCard("Not a Git repository"));

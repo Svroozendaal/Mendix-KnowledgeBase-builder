@@ -19,13 +19,13 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
 
 - Route detail extraction by resource `$Type`.
 - Current routes:
-  - `Microflows$Microflow -> action delta parser`
-  - `DomainModels$Entity -> attribute delta parser`
-  - `Pages$Page -> allowedRoles parser`
-- Extension routes (required for current known gaps):
-  - `Microflows$Nanoflow -> action delta parser`
-  - `DomainModels$Enumeration|Enumerations$Enumeration -> enumeration value parser`
-  - `Pages$Page -> layout/action/widget parsers (merged with allowedRoles parser)`
+  - `Microflows$Microflow|Microflows$Nanoflow|Nanoflows$Nanoflow|Microflows$Rule -> flow parser`
+  - `DomainModels$Entity -> entity attribute/metadata parser`
+  - `DomainModels$Association -> association parser`
+  - `DomainModels$Enumeration|Enumerations$Enumeration -> enumeration parser`
+  - `Pages$Page -> role/layout/action/widget parsers`
+  - `Pages$Snippet|Pages$PageTemplate|Pages$BuildingBlock|Pages$Layout -> layout/action/widget parsers`
+  - all remaining tracked resource types -> generic resource metadata parser
 
 ## D002 - Change type classification
 
@@ -100,6 +100,19 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
   - `decisions removed (<n>): ...`
   - `decisions modified (<n>): ...`
 
+## D014 - Flow baseline metadata extraction
+
+- Applies to:
+  - `Microflows$Microflow`
+  - `Microflows$Nanoflow`
+  - `Nanoflows$Nanoflow`
+  - `Microflows$Rule`
+- Trigger:
+  - when action/loop/decision delta anchors are absent.
+- Emit:
+  - `flow structure: ...`
+  - `flow metadata: ...`
+
 ## D020 - Domain entity attribute extraction
 
 - Applies to `DomainModels$Entity`.
@@ -111,7 +124,7 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
     - `attributes added (<n>): <AttributeList>`
     - `attributes removed (<n>): <AttributeList>`
     - `attributes renamed (<n>): <OldName->NewName list>`
-  - If none of the attribute deltas are present, emit no attribute section.
+  - If none of the attribute deltas are present, emit baseline entity metadata detail instead of null.
 
 ## D030 - Enumeration value extraction
 
@@ -163,9 +176,17 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
 
 ## D043 - Page widget summary extraction
 
-- Applies to `Pages$Page`.
-- Count significant widget types under layout arguments and nested widgets.
+- Applies to:
+  - `Pages$Page`
+  - `Pages$Snippet`
+  - `Pages$PageTemplate`
+  - `Pages$BuildingBlock`
+  - `Pages$Layout`
+- Count significant widget types under layout trees.
 - Emit:
+  - `widgets delta: added <n>, removed <n>` (when both snapshots exist and counts differ)
+  - `widgets added (<n>): <WidgetType x#>`
+  - `widgets removed (<n>): <WidgetType x#>`
   - `widgets used (<n>): <WidgetType x#>`
 
 ## D044 - Domain association metadata extraction
@@ -226,6 +247,16 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
   - structural change: `<property> entries updated`
 - Respect ignored semantic properties.
 
+## D051 - Generic resource metadata fallback
+
+- Applies to tracked resource types without specialised parsers, and as safety fallback when specialised parser output is empty.
+- Emit deterministic baseline anchors:
+  - `modelType=<ShortType>`
+  - `resource metadata: <key=value,...>` when parseable metadata exists
+  - `nested types (<n>): <Type x#>` when nested object types are present
+- Purpose:
+  - eliminate null `details` for changed resources with parseable dump signals.
+
 ## D060 - Null-detail prevention
 
 - If one or more deterministic parser outputs exist for a change, `details` must not be `null`.
@@ -233,11 +264,10 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
   - no parser rule applies, and
   - no generic fallback (D050) yields meaningful output.
 
-## Open Gaps (from 2026-02-26T12-28-22 export)
+## Open Gaps
 
-- `Microflow`/`Nanoflow` details can omit explicit loop context -> apply `D012`.
-- `Enumeration` still empty when model type is `Enumerations$Enumeration` -> route via `D001` + `D030`.
+- Full single-dump inventory is still out of scope for diff-only extraction.
 
 ## Next rule IDs
 
-- `D047` next available.
+- `D061` next available.

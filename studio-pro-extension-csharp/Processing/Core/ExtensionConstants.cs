@@ -9,5 +9,6 @@ internal static class ExtensionConstants
     public const string ActionQueryKey = "action";
     public const string ExportActionValue = "export";
     public const string RefreshActionValue = "refresh";
+    public const string GenerateOverviewActionValue = "generate-overview";
 }
 

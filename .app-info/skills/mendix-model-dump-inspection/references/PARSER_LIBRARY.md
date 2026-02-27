@@ -45,6 +45,14 @@ Observed dump evidence:
   - Contract:
     - Same anchor format as microflow action delta.
 
+- `BuildFlowMetadataDetails(string changeType, string modelType, JsonElement? working, JsonElement? head) -> string?`
+  - Status: implemented.
+  - Purpose:
+    - Baseline details for flow resources when no action/loop/decision deltas exist (for example newly created empty microflows).
+  - Contract anchors:
+    - `flow structure: ...`
+    - `flow metadata: ...`
+
 - `CollectFlowActionsById(JsonElement flow) -> Dictionary<string, FlowActionInfo>`
   - Status: implemented for microflow, reusable for nanoflow.
   - Notes:
@@ -98,6 +106,8 @@ Observed dump evidence:
     - `after commit=<MicroflowList>`
     - `system members: enabled <flagList>`
     - `system members: disabled <flagList>`
+  - Baseline fallback:
+    - Emits `entity metadata: ...` or deterministic baseline text when attribute/metadata delta anchors are absent.
 
 - `BuildDomainAssociationDetails(JsonElement? working, JsonElement? head, DumpSnapshot workingSnapshot, DumpSnapshot headSnapshot) -> string?`
   - Status: implemented.
@@ -161,11 +171,25 @@ Observed dump evidence:
     - `actions used (<n>): <ActionType x#>; action targets: <TargetList>`
 
 - `BuildPageWidgetSummaryDetails(JsonElement? working, JsonElement? head) -> string?`
-  - Status: missing (candidate).
+  - Status: implemented.
   - Parse target:
-    - Count significant widget types under `layoutCall.arguments[*].widgets`.
-  - Contract candidate:
+    - Count significant widget types under `layoutCall` and nested page widget trees.
+  - Contract:
+    - `widgets delta: added <n>, removed <n>` (when both snapshots exist and counts differ)
+    - `widgets added (<n>): <WidgetType x#>`
+    - `widgets removed (<n>): <WidgetType x#>`
     - `widgets used (<n>): <WidgetType x#>`
+
+## Generic resource parsers
+
+- `BuildGenericResourceDetails(string changeType, string modelType, JsonElement? working, JsonElement? head) -> string?`
+  - Status: implemented.
+  - Purpose:
+    - Deterministic non-null fallback details for document/resource model types without specialised parsers.
+  - Contract anchors:
+    - `modelType=<ShortType>`
+    - `resource metadata: <key=value,...>` (when present)
+    - `nested types (<n>): <Type x#>` (when nested model objects exist)
 
 ## Detail text assembly
 
@@ -177,12 +201,13 @@ Observed dump evidence:
 ## Recommended router implementation
 
 - `BuildResourceSpecificDetails(...)` should route by model type:
-  - `Microflows$Microflow -> BuildMicroflowActionDeltaDetails`
-  - `Microflows$Nanoflow -> BuildMicroflowActionDeltaDetails (shared flow parser)`
+  - `Microflows$Microflow|Microflows$Nanoflow|Nanoflows$Nanoflow|Microflows$Rule -> BuildMicroflowActionDeltaDetails + BuildFlowMetadataDetails`
   - `DomainModels$Entity -> BuildDomainEntityAttributeDetails`
   - `DomainModels$Association -> BuildDomainAssociationDetails`
   - `DomainModels$Enumeration|Enumerations$Enumeration -> BuildEnumerationValueDetails`
   - `Pages$Page -> Merge(BuildPageAllowedRolesDetails, BuildPageLayoutMetadataDetails, BuildPageActionBindingsDetails, BuildPageWidgetSummaryDetails)`
+  - `Pages$Snippet|Pages$PageTemplate|Pages$BuildingBlock|Pages$Layout -> Merge(BuildPageLayoutMetadataDetails, BuildPageActionBindingsDetails, BuildPageWidgetSummaryDetails)`
+  - all remaining tracked resources -> `BuildGenericResourceDetails`
 
 ## Rule linkage
 

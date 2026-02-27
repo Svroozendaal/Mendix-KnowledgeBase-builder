@@ -34,6 +34,12 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
             return;
         }
 
+        if (string.Equals(action, ExtensionConstants.GenerateOverviewActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleGenerateOverviewRequestAsync(projectPath, response, cancellationToken);
+            return;
+        }
+
         var payload = await Task.Run(() => AutoCommitMessageChangeService.ReadChanges(projectPath), cancellationToken);
         var html = AutoCommitMessagePanelHtml.Render(payload, projectPath);
         var content = Encoding.UTF8.GetBytes(html);
@@ -115,6 +121,47 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                 response,
                 500,
                 new { success = false, message = exception.Message },
+                cancellationToken);
+        }
+    }
+
+    private static async Task HandleGenerateOverviewRequestAsync(
+        string projectPath,
+        HttpListenerResponse response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            // TODO: Replace this call with a dedicated full-model inventory pipeline once available.
+            var result = await Task.Run(
+                () => AutoCommitMessageModelOverviewService.GenerateOverview(projectPath),
+                cancellationToken);
+
+            var statusCode = result.Success ? 200 : 400;
+            await WriteJsonResponseAsync(
+                response,
+                statusCode,
+                new
+                {
+                    success = result.Success,
+                    message = result.Message,
+                    overviewText = result.OverviewText,
+                    changedFileCount = result.ChangedFileCount,
+                    changedModelFileCount = result.ChangedModelFileCount,
+                    generatedAtUtc = result.GeneratedAtUtc,
+                },
+                cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                500,
+                new
+                {
+                    success = false,
+                    message = exception.Message,
+                },
                 cancellationToken);
         }
     }

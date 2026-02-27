@@ -46,6 +46,7 @@ public static class MendixModelDiffService
     private const string MicroflowModelType = "Microflows$Microflow";
     private const string NanoflowModelType = "Microflows$Nanoflow";
     private const string LegacyNanoflowModelType = "Nanoflows$Nanoflow";
+    private const string RuleModelType = "Microflows$Rule";
     private const string ActionActivityModelType = "Microflows$ActionActivity";
     private const string LoopedActivityModelType = "Microflows$LoopedActivity";
     private const string ExclusiveSplitModelType = "Microflows$ExclusiveSplit";
@@ -58,6 +59,10 @@ public static class MendixModelDiffService
     private const string DomainAttributeModelType = "DomainModels$Attribute";
     private const string NonPersistentEntityElementType = "NonPersistentEntity";
     private const string PageModelType = "Pages$Page";
+    private const string PageSnippetModelType = "Pages$Snippet";
+    private const string PageTemplateModelType = "Pages$PageTemplate";
+    private const string PageBuildingBlockModelType = "Pages$BuildingBlock";
+    private const string PageLayoutModelType = "Pages$Layout";
     private const string UserRoleModelType = "Security$UserRole";
     private const string NoClientActionModelType = "Pages$NoClientAction";
 
@@ -81,6 +86,58 @@ public static class MendixModelDiffService
         ("hasChangedBy", "store changed by"),
         ("hasCreatedDate", "store created date"),
         ("hasChangedDate", "store changed date"),
+    };
+
+    private static readonly HashSet<string> GenericScalarDetailProperties = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "exportLevel",
+        "excluded",
+        "markAsUsed",
+        "url",
+        "type",
+        "owner",
+        "storageFormat",
+        "entity",
+        "returnVariableName",
+        "applyEntityAccess",
+        "allowConcurrentExecution",
+        "persistable",
+        "publicAccessLevel",
+        "value",
+        "documentation",
+    };
+
+    private static readonly (string PropertyName, string Label)[] GenericArrayCountProperties =
+    {
+        ("allowedModuleRoles", "allowedModuleRoles"),
+        ("accessRules", "accessRules"),
+        ("attributes", "attributes"),
+        ("values", "values"),
+        ("parameters", "parameters"),
+        ("eventHandlers", "eventHandlers"),
+        ("flows", "flows"),
+        ("items", "items"),
+        ("widgets", "widgets"),
+        ("operations", "operations"),
+        ("menuItems", "menuItems"),
+    };
+
+    private static readonly HashSet<string> NonWidgetPageModelTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        PageModelType,
+        PageSnippetModelType,
+        PageTemplateModelType,
+        PageBuildingBlockModelType,
+        PageLayoutModelType,
+        NoClientActionModelType,
+        "Pages$Appearance",
+        "Pages$ClientTemplate",
+        "Pages$DesignPropertyValue",
+        "Pages$OptionDesignPropertyValue",
+        "Pages$CompoundDesignPropertyValue",
+        "Pages$FormattingInfo",
+        "Pages$LayoutCall",
+        "Pages$LayoutArgument",
     };
 
     /// <summary>
@@ -307,9 +364,17 @@ public static class MendixModelDiffService
             return null;
         }
 
+        string? details = null;
         if (IsFlowModelType(reference.ModelType))
         {
-            return BuildMicroflowActionDetails(workingDescriptor?.Object, headDescriptor?.Object);
+            details = BuildMicroflowActionDetails(
+                changeType,
+                reference.ModelType,
+                workingDescriptor?.Object,
+                headDescriptor?.Object);
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
         }
 
         if (string.Equals(reference.ModelType, DomainEntityModelType, StringComparison.OrdinalIgnoreCase))
@@ -319,23 +384,40 @@ public static class MendixModelDiffService
 
         if (string.Equals(reference.ModelType, DomainAssociationModelType, StringComparison.OrdinalIgnoreCase))
         {
-            return BuildDomainAssociationDetails(
+            details = BuildDomainAssociationDetails(
                 workingDescriptor?.Object,
                 headDescriptor?.Object,
                 workingSnapshot,
                 headSnapshot);
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
         }
 
         if (IsEnumerationModelType(reference.ModelType))
         {
-            return BuildEnumerationValueDetails(changeType, workingDescriptor?.Object, headDescriptor?.Object);
+            details = BuildEnumerationValueDetails(changeType, workingDescriptor?.Object, headDescriptor?.Object);
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
         }
 
-        if (string.Equals(reference.ModelType, PageModelType, StringComparison.OrdinalIgnoreCase))
+        if (IsPageLikeModelType(reference.ModelType))
         {
-            var details = BuildPageAllowedRolesDetails(workingDescriptor?.Object, headDescriptor?.Object, workingSnapshot, headSnapshot);
+            details = string.Equals(reference.ModelType, PageModelType, StringComparison.OrdinalIgnoreCase)
+                ? BuildPageAllowedRolesDetails(workingDescriptor?.Object, headDescriptor?.Object, workingSnapshot, headSnapshot)
+                : null;
             details = MergeDetailTexts(details, BuildPageLayoutMetadataDetails(workingDescriptor?.Object, headDescriptor?.Object));
             details = MergeDetailTexts(details, BuildPageActionBindingsDetails(workingDescriptor?.Object, headDescriptor?.Object));
+            details = MergeDetailTexts(details, BuildPageWidgetSummaryDetails(workingDescriptor?.Object, headDescriptor?.Object));
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
+        }
+
+        details = BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object);
+        if (!string.IsNullOrWhiteSpace(details))
+        {
             return details;
         }
 
@@ -343,10 +425,18 @@ public static class MendixModelDiffService
     }
 
     private static string? BuildMicroflowActionDetails(
+        string changeType,
+        string modelType,
         JsonElement? workingResource,
         JsonElement? headResource)
     {
-        return BuildMicroflowActionDeltaDetails(workingResource, headResource);
+        var details = BuildMicroflowActionDeltaDetails(workingResource, headResource);
+        if (!string.IsNullOrWhiteSpace(details))
+        {
+            return details;
+        }
+
+        return BuildFlowMetadataDetails(changeType, modelType, workingResource, headResource);
     }
 
     private static string? BuildMicroflowActionDeltaDetails(
@@ -532,6 +622,65 @@ public static class MendixModelDiffService
         }
 
         return string.Join("; ", parts);
+    }
+
+    private static string? BuildFlowMetadataDetails(
+        string changeType,
+        string modelType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var flowResource = workingResource ?? headResource;
+        if (flowResource is null)
+        {
+            return null;
+        }
+
+        var flowObject = flowResource.Value;
+        var actionCount = CollectMicroflowActionsById(flowObject).Count;
+        var loopCount = CollectFlowLoopsById(flowObject).Count;
+        var decisionCount = CollectFlowDecisionsById(flowObject).Count;
+        var sequenceFlowCount = TryGetArrayPropertyCount(flowObject, "flows") ?? 0;
+        var allowedRolesCount = TryGetArrayPropertyCount(flowObject, "allowedModuleRoles") ?? 0;
+
+        var parts = new List<string>();
+        if (actionCount == 0 && loopCount == 0 && decisionCount == 0)
+        {
+            parts.Add($"flow structure: no action/loop/decision activities configured; sequenceFlows={sequenceFlowCount}");
+        }
+        else
+        {
+            parts.Add($"flow structure: actions={actionCount}, loops={loopCount}, decisions={decisionCount}, sequenceFlows={sequenceFlowCount}");
+        }
+
+        var metadata = new List<string>();
+        AppendOption(metadata, "modelType", ShortTypeName(modelType));
+        AppendOption(metadata, "applyEntityAccess", TryReadStringProperty(flowObject, "applyEntityAccess"));
+        AppendOption(metadata, "allowConcurrentExecution", TryReadStringProperty(flowObject, "allowConcurrentExecution"));
+        AppendOption(metadata, "markAsUsed", TryReadStringProperty(flowObject, "markAsUsed"));
+        AppendOption(metadata, "returnVariableName", TryReadStringProperty(flowObject, "returnVariableName"));
+        AppendOption(metadata, "url", TryReadStringProperty(flowObject, "url"), maxLength: 160);
+        AppendOption(metadata, "exportLevel", TryReadStringProperty(flowObject, "exportLevel"));
+        if (allowedRolesCount > 0)
+        {
+            metadata.Add($"allowedModuleRoles={allowedRolesCount}");
+        }
+
+        if (metadata.Count > 0)
+        {
+            parts.Add($"flow metadata: {string.Join(", ", metadata)}");
+        }
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase) && parts.Count == 0)
+        {
+            parts.Add("flow created");
+        }
+        else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase) && parts.Count == 0)
+        {
+            parts.Add("flow before deletion");
+        }
+
+        return parts.Count == 0 ? null : string.Join("; ", parts);
     }
 
     private static Dictionary<string, FlowLoopInfo> CollectFlowLoopsById(JsonElement flowObject)
@@ -1800,10 +1949,71 @@ public static class MendixModelDiffService
 
         if (details.Count == 0)
         {
-            return null;
+            return BuildEntityBaselineDetails(changeType, workingResource, headResource);
         }
 
         return string.Join("; ", details);
+    }
+
+    private static string? BuildEntityBaselineDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var entityResource = workingResource ?? headResource;
+        if (entityResource is null)
+        {
+            return null;
+        }
+
+        var parts = new List<string>();
+        var accessRulesCount = TryGetArrayPropertyCount(entityResource.Value, "accessRules") ?? 0;
+        var indexCount = TryGetArrayPropertyCount(entityResource.Value, "indexes") ?? 0;
+        var validationCount = TryGetArrayPropertyCount(entityResource.Value, "validationRules") ?? 0;
+        var eventHandlerCount = TryGetArrayPropertyCount(entityResource.Value, "eventHandlers") ?? 0;
+
+        if (accessRulesCount > 0)
+        {
+            parts.Add($"accessRules={accessRulesCount}");
+        }
+
+        if (indexCount > 0)
+        {
+            parts.Add($"indexes={indexCount}");
+        }
+
+        if (validationCount > 0)
+        {
+            parts.Add($"validationRules={validationCount}");
+        }
+
+        if (eventHandlerCount > 0)
+        {
+            parts.Add($"eventHandlers={eventHandlerCount}");
+        }
+
+        AppendOption(parts, "exportLevel", TryReadStringProperty(entityResource.Value, "exportLevel"));
+
+        var metadata = parts.Count == 0
+            ? null
+            : $"entity metadata: {string.Join(", ", parts)}";
+
+        if (!string.IsNullOrWhiteSpace(metadata))
+        {
+            return metadata;
+        }
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+        {
+            return "entity created (no attributes or metadata changes)";
+        }
+
+        if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        {
+            return "entity deleted (no attributes or metadata captured)";
+        }
+
+        return "entity metadata updated";
     }
 
     private static string? BuildDomainAssociationDetails(
@@ -2472,6 +2682,147 @@ public static class MendixModelDiffService
         return string.Join("; ", details);
     }
 
+    private static string? BuildPageWidgetSummaryDetails(
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var workingWidgetCounts = workingResource is null
+            ? new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+            : CollectPageWidgetTypeCounts(workingResource.Value);
+        var headWidgetCounts = headResource is null
+            ? new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+            : CollectPageWidgetTypeCounts(headResource.Value);
+
+        var workingTotal = workingWidgetCounts.Values.Sum();
+        var headTotal = headWidgetCounts.Values.Sum();
+        if (workingTotal == 0 && headTotal == 0)
+        {
+            return null;
+        }
+
+        var parts = new List<string>();
+        if (workingResource is not null && headResource is not null)
+        {
+            var addedCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            var removedCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (var (widgetType, workingCount) in workingWidgetCounts)
+            {
+                headWidgetCounts.TryGetValue(widgetType, out var previousCount);
+                var delta = workingCount - previousCount;
+                if (delta > 0)
+                {
+                    addedCounts[widgetType] = delta;
+                }
+            }
+
+            foreach (var (widgetType, headCount) in headWidgetCounts)
+            {
+                workingWidgetCounts.TryGetValue(widgetType, out var currentCount);
+                var delta = headCount - currentCount;
+                if (delta > 0)
+                {
+                    removedCounts[widgetType] = delta;
+                }
+            }
+
+            var addedTotal = addedCounts.Values.Sum();
+            var removedTotal = removedCounts.Values.Sum();
+            if (addedTotal > 0 || removedTotal > 0)
+            {
+                parts.Add($"widgets delta: added {addedTotal}, removed {removedTotal}");
+            }
+
+            if (addedTotal > 0)
+            {
+                parts.Add($"widgets added ({addedTotal}): {FormatCounterList(addedCounts)}");
+            }
+
+            if (removedTotal > 0)
+            {
+                parts.Add($"widgets removed ({removedTotal}): {FormatCounterList(removedCounts)}");
+            }
+        }
+
+        if (workingTotal > 0)
+        {
+            parts.Add($"widgets used ({workingTotal}): {FormatCounterList(workingWidgetCounts)}");
+        }
+        else if (headTotal > 0)
+        {
+            parts.Add($"widgets before deletion ({headTotal}): {FormatCounterList(headWidgetCounts)}");
+        }
+
+        return parts.Count == 0 ? null : string.Join("; ", parts);
+    }
+
+    private static Dictionary<string, int> CollectPageWidgetTypeCounts(JsonElement pageResource)
+    {
+        if (!TryReadProperty(pageResource, "layoutCall", out var layoutCall) ||
+            layoutCall.ValueKind != JsonValueKind.Object)
+        {
+            return new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        }
+
+        var widgetCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var stack = new Stack<JsonElement>();
+        stack.Push(layoutCall);
+
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            switch (current.ValueKind)
+            {
+                case JsonValueKind.Object:
+                {
+                    var modelType = TryReadStringProperty(current, "$Type");
+                    if (IsPageWidgetModelType(modelType))
+                    {
+                        IncrementCount(widgetCounts, ShortTypeName(modelType!));
+                    }
+
+                    foreach (var property in current.EnumerateObject())
+                    {
+                        stack.Push(property.Value);
+                    }
+
+                    break;
+                }
+
+                case JsonValueKind.Array:
+                    foreach (var item in current.EnumerateArray())
+                    {
+                        stack.Push(item);
+                    }
+
+                    break;
+            }
+        }
+
+        return widgetCounts;
+    }
+
+    private static bool IsPageWidgetModelType(string? modelType)
+    {
+        if (string.IsNullOrWhiteSpace(modelType) ||
+            !modelType.StartsWith("Pages$", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        if (NonWidgetPageModelTypes.Contains(modelType))
+        {
+            return false;
+        }
+
+        if (IsPageClientActionType(modelType))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     private static List<PageClientActionInfo> CollectPageClientActions(JsonElement pageResource)
     {
         var actions = new List<PageClientActionInfo>();
@@ -2680,6 +3031,130 @@ public static class MendixModelDiffService
             .Select(value => value!.Trim())
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .ToArray();
+    }
+
+    private static string? BuildGenericResourceDetails(
+        string changeType,
+        string modelType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var resourceObject = string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase)
+            ? headResource ?? workingResource
+            : workingResource ?? headResource;
+        if (resourceObject is null)
+        {
+            return null;
+        }
+
+        var details = new List<string>
+        {
+            $"modelType={ShortTypeName(modelType)}"
+        };
+
+        var metadata = new List<string>();
+        foreach (var propertyName in GenericScalarDetailProperties)
+        {
+            var maxLength = string.Equals(propertyName, "documentation", StringComparison.OrdinalIgnoreCase) ? 100 : 140;
+            AppendOption(metadata, propertyName, TryReadStringProperty(resourceObject.Value, propertyName), maxLength);
+        }
+
+        foreach (var (propertyName, label) in GenericArrayCountProperties)
+        {
+            var count = TryGetArrayPropertyCount(resourceObject.Value, propertyName);
+            if (count is > 0)
+            {
+                metadata.Add($"{label}={count}");
+            }
+        }
+
+        if (metadata.Count > 0)
+        {
+            details.Add($"resource metadata: {string.Join(", ", metadata)}");
+        }
+
+        var nestedSummary = BuildNestedTypeSummary(resourceObject.Value);
+        if (!string.IsNullOrWhiteSpace(nestedSummary))
+        {
+            details.Add(nestedSummary);
+        }
+
+        if (details.Count == 1)
+        {
+            if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+            {
+                details.Add("resource created");
+            }
+            else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+            {
+                details.Add("resource before deletion");
+            }
+            else
+            {
+                details.Add("resource updated");
+            }
+        }
+
+        return string.Join("; ", details);
+    }
+
+    private static string? BuildNestedTypeSummary(JsonElement resourceObject, int maxTypes = 6)
+    {
+        var rootType = TryReadStringProperty(resourceObject, "$Type");
+        var nestedTypeCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var stack = new Stack<JsonElement>();
+        stack.Push(resourceObject);
+
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            switch (current.ValueKind)
+            {
+                case JsonValueKind.Object:
+                {
+                    var modelType = TryReadStringProperty(current, "$Type");
+                    if (!string.IsNullOrWhiteSpace(modelType) &&
+                        !string.Equals(modelType, rootType, StringComparison.OrdinalIgnoreCase))
+                    {
+                        IncrementCount(nestedTypeCounts, ShortTypeName(modelType));
+                    }
+
+                    foreach (var property in current.EnumerateObject())
+                    {
+                        stack.Push(property.Value);
+                    }
+
+                    break;
+                }
+
+                case JsonValueKind.Array:
+                    foreach (var item in current.EnumerateArray())
+                    {
+                        stack.Push(item);
+                    }
+
+                    break;
+            }
+        }
+
+        if (nestedTypeCounts.Count == 0)
+        {
+            return null;
+        }
+
+        var total = nestedTypeCounts.Values.Sum();
+        return $"nested types ({total}): {FormatCounterList(nestedTypeCounts, maxEntries: maxTypes)}";
+    }
+
+    private static int? TryGetArrayPropertyCount(JsonElement element, string propertyName)
+    {
+        if (!TryReadProperty(element, propertyName, out var propertyElement) ||
+            propertyElement.ValueKind != JsonValueKind.Array)
+        {
+            return null;
+        }
+
+        return propertyElement.GetArrayLength();
     }
 
     private static Dictionary<string, string> CollectDomainAttributes(JsonElement entityObject)
@@ -2943,7 +3418,22 @@ public static class MendixModelDiffService
 
         return string.Equals(modelType, MicroflowModelType, StringComparison.OrdinalIgnoreCase) ||
                string.Equals(modelType, NanoflowModelType, StringComparison.OrdinalIgnoreCase) ||
-               string.Equals(modelType, LegacyNanoflowModelType, StringComparison.OrdinalIgnoreCase);
+               string.Equals(modelType, LegacyNanoflowModelType, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(modelType, RuleModelType, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool IsPageLikeModelType(string? modelType)
+    {
+        if (string.IsNullOrWhiteSpace(modelType))
+        {
+            return false;
+        }
+
+        return string.Equals(modelType, PageModelType, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(modelType, PageSnippetModelType, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(modelType, PageTemplateModelType, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(modelType, PageBuildingBlockModelType, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(modelType, PageLayoutModelType, StringComparison.OrdinalIgnoreCase);
     }
 
     private static bool IsEnumerationModelType(string? modelType)
