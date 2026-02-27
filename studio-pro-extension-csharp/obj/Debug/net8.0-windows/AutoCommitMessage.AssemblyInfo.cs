@@ -10,11 +10,11 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyMetadataAttribute("MendixDataRoot", "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("MendixDataRoot", "C:\\Workspace\\Mendix-AutoCommitMessage\\mendix-data")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("AutoCommitMessage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c2d3fcea006cd1a7726712a30ce0862cae9cbb70")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a02d92a6a20168ab457d85716721b15b9bbb1541")]
 [assembly: System.Reflection.AssemblyProductAttribute("AutoCommitMessage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AutoCommitMessage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

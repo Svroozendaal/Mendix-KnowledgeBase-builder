@@ -6,7 +6,6 @@
     <RootNamespace>AutoCommitMessage</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <DefaultItemExcludes>$(DefaultItemExcludes);obj-build*\**;bin-build*\**</DefaultItemExcludes>
     <MendixDataRoot Condition="'$(MendixDataRoot)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\mendix-data'))</MendixDataRoot>

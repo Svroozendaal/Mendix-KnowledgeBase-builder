@@ -1,15 +1,29 @@
 # AutoCommitMessage Extension (Studio Pro 10)
 
-Studio Pro 10 dockable-pane extension for Mendix Git changes (`.mpr`, `.mprops`) with model-level `.mpr` analysis and export-ready data.
+Studio Pro 10 dockable-pane extension for analysing Mendix repository changes (`.mpr`, `.mprops`) with model-level `.mpr` diff extraction and export-ready JSON.
+
+## Structure
+
+- `UI/`
+  - Dockable pane and menu integration
+  - Internal web route handler
+  - In-extension HTML/CSS/JS view
+- `Processing/`
+  - Contracts and shared constants
+  - Change discovery and export services
+  - Mendix dump diffing and converter formatting
+- `Docs/`
+  - Technical module documentation (`info_*.md`)
 
 ## Current behaviour
 
-1. Filters Git status to Mendix model/config files only (`*.mpr`, `*.mprops`).
+1. Filters repository status to Mendix model/config files only (`*.mpr`, `*.mprops`).
 2. Renders a WebView UI with:
-   - left pane: `Model changes (.mpr)` (primary, larger pane)
-   - right pane: `Changed files` table and `Diff`
-3. `Refresh` calls the extension refresh route and re-runs Git plus model analysis.
-4. `Export` writes raw payload JSON and also persists full model dumps (`working/head`) for changed `.mpr` files.
+   - left pane: `Model changes (.mpr)`
+   - right pane: `Changed files` and `Diff`
+3. `Refresh` re-runs repository and model analysis.
+4. `Export` writes payload JSON and persists `working/head` model dumps for changed `.mpr` files.
+5. Exported model elements include `displayText` generated from converter rules.
 
 ## Build
 
@@ -56,13 +70,13 @@ Deployment target:
 - `<AppPath>\extensions\AutoCommitMessage\AutoCommitMessage.dll`
 - `<AppPath>\extensions\AutoCommitMessage\manifest.json`
 
-The extension writes export files to `<DataRootPath>\exports` and keeps the parser contract folders available:
+The extension writes data to `<DataRootPath>` folders:
 
-- `<DataRootPath>\exports`
-- `<DataRootPath>\processed`
-- `<DataRootPath>\errors`
-- `<DataRootPath>\structured`
-- `<DataRootPath>\dumps`
+- `exports`
+- `processed`
+- `errors`
+- `structured`
+- `dumps`
 
 ## Start the Mendix app quickly
 
@@ -72,21 +86,10 @@ Use the root launcher script:
 .\start-mendix-app.ps1
 ```
 
-It reads `MENDIX_APP_PATH` from `.env`, locates `studiopro.exe`, and starts Studio Pro with extension development enabled using `--enable-extension-development`.  
-You can still override the path:
-
-```powershell
-.\start-mendix-app.ps1 -AppPath "C:\Workspaces\Mendix\YourApp"
-```
-
-Optional: pin a specific Studio Pro executable:
-
-```powershell
-.\start-mendix-app.ps1 -StudioProPath "C:\Program Files\Mendix\10.x.x.x\modeler\studiopro.exe"
-```
+It reads `MENDIX_APP_PATH` from `.env`, locates `studiopro.exe`, and starts Studio Pro with extension development enabled using `--enable-extension-development`.
 
 ## Notes
 
 - No localhost web server or `npm` workflow is required.
-- Pane URL contains a cache-buster token per open to avoid stale UI rendering.
-- Export mode persists dump artifacts in `mendix-data\dumps` for deeper offline inspection.
+- Pane URL includes a cache-buster token per open.
+- Build artefacts under `studio-pro-extension-csharp/bin` and `studio-pro-extension-csharp/obj` are intentionally ignored by git.

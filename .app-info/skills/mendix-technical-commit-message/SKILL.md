@@ -11,8 +11,8 @@ description: Convert Mendix export JSON (`changes[*].modelChangesByModule`) into
 2. Use `modelChangesByModule` as the primary input shape.
 3. Produce technical commit text grouped by module.
 4. Write one line per changed element, each line starting with `-`.
-5. Apply only documented rules from `references/RULE_LIBRARY.md`.
-6. Ask for a new rule whenever an input pattern is not covered.
+5. Apply converter rules from Part 1 of `references/RULE_LIBRARY.md` for deterministic row formatting.
+6. Apply AI rules from Part 2 of `references/RULE_LIBRARY.md` for `details` interpretation.
 7. Persist approved rules back into `references/RULE_LIBRARY.md`.
 
 ## INPUT CONTRACT
@@ -51,20 +51,19 @@ Each change row is expected to contain:
 - `pages`
 - `nanoflows`
 - `resources`
-4. For each change item, find the first matching rule in `references/RULE_LIBRARY.md`.
-5. If a rule matches, render the final output line.
-6. If no rule matches:
+4. For each change item, apply converter rules first (name normalisation, NEW marker, abbreviation, final row shape).
+5. For each change item, apply AI rules to derive the `details` segment when interpretation is needed.
+6. If no applicable converter or AI rule matches:
 - add a `Missing Rules` entry with module, category, element type, change type, and raw details
-- ask the user to define a new rule for that exact pattern
+- ask the user to define a new rule for that exact pattern (`Cxxx` for converter or `Axxx` for AI)
 - after approval, append the rule to `references/RULE_LIBRARY.md` with a new rule id
 7. Regenerate the commit message once rule gaps are resolved.
 
-## STARTER FORMAT RULES
+## STARTER FORMAT RULE
 
-1. Domain model entity addition:
-- `- DM : <EntityName>: added with attributes '<AttributeList>'`
-2. Microflow modification:
-- `- <MicroflowName> : retrieve <Object>, change <Object> (<Fields>), commit <Object>`
+Use the global row shape from the rule library:
+
+- `- <NEW|DEL|empty> <ABBR|empty> <ElementName> : <Details>`
 
 ## MISSING RULE QUESTION TEMPLATE
 
