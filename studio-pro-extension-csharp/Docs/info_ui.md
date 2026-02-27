@@ -1,5 +1,12 @@
 # info_ui
 
+## Primary documentation
+
+For full request lifecycle, route handling, and UI workflow context, use:
+
+- `Docs/ARCHITECTURE.md`
+- `Docs/REPOSITORY_WORKFLOWS.md`
+
 ## Purpose
 
 - Hosts all Studio Pro UI integration points for AutoCommitMessage.

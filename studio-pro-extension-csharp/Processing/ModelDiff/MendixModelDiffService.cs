@@ -75,6 +75,14 @@ public static class MendixModelDiffService
         "size",
     };
 
+    private static readonly (string PropertyName, string Label)[] EntitySystemMemberFlags =
+    {
+        ("hasOwner", "store owner"),
+        ("hasChangedBy", "store changed by"),
+        ("hasCreatedDate", "store created date"),
+        ("hasChangedDate", "store changed date"),
+    };
+
     /// <summary>
     /// Compares two model dump JSON files and returns detected resource-level changes.
     /// </summary>
@@ -231,12 +239,21 @@ public static class MendixModelDiffService
 
     private static MendixModelChange ToModelChange(MutableResourceChange change)
     {
-        var details = MergeDetailTexts(change.DirectDetails, change.NestedChanges.ToDetailText());
+        var details = ShouldSuppressNestedChangeSummary(change.Descriptor.ElementType)
+            ? change.DirectDetails
+            : MergeDetailTexts(change.DirectDetails, change.NestedChanges.ToDetailText());
         return new MendixModelChange(
             change.ChangeType,
             change.Descriptor.ElementType,
             change.Descriptor.ElementName,
             details);
+    }
+
+    private static bool ShouldSuppressNestedChangeSummary(string? elementType)
+    {
+        return string.Equals(elementType, "Entity", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(elementType, NonPersistentEntityElementType, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(elementType, "Association", StringComparison.OrdinalIgnoreCase);
     }
 
     private static void AddResourceSpecificDetails(
@@ -248,6 +265,11 @@ public static class MendixModelDiffService
         {
             workingSnapshot.ResourcesById.TryGetValue(resourceId, out var workingDescriptor);
             headSnapshot.ResourcesById.TryGetValue(resourceId, out var headDescriptor);
+            var referenceDescriptor = workingDescriptor ?? headDescriptor;
+            if (referenceDescriptor is null)
+            {
+                continue;
+            }
 
             var resourceSpecificDetails = BuildResourceSpecificDetails(
                 resourceChange.ChangeType,
@@ -256,8 +278,20 @@ public static class MendixModelDiffService
                 workingSnapshot,
                 headSnapshot);
 
+            if (ShouldOverrideGenericResourceDetails(referenceDescriptor.ModelType))
+            {
+                resourceChange.DirectDetails = resourceSpecificDetails;
+                continue;
+            }
+
             resourceChange.DirectDetails = MergeDetailTexts(resourceChange.DirectDetails, resourceSpecificDetails);
         }
+    }
+
+    private static bool ShouldOverrideGenericResourceDetails(string modelType)
+    {
+        return string.Equals(modelType, DomainEntityModelType, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(modelType, DomainAssociationModelType, StringComparison.OrdinalIgnoreCase);
     }
 
     private static string? BuildResourceSpecificDetails(
@@ -1679,41 +1713,97 @@ public static class MendixModelDiffService
             ? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             : CollectDomainAttributes(headResource.Value);
 
+        var details = new List<string>();
         if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
         {
-            if (workingAttributes.Count == 0)
+            if (workingAttributes.Count > 0)
             {
-                return "attributes added (0): <none>";
+                var allNames = workingAttributes.Values.OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
+                details.Add($"attributes added ({workingAttributes.Count}): {FormatNameList(allNames)}");
             }
-
-            var allNames = workingAttributes.Values.OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
-            return $"attributes added ({workingAttributes.Count}): {FormatNameList(allNames)}";
         }
-
-        if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
         {
-            if (headAttributes.Count == 0)
+            if (headAttributes.Count > 0)
             {
-                return "attributes before deletion (0): <none>";
+                var removedNames = headAttributes.Values.OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
+                details.Add($"attributes before deletion ({headAttributes.Count}): {FormatNameList(removedNames)}");
+            }
+        }
+        else
+        {
+            var addedAttributeNames = workingAttributes
+                .Where(pair => !headAttributes.ContainsKey(pair.Key))
+                .Select(pair => pair.Value)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+            var removedAttributeNames = headAttributes
+                .Where(pair => !workingAttributes.ContainsKey(pair.Key))
+                .Select(pair => pair.Value)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+            var renamedAttributePairs = new List<(string Previous, string Current)>();
+            foreach (var (attributeKey, currentAttributeName) in workingAttributes)
+            {
+                if (!headAttributes.TryGetValue(attributeKey, out var previousAttributeName) ||
+                    string.Equals(previousAttributeName, currentAttributeName, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                renamedAttributePairs.Add((previousAttributeName, currentAttributeName));
             }
 
-            var removedNames = headAttributes.Values.OrderBy(name => name, StringComparer.OrdinalIgnoreCase);
-            return $"attributes before deletion ({headAttributes.Count}): {FormatNameList(removedNames)}";
+            if (addedAttributeNames.Length > 0)
+            {
+                details.Add($"attributes added ({addedAttributeNames.Length}): {FormatNameList(addedAttributeNames)}");
+            }
+
+            if (renamedAttributePairs.Count > 0)
+            {
+                details.Add($"attributes renamed ({renamedAttributePairs.Count}): {FormatRenameList(renamedAttributePairs)}");
+            }
+
+            if (removedAttributeNames.Length > 0)
+            {
+                details.Add($"attributes removed ({removedAttributeNames.Length}): {FormatNameList(removedAttributeNames)}");
+            }
         }
 
-        var addedAttributeNames = workingAttributes
-            .Where(pair => !headAttributes.ContainsKey(pair.Key))
-            .Select(pair => pair.Value)
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .OrderBy(name => name, StringComparer.OrdinalIgnoreCase)
-            .ToArray();
+        var renameDetails = BuildEntityRenameDetails(changeType, workingResource, headResource);
+        if (!string.IsNullOrWhiteSpace(renameDetails))
+        {
+            details.Add(renameDetails);
+        }
 
-        if (addedAttributeNames.Length == 0)
+        var generalizationDetails = BuildEntityGeneralizationDetails(changeType, workingResource, headResource);
+        if (!string.IsNullOrWhiteSpace(generalizationDetails))
+        {
+            details.Add(generalizationDetails);
+        }
+
+        var systemMemberDetails = BuildEntitySystemMemberDetails(workingResource, headResource);
+        if (!string.IsNullOrWhiteSpace(systemMemberDetails))
+        {
+            details.Add(systemMemberDetails);
+        }
+
+        var commitHandlerDetails = BuildEntityCommitHandlerDetails(workingResource, headResource);
+        if (!string.IsNullOrWhiteSpace(commitHandlerDetails))
+        {
+            details.Add(commitHandlerDetails);
+        }
+
+        if (details.Count == 0)
         {
             return null;
         }
 
-        return $"attributes added ({addedAttributeNames.Length}): {FormatNameList(addedAttributeNames)}";
+        return string.Join("; ", details);
     }
 
     private static string? BuildDomainAssociationDetails(
@@ -1728,27 +1818,374 @@ public static class MendixModelDiffService
             return null;
         }
 
-        var details = new List<string>();
-
-        AppendOption(details, "type", TryReadStringProperty(associationResource.Value, "type"));
-        AppendOption(details, "owner", TryReadStringProperty(associationResource.Value, "owner"));
-        AppendOption(details, "storageFormat", TryReadStringProperty(associationResource.Value, "storageFormat"));
+        var associationType = TryReadStringProperty(associationResource.Value, "type");
+        var associationOwner = TryReadStringProperty(associationResource.Value, "owner");
+        var storageFormat = TryReadStringProperty(associationResource.Value, "storageFormat");
 
         var parentEntity = ResolveAssociationEntityName(associationResource.Value, "parent", workingSnapshot, headSnapshot);
+        var childEntity = ResolveAssociationEntityName(associationResource.Value, "child", workingSnapshot, headSnapshot);
+        if (string.IsNullOrWhiteSpace(parentEntity) && string.IsNullOrWhiteSpace(childEntity))
+        {
+            return null;
+        }
+
+        var associationCardinality = ResolveAssociationCardinality(
+            associationType,
+            associationOwner,
+            fromParentPerspective: true);
+
+        var compactAssociationText = $"[{associationCardinality}] {ShortName(childEntity ?? "<unknown>")}";
+        var metadata = new List<string>();
+        if (!string.IsNullOrWhiteSpace(associationType) &&
+            !string.Equals(associationType, "Reference", StringComparison.OrdinalIgnoreCase))
+        {
+            metadata.Add($"type={associationType}");
+        }
+
+        if (!string.IsNullOrWhiteSpace(associationOwner) &&
+            !string.Equals(associationOwner, "Default", StringComparison.OrdinalIgnoreCase))
+        {
+            metadata.Add($"owner={associationOwner}");
+        }
+
+        if (!string.IsNullOrWhiteSpace(storageFormat) &&
+            !string.Equals(storageFormat, "Table", StringComparison.OrdinalIgnoreCase))
+        {
+            metadata.Add($"storageFormat={storageFormat}");
+        }
+
+        if (metadata.Count > 0)
+        {
+            compactAssociationText = $"{compactAssociationText} ({string.Join(", ", metadata)})";
+        }
+
+        var details = new List<string>();
         if (!string.IsNullOrWhiteSpace(parentEntity))
         {
             details.Add($"parent={NormalizeInlineText(parentEntity, 120)}");
         }
 
-        var childEntity = ResolveAssociationEntityName(associationResource.Value, "child", workingSnapshot, headSnapshot);
-        if (!string.IsNullOrWhiteSpace(childEntity))
+        details.Add($"association={compactAssociationText}");
+
+        return details.Count == 0
+            ? null
+            : string.Join("; ", details);
+    }
+
+    private static string ResolveAssociationCardinality(
+        string? associationType,
+        string? associationOwner,
+        bool fromParentPerspective)
+    {
+        if (string.Equals(associationType, "ReferenceSet", StringComparison.OrdinalIgnoreCase))
         {
-            details.Add($"child={NormalizeInlineText(childEntity, 120)}");
+            return "*-*";
+        }
+
+        if (string.Equals(associationType, "Reference", StringComparison.OrdinalIgnoreCase))
+        {
+            if (string.Equals(associationOwner, "Both", StringComparison.OrdinalIgnoreCase))
+            {
+                return "1-1";
+            }
+
+            if (string.Equals(associationOwner, "Parent", StringComparison.OrdinalIgnoreCase))
+            {
+                return fromParentPerspective ? "1-*" : "*-1";
+            }
+
+            if (string.Equals(associationOwner, "Child", StringComparison.OrdinalIgnoreCase))
+            {
+                return fromParentPerspective ? "*-1" : "1-*";
+            }
+
+            return fromParentPerspective ? "*-1" : "1-*";
+        }
+
+        return "1-1";
+    }
+
+    private static string? BuildEntityRenameDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        if (!string.Equals(changeType, "Modified", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        if (workingResource is null || headResource is null)
+        {
+            return null;
+        }
+
+        var currentName = TryReadStringProperty(workingResource.Value, "name");
+        var previousName = TryReadStringProperty(headResource.Value, "name");
+        if (string.IsNullOrWhiteSpace(currentName) ||
+            string.IsNullOrWhiteSpace(previousName) ||
+            string.Equals(currentName, previousName, StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        return $"renamed from {NormalizeInlineText(previousName, 120)}";
+    }
+
+    private static string? BuildEntityGeneralizationDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var currentGeneralization = workingResource is null
+            ? null
+            : ResolveEntityGeneralizationTarget(workingResource.Value);
+        var previousGeneralization = headResource is null
+            ? null
+            : ResolveEntityGeneralizationTarget(headResource.Value);
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+        {
+            if (string.IsNullOrWhiteSpace(currentGeneralization))
+            {
+                return null;
+            }
+
+            return $"Generalization of {FormatGeneralizationTarget(currentGeneralization)}";
+        }
+
+        if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        {
+            if (string.IsNullOrWhiteSpace(previousGeneralization))
+            {
+                return null;
+            }
+
+            return $"Generalization of {FormatGeneralizationTarget(previousGeneralization)}";
+        }
+
+        if (string.Equals(currentGeneralization, previousGeneralization, StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(previousGeneralization))
+        {
+            return $"Generalization of {FormatGeneralizationTarget(currentGeneralization)}";
+        }
+
+        if (string.IsNullOrWhiteSpace(currentGeneralization))
+        {
+            return $"Generalization of {FormatGeneralizationTarget(previousGeneralization)}-><none>";
+        }
+
+        return $"Generalization of {FormatGeneralizationTarget(previousGeneralization)}->{FormatGeneralizationTarget(currentGeneralization)}";
+    }
+
+    private static string? ResolveEntityGeneralizationTarget(JsonElement entityResource)
+    {
+        if (!TryReadProperty(entityResource, "generalization", out var generalizationElement) ||
+            generalizationElement.ValueKind != JsonValueKind.Object)
+        {
+            return null;
+        }
+
+        var generalizationType = TryReadStringProperty(generalizationElement, "$Type");
+        if (string.Equals(generalizationType, "DomainModels$NoGeneralization", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        return TryReadStringProperty(generalizationElement, "generalization");
+    }
+
+    private static string FormatGeneralizationTarget(string? target)
+    {
+        if (string.IsNullOrWhiteSpace(target))
+        {
+            return "<none>";
+        }
+
+        return NormalizeInlineText(target, 120);
+    }
+
+    private static string? BuildEntitySystemMemberDetails(
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var currentFlags = workingResource is null
+            ? new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase)
+            : CollectEntitySystemMemberFlags(workingResource.Value);
+        var previousFlags = headResource is null
+            ? new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase)
+            : CollectEntitySystemMemberFlags(headResource.Value);
+
+        var enabledFlags = new List<string>();
+        var disabledFlags = new List<string>();
+        foreach (var (propertyName, label) in EntitySystemMemberFlags)
+        {
+            var currentValue = currentFlags.TryGetValue(propertyName, out var currentFlagValue) && currentFlagValue;
+            var previousValue = previousFlags.TryGetValue(propertyName, out var previousFlagValue) && previousFlagValue;
+            if (currentValue == previousValue)
+            {
+                continue;
+            }
+
+            if (currentValue)
+            {
+                enabledFlags.Add(label);
+            }
+            else
+            {
+                disabledFlags.Add(label);
+            }
+        }
+
+        if (enabledFlags.Count == 0 && disabledFlags.Count == 0)
+        {
+            return null;
+        }
+
+        var details = new List<string>();
+        if (enabledFlags.Count > 0)
+        {
+            details.Add($"enabled {string.Join(", ", enabledFlags)}");
+        }
+
+        if (disabledFlags.Count > 0)
+        {
+            details.Add($"disabled {string.Join(", ", disabledFlags)}");
+        }
+
+        return $"system members: {string.Join("; ", details)}";
+    }
+
+    private static Dictionary<string, bool> CollectEntitySystemMemberFlags(JsonElement entityResource)
+    {
+        var flags = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+        if (!TryReadProperty(entityResource, "generalization", out var generalizationElement) ||
+            generalizationElement.ValueKind != JsonValueKind.Object)
+        {
+            return flags;
+        }
+
+        foreach (var (propertyName, _) in EntitySystemMemberFlags)
+        {
+            if (TryReadBooleanProperty(generalizationElement, propertyName, out var value))
+            {
+                flags[propertyName] = value;
+            }
+        }
+
+        return flags;
+    }
+
+    private static string? BuildEntityCommitHandlerDetails(
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var previousBeforeHandlers = headResource is null
+            ? Array.Empty<string>()
+            : CollectEntityCommitHandlerTargets(headResource.Value, "Before");
+        var currentBeforeHandlers = workingResource is null
+            ? Array.Empty<string>()
+            : CollectEntityCommitHandlerTargets(workingResource.Value, "Before");
+        var previousAfterHandlers = headResource is null
+            ? Array.Empty<string>()
+            : CollectEntityCommitHandlerTargets(headResource.Value, "After");
+        var currentAfterHandlers = workingResource is null
+            ? Array.Empty<string>()
+            : CollectEntityCommitHandlerTargets(workingResource.Value, "After");
+
+        var details = new List<string>();
+        var beforeDetails = BuildEntityCommitHandlerMomentDetails(
+            "before commit",
+            previousBeforeHandlers,
+            currentBeforeHandlers);
+        if (!string.IsNullOrWhiteSpace(beforeDetails))
+        {
+            details.Add(beforeDetails);
+        }
+
+        var afterDetails = BuildEntityCommitHandlerMomentDetails(
+            "after commit",
+            previousAfterHandlers,
+            currentAfterHandlers);
+        if (!string.IsNullOrWhiteSpace(afterDetails))
+        {
+            details.Add(afterDetails);
         }
 
         return details.Count == 0
             ? null
-            : $"association: {string.Join(", ", details)}";
+            : string.Join("; ", details);
+    }
+
+    private static string[] CollectEntityCommitHandlerTargets(JsonElement entityResource, string moment)
+    {
+        if (!TryReadProperty(entityResource, "eventHandlers", out var eventHandlersElement) ||
+            eventHandlersElement.ValueKind != JsonValueKind.Array)
+        {
+            return Array.Empty<string>();
+        }
+
+        var targets = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var eventHandler in eventHandlersElement.EnumerateArray())
+        {
+            if (eventHandler.ValueKind != JsonValueKind.Object)
+            {
+                continue;
+            }
+
+            var eventName = TryReadStringProperty(eventHandler, "event");
+            if (!string.Equals(eventName, "Commit", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var eventMoment = TryReadStringProperty(eventHandler, "moment");
+            if (!string.Equals(eventMoment, moment, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var microflowName = TryReadStringProperty(eventHandler, "microflow");
+            if (string.IsNullOrWhiteSpace(microflowName))
+            {
+                continue;
+            }
+
+            targets.Add(ShortName(microflowName));
+        }
+
+        return targets
+            .OrderBy(target => target, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static string? BuildEntityCommitHandlerMomentDetails(
+        string label,
+        IReadOnlyCollection<string> previousTargets,
+        IReadOnlyCollection<string> currentTargets)
+    {
+        var sameTargets = previousTargets.Count == currentTargets.Count &&
+                          previousTargets.All(target => currentTargets.Contains(target, StringComparer.OrdinalIgnoreCase));
+        if (sameTargets)
+        {
+            return null;
+        }
+
+        if (previousTargets.Count == 0 && currentTargets.Count > 0)
+        {
+            return $"{label}={string.Join(", ", currentTargets)}";
+        }
+
+        if (previousTargets.Count > 0 && currentTargets.Count == 0)
+        {
+            return $"{label} removed";
+        }
+
+        return $"{label} {string.Join(", ", previousTargets)}->{string.Join(", ", currentTargets)}";
     }
 
     private static string? ResolveAssociationEntityName(
@@ -2270,14 +2707,15 @@ public static class MendixModelDiffService
             var key =
                 TryReadStringProperty(attribute, "$ID") ??
                 TryReadStringProperty(attribute, "$QualifiedName") ??
-                Guid.NewGuid().ToString("N");
+                TryReadStringProperty(attribute, "name") ??
+                $"attribute_{attributes.Count + 1}";
 
             var name =
                 TryReadStringProperty(attribute, "name") ??
                 TryReadStringProperty(attribute, "$QualifiedName") ??
                 key;
 
-            attributes[key] = name;
+            attributes[key] = NormalizeInlineText(name, 120);
         }
 
         return attributes;
@@ -2323,6 +2761,34 @@ public static class MendixModelDiffService
         return string.Join(", ", visible);
     }
 
+    private static string FormatRenameList(
+        IEnumerable<(string Previous, string Current)> renames,
+        int maxEntries = 10)
+    {
+        var ordered = renames
+            .Where(rename =>
+                !string.IsNullOrWhiteSpace(rename.Previous) &&
+                !string.IsNullOrWhiteSpace(rename.Current))
+            .Select(rename => $"{NormalizeInlineText(rename.Previous, 80)}->{NormalizeInlineText(rename.Current, 80)}")
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(rename => rename, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        if (ordered.Length == 0)
+        {
+            return "<none>";
+        }
+
+        var visible = ordered.Take(maxEntries).ToList();
+        var remaining = ordered.Length - visible.Count;
+        if (remaining > 0)
+        {
+            visible.Add($"+{remaining} more");
+        }
+
+        return string.Join(", ", visible);
+    }
+
     private static string ShortTypeName(string modelType)
     {
         if (string.IsNullOrWhiteSpace(modelType))
@@ -2334,6 +2800,20 @@ public static class MendixModelDiffService
         return separatorIndex >= 0 && separatorIndex < modelType.Length - 1
             ? modelType[(separatorIndex + 1)..]
             : modelType;
+    }
+
+    private static string ShortName(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return "<unknown>";
+        }
+
+        var trimmed = value.Trim();
+        var separatorIndex = trimmed.LastIndexOf('.');
+        return separatorIndex >= 0 && separatorIndex < trimmed.Length - 1
+            ? trimmed[(separatorIndex + 1)..]
+            : trimmed;
     }
 
     private static bool TryReadProperty(JsonElement element, string propertyName, out JsonElement value)

@@ -256,6 +256,22 @@ internal static class AutoCommitMessagePanelHtml
       font-size: 12px;
       line-height: 1.5;
     }
+    .model-list > li {
+      margin: 0 0 4px 0;
+    }
+    .model-change-head {
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .model-detail-list {
+      margin: 4px 0 0 0;
+      padding: 0 0 0 18px;
+    }
+    .model-detail-list > li {
+      margin: 2px 0;
+      color: #334155;
+      font-weight: 400;
+    }
     .model-change-added { color: #228b22; }
     .model-change-modified { color: #236cc0; }
     .model-change-deleted { color: #b22222; }
@@ -387,7 +403,7 @@ internal static class AutoCommitMessagePanelHtml
 
       function resolveModelCategory(elementType) {
         const type = typeof elementType === "string" ? elementType.trim().toLowerCase() : "";
-        if (type === "entity") {
+        if (type === "entity" || type === "nonpersistententity" || type === "association") {
           return "DomainModel";
         }
         if (type === "microflow") {
@@ -423,7 +439,8 @@ internal static class AutoCommitMessagePanelHtml
       function resolveAbbreviation(elementType) {
         const type = typeof elementType === "string" ? elementType.trim().toLowerCase() : "";
         switch (type) {
-          case "entity": return "DM";
+          case "entity": return "";
+          case "nonpersistententity": return "NP";
           case "microflow": return "MF";
           case "nanoflow": return "NF";
           case "page": return "PG";
@@ -438,10 +455,15 @@ internal static class AutoCommitMessagePanelHtml
         }
       }
 
-      function resolveDetails(changeType, details) {
+      function resolveDetails(changeType, details, elementType) {
         const normalizedDetails = typeof details === "string" ? details.trim() : "";
         if (normalizedDetails) {
           return normalizedDetails;
+        }
+
+        const normalizedElementType = typeof elementType === "string" ? elementType.trim().toLowerCase() : "";
+        if (normalizedElementType === "entity" || normalizedElementType === "nonpersistententity") {
+          return "";
         }
 
         const normalizedChangeType = typeof changeType === "string" ? changeType.trim().toLowerCase() : "";
@@ -460,14 +482,70 @@ internal static class AutoCommitMessagePanelHtml
 
       function buildDisplayText(change) {
         const changeType = typeof change.ChangeType === "string" ? change.ChangeType.trim() : "";
-        const newMarker = changeType.toLowerCase() === "added" ? "NEW" : "";
+        const elementType = typeof change.ElementType === "string" ? change.ElementType.trim().toLowerCase() : "";
+        const normalizedChangeType = changeType.toLowerCase();
+        let changeMarker = "";
+        if (normalizedChangeType === "added") {
+          changeMarker = "NEW";
+        } else if (
+          normalizedChangeType === "deleted" &&
+          (elementType === "microflow" || elementType === "nanoflow")
+        ) {
+          changeMarker = "DEL";
+        }
+
         const abbreviation = resolveAbbreviation(change.ElementType);
         const elementName = normalizeElementName(change.ElementName);
-        const details = resolveDetails(change.ChangeType, change.Details);
-        return `- ${newMarker} ${abbreviation} ${elementName} : ${details}`
+        const details = resolveDetails(change.ChangeType, change.Details, change.ElementType);
+        return `${changeMarker} ${abbreviation} ${elementName} : ${details}`
           .split(/\s+/)
           .filter(Boolean)
           .join(" ");
+      }
+
+      function isZeroOnlyDetailSegment(segment) {
+        const normalized = typeof segment === "string" ? segment.trim() : "";
+        if (!normalized) {
+          return true;
+        }
+
+        const numberMatches = normalized.match(/\b\d+\b/g);
+        if (!numberMatches || numberMatches.length === 0) {
+          return false;
+        }
+
+        return numberMatches.every((value) => Number(value) === 0);
+      }
+
+      function splitDetailSegments(rawDetails) {
+        const normalized = typeof rawDetails === "string" ? rawDetails.trim() : "";
+        if (!normalized) {
+          return [];
+        }
+
+        return normalized
+          .split(";")
+          .map((segment) => segment.trim())
+          .filter((segment) => segment.length > 0)
+          .filter((segment) => !isZeroOnlyDetailSegment(segment));
+      }
+
+      function parseDisplayParts(change) {
+        const baseText = change.DisplayText && String(change.DisplayText).trim().length > 0
+          ? String(change.DisplayText).trim()
+          : buildDisplayText(change);
+        const normalizedText = baseText.replace(/^\-\s*/, "").trim();
+        const separatorIndex = normalizedText.indexOf(" : ");
+        if (separatorIndex < 0) {
+          return { header: normalizedText, details: [] };
+        }
+
+        const header = normalizedText.slice(0, separatorIndex).trim();
+        const detailsText = normalizedText.slice(separatorIndex + 3).trim();
+        return {
+          header,
+          details: splitDetailSegments(detailsText),
+        };
       }
 
       function createModuleBucket(moduleName) {
@@ -537,9 +615,17 @@ internal static class AutoCommitMessagePanelHtml
             item.classList.add(changeClass);
           }
 
-          item.textContent = change.DisplayText && String(change.DisplayText).trim().length > 0
-            ? String(change.DisplayText).trim()
-            : buildDisplayText(change);
+          const displayParts = parseDisplayParts(change);
+          item.appendChild(element("div", "model-change-head", displayParts.header || "<unnamed>"));
+
+          if (displayParts.details.length > 0) {
+            const detailsList = element("ul", "model-detail-list");
+            displayParts.details.forEach((detail) => {
+              detailsList.appendChild(element("li", null, detail));
+            });
+            item.appendChild(detailsList);
+          }
+
           list.appendChild(item);
         });
 

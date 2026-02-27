@@ -84,11 +84,20 @@ Observed dump evidence:
 
 - `BuildDomainEntityAttributeDetails(string changeType, JsonElement? working, JsonElement? head) -> string?`
   - Status: implemented.
-  - Contract anchor:
+  - Contract anchors:
     - `attributes added (<n>): <AttributeList>`
+    - `attributes removed (<n>): <AttributeList>`
+    - `attributes renamed (<n>): <OldName->NewNameList>`
   - Zero-attribute contract:
-    - Added: `attributes added (0): <none>`
-    - Deleted: `attributes before deletion (0): <none>`
+    - Do not emit zero-count attribute sections.
+  - Metadata anchors for modified entities:
+    - `renamed from <OldEntityName>`
+    - `Generalization of <newParent>`
+    - `Generalization of <oldParent>-><newParent|<none>>`
+    - `before commit=<MicroflowList>`
+    - `after commit=<MicroflowList>`
+    - `system members: enabled <flagList>`
+    - `system members: disabled <flagList>`
 
 - `BuildDomainAssociationDetails(JsonElement? working, JsonElement? head, DumpSnapshot workingSnapshot, DumpSnapshot headSnapshot) -> string?`
   - Status: implemented.
@@ -101,6 +110,11 @@ Observed dump evidence:
   - Contract:
     - `parent=<entity>; association=[<cardinality>] <otherEntity>`
     - include metadata only when non-default (`type!=Reference`, `owner!=Default`, `storageFormat!=Table`)
+    - cardinality mapping:
+      - `Reference + owner=Both -> 1-1`
+      - `Reference + owner=Parent -> 1-*`
+      - `Reference + owner=Child|Default -> *-1`
+      - `ReferenceSet -> *-*`
 
 - `ResolveElementType(string modelType, JsonElement element) -> string`
   - Status: implemented.

@@ -8,7 +8,7 @@ Documents the converter-rule implementation used by:
 
 The formatter creates deterministic `displayText` rows for model changes:
 
-- `- <NEW|empty> <ABBR|empty> <ElementName> : <Details>`
+- `<NEW|DEL|empty> <ABBR|empty> <ElementName> : <Details>`
 
 ## Where it is used
 
@@ -32,7 +32,8 @@ The formatter creates deterministic `displayText` rows for model changes:
 
 ### C003 - Abbreviation dictionary
 
-- `Entity -> DM`
+- `Entity -> (empty)`
+- `NonPersistentEntity -> NP`
 - `Microflow -> MF`
 - `Nanoflow -> NF`
 - `Page -> PG`
@@ -48,6 +49,7 @@ The formatter creates deterministic `displayText` rows for model changes:
 ### C004 - Details fallback
 
 - Use trimmed `details` when available.
+- If `elementType` is `Entity` or `NonPersistentEntity` and details are missing, keep details empty.
 - If missing:
   - `Added -> added`
   - `Modified -> modified`
@@ -56,8 +58,13 @@ The formatter creates deterministic `displayText` rows for model changes:
 
 ### C005 - Final row assembly
 
-- Build `- <NEW|empty> <ABBR|empty> <ElementName> : <Details>`.
+- Build `<NEW|DEL|empty> <ABBR|empty> <ElementName> : <Details>`.
 - Collapse repeated whitespace created by empty optional segments.
+
+### C012 - Zero-Value Segment Suppression
+
+- Removes detail segments where all numeric counters are `0`.
+- If all detail segments are suppressed for `Entity`/`NonPersistentEntity`, details remain empty.
 
 ### C008 - Flow details compaction
 

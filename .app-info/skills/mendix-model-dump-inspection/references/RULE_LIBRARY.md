@@ -105,11 +105,13 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
 - Applies to `DomainModels$Entity`.
 - Parse `attributes[*]` entries with `$Type=DomainModels$Attribute`.
 - Emit:
-  - Added entity: `attributes added (<n>): <AttributeList>`
-    - Zero-attribute entities must emit `attributes added (0): <none>`
-  - Deleted entity: `attributes before deletion (<n>): <AttributeList>`
-    - Zero-attribute entities must emit `attributes before deletion (0): <none>`
-  - Modified entity: `attributes added (<n>): <AttributeList>` (new only)
+  - Added entity: `attributes added (<n>): <AttributeList>` only when `<n> > 0`
+  - Deleted entity: `attributes before deletion (<n>): <AttributeList>` only when `<n> > 0`
+  - Modified entity:
+    - `attributes added (<n>): <AttributeList>`
+    - `attributes removed (<n>): <AttributeList>`
+    - `attributes renamed (<n>): <OldName->NewName list>`
+  - If none of the attribute deltas are present, emit no attribute section.
 
 ## D030 - Enumeration value extraction
 
@@ -183,7 +185,9 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
     - `owner` when not `Default`
     - `storageFormat` when not `Table`
   - cardinality contract:
-    - `Reference` (parent perspective): `*-1`
+    - `Reference` + `owner=Both`: `1-1`
+    - `Reference` + `owner=Parent`: `1-*`
+    - `Reference` + `owner=Child|Default`: `*-1`
     - `ReferenceSet`: `*-*`
     - fallback/unknown: `1-1`
 
@@ -196,6 +200,23 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
 - Emit element type override:
   - persistent entity -> `Entity`
   - non-persistent entity -> `NonPersistentEntity`
+
+## D046 - Domain entity metadata extraction
+
+- Applies to `DomainModels$Entity` on `Added|Modified|Deleted`.
+- Parse and emit semantic entity metadata changes:
+  - rename signal: `renamed from <oldEntityName>`
+  - generalization signal:
+    - `Generalization of <newParent>` (added or newly set)
+    - `Generalization of <oldParent>-><newParent|<none>>` (changed/removed)
+  - commit event handlers:
+    - `before commit=<MicroflowList>`
+    - `after commit=<MicroflowList>`
+    - `before/after commit removed` when handlers were removed
+  - system member toggles from `generalization` flags (`hasOwner`, `hasChangedBy`, `hasCreatedDate`, `hasChangedDate`):
+    - `system members: enabled <flagList>`
+    - `system members: disabled <flagList>`
+- If no metadata signals exist, emit no metadata section.
 
 ## D050 - Generic property diff fallback
 
@@ -219,4 +240,4 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
 
 ## Next rule IDs
 
-- `D046` next available.
+- `D047` next available.

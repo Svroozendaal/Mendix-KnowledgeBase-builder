@@ -2,6 +2,17 @@
 
 > Last updated: 2026-02-26
 
+## Primary documentation
+
+For full architecture and workflow documentation, use:
+
+- `Docs/README.md`
+- `Docs/ARCHITECTURE.md`
+- `Docs/PROCESSING_PIPELINE.md`
+- `Docs/EXPORT_CONTRACT.md`
+- `Docs/REPOSITORY_WORKFLOWS.md`
+- `Docs/OPEN_QUESTIONS.md`
+
 ## Purpose
 
 Studio Pro 10 extension that inspects Mendix repository changes (`.mpr`, `.mprops`), shows change analysis in a dockable pane, and exports structured JSON for downstream commit-message processing.

@@ -282,6 +282,16 @@ internal static class MendixModelChangeStructurer
                 return "1-1";
             }
 
+            if (string.Equals(associationOwner, "Parent", StringComparison.OrdinalIgnoreCase))
+            {
+                return fromParentPerspective ? "1-*" : "*-1";
+            }
+
+            if (string.Equals(associationOwner, "Child", StringComparison.OrdinalIgnoreCase))
+            {
+                return fromParentPerspective ? "*-1" : "1-*";
+            }
+
             return fromParentPerspective ? "*-1" : "1-*";
         }
 

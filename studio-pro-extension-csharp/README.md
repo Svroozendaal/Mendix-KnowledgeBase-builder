@@ -13,7 +13,8 @@ Studio Pro 10 dockable-pane extension for analysing Mendix repository changes (`
   - Change discovery and export services
   - Mendix dump diffing and converter formatting
 - `Docs/`
-  - Technical module documentation (`info_*.md`)
+  - Full technical documentation (`README.md`, `ARCHITECTURE.md`, `PROCESSING_PIPELINE.md`, `EXPORT_CONTRACT.md`, `REPOSITORY_WORKFLOWS.md`)
+  - Focused module notes (`info_*.md`)
 
 ## Current behaviour
 
@@ -93,3 +94,4 @@ It reads `MENDIX_APP_PATH` from `.env`, locates `studiopro.exe`, and starts Stud
 - No localhost web server or `npm` workflow is required.
 - Pane URL includes a cache-buster token per open.
 - Build artefacts under `studio-pro-extension-csharp/bin` and `studio-pro-extension-csharp/obj` are intentionally ignored by git.
+- Primary extension docs entrypoint: `studio-pro-extension-csharp/Docs/README.md`.

@@ -10,23 +10,21 @@ The rules are split into two parts:
 
 Every rendered element row MUST follow this shape:
 
-- `- <NEW|DEL|empty> <ABBR|empty> <ElementName> : <Details>`
+- `<NEW|DEL|empty> <ABBR|empty> <ElementName> : <Details>`
 
 Formatting constraints:
 
-- Each row starts with `-`.
 - `NEW` is used when `changeType = Added`.
 - `DEL` is used when `changeType = Deleted` for flow elements (`Microflow`, `Nanoflow`).
 - Abbreviation is optional and comes from the dictionary below.
 - `ElementName` is technical and explicit.
-- `Details` must always be present (derived fallback allowed).
+- `Details` is required except for entity rows covered by `C011` (intentional empty details).
 - Collapse duplicate spaces after optional parts.
 
 ## Abbreviation Dictionary
 
 Use this dictionary for the optional abbreviation slot:
 
-- `Entity -> DM`
 - `Entity ->` (empty)
 - `NonPersistentEntity -> NP`
 - `Microflow -> MF`
@@ -89,7 +87,7 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
 - Rule ID: `C005`
 - Purpose: build final row.
 - Output template:
-  - `- <NEW|DEL|empty> <ABBR|empty> <ElementName> : <Details>`
+  - `<NEW|DEL|empty> <ABBR|empty> <ElementName> : <Details>`
 - Post-process:
   - Remove duplicate spaces caused by empty optional tokens.
 
@@ -188,7 +186,17 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
   - `elementType = Entity|NonPersistentEntity`
 - Logic:
   - If `details` is empty after deterministic parsing, render an empty details segment.
-  - Keep row shape: `- <prefix> <abbr> <name> :`
+  - Keep row shape: `<prefix> <abbr> <name> :`
+
+### C012 - Zero-Value Detail Suppression
+
+- Rule ID: `C012`
+- Purpose: suppress noisy zero-only detail sections.
+- Logic:
+  - Split detail text on `;`.
+  - Drop segments where every parsed numeric value is `0`.
+  - Keep remaining segments in the original order.
+  - If all segments are dropped for entity rows, keep empty details.
 
 
 
@@ -298,5 +306,5 @@ Use this schema for each AI rule:
 
 ## Pending Rule Slots
 
-- Converter rules: `C012` next available
+- Converter rules: `C013` next available
 - AI rules: `A007` next available

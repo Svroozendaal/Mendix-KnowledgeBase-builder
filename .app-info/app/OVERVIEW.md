@@ -9,6 +9,10 @@ This folder contains the identity, vision, and high-level specification of the a
 |---|---|
 | `PRODUCT_PLAN.md` | Application vision, goals, non-goals, and delivery model |
 
+Primary implementation docs for this app live under:
+
+- `studio-pro-extension-csharp/Docs/`
+
 ## When to Update
 
 - When the product vision changes.

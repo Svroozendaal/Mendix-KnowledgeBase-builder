@@ -41,7 +41,7 @@ internal static class MendixModelChangeDisplayTextFormatter
         var changeMarker = ResolveChangeMarker(normalizedChangeType, normalizedElementType);
         var abbreviation = ResolveAbbreviation(normalizedElementType);
 
-        var formatted = $"- {changeMarker} {abbreviation} {normalizedElementName} : {normalizedDetails}";
+        var formatted = $"{changeMarker} {abbreviation} {normalizedElementName} : {normalizedDetails}";
         return CollapseWhitespace(formatted);
     }
 
@@ -81,7 +81,17 @@ internal static class MendixModelChangeDisplayTextFormatter
         {
             var normalizedDetails = details.Trim();
             var compactFlowDetails = TryBuildCompactFlowDetails(changeType, elementType, normalizedDetails);
-            return string.IsNullOrWhiteSpace(compactFlowDetails) ? normalizedDetails : compactFlowDetails;
+            var selectedDetails = string.IsNullOrWhiteSpace(compactFlowDetails) ? normalizedDetails : compactFlowDetails;
+            var filteredDetails = RemoveZeroOnlyDetailSegments(selectedDetails);
+            if (!string.IsNullOrWhiteSpace(filteredDetails))
+            {
+                return filteredDetails;
+            }
+
+            if (IsEntityElementType(elementType))
+            {
+                return string.Empty;
+            }
         }
 
         if (IsEntityElementType(elementType))
@@ -105,6 +115,49 @@ internal static class MendixModelChangeDisplayTextFormatter
         }
 
         return "changed";
+    }
+
+    private static string RemoveZeroOnlyDetailSegments(string details)
+    {
+        if (string.IsNullOrWhiteSpace(details))
+        {
+            return string.Empty;
+        }
+
+        var filteredSegments = details
+            .Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Where(segment => !IsZeroOnlyDetailSegment(segment))
+            .Select(segment => segment.Trim())
+            .Where(segment => segment.Length > 0)
+            .ToArray();
+
+        return filteredSegments.Length == 0
+            ? string.Empty
+            : string.Join("; ", filteredSegments);
+    }
+
+    private static bool IsZeroOnlyDetailSegment(string segment)
+    {
+        if (string.IsNullOrWhiteSpace(segment))
+        {
+            return true;
+        }
+
+        var numberMatches = Regex.Matches(segment, @"\b\d+\b");
+        if (numberMatches.Count == 0)
+        {
+            return false;
+        }
+
+        foreach (Match numberMatch in numberMatches)
+        {
+            if (!int.TryParse(numberMatch.Value, out var parsed) || parsed != 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static string? TryBuildCompactFlowDetails(string changeType, string elementType, string details)

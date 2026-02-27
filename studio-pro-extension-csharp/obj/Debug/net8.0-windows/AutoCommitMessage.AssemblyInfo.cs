@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AutoCommitMessage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01d133d9e79fd6c7aaf9a9419b302d7a0778817c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf3b076310239a4d07123ecb8e41add0e5ea2b18")]
 [assembly: System.Reflection.AssemblyProductAttribute("AutoCommitMessage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AutoCommitMessage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

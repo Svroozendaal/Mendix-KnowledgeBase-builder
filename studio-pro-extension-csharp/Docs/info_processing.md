@@ -1,5 +1,13 @@
 # info_processing
 
+## Primary documentation
+
+For complete processing internals and flow contracts, use:
+
+- `Docs/PROCESSING_PIPELINE.md`
+- `Docs/EXPORT_CONTRACT.md`
+- `Docs/info_model-change-display-text-formatter.md`
+
 ## Purpose
 
 - Encapsulates all non-UI logic for collecting, structuring, and exporting Mendix change data.

@@ -8,7 +8,15 @@ This folder tracks everything this application does — one entry per implemente
 | File | Purpose |
 |---|---|
 | `FEATURES.md` | Index of all features with status and links |
-| Per-feature files | Detailed spec, status, and notes per feature |
+| Per-feature files | Detailed scope, behaviour, constraints, and improvement notes per feature |
+
+Current per-feature files:
+
+- `git-changes-panel.md`
+- `model-diff-analysis.md`
+- `data-export-pipeline.md`
+- `commit-parser-agent.md`
+- `developer-workflow-env.md`
 
 ## How to Use
 
@@ -20,3 +28,9 @@ This folder tracks everything this application does — one entry per implemente
 ## Naming Convention
 
 Per-feature files: `<feature-name>.md` in kebab-case. Example: `commit-parser.md`.
+
+## Deep technical links
+
+Detailed runtime documentation is maintained in:
+
+- `studio-pro-extension-csharp/Docs/README.md`
