@@ -39,6 +39,8 @@ Out of scope:
 | Processing | Display formatter | `Processing/Formatting/MendixModelChangeDisplayTextFormatter.cs` | Produces deterministic `displayText` strings |
 | Processing | Installation detection | `Processing/Services/MendixInstallationDetectorService.cs` | Auto-detects correct mx.exe for a given .mpr file |
 | Processing | Configuration service | `Processing/Services/ExtensionConfigurationService.cs` | Stores detection result and install-root override state |
+| Processing | Commit message store | `Processing/Services/AutoCommitMessageCommitMessageStoreService.cs` | Stores commit messages with deterministic naming and git hash header |
+| Processing | Commit message history | `Processing/Services/AutoCommitMessageHistoryService.cs` | Lists and reads stored commit messages with path traversal guards |
 
 ## Mendix Installation Detection
 
@@ -103,6 +105,55 @@ If detection fails:
 
 Previously, the extension relied on development-time `.env` values for Mendix path/version. This dependency has been replaced by auto-detection. The `.env` file is not deleted; any Mendix configuration keys in it are now ignored.
 
+## Commit Message Storage and History
+
+The extension stores commit messages with deterministic filenames and git commit metadata, enabling history tracking and re-use.
+
+### Storage Format
+
+**Filename pattern:**
+```
+<storyId>_<signature>_<yyyyMMdd>.txt
+```
+
+- `storyId` and `signature` are sanitized to `[A-Za-z0-9_-]` only.
+- Empty `storyId` is retained as empty segment (e.g., `_JD_20260228.txt`).
+- Date uses local system time.
+
+**File content:**
+```
+#commit:<shortCommitHash>
+
+<message body>
+```
+
+- `#commit:` header is required and contains first 8 chars of HEAD SHA.
+- Header is stripped in history view/copy output.
+
+### Collision Strategy
+
+For same date/storyId/signature:
+1. If file doesn't exist: create it.
+2. If exists:
+   - Read first-line hash.
+   - If hash matches current HEAD: overwrite same file.
+   - If differs: try `_2`, `_3`, ... suffixes until free slot or matching hash found.
+
+### History View
+
+Accessible via History tab (extended mode only):
+- **List panel:** Shows stored messages by date (newest first), with date/story/signature/filename columns.
+- **Detail panel:** Lazy-loads message content on row click, strips `#commit:` header.
+- **Copy button:** Copies detail content (without header) to clipboard.
+- **Path guard:** `read-commit-message` validates file path remains within commit messages folder.
+
+### Integration Points
+
+- **Store endpoint:** `POST /store-commit-message` with `storyId`, `signature` query params; resolves git hash server-side.
+- **List endpoint:** `GET /list-commit-messages` returns metadata (filename, story, signature, date, path).
+- **Read endpoint:** `GET /read-commit-message?filePath=<path>` returns content with header stripped.
+- **Settings UI:** Toggle `Save commit messages to disk` and configure base path (extended mode only).
+
 ## Web actions and endpoints
 
 Route prefix: `autocommitmessage/`
@@ -117,7 +168,9 @@ Route prefix: `autocommitmessage/`
 | `generate-overview-modules` | `GET` | Generates module overview artefacts for selected modules |
 | `generate-overview-module` | `GET` | Generates module overview using `module` or `modules` query selection |
 | `generate-overview-both` / `generate-overview` | `GET` | Generates app and module overview artefacts |
-| `store-commit-message` | `POST` | Stores provided commit-message body as text file |
+| `store-commit-message` | `POST` | Stores commit message with deterministic filename and git hash header |
+| `list-commit-messages` | `GET` | Lists stored commit messages from history folder |
+| `read-commit-message` | `GET` | Reads content of specific commit message file |
 | `/api/detection` | `GET` | Runs Mendix installation detection with optional `override=<path>` parameter |
 
 Important query keys include:

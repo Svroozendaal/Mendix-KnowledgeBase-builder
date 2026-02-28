@@ -24,5 +24,10 @@ internal static class ExtensionConstants
     public const string GenerateOverviewModuleActionValue = "generate-overview-module";
     public const string GenerateOverviewBothActionValue = "generate-overview-both";
     public const string ListOverviewModulesActionValue = "list-overview-modules";
+    public const string ListCommitMessagesActionValue = "list-commit-messages";
+    public const string ReadCommitMessageActionValue = "read-commit-message";
+    public const string StoryIdQueryKey = "storyId";
+    public const string SignatureQueryKey = "signature";
+    public const string FilePathQueryKey = "filePath";
 }
 

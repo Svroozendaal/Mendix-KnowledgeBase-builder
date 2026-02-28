@@ -2,6 +2,7 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using LibGit2Sharp;
 using Mendix.StudioPro.ExtensionsAPI.UI.WebServer;
 
 namespace AutoCommitMessage;
@@ -134,6 +135,19 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
         if (string.Equals(action, ExtensionConstants.ListOverviewModulesActionValue, StringComparison.OrdinalIgnoreCase))
         {
             await HandleListOverviewModulesRequestAsync(projectPath, response, cancellationToken);
+            return;
+        }
+
+        if (string.Equals(action, ExtensionConstants.ListCommitMessagesActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleListCommitMessagesRequestAsync(projectPath, commitMessagesBasePath, response, cancellationToken);
+            return;
+        }
+
+        if (string.Equals(action, ExtensionConstants.ReadCommitMessageActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            var filePath = ReadQueryParameter(request.Url, ExtensionConstants.FilePathQueryKey);
+            await HandleReadCommitMessageRequestAsync(projectPath, filePath, commitMessagesBasePath, response, cancellationToken);
             return;
         }
 
@@ -398,9 +412,28 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                 return;
             }
 
+            // Read storyId and signature from query parameters.
+            var storyId = ReadQueryParameter(request.Url, ExtensionConstants.StoryIdQueryKey) ?? string.Empty;
+            var signature = ReadQueryParameter(request.Url, ExtensionConstants.SignatureQueryKey) ?? string.Empty;
+
+            // Get the short commit hash from the git repository.
+            var shortHash = await Task.Run(() => TryGetGitShortHash(projectPath), cancellationToken);
+            if (string.IsNullOrWhiteSpace(shortHash))
+            {
+                await WriteJsonResponseAsync(
+                    response,
+                    400,
+                    new { success = false, message = "Unable to determine git commit hash." },
+                    cancellationToken);
+                return;
+            }
+
             var outputPath = await Task.Run(
                 () => AutoCommitMessageCommitMessageStoreService.StoreCommitMessage(
                     commitMessage,
+                    storyId,
+                    signature,
+                    shortHash,
                     projectPath,
                     commitMessagesBasePath),
                 cancellationToken);
@@ -541,6 +574,107 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
         }
     }
 
+    private static async Task HandleListCommitMessagesRequestAsync(
+        string projectPath,
+        string? commitMessagesBasePath,
+        HttpListenerResponse response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var result = await Task.Run(
+                () => AutoCommitMessageHistoryService.ListMessages(commitMessagesBasePath ?? string.Empty, projectPath),
+                cancellationToken);
+
+            await WriteJsonResponseAsync(
+                response,
+                200,
+                new
+                {
+                    success = true,
+                    messages = result.Messages.Select(msg => new
+                    {
+                        fileName = msg.FileName,
+                        storyId = msg.StoryId,
+                        signature = msg.Signature,
+                        date = msg.Date?.ToString("yyyy-MM-dd"),
+                        filePath = msg.FilePath,
+                    }),
+                    folder = result.Folder,
+                    folderExists = result.FolderExists,
+                },
+                cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                500,
+                new { success = false, message = exception.Message },
+                cancellationToken);
+        }
+    }
+
+    private static async Task HandleReadCommitMessageRequestAsync(
+        string projectPath,
+        string? filePath,
+        string? commitMessagesBasePath,
+        HttpListenerResponse response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                await WriteJsonResponseAsync(
+                    response,
+                    400,
+                    new { success = false, message = "File path is required." },
+                    cancellationToken);
+                return;
+            }
+
+            var result = await Task.Run(
+                () => AutoCommitMessageHistoryService.ReadMessage(filePath, commitMessagesBasePath ?? string.Empty, projectPath),
+                cancellationToken);
+
+            await WriteJsonResponseAsync(
+                response,
+                200,
+                new
+                {
+                    success = true,
+                    fileName = result.FileName,
+                    content = result.Content,
+                },
+                cancellationToken);
+        }
+        catch (FileNotFoundException)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                404,
+                new { success = false, message = "File not found." },
+                cancellationToken);
+        }
+        catch (InvalidOperationException exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                400,
+                new { success = false, message = exception.Message },
+                cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                500,
+                new { success = false, message = exception.Message },
+                cancellationToken);
+        }
+    }
+
     private static string? FindMprFile(string projectPath)
     {
         try
@@ -552,6 +686,30 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
 
             var mprFiles = Directory.EnumerateFiles(projectPath, "*.mpr", SearchOption.TopDirectoryOnly);
             return mprFiles.FirstOrDefault();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static string? TryGetGitShortHash(string projectPath)
+    {
+        try
+        {
+            if (!Repository.IsValid(projectPath))
+            {
+                return null;
+            }
+
+            using var repo = new Repository(projectPath);
+            var head = repo.Head.Tip;
+            if (head is null)
+            {
+                return null;
+            }
+
+            return head.Sha[..8];
         }
         catch
         {

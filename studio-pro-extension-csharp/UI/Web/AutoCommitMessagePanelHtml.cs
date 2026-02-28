@@ -953,6 +953,8 @@ internal static class AutoCommitMessagePanelHtml
     const refreshActionValue = "{{ExtensionConstants.RefreshActionValue}}";
     const generateOverviewModulesActionValue = "{{ExtensionConstants.GenerateOverviewModulesActionValue}}";
     const listOverviewModulesActionValue = "{{ExtensionConstants.ListOverviewModulesActionValue}}";
+    const listCommitMessagesActionValue = "{{ExtensionConstants.ListCommitMessagesActionValue}}";
+    const readCommitMessageActionValue = "{{ExtensionConstants.ReadCommitMessageActionValue}}";
     const projectPathQueryKey = "{{ExtensionConstants.ProjectPathQueryKey}}";
     const dataRootBasePathQueryKey = "{{ExtensionConstants.DataRootBasePathQueryKey}}";
     const commitMessagesBasePathQueryKey = "{{ExtensionConstants.CommitMessagesBasePathQueryKey}}";
@@ -961,6 +963,9 @@ internal static class AutoCommitMessagePanelHtml
     const persistOverviewStructuredQueryKey = "{{ExtensionConstants.PersistOverviewStructuredQueryKey}}";
     const persistOverviewPseudocodeQueryKey = "{{ExtensionConstants.PersistOverviewPseudocodeQueryKey}}";
     const modulesQueryKey = "{{ExtensionConstants.ModulesQueryKey}}";
+    const filePathQueryKey = "{{ExtensionConstants.FilePathQueryKey}}";
+    const storyIdQueryKey = "{{ExtensionConstants.StoryIdQueryKey}}";
+    const signatureQueryKey = "{{ExtensionConstants.SignatureQueryKey}}";
     const defaultDataRootBasePath = {{defaultDataRootBasePathJson}};
     const themeStorageKey = "autocommitmessage.theme";
     const dataRootBasePathStorageKey = "autocommitmessage.dataRootBasePath";
@@ -1784,8 +1789,11 @@ internal static class AutoCommitMessagePanelHtml
           statusLine.textContent = "Storing commit message...";
 
           try {
+            const storeParams = Object.assign({}, getActionParameters());
+            storeParams.storyId = storyInput.value || "";
+            storeParams.signature = signatureInput.value || "";
             const response = await fetch(
-              buildActionUrl(storeCommitMessageActionValue, getActionParameters()),
+              buildActionUrl(storeCommitMessageActionValue, storeParams),
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -1803,19 +1811,18 @@ internal static class AutoCommitMessagePanelHtml
               const message = data && typeof data.message === "string"
                 ? data.message
                 : `Store failed (HTTP ${response.status})`;
-              statusLine.textContent = `Store failed: ${message}`;
+              statusLine.textContent = `Save failed - copied to clipboard only`;
               storeButton.disabled = false;
               return;
             }
 
-            const destination = typeof data.outputPath === "string" && data.outputPath.length > 0
-              ? data.outputPath
-              : "Commit messages folder";
-            statusLine.textContent = `Commit message stored: ${destination}`;
-            closeModal();
+            statusLine.textContent = "Message saved";
+            // Keep modal open and don't save signature settings from here
+            // User can manually save via Settings tab
+            storeButton.disabled = false;
           } catch (error) {
             const message = error && error.message ? error.message : "Unexpected error";
-            statusLine.textContent = `Store failed: ${message}`;
+            statusLine.textContent = `Save failed - copied to clipboard only`;
             storeButton.disabled = false;
           }
         });
@@ -2951,6 +2958,163 @@ internal static class AutoCommitMessagePanelHtml
       return layout;
     }
 
+    function renderCommitHistory(statusLine) {
+      const layout = element("div", "layout");
+
+      // List panel
+      const listPanel = element("div", "panel");
+      const listTitle = element("div", "panel-title", "Messages");
+      const listToolbar = element("div", "panel-toolbar");
+      const refreshListButton = element("button", "btn btn-secondary", "Refresh list");
+      refreshListButton.type = "button";
+      listToolbar.appendChild(refreshListButton);
+      listPanel.appendChild(listTitle);
+      listPanel.appendChild(listToolbar);
+
+      const listWrap = element("div", "table-wrap");
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+      headerRow.appendChild(element("th", null, "Date"));
+      headerRow.appendChild(element("th", null, "Story"));
+      headerRow.appendChild(element("th", null, "Signature"));
+      headerRow.appendChild(element("th", null, "File"));
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+      const tbody = document.createElement("tbody");
+      table.appendChild(tbody);
+      listWrap.appendChild(table);
+      listPanel.appendChild(listWrap);
+
+      // Detail panel
+      const detailPanel = element("div", "panel");
+      const detailTitle = element("div", "panel-title", "Content");
+      const detailToolbar = element("div", "panel-toolbar");
+      const copyButton = element("button", "btn btn-secondary", "Copy");
+      copyButton.type = "button";
+      copyButton.disabled = true;
+      detailToolbar.appendChild(copyButton);
+      detailPanel.appendChild(detailTitle);
+      detailPanel.appendChild(detailToolbar);
+
+      const detailContent = element("div");
+      detailContent.style.padding = "10px";
+      detailContent.style.overflow = "auto";
+      detailContent.style.flex = "1";
+      detailContent.innerHTML = "<p style=\"color: var(--text-subtle);\">Select a message to view content</p>";
+      detailPanel.appendChild(detailContent);
+
+      let currentMessage = null;
+
+      async function loadList() {
+        tbody.replaceChildren();
+        listWrap.style.opacity = "0.6";
+        refreshListButton.disabled = true;
+
+        try {
+          const listUrl = `${buildActionUrl(
+            listCommitMessagesActionValue,
+            getActionParameters())}&_t=${Date.now()}`;
+          const response = await fetch(listUrl, { cache: "no-store" });
+
+          if (!response.ok) {
+            statusLine.textContent = `Failed to load message list (HTTP ${response.status})`;
+            return;
+          }
+
+          const data = await response.json();
+          if (!data.success) {
+            statusLine.textContent = data.message || "Failed to load message list";
+            if (!data.folderExists) {
+              detailContent.innerHTML = "<p style=\"color: var(--text-subtle);\">No commit messages folder found</p>";
+            }
+            return;
+          }
+
+          if (!data.messages || data.messages.length === 0) {
+            detailContent.innerHTML = "<p style=\"color: var(--text-subtle);\">No messages stored yet</p>";
+            statusLine.textContent = "No messages found";
+            return;
+          }
+
+          data.messages.forEach((msg) => {
+            const row = document.createElement("tr");
+            row.appendChild(element("td", null, msg.date || "-"));
+            row.appendChild(element("td", null, msg.storyId || "-"));
+            row.appendChild(element("td", null, msg.signature || "-"));
+            row.appendChild(element("td", null, msg.fileName));
+            row.style.cursor = "pointer";
+
+            row.addEventListener("click", async () => {
+              currentMessage = msg;
+              detailContent.innerHTML = "<p style=\"color: var(--text-subtle);\">Loading...</p>";
+              copyButton.disabled = true;
+
+              try {
+                const readUrl = `${buildActionUrl(
+                  readCommitMessageActionValue,
+                  Object.assign({}, getActionParameters(), { filePath: msg.filePath }))}&_t=${Date.now()}`;
+                const readResponse = await fetch(readUrl, { cache: "no-store" });
+
+                if (!readResponse.ok) {
+                  detailContent.innerHTML = `<p style="color: var(--text-subtle);">Failed to load (HTTP ${readResponse.status})</p>`;
+                  return;
+                }
+
+                const readData = await readResponse.json();
+                if (!readData.success) {
+                  detailContent.innerHTML = `<p style="color: var(--text-subtle);">${readData.message}</p>`;
+                  return;
+                }
+
+                const pre = document.createElement("pre");
+                pre.style.fontFamily = "monospace";
+                pre.style.fontSize = "12px";
+                pre.style.whiteSpace = "pre-wrap";
+                pre.style.wordWrap = "break-word";
+                pre.textContent = readData.content;
+                detailContent.replaceChildren(pre);
+                copyButton.disabled = false;
+              } catch (error) {
+                detailContent.innerHTML = `<p style="color: var(--text-subtle);">Error: ${error.message}</p>`;
+              }
+            });
+
+            tbody.appendChild(row);
+          });
+
+          statusLine.textContent = `Loaded ${data.messages.length} message(s)`;
+        } catch (error) {
+          statusLine.textContent = `Error: ${error.message}`;
+          detailContent.innerHTML = `<p style="color: var(--text-subtle);">Error loading list</p>`;
+        } finally {
+          listWrap.style.opacity = "1";
+          refreshListButton.disabled = false;
+        }
+      }
+
+      refreshListButton.addEventListener("click", loadList);
+      copyButton.addEventListener("click", async () => {
+        if (!currentMessage) return;
+        const copied = await copyTextToClipboard(detailContent.textContent);
+        if (copied) {
+          statusLine.textContent = "Content copied to clipboard";
+        } else {
+          statusLine.textContent = "Copy failed: clipboard unavailable";
+        }
+      });
+
+      // Initial load
+      loadList();
+
+      layout.appendChild(listPanel);
+      layout.appendChild(detailPanel);
+      layout.style.display = "flex";
+      layout.style.gap = "10px";
+      layout.style.minHeight = "0";
+      return layout;
+    }
+
     function render(statusOverride) {
       const payload = currentPayload || {};
       const root = document.getElementById("root");
@@ -3017,17 +3181,28 @@ internal static class AutoCommitMessagePanelHtml
       const modelOverviewButton = settingsState.extendedMode
         ? element("button", "nav-btn", "Model overview")
         : null;
+      const historyButton = settingsState.extendedMode
+        ? element("button", "nav-btn", "History")
+        : null;
       if (modelOverviewButton) {
         modelOverviewButton.type = "button";
       }
+      if (historyButton) {
+        historyButton.type = "button";
+      }
       if (activeView === "model-overview" && modelOverviewButton) {
         modelOverviewButton.classList.add("active");
+      } else if (activeView === "history" && historyButton) {
+        historyButton.classList.add("active");
       } else if (activeView === "model-changes") {
         modelChangesButton.classList.add("active");
       }
       navMenu.appendChild(modelChangesButton);
       if (modelOverviewButton) {
         navMenu.appendChild(modelOverviewButton);
+      }
+      if (historyButton) {
+        navMenu.appendChild(historyButton);
       }
       navBar.appendChild(navMenu);
 
@@ -3122,6 +3297,17 @@ internal static class AutoCommitMessagePanelHtml
 
           activeView = "model-overview";
           render("Model overview view. Module list is loading; select modules and generate.");
+        });
+      }
+
+      if (historyButton) {
+        historyButton.addEventListener("click", () => {
+          if (activeView === "history") {
+            return;
+          }
+
+          activeView = "history";
+          render("Commit message history.");
         });
       }
 
@@ -3298,6 +3484,11 @@ internal static class AutoCommitMessagePanelHtml
 
       if (activeView === "model-overview") {
         content.appendChild(renderModelOverview(payload, statusLine));
+        return;
+      }
+
+      if (activeView === "history") {
+        content.appendChild(renderCommitHistory(statusLine));
         return;
       }
 
