@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(dotnet build --configuration Debug)",
-      "Bash(dotnet test --configuration Debug --verbosity minimal)"
+      "Bash(dotnet test --configuration Debug --verbosity minimal)",
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)",
+      "Bash(node -e \"const fs=require\\(''fs''\\);const raw=fs.readFileSync\\(''C:/Workspaces/Mendix-CommitMessage/mendix-data/dumps/2026-02-28T14-43-26.653Z_App.mpr_f12ee140374d4222846cd4991528f4ff/working-dump.json'',''utf8''\\);const data=JSON.parse\\(raw\\);const types={};function scan\\(o\\){if\\(!o||typeof o!==''object''\\)return;if\\(Array.isArray\\(o\\)\\){o.forEach\\(scan\\);return;}const cp=o[''$ContainerProperty'']||'''';const t=o[''$Type'']||'''';if\\(\\(cp===''documents''||cp===''projectDocuments''\\)&&t\\){types[t]=cp;}Object.values\\(o\\).forEach\\(scan\\);}scan\\(data\\);Object.entries\\(types\\).sort\\(\\).forEach\\(\\([t,cp]\\)=>console.log\\(cp+'': ''+t\\)\\);\")",
+      "Bash(powershell -Command \":*)",
+      "Bash(grep -o '\"\"\\\\\\\\$ContainerProperty\"\":\"\"[a-zA-Z]*\"\"' \"C:/Workspaces/Mendix-CommitMessage/mendix-data/dumps/2026-02-28T14-43-26.653Z_App.mpr_f12ee140374d4222846cd4991528f4ff/working-dump.json\")",
+      "Bash(python -c \"print\\(''hello''\\)\")",
+      "Bash(py -3 -c \"print\\(''hello''\\)\")",
+      "Bash(node -e \"console.log\\(''node ok''\\)\")",
+      "Bash(python -c \":*)"
     ]
   }
 }

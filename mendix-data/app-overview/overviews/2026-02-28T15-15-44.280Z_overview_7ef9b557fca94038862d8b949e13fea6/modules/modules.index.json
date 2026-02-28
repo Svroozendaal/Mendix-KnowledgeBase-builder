@@ -1,0 +1,12 @@
+[
+  {
+    "module": "ImporterHelper",
+    "jsonPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-02-28T15-15-44.280Z_overview_7ef9b557fca94038862d8b949e13fea6\\modules\\ImporterHelper.overview.json",
+    "pseudocodePath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-02-28T15-15-44.280Z_overview_7ef9b557fca94038862d8b949e13fea6\\modules\\ImporterHelper.overview.pseudo.txt"
+  },
+  {
+    "module": "SmartExpenses",
+    "jsonPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-02-28T15-15-44.280Z_overview_7ef9b557fca94038862d8b949e13fea6\\modules\\SmartExpenses.overview.json",
+    "pseudocodePath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-02-28T15-15-44.280Z_overview_7ef9b557fca94038862d8b949e13fea6\\modules\\SmartExpenses.overview.pseudo.txt"
+  }
+]

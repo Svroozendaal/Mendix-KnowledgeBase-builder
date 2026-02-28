@@ -311,14 +311,29 @@ internal static class AutoCommitMessagePanelHtml
     .settings-panel {
       height: 100%;
       min-height: 0;
+      display: flex;
+      flex-direction: column;
     }
     .settings-content {
+      flex: 1 1 auto;
       padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 12px;
       min-height: 0;
       overflow: auto;
+    }
+    .settings-footer {
+      flex: 0 0 auto;
+      position: sticky;
+      bottom: 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 10px 12px;
+      border-top: 1px solid #e5eaf5;
+      background: #fbfdff;
+      z-index: 2;
     }
     .settings-group {
       border: 1px solid #d8e0ef;
@@ -328,6 +343,10 @@ internal static class AutoCommitMessagePanelHtml
       display: flex;
       flex-direction: column;
       gap: 8px;
+    }
+    .settings-group > summary.settings-label {
+      cursor: pointer;
+      list-style: auto;
     }
     .settings-label {
       font-size: 12px;
@@ -339,11 +358,62 @@ internal static class AutoCommitMessagePanelHtml
       color: #64748b;
       line-height: 1.4;
     }
+    .settings-note {
+      font-size: 12px;
+      font-weight: 400;
+      color: #475569;
+      line-height: 1.4;
+    }
     .settings-inline {
       display: flex;
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
+    }
+    .settings-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+      user-select: none;
+    }
+    .settings-switch-input {
+      appearance: none;
+      width: 38px;
+      height: 22px;
+      margin: 0;
+      border: 1px solid #94a3b8;
+      border-radius: 999px;
+      background: #cbd5e1;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .settings-switch-input::before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.3);
+      transition: transform 0.2s ease;
+    }
+    .settings-switch-input:checked {
+      background: #2563eb;
+      border-color: #1d4ed8;
+    }
+    .settings-switch-input:checked::before {
+      transform: translateX(16px);
+    }
+    .settings-switch-input:focus-visible {
+      outline: 2px solid #1d4ed8;
+      outline-offset: 1px;
     }
     .settings-input {
       border: 1px solid #c5d0e4;
@@ -547,6 +617,19 @@ internal static class AutoCommitMessagePanelHtml
       color: #334155;
       background: #f8faff;
       border-bottom: 1px solid #e2e8f5;
+      list-style: none;
+    }
+    .overview-module-group > summary::-webkit-details-marker {
+      display: none;
+    }
+    .overview-module-summary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .overview-group-checkbox {
+      margin: 0;
+      cursor: pointer;
     }
     .overview-module-rows {
       max-height: 240px;
@@ -849,6 +932,7 @@ internal static class AutoCommitMessagePanelHtml
     :root[data-theme="dark"] tbody td,
     :root[data-theme="dark"] .overview-module-row {
       border-color: #243654;
+      color: #e2e8f0;
     }
     :root[data-theme="dark"] thead th {
       background: #17233f;
@@ -892,10 +976,33 @@ internal static class AutoCommitMessagePanelHtml
       background: #111c34;
     }
     :root[data-theme="dark"] .settings-help,
+    :root[data-theme="dark"] .settings-note,
     :root[data-theme="dark"] .overview-module-meta,
+    :root[data-theme="dark"] .overview-meta,
+    :root[data-theme="dark"] .overview-hint,
     :root[data-theme="dark"] .info-branch,
     :root[data-theme="dark"] .model-file-label {
       color: #94a3b8;
+    }
+    :root[data-theme="dark"] .settings-label,
+    :root[data-theme="dark"] .settings-preview,
+    :root[data-theme="dark"] .settings-inline span,
+    :root[data-theme="dark"] .settings-switch,
+    :root[data-theme="dark"] .overview-module-group > summary,
+    :root[data-theme="dark"] .overview-output {
+      color: #e2e8f0;
+    }
+    :root[data-theme="dark"] .settings-footer {
+      background: #17233f;
+      border-color: #304261;
+    }
+    :root[data-theme="dark"] .settings-switch-input {
+      background: #334155;
+      border-color: #475569;
+    }
+    :root[data-theme="dark"] .settings-switch-input:checked {
+      background: #2563eb;
+      border-color: #2563eb;
     }
     :root[data-theme="dark"] .status-line,
     :root[data-theme="dark"] .model-group > summary,
@@ -1016,6 +1123,10 @@ internal static class AutoCommitMessagePanelHtml
       moduleListError: "",
       appName: "",
       availableModules: [],
+      groupExpansion: {
+        app: false,
+        custom: false,
+      },
     };
 
     function normalizeTheme(value) {
@@ -1432,6 +1543,10 @@ internal static class AutoCommitMessagePanelHtml
         moduleListError: "",
         appName: "",
         availableModules: [],
+        groupExpansion: {
+          app: false,
+          custom: false,
+        },
       };
     }
 
@@ -1873,17 +1988,22 @@ internal static class AutoCommitMessagePanelHtml
         const customModules = availableModules.filter((moduleItem) =>
           moduleItem.category === "Custom");
 
-        const selectorToolbar = element("div", "overview-selector-toolbar");
-        const selectAllButton = element("button", "btn btn-outline", "Select all");
-        const selectAppButton = element("button", "btn btn-outline", "Select app");
-        const selectCustomButton = element("button", "btn btn-outline", "Select custom");
-        const generateSelectedButton = element("button", "btn", "Generate selected");
+        function setSelectedModules(nextModules) {
+          modelOverviewState = {
+            ...modelOverviewState,
+            selectedModules: nextModules
+              .filter((name) => typeof name === "string" && name.trim().length > 0)
+              .map((name) => name.trim())
+              .filter((name, index, all) => all.indexOf(name) === index)
+              .sort((a, b) => a.localeCompare(b)),
+          };
+        }
 
-        [selectAllButton, selectAppButton, selectCustomButton, generateSelectedButton].forEach((button) => {
-          button.type = "button";
-          button.disabled = overviewInProgress || overviewModulesInProgress || !canGenerateOverview(payload);
-          selectorToolbar.appendChild(button);
-        });
+        const selectorToolbar = element("div", "overview-selector-toolbar");
+        const generateSelectedButton = element("button", "btn", "Generate selected");
+        generateSelectedButton.type = "button";
+        generateSelectedButton.disabled = overviewInProgress || overviewModulesInProgress || !canGenerateOverview(payload);
+        selectorToolbar.appendChild(generateSelectedButton);
 
         generateSelectedButton.disabled =
           generateSelectedButton.disabled ||
@@ -1896,15 +2016,67 @@ internal static class AutoCommitMessagePanelHtml
           `Selected: ${Array.isArray(modelOverviewState.selectedModules) ? modelOverviewState.selectedModules.length : 0}`));
         modulePicker.appendChild(selectorToolbar);
 
-        function buildModuleGroup(title, modules, expandedByDefault) {
+        function buildModuleGroup(title, modules, groupKey) {
           const group = element("details", "overview-module-group");
-          group.open = expandedByDefault;
-          group.appendChild(element("summary", null, `${title}: ${modules.length}`));
-          const rows = element("div", "overview-module-rows");
+          const expansionState =
+            modelOverviewState.groupExpansion &&
+            Object.prototype.hasOwnProperty.call(modelOverviewState.groupExpansion, groupKey)
+              ? Boolean(modelOverviewState.groupExpansion[groupKey])
+              : false;
+          group.open = expansionState;
+
+          const summary = element("summary", "overview-module-summary");
+          const summaryCheckbox = document.createElement("input");
+          summaryCheckbox.type = "checkbox";
+          summaryCheckbox.className = "overview-group-checkbox";
+          summaryCheckbox.disabled = overviewInProgress || overviewModulesInProgress || !canGenerateOverview(payload);
+
           const selectedSet = new Set(
             Array.isArray(modelOverviewState.selectedModules)
               ? modelOverviewState.selectedModules
               : []);
+          const moduleNames = modules.map((moduleItem) => moduleItem.name);
+          summaryCheckbox.checked =
+            moduleNames.length > 0 &&
+            moduleNames.every((moduleName) => selectedSet.has(moduleName));
+
+          summaryCheckbox.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const nextSet = new Set(
+              Array.isArray(modelOverviewState.selectedModules)
+                ? modelOverviewState.selectedModules
+                : []);
+            const hasAllSelected =
+              moduleNames.length > 0 &&
+              moduleNames.every((moduleName) => nextSet.has(moduleName));
+
+            if (hasAllSelected) {
+              moduleNames.forEach((moduleName) => nextSet.delete(moduleName));
+            } else {
+              moduleNames.forEach((moduleName) => nextSet.add(moduleName));
+            }
+
+            setSelectedModules(Array.from(nextSet));
+            render(`Selected ${modelOverviewState.selectedModules.length} module(s).`);
+          });
+
+          summary.appendChild(summaryCheckbox);
+          summary.appendChild(element("span", null, `${title}: ${modules.length}`));
+          group.appendChild(summary);
+
+          group.addEventListener("toggle", () => {
+            modelOverviewState = {
+              ...modelOverviewState,
+              groupExpansion: {
+                ...(modelOverviewState.groupExpansion || {}),
+                [groupKey]: group.open,
+              },
+            };
+          });
+
+          const rows = element("div", "overview-module-rows");
 
           modules.forEach((moduleItem) => {
             const moduleName = moduleItem.name;
@@ -1958,35 +2130,9 @@ internal static class AutoCommitMessagePanelHtml
         const appNameLabel = typeof modelOverviewState.appName === "string" && modelOverviewState.appName.trim().length > 0
           ? modelOverviewState.appName.trim()
           : "Application";
-        groups.appendChild(buildModuleGroup(`App ${appNameLabel}`, appModules, false));
-        groups.appendChild(buildModuleGroup("Custom modules", customModules, true));
+        groups.appendChild(buildModuleGroup(`App ${appNameLabel}`, appModules, "app"));
+        groups.appendChild(buildModuleGroup("Custom modules", customModules, "custom"));
         modulePicker.appendChild(groups);
-
-        function setSelectedModules(nextModules) {
-          modelOverviewState = {
-            ...modelOverviewState,
-            selectedModules: nextModules
-              .filter((name) => typeof name === "string" && name.trim().length > 0)
-              .map((name) => name.trim())
-              .filter((name, index, all) => all.indexOf(name) === index)
-              .sort((a, b) => a.localeCompare(b)),
-          };
-        }
-
-        selectAllButton.addEventListener("click", () => {
-          setSelectedModules(availableModules.map((moduleItem) => moduleItem.name));
-          render(`Selected ${modelOverviewState.selectedModules.length} module(s).`);
-        });
-
-        selectAppButton.addEventListener("click", () => {
-          setSelectedModules(appModules.map((moduleItem) => moduleItem.name));
-          render(`Selected ${modelOverviewState.selectedModules.length} app module(s).`);
-        });
-
-        selectCustomButton.addEventListener("click", () => {
-          setSelectedModules(customModules.map((moduleItem) => moduleItem.name));
-          render(`Selected ${modelOverviewState.selectedModules.length} custom module(s).`);
-        });
 
         generateSelectedButton.addEventListener("click", async () =>
           requestOverviewForSelected());
@@ -2056,6 +2202,10 @@ internal static class AutoCommitMessagePanelHtml
           availableModules: Array.isArray(modelOverviewState.availableModules)
             ? modelOverviewState.availableModules.slice()
             : [],
+          groupExpansion: modelOverviewState.groupExpansion &&
+            typeof modelOverviewState.groupExpansion === "object"
+            ? { ...modelOverviewState.groupExpansion }
+            : { app: false, custom: false },
         };
       }
 
@@ -2135,6 +2285,7 @@ internal static class AutoCommitMessagePanelHtml
               moduleListError: moduleListState.moduleListError,
               appName: moduleListState.appName,
               availableModules: moduleListState.availableModules,
+              groupExpansion: moduleListState.groupExpansion,
             };
 
             overviewInProgress = false;
@@ -2163,6 +2314,7 @@ internal static class AutoCommitMessagePanelHtml
             moduleListError: moduleListState.moduleListError,
             appName: moduleListState.appName,
             availableModules: moduleListState.availableModules,
+            groupExpansion: moduleListState.groupExpansion,
           };
 
           overviewInProgress = false;
@@ -2190,6 +2342,7 @@ internal static class AutoCommitMessagePanelHtml
             moduleListError: moduleListState.moduleListError,
             appName: moduleListState.appName,
             availableModules: moduleListState.availableModules,
+            groupExpansion: moduleListState.groupExpansion,
           };
 
           overviewInProgress = false;
@@ -2244,17 +2397,41 @@ internal static class AutoCommitMessagePanelHtml
         "div",
         "settings-help",
         "Enable advanced export controls and model overview."));
-      const modeInline = element("label", "settings-inline");
+      const modeInline = element("label", "settings-switch");
       const extendedModeInput = document.createElement("input");
       extendedModeInput.type = "checkbox";
+      extendedModeInput.className = "settings-switch-input";
       extendedModeInput.checked = Boolean(settingsState.extendedMode);
       modeInline.appendChild(extendedModeInput);
       modeInline.appendChild(element("span", null, "Enable extended mode"));
       modeGroup.appendChild(modeInline);
 
-      const pathGroup = element("section", "settings-group");
-      pathGroup.appendChild(element("div", "settings-label", "Data root base path"));
-      pathGroup.appendChild(element(
+      const exportGroup = element("section", "settings-group");
+      exportGroup.appendChild(element("div", "settings-label", "Export additional data"));
+      exportGroup.appendChild(element(
+        "div",
+        "settings-help",
+        "Enable export settings and storage options."));
+      const exportToggleInline = element("label", "settings-switch");
+      const exportAdditionalDataInput = document.createElement("input");
+      exportAdditionalDataInput.type = "checkbox";
+      exportAdditionalDataInput.className = "settings-switch-input";
+      exportAdditionalDataInput.checked = Boolean(settingsState.exportAdditionalData);
+      exportToggleInline.appendChild(exportAdditionalDataInput);
+      exportToggleInline.appendChild(element("span", null, "Export additional data"));
+      exportGroup.appendChild(exportToggleInline);
+
+      const exportDetails = element("div");
+      exportDetails.style.display = "flex";
+      exportDetails.style.flexDirection = "column";
+      exportDetails.style.gap = "8px";
+
+      const pathSection = element("div");
+      pathSection.style.display = "flex";
+      pathSection.style.flexDirection = "column";
+      pathSection.style.gap = "8px";
+      pathSection.appendChild(element("div", "settings-help", "Data root base path"));
+      pathSection.appendChild(element(
         "div",
         "settings-help",
         "Set where the mendix-data folder will be stored. Subfolders remain automatic."));
@@ -2264,21 +2441,15 @@ internal static class AutoCommitMessagePanelHtml
       pathInput.className = "settings-input";
       pathInput.value = settingsState.dataRootBasePath || defaultDataRootBasePath;
       pathInput.placeholder = defaultDataRootBasePath;
-      pathGroup.appendChild(pathInput);
+      pathSection.appendChild(pathInput);
       const preview = element("div", "settings-preview", `Resolved data root: ${getConfiguredDataRootPath()}`);
-      pathGroup.appendChild(preview);
+      pathSection.appendChild(preview);
 
-      const exportToggleInline = element("label", "settings-inline");
-      const exportAdditionalDataInput = document.createElement("input");
-      exportAdditionalDataInput.type = "checkbox";
-      exportAdditionalDataInput.checked = Boolean(settingsState.exportAdditionalData);
-      exportToggleInline.appendChild(exportAdditionalDataInput);
-      exportToggleInline.appendChild(element("span", null, "Export additional data"));
-
-      const exportOptions = element("div", "settings-group");
-      exportOptions.style.padding = "8px";
-      exportOptions.style.marginTop = "4px";
-      exportOptions.appendChild(element("div", "settings-label", "Stored outputs"));
+      const exportOptions = element("div");
+      exportOptions.style.display = "flex";
+      exportOptions.style.flexDirection = "column";
+      exportOptions.style.gap = "8px";
+      exportOptions.appendChild(element("div", "settings-note", "Stored outputs"));
 
       const dumpsInline = element("label", "settings-inline");
       const persistDumpsInput = document.createElement("input");
@@ -2296,7 +2467,7 @@ internal static class AutoCommitMessagePanelHtml
       rawChangesInline.appendChild(element("span", null, "Raw changes"));
       exportOptions.appendChild(rawChangesInline);
 
-      exportOptions.appendChild(element("div", "settings-label", "App overview"));
+      exportOptions.appendChild(element("div", "settings-note", "App overview"));
       const structuredInline = element("label", "settings-inline");
       const persistOverviewStructuredInput = document.createElement("input");
       persistOverviewStructuredInput.type = "checkbox";
@@ -2313,22 +2484,18 @@ internal static class AutoCommitMessagePanelHtml
       pseudocodeInline.appendChild(element("span", null, "Pseudocode"));
       exportOptions.appendChild(pseudocodeInline);
 
-      if (settingsState.extendedMode) {
-        pathGroup.appendChild(exportToggleInline);
-        if (settingsState.exportAdditionalData) {
-          pathGroup.appendChild(exportOptions);
-        }
+      exportDetails.appendChild(exportOptions);
+      exportDetails.appendChild(pathSection);
+
+      if (settingsState.exportAdditionalData) {
+        exportGroup.appendChild(exportDetails);
       }
 
-      const actionInline = element("div", "settings-inline");
       const saveButton = element("button", "btn", "Save settings");
       saveButton.type = "button";
-      actionInline.appendChild(saveButton);
 
       const resetButton = element("button", "btn btn-outline", "Reset default");
       resetButton.type = "button";
-      actionInline.appendChild(resetButton);
-      pathGroup.appendChild(actionInline);
 
       const signatureGroup = element("section", "settings-group");
       signatureGroup.appendChild(element("div", "settings-label", "User signature"));
@@ -2353,6 +2520,8 @@ internal static class AutoCommitMessagePanelHtml
       const storeCommitMessagesInput = document.createElement("input");
       storeCommitMessagesInput.type = "checkbox";
       storeCommitMessagesInput.checked = Boolean(settingsState.storeCommitMessages);
+      storeCommitInline.className = "settings-switch";
+      storeCommitMessagesInput.className = "settings-switch-input";
       storeCommitInline.appendChild(storeCommitMessagesInput);
       storeCommitInline.appendChild(element("span", null, "Store commit messages"));
       commitGroup.appendChild(storeCommitInline);
@@ -2370,8 +2539,9 @@ internal static class AutoCommitMessagePanelHtml
       commitGroup.appendChild(commitPathPreview);
 
       // Mendix Installation Detection Group
-      const mendixGroup = element("section", "settings-group");
-      mendixGroup.appendChild(element("div", "settings-label", "Mendix Installation"));
+      const mendixGroup = element("details", "settings-group");
+      mendixGroup.open = false;
+      mendixGroup.appendChild(element("summary", "settings-label", "Mendix Installation"));
       mendixGroup.appendChild(element(
         "div",
         "settings-help",
@@ -2403,7 +2573,9 @@ internal static class AutoCommitMessagePanelHtml
       // Re-detect button
       const redetectButton = element("button", "btn", "Re-detect");
       redetectButton.type = "button";
-      mendixGroup.appendChild(redetectButton);
+      const redetectInline = element("div", "settings-inline");
+      redetectInline.appendChild(redetectButton);
+      mendixGroup.appendChild(redetectInline);
 
       // Update detection display
       function updateMendixDetectionDisplay() {
@@ -2443,6 +2615,27 @@ internal static class AutoCommitMessagePanelHtml
         }).catch(() => {
           render("Re-detection failed. Check console for details.");
         });
+      });
+
+      extendedModeInput.addEventListener("change", () => {
+        settingsState = {
+          ...settingsState,
+          extendedMode: extendedModeInput.checked,
+        };
+        if (!settingsState.extendedMode && activeView === "model-overview") {
+          activeView = "model-changes";
+        }
+        saveSettingsToStorage();
+        render(settingsState.extendedMode ? "Extended mode enabled." : "Extended mode disabled.");
+      });
+
+      exportAdditionalDataInput.addEventListener("change", () => {
+        settingsState = {
+          ...settingsState,
+          exportAdditionalData: exportAdditionalDataInput.checked,
+        };
+        saveSettingsToStorage();
+        render(settingsState.exportAdditionalData ? "Export additional data enabled." : "Export additional data disabled.");
       });
 
       themeSelect.addEventListener("change", () => {
@@ -2526,15 +2719,20 @@ internal static class AutoCommitMessagePanelHtml
         render("Settings reset to default.");
       });
 
+      const footer = element("div", "settings-footer");
+      footer.appendChild(saveButton);
+      footer.appendChild(resetButton);
+
       content.appendChild(themeGroup);
-      content.appendChild(modeGroup);
-      content.appendChild(mendixGroup);
-      content.appendChild(pathGroup);
       content.appendChild(signatureGroup);
+      content.appendChild(mendixGroup);
+      content.appendChild(modeGroup);
       if (settingsState.extendedMode) {
-        content.appendChild(commitGroup);
+        content.appendChild(exportGroup);
       }
+      content.appendChild(commitGroup);
       panel.appendChild(content);
+      panel.appendChild(footer);
       statusLine.textContent = statusLine.textContent || "Update extension settings.";
       return panel;
     }
@@ -3534,4 +3732,3 @@ internal static class AutoCommitMessagePanelHtml
 """;
     }
 }
-
