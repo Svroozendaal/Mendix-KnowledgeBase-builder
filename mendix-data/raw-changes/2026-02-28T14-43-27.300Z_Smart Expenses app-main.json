@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0",
+  "timestamp": "2026-02-28T14:43:27.3006306\u002B00:00",
+  "projectName": "Smart Expenses app-main",
+  "branchName": "main",
+  "userName": "Svroozendaal",
+  "userEmail": "simonvRoozendaal@gmail.com",
+  "changes": [
+    {
+      "filePath": "App.mpr",
+      "status": "Modified",
+      "isStaged": false,
+      "diffText": "Binary file changed - diff not available",
+      "modelChangesByModule": [
+        {
+          "module": "New_Module",
+          "domainModel": [
+            {
+              "changeType": "Added",
+              "elementType": "Entity",
+              "elementName": "New_Module.Entity2",
+              "details": "attributes added (1): Attribute",
+              "displayText": "NEW Entity2 : attributes added (1): Attribute"
+            },
+            {
+              "changeType": "Added",
+              "elementType": "Entity",
+              "elementName": "New_Module.Entity3assossiatatedwithEntity2",
+              "details": "entity metadata: exportLevel=Hidden; associations added (1): [*-1] Entity2",
+              "displayText": "NEW Entity3assossiatatedwithEntity2 : entity metadata: exportLevel=Hidden; associations added (1): [*-1] Entity2"
+            },
+            {
+              "changeType": "Added",
+              "elementType": "NonPersistentEntity",
+              "elementName": "New_Module.Entity5",
+              "details": "attributes added (1): test_attribute",
+              "displayText": "NEW NP Entity5 : attributes added (1): test_attribute"
+            },
+            {
+              "changeType": "Added",
+              "elementType": "Entity",
+              "elementName": "New_Module.Entitywith10attributes",
+              "details": "attributes added (3): Attribute1STring, Attribute2int, Attribute3datetime; before commit=BCO_new; after commit=ACO_new; associations added (1): [*-1] Entity2",
+              "displayText": "NEW Entitywith10attributes : attributes added (3): Attribute1STring, Attribute2int, Attribute3datetime; before commit=BCO_new; after commit=ACO_new; associations added (1): [*-1] Entity2"
+            },
+            {
+              "changeType": "Added",
+              "elementType": "Entity",
+              "elementName": "New_Module.GeneralizationEntityImage",
+              "details": "Generalization of System.Image",
+              "displayText": "NEW GeneralizationEntityImage : Generalization of System.Image"
+            }
+          ],
+          "microflows": [
+            {
+              "changeType": "Added",
+              "elementType": "Microflow",
+              "elementName": "New_Module.ACO_new",
+              "details": "actions delta: added 4, removed 0, modified 0; actions added (4): ChangeObjectAction x1, CommitAction x1, RetrieveAction x1, ShowMessageAction x1; added action details: ChangeObjectAction: change Entity2 (Attribute=\u0027 jooo nieuwe tekst\u0027; refreshInClient=false) | CommitAction: commit Entity2 (refreshInClient=false, withEvents=true) | RetrieveAction: retrieve Entity2 over association Entitywith10attributes_Entity2 from Entitywith10attributes | ShowMessageAction: show message (text=helaas!, type=Information, blocking=true); decisions delta: added 1, removed 0, modified 0; decisions added (1): filled? expression=$Entity2 != empty",
+              "displayText": "NEW MF ACO_new : added: change object Entity2, commit object Entity2, retrieve object Entitywith10attributes, show message; decisions: filled?"
+            },
+            {
+              "changeType": "Added",
+              "elementType": "Microflow",
+              "elementName": "New_Module.BCO_new",
+              "details": "actions delta: added 1, removed 0, modified 0; actions added (1): ChangeObjectAction x1; added action details: ChangeObjectAction: change Entitywith10attributes (Attribute2int=$Entitywith10attributes/Attribute2int \u002B 15; refreshInClient=false)",
+              "displayText": "NEW MF BCO_new : added: change object Entitywith10attributes"
+            }
+          ],
+          "pages": [],
+          "nanoflows": [],
+          "resources": [
+            {
+              "changeType": "Added",
+              "elementType": "Association",
+              "elementName": "New_Module.Entity3assossiatatedwithEntity2_Entity2",
+              "details": "parent=New_Module.Entity3assossiatatedwithEntity2; association=[*-1] Entity2",
+              "displayText": "NEW Entity3assossiatatedwithEntity2_Entity2 : parent=New_Module.Entity3assossiatatedwithEntity2; association=[*-1] Entity2"
+            },
+            {
+              "changeType": "Added",
+              "elementType": "Association",
+              "elementName": "New_Module.Entitywith10attributes_Entity2",
+              "details": "parent=New_Module.Entitywith10attributes; association=[*-1] Entity2",
+              "displayText": "NEW Entitywith10attributes_Entity2 : parent=New_Module.Entitywith10attributes; association=[*-1] Entity2"
+            }
+          ]
+        },
+        {
+          "module": "SmartExpenses",
+          "domainModel": [],
+          "microflows": [
+            {
+              "changeType": "Modified",
+              "elementType": "Microflow",
+              "elementName": "SmartExpenses.NEW_MICROFLOW_test",
+              "details": "flows count 6-\u003E7; actions delta: added 1, removed 0, modified 0; actions added (1): ShowMessageAction x1; added action details: ShowMessageAction: show message (text=woooow, type=Information, blocking=true)",
+              "displayText": "MF NEW_MICROFLOW_test : added: show message"
+            }
+          ],
+          "pages": [],
+          "nanoflows": [
+            {
+              "changeType": "Modified",
+              "elementType": "Nanoflow",
+              "elementName": "SmartExpenses.NEW_NANOFLOW",
+              "details": "objectCollection updated; flows count 1-\u003E4; decisions delta: added 1, removed 0, modified 0; decisions added (1): just true expression=true",
+              "displayText": "NF NEW_NANOFLOW : decisions: just true"
+            }
+          ],
+          "resources": [
+            {
+              "changeType": "Modified",
+              "elementType": "ImportMapping",
+              "elementName": "SmartExpenses.NEW_ImportMapping_renamed",
+              "details": "name NEW_ImportMapping-\u003ENEW_ImportMapping_renamed; modelType=ImportMapping; resource metadata: exportLevel=Hidden, excluded=false; nested types (1): UnknownType x1",
+              "displayText": "IM NEW_ImportMapping_renamed : name NEW_ImportMapping-\u003ENEW_ImportMapping_renamed; modelType=ImportMapping; resource metadata: exportLevel=Hidden, excluded=false; nested types (1): UnknownType x1"
+            },
+            {
+              "changeType": "Modified",
+              "elementType": "Enumeration",
+              "elementName": "SmartExpenses.NEW_name_NEUM",
+              "details": "name NEW_ENUMMMERATION-\u003ENEW_name_NEUM; modelType=Enumeration; resource metadata: exportLevel=Hidden, excluded=false",
+              "displayText": "ENUM NEW_name_NEUM : name NEW_ENUMMMERATION-\u003ENEW_name_NEUM; modelType=Enumeration; resource metadata: exportLevel=Hidden, excluded=false"
+            }
+          ]
+        }
+      ],
+      "modelDumpArtifact": {
+        "folderPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-28T14-43-26.653Z_App.mpr_f12ee140374d4222846cd4991528f4ff",
+        "workingDumpPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-28T14-43-26.653Z_App.mpr_f12ee140374d4222846cd4991528f4ff\\working-dump.json",
+        "headDumpPath": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\dumps\\2026-02-28T14-43-26.653Z_App.mpr_f12ee140374d4222846cd4991528f4ff\\head-dump.json"
+      }
+    }
+  ]
+}

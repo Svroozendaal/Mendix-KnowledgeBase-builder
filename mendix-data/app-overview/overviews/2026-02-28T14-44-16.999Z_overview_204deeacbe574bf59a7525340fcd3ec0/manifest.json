@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAtUtc": "2026-02-28T14:44:16.9995577\u002B00:00",
+  "mode": "App",
+  "selectedModules": [],
+  "includeStructuredOutput": true,
+  "includePseudocodeOutput": true,
+  "artifactCount": 2,
+  "artifacts": [
+    {
+      "type": "app-json",
+      "path": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-02-28T14-44-16.999Z_overview_204deeacbe574bf59a7525340fcd3ec0\\app-overview.json"
+    },
+    {
+      "type": "app-pseudocode",
+      "path": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-02-28T14-44-16.999Z_overview_204deeacbe574bf59a7525340fcd3ec0\\app-overview.pseudo.txt"
+    }
+  ]
+}
