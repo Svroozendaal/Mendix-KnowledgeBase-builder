@@ -20,6 +20,8 @@ public static class MxToolService
 
     /// <summary>
     /// Finds the full path to <c>mx.exe</c>.
+    /// First tries to use the detected Mendix installation from ExtensionConfigurationService.
+    /// Falls back to legacy detection if no detection result is available.
     /// </summary>
     /// <returns>Absolute path to <c>mx.exe</c>.</returns>
     /// <exception cref="FileNotFoundException">Thrown when the tool cannot be located.</exception>
@@ -27,6 +29,14 @@ public static class MxToolService
     {
         lock (SyncRoot)
         {
+            // Check if detection result is available and valid.
+            var detectionResult = ExtensionConfigurationService.GetDetectionResult();
+            if (detectionResult?.Success == true && !string.IsNullOrWhiteSpace(detectionResult.MxExePath))
+            {
+                cachedMxExePath = detectionResult.MxExePath;
+                return detectionResult.MxExePath;
+            }
+
             if (!string.IsNullOrWhiteSpace(cachedMxExePath) && File.Exists(cachedMxExePath))
             {
                 return cachedMxExePath;

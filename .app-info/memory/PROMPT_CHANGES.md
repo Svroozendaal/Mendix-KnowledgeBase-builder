@@ -59,3 +59,17 @@ REQUESTED_BY: User
 FILES_UPDATED: .app-info/development/prompts/V2 additional features/PROMPT_C1_HEAD_DUMP_CACHE.md, .app-info/development/prompts/V2 additional features/PROMPT_C2_MODULE_FILTER.md
 SUMMARY: Refined Phase C prompts with the Prompt Refiner workflow by adding required prompt structure, AGENTS-first startup steps, deterministic skill suggestion steps, repo-verified refresh/route/UI pointers, and explicit constants/schema guardrails for new query keys and actions.
 COMPATIBILITY: BACKWARD_COMPATIBLE
+
+## PROMPT_CHANGE - 009 - 2026-02-28
+REQUESTED_BY: User
+FILES_UPDATED: .app-info/development/prompts/V2 additional features/PROMPT_D1_COMMIT_MESSAGE_HISTORY.md
+SUMMARY: Refined Phase D prompt with Prompt Refiner by adding Entry/Exit criteria, AGENTS-first startup steps, deterministic skill suggestion step, and repo-verified hard pointers for store service, route actions, UI tab integration, constants, and path-guard requirements.
+COMPATIBILITY: BACKWARD_COMPATIBLE
+
+## PROMPT_CHANGE - 010 - 2026-02-28
+REQUESTED_BY: User
+FILES_UPDATED: PROMPT_A0_AUTO_DETECT_MENDIX.md (accepted and implemented)
+SUMMARY: DEVELOPER agent implemented PROMPT_A0_AUTO_DETECT_MENDIX.md with MendixInstallationDetectorService (version-specific auto-detection via show-version), startup integration, Settings UI with re-detect button, API endpoint for manual override, fallback to major.minor matching, and comprehensive unit tests covering exact match, fallback, and failure scenarios.
+COMPATIBILITY: BACKWARD_COMPATIBLE
+IMPLEMENTATION_STATUS: COMPLETE
+NEXT_STEPS: TESTER to validate detection on real Mendix projects with varying installed versions; Implementer to handle any build/deployment issues

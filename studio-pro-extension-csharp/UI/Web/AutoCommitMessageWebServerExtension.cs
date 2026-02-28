@@ -137,6 +137,13 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
             return;
         }
 
+        // Handle Mendix installation detection API endpoint.
+        if (request.Url?.AbsolutePath.Contains("/api/detection", StringComparison.OrdinalIgnoreCase) == true)
+        {
+            await HandleDetectionRequestAsync(projectPath, request.Url, response, cancellationToken);
+            return;
+        }
+
         var payload = new AutoCommitMessagePayload
         {
             IsGitRepo = false,
@@ -464,6 +471,91 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                     message = exception.Message,
                 },
                 cancellationToken);
+        }
+    }
+
+    private static async Task HandleDetectionRequestAsync(
+        string projectPath,
+        Uri? requestUrl,
+        HttpListenerResponse response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            // Read the optional override parameter from query string.
+            var installRootOverride = ReadQueryParameter(requestUrl, "override");
+            if (!string.IsNullOrWhiteSpace(installRootOverride))
+            {
+                ExtensionConfigurationService.SetInstallRootOverride(installRootOverride);
+            }
+
+            // Find the .mpr file in the project directory.
+            var mprPath = FindMprFile(projectPath);
+            if (string.IsNullOrWhiteSpace(mprPath))
+            {
+                await WriteJsonResponseAsync(
+                    response,
+                    400,
+                    new
+                    {
+                        success = false,
+                        message = "No .mpr file found in the project directory.",
+                    },
+                    cancellationToken);
+                return;
+            }
+
+            // Run detection.
+            var detector = new MendixInstallationDetectorService();
+            var detectionResult = await Task.Run(
+                () => detector.Detect(mprPath, installRootOverride),
+                cancellationToken);
+
+            ExtensionConfigurationService.SetDetectionResult(detectionResult);
+
+            await WriteJsonResponseAsync(
+                response,
+                200,
+                new
+                {
+                    success = detectionResult.Success,
+                    detectedVersion = detectionResult.DetectedVersion,
+                    mxExePath = detectionResult.MxExePath,
+                    installRoot = detectionResult.InstallRoot,
+                    failureReason = detectionResult.FailureReason,
+                    warningReason = detectionResult.WarningReason,
+                },
+                cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                500,
+                new
+                {
+                    success = false,
+                    message = exception.Message,
+                },
+                cancellationToken);
+        }
+    }
+
+    private static string? FindMprFile(string projectPath)
+    {
+        try
+        {
+            if (!Directory.Exists(projectPath))
+            {
+                return null;
+            }
+
+            var mprFiles = Directory.EnumerateFiles(projectPath, "*.mpr", SearchOption.TopDirectoryOnly);
+            return mprFiles.FirstOrDefault();
+        }
+        catch
+        {
+            return null;
         }
     }
 

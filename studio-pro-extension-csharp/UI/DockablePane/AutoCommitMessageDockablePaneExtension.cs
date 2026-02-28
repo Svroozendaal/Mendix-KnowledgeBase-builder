@@ -14,8 +14,74 @@ public sealed class AutoCommitMessageDockablePaneExtension : DockablePaneExtensi
     public override DockablePaneViewModelBase Open()
     {
         var currentProjectPath = CurrentApp?.Root?.DirectoryPath ?? string.Empty;
+
+        // Detect Mendix installation at startup if not already detected.
+        DetectMendixInstallationIfNeeded(currentProjectPath);
+
         var panelAddress = BuildPanelAddress(currentProjectPath);
         return new AutoCommitMessageDockablePaneViewModel(panelAddress);
+    }
+
+    /// <summary>
+    /// Runs Mendix installation detection at startup.
+    /// Stores result in ExtensionConfigurationService for use by MxToolService and UI.
+    /// </summary>
+    private void DetectMendixInstallationIfNeeded(string projectPath)
+    {
+        if (string.IsNullOrWhiteSpace(projectPath))
+        {
+            return;
+        }
+
+        try
+        {
+            // Check if we already have a detection result.
+            var existing = ExtensionConfigurationService.GetDetectionResult();
+            if (existing?.Success == true)
+            {
+                return; // Already detected successfully.
+            }
+
+            // Locate the .mpr file in the project path.
+            var mprPath = FindMprFile(projectPath);
+            if (string.IsNullOrWhiteSpace(mprPath))
+            {
+                return; // No .mpr file found; skip detection.
+            }
+
+            // Run detection with any override from settings.
+            var installRootOverride = ExtensionConfigurationService.GetInstallRootOverride();
+            var detector = new MendixInstallationDetectorService();
+            var result = detector.Detect(mprPath, installRootOverride);
+
+            ExtensionConfigurationService.SetDetectionResult(result);
+        }
+        catch
+        {
+            // Silently ignore detection errors at startup; UI will show the failure.
+        }
+    }
+
+    /// <summary>
+    /// Finds the .mpr file in the project directory.
+    /// Searches for *.mpr files and returns the first one found.
+    /// </summary>
+    private string? FindMprFile(string projectPath)
+    {
+        try
+        {
+            if (!Directory.Exists(projectPath))
+            {
+                return null;
+            }
+
+            var mprFiles = Directory.EnumerateFiles(projectPath, "*.mpr", SearchOption.TopDirectoryOnly);
+            return mprFiles.FirstOrDefault();
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     private Uri BuildPanelAddress(string projectPath)

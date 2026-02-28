@@ -37,6 +37,71 @@ Out of scope:
 | Processing | Overview parser | `Processing/ModelDiff/MendixModelOverviewParser.cs` | Builds full model inventory and pseudocode from a dump |
 | Processing | Grouping | `Processing/ModelDiff/MendixModelChangeStructurer.cs` | Groups model changes by module/category |
 | Processing | Display formatter | `Processing/Formatting/MendixModelChangeDisplayTextFormatter.cs` | Produces deterministic `displayText` strings |
+| Processing | Installation detection | `Processing/Services/MendixInstallationDetectorService.cs` | Auto-detects correct mx.exe for a given .mpr file |
+| Processing | Configuration service | `Processing/Services/ExtensionConfigurationService.cs` | Stores detection result and install-root override state |
+
+## Mendix Installation Detection
+
+The extension automatically detects and uses the correct `mx.exe` installation for each project without requiring manual configuration.
+
+### Detection algorithm
+
+Detection runs once at pane startup and follows three steps:
+
+**Step 1 — Determine required version:**
+- Scans the Mendix installations root (default: `C:\Program Files\Mendix\`) for any available `mx.exe`.
+- Runs `mx.exe show-version <mprFilePath>` on the first found to determine the Mendix version required by the project.
+
+**Step 2 — Find matching installation:**
+- Searches for `<installRoot>\<requiredVersion>\modeler\mx.exe` (exact version match).
+- Returns this path if found.
+
+**Step 3 — Fallback to major.minor match:**
+- If no exact match exists, searches for `<installRoot>\<majorMinor>.x\modeler\mx.exe` (e.g., `10.24.x`).
+- Logs a warning if fallback matching is used.
+- Fails with a user-facing error if no match is found.
+
+### Installation root resolution
+
+Installation root is resolved in this order:
+
+1. Manual override from Settings UI (stored as `mendixInstallRoot` in localStorage).
+2. Environment variable `MENDIX_INSTALL_ROOT`.
+3. Default: `C:\Program Files\Mendix`.
+
+### Integration points
+
+- **Startup detection:** `AutoCommitMessageDockablePaneExtension.Open()` runs detection once per pane load.
+- **Configuration storage:** Detection result and manual override are stored in `ExtensionConfigurationService`.
+- **MxToolService fallback:** `MxToolService.FindMxExe()` first checks the detection result; falls back to legacy detection if not available.
+- **Settings UI:** Displays detected version and path, with a "Re-detect" button and manual override input.
+- **API endpoint:** `GET /autocommitmessage/api/detection?override=<path>` re-runs detection with optional override.
+
+### Settings panel
+
+The **Mendix Installation** section in Settings displays:
+
+- **Detected version:** The version string from `show-version`.
+- **mx.exe path:** The full path to the detected (or fallback) `mx.exe`.
+- **Status indicator:**
+  - Green (✓) if exact match found.
+  - Amber (⚠) if fallback major.minor match used.
+  - Red (✗) with failure reason if detection failed.
+- **Manual override input:** Allows user to specify an alternative Mendix installations folder.
+- **Re-detect button:** Triggers detection with the current override and updates the status display.
+
+### Failure handling
+
+If detection fails:
+
+- Status shows red indicator with failure reason.
+- Refresh and Export actions remain available (fallback to legacy mx.exe detection).
+- User can provide a manual override path and click "Re-detect".
+- No blocking modals are shown; detection failure is non-fatal.
+
+### Environment variable
+
+Previously, the extension relied on development-time `.env` values for Mendix path/version. This dependency has been replaced by auto-detection. The `.env` file is not deleted; any Mendix configuration keys in it are now ignored.
 
 ## Web actions and endpoints
 
@@ -53,6 +118,7 @@ Route prefix: `autocommitmessage/`
 | `generate-overview-module` | `GET` | Generates module overview using `module` or `modules` query selection |
 | `generate-overview-both` / `generate-overview` | `GET` | Generates app and module overview artefacts |
 | `store-commit-message` | `POST` | Stores provided commit-message body as text file |
+| `/api/detection` | `GET` | Runs Mendix installation detection with optional `override=<path>` parameter |
 
 Important query keys include:
 

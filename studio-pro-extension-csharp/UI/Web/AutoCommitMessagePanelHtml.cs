@@ -2362,6 +2362,82 @@ internal static class AutoCommitMessagePanelHtml
         `Resolved folder: ${getConfiguredCommitMessagesFolderPath(commitPathInput.value)}`);
       commitGroup.appendChild(commitPathPreview);
 
+      // Mendix Installation Detection Group
+      const mendixGroup = element("section", "settings-group");
+      mendixGroup.appendChild(element("div", "settings-label", "Mendix Installation"));
+      mendixGroup.appendChild(element(
+        "div",
+        "settings-help",
+        "Auto-detected Mendix installation details. Override the installation folder if needed."));
+
+      // Detected version display
+      const versionDisplay = element("div", "settings-preview");
+      mendixGroup.appendChild(versionDisplay);
+
+      // Detected mx.exe path display
+      const pathDisplay = element("div", "settings-preview");
+      mendixGroup.appendChild(pathDisplay);
+
+      // Status indicator
+      const statusDisplay = element("div", "settings-preview");
+      mendixGroup.appendChild(statusDisplay);
+
+      // Install root override input
+      const installRootInline = element("div", "settings-inline");
+      const installRootInput = document.createElement("input");
+      installRootInput.type = "text";
+      installRootInput.className = "settings-input";
+      installRootInput.placeholder = "C:\\Program Files\\Mendix";
+      installRootInput.value = typeof settingsState.mendixInstallRoot === "string" ? settingsState.mendixInstallRoot : "";
+      installRootInline.appendChild(element("span", null, "Mendix installations folder:"));
+      installRootInline.appendChild(installRootInput);
+      mendixGroup.appendChild(installRootInline);
+
+      // Re-detect button
+      const redetectButton = element("button", "btn", "Re-detect");
+      redetectButton.type = "button";
+      mendixGroup.appendChild(redetectButton);
+
+      // Update detection display
+      function updateMendixDetectionDisplay() {
+        const detectionData = typeof window.mendixDetectionResult !== "undefined" ? window.mendixDetectionResult : null;
+        if (detectionData) {
+          versionDisplay.textContent = `Detected version: ${detectionData.detectedVersion || "Unknown"}`;
+          pathDisplay.textContent = `mx.exe path: ${detectionData.mxExePath || "Not found"}`;
+          if (detectionData.success) {
+            statusDisplay.textContent = "Status: ✓ Detected automatically";
+            statusDisplay.style.color = "#22c55e";
+          } else if (detectionData.warningReason) {
+            statusDisplay.textContent = `Status: ⚠ ${detectionData.warningReason}`;
+            statusDisplay.style.color = "#f59e0b";
+          } else {
+            statusDisplay.textContent = `Status: ✗ ${detectionData.failureReason || "Detection failed"}`;
+            statusDisplay.style.color = "#ef4444";
+          }
+        } else {
+          versionDisplay.textContent = "Detected version: Checking...";
+          pathDisplay.textContent = "mx.exe path: Checking...";
+          statusDisplay.textContent = "Status: Initializing...";
+        }
+      }
+
+      updateMendixDetectionDisplay();
+
+      redetectButton.addEventListener("click", () => {
+        const override = typeof installRootInput.value === "string" ? installRootInput.value.trim() : "";
+        settingsState = {
+          ...settingsState,
+          mendixInstallRoot: override.length > 0 ? override : "",
+        };
+        saveSettingsToStorage();
+        fetch("/autocommitmessage/api/detection?override=" + encodeURIComponent(override)).then(() => {
+          setTimeout(updateMendixDetectionDisplay, 500);
+          render("Mendix installation re-detected.");
+        }).catch(() => {
+          render("Re-detection failed. Check console for details.");
+        });
+      });
+
       themeSelect.addEventListener("change", () => {
         applyTheme(themeSelect.value);
         saveSettingsToStorage();
@@ -2420,6 +2496,7 @@ internal static class AutoCommitMessagePanelHtml
           persistOverviewPseudocode: true,
           storeCommitMessages: false,
           commitMessagesBasePath: defaultDataRootBasePath,
+          mendixInstallRoot: "",
         };
         if (activeView === "model-overview") {
           activeView = "model-changes";
@@ -2434,14 +2511,17 @@ internal static class AutoCommitMessagePanelHtml
         persistOverviewPseudocodeInput.checked = true;
         storeCommitMessagesInput.checked = false;
         commitPathInput.value = defaultDataRootBasePath;
+        installRootInput.value = "";
         saveSettingsToStorage();
         preview.textContent = `Resolved data root: ${getConfiguredDataRootPath()}`;
         commitPathPreview.textContent = `Resolved folder: ${getConfiguredCommitMessagesFolderPath(defaultDataRootBasePath)}`;
+        updateMendixDetectionDisplay();
         render("Settings reset to default.");
       });
 
       content.appendChild(themeGroup);
       content.appendChild(modeGroup);
+      content.appendChild(mendixGroup);
       content.appendChild(pathGroup);
       content.appendChild(signatureGroup);
       if (settingsState.extendedMode) {

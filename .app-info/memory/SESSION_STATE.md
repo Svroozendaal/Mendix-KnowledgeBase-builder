@@ -112,3 +112,24 @@ STATUS: COMPLETE
 NEXT_AGENT: none
 SUMMARY: Refined Phase C V2 prompts (C1, C2) to align with the Prompt Refiner contract by adding Entry/Exit criteria, AGENTS-first startup steps, deterministic skill suggestions, and hard pointers for refresh route, query constants, and processing integration points.
 BLOCKERS: none
+
+## HANDOFF - DEVELOPER - 2026-02-28T16:15:00+01:00
+STATUS: COMPLETE
+NEXT_AGENT: TESTER
+SUMMARY: Implemented PROMPT_A0_AUTO_DETECT_MENDIX.md - Mendix Installation Detection service auto-detects mx.exe at startup using show-version, with major.minor fallback and manual override support via Settings UI.
+BLOCKERS: none
+DELIVERABLES:
+- MendixInstallationDetectorService.cs (detection algorithm, 3-step process)
+- ExtensionConfigurationService.cs (shared config state)
+- Updated AutoCommitMessageDockablePaneExtension.cs (startup integration)
+- Updated MxToolService.cs (detection result fallback)
+- Updated AutoCommitMessagePanelHtml.cs (Settings UI with detection status display)
+- Updated AutoCommitMessageWebServerExtension.cs (API endpoint for re-detection)
+- Updated ARCHITECTURE.md (detection documentation section)
+- MendixInstallationDetectorServiceTests.cs (unit tests for all scenarios)
+
+## HANDOFF - Prompt Refiner - 2026-02-28T15:18:29+01:00
+STATUS: COMPLETE
+NEXT_AGENT: none
+SUMMARY: Refined Phase D V2 prompt (D1) to align with Prompt Refiner standards by adding required prompt structure and replacing vague references with verified route, service, constants, UI, and documentation pointers.
+BLOCKERS: none
