@@ -77,11 +77,15 @@ if ([string]::IsNullOrWhiteSpace($DataRootPath)) {
 
 $AppPath = [System.IO.Path]::GetFullPath($AppPath)
 $DataRootPath = [System.IO.Path]::GetFullPath($DataRootPath)
-$exportPath = Join-Path $DataRootPath 'exports'
+
+# Folders must match runtime paths in ExtensionDataPaths.cs and services.
+# Last verified: 2026-02-28
+$rawChangesPath = Join-Path $DataRootPath 'raw-changes'
 $processedPath = Join-Path $DataRootPath 'processed'
 $errorsPath = Join-Path $DataRootPath 'errors'
-$structuredPath = Join-Path $DataRootPath 'structured'
+$appOverviewPath = Join-Path $DataRootPath 'app-overview'
 $dumpsPath = Join-Path $DataRootPath 'dumps'
+$commitMessagesPath = Join-Path $DataRootPath 'Commit messages'
 
 $extensionName = 'AutoCommitMessage'
 $dllName = "$extensionName.dll"
@@ -101,11 +105,12 @@ if (-not (Test-Path $projectPath -PathType Leaf)) {
     throw "Extension project not found: $projectPath"
 }
 
-New-Item -ItemType Directory -Force -Path $exportPath | Out-Null
+New-Item -ItemType Directory -Force -Path $rawChangesPath | Out-Null
 New-Item -ItemType Directory -Force -Path $processedPath | Out-Null
 New-Item -ItemType Directory -Force -Path $errorsPath | Out-Null
-New-Item -ItemType Directory -Force -Path $structuredPath | Out-Null
+New-Item -ItemType Directory -Force -Path $appOverviewPath | Out-Null
 New-Item -ItemType Directory -Force -Path $dumpsPath | Out-Null
+New-Item -ItemType Directory -Force -Path $commitMessagesPath | Out-Null
 New-Item -ItemType Directory -Force -Path $buildBaseOutputPath | Out-Null
 New-Item -ItemType Directory -Force -Path $buildBaseIntermediatePath | Out-Null
 
@@ -160,18 +165,19 @@ if (Test-Path $legacyDll -PathType Leaf) {
 
 Write-Host ''
 Write-Host 'Deployment complete.' -ForegroundColor Green
-Write-Host "App path:      $AppPath"
-Write-Host "Target folder: $targetDir"
-Write-Host "Data root:     $DataRootPath"
-Write-Host "Exports:       $exportPath"
-Write-Host "Processed:     $processedPath"
-Write-Host "Errors:        $errorsPath"
-Write-Host "Structured:    $structuredPath"
-Write-Host "Dumps:         $dumpsPath"
-Write-Host "DLL:           $targetDll"
-Write-Host "Manifest:      $targetManifest"
-Write-Host "Build output:  $buildOutput"
+Write-Host "App path:           $AppPath"
+Write-Host "Target folder:      $targetDir"
+Write-Host "Data root:          $DataRootPath"
+Write-Host "Raw changes:        $rawChangesPath"
+Write-Host "Processed:          $processedPath"
+Write-Host "Errors:             $errorsPath"
+Write-Host "App overview:       $appOverviewPath"
+Write-Host "Dumps:              $dumpsPath"
+Write-Host "Commit messages:    $commitMessagesPath"
+Write-Host "DLL:                $targetDll"
+Write-Host "Manifest:           $targetManifest"
+Write-Host "Build output:       $buildOutput"
 if (Test-Path $targetPdb -PathType Leaf) {
-    Write-Host "PDB:           $targetPdb"
+    Write-Host "PDB:                $targetPdb"
 }
 Write-Host "Data root hint: `$env:MENDIX_GIT_DATA_ROOT = '$DataRootPath'"

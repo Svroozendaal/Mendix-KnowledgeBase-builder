@@ -18,6 +18,9 @@ public sealed class AutoCommitMessageDockablePaneExtension : DockablePaneExtensi
         // Detect Mendix installation at startup if not already detected.
         DetectMendixInstallationIfNeeded(currentProjectPath);
 
+        // Run one-time migration for legacy folder names.
+        RunFolderMigrationIfNeeded(currentProjectPath);
+
         var panelAddress = BuildPanelAddress(currentProjectPath);
         return new AutoCommitMessageDockablePaneViewModel(panelAddress);
     }
@@ -59,6 +62,28 @@ public sealed class AutoCommitMessageDockablePaneExtension : DockablePaneExtensi
         catch
         {
             // Silently ignore detection errors at startup; UI will show the failure.
+        }
+    }
+
+    /// <summary>
+    /// Runs one-time folder migration for legacy names (exports/ → _legacy_exports/, structured/ → _legacy_structured/).
+    /// Safe to call every startup (idempotent).
+    /// </summary>
+    private void RunFolderMigrationIfNeeded(string projectPath)
+    {
+        if (string.IsNullOrWhiteSpace(projectPath))
+        {
+            return;
+        }
+
+        try
+        {
+            var dataRootPath = ExtensionDataPaths.ResolveDataRoot(projectPath);
+            AutoCommitMessageFolderMigrationService.MigrateIfNeeded(dataRootPath);
+        }
+        catch
+        {
+            // Silently ignore migration errors - they are non-fatal.
         }
     }
 
