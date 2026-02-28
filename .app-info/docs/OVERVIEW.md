@@ -1,34 +1,35 @@
 # docs/
 ## Produced Documentation
 
-This folder stores documentation produced during development of this application.
+This folder stores application-level documentation produced during development.
 
 ## Primary technical docs location
 
-Deep implementation documentation for the Studio Pro extension is maintained in:
+Deep runtime implementation docs for the Studio Pro extension are maintained in:
 
 - `studio-pro-extension-csharp/Docs/README.md`
 - `studio-pro-extension-csharp/Docs/ARCHITECTURE.md`
 - `studio-pro-extension-csharp/Docs/PROCESSING_PIPELINE.md`
 - `studio-pro-extension-csharp/Docs/EXPORT_CONTRACT.md`
+- `studio-pro-extension-csharp/Docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md`
 - `studio-pro-extension-csharp/Docs/REPOSITORY_WORKFLOWS.md`
 - `studio-pro-extension-csharp/Docs/OPEN_QUESTIONS.md`
 
-This `.app-info/docs` folder is used as the app-level index and routing companion.
+## App-level documents in this folder
 
-## What Belongs Here
+- `APPLICATION_WORKINGS_2026-02-28.md`: complete technical walkthrough of current runtime behaviour.
+- `CHATGPT_FEATURE_BRAINSTORM_CONTEXT.md`: paste-ready context pack and prompt for feature brainstorming.
+- `MODEL_DUMP_PARSER_GAPS_2026-02-27.md`: parser coverage gap analysis from sampled dump set.
 
-- Reference documentation for implemented features.
-- API or integration documentation.
-- Architecture decision records that are too large for `memory/DECISIONS_LOG.md`.
-- End-user or maintainer guides produced by the Documenter agent.
+## What belongs here
 
-## What Does Not Belong Here
+- Cross-cutting architecture and behaviour summaries.
+- Integration and contract notes for app-level collaboration.
+- Documentation artefacts intended for planning and AI-assisted ideation.
 
-- Live session logs → use `memory/`.
-- Feature status tracking → use `features/`.
-- Development prompts → use `development/prompts/`.
+## What does not belong here
 
-## Organisation
+- Live session logs -> use `memory/`.
+- Feature status tracking -> use `features/`.
+- Development prompts -> use `development/prompts/`.
 
-Create subfolders or files per topic as needed. Use clear, descriptive names.

@@ -18,7 +18,10 @@ internal static class AutoCommitMessageExportService
         WriteIndented = true,
     };
 
-    public static string ExportChanges(AutoCommitMessagePayload payload, string projectPath)
+    public static string ExportChanges(
+        AutoCommitMessagePayload payload,
+        string projectPath,
+        string? dataRootBasePath = null)
     {
         ArgumentNullException.ThrowIfNull(payload);
 
@@ -60,14 +63,15 @@ internal static class AutoCommitMessageExportService
             userEmail,
             payload.Changes.Select(BuildExportFileChange).ToArray());
 
-        EnsureFoldersExist();
+        var exportFolder = ExtensionDataPaths.GetExportFolder(projectPath, dataRootBasePath);
+        EnsureFoldersExist(projectPath, dataRootBasePath);
 
         var timestampToken = timestampUtc.ToString(ExportFileTimestampFormat);
         var projectToken = SanitizeFileToken(projectName);
         var fileName = $"{timestampToken}_{projectToken}.json";
-        var destinationPath = BuildUniqueDestinationPath(ExtensionDataPaths.ExportFolder, fileName);
+        var destinationPath = BuildUniqueDestinationPath(exportFolder, fileName);
         var tempPath = Path.Combine(
-            ExtensionDataPaths.ExportFolder,
+            exportFolder,
             $"{Path.GetFileNameWithoutExtension(fileName)}_{Guid.NewGuid():N}.tmp");
 
         try
@@ -83,13 +87,13 @@ internal static class AutoCommitMessageExportService
         }
     }
 
-    private static void EnsureFoldersExist()
+    private static void EnsureFoldersExist(string projectPath, string? dataRootBasePath)
     {
-        Directory.CreateDirectory(ExtensionDataPaths.ExportFolder);
-        Directory.CreateDirectory(ExtensionDataPaths.ProcessedFolder);
-        Directory.CreateDirectory(ExtensionDataPaths.ErrorsFolder);
-        Directory.CreateDirectory(ExtensionDataPaths.StructuredFolder);
-        Directory.CreateDirectory(ExtensionDataPaths.DumpsFolder);
+        Directory.CreateDirectory(ExtensionDataPaths.GetExportFolder(projectPath, dataRootBasePath));
+        Directory.CreateDirectory(ExtensionDataPaths.GetProcessedFolder(projectPath, dataRootBasePath));
+        Directory.CreateDirectory(ExtensionDataPaths.GetErrorsFolder(projectPath, dataRootBasePath));
+        Directory.CreateDirectory(ExtensionDataPaths.GetStructuredFolder(projectPath, dataRootBasePath));
+        Directory.CreateDirectory(ExtensionDataPaths.GetDumpsFolder(projectPath, dataRootBasePath));
     }
 
     private static ExportFileChange BuildExportFileChange(AutoCommitMessageFileChange change)

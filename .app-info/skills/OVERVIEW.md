@@ -17,6 +17,7 @@ App-specific skills are used when:
 | Mendix SDK | `mendix-sdk/` | Mendix SDK usage and model manipulation |
 | Mendix Studio Pro 10 | `mendix-studio-pro-10/` | Studio Pro 10 extension development constraints |
 | Mendix Model Dump Inspection | `mendix-model-dump-inspection/` | Inspecting dump outputs, maintaining diff parser contracts, and evolving deterministic diff rules (`Dxxx`) |
+| Mendix Model Overview Export | `mendix-model-overview-export/` | Building full-model overview exports (app + modules) from single dumps, including deterministic flow execution ordering and pseudocode output |
 | Mendix Commit Structuring | `mendix-commit-structuring/` | Structuring commit data for the parser pipeline |
 | Mendix Technical Commit Message | `mendix-technical-commit-message/` | Rule-driven conversion of module-grouped export data into technical commit message lines |
 

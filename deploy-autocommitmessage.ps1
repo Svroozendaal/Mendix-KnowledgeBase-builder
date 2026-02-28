@@ -72,7 +72,7 @@ if (-not $PSBoundParameters.ContainsKey('DataRootPath') -and $dotEnv.ContainsKey
 }
 
 if ([string]::IsNullOrWhiteSpace($DataRootPath)) {
-    $DataRootPath = Join-Path $repoRoot 'mendix-data'
+    $DataRootPath = Join-Path $AppPath 'mendix-data'
 }
 
 $AppPath = [System.IO.Path]::GetFullPath($AppPath)

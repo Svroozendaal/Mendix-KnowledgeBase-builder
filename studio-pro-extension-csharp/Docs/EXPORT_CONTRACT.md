@@ -2,19 +2,27 @@
 
 ## Purpose
 
-This document defines the current export payload and folder contract produced by:
+Defines the raw-change export payload produced by:
 
 - `Processing/Services/AutoCommitMessageExportService.cs`
 
-It is intended for maintainers of downstream processors (for example parsing, structuring, and commit-message generation).
+This contract is consumed by downstream parsing and commit-message tooling.
 
 ## Output location
 
-Export JSON files are written to:
+Raw-change JSON files are written to:
 
-- `<DataRoot>/exports`
+- `<DataRoot>/raw-changes`
 
-`DataRoot` resolution is documented in `ARCHITECTURE.md`.
+`DataRoot` is resolved by `ExtensionDataPaths` (see `ARCHITECTURE.md`).
+
+## Trigger path
+
+Raw-change export is triggered through web route action:
+
+- `POST autocommitmessage/?action=export`
+
+Raw-change export only runs when `persistRawChanges=true`.
 
 ## File naming
 
@@ -24,15 +32,15 @@ Pattern:
 
 Example:
 
-`2026-02-27T17-05-12.304Z_Smart Expenses app-main.json`
+`2026-02-28T13-20-11.204Z_Smart Expenses app-main.json`
 
 Collision handling:
 
-- If target file already exists, a suffix timestamp token is appended.
+- If file exists, a timestamp suffix is appended.
 
 Write safety:
 
-- Export is written to a temporary file first and then moved to destination.
+- JSON is written to temp file first, then atomically moved.
 
 ## Schema version
 
@@ -40,7 +48,7 @@ Current value:
 
 - `schemaVersion: "1.0"`
 
-Version changes should be treated as explicit compatibility events for downstream consumers.
+Any change must be treated as a compatibility event for downstream consumers.
 
 ## JSON structure
 
@@ -49,22 +57,22 @@ Top-level fields:
 | Field | Type | Description |
 |---|---|---|
 | `schemaVersion` | `string` | Export schema version |
-| `timestamp` | `string` (ISO-8601 UTC) | Export creation time |
+| `timestamp` | `string` (ISO-8601 UTC) | Export creation timestamp |
 | `projectName` | `string` | Project folder name |
 | `branchName` | `string` | Current Git branch |
-| `userName` | `string` | `git config user.name` fallback `Unknown` |
-| `userEmail` | `string` | `git config user.email` fallback `unknown@example.com` |
-| `changes` | `array` | File-level change entries |
+| `userName` | `string` | `git config user.name` or fallback |
+| `userEmail` | `string` | `git config user.email` or fallback |
+| `changes` | `array` | File-level changes |
 
 `changes[]` fields:
 
 | Field | Type | Description |
 |---|---|---|
-| `filePath` | `string` | Repository-relative path |
+| `filePath` | `string` | Repository-relative file path |
 | `status` | `string` | Normalised Git status |
 | `isStaged` | `boolean` | Index staging flag |
 | `diffText` | `string` | Patch text or fallback message |
-| `modelChangesByModule` | `array?` | Module-grouped model changes (for `*.mpr`) |
+| `modelChangesByModule` | `array?` | Module-grouped model changes (for `.mpr`) |
 | `modelDumpArtifact` | `object?` | Persisted dump artefact paths |
 
 `modelChangesByModule[]` fields:
@@ -82,33 +90,33 @@ Top-level fields:
 
 | Field | Type | Description |
 |---|---|---|
-| `changeType` | `string` | Added/Modified/Deleted |
-| `elementType` | `string` | Mendix element category |
+| `changeType` | `string` | Added / Modified / Deleted |
+| `elementType` | `string` | Element category |
 | `elementName` | `string` | Element name |
-| `details` | `string?` | Optional details |
-| `displayText` | `string` | Deterministic formatted row text |
+| `details` | `string?` | Optional detail text |
+| `displayText` | `string` | Deterministic formatted display line |
 
 `modelDumpArtifact` fields:
 
 | Field | Type | Description |
 |---|---|---|
 | `folderPath` | `string` | Dump artefact folder |
-| `workingDumpPath` | `string` | Working-copy dump JSON |
-| `headDumpPath` | `string` | HEAD dump JSON |
+| `workingDumpPath` | `string` | Working dump JSON path |
+| `headDumpPath` | `string` | HEAD dump JSON path |
 
 ## Example payload (abridged)
 
 ```json
 {
   "schemaVersion": "1.0",
-  "timestamp": "2026-02-27T17:05:12.3040000+00:00",
+  "timestamp": "2026-02-28T13:20:11.2040000+00:00",
   "projectName": "Smart Expenses app-main",
-  "branchName": "feature/model-ui",
+  "branchName": "feature/model-overview",
   "userName": "Dev User",
   "userEmail": "dev@example.com",
   "changes": [
     {
-      "filePath": "MyProject.mpr",
+      "filePath": "App.mpr",
       "status": "Modified",
       "isStaged": false,
       "diffText": "Binary file changed - diff not available",
@@ -121,7 +129,7 @@ Top-level fields:
               "elementType": "Entity",
               "elementName": "MyFirstModule.Order",
               "details": "attributes added (1): totalAmount",
-              "displayText": "- Order : attributes added (1): totalAmount"
+              "displayText": "Order : attributes added (1): totalAmount"
             }
           ],
           "microflows": [],
@@ -131,7 +139,7 @@ Top-level fields:
         }
       ],
       "modelDumpArtifact": {
-        "folderPath": "C:\\Repo\\mendix-data\\dumps\\2026-02-27T17-05-11.900Z_MyProject_mpr_...",
+        "folderPath": "C:\\Repo\\mendix-data\\dumps\\...",
         "workingDumpPath": "C:\\Repo\\mendix-data\\dumps\\...\\working-dump.json",
         "headDumpPath": "C:\\Repo\\mendix-data\\dumps\\...\\head-dump.json"
       }
@@ -142,25 +150,30 @@ Top-level fields:
 
 ## Folder contract around export
 
-At export time the extension ensures these folders exist:
+When export runs, these folders are ensured:
 
-- `exports`
+- `raw-changes`
 - `processed`
 - `errors`
-- `structured`
+- `app-overview`
 - `dumps`
 
-Only `exports` and `dumps` are currently written by the extension. The other folders are reserved for downstream pipeline stages.
+Current writer responsibilities:
+
+- Raw-change export writer: `raw-changes`
+- Overview writer: `app-overview`
+- Dump artefact writer: `dumps`
 
 ## Consumer guidance
 
 - Treat unknown fields as forward-compatible additions.
-- Read `displayText` as presentation-friendly, not as the only semantic source.
-- Prefer structured fields (`changeType`, `elementType`, `details`) for deterministic processing.
-- Respect schema version gates before making strict parsing assumptions.
+- Use structured fields as canonical semantics.
+- Treat `displayText` as deterministic presentation-friendly text.
+- Gate strict parsing by `schemaVersion`.
 
 ## Improvement opportunities
 
 - Publish machine-readable JSON Schema in-repo.
-- Add explicit export ID for easier cross-stage traceability.
-- Add optional source metadata for tool version diagnostics.
+- Add explicit export correlation ID for cross-stage traceability.
+- Add compatibility test fixtures shared with downstream parser.
+

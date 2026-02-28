@@ -23,7 +23,10 @@ public static class AutoCommitMessageChangeService
     /// </summary>
     /// <param name="projectPath">The path to the project root.</param>
     /// <returns>A payload containing repository state, change items, and optional errors.</returns>
-    public static AutoCommitMessagePayload ReadChanges(string projectPath, bool persistModelDumps = false)
+    public static AutoCommitMessagePayload ReadChanges(
+        string projectPath,
+        bool persistModelDumps = false,
+        string? dataRootBasePath = null)
     {
         try
         {
@@ -88,7 +91,8 @@ public static class AutoCommitMessageChangeService
                             repository,
                             repositoryRoot,
                             NormalizeRepositoryPath(entry.FilePath),
-                            persistModelDumps);
+                            persistModelDumps,
+                            dataRootBasePath);
 
                         fileChange = fileChange with
                         {
@@ -211,7 +215,8 @@ public static class AutoCommitMessageChangeService
         Repository repository,
         string repositoryRoot,
         string repositoryRelativeMprPath,
-        bool persistModelDumps)
+        bool persistModelDumps,
+        string? dataRootBasePath)
     {
         var workingDumpPath = CreateTempPath(".json");
         var headDumpPath = CreateTempPath(".json");
@@ -256,7 +261,12 @@ public static class AutoCommitMessageChangeService
 
             var modelChanges = MendixModelDiffService.CompareDumps(workingDumpPath, headDumpPath);
             var modelDumpArtifact = persistModelDumps
-                ? PersistModelDumpArtifacts(repositoryRelativeMprPath, workingDumpPath, headDumpPath)
+                ? PersistModelDumpArtifacts(
+                    repositoryRelativeMprPath,
+                    workingDumpPath,
+                    headDumpPath,
+                    repositoryRoot,
+                    dataRootBasePath)
                 : null;
 
             return new ModelAnalysisResult(modelChanges, modelDumpArtifact);
@@ -381,14 +391,17 @@ public static class AutoCommitMessageChangeService
     private static ModelDumpArtifact PersistModelDumpArtifacts(
         string repositoryRelativeMprPath,
         string workingDumpPath,
-        string headDumpPath)
+        string headDumpPath,
+        string repositoryRoot,
+        string? dataRootBasePath)
     {
-        Directory.CreateDirectory(ExtensionDataPaths.DumpsFolder);
+        var dumpsFolder = ExtensionDataPaths.GetDumpsFolder(repositoryRoot, dataRootBasePath);
+        Directory.CreateDirectory(dumpsFolder);
 
         var timestamp = DateTimeOffset.UtcNow.ToString("yyyy-MM-ddTHH-mm-ss.fffZ");
         var mprToken = SanitizePathToken(repositoryRelativeMprPath);
         var folderName = $"{timestamp}_{mprToken}_{Guid.NewGuid():N}";
-        var destinationFolder = Path.Combine(ExtensionDataPaths.DumpsFolder, folderName);
+        var destinationFolder = Path.Combine(dumpsFolder, folderName);
         Directory.CreateDirectory(destinationFolder);
 
         var destinationWorkingDumpPath = Path.Combine(destinationFolder, "working-dump.json");

@@ -21,10 +21,46 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
     {
         var projectPath = NormalizeProjectPath(ReadQueryParameter(request.Url, ExtensionConstants.ProjectPathQueryKey));
         var action = ReadQueryParameter(request.Url, ExtensionConstants.ActionQueryKey);
+        var dataRootBasePath = ReadQueryParameter(request.Url, ExtensionConstants.DataRootBasePathQueryKey);
+        var commitMessagesBasePath = ReadQueryParameter(request.Url, ExtensionConstants.CommitMessagesBasePathQueryKey);
+        var persistDumps = ReadBooleanQueryParameter(request.Url, ExtensionConstants.PersistDumpsQueryKey, defaultValue: true);
+        var persistRawChanges = ReadBooleanQueryParameter(
+            request.Url,
+            ExtensionConstants.PersistRawChangesQueryKey,
+            defaultValue: true);
+        var persistOverviewStructured = ReadBooleanQueryParameter(
+            request.Url,
+            ExtensionConstants.PersistOverviewStructuredQueryKey,
+            defaultValue: true);
+        var persistOverviewPseudocode = ReadBooleanQueryParameter(
+            request.Url,
+            ExtensionConstants.PersistOverviewPseudocodeQueryKey,
+            defaultValue: true);
+        var selectedModule = ReadQueryParameter(request.Url, ExtensionConstants.ModuleQueryKey);
+        var selectedModules = ParseModuleList(ReadQueryParameter(request.Url, ExtensionConstants.ModulesQueryKey));
 
         if (string.Equals(action, ExtensionConstants.ExportActionValue, StringComparison.OrdinalIgnoreCase))
         {
-            await HandleExportRequestAsync(projectPath, response, cancellationToken);
+            await HandleExportRequestAsync(
+                projectPath,
+                dataRootBasePath,
+                persistDumps,
+                persistRawChanges,
+                persistOverviewStructured,
+                persistOverviewPseudocode,
+                response,
+                cancellationToken);
+            return;
+        }
+
+        if (string.Equals(action, ExtensionConstants.StoreCommitMessageActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleStoreCommitMessageRequestAsync(
+                request,
+                projectPath,
+                commitMessagesBasePath,
+                response,
+                cancellationToken);
             return;
         }
 
@@ -34,13 +70,80 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
             return;
         }
 
-        if (string.Equals(action, ExtensionConstants.GenerateOverviewActionValue, StringComparison.OrdinalIgnoreCase))
+        if (string.Equals(action, ExtensionConstants.GenerateOverviewAppActionValue, StringComparison.OrdinalIgnoreCase))
         {
-            await HandleGenerateOverviewRequestAsync(projectPath, response, cancellationToken);
+            await HandleGenerateOverviewRequestAsync(
+                projectPath,
+                ModelOverviewGenerationMode.App,
+                response,
+                cancellationToken,
+                null,
+                null,
+                persistOverviewStructured,
+                persistOverviewPseudocode,
+                dataRootBasePath);
             return;
         }
 
-        var payload = await Task.Run(() => AutoCommitMessageChangeService.ReadChanges(projectPath), cancellationToken);
+        if (string.Equals(action, ExtensionConstants.GenerateOverviewModulesActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleGenerateOverviewRequestAsync(
+                projectPath,
+                ModelOverviewGenerationMode.Modules,
+                response,
+                cancellationToken,
+                null,
+                selectedModules,
+                persistOverviewStructured,
+                persistOverviewPseudocode,
+                dataRootBasePath);
+            return;
+        }
+
+        if (string.Equals(action, ExtensionConstants.GenerateOverviewModuleActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleGenerateOverviewRequestAsync(
+                projectPath,
+                ModelOverviewGenerationMode.Modules,
+                response,
+                cancellationToken,
+                selectedModule,
+                selectedModules,
+                persistOverviewStructured,
+                persistOverviewPseudocode,
+                dataRootBasePath);
+            return;
+        }
+
+        if (string.Equals(action, ExtensionConstants.GenerateOverviewBothActionValue, StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(action, ExtensionConstants.GenerateOverviewActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleGenerateOverviewRequestAsync(
+                projectPath,
+                ModelOverviewGenerationMode.Both,
+                response,
+                cancellationToken,
+                null,
+                null,
+                persistOverviewStructured,
+                persistOverviewPseudocode,
+                dataRootBasePath);
+            return;
+        }
+
+        if (string.Equals(action, ExtensionConstants.ListOverviewModulesActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleListOverviewModulesRequestAsync(projectPath, response, cancellationToken);
+            return;
+        }
+
+        var payload = new AutoCommitMessagePayload
+        {
+            IsGitRepo = false,
+            BranchName = string.Empty,
+            Changes = Array.Empty<AutoCommitMessageFileChange>(),
+            Error = null,
+        };
         var html = AutoCommitMessagePanelHtml.Render(payload, projectPath);
         var content = Encoding.UTF8.GetBytes(html);
 
@@ -62,10 +165,30 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
 
     private static async Task HandleExportRequestAsync(
         string projectPath,
+        string? dataRootBasePath,
+        bool persistDumps,
+        bool persistRawChanges,
+        bool persistOverviewStructured,
+        bool persistOverviewPseudocode,
         HttpListenerResponse response,
         CancellationToken cancellationToken)
     {
-        var payload = await Task.Run(() => AutoCommitMessageChangeService.ReadChanges(projectPath, persistModelDumps: true), cancellationToken);
+        if (!persistDumps && !persistRawChanges && !persistOverviewStructured && !persistOverviewPseudocode)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                400,
+                new { success = false, message = "No export outputs selected." },
+                cancellationToken);
+            return;
+        }
+
+        var payload = await Task.Run(
+            () => AutoCommitMessageChangeService.ReadChanges(
+                projectPath,
+                persistModelDumps: persistDumps,
+                dataRootBasePath),
+            cancellationToken);
         if (!payload.IsGitRepo)
         {
             await WriteJsonResponseAsync(
@@ -86,7 +209,7 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
             return;
         }
 
-        if (payload.Changes.Count == 0)
+        if ((persistRawChanges || persistDumps) && payload.Changes.Count == 0)
         {
             await WriteJsonResponseAsync(
                 response,
@@ -98,9 +221,54 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
 
         try
         {
-            var outputPath = await Task.Run(
-                () => AutoCommitMessageExportService.ExportChanges(payload, projectPath),
-                cancellationToken);
+            string? rawChangesOutputPath = null;
+            ModelOverviewGenerationResult? overviewResult = null;
+            if (persistRawChanges)
+            {
+                rawChangesOutputPath = await Task.Run(
+                    () => AutoCommitMessageExportService.ExportChanges(payload, projectPath, dataRootBasePath),
+                    cancellationToken);
+            }
+
+            if (persistOverviewStructured || persistOverviewPseudocode)
+            {
+                overviewResult = await Task.Run(
+                    () => AutoCommitMessageModelOverviewService.GenerateOverview(
+                        projectPath,
+                        ModelOverviewGenerationMode.App,
+                        selectedModule: null,
+                        selectedModules: null,
+                        includeStructuredOutput: persistOverviewStructured,
+                        includePseudocodeOutput: persistOverviewPseudocode,
+                        dataRootBasePath),
+                    cancellationToken);
+
+                if (!overviewResult.Success)
+                {
+                    await WriteJsonResponseAsync(
+                        response,
+                        500,
+                        new { success = false, message = overviewResult.Message },
+                        cancellationToken);
+                    return;
+                }
+            }
+
+            var outputLabels = new List<string>();
+            if (persistRawChanges)
+            {
+                outputLabels.Add("Raw changes");
+            }
+
+            if (persistDumps)
+            {
+                outputLabels.Add("Dumps");
+            }
+
+            if (persistOverviewStructured || persistOverviewPseudocode)
+            {
+                outputLabels.Add("App overview");
+            }
 
             await WriteJsonResponseAsync(
                 response,
@@ -108,10 +276,13 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                 new
                 {
                     success = true,
-                    message = $"Exported {payload.Changes.Count} file(s).",
-                    outputPath,
+                    message = $"Stored {string.Join(", ", outputLabels)}.",
+                    outputPath = rawChangesOutputPath,
                     changeCount = payload.Changes.Count,
-                    exportFolder = ExtensionDataPaths.ExportFolder,
+                    exportFolder = ExtensionDataPaths.GetExportFolder(projectPath, dataRootBasePath),
+                    dumpsFolder = ExtensionDataPaths.GetDumpsFolder(projectPath, dataRootBasePath),
+                    overviewOutputFolder = overviewResult?.OutputFolderPath ?? string.Empty,
+                    overviewOutputPaths = overviewResult?.OutputPaths ?? Array.Empty<string>(),
                 },
                 cancellationToken);
         }
@@ -127,14 +298,26 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
 
     private static async Task HandleGenerateOverviewRequestAsync(
         string projectPath,
+        ModelOverviewGenerationMode mode,
         HttpListenerResponse response,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        string? selectedModule = null,
+        IReadOnlyList<string>? selectedModules = null,
+        bool includeStructuredOutput = true,
+        bool includePseudocodeOutput = true,
+        string? dataRootBasePath = null)
     {
         try
         {
-            // TODO: Replace this call with a dedicated full-model inventory pipeline once available.
             var result = await Task.Run(
-                () => AutoCommitMessageModelOverviewService.GenerateOverview(projectPath),
+                () => AutoCommitMessageModelOverviewService.GenerateOverview(
+                    projectPath,
+                    mode,
+                    selectedModule,
+                    selectedModules,
+                    includeStructuredOutput,
+                    includePseudocodeOutput,
+                    dataRootBasePath),
                 cancellationToken);
 
             var statusCode = result.Success ? 200 : 400;
@@ -148,6 +331,124 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                     overviewText = result.OverviewText,
                     changedFileCount = result.ChangedFileCount,
                     changedModelFileCount = result.ChangedModelFileCount,
+                    mprFileCount = result.MprFileCount,
+                    outputFolderPath = result.OutputFolderPath,
+                    outputPaths = result.OutputPaths,
+                    mode = result.Mode,
+                    generatedAtUtc = result.GeneratedAtUtc,
+                    selectedModule = result.SelectedModule,
+                    selectedModules = result.SelectedModules,
+                },
+                cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                500,
+                new
+                {
+                    success = false,
+                    message = exception.Message,
+                },
+                cancellationToken);
+        }
+    }
+
+    private static async Task HandleStoreCommitMessageRequestAsync(
+        HttpListenerRequest request,
+        string projectPath,
+        string? commitMessagesBasePath,
+        HttpListenerResponse response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var requestBody = await ReadRequestBodyAsStringAsync(request, cancellationToken);
+            if (string.IsNullOrWhiteSpace(requestBody))
+            {
+                await WriteJsonResponseAsync(
+                    response,
+                    400,
+                    new { success = false, message = "Request body is empty." },
+                    cancellationToken);
+                return;
+            }
+
+            using var requestJson = JsonDocument.Parse(requestBody);
+            var root = requestJson.RootElement;
+            var commitMessage = root.TryGetProperty("message", out var messageProperty) &&
+                                messageProperty.ValueKind == JsonValueKind.String
+                ? messageProperty.GetString()
+                : null;
+            if (string.IsNullOrWhiteSpace(commitMessage))
+            {
+                await WriteJsonResponseAsync(
+                    response,
+                    400,
+                    new { success = false, message = "Commit message is empty." },
+                    cancellationToken);
+                return;
+            }
+
+            var outputPath = await Task.Run(
+                () => AutoCommitMessageCommitMessageStoreService.StoreCommitMessage(
+                    commitMessage,
+                    projectPath,
+                    commitMessagesBasePath),
+                cancellationToken);
+
+            await WriteJsonResponseAsync(
+                response,
+                200,
+                new
+                {
+                    success = true,
+                    message = "Commit message stored.",
+                    outputPath,
+                    outputFolder = ExtensionDataPaths.GetCommitMessagesFolder(commitMessagesBasePath, projectPath),
+                },
+                cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                500,
+                new { success = false, message = exception.Message },
+                cancellationToken);
+        }
+    }
+
+    private static async Task HandleListOverviewModulesRequestAsync(
+        string projectPath,
+        HttpListenerResponse response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var result = await Task.Run(
+                () => AutoCommitMessageModelOverviewService.ListOverviewModules(projectPath),
+                cancellationToken);
+
+            var statusCode = result.Success ? 200 : 400;
+            await WriteJsonResponseAsync(
+                response,
+                statusCode,
+                new
+                {
+                    success = result.Success,
+                    message = result.Message,
+                    mprFileCount = result.MprFileCount,
+                    appName = result.AppName,
+                    moduleCount = result.Modules.Count,
+                    modules = result.Modules.Select(module => new
+                    {
+                        name = module.Name,
+                        sourceMprPath = module.SourceMprPath,
+                        category = module.Category,
+                        appName = module.AppName,
+                    }),
                     generatedAtUtc = result.GeneratedAtUtc,
                 },
                 cancellationToken);
@@ -168,6 +469,20 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
 
     private static string NormalizeProjectPath(string? projectPath) =>
         string.IsNullOrWhiteSpace(projectPath) ? Environment.CurrentDirectory : projectPath;
+
+    private static IReadOnlyList<string> ParseModuleList(string? rawValue)
+    {
+        if (string.IsNullOrWhiteSpace(rawValue))
+        {
+            return Array.Empty<string>();
+        }
+
+        return rawValue
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Where(value => !string.IsNullOrWhiteSpace(value))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
 
     private static string? ReadQueryParameter(Uri? requestUrl, string key)
     {
@@ -198,6 +513,40 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
         }
 
         return null;
+    }
+
+    private static bool ReadBooleanQueryParameter(Uri? requestUrl, string key, bool defaultValue)
+    {
+        var rawValue = ReadQueryParameter(requestUrl, key);
+        if (string.IsNullOrWhiteSpace(rawValue))
+        {
+            return defaultValue;
+        }
+
+        if (bool.TryParse(rawValue, out var parsedValue))
+        {
+            return parsedValue;
+        }
+
+        return rawValue.Trim() switch
+        {
+            "1" => true,
+            "0" => false,
+            "yes" => true,
+            "no" => false,
+            "on" => true,
+            "off" => false,
+            _ => defaultValue,
+        };
+    }
+
+    private static async Task<string> ReadRequestBodyAsStringAsync(
+        HttpListenerRequest request,
+        CancellationToken cancellationToken)
+    {
+        var encoding = request.ContentEncoding ?? Encoding.UTF8;
+        using var reader = new StreamReader(request.InputStream, encoding, detectEncodingFromByteOrderMarks: true);
+        return await reader.ReadToEndAsync(cancellationToken);
     }
 
     private static async Task WriteJsonResponseAsync(

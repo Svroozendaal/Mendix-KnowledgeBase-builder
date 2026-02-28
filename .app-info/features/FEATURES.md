@@ -8,6 +8,7 @@ This file is the index of all implemented features in this application.
 | Git changes pane and in-IDE review | DONE | `git-changes-panel.md` | 3 |
 | Model dump diff analysis (`.mpr`) | DONE | `model-diff-analysis.md` | 5.5 |
 | Structured export pipeline (`schemaVersion: 1.0`) | DONE | `data-export-pipeline.md` | 6 |
+| Full model overview export (app + modules) | DONE | `model-overview-export-pipeline.md` | 8 |
 | Commit parser handoff contract | DONE | `commit-parser-agent.md` | 7 |
 | `.env`-based developer workflow | DONE | `developer-workflow-env.md` | 3 |
 
@@ -25,4 +26,5 @@ For implementation details, use:
 - `studio-pro-extension-csharp/Docs/ARCHITECTURE.md`
 - `studio-pro-extension-csharp/Docs/PROCESSING_PIPELINE.md`
 - `studio-pro-extension-csharp/Docs/EXPORT_CONTRACT.md`
+- `studio-pro-extension-csharp/Docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md`
 - `studio-pro-extension-csharp/Docs/REPOSITORY_WORKFLOWS.md`
