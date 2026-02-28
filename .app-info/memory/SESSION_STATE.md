@@ -94,3 +94,21 @@ STATUS: COMPLETE
 NEXT_AGENT: Tester
 SUMMARY: Implemented phase 8 semantic model diff improvements in `MendixModelDiffService` to suppress layout-only microflow noise, emit microflow action delta details, and emit page allowed-role kept/removed details with role names.
 BLOCKERS: Verification currently executed through a temporary harness and dump artifacts; end-to-end parser output for old exports still depends on new exports generated with updated extension.
+
+## HANDOFF - Prompt Refiner - 2026-02-28T14:52:49+01:00
+STATUS: COMPLETE
+NEXT_AGENT: none
+SUMMARY: Refined Phase A V2 prompts (A0, A1, A2) to align with the new Prompt Refiner contract by adding Entry/Exit criteria, AGENTS-first startup steps, explicit skill suggestion steps, and hard pointers verified against current repository files.
+BLOCKERS: none
+
+## HANDOFF - Prompt Refiner - 2026-02-28T14:59:17+01:00
+STATUS: COMPLETE
+NEXT_AGENT: none
+SUMMARY: Refined Phase B V2 prompts (B1, B2, B3) to align with the Prompt Refiner contract by adding required prompt structure, deterministic skill suggestion steps, repo-verified file pointers, and explicit versioning/design guardrails.
+BLOCKERS: none
+
+## HANDOFF - Prompt Refiner - 2026-02-28T15:01:40+01:00
+STATUS: COMPLETE
+NEXT_AGENT: none
+SUMMARY: Refined Phase C V2 prompts (C1, C2) to align with the Prompt Refiner contract by adding Entry/Exit criteria, AGENTS-first startup steps, deterministic skill suggestions, and hard pointers for refresh route, query constants, and processing integration points.
+BLOCKERS: none
