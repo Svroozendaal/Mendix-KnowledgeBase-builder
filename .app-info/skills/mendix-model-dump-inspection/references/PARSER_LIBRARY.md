@@ -180,6 +180,62 @@ Observed dump evidence:
     - `widgets removed (<n>): <WidgetType x#>`
     - `widgets used (<n>): <WidgetType x#>`
 
+## System configuration parsers
+
+- `BuildConstantDetails(string changeType, JsonElement? working, JsonElement? head) -> string?`
+  - Status: implemented.
+  - Parse fields:
+    - `value` (scalar constant value)
+    - `type` (value type string)
+  - Contract candidates:
+    - Added: `value=<value>; type=<type>`
+    - Deleted: `value=<value>; type=<type>`
+    - Modified: `value <old>-><new>` and/or `type <oldType>-><newType>`
+
+- `BuildScheduledEventDetails(string changeType, JsonElement? working, JsonElement? head) -> string?`
+  - Status: implemented.
+  - Parse fields:
+    - `enabled` (boolean as string "true"/"false")
+    - `interval` (cron expression or duration string)
+    - `microflowName` (target microflow identifier)
+    - `startTime` (start datetime string)
+  - Contract candidates:
+    - Added: `enabled=<value>; interval=<value>; microflow=<value>; startTime=<value>`
+    - Deleted: same as Added
+    - Modified: `enabled <old>-><new>`, `interval <old>-><new>`, `microflow <old>-><new>`, `startTime <old>-><new>`
+
+- `BuildConsumedRestServiceDetails(string changeType, JsonElement? working, JsonElement? head) -> string?`
+  - Status: implemented.
+  - Parse fields:
+    - `baseURL` (endpoint URL string)
+    - `authenticationType` (auth method: None, Basic, OAuth, etc.)
+    - `operations` (operation array count)
+  - Contract candidates:
+    - Added: `baseURL=<url>; auth=<type>; operations=<count>`
+    - Deleted: same as Added
+    - Modified: `baseURL <old>-><new>`, `auth <old>-><new>`, `operations <oldCount>-><newCount>`
+
+- `BuildPublishedRestServiceDetails(string changeType, JsonElement? working, JsonElement? head) -> string?`
+  - Status: implemented.
+  - Parse fields:
+    - `operations` (operation array count)
+    - `publicAccessLevel` (API access level)
+  - Contract candidates:
+    - Added: `operations=<count>; accessLevel=<level>`
+    - Deleted: same as Added
+    - Modified: `operations <oldCount>-><newCount>`, `accessLevel <old>-><new>`
+
+- `BuildJavaActionDetails(string changeType, JsonElement? working, JsonElement? head) -> string?`
+  - Status: implemented.
+  - Parse fields:
+    - `parameters` (parameter array count)
+    - `returnType` (action return type)
+    - `publicAccessLevel` (access level)
+  - Contract candidates:
+    - Added: `parameters=<count>; returnType=<type>; accessLevel=<level>`
+    - Deleted: same as Added
+    - Modified: `parameters <oldCount>-><newCount>`, `returnType <old>-><new>`, `accessLevel <old>-><new>`
+
 ## Generic resource parsers
 
 - `BuildGenericResourceDetails(string changeType, string modelType, JsonElement? working, JsonElement? head) -> string?`
@@ -207,6 +263,11 @@ Observed dump evidence:
   - `DomainModels$Enumeration|Enumerations$Enumeration -> BuildEnumerationValueDetails`
   - `Pages$Page -> Merge(BuildPageAllowedRolesDetails, BuildPageLayoutMetadataDetails, BuildPageActionBindingsDetails, BuildPageWidgetSummaryDetails)`
   - `Pages$Snippet|Pages$PageTemplate|Pages$BuildingBlock|Pages$Layout -> Merge(BuildPageLayoutMetadataDetails, BuildPageActionBindingsDetails, BuildPageWidgetSummaryDetails)`
+  - `System$Constant -> BuildConstantDetails`
+  - `System$ScheduledEvent -> BuildScheduledEventDetails`
+  - `System$ConsumedRestService -> BuildConsumedRestServiceDetails`
+  - `System$PublishedRestService -> BuildPublishedRestServiceDetails`
+  - `System$JavaAction -> BuildJavaActionDetails`
   - all remaining tracked resources -> `BuildGenericResourceDetails`
 
 ## Rule linkage

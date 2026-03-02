@@ -1062,6 +1062,7 @@ internal static class AutoCommitMessagePanelHtml
     const listOverviewModulesActionValue = "{{ExtensionConstants.ListOverviewModulesActionValue}}";
     const listCommitMessagesActionValue = "{{ExtensionConstants.ListCommitMessagesActionValue}}";
     const readCommitMessageActionValue = "{{ExtensionConstants.ReadCommitMessageActionValue}}";
+    const listChangeModulesActionValue = "{{ExtensionConstants.ListChangeModulesActionValue}}";
     const projectPathQueryKey = "{{ExtensionConstants.ProjectPathQueryKey}}";
     const dataRootBasePathQueryKey = "{{ExtensionConstants.DataRootBasePathQueryKey}}";
     const commitMessagesBasePathQueryKey = "{{ExtensionConstants.CommitMessagesBasePathQueryKey}}";
@@ -1071,6 +1072,8 @@ internal static class AutoCommitMessagePanelHtml
     const persistOverviewPseudocodeQueryKey = "{{ExtensionConstants.PersistOverviewPseudocodeQueryKey}}";
     const modulesQueryKey = "{{ExtensionConstants.ModulesQueryKey}}";
     const filePathQueryKey = "{{ExtensionConstants.FilePathQueryKey}}";
+    const headDumpCacheEnabledQueryKey = "{{ExtensionConstants.HeadDumpCacheEnabledQueryKey}}";
+    const moduleFilterQueryKey = "{{ExtensionConstants.ModuleFilterQueryKey}}";
     const storyIdQueryKey = "{{ExtensionConstants.StoryIdQueryKey}}";
     const signatureQueryKey = "{{ExtensionConstants.SignatureQueryKey}}";
     const defaultDataRootBasePath = {{defaultDataRootBasePathJson}};
@@ -1085,6 +1088,8 @@ internal static class AutoCommitMessagePanelHtml
     const persistOverviewPseudocodeStorageKey = "autocommitmessage.persistOverviewPseudocode";
     const storeCommitMessagesStorageKey = "autocommitmessage.storeCommitMessages";
     const commitMessagesBasePathStorageKey = "autocommitmessage.commitMessagesBasePath";
+    const headDumpCacheEnabledStorageKey = "autocommitmessage.headDumpCacheEnabled";
+    const changeModuleFilterStorageKey = "changeModuleFilter";
     let currentPayload = initialPayload;
     let hasLoadedChanges = false;
     let refreshInProgress = false;
@@ -1103,6 +1108,7 @@ internal static class AutoCommitMessagePanelHtml
       persistOverviewPseudocode: true,
       storeCommitMessages: false,
       commitMessagesBasePath: defaultDataRootBasePath,
+      headDumpCacheEnabled: true,
     };
     let modelOverviewState = {
       hasGenerated: false,
@@ -1127,6 +1133,14 @@ internal static class AutoCommitMessagePanelHtml
         app: false,
         custom: false,
       },
+    };
+
+    let changeModulesState = {
+      mprVersion: "v1",
+      modules: [],
+      supportsPreFilter: false,
+      selectedModules: [],
+      loaded: false,
     };
 
     function normalizeTheme(value) {
@@ -1246,6 +1260,13 @@ internal static class AutoCommitMessagePanelHtml
         storedCommitMessagesBasePath = defaultDataRootBasePath;
       }
 
+      let storedHeadDumpCacheEnabled = "true";
+      try {
+        storedHeadDumpCacheEnabled = localStorage.getItem(headDumpCacheEnabledStorageKey) || "true";
+      } catch {
+        storedHeadDumpCacheEnabled = "true";
+      }
+
       const resolvedDataRootBasePath = resolveStoredDataRootBasePath(storedDataRootBasePath);
 
       settingsState = {
@@ -1260,6 +1281,7 @@ internal static class AutoCommitMessagePanelHtml
         persistOverviewPseudocode: normalizeStoredBoolean(storedPersistOverviewPseudocode, true),
         storeCommitMessages: normalizeStoredBoolean(storedStoreCommitMessages, false),
         commitMessagesBasePath: resolveStoredBasePath(storedCommitMessagesBasePath, resolvedDataRootBasePath),
+        headDumpCacheEnabled: normalizeStoredBoolean(storedHeadDumpCacheEnabled, true),
       };
     }
 
@@ -1289,6 +1311,7 @@ internal static class AutoCommitMessagePanelHtml
           String(Boolean(settingsState.persistOverviewPseudocode)));
         localStorage.setItem(storeCommitMessagesStorageKey, String(Boolean(settingsState.storeCommitMessages)));
         localStorage.setItem(commitMessagesBasePathStorageKey, settingsState.commitMessagesBasePath || "");
+        localStorage.setItem(headDumpCacheEnabledStorageKey, String(Boolean(settingsState.headDumpCacheEnabled)));
       } catch {
         // Ignore storage errors and continue in-memory.
       }
@@ -1314,8 +1337,24 @@ internal static class AutoCommitMessagePanelHtml
       queryParams[persistRawChangesQueryKey] = settingsState.persistRawChanges ? "true" : "false";
       queryParams[persistOverviewStructuredQueryKey] = settingsState.persistOverviewStructured ? "true" : "false";
       queryParams[persistOverviewPseudocodeQueryKey] = settingsState.persistOverviewPseudocode ? "true" : "false";
+      queryParams[headDumpCacheEnabledQueryKey] = settingsState.headDumpCacheEnabled ? "true" : "false";
+
+      // C2: Add module filter if applicable
+      const selectedModules = getSelectedModulesForRefresh && typeof getSelectedModulesForRefresh === "function"
+        ? getSelectedModulesForRefresh()
+        : [];
+      if (Array.isArray(selectedModules) && selectedModules.length > 0) {
+        queryParams[moduleFilterQueryKey] = selectedModules.join(",");
+      }
 
       return queryParams;
+    }
+
+    function getSelectedModulesForRefresh() {
+      if (!changeModulesState.supportsPreFilter || changeModulesState.selectedModules.length === 0) {
+        return [];
+      }
+      return changeModulesState.selectedModules;
     }
 
     function getConfiguredDataRootPath() {
@@ -2421,6 +2460,34 @@ internal static class AutoCommitMessagePanelHtml
       exportToggleInline.appendChild(element("span", null, "Export additional data"));
       exportGroup.appendChild(exportToggleInline);
 
+      // C1: Cache toggle (only in extended mode)
+      if (settingsState.extendedMode) {
+        const cacheGroup = element("section", "settings-group");
+        cacheGroup.appendChild(element("div", "settings-label", "Refresh performance"));
+        cacheGroup.appendChild(element(
+          "div",
+          "settings-help",
+          "Cache HEAD model dumps to reduce mx.exe invocations on repeated refreshes."));
+        const cacheToggleInline = element("label", "settings-switch");
+        const headDumpCacheEnabledInput = document.createElement("input");
+        headDumpCacheEnabledInput.type = "checkbox";
+        headDumpCacheEnabledInput.className = "settings-switch-input";
+        headDumpCacheEnabledInput.checked = Boolean(settingsState.headDumpCacheEnabled);
+        cacheToggleInline.appendChild(headDumpCacheEnabledInput);
+        cacheToggleInline.appendChild(element("span", null, "Cache HEAD dumps"));
+        cacheGroup.appendChild(cacheToggleInline);
+        content.appendChild(cacheGroup);
+
+        headDumpCacheEnabledInput.addEventListener("change", () => {
+          settingsState = {
+            ...settingsState,
+            headDumpCacheEnabled: headDumpCacheEnabledInput.checked,
+          };
+          saveSettingsToStorage();
+          render(settingsState.headDumpCacheEnabled ? "HEAD dump caching enabled." : "HEAD dump caching disabled.");
+        });
+      }
+
       const exportDetails = element("div");
       exportDetails.style.display = "flex";
       exportDetails.style.flexDirection = "column";
@@ -2751,6 +2818,115 @@ internal static class AutoCommitMessagePanelHtml
       modelPanel.appendChild(modelToolbar);
       const modelChangesContainer = element("div", "model-changes");
       modelPanel.appendChild(modelChangesContainer);
+
+      // C2: Module filter panel (only in extended mode)
+      const moduleFilterPanel = element("details", "panel collapsible-panel");
+      moduleFilterPanel.style.display = "none"; // Hidden until extended mode detects v2
+      moduleFilterPanel.appendChild(element("summary", "panel-title collapsible-summary", "Module filter"));
+      const moduleFilterContent = element("div");
+      moduleFilterPanel.appendChild(moduleFilterContent);
+      modelPanel.insertBefore(moduleFilterPanel, modelPanel.lastChild);
+
+      async function loadChangeModules() {
+        if (!settingsState.extendedMode) {
+          return;
+        }
+        try {
+          const listUrl = `${buildActionUrl(listChangeModulesActionValue, {})}&_t=${Date.now()}`;
+          const response = await fetch(listUrl, { cache: "no-store" });
+          const result = await response.json();
+
+          if (result.success && result.mprVersion) {
+            changeModulesState = {
+              mprVersion: result.mprVersion,
+              modules: Array.isArray(result.modules) ? result.modules : [],
+              supportsPreFilter: Boolean(result.supportsPreFilter),
+              selectedModules: Array.isArray(result.modules) ? result.modules.slice() : [],
+              loaded: true,
+            };
+            renderModuleFilter();
+          }
+        } catch {
+          // Silently ignore errors loading modules
+        }
+      }
+
+      function renderModuleFilter() {
+        moduleFilterContent.innerHTML = "";
+
+        if (!changeModulesState.loaded) {
+          moduleFilterContent.appendChild(element("div", "settings-help", "Loading modules..."));
+          return;
+        }
+
+        if (changeModulesState.mprVersion === "v2" && changeModulesState.supportsPreFilter) {
+          moduleFilterPanel.style.display = "block";
+          moduleFilterContent.appendChild(element("div", "settings-note", "Pre-analysis filtering (MPR v2 project)"));
+
+          const moduleList = element("div");
+          moduleList.style.display = "flex";
+          moduleList.style.flexDirection = "column";
+          moduleList.style.gap = "8px";
+          moduleList.style.marginTop = "8px";
+
+          const selectAllLabel = element("label", "settings-inline");
+          const selectAllCheckbox = document.createElement("input");
+          selectAllCheckbox.type = "checkbox";
+          selectAllCheckbox.checked = changeModulesState.selectedModules.length === changeModulesState.modules.length &&
+                                       changeModulesState.modules.length > 0;
+          selectAllLabel.appendChild(selectAllCheckbox);
+          selectAllLabel.appendChild(element("span", null, `Select all (${changeModulesState.modules.length})`));
+
+          selectAllCheckbox.addEventListener("change", () => {
+            if (selectAllCheckbox.checked) {
+              changeModulesState.selectedModules = changeModulesState.modules.slice();
+            } else {
+              changeModulesState.selectedModules = [];
+            }
+            renderModuleFilter();
+            saveModuleFilterToStorage();
+          });
+
+          moduleList.appendChild(selectAllLabel);
+
+          changeModulesState.modules.forEach((module) => {
+            const label = element("label", "settings-inline");
+            label.style.marginLeft = "16px";
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = changeModulesState.selectedModules.includes(module);
+            checkbox.addEventListener("change", () => {
+              if (checkbox.checked) {
+                if (!changeModulesState.selectedModules.includes(module)) {
+                  changeModulesState.selectedModules.push(module);
+                }
+              } else {
+                changeModulesState.selectedModules = changeModulesState.selectedModules.filter(m => m !== module);
+              }
+              renderModuleFilter();
+              saveModuleFilterToStorage();
+            });
+            label.appendChild(checkbox);
+            label.appendChild(element("span", null, module));
+            moduleList.appendChild(label);
+          });
+
+          moduleFilterContent.appendChild(moduleList);
+        } else if (changeModulesState.mprVersion === "v1") {
+          moduleFilterPanel.style.display = "block";
+          moduleFilterContent.appendChild(element("div", "settings-note", "Post-analysis filtering (MPR v1 project)"));
+          moduleFilterContent.appendChild(element("div", "settings-help",
+            "Module filtering is applied after analysis. Upgrade to MPR v2 for faster pre-analysis filtering."));
+        }
+      }
+
+      function saveModuleFilterToStorage() {
+        try {
+          localStorage.setItem(changeModuleFilterStorageKey, JSON.stringify(changeModulesState.selectedModules));
+        } catch {
+          // Ignore storage errors
+        }
+      }
 
       const detailsPanel = element("details", "panel collapsible-panel details-drawer");
       detailsPanel.open = false;
@@ -3601,6 +3777,7 @@ internal static class AutoCommitMessagePanelHtml
           let moduleListResult = { success: false, message: "Extended mode is disabled." };
           if (settingsState.extendedMode) {
             moduleListResult = await loadOverviewModulesIntoState();
+            await loadChangeModules();
           }
           refreshInProgress = false;
           const refreshedAt = new Date().toLocaleTimeString();

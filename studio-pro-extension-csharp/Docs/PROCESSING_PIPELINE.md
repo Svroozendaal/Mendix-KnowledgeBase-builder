@@ -13,24 +13,48 @@ The processing layer converts local repository state into deterministic, machine
 
 ## 1) Change analysis pipeline (`ReadChanges`)
 
-Entry point: `AutoCommitMessageChangeService.ReadChanges(projectPath, persistModelDumps, dataRootBasePath)`
+Entry point: `AutoCommitMessageChangeService.ReadChanges(projectPath, persistModelDumps, dataRootBasePath, headDumpCacheEnabled, selectedModules)`
 
 1. Discover Git repository from `projectPath`.
 2. Retrieve filtered status for `*.mpr` and `*.mprops`.
 3. Retrieve filtered patch data.
 4. Build file-change records (`filePath`, `status`, `isStaged`, `diffText`).
 5. For each changed `.mpr`:
+   - (v2 only) Check if module is in `selectedModules` filter; skip analysis if not
    - dump working model (`mx dump-mpr`)
    - reconstruct and dump committed (`HEAD`) snapshot
+   - (if `headDumpCacheEnabled=true`) attempt cached HEAD dump lookup; skip mx.exe if cache hit
+   - (on cache miss) execute dump and cache result for future use
    - diff dumps semantically via `MendixModelDiffService`
    - group by module/category via `MendixModelChangeStructurer`
    - optionally persist dump artefacts (`persistModelDumps=true`)
-6. Return `AutoCommitMessagePayload`.
+6. (if `headDumpCacheEnabled=true`) prune stale cache entries
+7. Return `AutoCommitMessagePayload`.
 
 Fallback behaviour:
 
 - Per-file model-analysis failures become synthetic `Model Analysis` changes.
 - Known dump environment mismatches return empty model changes for affected file rather than failing full payload.
+- Cache read failures fall back to live dump execution.
+- Cache write failures are non-critical and do not block refresh.
+
+### HEAD Dump Caching Details
+
+When enabled, `AutoCommitMessageHeadDumpCacheService`:
+- Stores dumps at: `<DataRoot>/dumps/head-cache/<commit-hash>/<mpr-filename>.json`
+- Cache key: `<mpr-path> + <HEAD-commit-SHA>`
+- Prunes entries older than 30 days (configurable)
+- Prune failures are non-critical and logged but not thrown
+- Setting: Query parameter `headDumpCacheEnabled` (default: true), localStorage key: `autocommitmessage.headDumpCacheEnabled`
+
+### Module Filtering Details
+
+For **MPR v2** projects (detected via `mprcontents/` directory):
+- If `selectedModules` provided and non-empty, skip analysis for modules not in list
+- Optimization: unselected modules avoid dump/diff work entirely
+- For **MPR v1** projects, filter is ignored; full analysis always performed (client-side filtering in UI)
+
+Format detection via `MendixMprFormatDetector.IsMprV2(mprPath)`. See `Docs/MPR_FORMAT_SUPPORT.md` for full details.
 
 ## 2) Raw-change export pipeline
 
@@ -70,7 +94,31 @@ Output path pattern:
 
 - `<DataRoot>/app-overview/overviews/<timestamp>_<repo>_<guid>/...`
 
-## 4) Commit-message storage pipeline
+## 4) Changed module detection pipeline (`ListChangeModules`)
+
+Entry point: HTTP GET `/list-change-modules` (routed via `AutoCommitMessageWebServerExtension.HandleListChangeModulesRequestAsync`)
+
+1. Validate Git repository at `projectPath`.
+2. Find first `.mpr` file in project.
+3. Detect MPR format via `MendixMprFormatDetector.IsMprV2(mprPath)`.
+4. For **v2 projects**: extract changed modules via `MendixV2ChangedModuleDetector.DetectChangedModules(repository, mprContentsPath)`.
+5. For **v1 projects**: return empty module list.
+6. Return JSON response with format version, module list, and `supportsPreFilter` flag.
+
+Response shape:
+
+```json
+{
+  "success": true,
+  "mprVersion": "v2",
+  "modules": ["ModuleA", "ModuleB"],
+  "supportsPreFilter": true
+}
+```
+
+Used by UI to populate module selection before Refresh action.
+
+## 5) Commit-message storage pipeline
 
 Entry point: `AutoCommitMessageCommitMessageStoreService.StoreCommitMessage(...)`
 
@@ -84,6 +132,9 @@ Entry point: `AutoCommitMessageCommitMessageStoreService.StoreCommitMessage(...)
 | Service | Responsibility |
 |---|---|
 | `AutoCommitMessageChangeService` | Git status/diff collection and `.mpr` model analysis orchestration |
+| `AutoCommitMessageHeadDumpCacheService` | HEAD dump caching (lookup, storage, pruning) |
+| `MendixMprFormatDetector` | MPR v1 vs v2 format detection |
+| `MendixV2ChangedModuleDetector` | Changed module extraction from mprcontents/ structure |
 | `MxToolService` | `mx.exe` discovery, compatibility probing, and dump execution |
 | `MendixModelDiffService` | Semantic diffing and resource-specific detail enrichment |
 | `MendixModelChangeStructurer` | Module/category grouping and association-to-domain detail promotion |

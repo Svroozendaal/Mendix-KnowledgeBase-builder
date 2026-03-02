@@ -264,10 +264,88 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
   - no parser rule applies, and
   - no generic fallback (D050) yields meaningful output.
 
+## D070 - Constant value and type extraction
+
+- Applies to `System$Constant`.
+- Parse:
+  - `value` (scalar constant value)
+  - `type` (value type, e.g., "String", "Integer", "Boolean")
+- Emit:
+  - Added: `value=<value>; type=<type>` (when present)
+  - Deleted: `value=<value>; type=<type>` (when present)
+  - Modified:
+    - `value <oldValue>-><newValue>` (when value differs)
+    - `type <oldType>-><newType>` (when type differs)
+  - Fallback to generic parser if no meaningful value/type fields found
+
+## D071 - Scheduled event configuration extraction
+
+- Applies to `System$ScheduledEvent`.
+- Parse:
+  - `enabled` (boolean, as string: "true" or "false")
+  - `interval` (cron expression or duration string)
+  - `microflowName` (target microflow identifier)
+  - `startTime` (start time/date if applicable)
+- Emit:
+  - Added: `enabled=<value>; interval=<value>; microflow=<value>; startTime=<value>`
+  - Deleted: same as Added (shows previous state)
+  - Modified:
+    - `enabled <oldValue>-><newValue>` (when state toggled)
+    - `interval <oldCron>-><newCron>` (when schedule changed)
+    - `microflow <oldMF>-><newMF>` (when target changed)
+    - `startTime <oldTime>-><newTime>` (when start changed)
+  - Fallback to generic parser if no meaningful event fields found
+
+## D072 - Consumed REST Service configuration extraction
+
+- Applies to `System$ConsumedRestService`.
+- Parse:
+  - `baseURL` (endpoint URL)
+  - `authenticationType` (auth method: None, Basic, OAuth, etc.)
+  - `operations` (operation count)
+- Emit:
+  - Added: `baseURL=<url>; auth=<type>; operations=<count>`
+  - Deleted: same as Added (shows previous state)
+  - Modified:
+    - `baseURL <oldUrl>-><newUrl>` (when endpoint changed)
+    - `auth <oldType>-><newType>` (when auth method changed)
+    - `operations <oldCount>-><newCount>` (when operations count changed)
+  - Fallback to generic parser if no meaningful service fields found
+
+## D073 - Published REST Service configuration extraction
+
+- Applies to `System$PublishedRestService`.
+- Parse:
+  - `operations` (operation count)
+  - `publicAccessLevel` (access level for API)
+- Emit:
+  - Added: `operations=<count>; accessLevel=<level>`
+  - Deleted: same as Added (shows previous state)
+  - Modified:
+    - `operations <oldCount>-><newCount>` (when operations count changed)
+    - `accessLevel <oldLevel>-><newLevel>` (when access level changed)
+  - Fallback to generic parser if no meaningful service fields found
+
+## D074 - Java Action configuration extraction
+
+- Applies to `System$JavaAction`.
+- Parse:
+  - `parameters` (parameter count)
+  - `returnType` (action return type)
+  - `publicAccessLevel` (access level)
+- Emit:
+  - Added: `parameters=<count>; returnType=<type>; accessLevel=<level>`
+  - Deleted: same as Added (shows previous state)
+  - Modified:
+    - `parameters <oldCount>-><newCount>` (when parameter count changed)
+    - `returnType <oldType>-><newType>` (when return type changed)
+    - `accessLevel <oldLevel>-><newLevel>` (when access level changed)
+  - Fallback to generic parser if no meaningful action fields found
+
 ## Open Gaps
 
 - Full single-dump inventory is still out of scope for diff-only extraction.
 
 ## Next rule IDs
 
-- `D061` next available.
+- `D075` next available.

@@ -39,6 +39,11 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
             defaultValue: true);
         var selectedModule = ReadQueryParameter(request.Url, ExtensionConstants.ModuleQueryKey);
         var selectedModules = ParseModuleList(ReadQueryParameter(request.Url, ExtensionConstants.ModulesQueryKey));
+        var headDumpCacheEnabled = ReadBooleanQueryParameter(
+            request.Url,
+            ExtensionConstants.HeadDumpCacheEnabledQueryKey,
+            defaultValue: true);
+        var moduleFilter = ParseModuleList(ReadQueryParameter(request.Url, ExtensionConstants.ModuleFilterQueryKey));
 
         if (string.Equals(action, ExtensionConstants.ExportActionValue, StringComparison.OrdinalIgnoreCase))
         {
@@ -50,7 +55,9 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                 persistOverviewStructured,
                 persistOverviewPseudocode,
                 response,
-                cancellationToken);
+                cancellationToken,
+                headDumpCacheEnabled,
+                moduleFilter);
             return;
         }
 
@@ -67,7 +74,7 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
 
         if (string.Equals(action, ExtensionConstants.RefreshActionValue, StringComparison.OrdinalIgnoreCase))
         {
-            await HandleRefreshRequestAsync(projectPath, response, cancellationToken);
+            await HandleRefreshRequestAsync(projectPath, response, cancellationToken, headDumpCacheEnabled, moduleFilter);
             return;
         }
 
@@ -151,6 +158,12 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
             return;
         }
 
+        if (string.Equals(action, ExtensionConstants.ListChangeModulesActionValue, StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleListChangeModulesRequestAsync(projectPath, response, cancellationToken);
+            return;
+        }
+
         // Handle Mendix installation detection API endpoint.
         if (request.Url?.AbsolutePath.Contains("/api/detection", StringComparison.OrdinalIgnoreCase) == true)
         {
@@ -178,9 +191,11 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
     private static async Task HandleRefreshRequestAsync(
         string projectPath,
         HttpListenerResponse response,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        bool headDumpCacheEnabled = true,
+        IReadOnlyList<string>? moduleFilter = null)
     {
-        var payload = await Task.Run(() => AutoCommitMessageChangeService.ReadChanges(projectPath), cancellationToken);
+        var payload = await Task.Run(() => AutoCommitMessageChangeService.ReadChanges(projectPath, headDumpCacheEnabled: headDumpCacheEnabled, selectedModules: moduleFilter), cancellationToken);
         await WriteJsonResponseAsync(response, 200, payload, cancellationToken);
     }
 
@@ -192,7 +207,9 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
         bool persistOverviewStructured,
         bool persistOverviewPseudocode,
         HttpListenerResponse response,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        bool headDumpCacheEnabled = true,
+        IReadOnlyList<string>? moduleFilter = null)
     {
         if (!persistDumps && !persistRawChanges && !persistOverviewStructured && !persistOverviewPseudocode)
         {
@@ -208,7 +225,9 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
             () => AutoCommitMessageChangeService.ReadChanges(
                 projectPath,
                 persistModelDumps: persistDumps,
-                dataRootBasePath),
+                dataRootBasePath,
+                headDumpCacheEnabled,
+                moduleFilter),
             cancellationToken);
         if (!payload.IsGitRepo)
         {
@@ -671,6 +690,83 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                 response,
                 500,
                 new { success = false, message = exception.Message },
+                cancellationToken);
+        }
+    }
+
+    private static async Task HandleListChangeModulesRequestAsync(
+        string projectPath,
+        HttpListenerResponse response,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (!Repository.IsValid(projectPath))
+            {
+                await WriteJsonResponseAsync(
+                    response,
+                    400,
+                    new
+                    {
+                        success = false,
+                        message = "Current project is not a Git repository.",
+                        mprVersion = (string?)null,
+                        modules = Array.Empty<string>(),
+                        supportsPreFilter = false,
+                    },
+                    cancellationToken);
+                return;
+            }
+
+            using var repository = new Repository(projectPath);
+            var repositoryRoot = repository.Info.WorkingDirectory;
+
+            // Find the first .mpr file to determine format
+            var mprFile = FindMprFile(projectPath);
+            var isMprV2 = !string.IsNullOrWhiteSpace(mprFile) && MendixMprFormatDetector.IsMprV2(mprFile);
+
+            // Detect changed modules for v2 projects
+            IReadOnlyList<string> changedModules = Array.Empty<string>();
+            if (isMprV2)
+            {
+                // Extract the relative path to mprcontents from the mpr file location
+                var mprDirectory = Path.GetDirectoryName(mprFile);
+                var relativeMprDir = string.IsNullOrWhiteSpace(mprDirectory)
+                    ? string.Empty
+                    : Path.GetRelativePath(repositoryRoot, mprDirectory);
+
+                var mprContentsPath = string.IsNullOrWhiteSpace(relativeMprDir) || relativeMprDir == "."
+                    ? "mprcontents"
+                    : $"{relativeMprDir.Replace(Path.DirectorySeparatorChar, '/')}/mprcontents";
+
+                changedModules = MendixV2ChangedModuleDetector.DetectChangedModules(repository, mprContentsPath);
+            }
+
+            await WriteJsonResponseAsync(
+                response,
+                200,
+                new
+                {
+                    success = true,
+                    mprVersion = isMprV2 ? "v2" : "v1",
+                    modules = changedModules,
+                    supportsPreFilter = isMprV2,
+                },
+                cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            await WriteJsonResponseAsync(
+                response,
+                500,
+                new
+                {
+                    success = false,
+                    message = exception.Message,
+                    mprVersion = (string?)null,
+                    modules = Array.Empty<string>(),
+                    supportsPreFilter = false,
+                },
                 cancellationToken);
         }
     }

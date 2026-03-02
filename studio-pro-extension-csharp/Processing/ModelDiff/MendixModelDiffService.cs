@@ -32,6 +32,11 @@ public static class MendixModelDiffService
         ["Microflows$Microflow"] = "Microflow",
         ["Microflows$Nanoflow"] = "Nanoflow",
         ["Nanoflows$Nanoflow"] = "Nanoflow",
+        ["System$Constant"] = "Constant",
+        ["System$ScheduledEvent"] = "ScheduledEvent",
+        ["System$ConsumedRestService"] = "ConsumedRestService",
+        ["System$PublishedRestService"] = "PublishedRestService",
+        ["System$JavaAction"] = "JavaAction",
     };
 
     private static readonly HashSet<string> IgnoredDetailFields = new(StringComparer.Ordinal)
@@ -65,6 +70,11 @@ public static class MendixModelDiffService
     private const string PageLayoutModelType = "Pages$Layout";
     private const string UserRoleModelType = "Security$UserRole";
     private const string NoClientActionModelType = "Pages$NoClientAction";
+    private const string ConstantModelType = "System$Constant";
+    private const string ScheduledEventModelType = "System$ScheduledEvent";
+    private const string ConsumedRestServiceModelType = "System$ConsumedRestService";
+    private const string PublishedRestServiceModelType = "System$PublishedRestService";
+    private const string JavaActionModelType = "System$JavaAction";
 
     private static readonly HashSet<string> LayoutOnlyNestedModelTypes = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -410,6 +420,46 @@ public static class MendixModelDiffService
             details = MergeDetailTexts(details, BuildPageLayoutMetadataDetails(workingDescriptor?.Object, headDescriptor?.Object));
             details = MergeDetailTexts(details, BuildPageActionBindingsDetails(workingDescriptor?.Object, headDescriptor?.Object));
             details = MergeDetailTexts(details, BuildPageWidgetSummaryDetails(workingDescriptor?.Object, headDescriptor?.Object));
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
+        }
+
+        if (string.Equals(reference.ModelType, ConstantModelType, StringComparison.OrdinalIgnoreCase))
+        {
+            details = BuildConstantDetails(changeType, workingDescriptor?.Object, headDescriptor?.Object);
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
+        }
+
+        if (string.Equals(reference.ModelType, ScheduledEventModelType, StringComparison.OrdinalIgnoreCase))
+        {
+            details = BuildScheduledEventDetails(changeType, workingDescriptor?.Object, headDescriptor?.Object);
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
+        }
+
+        if (string.Equals(reference.ModelType, ConsumedRestServiceModelType, StringComparison.OrdinalIgnoreCase))
+        {
+            details = BuildConsumedRestServiceDetails(changeType, workingDescriptor?.Object, headDescriptor?.Object);
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
+        }
+
+        if (string.Equals(reference.ModelType, PublishedRestServiceModelType, StringComparison.OrdinalIgnoreCase))
+        {
+            details = BuildPublishedRestServiceDetails(changeType, workingDescriptor?.Object, headDescriptor?.Object);
+            return string.IsNullOrWhiteSpace(details)
+                ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
+                : details;
+        }
+
+        if (string.Equals(reference.ModelType, JavaActionModelType, StringComparison.OrdinalIgnoreCase))
+        {
+            details = BuildJavaActionDetails(changeType, workingDescriptor?.Object, headDescriptor?.Object);
             return string.IsNullOrWhiteSpace(details)
                 ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
                 : details;
@@ -2080,6 +2130,370 @@ public static class MendixModelDiffService
         return details.Count == 0
             ? null
             : string.Join("; ", details);
+    }
+
+    private static string? BuildConstantDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var details = new List<string>();
+
+        var workingValue = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "value");
+        var headValue = headResource is null ? null : TryReadStringProperty(headResource.Value, "value");
+        var workingType = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "type");
+        var headType = headResource is null ? null : TryReadStringProperty(headResource.Value, "type");
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+        {
+            if (!string.IsNullOrWhiteSpace(workingValue))
+            {
+                details.Add($"value={NormalizeInlineText(workingValue, 140)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingType))
+            {
+                details.Add($"type={workingType}");
+            }
+        }
+        else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        {
+            if (!string.IsNullOrWhiteSpace(headValue))
+            {
+                details.Add($"value={NormalizeInlineText(headValue, 140)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headType))
+            {
+                details.Add($"type={headType}");
+            }
+        }
+        else
+        {
+            // Modified: check for value change
+            if (!string.Equals(workingValue, headValue, StringComparison.Ordinal))
+            {
+                var normalizedHeadValue = string.IsNullOrWhiteSpace(headValue) ? "<empty>" : NormalizeInlineText(headValue, 70);
+                var normalizedWorkingValue = string.IsNullOrWhiteSpace(workingValue) ? "<empty>" : NormalizeInlineText(workingValue, 70);
+                details.Add($"value {normalizedHeadValue}->{normalizedWorkingValue}");
+            }
+
+            // Check for type change
+            if (!string.Equals(workingType, headType, StringComparison.OrdinalIgnoreCase))
+            {
+                var displayHeadType = string.IsNullOrWhiteSpace(headType) ? "<unknown>" : headType;
+                var displayWorkingType = string.IsNullOrWhiteSpace(workingType) ? "<unknown>" : workingType;
+                details.Add($"type {displayHeadType}->{displayWorkingType}");
+            }
+        }
+
+        return details.Count == 0 ? null : string.Join("; ", details);
+    }
+
+    private static string? BuildScheduledEventDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var details = new List<string>();
+
+        var workingEnabled = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "enabled");
+        var headEnabled = headResource is null ? null : TryReadStringProperty(headResource.Value, "enabled");
+        var workingInterval = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "interval");
+        var headInterval = headResource is null ? null : TryReadStringProperty(headResource.Value, "interval");
+        var workingMicroflow = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "microflowName");
+        var headMicroflow = headResource is null ? null : TryReadStringProperty(headResource.Value, "microflowName");
+        var workingStartTime = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "startTime");
+        var headStartTime = headResource is null ? null : TryReadStringProperty(headResource.Value, "startTime");
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+        {
+            if (!string.IsNullOrWhiteSpace(workingEnabled))
+            {
+                details.Add($"enabled={workingEnabled}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingInterval))
+            {
+                details.Add($"interval={NormalizeInlineText(workingInterval, 100)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingMicroflow))
+            {
+                details.Add($"microflow={workingMicroflow}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingStartTime))
+            {
+                details.Add($"startTime={workingStartTime}");
+            }
+        }
+        else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        {
+            if (!string.IsNullOrWhiteSpace(headEnabled))
+            {
+                details.Add($"enabled={headEnabled}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headInterval))
+            {
+                details.Add($"interval={NormalizeInlineText(headInterval, 100)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headMicroflow))
+            {
+                details.Add($"microflow={headMicroflow}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headStartTime))
+            {
+                details.Add($"startTime={headStartTime}");
+            }
+        }
+        else
+        {
+            // Modified: check for enabled change
+            if (!string.Equals(workingEnabled, headEnabled, StringComparison.OrdinalIgnoreCase))
+            {
+                var displayHeadEnabled = string.IsNullOrWhiteSpace(headEnabled) ? "<unknown>" : headEnabled;
+                var displayWorkingEnabled = string.IsNullOrWhiteSpace(workingEnabled) ? "<unknown>" : workingEnabled;
+                details.Add($"enabled {displayHeadEnabled}->{displayWorkingEnabled}");
+            }
+
+            // Check for interval change
+            if (!string.Equals(workingInterval, headInterval, StringComparison.Ordinal))
+            {
+                var normalizedHeadInterval = string.IsNullOrWhiteSpace(headInterval) ? "<unknown>" : NormalizeInlineText(headInterval, 80);
+                var normalizedWorkingInterval = string.IsNullOrWhiteSpace(workingInterval) ? "<unknown>" : NormalizeInlineText(workingInterval, 80);
+                details.Add($"interval {normalizedHeadInterval}->{normalizedWorkingInterval}");
+            }
+
+            // Check for microflow change
+            if (!string.Equals(workingMicroflow, headMicroflow, StringComparison.OrdinalIgnoreCase))
+            {
+                var displayHeadMf = string.IsNullOrWhiteSpace(headMicroflow) ? "<unknown>" : headMicroflow;
+                var displayWorkingMf = string.IsNullOrWhiteSpace(workingMicroflow) ? "<unknown>" : workingMicroflow;
+                details.Add($"microflow {displayHeadMf}->{displayWorkingMf}");
+            }
+
+            // Check for startTime change
+            if (!string.Equals(workingStartTime, headStartTime, StringComparison.Ordinal))
+            {
+                var displayHeadTime = string.IsNullOrWhiteSpace(headStartTime) ? "<empty>" : headStartTime;
+                var displayWorkingTime = string.IsNullOrWhiteSpace(workingStartTime) ? "<empty>" : workingStartTime;
+                details.Add($"startTime {displayHeadTime}->{displayWorkingTime}");
+            }
+        }
+
+        return details.Count == 0 ? null : string.Join("; ", details);
+    }
+
+    private static string? BuildConsumedRestServiceDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var details = new List<string>();
+
+        var workingBaseUrl = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "baseURL");
+        var headBaseUrl = headResource is null ? null : TryReadStringProperty(headResource.Value, "baseURL");
+        var workingAuthType = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "authenticationType");
+        var headAuthType = headResource is null ? null : TryReadStringProperty(headResource.Value, "authenticationType");
+        var workingOpCount = workingResource is null ? 0 : TryGetArrayPropertyCount(workingResource.Value, "operations") ?? 0;
+        var headOpCount = headResource is null ? 0 : TryGetArrayPropertyCount(headResource.Value, "operations") ?? 0;
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+        {
+            if (!string.IsNullOrWhiteSpace(workingBaseUrl))
+            {
+                details.Add($"baseURL={NormalizeInlineText(workingBaseUrl, 140)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingAuthType))
+            {
+                details.Add($"auth={workingAuthType}");
+            }
+
+            if (workingOpCount > 0)
+            {
+                details.Add($"operations={workingOpCount}");
+            }
+        }
+        else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        {
+            if (!string.IsNullOrWhiteSpace(headBaseUrl))
+            {
+                details.Add($"baseURL={NormalizeInlineText(headBaseUrl, 140)}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headAuthType))
+            {
+                details.Add($"auth={headAuthType}");
+            }
+
+            if (headOpCount > 0)
+            {
+                details.Add($"operations={headOpCount}");
+            }
+        }
+        else
+        {
+            // Modified: check for baseURL change
+            if (!string.Equals(workingBaseUrl, headBaseUrl, StringComparison.Ordinal))
+            {
+                var displayHeadUrl = string.IsNullOrWhiteSpace(headBaseUrl) ? "<empty>" : NormalizeInlineText(headBaseUrl, 70);
+                var displayWorkingUrl = string.IsNullOrWhiteSpace(workingBaseUrl) ? "<empty>" : NormalizeInlineText(workingBaseUrl, 70);
+                details.Add($"baseURL {displayHeadUrl}->{displayWorkingUrl}");
+            }
+
+            // Check for authentication change
+            if (!string.Equals(workingAuthType, headAuthType, StringComparison.OrdinalIgnoreCase))
+            {
+                var displayHeadAuth = string.IsNullOrWhiteSpace(headAuthType) ? "<none>" : headAuthType;
+                var displayWorkingAuth = string.IsNullOrWhiteSpace(workingAuthType) ? "<none>" : workingAuthType;
+                details.Add($"auth {displayHeadAuth}->{displayWorkingAuth}");
+            }
+
+            // Check for operations count change
+            if (workingOpCount != headOpCount)
+            {
+                details.Add($"operations {headOpCount}->{workingOpCount}");
+            }
+        }
+
+        return details.Count == 0 ? null : string.Join("; ", details);
+    }
+
+    private static string? BuildPublishedRestServiceDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var details = new List<string>();
+
+        var workingOpCount = workingResource is null ? 0 : TryGetArrayPropertyCount(workingResource.Value, "operations") ?? 0;
+        var headOpCount = headResource is null ? 0 : TryGetArrayPropertyCount(headResource.Value, "operations") ?? 0;
+        var workingPublic = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "publicAccessLevel");
+        var headPublic = headResource is null ? null : TryReadStringProperty(headResource.Value, "publicAccessLevel");
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+        {
+            if (workingOpCount > 0)
+            {
+                details.Add($"operations={workingOpCount}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingPublic))
+            {
+                details.Add($"accessLevel={workingPublic}");
+            }
+        }
+        else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        {
+            if (headOpCount > 0)
+            {
+                details.Add($"operations={headOpCount}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headPublic))
+            {
+                details.Add($"accessLevel={headPublic}");
+            }
+        }
+        else
+        {
+            // Modified: check for operations count change
+            if (workingOpCount != headOpCount)
+            {
+                details.Add($"operations {headOpCount}->{workingOpCount}");
+            }
+
+            // Check for access level change
+            if (!string.Equals(workingPublic, headPublic, StringComparison.OrdinalIgnoreCase))
+            {
+                var displayHeadLevel = string.IsNullOrWhiteSpace(headPublic) ? "<default>" : headPublic;
+                var displayWorkingLevel = string.IsNullOrWhiteSpace(workingPublic) ? "<default>" : workingPublic;
+                details.Add($"accessLevel {displayHeadLevel}->{displayWorkingLevel}");
+            }
+        }
+
+        return details.Count == 0 ? null : string.Join("; ", details);
+    }
+
+    private static string? BuildJavaActionDetails(
+        string changeType,
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var details = new List<string>();
+
+        var workingReturnType = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "returnType");
+        var headReturnType = headResource is null ? null : TryReadStringProperty(headResource.Value, "returnType");
+        var workingParamCount = workingResource is null ? 0 : TryGetArrayPropertyCount(workingResource.Value, "parameters") ?? 0;
+        var headParamCount = headResource is null ? 0 : TryGetArrayPropertyCount(headResource.Value, "parameters") ?? 0;
+        var workingPublic = workingResource is null ? null : TryReadStringProperty(workingResource.Value, "publicAccessLevel");
+        var headPublic = headResource is null ? null : TryReadStringProperty(headResource.Value, "publicAccessLevel");
+
+        if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
+        {
+            if (workingParamCount > 0)
+            {
+                details.Add($"parameters={workingParamCount}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingReturnType))
+            {
+                details.Add($"returnType={workingReturnType}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(workingPublic))
+            {
+                details.Add($"accessLevel={workingPublic}");
+            }
+        }
+        else if (string.Equals(changeType, "Deleted", StringComparison.OrdinalIgnoreCase))
+        {
+            if (headParamCount > 0)
+            {
+                details.Add($"parameters={headParamCount}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headReturnType))
+            {
+                details.Add($"returnType={headReturnType}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(headPublic))
+            {
+                details.Add($"accessLevel={headPublic}");
+            }
+        }
+        else
+        {
+            // Modified: check for parameter count change
+            if (workingParamCount != headParamCount)
+            {
+                details.Add($"parameters {headParamCount}->{workingParamCount}");
+            }
+
+            // Check for return type change
+            if (!string.Equals(workingReturnType, headReturnType, StringComparison.OrdinalIgnoreCase))
+            {
+                var displayHeadType = string.IsNullOrWhiteSpace(headReturnType) ? "<void>" : headReturnType;
+                var displayWorkingType = string.IsNullOrWhiteSpace(workingReturnType) ? "<void>" : workingReturnType;
+                details.Add($"returnType {displayHeadType}->{displayWorkingType}");
+            }
+
+            // Check for access level change
+            if (!string.Equals(workingPublic, headPublic, StringComparison.OrdinalIgnoreCase))
+            {
+                var displayHeadLevel = string.IsNullOrWhiteSpace(headPublic) ? "<private>" : headPublic;
+                var displayWorkingLevel = string.IsNullOrWhiteSpace(workingPublic) ? "<private>" : workingPublic;
+                details.Add($"accessLevel {displayHeadLevel}->{displayWorkingLevel}");
+            }
+        }
+
+        return details.Count == 0 ? null : string.Join("; ", details);
     }
 
     private static string ResolveAssociationCardinality(

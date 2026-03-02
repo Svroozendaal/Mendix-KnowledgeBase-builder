@@ -22,11 +22,17 @@ public static class AutoCommitMessageChangeService
     /// Reads the current repository status and diff data for supported Mendix files.
     /// </summary>
     /// <param name="projectPath">The path to the project root.</param>
+    /// <param name="persistModelDumps">Whether to persist model dump artefacts for debugging.</param>
+    /// <param name="dataRootBasePath">Optional data root path for storing dumps and artifacts.</param>
+    /// <param name="headDumpCacheEnabled">Whether to cache HEAD dumps to avoid redundant mx.exe invocations.</param>
+    /// <param name="selectedModules">Optional list of modules to include in analysis. For MPR v2 projects, skips analysis for unselected modules. Ignored for MPR v1.</param>
     /// <returns>A payload containing repository state, change items, and optional errors.</returns>
     public static AutoCommitMessagePayload ReadChanges(
         string projectPath,
         bool persistModelDumps = false,
-        string? dataRootBasePath = null)
+        string? dataRootBasePath = null,
+        bool headDumpCacheEnabled = true,
+        IReadOnlyList<string>? selectedModules = null)
     {
         try
         {
@@ -92,7 +98,9 @@ public static class AutoCommitMessageChangeService
                             repositoryRoot,
                             NormalizeRepositoryPath(entry.FilePath),
                             persistModelDumps,
-                            dataRootBasePath);
+                            dataRootBasePath,
+                            headDumpCacheEnabled,
+                            selectedModules);
 
                         fileChange = fileChange with
                         {
@@ -122,6 +130,21 @@ public static class AutoCommitMessageChangeService
                 }
 
                 changes.Add(fileChange);
+            }
+
+            // Prune stale cache entries after successful refresh
+            if (headDumpCacheEnabled && repository.Head?.Tip is not null)
+            {
+                try
+                {
+                    AutoCommitMessageHeadDumpCacheService.PruneOldCacheEntries(
+                        ExtensionDataPaths.DataRoot,
+                        repository.Head.Tip.Sha);
+                }
+                catch
+                {
+                    // Prune failures are non-critical; silently ignore
+                }
             }
 
             return new AutoCommitMessagePayload
@@ -216,12 +239,37 @@ public static class AutoCommitMessageChangeService
         string repositoryRoot,
         string repositoryRelativeMprPath,
         bool persistModelDumps,
-        string? dataRootBasePath)
+        string? dataRootBasePath,
+        bool headDumpCacheEnabled = true,
+        IReadOnlyList<string>? selectedModules = null)
     {
+        var workingMprPath = Path.Combine(repositoryRoot, repositoryRelativeMprPath.Replace('/', Path.DirectorySeparatorChar));
+
+        // For MPR v2 projects with module filtering, skip analysis for unselected modules
+        if (selectedModules is { Count: > 0 } && MendixMprFormatDetector.IsMprV2(workingMprPath))
+        {
+            // Extract module name from directory structure: if mprPath is in a module-specific directory
+            // For example, "Modules/MyModule/MyModule.mpr" -> module name is "MyModule"
+            // For root-level .mpr like "App.mpr", we consider it part of the main app
+            var mprDirectory = Path.GetDirectoryName(workingMprPath);
+            var mprFileName = Path.GetFileNameWithoutExtension(workingMprPath);
+
+            // Simple heuristic: use parent directory name as module name if it matches the mpr filename
+            var moduleCandidate = !string.IsNullOrWhiteSpace(mprDirectory)
+                ? Path.GetFileName(mprDirectory)
+                : mprFileName;
+
+            // Check if this module is in the selected list
+            if (!selectedModules.Any(m => string.Equals(m, moduleCandidate, StringComparison.OrdinalIgnoreCase)))
+            {
+                // Module not selected; skip analysis
+                return new ModelAnalysisResult(new List<MendixModelChange>(), null);
+            }
+        }
+
         var workingDumpPath = CreateTempPath(".json");
         var headDumpPath = CreateTempPath(".json");
         var headWorkspacePath = CreateTempDirectoryPath();
-        var workingMprPath = Path.Combine(repositoryRoot, repositoryRelativeMprPath.Replace('/', Path.DirectorySeparatorChar));
 
         try
         {
@@ -244,14 +292,48 @@ public static class AutoCommitMessageChangeService
 
             if (TryWriteHeadMpr(repository, repositoryRelativeMprPath, workingMprPath, headWorkspacePath, out var headMprPath))
             {
-                try
+                // Attempt to use cached HEAD dump if caching is enabled
+                var headCommitSha = repository.Head?.Tip?.Sha;
+                if (headDumpCacheEnabled && !string.IsNullOrWhiteSpace(headCommitSha) &&
+                    AutoCommitMessageHeadDumpCacheService.TryGetCachedDump(headMprPath, headCommitSha, out var cachedDumpPath))
                 {
-                    MxToolService.DumpMpr(headMprPath, headDumpPath);
+                    // Cache hit: copy cached dump to working location
+                    try
+                    {
+                        File.Copy(cachedDumpPath, headDumpPath, overwrite: true);
+                    }
+                    catch
+                    {
+                        // Cache read failure: fall back to live dump
+                        try
+                        {
+                            MxToolService.DumpMpr(headMprPath, headDumpPath);
+                            // Attempt to cache the newly created dump
+                            AutoCommitMessageHeadDumpCacheService.TryCacheDump(headDumpPath, headMprPath, headCommitSha);
+                        }
+                        catch (Exception exception) when (LooksLikeDumpEnvironmentIssue(exception))
+                        {
+                            return new ModelAnalysisResult(new List<MendixModelChange>(), null);
+                        }
+                    }
                 }
-                catch (Exception exception) when (LooksLikeDumpEnvironmentIssue(exception))
+                else
                 {
-                    // Some repositories cannot be reconstructed for HEAD snapshot analysis.
-                    return new ModelAnalysisResult(new List<MendixModelChange>(), null);
+                    // Cache miss or disabled: run live dump
+                    try
+                    {
+                        MxToolService.DumpMpr(headMprPath, headDumpPath);
+                        // Attempt to cache the newly created dump if caching is enabled
+                        if (headDumpCacheEnabled && !string.IsNullOrWhiteSpace(headCommitSha))
+                        {
+                            AutoCommitMessageHeadDumpCacheService.TryCacheDump(headDumpPath, headMprPath, headCommitSha);
+                        }
+                    }
+                    catch (Exception exception) when (LooksLikeDumpEnvironmentIssue(exception))
+                    {
+                        // Some repositories cannot be reconstructed for HEAD snapshot analysis.
+                        return new ModelAnalysisResult(new List<MendixModelChange>(), null);
+                    }
                 }
             }
             else

@@ -11,7 +11,13 @@
       "Bash(python -c \"print\\(''hello''\\)\")",
       "Bash(py -3 -c \"print\\(''hello''\\)\")",
       "Bash(node -e \"console.log\\(''node ok''\\)\")",
-      "Bash(python -c \":*)"
+      "Bash(python -c \":*)",
+      "Bash(python3:*)",
+      "Bash(ls -lh /c/Workspaces/Mendix-CommitMessage/mendix-data/dumps/*/working-dump.json)",
+      "Bash(echo \"Found System$Constant\")",
+      "Bash(echo \"System$Constant not found\")",
+      "Bash(awk 'NR>=10 && NR<=20')",
+      "Bash(dotnet build)"
     ]
   }
 }

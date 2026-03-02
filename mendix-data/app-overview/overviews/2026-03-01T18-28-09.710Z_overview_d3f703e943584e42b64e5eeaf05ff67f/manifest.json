@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAtUtc": "2026-03-01T18:28:09.7103641\u002B00:00",
+  "mode": "Modules",
+  "selectedModules": [
+    "ImporterHelper",
+    "SmartExpenses"
+  ],
+  "includeStructuredOutput": true,
+  "includePseudocodeOutput": true,
+  "artifactCount": 5,
+  "artifacts": [
+    {
+      "type": "module-json",
+      "path": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-03-01T18-28-09.710Z_overview_d3f703e943584e42b64e5eeaf05ff67f\\modules\\ImporterHelper.overview.json"
+    },
+    {
+      "type": "module-pseudocode",
+      "path": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-03-01T18-28-09.710Z_overview_d3f703e943584e42b64e5eeaf05ff67f\\modules\\ImporterHelper.overview.pseudo.txt"
+    },
+    {
+      "type": "module-json",
+      "path": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-03-01T18-28-09.710Z_overview_d3f703e943584e42b64e5eeaf05ff67f\\modules\\SmartExpenses.overview.json"
+    },
+    {
+      "type": "module-pseudocode",
+      "path": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-03-01T18-28-09.710Z_overview_d3f703e943584e42b64e5eeaf05ff67f\\modules\\SmartExpenses.overview.pseudo.txt"
+    },
+    {
+      "type": "module-index",
+      "path": "C:\\Workspaces\\Mendix-CommitMessage\\mendix-data\\app-overview\\overviews\\2026-03-01T18-28-09.710Z_overview_d3f703e943584e42b64e5eeaf05ff67f\\modules\\modules.index.json"
+    }
+  ]
+}

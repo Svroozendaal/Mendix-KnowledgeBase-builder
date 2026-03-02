@@ -1,0 +1,1402 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAtUtc": "2026-03-01T18:28:09.7103641+00:00",
+  "sourceMprPath": "C:\\Workspaces\\Mendix\\Smart Expenses app-main\\App.mpr",
+  "sourceDumpPath": "C:\\Users\\Simon\\AppData\\Local\\Temp\\autocommitmessage_overview_b3e88d0bd072422fab8bdfafeff65eb9.json",
+  "module": {
+    "module": "ImporterHelper",
+    "domainModel": {
+      "entities": [
+        {
+          "name": "ImporterHelper.ExcelFileImport",
+          "isPersistable": true,
+          "generalization": "System.FileDocument",
+          "attributes": []
+        },
+        {
+          "name": "ImporterHelper.ImportTransaction",
+          "isPersistable": false,
+          "generalization": null,
+          "attributes": [
+            {
+              "name": "Bedrag",
+              "type": "DecimalAttributeType"
+            },
+            {
+              "name": "Datum",
+              "type": "DateTimeAttributeType"
+            },
+            {
+              "name": "Number",
+              "type": "IntegerAttributeType"
+            },
+            {
+              "name": "Omschrijving",
+              "type": "StringAttributeType"
+            },
+            {
+              "name": "Tegenpartij",
+              "type": "StringAttributeType"
+            },
+            {
+              "name": "Transactiereferentie",
+              "type": "StringAttributeType"
+            }
+          ]
+        },
+        {
+          "name": "ImporterHelper.ImportTransactionHelper",
+          "isPersistable": false,
+          "generalization": null,
+          "attributes": []
+        }
+      ],
+      "associations": [
+        {
+          "name": "ImporterHelper.ImportTransactionHelper_ExcelFileImport",
+          "parentEntity": "ImporterHelper.ImportTransactionHelper",
+          "childEntity": "ImporterHelper.ExcelFileImport",
+          "cardinality": "*-1",
+          "type": "Reference",
+          "owner": "Default",
+          "storageFormat": "Table"
+        },
+        {
+          "name": "ImporterHelper.ImportTransaction_ImportTransactionHelper",
+          "parentEntity": "ImporterHelper.ImportTransaction",
+          "childEntity": "ImporterHelper.ImportTransactionHelper",
+          "cardinality": "*-1",
+          "type": "Reference",
+          "owner": "Default",
+          "storageFormat": "Table"
+        }
+      ],
+      "enumerations": []
+    },
+    "flows": [
+      {
+        "flowId": "32a05137-0a26-429b-93a5-adf933050f87",
+        "kind": "Microflow",
+        "qualifiedName": "ImporterHelper.ACT_ExcelFileImport_Create",
+        "module": "ImporterHelper",
+        "nodes": [
+          {
+            "nodeId": "1a403864-9d67-48d7-b38d-66cf5d5220a3",
+            "nodeType": "ActionActivity",
+            "label": "ChangeObjectAction: change ImportTransactionHelper (ImportTransactionHelper_ExcelFileImport=$NewExcelFileImport; refreshInClient=false)",
+            "detail": "change ImportTransactionHelper (ImportTransactionHelper_ExcelFileImport=$NewExcelFileImport; refreshInClient=false)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "c6b8f4f8-5fc0-492e-8c28-b28cdabee91c",
+            "nodeType": "ActionActivity",
+            "label": "CreateObjectAction: create ImporterHelper.ExcelFileImport as NewExcelFileImport",
+            "detail": "create ImporterHelper.ExcelFileImport as NewExcelFileImport",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "9398af62-72fe-4b9d-bcc5-48bbe0d3bed8",
+            "nodeType": "ActionActivity",
+            "label": "ShowPageAction: show page ImporterHelper.ExcelFileImport_Upload",
+            "detail": "show page ImporterHelper.ExcelFileImport_Upload",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "7e0f912e-c4ba-4813-a632-ef055b8a6466",
+            "nodeType": "Annotation",
+            "label": "Creates the ExcelFile entity and a popup to upload it. The \u0027ExcelFileImport\u0027 enity will be used to attach the real excelfile to, this happens in the popup",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "e3b16632-212a-4b38-83e8-f35b05fdfaf7",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "f9a62e0f-43e4-4809-baac-59c85b90074c",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "f0eb1612-9672-44f8-bf16-9d98da9b6f6f",
+            "nodeType": "StartEvent",
+            "label": "StartEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          }
+        ],
+        "edges": [
+          {
+            "edgeId": "3836ed1d-9a7c-4833-b012-9a504b7238b5",
+            "originNodeId": "f0eb1612-9672-44f8-bf16-9d98da9b6f6f",
+            "destinationNodeId": "c6b8f4f8-5fc0-492e-8c28-b28cdabee91c",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "5cacab20-a8e6-42dc-ad04-6d57f5473295",
+            "originNodeId": "c6b8f4f8-5fc0-492e-8c28-b28cdabee91c",
+            "destinationNodeId": "1a403864-9d67-48d7-b38d-66cf5d5220a3",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "db7ad95f-d6b3-4dca-b7bb-3607eee5b1cc",
+            "originNodeId": "9398af62-72fe-4b9d-bcc5-48bbe0d3bed8",
+            "destinationNodeId": "e3b16632-212a-4b38-83e8-f35b05fdfaf7",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "b3ca0ce1-b5ab-49ec-9baa-d6bb94c09ee1",
+            "originNodeId": "1a403864-9d67-48d7-b38d-66cf5d5220a3",
+            "destinationNodeId": "9398af62-72fe-4b9d-bcc5-48bbe0d3bed8",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          }
+        ],
+        "calls": [],
+        "startNodeIds": [
+          "f0eb1612-9672-44f8-bf16-9d98da9b6f6f"
+        ],
+        "primaryExecutionOrderNodeIds": [
+          "f0eb1612-9672-44f8-bf16-9d98da9b6f6f",
+          "c6b8f4f8-5fc0-492e-8c28-b28cdabee91c",
+          "1a403864-9d67-48d7-b38d-66cf5d5220a3",
+          "9398af62-72fe-4b9d-bcc5-48bbe0d3bed8",
+          "e3b16632-212a-4b38-83e8-f35b05fdfaf7"
+        ],
+        "pseudocode": "FLOW Microflow: ImporterHelper.ACT_ExcelFileImport_Create\r\nNODES=7; EDGES=4\r\n1. START\r\n2. ACTION CreateObjectAction: create ImporterHelper.ExcelFileImport as NewExcelFileImport\r\n3. ACTION ChangeObjectAction: change ImportTransactionHelper (ImportTransactionHelper_ExcelFileImport=$NewExcelFileImport; refreshInClient=false)\r\n4. ACTION ShowPageAction: show page ImporterHelper.ExcelFileImport_Upload\r\n5. END"
+      },
+      {
+        "flowId": "a6a14a02-b6ef-4069-94cf-efc8ac4b46f7",
+        "kind": "Microflow",
+        "qualifiedName": "ImporterHelper.ACT_ExcelFileImport_ImportToNP",
+        "module": "ImporterHelper",
+        "nodes": [
+          {
+            "nodeId": "f0010539-a130-46f2-a944-55cc28dac354",
+            "nodeType": "ActionActivity",
+            "label": "CloseFormAction: close page (pagesToClose=1)",
+            "detail": "close page (pagesToClose=1)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "30aa60df-2aea-4df9-b6dc-f3946b51ca23",
+            "nodeType": "ActionActivity",
+            "label": "CommitAction: commit ExcelFileImport (refreshInClient=true, withEvents=true)",
+            "detail": "commit ExcelFileImport (refreshInClient=true, withEvents=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "1775bb55-8bd8-4d48-925d-fd1d5dade241",
+            "nodeType": "ActionActivity",
+            "label": "CommitAction: commit ImportTransactionHelper (refreshInClient=true, withEvents=true)",
+            "detail": "commit ImportTransactionHelper (refreshInClient=true, withEvents=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "143f2921-5675-4065-b7b3-2a5d7ca30c9a",
+            "nodeType": "ActionActivity",
+            "label": "ListOperationAction: ListOperationAction (output=ImportTransactionHelper, errorHandlingType=Rollback)",
+            "detail": "ListOperationAction (output=ImportTransactionHelper, errorHandlingType=Rollback)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "7defd0c1-571b-4bcd-b41e-a54a79e3a62b",
+            "nodeType": "ActionActivity",
+            "label": "MicroflowCallAction: call microflow ImporterHelper.SUB_ImportTemplateDocument -\u003E Imported",
+            "detail": "call microflow ImporterHelper.SUB_ImportTemplateDocument -\u003E Imported",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": [
+              {
+                "callKind": "Microflow",
+                "targetFlowName": "ImporterHelper.SUB_ImportTemplateDocument",
+                "sourceNodeId": "7defd0c1-571b-4bcd-b41e-a54a79e3a62b"
+              }
+            ]
+          },
+          {
+            "nodeId": "b42e4622-c81f-4972-afca-79d377edf291",
+            "nodeType": "ActionActivity",
+            "label": "RetrieveAction: retrieve ImportTransactionHelperList over association ImportTransactionHelper_ExcelFileImport from ExcelFileImport",
+            "detail": "retrieve ImportTransactionHelperList over association ImportTransactionHelper_ExcelFileImport from ExcelFileImport",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "fb3c1833-8a1c-484b-b9d5-18b36fe16925",
+            "nodeType": "ActionActivity",
+            "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+            "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "43e68081-7155-41d8-9112-9eaf7bedb4ce",
+            "nodeType": "Annotation",
+            "label": "Runs the Importer flow (copied/edited from the ExcelImporter) and closes the page. The importerflow uses the Excelfiles selected in the upload popup (attachted ...",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "53af277f-08ca-4c40-9109-f10bf5c6c618",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "d2af000b-4dd7-4119-99bf-cd4e050a93d6",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "e2240b71-ceeb-4d1e-827b-2e9502318174",
+            "nodeType": "ExclusiveSplit",
+            "label": "Is Variable? expression=$Imported = true",
+            "detail": "Is Variable? expression=$Imported = true",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "c6b37899-2286-4985-8adf-baf38029bbfe",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "09d9a814-7b21-41f7-81eb-e9acea8401e4",
+            "nodeType": "StartEvent",
+            "label": "StartEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          }
+        ],
+        "edges": [
+          {
+            "edgeId": "ab1e38a1-c3d3-48c1-864f-240f52a4994c",
+            "originNodeId": "09d9a814-7b21-41f7-81eb-e9acea8401e4",
+            "destinationNodeId": "b42e4622-c81f-4972-afca-79d377edf291",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "5c15d0f5-e6e7-483f-91df-181ac6d32a80",
+            "originNodeId": "7defd0c1-571b-4bcd-b41e-a54a79e3a62b",
+            "destinationNodeId": "e2240b71-ceeb-4d1e-827b-2e9502318174",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "fef24cac-e3d1-4cf1-8bc7-425683c5a96a",
+            "originNodeId": "f0010539-a130-46f2-a944-55cc28dac354",
+            "destinationNodeId": "d2af000b-4dd7-4119-99bf-cd4e050a93d6",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "dd5ba35e-9c2b-4777-b622-650a1b0559a5",
+            "originNodeId": "30aa60df-2aea-4df9-b6dc-f3946b51ca23",
+            "destinationNodeId": "f0010539-a130-46f2-a944-55cc28dac354",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "3b145774-24be-46c8-85b6-cb0fb70efa5d",
+            "originNodeId": "b42e4622-c81f-4972-afca-79d377edf291",
+            "destinationNodeId": "143f2921-5675-4065-b7b3-2a5d7ca30c9a",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "2b85048a-5f02-4d1a-a0f3-1450c6ec5875",
+            "originNodeId": "143f2921-5675-4065-b7b3-2a5d7ca30c9a",
+            "destinationNodeId": "7defd0c1-571b-4bcd-b41e-a54a79e3a62b",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "9ff37af8-eaec-4dcd-a4f8-ae05571d7f30",
+            "originNodeId": "1775bb55-8bd8-4d48-925d-fd1d5dade241",
+            "destinationNodeId": "30aa60df-2aea-4df9-b6dc-f3946b51ca23",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "63791c87-ba11-4f21-85df-489115e14199",
+            "originNodeId": "e2240b71-ceeb-4d1e-827b-2e9502318174",
+            "destinationNodeId": "1775bb55-8bd8-4d48-925d-fd1d5dade241",
+            "condition": "EnumerationCase=true",
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "b2953e5f-ead1-4078-ac7e-0631aeaf0f2b",
+            "originNodeId": "e2240b71-ceeb-4d1e-827b-2e9502318174",
+            "destinationNodeId": "fb3c1833-8a1c-484b-b9d5-18b36fe16925",
+            "condition": "EnumerationCase=false",
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          },
+          {
+            "edgeId": "3d8e5fcf-dfa3-4d86-b4dd-df2db006296c",
+            "originNodeId": "fb3c1833-8a1c-484b-b9d5-18b36fe16925",
+            "destinationNodeId": "53af277f-08ca-4c40-9109-f10bf5c6c618",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          }
+        ],
+        "calls": [
+          {
+            "callKind": "Microflow",
+            "targetFlowName": "ImporterHelper.SUB_ImportTemplateDocument",
+            "sourceNodeId": "7defd0c1-571b-4bcd-b41e-a54a79e3a62b"
+          }
+        ],
+        "startNodeIds": [
+          "09d9a814-7b21-41f7-81eb-e9acea8401e4"
+        ],
+        "primaryExecutionOrderNodeIds": [
+          "09d9a814-7b21-41f7-81eb-e9acea8401e4",
+          "b42e4622-c81f-4972-afca-79d377edf291",
+          "143f2921-5675-4065-b7b3-2a5d7ca30c9a",
+          "7defd0c1-571b-4bcd-b41e-a54a79e3a62b",
+          "e2240b71-ceeb-4d1e-827b-2e9502318174",
+          "1775bb55-8bd8-4d48-925d-fd1d5dade241",
+          "30aa60df-2aea-4df9-b6dc-f3946b51ca23",
+          "f0010539-a130-46f2-a944-55cc28dac354",
+          "d2af000b-4dd7-4119-99bf-cd4e050a93d6",
+          "fb3c1833-8a1c-484b-b9d5-18b36fe16925",
+          "53af277f-08ca-4c40-9109-f10bf5c6c618"
+        ],
+        "pseudocode": "FLOW Microflow: ImporterHelper.ACT_ExcelFileImport_ImportToNP\r\nNODES=13; EDGES=10\r\n1. START\r\n2. ACTION RetrieveAction: retrieve ImportTransactionHelperList over association ImportTransactionHelper_ExcelFileImport from ExcelFileImport\r\n3. ACTION ListOperationAction: ListOperationAction (output=ImportTransactionHelper, errorHandlingType=Rollback)\r\n4. ACTION MicroflowCallAction: call microflow ImporterHelper.SUB_ImportTemplateDocument -\u003E Imported\r\n5. DECISION Is Variable? expression=$Imported = true\r\n6. BRANCH when EnumerationCase=true\r\n  7. ACTION CommitAction: commit ImportTransactionHelper (refreshInClient=true, withEvents=true)\r\n  8. ACTION CommitAction: commit ExcelFileImport (refreshInClient=true, withEvents=true)\r\n  9. ACTION CloseFormAction: close page (pagesToClose=1)\r\n  10. END\r\n11. BRANCH when EnumerationCase=false\r\n  12. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n  13. END"
+      },
+      {
+        "flowId": "a4f25624-8ab4-4c64-9c7b-4a96469b77f7",
+        "kind": "Microflow",
+        "qualifiedName": "ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+        "module": "ImporterHelper",
+        "nodes": [
+          {
+            "nodeId": "73f0e6ec-b6aa-4086-837c-b5370771df02",
+            "nodeType": "ActionActivity",
+            "label": "ChangeListAction: change ImportTransactionList (type=Remove, value=$IteratorImportTransaction)",
+            "detail": "change ImportTransactionList (type=Remove, value=$IteratorImportTransaction)",
+            "loopOwnerId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "466a807a-57e7-4a45-a7e1-8d26d893f7a1",
+            "nodeType": "ActionActivity",
+            "label": "ChangeListAction: change TransactionList (type=Add, value=$Transaction)",
+            "detail": "change TransactionList (type=Add, value=$Transaction)",
+            "loopOwnerId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "11ec7fe3-6085-4aa6-bd93-5b9a8ee314fb",
+            "nodeType": "ActionActivity",
+            "label": "CommitAction: commit ImportTransactionList (refreshInClient=true, withEvents=true)",
+            "detail": "commit ImportTransactionList (refreshInClient=true, withEvents=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "06d548f8-b9a5-4c1d-a854-950be2181115",
+            "nodeType": "ActionActivity",
+            "label": "CommitAction: commit TransactionList (refreshInClient=true, withEvents=true)",
+            "detail": "commit TransactionList (refreshInClient=true, withEvents=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "8b7f90c2-09de-4175-8577-09c3cbed339c",
+            "nodeType": "ActionActivity",
+            "label": "CreateListAction: CreateListAction (output=TransactionList, entity=SmartExpenses.Transaction, errorHandlingType=Rollback)",
+            "detail": "CreateListAction (output=TransactionList, entity=SmartExpenses.Transaction, errorHandlingType=Rollback)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "14cc6fe7-9ce0-4f3f-8118-ef50169c6877",
+            "nodeType": "ActionActivity",
+            "label": "CreateObjectAction: create SmartExpenses.Transaction as Transaction (Transaction_FBGProfile=$FBGProfile, TransactionCode=$IteratorImportTransaction/Transactiereferentie, Name=$IteratorImportTransaction/Tegenpartij, Description=$IteratorImportTransaction/Omschrijving, InOut=if $IteratorImportTransaction/Bedrag \u003E= 0 then SmartExpenses.ENUM_TransactionSort.income else SmartExpenses.ENUM_TransactionSort.expenditure, Value=abs($IteratorImportTransaction/Bedrag), TransactionDate=$IteratorImportTransaction/Datum, EntryDate=[%BeginOfCurrentDay%], \u002B2 more)",
+            "detail": "create SmartExpenses.Transaction as Transaction (Transaction_FBGProfile=$FBGProfile, TransactionCode=$IteratorImportTransaction/Transactiereferentie, Name=$IteratorImportTransaction/Tegenpartij, Description=$IteratorImportTransaction/Omschrijving, InOut=if $IteratorImportTransaction/Bedrag \u003E= 0 then SmartExpenses.ENUM_TransactionSort.income else SmartExpenses.ENUM_TransactionSort.expenditure, Value=abs($IteratorImportTransaction/Bedrag), TransactionDate=$IteratorImportTransaction/Datum, EntryDate=[%BeginOfCurrentDay%], \u002B2 more)",
+            "loopOwnerId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "5adb021d-8f5d-444c-ba94-25ba33e5c40f",
+            "nodeType": "ActionActivity",
+            "label": "DeleteAction: delete IteratorImportTransaction (refreshInClient=false)",
+            "detail": "delete IteratorImportTransaction (refreshInClient=false)",
+            "loopOwnerId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "0560e781-6de2-4110-b065-6478268cdf04",
+            "nodeType": "ActionActivity",
+            "label": "MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_setStatus",
+            "detail": "call microflow SmartExpenses.SUB_Transaction_setStatus",
+            "loopOwnerId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "isExecutable": true,
+            "calls": [
+              {
+                "callKind": "Microflow",
+                "targetFlowName": "SmartExpenses.SUB_Transaction_setStatus",
+                "sourceNodeId": "0560e781-6de2-4110-b065-6478268cdf04"
+              }
+            ]
+          },
+          {
+            "nodeId": "e2b2d33d-4ae5-436f-8729-63c684de63cb",
+            "nodeType": "ActionActivity",
+            "label": "RetrieveAction: retrieve ImportTransactionList over association ImportTransaction_ImportTransactionHelper from ImportTransactionHelper",
+            "detail": "retrieve ImportTransactionList over association ImportTransaction_ImportTransactionHelper from ImportTransactionHelper",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "cb209acf-d366-472d-a1cf-562d7d6eb511",
+            "nodeType": "Annotation",
+            "label": "todo validatie flow checken of alle columns er zijn",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "f3847018-3fa0-4878-9693-4d3077f58a09",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "nodeType": "LoopedActivity",
+            "label": "iterate ImportTransactionList as IteratorImportTransaction",
+            "detail": "iterate ImportTransactionList as IteratorImportTransaction",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "00680c24-cb71-45be-b9c5-14f29d68178d",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "20c3ba12-d734-4ef2-9bbe-e28972709bcb",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "4f35a567-ee7e-44c6-8516-f4d4c2a22f7c",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "4f0a5f27-6d94-4f18-b5cf-1366d5e0be89",
+            "nodeType": "StartEvent",
+            "label": "StartEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          }
+        ],
+        "edges": [
+          {
+            "edgeId": "3faf4637-e8ed-4221-9342-5eed2f4abda9",
+            "originNodeId": "4f0a5f27-6d94-4f18-b5cf-1366d5e0be89",
+            "destinationNodeId": "e2b2d33d-4ae5-436f-8729-63c684de63cb",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "393b5634-872b-422d-a128-c0e9f23e6e9e",
+            "originNodeId": "e2b2d33d-4ae5-436f-8729-63c684de63cb",
+            "destinationNodeId": "8b7f90c2-09de-4175-8577-09c3cbed339c",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "296ddca3-3ac1-4153-a611-c0c1e5875242",
+            "originNodeId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "destinationNodeId": "06d548f8-b9a5-4c1d-a854-950be2181115",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "5047ad1f-9653-424a-b251-2049ebeaee76",
+            "originNodeId": "14cc6fe7-9ce0-4f3f-8118-ef50169c6877",
+            "destinationNodeId": "73f0e6ec-b6aa-4086-837c-b5370771df02",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "fcae30c6-0a32-4cda-a9f9-105b913415b4",
+            "originNodeId": "73f0e6ec-b6aa-4086-837c-b5370771df02",
+            "destinationNodeId": "0560e781-6de2-4110-b065-6478268cdf04",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "3900515b-7723-4977-acd4-5873627c5058",
+            "originNodeId": "8b7f90c2-09de-4175-8577-09c3cbed339c",
+            "destinationNodeId": "b1749477-a6a2-4dce-9310-327e22c37fda",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "19420768-7075-4329-92bb-30003e506825",
+            "originNodeId": "0560e781-6de2-4110-b065-6478268cdf04",
+            "destinationNodeId": "466a807a-57e7-4a45-a7e1-8d26d893f7a1",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "c40a3a38-f7c2-4a45-bfc8-9d9158acc083",
+            "originNodeId": "06d548f8-b9a5-4c1d-a854-950be2181115",
+            "destinationNodeId": "11ec7fe3-6085-4aa6-bd93-5b9a8ee314fb",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "0a956fbc-48fc-427f-ba7e-e3b63140fe54",
+            "originNodeId": "11ec7fe3-6085-4aa6-bd93-5b9a8ee314fb",
+            "destinationNodeId": "f3847018-3fa0-4878-9693-4d3077f58a09",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "0ed75914-1fa3-4aef-867c-4cc49cc7adb9",
+            "originNodeId": "466a807a-57e7-4a45-a7e1-8d26d893f7a1",
+            "destinationNodeId": "5adb021d-8f5d-444c-ba94-25ba33e5c40f",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          }
+        ],
+        "calls": [
+          {
+            "callKind": "Microflow",
+            "targetFlowName": "SmartExpenses.SUB_Transaction_setStatus",
+            "sourceNodeId": "0560e781-6de2-4110-b065-6478268cdf04"
+          }
+        ],
+        "startNodeIds": [
+          "4f0a5f27-6d94-4f18-b5cf-1366d5e0be89"
+        ],
+        "primaryExecutionOrderNodeIds": [
+          "4f0a5f27-6d94-4f18-b5cf-1366d5e0be89",
+          "e2b2d33d-4ae5-436f-8729-63c684de63cb",
+          "8b7f90c2-09de-4175-8577-09c3cbed339c",
+          "b1749477-a6a2-4dce-9310-327e22c37fda",
+          "0560e781-6de2-4110-b065-6478268cdf04",
+          "14cc6fe7-9ce0-4f3f-8118-ef50169c6877",
+          "466a807a-57e7-4a45-a7e1-8d26d893f7a1",
+          "5adb021d-8f5d-444c-ba94-25ba33e5c40f",
+          "73f0e6ec-b6aa-4086-837c-b5370771df02",
+          "06d548f8-b9a5-4c1d-a854-950be2181115",
+          "11ec7fe3-6085-4aa6-bd93-5b9a8ee314fb",
+          "f3847018-3fa0-4878-9693-4d3077f58a09"
+        ],
+        "pseudocode": "FLOW Microflow: ImporterHelper.ACT_ImportTransaction_AcceptTransactions\r\nNODES=11; EDGES=6\r\n1. START\r\n2. ACTION RetrieveAction: retrieve ImportTransactionList over association ImportTransaction_ImportTransactionHelper from ImportTransactionHelper\r\n3. ACTION CreateListAction: CreateListAction (output=TransactionList, entity=SmartExpenses.Transaction, errorHandlingType=Rollback)\r\n4. LOOP iterate ImportTransactionList as IteratorImportTransaction\r\n  5. LOOP BODY\r\n    6. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_setStatus\r\n    7. ACTION CreateObjectAction: create SmartExpenses.Transaction as Transaction (Transaction_FBGProfile=$FBGProfile, TransactionCode=$IteratorImportTransaction/Transactiereferentie, Name=$IteratorImportTransaction/Tegenpartij, Description=$IteratorImportTransaction/Omschrijving, InOut=if $IteratorImportTransaction/Bedrag \u003E= 0 then SmartExpenses.ENUM_TransactionSort.income else SmartExpenses.ENUM_TransactionSort.expenditure, Value=abs($IteratorImportTransaction/Bedrag), TransactionDate=$IteratorImportTransaction/Datum, EntryDate=[%BeginOfCurrentDay%], \u002B2 more)\r\n    8. ACTION ChangeListAction: change TransactionList (type=Add, value=$Transaction)\r\n    9. ACTION DeleteAction: delete IteratorImportTransaction (refreshInClient=false)\r\n    10. ACTION ChangeListAction: change ImportTransactionList (type=Remove, value=$IteratorImportTransaction)\r\n11. ACTION CommitAction: commit TransactionList (refreshInClient=true, withEvents=true)\r\n12. ACTION CommitAction: commit ImportTransactionList (refreshInClient=true, withEvents=true)\r\n13. END"
+      },
+      {
+        "flowId": "1a6d88d3-4d88-4eca-bcd3-51282f06e67c",
+        "kind": "Microflow",
+        "qualifiedName": "ImporterHelper.ACT_ImportTransaction_ShowPage",
+        "module": "ImporterHelper",
+        "nodes": [
+          {
+            "nodeId": "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+            "nodeType": "ActionActivity",
+            "label": "CreateObjectAction: create ImporterHelper.ImportTransactionHelper as NewImportTransactionHelper",
+            "detail": "create ImporterHelper.ImportTransactionHelper as NewImportTransactionHelper",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+            "nodeType": "ActionActivity",
+            "label": "ShowPageAction: show page ImporterHelper.ImportTransaction_Overview",
+            "detail": "show page ImporterHelper.ImportTransaction_Overview",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "dc6a7852-34ac-4db5-91fd-bfe74b2b504f",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "6b81afe7-18f3-49cd-bd71-dbdeb3143d4f",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "fb6e8c5a-8147-489b-9e0a-184d449cddf4",
+            "nodeType": "StartEvent",
+            "label": "StartEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          }
+        ],
+        "edges": [
+          {
+            "edgeId": "693e7d26-c92a-486b-9e32-07a4dfddbb00",
+            "originNodeId": "fb6e8c5a-8147-489b-9e0a-184d449cddf4",
+            "destinationNodeId": "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "e172c8d1-d072-4b0c-aa50-2839895a1f7e",
+            "originNodeId": "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+            "destinationNodeId": "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "cc3f88c5-cbe4-44d7-95ab-4584f5627675",
+            "originNodeId": "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+            "destinationNodeId": "dc6a7852-34ac-4db5-91fd-bfe74b2b504f",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          }
+        ],
+        "calls": [],
+        "startNodeIds": [
+          "fb6e8c5a-8147-489b-9e0a-184d449cddf4"
+        ],
+        "primaryExecutionOrderNodeIds": [
+          "fb6e8c5a-8147-489b-9e0a-184d449cddf4",
+          "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+          "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+          "dc6a7852-34ac-4db5-91fd-bfe74b2b504f"
+        ],
+        "pseudocode": "FLOW Microflow: ImporterHelper.ACT_ImportTransaction_ShowPage\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create ImporterHelper.ImportTransactionHelper as NewImportTransactionHelper\r\n3. ACTION ShowPageAction: show page ImporterHelper.ImportTransaction_Overview\r\n4. END"
+      },
+      {
+        "flowId": "45ff07cb-a305-4927-8c78-dc5e18105e98",
+        "kind": "Microflow",
+        "qualifiedName": "ImporterHelper.CWS_GetProducts",
+        "module": "ImporterHelper",
+        "nodes": [
+          {
+            "nodeId": "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+            "nodeType": "ActionActivity",
+            "label": "AggregateListAction: AggregateListAction (output=CountTransactions, errorHandlingType=Rollback)",
+            "detail": "AggregateListAction (output=CountTransactions, errorHandlingType=Rollback)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "37b26612-4809-40ac-991c-650d03fb9c8e",
+            "nodeType": "ActionActivity",
+            "label": "CommitAction: commit Response (refreshInClient=true, withEvents=true)",
+            "detail": "commit Response (refreshInClient=true, withEvents=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "1186db5a-0735-45f5-a470-6269c235c7ec",
+            "nodeType": "ActionActivity",
+            "label": "RestCallAction: RestCallAction (errorHandlingType=Rollback)",
+            "detail": "RestCallAction (errorHandlingType=Rollback)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+            "nodeType": "ActionActivity",
+            "label": "ShowMessageAction: show message (text=Het is gelukt! {1} transacties zijn opgehaald!, type=Information, blocking=true)",
+            "detail": "show message (text=Het is gelukt! {1} transacties zijn opgehaald!, type=Information, blocking=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+            "nodeType": "ActionActivity",
+            "label": "ShowMessageAction: show message (text=Het ophalen van transacties is niet gelukt!, type=Error, blocking=true)",
+            "detail": "show message (text=Het ophalen van transacties is niet gelukt!, type=Error, blocking=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "625fc2b5-879c-4373-a9a7-cfb0bfd231fd",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "6ebd8698-298a-4913-8f1b-77d6e4d512c2",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "2012f427-41d5-49bc-99e5-c209124505c4",
+            "nodeType": "ExclusiveSplit",
+            "label": "Response full? expression=$Response != empty",
+            "detail": "Response full? expression=$Response != empty",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "3e558610-00f1-4a86-9daf-634500ac7daf",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "b9e02b0a-09c9-4a56-bd49-80a561907330",
+            "nodeType": "StartEvent",
+            "label": "StartEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          }
+        ],
+        "edges": [
+          {
+            "edgeId": "095fa942-76be-439b-b82c-39e0a14f37d2",
+            "originNodeId": "b9e02b0a-09c9-4a56-bd49-80a561907330",
+            "destinationNodeId": "1186db5a-0735-45f5-a470-6269c235c7ec",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "1c51ee1f-4db3-4913-91ed-f348c984fcda",
+            "originNodeId": "1186db5a-0735-45f5-a470-6269c235c7ec",
+            "destinationNodeId": "2012f427-41d5-49bc-99e5-c209124505c4",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "03955560-ee11-4fb9-86d4-db3ea29d7f9f",
+            "originNodeId": "2012f427-41d5-49bc-99e5-c209124505c4",
+            "destinationNodeId": "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+            "condition": "EnumerationCase=true",
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "04b076bc-d17d-43d8-bf07-ff9c68f33828",
+            "originNodeId": "2012f427-41d5-49bc-99e5-c209124505c4",
+            "destinationNodeId": "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+            "condition": "EnumerationCase=false",
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          },
+          {
+            "edgeId": "da4bb242-b873-48d0-9cb5-0c617c1944f6",
+            "originNodeId": "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+            "destinationNodeId": "37b26612-4809-40ac-991c-650d03fb9c8e",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "712940ac-cf2e-4bea-9b05-e308cca616f7",
+            "originNodeId": "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+            "destinationNodeId": "625fc2b5-879c-4373-a9a7-cfb0bfd231fd",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          },
+          {
+            "edgeId": "2e3ec042-f917-45dd-a98f-bda21fd1bd0a",
+            "originNodeId": "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+            "destinationNodeId": "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "b09c542e-a262-4b26-a3b5-7983c4d0f506",
+            "originNodeId": "37b26612-4809-40ac-991c-650d03fb9c8e",
+            "destinationNodeId": "6ebd8698-298a-4913-8f1b-77d6e4d512c2",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          }
+        ],
+        "calls": [],
+        "startNodeIds": [
+          "b9e02b0a-09c9-4a56-bd49-80a561907330"
+        ],
+        "primaryExecutionOrderNodeIds": [
+          "b9e02b0a-09c9-4a56-bd49-80a561907330",
+          "1186db5a-0735-45f5-a470-6269c235c7ec",
+          "2012f427-41d5-49bc-99e5-c209124505c4",
+          "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+          "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+          "37b26612-4809-40ac-991c-650d03fb9c8e",
+          "6ebd8698-298a-4913-8f1b-77d6e4d512c2",
+          "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+          "625fc2b5-879c-4373-a9a7-cfb0bfd231fd"
+        ],
+        "pseudocode": "FLOW Microflow: ImporterHelper.CWS_GetProducts\r\nNODES=10; EDGES=8\r\n1. START\r\n2. ACTION RestCallAction: RestCallAction (errorHandlingType=Rollback)\r\n3. DECISION Response full? expression=$Response != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION AggregateListAction: AggregateListAction (output=CountTransactions, errorHandlingType=Rollback)\r\n  6. ACTION ShowMessageAction: show message (text=Het is gelukt! {1} transacties zijn opgehaald!, type=Information, blocking=true)\r\n  7. ACTION CommitAction: commit Response (refreshInClient=true, withEvents=true)\r\n  8. END\r\n9. BRANCH when EnumerationCase=false\r\n  10. ACTION ShowMessageAction: show message (text=Het ophalen van transacties is niet gelukt!, type=Error, blocking=true)\r\n  11. END"
+      },
+      {
+        "flowId": "2f855460-cdb6-49ec-9d20-67100aea9632",
+        "kind": "Microflow",
+        "qualifiedName": "ImporterHelper.SUB_ImportTemplateDocument",
+        "module": "ImporterHelper",
+        "nodes": [
+          {
+            "nodeId": "08383fb8-cdf9-4296-accd-b7709d3161f6",
+            "nodeType": "ActionActivity",
+            "label": "JavaActionCallAction: call java action ExcelImporter.StartImportByTemplate -\u003E rowCount",
+            "detail": "call java action ExcelImporter.StartImportByTemplate -\u003E rowCount",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "a4ef8c47-3315-47d7-a407-a6195bf7f551",
+            "nodeType": "ActionActivity",
+            "label": "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+            "detail": "LogMessageAction (errorHandlingType=Rollback)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "e76d4e90-97ce-4576-85ec-8a0cc76585a7",
+            "nodeType": "ActionActivity",
+            "label": "RetrieveAction: retrieve Template from ExcelImporter.Template",
+            "detail": "retrieve Template from ExcelImporter.Template",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "40e8211b-5d37-4a77-b31f-2759dfcf933d",
+            "nodeType": "ActionActivity",
+            "label": "ShowMessageAction: show message (text=No template selected for this file, type=Warning, blocking=true)",
+            "detail": "show message (text=No template selected for this file, type=Warning, blocking=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "42c57f0e-28b5-4037-b6d9-faac7c43a29c",
+            "nodeType": "ActionActivity",
+            "label": "ShowMessageAction: show message (text=The following error occurred when importing document: {1} {2}, type=Error, blocking=true)",
+            "detail": "show message (text=The following error occurred when importing document: {1} {2}, type=Error, blocking=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "1807da4d-8416-460f-ac48-a1f081159b04",
+            "nodeType": "ActionActivity",
+            "label": "ShowMessageAction: show message (text=The import is finished. {1} records have been imported., type=Information, blocking=true)",
+            "detail": "show message (text=The import is finished. {1} records have been imported., type=Information, blocking=true)",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "67860553-48cf-42df-95b9-124453044b4c",
+            "nodeType": "Annotation",
+            "label": "Op basis van de template (nu Rabo) Wordt de import flow van Excleimporter aangeroepen. Deze staat ingesteld (in het template zelf, via de admin page) op dat het...",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "990a2c7a-a76c-426e-a87d-99afe55f1029",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "9b3fe70c-3cce-48ab-8426-d13668e93091",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "ba84e32a-1064-459d-801c-5a2e5a11e719",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "18b83d04-3fe8-4dd7-9fda-cc3bfa7b7fb6",
+            "nodeType": "ExclusiveSplit",
+            "label": "has a template selected expression=$Template != empty",
+            "detail": "has a template selected expression=$Template != empty",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "17398485-5e4c-4198-869e-81a1cb4ddfa7",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "ae6d3a2e-6ba1-4cd3-b975-b226c2cd4ee8",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "764160a3-534e-4f32-95fa-d58a849ef973",
+            "nodeType": "StartEvent",
+            "label": "StartEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          }
+        ],
+        "edges": [
+          {
+            "edgeId": "51c987c3-d436-4634-8d41-13d216fb1d49",
+            "originNodeId": "764160a3-534e-4f32-95fa-d58a849ef973",
+            "destinationNodeId": "e76d4e90-97ce-4576-85ec-8a0cc76585a7",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "ec95f8fc-397a-4668-b6b3-aeeec8681bf5",
+            "originNodeId": "18b83d04-3fe8-4dd7-9fda-cc3bfa7b7fb6",
+            "destinationNodeId": "08383fb8-cdf9-4296-accd-b7709d3161f6",
+            "condition": "EnumerationCase=true",
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "e3441cb9-14d6-4e37-9a25-3be92ad9cd7d",
+            "originNodeId": "e76d4e90-97ce-4576-85ec-8a0cc76585a7",
+            "destinationNodeId": "18b83d04-3fe8-4dd7-9fda-cc3bfa7b7fb6",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "f00ebdbc-2b3c-4054-8e44-ab1f660f4db9",
+            "originNodeId": "18b83d04-3fe8-4dd7-9fda-cc3bfa7b7fb6",
+            "destinationNodeId": "40e8211b-5d37-4a77-b31f-2759dfcf933d",
+            "condition": "EnumerationCase=false",
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          },
+          {
+            "edgeId": "c254c4a7-78eb-4392-9e5c-fb245322d543",
+            "originNodeId": "40e8211b-5d37-4a77-b31f-2759dfcf933d",
+            "destinationNodeId": "990a2c7a-a76c-426e-a87d-99afe55f1029",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          },
+          {
+            "edgeId": "1df519c4-1a6c-48d6-99a9-5c4e064c36cf",
+            "originNodeId": "08383fb8-cdf9-4296-accd-b7709d3161f6",
+            "destinationNodeId": "1807da4d-8416-460f-ac48-a1f081159b04",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "bae4dc74-1203-4ae5-b65b-007e9cdc6362",
+            "originNodeId": "1807da4d-8416-460f-ac48-a1f081159b04",
+            "destinationNodeId": "9b3fe70c-3cce-48ab-8426-d13668e93091",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "4c9d375f-5b9a-41a9-98bb-8cd4cd739d80",
+            "originNodeId": "42c57f0e-28b5-4037-b6d9-faac7c43a29c",
+            "destinationNodeId": "ba84e32a-1064-459d-801c-5a2e5a11e719",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          },
+          {
+            "edgeId": "4b4229e6-80bf-486d-89fc-391fe3aca90e",
+            "originNodeId": "08383fb8-cdf9-4296-accd-b7709d3161f6",
+            "destinationNodeId": "a4ef8c47-3315-47d7-a407-a6195bf7f551",
+            "condition": null,
+            "isErrorHandler": true,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          },
+          {
+            "edgeId": "39fbcb19-ddce-41eb-9487-670923cb6738",
+            "originNodeId": "a4ef8c47-3315-47d7-a407-a6195bf7f551",
+            "destinationNodeId": "42c57f0e-28b5-4037-b6d9-faac7c43a29c",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 2,
+            "destinationConnectionIndex": 0
+          }
+        ],
+        "calls": [],
+        "startNodeIds": [
+          "764160a3-534e-4f32-95fa-d58a849ef973"
+        ],
+        "primaryExecutionOrderNodeIds": [
+          "764160a3-534e-4f32-95fa-d58a849ef973",
+          "e76d4e90-97ce-4576-85ec-8a0cc76585a7",
+          "18b83d04-3fe8-4dd7-9fda-cc3bfa7b7fb6",
+          "08383fb8-cdf9-4296-accd-b7709d3161f6",
+          "1807da4d-8416-460f-ac48-a1f081159b04",
+          "9b3fe70c-3cce-48ab-8426-d13668e93091",
+          "a4ef8c47-3315-47d7-a407-a6195bf7f551",
+          "42c57f0e-28b5-4037-b6d9-faac7c43a29c",
+          "ba84e32a-1064-459d-801c-5a2e5a11e719",
+          "40e8211b-5d37-4a77-b31f-2759dfcf933d",
+          "990a2c7a-a76c-426e-a87d-99afe55f1029"
+        ],
+        "pseudocode": "FLOW Microflow: ImporterHelper.SUB_ImportTemplateDocument\r\nNODES=14; EDGES=10\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Template from ExcelImporter.Template\r\n3. DECISION has a template selected expression=$Template != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION JavaActionCallAction: call java action ExcelImporter.StartImportByTemplate -\u003E rowCount\r\n  6. BRANCH\r\n    7. ACTION ShowMessageAction: show message (text=The import is finished. {1} records have been imported., type=Information, blocking=true)\r\n    8. END\r\n  9. BRANCH on error\r\n    10. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n    11. ACTION ShowMessageAction: show message (text=The following error occurred when importing document: {1} {2}, type=Error, blocking=true)\r\n    12. END\r\n13. BRANCH when EnumerationCase=false\r\n  14. ACTION ShowMessageAction: show message (text=No template selected for this file, type=Warning, blocking=true)\r\n  15. END"
+      },
+      {
+        "flowId": "c6fee5d5-8765-4e13-a4b2-e9b7336500e4",
+        "kind": "Nanoflow",
+        "qualifiedName": "ImporterHelper.ACT_ImportTransaction_Refreshpage",
+        "module": "ImporterHelper",
+        "nodes": [
+          {
+            "nodeId": "c55d34b3-eca1-4db4-81d5-3970de55955d",
+            "nodeType": "ActionActivity",
+            "label": "JavaScriptActionCallAction: call javascript action Toast.showToast -\u003E ReturnValueName",
+            "detail": "call javascript action Toast.showToast -\u003E ReturnValueName",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "150a727b-c40c-48c6-9499-8518c7576df3",
+            "nodeType": "ActionActivity",
+            "label": "MicroflowCallAction: call microflow ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+            "detail": "call microflow ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": [
+              {
+                "callKind": "Microflow",
+                "targetFlowName": "ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+                "sourceNodeId": "150a727b-c40c-48c6-9499-8518c7576df3"
+              }
+            ]
+          },
+          {
+            "nodeId": "5ff85539-1395-4637-9385-547d260bb84a",
+            "nodeType": "EndEvent",
+            "label": "EndEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          },
+          {
+            "nodeId": "3fd48fa7-7824-4198-b28b-5c9752178f39",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "78903348-48a0-4f8a-bb33-cbc47da537ee",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "a0d8a1de-e50a-4e15-bfa9-8711890750e7",
+            "nodeType": "MicroflowParameterObject",
+            "label": "MicroflowParameterObject",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": false,
+            "calls": []
+          },
+          {
+            "nodeId": "9e1e5aac-e5eb-4fd0-8d6b-e64cd7dacdc7",
+            "nodeType": "StartEvent",
+            "label": "StartEvent",
+            "detail": null,
+            "loopOwnerId": null,
+            "isExecutable": true,
+            "calls": []
+          }
+        ],
+        "edges": [
+          {
+            "edgeId": "6e313b5d-b55a-46bd-b2c7-7b873f6cb364",
+            "originNodeId": "9e1e5aac-e5eb-4fd0-8d6b-e64cd7dacdc7",
+            "destinationNodeId": "c55d34b3-eca1-4db4-81d5-3970de55955d",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "783c3951-a02b-452e-b0da-506bff5ed6f7",
+            "originNodeId": "150a727b-c40c-48c6-9499-8518c7576df3",
+            "destinationNodeId": "5ff85539-1395-4637-9385-547d260bb84a",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          },
+          {
+            "edgeId": "4bfc385d-6822-45e3-9eaa-a52556279400",
+            "originNodeId": "c55d34b3-eca1-4db4-81d5-3970de55955d",
+            "destinationNodeId": "150a727b-c40c-48c6-9499-8518c7576df3",
+            "condition": null,
+            "isErrorHandler": false,
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3
+          }
+        ],
+        "calls": [
+          {
+            "callKind": "Microflow",
+            "targetFlowName": "ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+            "sourceNodeId": "150a727b-c40c-48c6-9499-8518c7576df3"
+          }
+        ],
+        "startNodeIds": [
+          "9e1e5aac-e5eb-4fd0-8d6b-e64cd7dacdc7"
+        ],
+        "primaryExecutionOrderNodeIds": [
+          "9e1e5aac-e5eb-4fd0-8d6b-e64cd7dacdc7",
+          "c55d34b3-eca1-4db4-81d5-3970de55955d",
+          "150a727b-c40c-48c6-9499-8518c7576df3",
+          "5ff85539-1395-4637-9385-547d260bb84a"
+        ],
+        "pseudocode": "FLOW Nanoflow: ImporterHelper.ACT_ImportTransaction_Refreshpage\r\nNODES=7; EDGES=3\r\n1. START\r\n2. ACTION JavaScriptActionCallAction: call javascript action Toast.showToast -\u003E ReturnValueName\r\n3. ACTION MicroflowCallAction: call microflow ImporterHelper.ACT_ImportTransaction_AcceptTransactions\r\n4. END"
+      }
+    ]
+  },
+  "callEdges": [
+    {
+      "callerModule": "ImporterHelper",
+      "callerFlow": "ImporterHelper.ACT_ExcelFileImport_ImportToNP",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "7defd0c1-571b-4bcd-b41e-a54a79e3a62b",
+      "targetModule": "ImporterHelper",
+      "targetFlow": "ImporterHelper.SUB_ImportTemplateDocument",
+      "isInternal": true
+    },
+    {
+      "callerModule": "ImporterHelper",
+      "callerFlow": "ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "0560e781-6de2-4110-b065-6478268cdf04",
+      "targetModule": "SmartExpenses",
+      "targetFlow": "SmartExpenses.SUB_Transaction_setStatus",
+      "isInternal": true
+    },
+    {
+      "callerModule": "ImporterHelper",
+      "callerFlow": "ImporterHelper.ACT_ImportTransaction_Refreshpage",
+      "callerKind": "Nanoflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "150a727b-c40c-48c6-9499-8518c7576df3",
+      "targetModule": "ImporterHelper",
+      "targetFlow": "ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+      "isInternal": true
+    }
+  ]
+}

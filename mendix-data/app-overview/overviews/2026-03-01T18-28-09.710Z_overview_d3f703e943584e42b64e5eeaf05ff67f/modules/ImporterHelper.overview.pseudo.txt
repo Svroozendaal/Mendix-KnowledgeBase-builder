@@ -1,0 +1,109 @@
+# Module: ImporterHelper
+Entities: 3, Associations: 2, Enumerations: 0
+Flows: 7
+
+## Domain Model
+- ENTITY ImporterHelper.ExcelFileImport (persistent, generalization=System.FileDocument)
+- ENTITY ImporterHelper.ImportTransaction (non-persistent)
+  - ATTR Bedrag: DecimalAttributeType
+  - ATTR Datum: DateTimeAttributeType
+  - ATTR Number: IntegerAttributeType
+  - ATTR Omschrijving: StringAttributeType
+  - ATTR Tegenpartij: StringAttributeType
+  - ATTR Transactiereferentie: StringAttributeType
+- ENTITY ImporterHelper.ImportTransactionHelper (non-persistent)
+- ASSOC ImporterHelper.ImportTransactionHelper_ExcelFileImport: ImporterHelper.ImportTransactionHelper [*-1] ImporterHelper.ExcelFileImport
+- ASSOC ImporterHelper.ImportTransaction_ImportTransactionHelper: ImporterHelper.ImportTransaction [*-1] ImporterHelper.ImportTransactionHelper
+
+## Flows
+
+FLOW Microflow: ImporterHelper.ACT_ExcelFileImport_Create
+NODES=7; EDGES=4
+1. START
+2. ACTION CreateObjectAction: create ImporterHelper.ExcelFileImport as NewExcelFileImport
+3. ACTION ChangeObjectAction: change ImportTransactionHelper (ImportTransactionHelper_ExcelFileImport=$NewExcelFileImport; refreshInClient=false)
+4. ACTION ShowPageAction: show page ImporterHelper.ExcelFileImport_Upload
+5. END
+
+FLOW Microflow: ImporterHelper.ACT_ExcelFileImport_ImportToNP
+NODES=13; EDGES=10
+1. START
+2. ACTION RetrieveAction: retrieve ImportTransactionHelperList over association ImportTransactionHelper_ExcelFileImport from ExcelFileImport
+3. ACTION ListOperationAction: ListOperationAction (output=ImportTransactionHelper, errorHandlingType=Rollback)
+4. ACTION MicroflowCallAction: call microflow ImporterHelper.SUB_ImportTemplateDocument -> Imported
+5. DECISION Is Variable? expression=$Imported = true
+6. BRANCH when EnumerationCase=true
+  7. ACTION CommitAction: commit ImportTransactionHelper (refreshInClient=true, withEvents=true)
+  8. ACTION CommitAction: commit ExcelFileImport (refreshInClient=true, withEvents=true)
+  9. ACTION CloseFormAction: close page (pagesToClose=1)
+  10. END
+11. BRANCH when EnumerationCase=false
+  12. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+  13. END
+
+FLOW Microflow: ImporterHelper.ACT_ImportTransaction_AcceptTransactions
+NODES=11; EDGES=6
+1. START
+2. ACTION RetrieveAction: retrieve ImportTransactionList over association ImportTransaction_ImportTransactionHelper from ImportTransactionHelper
+3. ACTION CreateListAction: CreateListAction (output=TransactionList, entity=SmartExpenses.Transaction, errorHandlingType=Rollback)
+4. LOOP iterate ImportTransactionList as IteratorImportTransaction
+  5. LOOP BODY
+    6. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_setStatus
+    7. ACTION CreateObjectAction: create SmartExpenses.Transaction as Transaction (Transaction_FBGProfile=$FBGProfile, TransactionCode=$IteratorImportTransaction/Transactiereferentie, Name=$IteratorImportTransaction/Tegenpartij, Description=$IteratorImportTransaction/Omschrijving, InOut=if $IteratorImportTransaction/Bedrag >= 0 then SmartExpenses.ENUM_TransactionSort.income else SmartExpenses.ENUM_TransactionSort.expenditure, Value=abs($IteratorImportTransaction/Bedrag), TransactionDate=$IteratorImportTransaction/Datum, EntryDate=[%BeginOfCurrentDay%], +2 more)
+    8. ACTION ChangeListAction: change TransactionList (type=Add, value=$Transaction)
+    9. ACTION DeleteAction: delete IteratorImportTransaction (refreshInClient=false)
+    10. ACTION ChangeListAction: change ImportTransactionList (type=Remove, value=$IteratorImportTransaction)
+11. ACTION CommitAction: commit TransactionList (refreshInClient=true, withEvents=true)
+12. ACTION CommitAction: commit ImportTransactionList (refreshInClient=true, withEvents=true)
+13. END
+
+FLOW Microflow: ImporterHelper.ACT_ImportTransaction_ShowPage
+NODES=5; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create ImporterHelper.ImportTransactionHelper as NewImportTransactionHelper
+3. ACTION ShowPageAction: show page ImporterHelper.ImportTransaction_Overview
+4. END
+
+FLOW Microflow: ImporterHelper.CWS_GetProducts
+NODES=10; EDGES=8
+1. START
+2. ACTION RestCallAction: RestCallAction (errorHandlingType=Rollback)
+3. DECISION Response full? expression=$Response != empty
+4. BRANCH when EnumerationCase=true
+  5. ACTION AggregateListAction: AggregateListAction (output=CountTransactions, errorHandlingType=Rollback)
+  6. ACTION ShowMessageAction: show message (text=Het is gelukt! {1} transacties zijn opgehaald!, type=Information, blocking=true)
+  7. ACTION CommitAction: commit Response (refreshInClient=true, withEvents=true)
+  8. END
+9. BRANCH when EnumerationCase=false
+  10. ACTION ShowMessageAction: show message (text=Het ophalen van transacties is niet gelukt!, type=Error, blocking=true)
+  11. END
+
+FLOW Microflow: ImporterHelper.SUB_ImportTemplateDocument
+NODES=14; EDGES=10
+1. START
+2. ACTION RetrieveAction: retrieve Template from ExcelImporter.Template
+3. DECISION has a template selected expression=$Template != empty
+4. BRANCH when EnumerationCase=true
+  5. ACTION JavaActionCallAction: call java action ExcelImporter.StartImportByTemplate -> rowCount
+  6. BRANCH
+    7. ACTION ShowMessageAction: show message (text=The import is finished. {1} records have been imported., type=Information, blocking=true)
+    8. END
+  9. BRANCH on error
+    10. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+    11. ACTION ShowMessageAction: show message (text=The following error occurred when importing document: {1} {2}, type=Error, blocking=true)
+    12. END
+13. BRANCH when EnumerationCase=false
+  14. ACTION ShowMessageAction: show message (text=No template selected for this file, type=Warning, blocking=true)
+  15. END
+
+FLOW Nanoflow: ImporterHelper.ACT_ImportTransaction_Refreshpage
+NODES=7; EDGES=3
+1. START
+2. ACTION JavaScriptActionCallAction: call javascript action Toast.showToast -> ReturnValueName
+3. ACTION MicroflowCallAction: call microflow ImporterHelper.ACT_ImportTransaction_AcceptTransactions
+4. END
+
+## Outgoing Calls
+- ImporterHelper.ACT_ExcelFileImport_ImportToNP -> ImporterHelper.SUB_ImportTemplateDocument (Microflow, internal)
+- ImporterHelper.ACT_ImportTransaction_AcceptTransactions -> SmartExpenses.SUB_Transaction_setStatus (Microflow, internal)
+- ImporterHelper.ACT_ImportTransaction_Refreshpage -> ImporterHelper.ACT_ImportTransaction_AcceptTransactions (Microflow, internal)
