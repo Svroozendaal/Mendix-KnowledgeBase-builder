@@ -164,7 +164,8 @@ internal static class MendixModelChangeDisplayTextFormatter
     {
         if (!IsFlowElementType(elementType) ||
             (!details.Contains("actions delta:", StringComparison.OrdinalIgnoreCase) &&
-             !details.Contains("decisions delta:", StringComparison.OrdinalIgnoreCase)))
+             !details.Contains("decisions delta:", StringComparison.OrdinalIgnoreCase) &&
+             !details.Contains("annotations delta:", StringComparison.OrdinalIgnoreCase)))
         {
             return null;
         }
@@ -178,8 +179,13 @@ internal static class MendixModelChangeDisplayTextFormatter
         var addedItems = BuildActionBucketItems(details, "added");
         var modifiedItems = BuildActionBucketItems(details, "modified", normalizeModifiedDescriptor: true);
         var removedItems = BuildActionBucketItems(details, "removed");
+        MergeDecisionCaptionsIntoBucket(addedItems, ParseDecisionCaptions(details, "added"));
+        MergeDecisionCaptionsIntoBucket(modifiedItems, ParseDecisionCaptions(details, "modified"));
+        MergeDecisionCaptionsIntoBucket(removedItems, ParseDecisionCaptions(details, "removed"));
+        MergeAnnotationLabelsIntoBucket(addedItems, ParseAnnotationLabels(details, "added"));
+        MergeAnnotationLabelsIntoBucket(modifiedItems, ParseAnnotationLabels(details, "modified"));
+        MergeAnnotationLabelsIntoBucket(removedItems, ParseAnnotationLabels(details, "removed"));
         var loopDescriptors = ParseLoopDescriptors(details);
-        var decisionCaptions = ParseDecisionCaptions(details);
         var returnChangeDetails = ParseReturnChangeDetails(details);
 
         var sections = new List<string>();
@@ -201,11 +207,6 @@ internal static class MendixModelChangeDisplayTextFormatter
         if (loopDescriptors.Count > 0)
         {
             sections.Add($"loops: {string.Join(", ", loopDescriptors)}");
-        }
-
-        if (decisionCaptions.Count > 0)
-        {
-            sections.Add($"decisions: {string.Join(", ", decisionCaptions)}");
         }
 
         if (!string.IsNullOrWhiteSpace(returnChangeDetails))
@@ -371,45 +372,123 @@ internal static class MendixModelChangeDisplayTextFormatter
         return trimmed;
     }
 
-    private static List<string> ParseDecisionCaptions(string details)
+    private static void MergeDecisionCaptionsIntoBucket(
+        ICollection<string> bucketItems,
+        IEnumerable<string> decisionCaptions)
     {
-        var captions = new List<string>();
-        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var anchor in new[] { "decisions added (", "decisions removed (", "decisions modified (" })
+        var seen = new HashSet<string>(bucketItems, StringComparer.OrdinalIgnoreCase);
+        foreach (var caption in decisionCaptions)
         {
-            var segment = ExtractSegment(
-                details,
-                anchor,
-                "; decisions added (",
-                "; decisions removed (",
-                "; decisions modified (",
-                "; loops delta:",
-                "; actions delta:");
-            if (string.IsNullOrWhiteSpace(segment))
+            if (string.IsNullOrWhiteSpace(caption))
             {
                 continue;
             }
 
-            var colonIndex = segment.IndexOf(':');
-            if (colonIndex >= 0 && colonIndex < segment.Length - 1)
+            var phrase = $"decision {caption.Trim()}";
+            if (seen.Add(phrase))
             {
-                segment = segment[(colonIndex + 1)..].Trim();
+                bucketItems.Add(phrase);
+            }
+        }
+    }
+
+    private static void MergeAnnotationLabelsIntoBucket(
+        ICollection<string> bucketItems,
+        IEnumerable<string> annotationLabels)
+    {
+        var seen = new HashSet<string>(bucketItems, StringComparer.OrdinalIgnoreCase);
+        foreach (var label in annotationLabels)
+        {
+            if (string.IsNullOrWhiteSpace(label))
+            {
+                continue;
             }
 
-            foreach (var token in segment.Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            var phrase = $"annotation {label.Trim()}";
+            if (seen.Add(phrase))
             {
-                if (token.StartsWith("+", StringComparison.Ordinal))
-                {
-                    continue;
-                }
-
-                var caption = ExtractDecisionCaption(token);
-                AddUniqueIfNotEmpty(captions, seen, caption);
+                bucketItems.Add(phrase);
             }
+        }
+    }
+
+    private static List<string> ParseDecisionCaptions(string details, string bucket)
+    {
+        var captions = new List<string>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        var anchor = $"decisions {bucket} (";
+        var segment = ExtractSegment(
+            details,
+            anchor,
+            "; decisions added (",
+            "; decisions removed (",
+            "; decisions modified (",
+            "; loops delta:",
+            "; actions delta:");
+        if (string.IsNullOrWhiteSpace(segment))
+        {
+            return captions;
+        }
+
+        var colonIndex = segment.IndexOf(':');
+        if (colonIndex >= 0 && colonIndex < segment.Length - 1)
+        {
+            segment = segment[(colonIndex + 1)..].Trim();
+        }
+
+        foreach (var token in segment.Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            if (token.StartsWith("+", StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var caption = ExtractDecisionCaption(token);
+            AddUniqueIfNotEmpty(captions, seen, caption);
         }
 
         return captions;
+    }
+
+    private static List<string> ParseAnnotationLabels(string details, string bucket)
+    {
+        var labels = new List<string>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        var anchor = $"annotations {bucket} (";
+        var segment = ExtractSegment(
+            details,
+            anchor,
+            "; annotations added (",
+            "; annotations removed (",
+            "; annotations modified (",
+            "; loops delta:",
+            "; decisions delta:",
+            "; actions delta:");
+        if (string.IsNullOrWhiteSpace(segment))
+        {
+            return labels;
+        }
+
+        var colonIndex = segment.IndexOf(':');
+        if (colonIndex >= 0 && colonIndex < segment.Length - 1)
+        {
+            segment = segment[(colonIndex + 1)..].Trim();
+        }
+
+        foreach (var token in segment.Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            if (token.StartsWith("+", StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var label = ExtractAnnotationLabel(token);
+            AddUniqueIfNotEmpty(labels, seen, label);
+        }
+
+        return labels;
     }
 
     private static List<string> ParseLoopDescriptors(string details)
@@ -533,6 +612,35 @@ internal static class MendixModelChangeDisplayTextFormatter
 
         working = working.Trim(' ', ',', ';');
         return working.Length == 0 ? null : NormalizeInlineToken(working);
+    }
+
+    private static string? ExtractAnnotationLabel(string token)
+    {
+        var working = token.Trim();
+        if (working.Length == 0)
+        {
+            return null;
+        }
+
+        var arrowIndex = working.LastIndexOf("->", StringComparison.Ordinal);
+        if (arrowIndex >= 0 && arrowIndex < working.Length - 2)
+        {
+            working = working[(arrowIndex + 2)..].Trim();
+        }
+
+        const string textPrefix = "text=";
+        if (working.StartsWith(textPrefix, StringComparison.OrdinalIgnoreCase))
+        {
+            working = working[textPrefix.Length..].Trim();
+        }
+
+        working = working.Trim(' ', ',', ';');
+        if (working.Length == 0 || string.Equals(working, "annotation", StringComparison.OrdinalIgnoreCase))
+        {
+            return "updated";
+        }
+
+        return NormalizeInlineToken(working);
     }
 
     private static string? ParseCallTarget(string? descriptor, string flowKind)

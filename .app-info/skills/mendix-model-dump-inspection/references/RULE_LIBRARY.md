@@ -113,6 +113,23 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
   - `flow structure: ...`
   - `flow metadata: ...`
 
+## D015 - Flow annotation extraction and ownership fallback
+
+- Applies to:
+  - `Microflows$Microflow`
+  - `Microflows$Nanoflow`
+- Parse:
+  - `Microflows$Annotation` objects anywhere in the flow object graph (`objectCollection` traversal).
+  - Annotation descriptor text from caption/text/content payload when available.
+- Emit anchors:
+  - `annotations delta: added <n>, removed <n>, modified <n>`
+  - `annotations added (<n>): <AnnotationDescriptor>`
+  - `annotations removed (<n>): <AnnotationDescriptor>`
+  - `annotations modified (<n>): <OldDescriptor -> NewDescriptor>`
+- Ownership fallback:
+  - If flow-level semantic diff is equal (for example because `objectCollection` is ignored for noise suppression), still mark the flow `Modified` when deterministic flow delta anchors exist (actions/loops/decisions/annotations).
+  - This ensures annotation changes without `$ContainerID` are still attached to the owning flow.
+
 ## D020 - Domain entity attribute extraction
 
 - Applies to `DomainModels$Entity`.
@@ -342,10 +359,83 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
     - `accessLevel <oldLevel>-><newLevel>` (when access level changed)
   - Fallback to generic parser if no meaningful action fields found
 
+## D075 - Page layout metadata delta extraction
+
+- Applies to:
+  - `Pages$Page`
+- Parse:
+  - `layoutCall.layout`
+  - `title.translations`
+  - `url`
+  - popup fields (`popupWidth`, `popupHeight`, `popupResizable`)
+- Emit:
+  - Added/Deleted:
+    - `layout=<layout>; title=<title>; url=<url|empty>; popup=<w>x<h> resizable=<bool>`
+  - Modified:
+    - only changed fields, each as `<field> <old|empty>-><new|empty>`
+    - supported fields: `layout`, `title`, `url`, `popup`
+
+## D076 - Page-like action binding delta extraction
+
+- Applies to:
+  - `Pages$Page`
+  - `Pages$Snippet`
+  - `Pages$PageTemplate`
+  - `Pages$BuildingBlock`
+  - `Pages$Layout`
+- Parse targets:
+  - widget deltas by widget `$ID` + widget type
+  - widget action binding fields (`action`, `onChangeAction`, `onClickAction`, `onEnterAction`, `onLeaveAction`, ...)
+  - client-action targets (`page`, `microflow`, `nanoflow`)
+  - source bindings from `dataSource` / `selectorSource`
+- Emit:
+  - Added:
+    - `actions used (<n>): <ActionType x#>; action targets: <TargetList>`
+  - Deleted:
+    - `actions before deletion (<n>): <ActionType x#>; action targets before deletion: <TargetList>`
+  - Modified:
+    - one or more widget-level rows:
+    - `added <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
+    - `modified <WidgetType>(<optionalName>) (<bindingKey old->new | property-change summary>)`
+    - `removed <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
+
+## D077 - Page-like widget delta-only rendering for modified rows
+
+- Applies to:
+  - `Pages$Page`
+  - `Pages$Snippet`
+  - `Pages$PageTemplate`
+  - `Pages$BuildingBlock`
+  - `Pages$Layout`
+- Parse:
+  - significant widget type counts under layout trees
+- Emit:
+  - Added:
+    - `widgets used (<n>): <WidgetType x#>`
+  - Deleted:
+    - `widgets before deletion (<n>): <WidgetType x#>`
+  - Modified:
+    - suppress aggregate widget count sections when widget-level delta rows are emitted by D076
+    - do not emit full `widgets used` inventory for modified rows
+
+## D078 - Page-like generic-noise suppression
+
+- Applies to:
+  - `Pages$Page`
+  - `Pages$Snippet`
+  - `Pages$PageTemplate`
+  - `Pages$BuildingBlock`
+  - `Pages$Layout`
+- Rule:
+  - when deterministic page/UI parser anchors are available, prefer page-specific detail output and do not merge generic modification fragments such as:
+    - `layoutCall updated`
+    - `widgets entries updated`
+    - other generic property-summary noise from `BuildModificationDetails(...)`
+
 ## Open Gaps
 
 - Full single-dump inventory is still out of scope for diff-only extraction.
 
 ## Next rule IDs
 
-- `D075` next available.
+- `D079` next available.

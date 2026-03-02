@@ -36,6 +36,9 @@ Observed dump evidence:
     - `actions delta: added <n>, removed <n>, modified <n>`
     - `actions added (<n>): <ActionType x#>`
     - `added action details: <ActionType: descriptor>`
+    - `annotations delta: added <n>, removed <n>, modified <n>`
+    - `annotations added (<n>): <AnnotationDescriptor>`
+    - `annotations modified (<n>): <OldDescriptor -> NewDescriptor>`
 
 - `BuildNanoflowActionDeltaDetails(JsonElement? working, JsonElement? head) -> string?`
   - Status: implemented via shared flow action parser.
@@ -87,6 +90,15 @@ Observed dump evidence:
   - Contract anchors:
     - `decisions delta: ...`
     - `decisions added/removed/modified (...)`
+
+- `CollectFlowAnnotationsById(JsonElement flow) -> Dictionary<string, FlowAnnotationInfo>`
+  - Status: implemented.
+  - Parse target:
+    - `Microflows$Annotation`
+    - annotation text/caption payload
+  - Contract anchors:
+    - `annotations delta: ...`
+    - `annotations added/removed/modified (...)`
 
 ## Domain model parsers
 
@@ -159,16 +171,33 @@ Observed dump evidence:
     - `url`
     - `title.translations`
     - popup settings (`popupWidth`, `popupHeight`, `popupResizable`)
-  - Contract candidate:
-    - `layout=<layout>; title=<title>; url=<url|empty>; popup=<w>x<h> resizable=<bool>`
+  - Contract:
+    - Added/Deleted rows:
+      - `layout=<layout>; title=<title>; url=<url|empty>; popup=<w>x<h> resizable=<bool>`
+    - Modified rows:
+      - emit only changed fields:
+      - `layout <old|empty>-><new|empty>`
+      - `title <old|empty>-><new|empty>`
+      - `url <old|empty>-><new|empty>`
+      - `popup <old|empty>-><new|empty>`
 
 - `BuildPageActionBindingsDetails(JsonElement? working, JsonElement? head) -> string?`
   - Status: implemented.
   - Parse targets:
-    - `Pages$*ClientAction` (`MicroflowClientAction`, `NanoflowClientAction`, `PageClientAction`)
-    - Extract referenced microflow/nanoflow/page.
-  - Contract candidate:
-    - `actions used (<n>): <ActionType x#>; action targets: <TargetList>`
+    - page widget deltas keyed by widget `$ID`
+    - action bindings from widget action properties (`action`, `onChangeAction`, `onClickAction`, `onEnterAction`, `onLeaveAction`, ...)
+    - action targets from page/microflow/nanoflow references
+    - source bindings from `dataSource` / `selectorSource` (`MicroflowSource`, `NanoflowSource`, selector microflow source, etc.)
+  - Contract:
+    - Added rows:
+      - `actions used (<n>): <ActionType x#>; action targets: <TargetList>`
+    - Deleted rows:
+      - `actions before deletion (<n>): <ActionType x#>; action targets before deletion: <TargetList>`
+    - Modified rows:
+      - emit per-widget lines:
+      - `added <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
+      - `modified <WidgetType>(<optionalName>) (<bindingKey old->new | property updated ...>)`
+      - `removed <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
 
 - `BuildPageWidgetSummaryDetails(JsonElement? working, JsonElement? head) -> string?`
   - Status: implemented.
@@ -178,7 +207,9 @@ Observed dump evidence:
     - `widgets delta: added <n>, removed <n>` (when both snapshots exist and counts differ)
     - `widgets added (<n>): <WidgetType x#>`
     - `widgets removed (<n>): <WidgetType x#>`
-    - `widgets used (<n>): <WidgetType x#>`
+    - Added rows: `widgets used (<n>): <WidgetType x#>`
+    - Deleted rows: `widgets before deletion (<n>): <WidgetType x#>`
+    - Modified rows: suppress widget count summaries when widget-level delta lines are already emitted by `BuildPageActionBindingsDetails`
 
 ## System configuration parsers
 
@@ -269,6 +300,8 @@ Observed dump evidence:
   - `System$PublishedRestService -> BuildPublishedRestServiceDetails`
   - `System$JavaAction -> BuildJavaActionDetails`
   - all remaining tracked resources -> `BuildGenericResourceDetails`
+  - Generic-detail merge behavior:
+    - For page-like model types (`Pages$Page`, `Pages$Snippet`, `Pages$PageTemplate`, `Pages$BuildingBlock`, `Pages$Layout`), prefer parser output only and do not merge generic `BuildModificationDetails(...)` noise when deterministic page/UI anchors are available.
 
 ## Rule linkage
 

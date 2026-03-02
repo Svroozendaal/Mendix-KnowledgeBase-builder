@@ -198,6 +198,45 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
   - Keep remaining segments in the original order.
   - If all segments are dropped for entity rows, keep empty details.
 
+### C013 - Flow Decision Bucket Alignment
+
+- Rule ID: `C013`
+- Purpose: keep decision deltas inside action buckets so flow output stays grouped by `added/modified/removed`.
+- Applies to:
+  - `elementType = Microflow|Nanoflow`
+  - compacted flow details built from `actions delta` and `decisions delta` anchors
+- Logic:
+  - Parse decision captions per bucket:
+    - `decisions added (...)` -> `added`
+    - `decisions modified (...)` -> `modified`
+    - `decisions removed (...)` -> `removed`
+  - Render each decision as `decision <Caption>` and append to the matching bucket list.
+  - Do not emit a standalone `decisions:` section.
+- Example input:
+  - `...; actions removed (1): ValidationFeedbackAction x1; ...; decisions removed (1): FTE >=0 expression=...; decisions modified (1): is TWK? expression=... -> is TWK? expression=...`
+- Example output:
+  - `removed: validation feedback, decision FTE >=0; modified: decision is TWK?`
+
+### C014 - Flow Annotation Bucket Alignment
+
+- Rule ID: `C014`
+- Purpose: keep annotation deltas inside action buckets so flow output stays grouped by `added/modified/removed`.
+- Applies to:
+  - `elementType = Microflow|Nanoflow`
+  - compacted flow details built from `annotations delta` anchors
+- Logic:
+  - Parse annotation labels per bucket:
+    - `annotations added (...)` -> `added`
+    - `annotations modified (...)` -> `modified`
+    - `annotations removed (...)` -> `removed`
+  - Render each entry as `annotation <label>` and append to the matching bucket list.
+  - If no label can be derived, use `annotation updated`.
+  - Do not emit a standalone `annotations:` section.
+- Example input:
+  - `annotations delta: added 1, removed 0, modified 0; annotations added (1): text=Need validation`
+- Example output:
+  - `added: annotation Need validation`
+
 
 
 
@@ -306,5 +345,5 @@ Use this schema for each AI rule:
 
 ## Pending Rule Slots
 
-- Converter rules: `C013` next available
+- Converter rules: `C014` next available
 - AI rules: `A007` next available

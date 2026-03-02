@@ -55,6 +55,7 @@ public static class MendixModelDiffService
     private const string ActionActivityModelType = "Microflows$ActionActivity";
     private const string LoopedActivityModelType = "Microflows$LoopedActivity";
     private const string ExclusiveSplitModelType = "Microflows$ExclusiveSplit";
+    private const string AnnotationModelType = "Microflows$Annotation";
     private const string MicroflowObjectCollectionModelType = "Microflows$MicroflowObjectCollection";
     private const string SequenceFlowModelType = "Microflows$SequenceFlow";
     private const string DomainEntityModelType = "DomainModels$Entity";
@@ -188,15 +189,25 @@ public static class MendixModelDiffService
                 continue;
             }
 
-            if (ElementsSemanticallyEqual(workingResource.Object, headResource.Object))
+            var semanticallyEqual = ElementsSemanticallyEqual(workingResource.Object, headResource.Object);
+            var hasFlowSpecificDelta = semanticallyEqual &&
+                                       IsFlowModelType(workingResource.ModelType) &&
+                                       !string.IsNullOrWhiteSpace(BuildMicroflowActionDeltaDetails(
+                                           workingResource.Object,
+                                           headResource.Object));
+
+            if (semanticallyEqual && !hasFlowSpecificDelta)
             {
                 continue;
             }
 
             var modified = EnsureModifiedChange(changeMap, resourceId, workingResource);
-            modified.DirectDetails = MergeDetailTexts(
-                modified.DirectDetails,
-                BuildModificationDetails(headResource.Object, workingResource.Object));
+            if (!semanticallyEqual)
+            {
+                modified.DirectDetails = MergeDetailTexts(
+                    modified.DirectDetails,
+                    BuildModificationDetails(headResource.Object, workingResource.Object));
+            }
         }
 
         AddNestedOwnershipChanges(
@@ -358,7 +369,8 @@ public static class MendixModelDiffService
     private static bool ShouldOverrideGenericResourceDetails(string modelType)
     {
         return string.Equals(modelType, DomainEntityModelType, StringComparison.OrdinalIgnoreCase) ||
-               string.Equals(modelType, DomainAssociationModelType, StringComparison.OrdinalIgnoreCase);
+               string.Equals(modelType, DomainAssociationModelType, StringComparison.OrdinalIgnoreCase) ||
+               IsPageLikeModelType(modelType);
     }
 
     private static string? BuildResourceSpecificDetails(
@@ -511,6 +523,12 @@ public static class MendixModelDiffService
         var headDecisions = headResource is null
             ? new Dictionary<string, FlowDecisionInfo>(StringComparer.OrdinalIgnoreCase)
             : CollectFlowDecisionsById(headResource.Value);
+        var workingAnnotations = workingResource is null
+            ? new Dictionary<string, FlowAnnotationInfo>(StringComparer.OrdinalIgnoreCase)
+            : CollectFlowAnnotationsById(workingResource.Value);
+        var headAnnotations = headResource is null
+            ? new Dictionary<string, FlowAnnotationInfo>(StringComparer.OrdinalIgnoreCase)
+            : CollectFlowAnnotationsById(headResource.Value);
 
         var added = new List<MicroflowActionInfo>();
         var removed = new List<MicroflowActionInfo>();
@@ -521,6 +539,9 @@ public static class MendixModelDiffService
         var addedDecisions = new List<FlowDecisionInfo>();
         var removedDecisions = new List<FlowDecisionInfo>();
         var modifiedDecisions = new List<(FlowDecisionInfo Head, FlowDecisionInfo Working)>();
+        var addedAnnotations = new List<FlowAnnotationInfo>();
+        var removedAnnotations = new List<FlowAnnotationInfo>();
+        var modifiedAnnotations = new List<(FlowAnnotationInfo Head, FlowAnnotationInfo Working)>();
 
         foreach (var (actionId, workingAction) in workingActions)
         {
@@ -588,9 +609,32 @@ public static class MendixModelDiffService
             }
         }
 
+        foreach (var (annotationId, workingAnnotation) in workingAnnotations)
+        {
+            if (!headAnnotations.TryGetValue(annotationId, out var headAnnotation))
+            {
+                addedAnnotations.Add(workingAnnotation);
+                continue;
+            }
+
+            if (!ElementsSemanticallyEqual(workingAnnotation.AnnotationElement, headAnnotation.AnnotationElement))
+            {
+                modifiedAnnotations.Add((headAnnotation, workingAnnotation));
+            }
+        }
+
+        foreach (var (annotationId, headAnnotation) in headAnnotations)
+        {
+            if (!workingAnnotations.ContainsKey(annotationId))
+            {
+                removedAnnotations.Add(headAnnotation);
+            }
+        }
+
         if (added.Count == 0 && removed.Count == 0 && modified.Count == 0 &&
             addedLoops.Count == 0 && removedLoops.Count == 0 && modifiedLoops.Count == 0 &&
-            addedDecisions.Count == 0 && removedDecisions.Count == 0 && modifiedDecisions.Count == 0)
+            addedDecisions.Count == 0 && removedDecisions.Count == 0 && modifiedDecisions.Count == 0 &&
+            addedAnnotations.Count == 0 && removedAnnotations.Count == 0 && modifiedAnnotations.Count == 0)
         {
             return null;
         }
@@ -669,6 +713,26 @@ public static class MendixModelDiffService
         if (modifiedDecisions.Count > 0)
         {
             parts.Add($"decisions modified ({modifiedDecisions.Count}): {FormatModifiedDecisionDetails(modifiedDecisions)}");
+        }
+
+        if (addedAnnotations.Count > 0 || removedAnnotations.Count > 0 || modifiedAnnotations.Count > 0)
+        {
+            parts.Add($"annotations delta: added {addedAnnotations.Count}, removed {removedAnnotations.Count}, modified {modifiedAnnotations.Count}");
+        }
+
+        if (addedAnnotations.Count > 0)
+        {
+            parts.Add($"annotations added ({addedAnnotations.Count}): {FormatAnnotationInstanceDetails(addedAnnotations)}");
+        }
+
+        if (removedAnnotations.Count > 0)
+        {
+            parts.Add($"annotations removed ({removedAnnotations.Count}): {FormatAnnotationInstanceDetails(removedAnnotations)}");
+        }
+
+        if (modifiedAnnotations.Count > 0)
+        {
+            parts.Add($"annotations modified ({modifiedAnnotations.Count}): {FormatModifiedAnnotationDetails(modifiedAnnotations)}");
         }
 
         return string.Join("; ", parts);
@@ -1034,6 +1098,157 @@ public static class MendixModelDiffService
                 if (string.Equals(entry.Head.DescriptorText, entry.Working.DescriptorText, StringComparison.OrdinalIgnoreCase))
                 {
                     return "decision payload changed";
+                }
+
+                return $"{entry.Head.DescriptorText} -> {entry.Working.DescriptorText}";
+            })
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(detail => detail, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        if (details.Length == 0)
+        {
+            return "<none>";
+        }
+
+        var visible = details.Take(maxEntries).ToList();
+        var remaining = details.Length - visible.Count;
+        if (remaining > 0)
+        {
+            visible.Add($"+{remaining} more");
+        }
+
+        return string.Join(" | ", visible);
+    }
+
+    private static Dictionary<string, FlowAnnotationInfo> CollectFlowAnnotationsById(JsonElement flowObject)
+    {
+        var annotationsById = new Dictionary<string, FlowAnnotationInfo>(StringComparer.OrdinalIgnoreCase);
+        var duplicateCounters = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var stack = new Stack<JsonElement>();
+        stack.Push(flowObject);
+
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            switch (current.ValueKind)
+            {
+                case JsonValueKind.Object:
+                {
+                    var modelType = TryReadStringProperty(current, "$Type");
+                    if (string.Equals(modelType, AnnotationModelType, StringComparison.OrdinalIgnoreCase))
+                    {
+                        var descriptor = BuildAnnotationDescriptor(current) ?? "annotation payload changed";
+                        var annotationId = TryReadStringProperty(current, "$ID") ?? BuildFallbackAnnotationId(descriptor);
+
+                        if (annotationsById.ContainsKey(annotationId))
+                        {
+                            duplicateCounters.TryGetValue(annotationId, out var duplicateIndex);
+                            duplicateIndex++;
+                            duplicateCounters[annotationId] = duplicateIndex;
+                            annotationId = $"{annotationId}#{duplicateIndex}";
+                        }
+                        else
+                        {
+                            duplicateCounters[annotationId] = 0;
+                        }
+
+                        annotationsById[annotationId] = new FlowAnnotationInfo(
+                            annotationId,
+                            NormalizeInlineText(descriptor, maxLength: 180),
+                            current);
+                    }
+
+                    foreach (var property in current.EnumerateObject())
+                    {
+                        stack.Push(property.Value);
+                    }
+
+                    break;
+                }
+
+                case JsonValueKind.Array:
+                    foreach (var item in current.EnumerateArray())
+                    {
+                        stack.Push(item);
+                    }
+
+                    break;
+            }
+        }
+
+        return annotationsById;
+    }
+
+    private static string BuildFallbackAnnotationId(string descriptor)
+    {
+        var normalizedDescriptor = string.IsNullOrWhiteSpace(descriptor)
+            ? "annotation"
+            : NormalizeInlineText(descriptor, maxLength: 90);
+        return $"annotation:{normalizedDescriptor}";
+    }
+
+    private static string BuildAnnotationDescriptor(JsonElement annotationElement)
+    {
+        var caption = TryReadStringProperty(annotationElement, "caption");
+        if (string.IsNullOrWhiteSpace(caption))
+        {
+            caption = TryReadTranslatableTextProperty(annotationElement, "caption");
+        }
+
+        var text = TryReadStringProperty(annotationElement, "text");
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            text = TryReadTranslatableTextProperty(annotationElement, "text");
+        }
+
+        var value = !string.IsNullOrWhiteSpace(caption) ? caption : text;
+        if (string.IsNullOrWhiteSpace(value) &&
+            TryReadProperty(annotationElement, "content", out var content))
+        {
+            value = TryReadTranslatedText(content);
+        }
+
+        return string.IsNullOrWhiteSpace(value)
+            ? "annotation"
+            : $"text={NormalizeInlineText(value, maxLength: 120)}";
+    }
+
+    private static string FormatAnnotationInstanceDetails(
+        IEnumerable<FlowAnnotationInfo> annotations,
+        int maxEntries = 5)
+    {
+        var details = annotations
+            .Select(annotation => annotation.DescriptorText)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(detail => detail, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        if (details.Length == 0)
+        {
+            return "<none>";
+        }
+
+        var visible = details.Take(maxEntries).ToList();
+        var remaining = details.Length - visible.Count;
+        if (remaining > 0)
+        {
+            visible.Add($"+{remaining} more");
+        }
+
+        return string.Join(" | ", visible);
+    }
+
+    private static string FormatModifiedAnnotationDetails(
+        IEnumerable<(FlowAnnotationInfo Head, FlowAnnotationInfo Working)> modifiedAnnotations,
+        int maxEntries = 5)
+    {
+        var details = modifiedAnnotations
+            .Select(entry =>
+            {
+                if (string.Equals(entry.Head.DescriptorText, entry.Working.DescriptorText, StringComparison.OrdinalIgnoreCase))
+                {
+                    return "annotation payload changed";
                 }
 
                 return $"{entry.Head.DescriptorText} -> {entry.Working.DescriptorText}";
@@ -3010,6 +3225,41 @@ public static class MendixModelDiffService
         JsonElement? workingResource,
         JsonElement? headResource)
     {
+        if (workingResource is not null && headResource is not null)
+        {
+            var modifiedDetails = new List<string>();
+            AddPageMetadataDelta(
+                modifiedDetails,
+                "layout",
+                TryReadNestedStringProperty(headResource.Value, "layoutCall", "layout"),
+                TryReadNestedStringProperty(workingResource.Value, "layoutCall", "layout"),
+                maxLength: 120,
+                emptyToken: "<empty>");
+            AddPageMetadataDelta(
+                modifiedDetails,
+                "title",
+                TryReadTranslatableTextProperty(headResource.Value, "title"),
+                TryReadTranslatableTextProperty(workingResource.Value, "title"),
+                maxLength: 120,
+                emptyToken: "<empty>");
+            AddPageMetadataDelta(
+                modifiedDetails,
+                "url",
+                TryReadStringProperty(headResource.Value, "url"),
+                TryReadStringProperty(workingResource.Value, "url"),
+                maxLength: 180,
+                emptyToken: "<empty>");
+            AddPageMetadataDelta(
+                modifiedDetails,
+                "popup",
+                BuildPagePopupMetadata(headResource.Value),
+                BuildPagePopupMetadata(workingResource.Value),
+                maxLength: 80,
+                emptyToken: "<empty>");
+
+            return modifiedDetails.Count == 0 ? null : string.Join("; ", modifiedDetails);
+        }
+
         var pageResource = workingResource ?? headResource;
         if (pageResource is null)
         {
@@ -3055,17 +3305,75 @@ public static class MendixModelDiffService
         return details.Count == 0 ? null : string.Join("; ", details);
     }
 
-    private static string? BuildPageActionBindingsDetails(
-        JsonElement? workingResource,
-        JsonElement? headResource)
+    private static string? BuildPagePopupMetadata(JsonElement pageResource)
     {
-        var pageResource = workingResource ?? headResource;
-        if (pageResource is null)
+        var popupWidth = TryReadStringProperty(pageResource, "popupWidth");
+        var popupHeight = TryReadStringProperty(pageResource, "popupHeight");
+        var popupResizable = TryReadStringProperty(pageResource, "popupResizable");
+        if (string.IsNullOrWhiteSpace(popupWidth) &&
+            string.IsNullOrWhiteSpace(popupHeight) &&
+            string.IsNullOrWhiteSpace(popupResizable))
         {
             return null;
         }
 
-        var actionBindings = CollectPageClientActions(pageResource.Value);
+        var width = string.IsNullOrWhiteSpace(popupWidth) ? "?" : popupWidth;
+        var height = string.IsNullOrWhiteSpace(popupHeight) ? "?" : popupHeight;
+        var popupDetails = $"popup={width}x{height}";
+        if (!string.IsNullOrWhiteSpace(popupResizable))
+        {
+            popupDetails = $"{popupDetails} resizable={popupResizable}";
+        }
+
+        return popupDetails;
+    }
+
+    private static void AddPageMetadataDelta(
+        ICollection<string> details,
+        string label,
+        string? previousValue,
+        string? currentValue,
+        int maxLength,
+        string emptyToken)
+    {
+        var normalizedPrevious = string.IsNullOrWhiteSpace(previousValue)
+            ? string.Empty
+            : NormalizeInlineText(previousValue, maxLength);
+        var normalizedCurrent = string.IsNullOrWhiteSpace(currentValue)
+            ? string.Empty
+            : NormalizeInlineText(currentValue, maxLength);
+        if (string.Equals(normalizedPrevious, normalizedCurrent, StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        var displayPrevious = normalizedPrevious.Length == 0 ? emptyToken : normalizedPrevious;
+        var displayCurrent = normalizedCurrent.Length == 0 ? emptyToken : normalizedCurrent;
+        details.Add($"{label} {displayPrevious}->{displayCurrent}");
+    }
+
+    private static string? BuildPageActionBindingsDetails(
+        JsonElement? workingResource,
+        JsonElement? headResource)
+    {
+        var workingActionBindings = workingResource is null
+            ? new List<PageClientActionInfo>()
+            : CollectPageClientActions(workingResource.Value);
+        var headActionBindings = headResource is null
+            ? new List<PageClientActionInfo>()
+            : CollectPageClientActions(headResource.Value);
+
+        if (workingResource is not null && headResource is not null)
+        {
+            var widgetDeltaLines = BuildPageWidgetDeltaLines(workingResource.Value, headResource.Value);
+            return widgetDeltaLines.Count == 0
+                ? null
+                : string.Join("; ", widgetDeltaLines);
+        }
+
+        var actionBindings = workingResource is not null
+            ? workingActionBindings
+            : headActionBindings;
         if (actionBindings.Count == 0)
         {
             return null;
@@ -3077,23 +3385,440 @@ public static class MendixModelDiffService
             IncrementCount(counts, actionBinding.ActionType);
         }
 
-        var details = new List<string>
+        var detailsForLifecycleChange = new List<string>
         {
-            $"actions used ({actionBindings.Count}): {FormatCounterList(counts)}",
+            workingResource is not null
+                ? $"actions used ({actionBindings.Count}): {FormatCounterList(counts)}"
+                : $"actions before deletion ({actionBindings.Count}): {FormatCounterList(counts)}",
         };
 
-        var targets = actionBindings
-            .SelectMany(actionBinding => actionBinding.Targets)
+        var targets = CollectDistinctPageActionTargets(actionBindings);
+        if (targets.Length > 0)
+        {
+            detailsForLifecycleChange.Add(workingResource is not null
+                ? $"action targets: {FormatNameList(targets, maxEntries: 8)}"
+                : $"action targets before deletion: {FormatNameList(targets, maxEntries: 8)}");
+        }
+
+        return string.Join("; ", detailsForLifecycleChange);
+    }
+
+    private static List<string> BuildPageWidgetDeltaLines(JsonElement workingPageResource, JsonElement headPageResource)
+    {
+        var workingWidgets = CollectPageWidgetsById(workingPageResource);
+        var headWidgets = CollectPageWidgetsById(headPageResource);
+        var addedLines = new List<string>();
+        var modifiedLines = new List<string>();
+        var removedLines = new List<string>();
+
+        foreach (var (widgetId, workingWidget) in workingWidgets)
+        {
+            if (!headWidgets.TryGetValue(widgetId, out var headWidget))
+            {
+                addedLines.Add(BuildAddedOrRemovedWidgetLine("added", workingWidget));
+                continue;
+            }
+
+            if (ElementsSemanticallyEqual(headWidget.WidgetElement, workingWidget.WidgetElement))
+            {
+                continue;
+            }
+
+            modifiedLines.Add(BuildModifiedWidgetLine(headWidget, workingWidget));
+        }
+
+        foreach (var (widgetId, headWidget) in headWidgets)
+        {
+            if (!workingWidgets.ContainsKey(widgetId))
+            {
+                removedLines.Add(BuildAddedOrRemovedWidgetLine("removed", headWidget));
+            }
+        }
+
+        var output = new List<string>();
+        output.AddRange(addedLines.OrderBy(line => line, StringComparer.OrdinalIgnoreCase));
+        output.AddRange(modifiedLines.OrderBy(line => line, StringComparer.OrdinalIgnoreCase));
+        output.AddRange(removedLines.OrderBy(line => line, StringComparer.OrdinalIgnoreCase));
+        return output;
+    }
+
+    private static Dictionary<string, PageWidgetInfo> CollectPageWidgetsById(JsonElement pageResource)
+    {
+        var widgetMap = new Dictionary<string, PageWidgetInfo>(StringComparer.OrdinalIgnoreCase);
+        if (!TryReadProperty(pageResource, "layoutCall", out var layoutCall) ||
+            layoutCall.ValueKind != JsonValueKind.Object)
+        {
+            return widgetMap;
+        }
+
+        var stack = new Stack<JsonElement>();
+        stack.Push(layoutCall);
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            switch (current.ValueKind)
+            {
+                case JsonValueKind.Object:
+                {
+                    var modelType = TryReadStringProperty(current, "$Type");
+                    var widgetId = TryReadStringProperty(current, "$ID");
+                    if (!string.IsNullOrWhiteSpace(modelType) &&
+                        !string.IsNullOrWhiteSpace(widgetId) &&
+                        IsPageWidgetModelType(modelType))
+                    {
+                        widgetMap[widgetId] = new PageWidgetInfo(
+                            widgetId,
+                            ShortTypeName(modelType),
+                            TryReadStringProperty(current, "name"),
+                            current);
+                    }
+
+                    foreach (var property in current.EnumerateObject())
+                    {
+                        stack.Push(property.Value);
+                    }
+
+                    break;
+                }
+
+                case JsonValueKind.Array:
+                    foreach (var item in current.EnumerateArray())
+                    {
+                        stack.Push(item);
+                    }
+
+                    break;
+            }
+        }
+
+        return widgetMap;
+    }
+
+    private static string BuildAddedOrRemovedWidgetLine(string changeVerb, PageWidgetInfo widget)
+    {
+        var widgetLabel = FormatWidgetLabel(widget);
+        var bindings = ExtractWidgetBindings(widget.WidgetElement);
+        if (bindings.Count == 0)
+        {
+            return $"{changeVerb} {widgetLabel}";
+        }
+
+        var bindingText = string.Join(", ", bindings
+            .OrderBy(entry => entry.Key, StringComparer.OrdinalIgnoreCase)
+            .Select(entry => $"{entry.Key}={entry.Value}"));
+        return $"{changeVerb} {widgetLabel} ({bindingText})";
+    }
+
+    private static string BuildModifiedWidgetLine(PageWidgetInfo previousWidget, PageWidgetInfo currentWidget)
+    {
+        var widgetLabel = FormatWidgetLabel(currentWidget);
+        var previousBindings = ExtractWidgetBindings(previousWidget.WidgetElement);
+        var currentBindings = ExtractWidgetBindings(currentWidget.WidgetElement);
+        var bindingChanges = BuildWidgetBindingChanges(previousBindings, currentBindings);
+        if (bindingChanges.Count > 0)
+        {
+            return $"modified {widgetLabel} ({string.Join(", ", bindingChanges)})";
+        }
+
+        var propertySummary = BuildWidgetPropertyChangeSummary(previousWidget.WidgetElement, currentWidget.WidgetElement);
+        if (!string.IsNullOrWhiteSpace(propertySummary))
+        {
+            return $"modified {widgetLabel} ({propertySummary})";
+        }
+
+        return $"modified {widgetLabel}";
+    }
+
+    private static string FormatWidgetLabel(PageWidgetInfo widget)
+    {
+        if (!string.IsNullOrWhiteSpace(widget.WidgetName))
+        {
+            return $"{widget.WidgetType}({NormalizeInlineText(widget.WidgetName, 40)})";
+        }
+
+        return widget.WidgetType;
+    }
+
+    private static Dictionary<string, string> ExtractWidgetBindings(JsonElement widgetElement)
+    {
+        var bindings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        AddWidgetActionBinding(bindings, widgetElement, "onChangeAction", "onChange");
+        AddWidgetActionBinding(bindings, widgetElement, "onClickAction", "onClick");
+        AddWidgetActionBinding(bindings, widgetElement, "onEnterAction", "onEnter");
+        AddWidgetActionBinding(bindings, widgetElement, "onLeaveAction", "onLeave");
+        AddWidgetActionBinding(bindings, widgetElement, "onEnterKeyPressAction", "onEnterKeyPress");
+        AddWidgetActionBinding(bindings, widgetElement, "clickAction", "onClick");
+        AddWidgetActionBinding(bindings, widgetElement, "pullDownAction", "onPullDown");
+        AddWidgetActionBinding(bindings, widgetElement, "action", "action");
+
+        if (TryReadNestedStringProperty(widgetElement, "pageSettings", "page") is { } pageSettingsPage &&
+            !string.IsNullOrWhiteSpace(pageSettingsPage))
+        {
+            bindings["showPage"] = NormalizeInlineText(pageSettingsPage, 140);
+        }
+
+        if (TryReadNestedStringProperty(widgetElement, "selectPageSettings", "page") is { } selectPage &&
+            !string.IsNullOrWhiteSpace(selectPage))
+        {
+            bindings["selectPage"] = NormalizeInlineText(selectPage, 140);
+        }
+
+        if (TryReadNestedStringProperty(widgetElement, "gotoPageSettings", "page") is { } gotoPage &&
+            !string.IsNullOrWhiteSpace(gotoPage))
+        {
+            bindings["gotoPage"] = NormalizeInlineText(gotoPage, 140);
+        }
+
+        if (TryReadProperty(widgetElement, "dataSource", out var dataSourceElement) &&
+            TryExtractWidgetSource(dataSourceElement, out var dataSource))
+        {
+            bindings["source"] = dataSource;
+        }
+
+        if (TryReadProperty(widgetElement, "selectorSource", out var selectorSourceElement) &&
+            TryExtractWidgetSource(selectorSourceElement, out var selectorSource))
+        {
+            bindings["source"] = selectorSource;
+        }
+
+        return bindings;
+    }
+
+    private static void AddWidgetActionBinding(
+        Dictionary<string, string> bindings,
+        JsonElement widgetElement,
+        string propertyName,
+        string bindingLabel)
+    {
+        if (!TryReadProperty(widgetElement, propertyName, out var actionElement) ||
+            actionElement.ValueKind != JsonValueKind.Object)
+        {
+            return;
+        }
+
+        if (!TryExtractClientActionTarget(actionElement, out var targetKind, out var targetValue))
+        {
+            return;
+        }
+
+        var effectiveLabel = bindingLabel;
+        if (string.Equals(propertyName, "action", StringComparison.OrdinalIgnoreCase))
+        {
+            effectiveLabel = string.Equals(targetKind, "page", StringComparison.OrdinalIgnoreCase)
+                ? "showPage"
+                : "onClick";
+        }
+
+        bindings[effectiveLabel] = targetValue!;
+    }
+
+    private static bool TryExtractClientActionTarget(
+        JsonElement actionElement,
+        out string? targetKind,
+        out string? targetValue)
+    {
+        targetKind = null;
+        targetValue = null;
+
+        var directPage = TryReadStringProperty(actionElement, "page");
+        var directMicroflow = TryReadStringProperty(actionElement, "microflow");
+        var directNanoflow = TryReadStringProperty(actionElement, "nanoflow");
+        var pageFromSettings = TryReadNestedStringProperty(actionElement, "pageSettings", "page");
+        var microflowFromSettings = TryReadNestedStringProperty(actionElement, "microflowSettings", "microflow");
+        var nanoflowFromSettings = TryReadNestedStringProperty(actionElement, "nanoflowSettings", "nanoflow");
+
+        var pageTarget = !string.IsNullOrWhiteSpace(pageFromSettings) ? pageFromSettings : directPage;
+        if (!string.IsNullOrWhiteSpace(pageTarget))
+        {
+            targetKind = "page";
+            targetValue = NormalizeInlineText(pageTarget!, 140);
+            return true;
+        }
+
+        var microflowTarget = !string.IsNullOrWhiteSpace(microflowFromSettings) ? microflowFromSettings : directMicroflow;
+        if (!string.IsNullOrWhiteSpace(microflowTarget))
+        {
+            targetKind = "microflow";
+            targetValue = NormalizeInlineText(microflowTarget!, 140);
+            return true;
+        }
+
+        var nanoflowTarget = !string.IsNullOrWhiteSpace(nanoflowFromSettings) ? nanoflowFromSettings : directNanoflow;
+        if (!string.IsNullOrWhiteSpace(nanoflowTarget))
+        {
+            targetKind = "nanoflow";
+            targetValue = NormalizeInlineText(nanoflowTarget!, 140);
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool TryExtractWidgetSource(JsonElement sourceElement, out string source)
+    {
+        source = string.Empty;
+
+        var microflow =
+            TryReadNestedStringProperty(sourceElement, "microflowSettings", "microflow") ??
+            TryReadNestedStringProperty(sourceElement, "dataSourceMicroflowSettings", "microflow") ??
+            TryReadStringProperty(sourceElement, "microflow");
+        if (!string.IsNullOrWhiteSpace(microflow))
+        {
+            source = NormalizeInlineText(microflow, 140);
+            return true;
+        }
+
+        var nanoflow = TryReadStringProperty(sourceElement, "nanoflow");
+        if (!string.IsNullOrWhiteSpace(nanoflow))
+        {
+            source = NormalizeInlineText(nanoflow, 140);
+            return true;
+        }
+
+        var sourceVariableName = TryReadNestedStringProperty(sourceElement, "sourceVariable", "pageParameter") ??
+                                 TryReadNestedStringProperty(sourceElement, "sourceVariable", "localVariable") ??
+                                 TryReadNestedStringProperty(sourceElement, "sourceVariable", "widget");
+        if (!string.IsNullOrWhiteSpace(sourceVariableName))
+        {
+            source = NormalizeInlineText(sourceVariableName, 140);
+            return true;
+        }
+
+        var entity = TryReadNestedStringProperty(sourceElement, "entityRef", "entity");
+        if (!string.IsNullOrWhiteSpace(entity))
+        {
+            source = NormalizeInlineText(entity, 140);
+            return true;
+        }
+
+        return false;
+    }
+
+    private static List<string> BuildWidgetBindingChanges(
+        IReadOnlyDictionary<string, string> previousBindings,
+        IReadOnlyDictionary<string, string> currentBindings)
+    {
+        var changes = new List<string>();
+        var keys = previousBindings.Keys
+            .Union(currentBindings.Keys, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(key => key, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        foreach (var key in keys)
+        {
+            previousBindings.TryGetValue(key, out var previousValue);
+            currentBindings.TryGetValue(key, out var currentValue);
+            if (string.Equals(previousValue, currentValue, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            if (string.IsNullOrWhiteSpace(previousValue))
+            {
+                changes.Add($"{key}={currentValue}");
+                continue;
+            }
+
+            if (string.IsNullOrWhiteSpace(currentValue))
+            {
+                changes.Add($"{key} removed");
+                continue;
+            }
+
+            changes.Add($"{key} {previousValue}->{currentValue}");
+        }
+
+        return changes;
+    }
+
+    private static string? BuildWidgetPropertyChangeSummary(JsonElement previousWidget, JsonElement currentWidget)
+    {
+        if (previousWidget.ValueKind != JsonValueKind.Object || currentWidget.ValueKind != JsonValueKind.Object)
+        {
+            return null;
+        }
+
+        var modelType =
+            TryReadStringProperty(currentWidget, "$Type") ??
+            TryReadStringProperty(previousWidget, "$Type");
+        var previousProperties = previousWidget
+            .EnumerateObject()
+            .Where(property =>
+                !IgnoredDetailFields.Contains(property.Name) &&
+                !IsWidgetBindingProperty(property.Name))
+            .ToDictionary(property => property.Name, property => property.Value, StringComparer.Ordinal);
+        var currentProperties = currentWidget
+            .EnumerateObject()
+            .Where(property =>
+                !IgnoredDetailFields.Contains(property.Name) &&
+                !IsWidgetBindingProperty(property.Name))
+            .ToDictionary(property => property.Name, property => property.Value, StringComparer.Ordinal);
+        var parts = new List<string>();
+
+        foreach (var (propertyName, currentValue) in currentProperties)
+        {
+            if (!previousProperties.TryGetValue(propertyName, out var previousValue))
+            {
+                parts.Add($"{propertyName} added");
+                continue;
+            }
+
+            if (!ElementsSemanticallyEqual(previousValue, currentValue, propertyName, modelType))
+            {
+                parts.Add(DescribePropertyChange(propertyName, previousValue, currentValue));
+            }
+        }
+
+        foreach (var propertyName in previousProperties.Keys)
+        {
+            if (!currentProperties.ContainsKey(propertyName))
+            {
+                parts.Add($"{propertyName} removed");
+            }
+        }
+
+        if (parts.Count == 0)
+        {
+            return null;
+        }
+
+        const int maxParts = 2;
+        var visible = parts.Take(maxParts).ToList();
+        var remaining = parts.Count - visible.Count;
+        if (remaining > 0)
+        {
+            visible.Add($"+{remaining} more");
+        }
+
+        return string.Join(", ", visible);
+    }
+
+    private static bool IsWidgetBindingProperty(string propertyName)
+    {
+        return string.Equals(propertyName, "action", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "onChangeAction", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "onClickAction", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "onEnterAction", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "onLeaveAction", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "onEnterKeyPressAction", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "clickAction", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "pullDownAction", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "dataSource", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "selectorSource", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "pageSettings", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "selectPageSettings", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(propertyName, "gotoPageSettings", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string[] CollectDistinctPageActionTargets(IEnumerable<PageClientActionInfo> actions)
+    {
+        return actions
+            .SelectMany(action => action.Targets)
             .Where(target => !string.IsNullOrWhiteSpace(target))
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(target => target, StringComparer.OrdinalIgnoreCase)
             .ToArray();
-        if (targets.Length > 0)
-        {
-            details.Add($"action targets: {FormatNameList(targets, maxEntries: 8)}");
-        }
-
-        return string.Join("; ", details);
     }
 
     private static string? BuildPageWidgetSummaryDetails(
@@ -3114,60 +3839,22 @@ public static class MendixModelDiffService
             return null;
         }
 
-        var parts = new List<string>();
         if (workingResource is not null && headResource is not null)
         {
-            var addedCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-            var removedCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-
-            foreach (var (widgetType, workingCount) in workingWidgetCounts)
-            {
-                headWidgetCounts.TryGetValue(widgetType, out var previousCount);
-                var delta = workingCount - previousCount;
-                if (delta > 0)
-                {
-                    addedCounts[widgetType] = delta;
-                }
-            }
-
-            foreach (var (widgetType, headCount) in headWidgetCounts)
-            {
-                workingWidgetCounts.TryGetValue(widgetType, out var currentCount);
-                var delta = headCount - currentCount;
-                if (delta > 0)
-                {
-                    removedCounts[widgetType] = delta;
-                }
-            }
-
-            var addedTotal = addedCounts.Values.Sum();
-            var removedTotal = removedCounts.Values.Sum();
-            if (addedTotal > 0 || removedTotal > 0)
-            {
-                parts.Add($"widgets delta: added {addedTotal}, removed {removedTotal}");
-            }
-
-            if (addedTotal > 0)
-            {
-                parts.Add($"widgets added ({addedTotal}): {FormatCounterList(addedCounts)}");
-            }
-
-            if (removedTotal > 0)
-            {
-                parts.Add($"widgets removed ({removedTotal}): {FormatCounterList(removedCounts)}");
-            }
+            return null;
         }
 
         if (workingTotal > 0)
         {
-            parts.Add($"widgets used ({workingTotal}): {FormatCounterList(workingWidgetCounts)}");
-        }
-        else if (headTotal > 0)
-        {
-            parts.Add($"widgets before deletion ({headTotal}): {FormatCounterList(headWidgetCounts)}");
+            return $"widgets used ({workingTotal}): {FormatCounterList(workingWidgetCounts)}";
         }
 
-        return parts.Count == 0 ? null : string.Join("; ", parts);
+        if (headTotal > 0)
+        {
+            return $"widgets before deletion ({headTotal}): {FormatCounterList(headWidgetCounts)}";
+        }
+
+        return null;
     }
 
     private static Dictionary<string, int> CollectPageWidgetTypeCounts(JsonElement pageResource)
@@ -4684,6 +5371,11 @@ public static class MendixModelDiffService
         string DescriptorText,
         JsonElement DecisionElement);
 
+    private sealed record FlowAnnotationInfo(
+        string AnnotationId,
+        string DescriptorText,
+        JsonElement AnnotationElement);
+
     private sealed record EnumerationValueInfo(
         string ValueId,
         string Name,
@@ -4693,6 +5385,12 @@ public static class MendixModelDiffService
     private sealed record PageClientActionInfo(
         string ActionType,
         string[] Targets);
+
+    private sealed record PageWidgetInfo(
+        string WidgetId,
+        string WidgetType,
+        string? WidgetName,
+        JsonElement WidgetElement);
 
     private sealed record ResourceDescriptor(
         string ResourceId,

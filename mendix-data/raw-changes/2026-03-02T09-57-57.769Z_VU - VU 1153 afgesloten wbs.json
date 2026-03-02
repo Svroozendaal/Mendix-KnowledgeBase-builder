@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "1.0",
+  "timestamp": "2026-03-02T09:57:57.7691277\u002B00:00",
+  "projectName": "VU - VU 1153 afgesloten wbs",
+  "branchName": "VU_1153_boekingen_afgesloten_wbs",
+  "userName": "Svroozendaal",
+  "userEmail": "115573006\u002BSvroozendaal@users.noreply.github.com",
+  "changes": [
+    {
+      "filePath": "VU Project Budgetting.mpr",
+      "status": "Modified",
+      "isStaged": false,
+      "diffText": "Binary file changed - diff not available",
+      "modelChangesByModule": [
+        {
+          "module": "TWK",
+          "domainModel": [],
+          "microflows": [
+            {
+              "changeType": "Modified",
+              "elementType": "Microflow",
+              "elementName": "TWK.ACT_JournalItem_Save",
+              "details": "flows count 58-\u003E17; actions delta: added 1, removed 16, modified 0; actions added (1): MicroflowCallAction x1; actions removed (16): ChangeVariableAction x7, ValidationFeedbackAction x7, ChangeObjectAction x1, CreateVariableAction x1; added action details: MicroflowCallAction: call microflow TWK.VAL_JournalItem -\u003E isValidated; removed action details: ChangeObjectAction: change JournalItem (FiscalYearPeriodEnd=addDays(addMonths(trimToMonthsUTC($JournalItem/FiscalYearPeriodEnd),1),-1); refreshInClient=false) | ChangeVariableAction: change variable isValidated=false | CreateVariableAction: create variable isValidated=true | ValidationFeedbackAction: action payload changed; decisions delta: added 0, removed 9, modified 0; decisions removed (9): Enddate correct? expression=$JournalItem/FiscalYearPeriodEnd \u003C= $Request/FiscalYearPeriodUntil | FTE \u003C=0 expression=$JournalItem/Quantity \u003C= 0 | FTE \u003E=0 expression=$JournalItem/Quantity \u003E= 0 | is PKAF? expression=$JournalItem/EntryType = TWK.Enum_JournalItemType.PKAF | normal booking? expression=$JournalItem/EntryType != TWK.Enum_JournalItemType.Reversal | \u002B4 more",
+              "displayText": "MF ACT_JournalItem_Save : added: call MF VAL_JournalItem; removed: change object JournalItem, change variable, create variable, validation feedback"
+            },
+            {
+              "changeType": "Modified",
+              "elementType": "Microflow",
+              "elementName": "TWK.SUB_JournalItem_QuantityChange",
+              "details": "flows count 19-\u003E21; actions delta: added 0, removed 1, modified 0; actions removed (1): ValidationFeedbackAction x1; removed action details: ValidationFeedbackAction: action payload changed; decisions delta: added 0, removed 1, modified 1; decisions removed (1): FTE \u003E=0 expression=$JournalItem/Quantity \u003E= 0; decisions modified (1): is TWK? expression=$JournalItem/EntryType = TWK.Enum_JournalItemType.TWK -\u003E is TWK? expression=$JournalItem/EntryType",
+              "displayText": "MF SUB_JournalItem_QuantityChange : removed: validation feedback"
+            },
+            {
+              "changeType": "Added",
+              "elementType": "Microflow",
+              "elementName": "TWK.VAL_JournalItem",
+              "details": "actions delta: added 19, removed 0, modified 0; actions added (19): ValidationFeedbackAction x9, ChangeVariableAction x8, ChangeObjectAction x1, CreateVariableAction x1; added action details: ChangeObjectAction: change JournalItem (FiscalYearPeriodEnd=addDays(addMonths(trimToMonthsUTC($JournalItem/FiscalYearPeriodEnd),1),-1); refreshInClient=false) | ChangeVariableAction: change variable isValidated=false | CreateVariableAction: create variable isValidated=true | ValidationFeedbackAction: action payload changed; decisions delta: added 11, removed 0, modified 0; decisions added (11): costcenter filled? expression=if $JournalItem/BookingType = TWK.ENUM_TWKBookingType.CostCenter then $JournalItem/TWK.JournalItem_ToCostCenter != empty... | Enddate correct? expression=$JournalItem/FiscalYearPeriodEnd \u003C= $Request/FiscalYearPeriodUntil | FTE \u003C=0 expression=$JournalItem/Quantity \u003C= 0 | FTE \u003E=0 expression=$JournalItem/Quantity \u003E= 0 | is PKAF? expression=$JournalItem/EntryType = TWK.Enum_JournalItemType.PKAF | \u002B6 more",
+              "displayText": "NEW MF VAL_JournalItem : added: change object JournalItem, change variable, create variable, validation feedback"
+            },
+            {
+              "changeType": "Modified",
+              "elementType": "Microflow",
+              "elementName": "TWK.VAL_JournalItemHelper",
+              "details": "flows count 49-\u003E55; actions delta: added 2, removed 0, modified 0; actions added (2): ChangeVariableAction x1, ValidationFeedbackAction x1; added action details: ChangeVariableAction: change variable isOk=false | ValidationFeedbackAction: action payload changed; loops delta: added 1, removed 0, modified 0; loops added (1): iterate FiscalYearPeriodHelperList_selected as IteratorFiscalYearPeriodHelper (source=IterableList); decisions delta: added 1, removed 0, modified 0; decisions added (1): 0 \u003E\u003C= 1 expression=$IteratorFiscalYearPeriodHelper/FTE != empty and $IteratorFiscalYearPeriodHelper/FTE \u003E 0 and $IteratorFiscalYearPeriodHe...",
+              "displayText": "MF VAL_JournalItemHelper : added: change variable, validation feedback; loops: iterate FiscalYearPeriodHelperList_selected as IteratorFiscalYearPeriodHelper (source=IterableList); decisions: 0 \u003E\u003C= 1"
+            }
+          ],
+          "pages": [
+            {
+              "changeType": "Modified",
+              "elementType": "Page",
+              "elementName": "TWK.JournalItem_Edit",
+              "details": "layoutCall updated; layout=General.VU_PopupLayout; title=Page Title; url=\u003Cempty\u003E; popup=0x0 resizable=true; actions used (6): CallNanoflowClientAction x4, CancelChangesClientAction x1, MicroflowClientAction x1; action targets: microflow=TWK.ACT_JournalItem_Save, nanoflow=TWK.OCh_JournalItem_AmountChange, nanoflow=TWK.OCh_JournalItem_ChangePercentage, nanoflow=TWK.OCh_JournalItem_ClearBookingsType, nanoflow=TWK.OCh_JournalItem_QuantityChange; widgets used (67): ConditionalVisibilitySettings x10, WidgetValidation x10, PageSettings x8, PageVariable x8, ReferenceSelector x4, MicroflowSettings x3, TextBox x3, ActionButton x2, \u002B13 more",
+              "displayText": "PG JournalItem_Edit : layoutCall updated; layout=General.VU_PopupLayout; title=Page Title; url=\u003Cempty\u003E; popup=0x0 resizable=true; actions used (6): CallNanoflowClientAction x4, CancelChangesClientAction x1, MicroflowClientAction x1; action targets: microflow=TWK.ACT_JournalItem_Save, nanoflow=TWK.OCh_JournalItem_AmountChange, nanoflow=TWK.OCh_JournalItem_ChangePercentage, nanoflow=TWK.OCh_JournalItem_ClearBookingsType, nanoflow=TWK.OCh_JournalItem_QuantityChange; widgets used (67): ConditionalVisibilitySettings x10, WidgetValidation x10, PageSettings x8, PageVariable x8, ReferenceSelector x4, MicroflowSettings x3, TextBox x3, ActionButton x2, \u002B13 more"
+            }
+          ],
+          "nanoflows": [],
+          "resources": [
+            {
+              "changeType": "Modified",
+              "elementType": "Snippet",
+              "elementName": "TWK.SNP_Request_Overview",
+              "details": "widgets entries updated; url=\u003Cempty\u003E; actions used (15): MicroflowClientAction x9, PageClientAction x6; action targets: microflow=TWK.ACT_JournalItemHelper_Create, microflow=TWK.ACT_JournalItem_Delete, microflow=TWK.ACT_JournalItem_ReuseOldSituation, microflow=TWK.ACT_Request_JournalItem_createAllReverse, page=TWK.JournalItem_Edit",
+              "displayText": "SNP_Request_Overview : widgets entries updated; url=\u003Cempty\u003E; actions used (15): MicroflowClientAction x9, PageClientAction x6; action targets: microflow=TWK.ACT_JournalItemHelper_Create, microflow=TWK.ACT_JournalItem_Delete, microflow=TWK.ACT_JournalItem_ReuseOldSituation, microflow=TWK.ACT_Request_JournalItem_createAllReverse, page=TWK.JournalItem_Edit"
+            }
+          ]
+        }
+      ],
+      "modelDumpArtifact": {
+        "folderPath": "C:\\MendixWorkers\\VU - VU 1153 afgesloten wbs\\mendix-data\\dumps\\2026-03-02T09-57-55.861Z_VU Project Budgetting.mpr_769a41dc8a75405ba09b37eb34e433a6",
+        "workingDumpPath": "C:\\MendixWorkers\\VU - VU 1153 afgesloten wbs\\mendix-data\\dumps\\2026-03-02T09-57-55.861Z_VU Project Budgetting.mpr_769a41dc8a75405ba09b37eb34e433a6\\working-dump.json",
+        "headDumpPath": "C:\\MendixWorkers\\VU - VU 1153 afgesloten wbs\\mendix-data\\dumps\\2026-03-02T09-57-55.861Z_VU Project Budgetting.mpr_769a41dc8a75405ba09b37eb34e433a6\\head-dump.json"
+      }
+    }
+  ]
+}
