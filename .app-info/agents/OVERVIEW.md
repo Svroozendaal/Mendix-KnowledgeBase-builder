@@ -1,7 +1,7 @@
 # agents/
-## App-Specific Agent Extensions
+## App-Specific Agent Extensions and Agents
 
-This folder contains app-specific extensions for generic agents defined in `.agents/agents/`.
+This folder contains app-specific extensions for generic agents defined in `.agents/agents/`, as well as standalone app-specific agents that have no generic base.
 
 ## How Extensions Work
 
@@ -16,6 +16,8 @@ Use `.agents/skills/agent-extender/SKILL.md` to write a new extension correctly.
 
 ## Contents
 
+### Extensions (have a matching base agent in `.agents/agents/`)
+
 | Agent | File | What the extension adds |
 |---|---|---|
 | Designer | `DESIGNER.md` | App token system skill reference, Elementor guardrails, WellBased breakpoints, container widths, column defaults, JS file routing |
@@ -23,18 +25,30 @@ Use `.agents/skills/agent-extender/SKILL.md` to write a new extension correctly.
 | Deployment | `DEPLOYMENT.md` | WellBased branch policy (development/docs/staging/main), CI/CD workflows, js-loader version bump rule, Cloudways, plugin-only hygiene |
 | Documenter | `DOCUMENTER.md` | WellBased `core/*/info_*.MD` indexing convention, `templates/*/info_*.MD` convention, WordPress entry-point checklist |
 | Light | `LIGHT.md` | App-specific escalation triggers (ACF, constants.php, webhooks), agent handoff map |
-| Commit Message Writer | `COMMIT_MESSAGE_WRITER.md` | Mendix export to technical commit text workflow with rule-gap capture and iterative rule growth |
 | Prompt Refiner | `PROMPT_REFINER.md` | Deterministic prompt linting and refinement workflow with hard-pointer rules, blockers, and skill mapping defaults |
+
+### Standalone App-Specific Agents (no generic base in `.agents/agents/`)
+
+| Agent | File | Responsibility |
+|---|---|---|
+| Commit Message Writer | `COMMIT_MESSAGE_WRITER.md` | Mendix export to technical commit text workflow with rule-gap capture and iterative rule growth |
 | GAPSMITH | `GAPSMITH.md` | End-to-end gap loop for dump diff rules (`Dxxx`) and display-text/commit rules (`Cxxx`/`Axxx`) with implementation mapping |
 | OVERVIEWSMITH | `OVERVIEWSMITH.md` | Full-model overview export workflow for single-dump parsing, flow ordering, and app/module pseudocode artefacts |
 
 ## Notes
 
-These extensions were derived from the WellBased WordPress plugin project. The base agents (`.agents/agents/`) are generic and reusable in any project. The heavy app-specific detail (token names, WP API functions, component rules) belongs in `.app-info/skills/` — the extensions here reference those skills rather than duplicating them.
+This folder contains a mix of extensions from the original WellBased WordPress plugin project and Mendix-specific agents. The base agents (`.agents/agents/`) are generic and reusable in any project. The heavy app-specific detail belongs in `.app-info/skills/` — the agents and extensions here reference those skills rather than duplicating them.
 
 ## Adding a New Extension
 
 1. Use the `agent-extender` skill (`.agents/skills/agent-extender/SKILL.md`).
 2. Create `<AGENT>.md` in this folder using the required preamble format.
 3. Add a row to the Contents table above.
+4. Run the Structure Guardian to validate.
+
+## Adding a Standalone App-Specific Agent
+
+1. Create `<AGENT>.md` in this folder.
+2. Include `This is an app-specific agent for this project. It does not have a generic base in .agents/agents/.` in the Role section.
+3. Add a row to the Standalone App-Specific Agents table above.
 4. Run the Structure Guardian to validate.

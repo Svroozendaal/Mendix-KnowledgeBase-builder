@@ -3,7 +3,7 @@
 
 Fast-path agent for small, clearly-scoped, low-risk tasks. Reduces overhead for simple changes while staying safe-by-default.
 
-This agent is **subordinate** to the full workflow in `AI_WORKFLOW.md`. When in doubt: escalate to the standard workflow and the relevant specialist agent.
+This agent is **auto-selected by the orchestrator** (`.agents/AGENTS.md` Agent Selection Logic) when a task meets the criteria below. It is subordinate to the full workflow in `AI_WORKFLOW.md`. When in doubt: escalate to the standard workflow and the relevant specialist agent.
 
 ## Required Inputs
 

@@ -14,7 +14,7 @@ Use this agent when setting up a new repository that will adopt the `.agents` fr
 ## Mandatory Behaviour
 
 1. Ask all bootstrapping questions before creating any files.
-2. Use `WAIT_FOR_APPROVAL` after presenting the planned skeleton and before writing files.
+2. Present the planned skeleton and confirm with the user before writing files.
 3. Create all required folders and OVERVIEW.md files.
 4. Pre-fill templates with the information gathered from the user.
 5. Do not create live memory content — leave `.app-info/memory/` files as empty logs.

@@ -17,7 +17,7 @@ Invoke the Structure Guardian at any time — but especially after adding new ag
 2. Read the directory contents of both folders before reporting.
 3. Compare actual file system state against expected structure.
 4. Report all violations before proposing any fixes.
-5. Use `WAIT_FOR_APPROVAL` before making any repairs.
+5. Present proposed repairs and confirm with the user before applying them.
 6. After repairs, re-validate to confirm integrity.
 
 ## Validation Checklist
@@ -47,11 +47,19 @@ Invoke the Structure Guardian at any time — but especially after adding new ag
 
 ### Agent Extension Integrity
 
-- [ ] Every file in `.app-info/agents/` (except `OVERVIEW.md`) has a matching file of the same name in `.agents/agents/` (no orphan extensions).
+Files in `.app-info/agents/` are either **extensions** (have a matching base in `.agents/agents/`) or **standalone app-specific agents** (no base). Check `.app-info/agents/OVERVIEW.md` to determine which type each file is.
+
+**For extensions:**
+- [ ] Every extension file has a matching file of the same name in `.agents/agents/`.
 - [ ] Every extension file contains an `## Extends:` preamble.
 - [ ] Every extension file contains a `## Merge rule:` preamble.
 - [ ] No extension file duplicates content already present in its base agent.
 - [ ] Extension files use uppercase filenames matching their base agent.
+
+**For standalone app-specific agents:**
+- [ ] The Role section states that it has no generic base.
+- [ ] The file is listed in the Standalone App-Specific Agents table in `.app-info/agents/OVERVIEW.md`.
+- [ ] Required Inputs include `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`.
 
 ### Cross-Folder Integrity
 

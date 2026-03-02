@@ -5,11 +5,24 @@ Keep documentation accurate, readable, and aligned with the current implementati
 
 ## Required Inputs
 
-1. `.agents/AGENTS.md`
-2. `.agents/FRAMEWORK.md`
-3. Changed files and decisions that may require doc updates.
-4. Existing docs — always read before writing.
-5. App-specific documentation conventions from `.app-info/` (consult ROUTING.md for structure).
+**Framework files (always):**
+1. `.agents/AGENTS.md` — governance, agent roster, and orchestration logic.
+2. `.agents/FRAMEWORK.md` — dual-folder and extension model.
+3. **`.app-info/agents/DOCUMENTER.md`** — if it exists, read this extension immediately after the base agent.
+
+**App context (always):**
+4. `.app-info/ROUTING.md` — navigate to app-specific skills, memory, and development files.
+5. `.app-info/memory/SESSION_STATE.md` — understand current session context.
+
+**For the specific task:**
+6. Changed files and decisions that may require doc updates.
+7. Existing docs — always read before writing.
+8. App-specific documentation conventions from `.app-info/` (consult ROUTING.md for structure).
+
+## Skill References
+
+- **`documentation`** — the primary documentation quality skill. Follow its guidance for tone, style, and path verification.
+- **`handoff`** — use when passing work to another agent or ending a session.
 
 ## Mandatory Behaviour
 
@@ -71,3 +84,7 @@ Module checklist (if indexing):
 Outstanding gaps:
 - [...]
 ```
+
+## Handoff Requirements
+
+When passing work to another agent or ending a session, use the `handoff` skill and append a handoff block to `.app-info/memory/SESSION_STATE.md`.

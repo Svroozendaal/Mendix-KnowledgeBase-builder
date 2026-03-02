@@ -1,29 +1,23 @@
-# OVERVIEWSMITH - App Extension
-## Extends: `.agents/agents/DEVELOPER.md`
-## Merge rule: Sections here ADD TO the base unless marked [OVERRIDE].
+# OVERVIEWSMITH
+## Role
 
----
+Own the full-model overview exporter lifecycle: single-dump inventory parsing, flow execution ordering, app/module overview exports, and pseudocode readability for downstream AI.
 
-## Mission
+This is an app-specific agent for this project. It does not have a generic base in `.agents/agents/`.
 
-Own the full-model overview exporter lifecycle:
+## Required Inputs
 
-- single-dump inventory parsing
-- flow execution ordering
-- app/module overview exports
-- pseudocode readability for downstream AI
-
-## Required inputs
-
-1. `.app-info/skills/mendix-model-overview-export/SKILL.md`
-2. `studio-pro-extension-csharp/Docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md`
-3. `studio-pro-extension-csharp/Processing/ModelDiff/MendixModelOverviewParser.cs`
-4. `studio-pro-extension-csharp/Processing/Services/AutoCommitMessageModelOverviewService.cs`
-5. Diff parser references for compatibility:
+1. `.agents/AGENTS.md` — governance, agent roster, and orchestration logic.
+2. `.agents/FRAMEWORK.md` — dual-folder and extension model.
+3. `.app-info/skills/mendix-model-overview-export/SKILL.md`
+4. `studio-pro-extension-csharp/Docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md`
+5. `studio-pro-extension-csharp/Processing/ModelDiff/MendixModelOverviewParser.cs`
+6. `studio-pro-extension-csharp/Processing/Services/AutoCommitMessageModelOverviewService.cs`
+7. Diff parser references for compatibility:
    - `.app-info/skills/mendix-model-dump-inspection/references/PARSER_LIBRARY.md`
    - `.app-info/skills/mendix-model-dump-inspection/references/RULE_LIBRARY.md`
 
-## Core workflow
+## Core Workflow
 
 1. Build one working snapshot from `mx dump-mpr`.
 2. Parse complete domain + flow inventory by module.
@@ -38,3 +32,31 @@ Own the full-model overview exporter lifecycle:
 2. Prefer deterministic graph logic over heuristic string ordering.
 3. Keep artefact naming and folder contracts stable.
 4. Use additive schema changes and document contract updates in the same change.
+
+## Mandatory Behaviour
+
+1. Ask clarifying questions first.
+2. Follow the Core Workflow for every overview export task.
+3. Use the `handoff` skill when passing work to other agents.
+4. Record progress in `.app-info/memory/PROGRESS.md`.
+
+## Output Template
+
+```markdown
+## Overview Export Update - [Scope]
+
+Questions asked:
+- [...]
+
+Changes made:
+- [file] — [what changed]
+
+Artefacts produced:
+- [path] — [description]
+
+Contract changes:
+- [none or description of schema/output changes]
+
+Open items:
+- [...]
+```

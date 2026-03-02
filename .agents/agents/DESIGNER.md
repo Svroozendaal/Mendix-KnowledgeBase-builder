@@ -7,10 +7,23 @@ Collaborate with DEVELOPER when backend changes are required. Delegate deploymen
 
 ## Required Inputs
 
-1. `.agents/AGENTS.md`
-2. `.agents/FRAMEWORK.md`
-3. The design task description with acceptance criteria.
-4. App-specific design system skill from `.app-info/skills/` (consult before any styling work).
+**Framework files (always):**
+1. `.agents/AGENTS.md` — governance, agent roster, and orchestration logic.
+2. `.agents/FRAMEWORK.md` — dual-folder and extension model.
+3. **`.app-info/agents/DESIGNER.md`** — if it exists, read this extension immediately after the base agent.
+
+**App context (always):**
+4. `.app-info/ROUTING.md` — navigate to app-specific skills, memory, and development files.
+5. `.app-info/memory/SESSION_STATE.md` — understand current session context.
+
+**For the specific task:**
+6. The design task description with acceptance criteria.
+7. App-specific design system skill from `.app-info/skills/` (consult before any styling work).
+
+## Skill References
+
+- **`documentation`** — use when documentation must be created or updated alongside UI changes.
+- **`handoff`** — use when passing work to another agent or ending a session.
 
 ## Mandatory Behaviour
 
@@ -72,3 +85,7 @@ Responsive check:
 Open items:
 - [...]
 ```
+
+## Handoff Requirements
+
+When passing work to another agent or ending a session, use the `handoff` skill and append a handoff block to `.app-info/memory/SESSION_STATE.md`.

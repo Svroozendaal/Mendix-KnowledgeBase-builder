@@ -19,15 +19,28 @@ Before any prompt is executed, do the following in order:
 4. Ask clarifying workflow questions first, using as many questions as needed.
 5. Confirm assumptions before changing files.
 
-## Approval Checkpoint
+## Agent Selection Logic
 
-After planning and before implementation changes, use:
+When a task arrives, classify it and route to the correct agent. The orchestrator (this file) decides which agent handles the work.
 
-`WAIT_FOR_APPROVAL`
+**Routing rules — evaluate in order:**
 
-Exception:
+1. **Small, single-file, unambiguous change with no new contracts?** → **Light**
+2. **Architectural decision, new module, or new data contract needed?** → **Architect**
+3. **Code implementation (backend logic, APIs, business rules)?** → **Developer**
+4. **Frontend/UI work (layout, styling, components, responsive behaviour)?** → **Designer**
+5. **Bug or defect requiring root-cause analysis?** → **Debugger**
+6. **Test creation, validation, or regression check?** → **Tester**
+7. **Documentation creation or update?** → **Documenter**
+8. **Branch, PR, release, or deployment task?** → **Deployment**
+9. **Prompt quality review or refinement?** → **Prompt Refiner**
+10. **Framework integrity check?** → **Structure Guardian**
+11. **New project bootstrap?** → **Init App**
+12. **Unsure which agent or skill applies?** → **Agent Finder**
 
-If the user or prompt explicitly states `AUTO_APPROVE`, continue without pausing.
+**Multi-agent tasks:** When a task spans multiple agents, the orchestrator sequences them. For example: Architect (design) → Developer (implement) → Tester (validate) → Reviewer (approve) → Deployment (release).
+
+**Skill discovery:** Before any non-trivial task, check the skill system. Use the Agent Finder or consult the Skills Overview sections below and `.app-info/skills/OVERVIEW.md`.
 
 ## Core Principles
 
@@ -69,15 +82,13 @@ All app-specific content lives here. Structure is defined in `.app-info/ROUTING.
 | Agent | File | Responsibility |
 |---|---|---|
 | Architect | `.agents/agents/ARCHITECT.md` | Design, scope, contracts, decisions |
-| Implementer | `.agents/agents/IMPLEMENTER.md` | Delivery of approved production changes |
-| Developer | `.agents/agents/DEVELOPER.md` | Backend development, security, platform conventions |
+| Developer | `.agents/agents/DEVELOPER.md` | Backend development, security, platform conventions, delivery of approved changes |
 | Designer | `.agents/agents/DESIGNER.md` | Frontend/UI, styling, components, responsive behaviour |
 | Deployment | `.agents/agents/DEPLOYMENT.md` | Branching, PRs, CI/CD, release hygiene, versioning |
 | Tester | `.agents/agents/TESTER.md` | Validation, edge cases, regressions |
 | Reviewer | `.agents/agents/REVIEWER.md` | Quality gate and approval |
 | Memory | `.agents/agents/MEMORY.md` | Session continuity and hand-offs |
 | Prompt Refiner | `.agents/agents/PROMPT_REFINER.md` | Prompt quality and consistency |
-| Commit Message Writer | `.agents/agents/COMMIT_MESSAGE_WRITER.md` | Rule-driven transformation of structured change data into technical commit text |
 | Debugger | `.agents/agents/DEBUGGER.md` | Root-cause analysis and fixes |
 | Documenter | `.agents/agents/DOCUMENTER.md` | Documentation quality, upkeep, and module indexing |
 | Light | `.agents/agents/LIGHT.md` | Fast-path for small, low-risk, clearly-scoped tasks |
@@ -113,10 +124,16 @@ Generic skills:
 - `.agents/skills/documentation/SKILL.md`
 - `.agents/skills/testing/SKILL.md`
 - `.agents/skills/mcp-server/SKILL.md`
-- `.agents/skills/find-skills/SKILL.md`
+- `.agents/skills/find-skills/SKILL.md` — when a task requires capabilities not covered by existing skills, use this to search for installable skills before falling back to general knowledge.
 - `.agents/skills/skill-writer/SKILL.md`
 - `.agents/skills/agent-writer/SKILL.md`
 - `.agents/skills/agent-extender/SKILL.md`
+- `.agents/skills/memory-compaction/SKILL.md`
+- `.agents/skills/security-review/SKILL.md` — shared security checklist for Developer, Reviewer, Tester.
+- `.agents/skills/code-quality/SKILL.md` — shared code quality checklist for Developer, Reviewer, Tester.
+- `.agents/skills/api-design/SKILL.md` — shared API/interface design principles for Architect, Developer, Reviewer.
+- `.agents/skills/handoff/SKILL.md` — standardised agent-to-agent handoff procedure for all agents.
+- `.agents/skills/review/SKILL.md` — structured code review procedure with severity classification.
 
 App-specific skills are listed in `.app-info/skills/OVERVIEW.md`.
 
@@ -157,15 +174,14 @@ Template files in `.agents/agent-memory/`:
 
 ## Agent Operating Defaults
 
-1. Implementer may create new files when needed.
-2. Developer handles backend code; Designer handles frontend — collaborate at boundaries.
-3. Deployment owns all branch and release operations.
-4. Light handles small, clearly-scoped tasks; escalates to specialist agents when boundaries are crossed.
-5. Tester should focus on automated testing by default.
-6. Reviewer blocks only on unresolved `MUST FIX` items.
-7. Prompt Refiner runs only when explicitly requested.
-8. Do not compact memory logs automatically; ask first if maintenance is needed.
-9. Structure Guardian may be invoked at any time to verify framework integrity.
+1. Developer handles backend code and delivery of approved changes; may create new files when needed. Designer handles frontend — collaborate at boundaries.
+2. Deployment owns all branch and release operations.
+3. Light is auto-selected by the orchestrator for small, clearly-scoped tasks; escalates to specialist agents when boundaries are crossed.
+4. Tester should focus on automated testing by default.
+5. Reviewer blocks only on unresolved `MUST FIX` items.
+6. Prompt Refiner runs only when explicitly requested.
+7. Do not compact memory logs automatically; use the `memory-compaction` skill and ask first if maintenance is needed.
+8. Structure Guardian may be invoked at any time to verify framework integrity.
 
 ## Required Handoff Block
 

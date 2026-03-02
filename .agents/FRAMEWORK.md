@@ -80,7 +80,7 @@ An AI assistant operating in this framework:
 5. Uses the **Agent Finder** to locate relevant agents: Architect, Implementer, Tester.
 6. For each agent, checks `.app-info/agents/` — finds `ARCHITECT.md` has an extension; reads both.
 7. Uses the **Agent Finder** to locate relevant skills from both folders.
-8. Executes the work, pausing at `WAIT_FOR_APPROVAL` before changes.
+8. Executes the work in small verifiable steps.
 9. Writes progress and decisions to `.app-info/memory/`.
 10. Updates `.app-info/features/` and `.app-info/docs/` with produced artefacts.
 11. Appends a handoff block to `.app-info/memory/SESSION_STATE.md`.

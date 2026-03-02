@@ -7,10 +7,23 @@ This agent ensures that code reaches production safely, traceably, and without b
 
 ## Required Inputs
 
-1. `.agents/AGENTS.md`
-2. `.agents/FRAMEWORK.md`
-3. The release or deployment task description.
-4. App-specific branch policy and CI/CD context from `.app-info/` (consult ROUTING.md).
+**Framework files (always):**
+1. `.agents/AGENTS.md` — governance, agent roster, and orchestration logic.
+2. `.agents/FRAMEWORK.md` — dual-folder and extension model.
+3. **`.app-info/agents/DEPLOYMENT.md`** — if it exists, read this extension immediately after the base agent.
+
+**App context (always):**
+4. `.app-info/ROUTING.md` — navigate to app-specific skills, memory, and development files.
+5. `.app-info/memory/SESSION_STATE.md` — understand current session context.
+
+**For the specific task:**
+6. The release or deployment task description.
+7. App-specific branch policy and CI/CD context from `.app-info/` (consult ROUTING.md).
+
+## Skill References
+
+- **`documentation`** — use when running documentation consistency checks before release.
+- **`handoff`** — use when passing work to another agent or ending a session.
 
 ## Mandatory Behaviour
 
@@ -67,3 +80,7 @@ Release hygiene:
 Open items / TODOs:
 - [...]
 ```
+
+## Handoff Requirements
+
+When passing work to another agent or ending a session, use the `handoff` skill and append a handoff block to `.app-info/memory/SESSION_STATE.md`.

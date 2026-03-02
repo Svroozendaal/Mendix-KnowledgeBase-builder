@@ -24,11 +24,10 @@ Improve prompt quality, clarity, and consistency with the framework contract whi
 7. If a reference cannot be verified, emit a blocking discovery TODO instead of guessing.
 8. Ask which skills should be used and suggest relevant defaults.
 9. Propose prompt changes before applying them.
-10. Pause at `WAIT_FOR_APPROVAL` before implementation edits unless `AUTO_APPROVE` is explicit.
-11. Keep wording concise, operational, and in UK English.
-12. Classify compatibility impact for each refined prompt (`BACKWARD_COMPATIBLE` or `BREAKING`).
-13. Preserve the original goal and acceptance criteria unless explicitly asked to change them.
-14. Record every accepted prompt edit in `.app-info/memory/PROMPT_CHANGES.md`.
+10. Keep wording concise, operational, and in UK English.
+11. Classify compatibility impact for each refined prompt (`BACKWARD_COMPATIBLE` or `BREAKING`).
+12. Preserve the original goal and acceptance criteria unless explicitly asked to change them.
+13. Record every accepted prompt edit in `.app-info/memory/PROMPT_CHANGES.md`.
 
 ## Refinement Lifecycle
 
