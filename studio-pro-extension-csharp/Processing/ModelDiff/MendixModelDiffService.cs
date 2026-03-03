@@ -151,6 +151,17 @@ public static class MendixModelDiffService
         "Pages$LayoutArgument",
     };
 
+    private static readonly IReadOnlyDictionary<string, string> FunctionalPageWidgetTypeMap =
+        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["ActionButton"] = "ActionButton",
+            ["DataView"] = "DataView",
+            ["DataGrid"] = "DataGrid",
+            ["DataGrid2"] = "DataGrid2",
+            ["Snippet"] = "Snippet",
+            ["SnippetCallWidget"] = "Snippet",
+        };
+
     /// <summary>
     /// Compares two model dump JSON files and returns detected resource-level changes.
     /// </summary>
@@ -3831,6 +3842,8 @@ public static class MendixModelDiffService
         var headWidgetCounts = headResource is null
             ? new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             : CollectPageWidgetTypeCounts(headResource.Value);
+        var workingFunctionalWidgetCounts = BuildFunctionalPageWidgetCounts(workingWidgetCounts);
+        var headFunctionalWidgetCounts = BuildFunctionalPageWidgetCounts(headWidgetCounts);
 
         var workingTotal = workingWidgetCounts.Values.Sum();
         var headTotal = headWidgetCounts.Values.Sum();
@@ -3844,17 +3857,28 @@ public static class MendixModelDiffService
             return null;
         }
 
+        var details = new List<string>();
         if (workingTotal > 0)
         {
-            return $"widgets used ({workingTotal}): {FormatCounterList(workingWidgetCounts)}";
+            details.Add($"widgets used ({workingTotal}): {FormatCounterList(workingWidgetCounts)}");
+            if (workingFunctionalWidgetCounts.Count > 0)
+            {
+                var total = workingFunctionalWidgetCounts.Values.Sum();
+                details.Add($"functional widgets ({total}): {FormatCounterList(workingFunctionalWidgetCounts, maxEntries: 10)}");
+            }
         }
 
         if (headTotal > 0)
         {
-            return $"widgets before deletion ({headTotal}): {FormatCounterList(headWidgetCounts)}";
+            details.Add($"widgets before deletion ({headTotal}): {FormatCounterList(headWidgetCounts)}");
+            if (headFunctionalWidgetCounts.Count > 0)
+            {
+                var total = headFunctionalWidgetCounts.Values.Sum();
+                details.Add($"functional widgets before deletion ({total}): {FormatCounterList(headFunctionalWidgetCounts, maxEntries: 10)}");
+            }
         }
 
-        return null;
+        return details.Count == 0 ? null : string.Join("; ", details);
     }
 
     private static Dictionary<string, int> CollectPageWidgetTypeCounts(JsonElement pageResource)
@@ -3901,6 +3925,29 @@ public static class MendixModelDiffService
         }
 
         return widgetCounts;
+    }
+
+    private static Dictionary<string, int> BuildFunctionalPageWidgetCounts(IReadOnlyDictionary<string, int> widgetCounts)
+    {
+        var functionalCounts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var (widgetType, count) in widgetCounts)
+        {
+            if (count <= 0 ||
+                !FunctionalPageWidgetTypeMap.TryGetValue(widgetType, out var normalizedWidgetType))
+            {
+                continue;
+            }
+
+            if (functionalCounts.TryGetValue(normalizedWidgetType, out var existing))
+            {
+                functionalCounts[normalizedWidgetType] = existing + count;
+                continue;
+            }
+
+            functionalCounts[normalizedWidgetType] = count;
+        }
+
+        return functionalCounts;
     }
 
     private static bool IsPageWidgetModelType(string? modelType)

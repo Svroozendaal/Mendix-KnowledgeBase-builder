@@ -432,10 +432,34 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
     - `widgets entries updated`
     - other generic property-summary noise from `BuildModificationDetails(...)`
 
+## D079 - Page functional widget summary extraction
+
+- Applies to:
+  - `Pages$Page`
+  - `Pages$Snippet`
+  - `Pages$PageTemplate`
+  - `Pages$BuildingBlock`
+  - `Pages$Layout`
+- Parse:
+  - full widget-type counts from layout tree traversal output (before any `+N more` truncation)
+  - functional widget subset:
+    - `ActionButton`
+    - `DataView`
+    - `DataGrid`
+    - `DataGrid2`
+    - `Snippet` (including `SnippetCallWidget` mapped to `Snippet`)
+- Emit:
+  - Added/Modified-with-single-snapshot:
+    - `functional widgets (<n>): <WidgetType x# list>`
+  - Deleted:
+    - `functional widgets before deletion (<n>): <WidgetType x# list>`
+- Example evidence:
+  - `New_Module.Pagina_test` (`Pages$Page`, Added) produced a broad `widgets used (...)` inventory where functional widget types can be hidden by `+N more`; this rule guarantees explicit functional-widget anchors for downstream converter formatting.
+
 ## Open Gaps
 
 - Full single-dump inventory is still out of scope for diff-only extraction.
 
 ## Next rule IDs
 
-- `D079` next available.
+- `D080` next available.

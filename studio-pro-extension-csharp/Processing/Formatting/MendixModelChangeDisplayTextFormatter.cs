@@ -21,6 +21,26 @@ internal static class MendixModelChangeDisplayTextFormatter
             ["Workflow"] = "WF",
         };
 
+    private static readonly IReadOnlyDictionary<string, string> FunctionalPageWidgetLabels =
+        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["ActionButton"] = "buttons",
+            ["DataView"] = "dataview",
+            ["DataGrid"] = "datagrid",
+            ["DataGrid2"] = "datagrid2",
+            ["Snippet"] = "snippet",
+            ["SnippetCallWidget"] = "snippet",
+        };
+
+    private static readonly string[] FunctionalPageWidgetLabelOrder =
+    {
+        "buttons",
+        "dataview",
+        "datagrid",
+        "datagrid2",
+        "snippet",
+    };
+
     public static string Format(MendixModelChange change)
     {
         ArgumentNullException.ThrowIfNull(change);
@@ -81,7 +101,12 @@ internal static class MendixModelChangeDisplayTextFormatter
         {
             var normalizedDetails = details.Trim();
             var compactFlowDetails = TryBuildCompactFlowDetails(changeType, elementType, normalizedDetails);
-            var selectedDetails = string.IsNullOrWhiteSpace(compactFlowDetails) ? normalizedDetails : compactFlowDetails;
+            var compactPageDetails = TryBuildCompactPageDetails(changeType, elementType, normalizedDetails);
+            var selectedDetails = !string.IsNullOrWhiteSpace(compactFlowDetails)
+                ? compactFlowDetails
+                : IsPageLikeElementType(elementType)
+                    ? compactPageDetails ?? string.Empty
+                    : normalizedDetails;
             var filteredDetails = RemoveZeroOnlyDetailSegments(selectedDetails);
             if (!string.IsNullOrWhiteSpace(filteredDetails))
             {
@@ -158,6 +183,560 @@ internal static class MendixModelChangeDisplayTextFormatter
         }
 
         return true;
+    }
+
+    private static string? TryBuildCompactPageDetails(string changeType, string elementType, string details)
+    {
+        if (!IsPageLikeElementType(elementType))
+        {
+            return null;
+        }
+
+        var requestedSummary = TryBuildRequestedPageWidgetSummary(details);
+        if (!string.IsNullOrWhiteSpace(requestedSummary))
+        {
+            return requestedSummary;
+        }
+
+        var sections = new List<string>();
+        var addedSummary = BuildFunctionalPageWidgetDeltaSummary(details, "added");
+        if (!string.IsNullOrWhiteSpace(addedSummary))
+        {
+            sections.Add(addedSummary);
+        }
+
+        var modifiedSummary = BuildFunctionalPageWidgetDeltaSummary(details, "modified");
+        if (!string.IsNullOrWhiteSpace(modifiedSummary))
+        {
+            sections.Add(modifiedSummary);
+        }
+
+        var removedSummary = BuildFunctionalPageWidgetDeltaSummary(details, "removed");
+        if (!string.IsNullOrWhiteSpace(removedSummary))
+        {
+            sections.Add(removedSummary);
+        }
+
+        if (sections.Count == 0)
+        {
+            return null;
+        }
+
+        return string.Join("; ", sections);
+    }
+
+    private static string? BuildFunctionalPageWidgetCountSummary(string details)
+    {
+        var segments = details
+            .Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(segment => segment.Trim())
+            .Where(segment => segment.Length > 0)
+            .ToArray();
+
+        var sourceSegments = segments
+            .Where(segment => segment.StartsWith("functional widgets", StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+        if (sourceSegments.Length == 0)
+        {
+            sourceSegments = segments
+                .Where(segment =>
+                    segment.StartsWith("widgets used", StringComparison.OrdinalIgnoreCase) ||
+                    segment.StartsWith("widgets before deletion", StringComparison.OrdinalIgnoreCase) ||
+                    segment.StartsWith("widgets added", StringComparison.OrdinalIgnoreCase) ||
+                    segment.StartsWith("widgets removed", StringComparison.OrdinalIgnoreCase))
+                .ToArray();
+        }
+
+        if (sourceSegments.Length == 0)
+        {
+            return null;
+        }
+
+        var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var segment in sourceSegments)
+        {
+            foreach (Match match in Regex.Matches(segment, @"(?<type>[A-Za-z][A-Za-z0-9_]+)\s+x(?<count>\d+)", RegexOptions.IgnoreCase))
+            {
+                var widgetType = match.Groups["type"].Value;
+                if (!FunctionalPageWidgetLabels.TryGetValue(widgetType, out var label))
+                {
+                    continue;
+                }
+
+                if (!int.TryParse(match.Groups["count"].Value, out var count) || count <= 0)
+                {
+                    continue;
+                }
+
+                if (counts.TryGetValue(label, out var existing))
+                {
+                    counts[label] = existing + count;
+                    continue;
+                }
+
+                counts[label] = count;
+            }
+        }
+
+        var formatted = FormatFunctionalPageWidgetCounts(counts);
+        return string.IsNullOrWhiteSpace(formatted) ? null : $"functional widgets: {formatted}";
+    }
+
+    private static string? TryBuildRequestedPageWidgetSummary(string details)
+    {
+        var addedEntries = ParseAddedPageWidgetEntries(details);
+        var countedWidgetTypes = ParseFunctionalWidgetTypesFromCountSummary(details);
+
+        var addedLabels = new List<string>();
+        var seenAddedLabels = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        if (addedEntries.Count > 0)
+        {
+            foreach (var entry in addedEntries)
+            {
+                var label = BuildRequestedWidgetLabel(entry.WidgetType);
+                AddUniqueIfNotEmpty(addedLabels, seenAddedLabels, label);
+            }
+        }
+        else
+        {
+            foreach (var widgetType in countedWidgetTypes)
+            {
+                var label = BuildRequestedWidgetLabel(widgetType);
+                AddUniqueIfNotEmpty(addedLabels, seenAddedLabels, label);
+            }
+        }
+
+        if (addedLabels.Count == 0)
+        {
+            return null;
+        }
+
+        var detailsList = new List<string>();
+        var seenDetails = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        if (addedEntries.Count > 0)
+        {
+            foreach (var entry in addedEntries)
+            {
+                var detailsText = BuildRequestedWidgetDetailsFromAddedEntry(entry);
+                AddUniqueIfNotEmpty(detailsList, seenDetails, detailsText);
+            }
+        }
+        else
+        {
+            var actionTargets = ParseLifecycleActionTargets(details);
+            foreach (var widgetType in countedWidgetTypes)
+            {
+                foreach (var detailsText in BuildRequestedWidgetDetailsFromCountType(widgetType, actionTargets))
+                {
+                    AddUniqueIfNotEmpty(detailsList, seenDetails, detailsText);
+                }
+            }
+        }
+
+        var addedSummary = $"added: {string.Join(", ", addedLabels)}";
+        if (detailsList.Count == 0)
+        {
+            return addedSummary;
+        }
+
+        return $"{addedSummary}; widget details: {string.Join(", ", detailsList)}";
+    }
+
+    private static List<PageWidgetSummaryEntry> ParseAddedPageWidgetEntries(string details)
+    {
+        var entries = new List<PageWidgetSummaryEntry>();
+        foreach (var segment in details.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var match = Regex.Match(
+                segment,
+                @"^added\s+(?<type>[A-Za-z][A-Za-z0-9_]+)",
+                RegexOptions.IgnoreCase);
+            if (!match.Success)
+            {
+                continue;
+            }
+
+            var widgetType = match.Groups["type"].Value.Trim();
+            if (string.IsNullOrWhiteSpace(widgetType))
+            {
+                continue;
+            }
+
+            var bindingsMatch = Regex.Match(
+                segment,
+                @"\((?<bindings>[^()]*(?:=|->)[^()]*)\)\s*$",
+                RegexOptions.IgnoreCase);
+            var bindings = bindingsMatch.Success ? bindingsMatch.Groups["bindings"].Value.Trim() : null;
+            entries.Add(new PageWidgetSummaryEntry(widgetType, bindings));
+        }
+
+        return entries;
+    }
+
+    private static List<string> ParseFunctionalWidgetTypesFromCountSummary(string details)
+    {
+        var widgetTypes = new List<string>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var segment in details.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            if (!segment.StartsWith("functional widgets", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            foreach (Match match in Regex.Matches(segment, @"(?<type>[A-Za-z][A-Za-z0-9_]+)\s+x(?<count>\d+)", RegexOptions.IgnoreCase))
+            {
+                if (!int.TryParse(match.Groups["count"].Value, out var count) || count <= 0)
+                {
+                    continue;
+                }
+
+                var widgetType = match.Groups["type"].Value.Trim();
+                if (widgetType.Length == 0 || !seen.Add(widgetType))
+                {
+                    continue;
+                }
+
+                widgetTypes.Add(widgetType);
+            }
+        }
+
+        return widgetTypes;
+    }
+
+    private static List<(string Kind, string Target)> ParseLifecycleActionTargets(string details)
+    {
+        var result = new List<(string Kind, string Target)>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        var match = Regex.Match(
+            details,
+            @"action\s+targets(?:\s+before\s+deletion)?\s*:\s*(?<targets>[^;]+)",
+            RegexOptions.IgnoreCase);
+        if (!match.Success)
+        {
+            return result;
+        }
+
+        foreach (var targetToken in match.Groups["targets"].Value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var pairMatch = Regex.Match(
+                targetToken,
+                @"(?<kind>[A-Za-z]+)\s*=\s*(?<target>[^\s,]+)",
+                RegexOptions.IgnoreCase);
+            if (!pairMatch.Success)
+            {
+                continue;
+            }
+
+            var kind = pairMatch.Groups["kind"].Value.Trim();
+            var target = pairMatch.Groups["target"].Value.Trim();
+            if (kind.Length == 0 || target.Length == 0)
+            {
+                continue;
+            }
+
+            var dedupeKey = $"{kind}:{target}";
+            if (seen.Add(dedupeKey))
+            {
+                result.Add((kind, target));
+            }
+        }
+
+        return result;
+    }
+
+    private static string? BuildRequestedWidgetLabel(string widgetType)
+    {
+        if (string.Equals(widgetType, "ActionButton", StringComparison.OrdinalIgnoreCase))
+        {
+            return "button";
+        }
+
+        if (string.Equals(widgetType, "DataGrid", StringComparison.OrdinalIgnoreCase))
+        {
+            return "DG";
+        }
+
+        if (string.Equals(widgetType, "DataGrid2", StringComparison.OrdinalIgnoreCase))
+        {
+            return "DG2";
+        }
+
+        if (string.Equals(widgetType, "DataView", StringComparison.OrdinalIgnoreCase))
+        {
+            return "list";
+        }
+
+        if (string.Equals(widgetType, "Snippet", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(widgetType, "SnippetCallWidget", StringComparison.OrdinalIgnoreCase))
+        {
+            return "snippet";
+        }
+
+        return null;
+    }
+
+    private static string? BuildRequestedWidgetDetailsFromAddedEntry(PageWidgetSummaryEntry entry)
+    {
+        if (string.Equals(entry.WidgetType, "ActionButton", StringComparison.OrdinalIgnoreCase))
+        {
+            var bindings = ParseWidgetBindingPairs(entry.Bindings);
+            return BuildButtonDetailsFromBindings(bindings);
+        }
+
+        if (string.Equals(entry.WidgetType, "DataGrid", StringComparison.OrdinalIgnoreCase))
+        {
+            var source = ResolveWidgetSourceFromBindings(ParseWidgetBindingPairs(entry.Bindings));
+            return string.IsNullOrWhiteSpace(source) ? "DG <unknown source>" : $"DG {source}";
+        }
+
+        if (string.Equals(entry.WidgetType, "DataGrid2", StringComparison.OrdinalIgnoreCase))
+        {
+            var source = ResolveWidgetSourceFromBindings(ParseWidgetBindingPairs(entry.Bindings));
+            return string.IsNullOrWhiteSpace(source) ? "DG2 <unknown source>" : $"DG2 {source}";
+        }
+
+        if (string.Equals(entry.WidgetType, "DataView", StringComparison.OrdinalIgnoreCase))
+        {
+            var source = ResolveWidgetSourceFromBindings(ParseWidgetBindingPairs(entry.Bindings));
+            return string.IsNullOrWhiteSpace(source) ? "list <unknown source>" : $"list {source}";
+        }
+
+        if (string.Equals(entry.WidgetType, "Snippet", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(entry.WidgetType, "SnippetCallWidget", StringComparison.OrdinalIgnoreCase))
+        {
+            return "snippet";
+        }
+
+        return null;
+    }
+
+    private static IEnumerable<string> BuildRequestedWidgetDetailsFromCountType(
+        string widgetType,
+        IReadOnlyList<(string Kind, string Target)> actionTargets)
+    {
+        if (string.Equals(widgetType, "ActionButton", StringComparison.OrdinalIgnoreCase))
+        {
+            if (actionTargets.Count == 0)
+            {
+                return new[] { "button <action unknown>" };
+            }
+
+            return actionTargets
+                .Select(target => BuildButtonDetailsFromActionTarget(target.Kind, target.Target))
+                .Where(text => !string.IsNullOrWhiteSpace(text))
+                .Cast<string>()
+                .ToArray();
+        }
+
+        if (string.Equals(widgetType, "DataGrid", StringComparison.OrdinalIgnoreCase))
+        {
+            return new[] { "DG <unknown source>" };
+        }
+
+        if (string.Equals(widgetType, "DataGrid2", StringComparison.OrdinalIgnoreCase))
+        {
+            return new[] { "DG2 <unknown source>" };
+        }
+
+        if (string.Equals(widgetType, "DataView", StringComparison.OrdinalIgnoreCase))
+        {
+            return new[] { "list <unknown source>" };
+        }
+
+        if (string.Equals(widgetType, "Snippet", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(widgetType, "SnippetCallWidget", StringComparison.OrdinalIgnoreCase))
+        {
+            return new[] { "snippet" };
+        }
+
+        return Array.Empty<string>();
+    }
+
+    private static string? BuildButtonDetailsFromBindings(IReadOnlyDictionary<string, string> bindings)
+    {
+        if (bindings.Count == 0)
+        {
+            return "button <action unknown>";
+        }
+
+        foreach (var bindingKey in new[] { "showPage", "selectPage", "gotoPage", "onClick", "onChange", "onEnter", "onLeave", "onEnterKeyPress", "action" })
+        {
+            if (!bindings.TryGetValue(bindingKey, out var target) || string.IsNullOrWhiteSpace(target))
+            {
+                continue;
+            }
+
+            var actionPhrase = BuildButtonActionPhrase(bindingKey, target);
+            if (!string.IsNullOrWhiteSpace(actionPhrase))
+            {
+                return $"button {actionPhrase}";
+            }
+        }
+
+        return "button <action unknown>";
+    }
+
+    private static string? BuildButtonDetailsFromActionTarget(string kind, string target)
+    {
+        var normalizedTarget = ShortName(target);
+        if (string.IsNullOrWhiteSpace(normalizedTarget))
+        {
+            return null;
+        }
+
+        if (string.Equals(kind, "page", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"button show page {normalizedTarget}";
+        }
+
+        if (string.Equals(kind, "nanoflow", StringComparison.OrdinalIgnoreCase))
+        {
+            return $"button call nanoflow {normalizedTarget}";
+        }
+
+        return $"button call MF {normalizedTarget}";
+    }
+
+    private static string BuildButtonActionPhrase(string bindingKey, string target)
+    {
+        var normalizedTarget = ShortName(target);
+        if (string.IsNullOrWhiteSpace(normalizedTarget))
+        {
+            return "action";
+        }
+
+        if (string.Equals(bindingKey, "showPage", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(bindingKey, "selectPage", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(bindingKey, "gotoPage", StringComparison.OrdinalIgnoreCase) ||
+            LooksLikePageTarget(target))
+        {
+            return $"show page {normalizedTarget}";
+        }
+
+        if (LooksLikeNanoflowTarget(target))
+        {
+            return $"call nanoflow {normalizedTarget}";
+        }
+
+        return $"call MF {normalizedTarget}";
+    }
+
+    private static Dictionary<string, string> ParseWidgetBindingPairs(string? bindingsText)
+    {
+        var bindings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (string.IsNullOrWhiteSpace(bindingsText))
+        {
+            return bindings;
+        }
+
+        foreach (var token in bindingsText.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var normalizedToken = token.Trim();
+            if (normalizedToken.Length == 0)
+            {
+                continue;
+            }
+
+            var equalsIndex = normalizedToken.IndexOf('=');
+            if (equalsIndex > 0 && equalsIndex < normalizedToken.Length - 1)
+            {
+                var key = normalizedToken[..equalsIndex].Trim();
+                var value = normalizedToken[(equalsIndex + 1)..].Trim();
+                if (key.Length > 0 && value.Length > 0)
+                {
+                    bindings[key] = value;
+                }
+
+                continue;
+            }
+
+            var arrowIndex = normalizedToken.LastIndexOf("->", StringComparison.Ordinal);
+            var spaceIndex = normalizedToken.IndexOf(' ');
+            if (arrowIndex > 0 && spaceIndex > 0 && spaceIndex < normalizedToken.Length - 1)
+            {
+                var key = normalizedToken[..spaceIndex].Trim();
+                var value = normalizedToken[(arrowIndex + 2)..].Trim();
+                if (key.Length > 0 && value.Length > 0)
+                {
+                    bindings[key] = value;
+                }
+            }
+        }
+
+        return bindings;
+    }
+
+    private static string? ResolveWidgetSourceFromBindings(IReadOnlyDictionary<string, string> bindings)
+    {
+        if (!bindings.TryGetValue("source", out var source) || string.IsNullOrWhiteSpace(source))
+        {
+            return null;
+        }
+
+        return ShortName(source);
+    }
+
+    private static bool LooksLikePageTarget(string target)
+    {
+        return target.Contains(".Page", StringComparison.OrdinalIgnoreCase) ||
+               target.StartsWith("Page_", StringComparison.OrdinalIgnoreCase) ||
+               Regex.IsMatch(target, @"(^|[._])Page[A-Za-z0-9_]*$", RegexOptions.IgnoreCase);
+    }
+
+    private static bool LooksLikeNanoflowTarget(string target)
+    {
+        return target.Contains("nanoflow", StringComparison.OrdinalIgnoreCase) ||
+               Regex.IsMatch(target, @"(^|[._])NF[_A-Za-z0-9]*$", RegexOptions.IgnoreCase);
+    }
+
+    private static string? BuildFunctionalPageWidgetDeltaSummary(string details, string bucket)
+    {
+        var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        foreach (var segment in details.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var match = Regex.Match(
+                segment,
+                $@"^{Regex.Escape(bucket)}\s+(?<type>[A-Za-z][A-Za-z0-9_]+)",
+                RegexOptions.IgnoreCase);
+            if (!match.Success)
+            {
+                continue;
+            }
+
+            var widgetType = match.Groups["type"].Value;
+            if (!FunctionalPageWidgetLabels.TryGetValue(widgetType, out var label))
+            {
+                continue;
+            }
+
+            if (counts.TryGetValue(label, out var existing))
+            {
+                counts[label] = existing + 1;
+                continue;
+            }
+
+            counts[label] = 1;
+        }
+
+        var formatted = FormatFunctionalPageWidgetCounts(counts);
+        return string.IsNullOrWhiteSpace(formatted) ? null : $"{bucket}: {formatted}";
+    }
+
+    private static string? FormatFunctionalPageWidgetCounts(IReadOnlyDictionary<string, int> counts)
+    {
+        if (counts.Count == 0)
+        {
+            return null;
+        }
+
+        var formatted = FunctionalPageWidgetLabelOrder
+            .Where(label => counts.TryGetValue(label, out var count) && count > 0)
+            .Select(label => $"{label} x{counts[label]}")
+            .ToArray();
+
+        return formatted.Length == 0 ? null : string.Join(", ", formatted);
     }
 
     private static string? TryBuildCompactFlowDetails(string changeType, string elementType, string details)
@@ -1360,6 +1939,13 @@ internal static class MendixModelChangeDisplayTextFormatter
         string.Equals(elementType, "Entity", StringComparison.OrdinalIgnoreCase) ||
         string.Equals(elementType, "NonPersistentEntity", StringComparison.OrdinalIgnoreCase);
 
+    private static bool IsPageLikeElementType(string elementType) =>
+        string.Equals(elementType, "Page", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(elementType, "Snippet", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(elementType, "PageTemplate", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(elementType, "BuildingBlock", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(elementType, "Layout", StringComparison.OrdinalIgnoreCase);
+
     private static string ResolveChangeMarker(string changeType, string elementType)
     {
         if (string.Equals(changeType, "Added", StringComparison.OrdinalIgnoreCase))
@@ -1432,6 +2018,8 @@ internal static class MendixModelChangeDisplayTextFormatter
             parts.Add(value.Trim());
         }
     }
+
+    private sealed record PageWidgetSummaryEntry(string WidgetType, string? Bindings);
 
     private sealed record ActionDeltaCounts(int Added, int Removed, int Modified);
 

@@ -1047,6 +1047,7 @@ internal static class AutoCommitMessagePanelHtml
         gap: 8px;
       }
     }
+    {{AutoCommitMessageStyleLibrary.CheckboxCss}}
   </style>
 </head>
 <body>
@@ -1093,9 +1094,12 @@ internal static class AutoCommitMessagePanelHtml
     let currentPayload = initialPayload;
     let hasLoadedChanges = false;
     let refreshInProgress = false;
+    let activeOperation = "";
     let activeView = "model-changes";
     let overviewInProgress = false;
     let overviewModulesInProgress = false;
+    let changeModulesLoadInProgress = false;
+    let changeModulesLoadAttempted = false;
     let settingsState = {
       theme: "dark",
       dataRootBasePath: defaultDataRootBasePath,
@@ -1142,6 +1146,29 @@ internal static class AutoCommitMessagePanelHtml
       selectedModules: [],
       loaded: false,
     };
+
+    function isOperationInProgress() {
+      return typeof activeOperation === "string" && activeOperation.length > 0;
+    }
+
+    function beginOperation(operationName) {
+      if (isOperationInProgress()) {
+        return false;
+      }
+
+      activeOperation = operationName;
+      return true;
+    }
+
+    function endOperation(operationName) {
+      if (!isOperationInProgress()) {
+        return;
+      }
+
+      if (!operationName || activeOperation === operationName) {
+        activeOperation = "";
+      }
+    }
 
     function normalizeTheme(value) {
       return value === "light" ? "light" : "dark";
@@ -1392,6 +1419,147 @@ internal static class AutoCommitMessagePanelHtml
         ? "\\"
         : "/";
       return `${normalized}${separator}Commit messages`;
+    }
+
+    function resetChangeModulesState(keepLoadAttempt) {
+      changeModulesState = {
+        mprVersion: "v1",
+        modules: [],
+        supportsPreFilter: false,
+        selectedModules: [],
+        loaded: false,
+      };
+
+      if (!keepLoadAttempt) {
+        changeModulesLoadAttempted = false;
+      }
+    }
+
+    function normalizeChangeModuleItem(rawItem) {
+      if (!rawItem) {
+        return null;
+      }
+
+      if (typeof rawItem === "string") {
+        const normalized = rawItem.trim();
+        return normalized.length > 0 ? { id: normalized, name: normalized } : null;
+      }
+
+      if (typeof rawItem !== "object") {
+        return null;
+      }
+
+      const rawId = typeof rawItem.id === "string" ? rawItem.id.trim() : "";
+      if (rawId.length === 0) {
+        return null;
+      }
+
+      const rawName = typeof rawItem.name === "string" ? rawItem.name.trim() : "";
+      return {
+        id: rawId,
+        name: rawName.length > 0 ? rawName : rawId,
+      };
+    }
+
+    function normalizeChangeModuleItems(result) {
+      const rawItems = Array.isArray(result && result.moduleItems)
+        ? result.moduleItems
+        : (Array.isArray(result && result.modules) ? result.modules : []);
+      const seenIds = new Set();
+      const normalizedItems = [];
+      rawItems.forEach((rawItem) => {
+        const moduleItem = normalizeChangeModuleItem(rawItem);
+        if (!moduleItem) {
+          return;
+        }
+
+        const dedupeKey = moduleItem.id.toLowerCase();
+        if (seenIds.has(dedupeKey)) {
+          return;
+        }
+
+        seenIds.add(dedupeKey);
+        normalizedItems.push(moduleItem);
+      });
+
+      return normalizedItems.sort((left, right) => left.name.localeCompare(right.name));
+    }
+
+    async function loadChangeModulesIntoState(forceReload) {
+      if (!settingsState.extendedMode) {
+        return { success: false, message: "Extended mode is disabled." };
+      }
+
+      if (changeModulesLoadInProgress) {
+        return { success: false, message: "Module filter loading is already in progress." };
+      }
+
+      if (!forceReload && changeModulesState.loaded) {
+        return { success: true, count: changeModulesState.modules.length };
+      }
+
+      changeModulesLoadInProgress = true;
+      changeModulesLoadAttempted = true;
+      try {
+        const listUrl = `${buildActionUrl(listChangeModulesActionValue, {})}&_t=${Date.now()}`;
+        const response = await fetch(listUrl, { cache: "no-store" });
+        let result = null;
+        try {
+          result = await response.json();
+        } catch {
+          result = null;
+        }
+
+        if (!response.ok || !result || result.success !== true || typeof result.mprVersion !== "string") {
+          const message = result && typeof result.message === "string"
+            ? result.message
+            : `Change-module loading failed (HTTP ${response.status})`;
+          resetChangeModulesState(true);
+          return { success: false, message };
+        }
+
+        const modules = normalizeChangeModuleItems(result);
+
+        let storedSelection = [];
+        try {
+          const rawStoredSelection = localStorage.getItem(changeModuleFilterStorageKey);
+          const parsedSelection = rawStoredSelection ? JSON.parse(rawStoredSelection) : [];
+          if (Array.isArray(parsedSelection)) {
+            storedSelection = parsedSelection
+              .filter((moduleName) => typeof moduleName === "string" && moduleName.trim().length > 0)
+              .map((moduleName) => moduleName.trim());
+          }
+        } catch {
+          storedSelection = [];
+        }
+
+        let selectedModules = storedSelection.length > 0
+          ? modules
+              .filter((moduleItem) =>
+                storedSelection.includes(moduleItem.id) ||
+                storedSelection.includes(moduleItem.name))
+              .map((moduleItem) => moduleItem.id)
+          : modules.map((moduleItem) => moduleItem.id);
+        if (selectedModules.length === 0 && modules.length > 0) {
+          selectedModules = modules.map((moduleItem) => moduleItem.id);
+        }
+
+        changeModulesState = {
+          mprVersion: result.mprVersion === "v2" ? "v2" : "v1",
+          modules,
+          supportsPreFilter: Boolean(result.supportsPreFilter),
+          selectedModules,
+          loaded: true,
+        };
+
+        return { success: true, count: modules.length };
+      } catch (error) {
+        const message = error && error.message ? error.message : "Unexpected error";
+        resetChangeModulesState(true);
+        return { success: false, message };
+      } finally {
+        changeModulesLoadInProgress = false;
+      }
     }
 
     async function loadOverviewModulesIntoState() {
@@ -2001,7 +2169,8 @@ internal static class AutoCommitMessagePanelHtml
       modulePickerHead.appendChild(element("span", "overview-meta", "Modules"));
       const reloadModulesButton = element("button", "btn btn-outline", "Reload modules");
       reloadModulesButton.type = "button";
-      reloadModulesButton.disabled = overviewInProgress || overviewModulesInProgress || !canGenerateOverview(payload);
+      reloadModulesButton.disabled =
+        overviewInProgress || overviewModulesInProgress || isOperationInProgress() || !canGenerateOverview(payload);
       modulePickerHead.appendChild(reloadModulesButton);
       modulePicker.appendChild(modulePickerHead);
 
@@ -2041,7 +2210,8 @@ internal static class AutoCommitMessagePanelHtml
         const selectorToolbar = element("div", "overview-selector-toolbar");
         const generateSelectedButton = element("button", "btn", "Generate selected");
         generateSelectedButton.type = "button";
-        generateSelectedButton.disabled = overviewInProgress || overviewModulesInProgress || !canGenerateOverview(payload);
+        generateSelectedButton.disabled =
+          overviewInProgress || overviewModulesInProgress || isOperationInProgress() || !canGenerateOverview(payload);
         selectorToolbar.appendChild(generateSelectedButton);
 
         generateSelectedButton.disabled =
@@ -2067,8 +2237,9 @@ internal static class AutoCommitMessagePanelHtml
           const summary = element("summary", "overview-module-summary");
           const summaryCheckbox = document.createElement("input");
           summaryCheckbox.type = "checkbox";
-          summaryCheckbox.className = "overview-group-checkbox";
-          summaryCheckbox.disabled = overviewInProgress || overviewModulesInProgress || !canGenerateOverview(payload);
+          summaryCheckbox.className = "overview-group-checkbox acm-checkbox";
+          summaryCheckbox.disabled =
+            overviewInProgress || overviewModulesInProgress || isOperationInProgress() || !canGenerateOverview(payload);
 
           const selectedSet = new Set(
             Array.isArray(modelOverviewState.selectedModules)
@@ -2123,8 +2294,10 @@ internal static class AutoCommitMessagePanelHtml
             const label = element("label");
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
+            checkbox.className = "acm-checkbox";
             checkbox.checked = selectedSet.has(moduleName);
-            checkbox.disabled = overviewInProgress || overviewModulesInProgress || !canGenerateOverview(payload);
+            checkbox.disabled =
+              overviewInProgress || overviewModulesInProgress || isOperationInProgress() || !canGenerateOverview(payload);
             checkbox.addEventListener("change", () => {
               const nextSet = new Set(
                 Array.isArray(modelOverviewState.selectedModules)
@@ -2249,7 +2422,7 @@ internal static class AutoCommitMessagePanelHtml
       }
 
       async function requestModuleList(forceReload) {
-        if (overviewModulesInProgress || !canGenerateOverview(payload)) {
+        if (overviewModulesInProgress || isOperationInProgress() || !canGenerateOverview(payload)) {
           return;
         }
 
@@ -2257,19 +2430,31 @@ internal static class AutoCommitMessagePanelHtml
           return;
         }
 
-        statusLine.textContent = "Loading overview modules...";
-        const result = await loadOverviewModulesIntoState();
-        if (result.success) {
-          const moduleCount = Number.isInteger(result.count) ? result.count : 0;
-          render(`Loaded ${moduleCount} module(s).`);
+        if (!beginOperation("list-overview-modules")) {
           return;
         }
 
-        render(`Module list loading failed: ${result.message}`);
+        statusLine.textContent = "Loading overview modules...";
+        let statusMessage = "";
+        try {
+          const result = await loadOverviewModulesIntoState();
+          if (result.success) {
+            const moduleCount = Number.isInteger(result.count) ? result.count : 0;
+            statusMessage = `Loaded ${moduleCount} module(s).`;
+          } else {
+            statusMessage = `Module list loading failed: ${result.message}`;
+          }
+        } finally {
+          endOperation("list-overview-modules");
+        }
+
+        if (statusMessage) {
+          render(statusMessage);
+        }
       }
 
       async function requestOverviewForSelected() {
-        if (overviewInProgress || !canGenerateOverview(payload)) {
+        if (overviewInProgress || isOperationInProgress() || !canGenerateOverview(payload)) {
           return;
         }
 
@@ -2282,9 +2467,14 @@ internal static class AutoCommitMessagePanelHtml
           return;
         }
 
+        if (!beginOperation("generate-overview")) {
+          return;
+        }
+
         const moduleListState = snapshotModuleListState();
         overviewInProgress = true;
         statusLine.textContent = `Generating ${selectedModules.length} module overview(s)...`;
+        let statusMessage = "";
 
         try {
           const modulesCsv = selectedModules.join(",");
@@ -2327,39 +2517,34 @@ internal static class AutoCommitMessagePanelHtml
               groupExpansion: moduleListState.groupExpansion,
             };
 
-            overviewInProgress = false;
-            render(`Overview generation failed: ${message}`);
-            return;
+            statusMessage = `Overview generation failed: ${message}`;
+          } else {
+            modelOverviewState = {
+              hasGenerated: true,
+              generatedAtUtc: data.generatedAtUtc || null,
+              changedFileCount: Number.isInteger(data.changedFileCount) ? data.changedFileCount : 0,
+              changedModelFileCount: Number.isInteger(data.changedModelFileCount) ? data.changedModelFileCount : 0,
+              mprFileCount: Number.isInteger(data.mprFileCount) ? data.mprFileCount : 0,
+              overviewText: typeof data.overviewText === "string" ? data.overviewText : "",
+              outputFolderPath: typeof data.outputFolderPath === "string" ? data.outputFolderPath : "",
+              outputPaths: Array.isArray(data.outputPaths) ? data.outputPaths.filter((item) => typeof item === "string") : [],
+              mode: typeof data.mode === "string" ? data.mode : "",
+              selectedModule: typeof data.selectedModule === "string" ? data.selectedModule : "",
+              selectedModules: Array.isArray(data.selectedModules)
+                ? data.selectedModules.filter((item) => typeof item === "string")
+                : moduleListState.selectedModules,
+              message: typeof data.message === "string" ? data.message : "",
+              error: "",
+              modulesLoaded: moduleListState.modulesLoaded,
+              modulesLoadGeneratedAtUtc: moduleListState.modulesLoadGeneratedAtUtc,
+              moduleListError: moduleListState.moduleListError,
+              appName: moduleListState.appName,
+              availableModules: moduleListState.availableModules,
+              groupExpansion: moduleListState.groupExpansion,
+            };
+
+            statusMessage = modelOverviewState.message || "Model overview generated.";
           }
-
-          modelOverviewState = {
-            hasGenerated: true,
-            generatedAtUtc: data.generatedAtUtc || null,
-            changedFileCount: Number.isInteger(data.changedFileCount) ? data.changedFileCount : 0,
-            changedModelFileCount: Number.isInteger(data.changedModelFileCount) ? data.changedModelFileCount : 0,
-            mprFileCount: Number.isInteger(data.mprFileCount) ? data.mprFileCount : 0,
-            overviewText: typeof data.overviewText === "string" ? data.overviewText : "",
-            outputFolderPath: typeof data.outputFolderPath === "string" ? data.outputFolderPath : "",
-            outputPaths: Array.isArray(data.outputPaths) ? data.outputPaths.filter((item) => typeof item === "string") : [],
-            mode: typeof data.mode === "string" ? data.mode : "",
-            selectedModule: typeof data.selectedModule === "string" ? data.selectedModule : "",
-            selectedModules: Array.isArray(data.selectedModules)
-              ? data.selectedModules.filter((item) => typeof item === "string")
-              : moduleListState.selectedModules,
-            message: typeof data.message === "string" ? data.message : "",
-            error: "",
-            modulesLoaded: moduleListState.modulesLoaded,
-            modulesLoadGeneratedAtUtc: moduleListState.modulesLoadGeneratedAtUtc,
-            moduleListError: moduleListState.moduleListError,
-            appName: moduleListState.appName,
-            availableModules: moduleListState.availableModules,
-            groupExpansion: moduleListState.groupExpansion,
-          };
-
-          overviewInProgress = false;
-          const generatedMessage = modelOverviewState.message || "Model overview generated.";
-          render(generatedMessage);
-          return;
         } catch (error) {
           const message = error && error.message ? error.message : "Unexpected error";
           modelOverviewState = {
@@ -2384,8 +2569,14 @@ internal static class AutoCommitMessagePanelHtml
             groupExpansion: moduleListState.groupExpansion,
           };
 
+          statusMessage = `Overview generation failed: ${message}`;
+        } finally {
           overviewInProgress = false;
-          render(`Overview generation failed: ${message}`);
+          endOperation("generate-overview");
+        }
+
+        if (statusMessage) {
+          render(statusMessage);
         }
       }
 
@@ -2827,35 +3018,15 @@ internal static class AutoCommitMessagePanelHtml
       moduleFilterPanel.appendChild(moduleFilterContent);
       modelPanel.insertBefore(moduleFilterPanel, modelPanel.lastChild);
 
-      async function loadChangeModules() {
-        if (!settingsState.extendedMode) {
-          return;
-        }
-        try {
-          const listUrl = `${buildActionUrl(listChangeModulesActionValue, {})}&_t=${Date.now()}`;
-          const response = await fetch(listUrl, { cache: "no-store" });
-          const result = await response.json();
-
-          if (result.success && result.mprVersion) {
-            changeModulesState = {
-              mprVersion: result.mprVersion,
-              modules: Array.isArray(result.modules) ? result.modules : [],
-              supportsPreFilter: Boolean(result.supportsPreFilter),
-              selectedModules: Array.isArray(result.modules) ? result.modules.slice() : [],
-              loaded: true,
-            };
-            renderModuleFilter();
-          }
-        } catch {
-          // Silently ignore errors loading modules
-        }
-      }
-
       function renderModuleFilter() {
         moduleFilterContent.innerHTML = "";
 
         if (!changeModulesState.loaded) {
-          moduleFilterContent.appendChild(element("div", "settings-help", "Loading modules..."));
+          moduleFilterPanel.style.display = "block";
+          const loadingText = changeModulesLoadAttempted
+            ? "Module filter is unavailable for this project state."
+            : "Loading modules...";
+          moduleFilterContent.appendChild(element("div", "settings-help", loadingText));
           return;
         }
 
@@ -2872,14 +3043,17 @@ internal static class AutoCommitMessagePanelHtml
           const selectAllLabel = element("label", "settings-inline");
           const selectAllCheckbox = document.createElement("input");
           selectAllCheckbox.type = "checkbox";
-          selectAllCheckbox.checked = changeModulesState.selectedModules.length === changeModulesState.modules.length &&
-                                       changeModulesState.modules.length > 0;
+          selectAllCheckbox.className = "acm-checkbox";
+          const moduleIds = changeModulesState.modules.map((moduleItem) => moduleItem.id);
+          const selectedSet = new Set(changeModulesState.selectedModules);
+          selectAllCheckbox.checked = moduleIds.length > 0 &&
+                                       moduleIds.every((moduleId) => selectedSet.has(moduleId));
           selectAllLabel.appendChild(selectAllCheckbox);
           selectAllLabel.appendChild(element("span", null, `Select all (${changeModulesState.modules.length})`));
 
           selectAllCheckbox.addEventListener("change", () => {
             if (selectAllCheckbox.checked) {
-              changeModulesState.selectedModules = changeModulesState.modules.slice();
+              changeModulesState.selectedModules = moduleIds.slice();
             } else {
               changeModulesState.selectedModules = [];
             }
@@ -2889,25 +3063,32 @@ internal static class AutoCommitMessagePanelHtml
 
           moduleList.appendChild(selectAllLabel);
 
-          changeModulesState.modules.forEach((module) => {
+          changeModulesState.modules.forEach((moduleItem) => {
             const label = element("label", "settings-inline");
             label.style.marginLeft = "16px";
+            const moduleId = moduleItem.id;
+            const moduleName = moduleItem.name || moduleId;
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.checked = changeModulesState.selectedModules.includes(module);
+            checkbox.className = "acm-checkbox";
+            checkbox.checked = changeModulesState.selectedModules.includes(moduleId);
             checkbox.addEventListener("change", () => {
               if (checkbox.checked) {
-                if (!changeModulesState.selectedModules.includes(module)) {
-                  changeModulesState.selectedModules.push(module);
+                if (!changeModulesState.selectedModules.includes(moduleId)) {
+                  changeModulesState.selectedModules.push(moduleId);
                 }
               } else {
-                changeModulesState.selectedModules = changeModulesState.selectedModules.filter(m => m !== module);
+                changeModulesState.selectedModules = changeModulesState.selectedModules.filter(m => m !== moduleId);
               }
               renderModuleFilter();
               saveModuleFilterToStorage();
             });
             label.appendChild(checkbox);
-            label.appendChild(element("span", null, module));
+            const labelText = element("span", null, moduleName);
+            if (moduleName !== moduleId) {
+              labelText.title = moduleId;
+            }
+            label.appendChild(labelText);
             moduleList.appendChild(label);
           });
 
@@ -3327,6 +3508,13 @@ internal static class AutoCommitMessagePanelHtml
         selectRow(0);
       }
 
+      renderModuleFilter();
+      if (settingsState.extendedMode && !changeModulesState.loaded && !changeModulesLoadInProgress && !changeModulesLoadAttempted) {
+        loadChangeModulesIntoState(false)
+          .then(() => render())
+          .catch(() => { });
+      }
+
       layout.appendChild(modelPanel);
       layout.appendChild(detailsPanel);
       return layout;
@@ -3585,7 +3773,7 @@ internal static class AutoCommitMessagePanelHtml
       navRefreshButton.type = "button";
       navRefreshButton.title = "Refresh";
       navRefreshButton.setAttribute("aria-label", "Refresh");
-      navRefreshButton.disabled = refreshInProgress;
+      navRefreshButton.disabled = refreshInProgress || isOperationInProgress();
       const navRefreshIcon = element("span", "refresh-icon");
       navRefreshIcon.setAttribute("aria-hidden", "true");
       navRefreshButton.appendChild(navRefreshIcon);
@@ -3614,6 +3802,7 @@ internal static class AutoCommitMessagePanelHtml
         }
 
         exportButton.disabled = !(
+          !isOperationInProgress() &&
           settingsState.extendedMode &&
           settingsState.exportAdditionalData &&
           hasEnabledExportOutputs &&
@@ -3737,12 +3926,23 @@ internal static class AutoCommitMessagePanelHtml
           return;
         }
 
+        if (isOperationInProgress()) {
+          statusLine.textContent = "Please wait for the current action to finish.";
+          return;
+        }
+
+        if (!beginOperation("refresh")) {
+          return;
+        }
+
         refreshInProgress = true;
         navRefreshButton.disabled = true;
         if (exportButton) {
           exportButton.disabled = true;
         }
         statusLine.textContent = "Reloading change analysis...";
+        let refreshStatusMessage = "";
+        let shouldRerender = false;
 
         try {
           const refreshUrl = `${buildActionUrl(
@@ -3763,48 +3963,30 @@ internal static class AutoCommitMessagePanelHtml
                 ? refreshedPayload.Error
                 : `Refresh failed (HTTP ${response.status})`;
             statusLine.textContent = `Refresh failed: ${message}`;
-            refreshInProgress = false;
-            navRefreshButton.disabled = false;
-            setExportAvailability();
-            setCopyAvailability();
-            setCreateMessageAvailability();
             return;
           }
 
           currentPayload = refreshedPayload;
           hasLoadedChanges = true;
           resetModelOverviewState();
-          let moduleListResult = { success: false, message: "Extended mode is disabled." };
-          if (settingsState.extendedMode) {
-            moduleListResult = await loadOverviewModulesIntoState();
-            await loadChangeModules();
-          }
-          refreshInProgress = false;
+          resetChangeModulesState();
           const refreshedAt = new Date().toLocaleTimeString();
-          if (moduleListResult.success) {
-            const count = Number.isInteger(moduleListResult.count) ? moduleListResult.count : 0;
-            render(`Reloaded change analysis at ${refreshedAt}. Loaded ${count} overview module(s).`);
-            return;
-          }
-
-          if (!settingsState.extendedMode) {
-            render(`Reloaded change analysis at ${refreshedAt}.`);
-            return;
-          }
-
-          const moduleError = typeof moduleListResult.message === "string"
-            ? moduleListResult.message
-            : "Unknown module-list error";
-          render(`Reloaded change analysis at ${refreshedAt}. Module list load failed: ${moduleError}`);
-          return;
+          refreshStatusMessage = `Reloaded change analysis at ${refreshedAt}.`;
+          shouldRerender = true;
         } catch (error) {
           const message = error && error.message ? error.message : "Unexpected error";
           statusLine.textContent = `Refresh failed: ${message}`;
+        } finally {
           refreshInProgress = false;
+          endOperation("refresh");
           navRefreshButton.disabled = false;
           setExportAvailability();
           setCopyAvailability();
           setCreateMessageAvailability();
+        }
+
+        if (shouldRerender) {
+          render(refreshStatusMessage);
         }
       }
 
@@ -3814,6 +3996,11 @@ internal static class AutoCommitMessagePanelHtml
 
       if (exportButton) {
         exportButton.addEventListener("click", async () => {
+          if (isOperationInProgress() || !beginOperation("export")) {
+            statusLine.textContent = "Please wait for the current action to finish.";
+            return;
+          }
+
           exportButton.disabled = true;
           statusLine.textContent = "Exporting changes...";
 
@@ -3842,6 +4029,7 @@ internal static class AutoCommitMessagePanelHtml
             const message = error && error.message ? error.message : "Unexpected error";
             statusLine.textContent = `Export failed: ${message}`;
           } finally {
+            endOperation("export");
             setExportAvailability();
             setCopyAvailability();
             setCreateMessageAvailability();

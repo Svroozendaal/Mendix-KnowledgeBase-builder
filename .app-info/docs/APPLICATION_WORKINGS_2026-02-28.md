@@ -103,6 +103,7 @@ Deployment scripts still pre-create legacy `exports` / `structured` folders for 
    - model-change groups by module/category
    - changed-file table
    - diff text pane
+6. Refresh no longer auto-loads overview modules; overview requests are on demand from the overview view.
 
 ## 3) `.mpr` semantic diff flow
 

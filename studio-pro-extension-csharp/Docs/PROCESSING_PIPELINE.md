@@ -75,7 +75,7 @@ Entry points:
 
 `ListOverviewModules`:
 
-1. Validate Git/HEAD state.
+1. Validate Git/HEAD state directly (without running `ReadChanges`).
 2. Resolve committed `.mpr` files from repository tree.
 3. Reconstruct each committed `.mpr` in temporary workspace.
 4. Run `mx dump-mpr` on committed snapshot.
@@ -116,7 +116,7 @@ Response shape:
 }
 ```
 
-Used by UI to populate module selection before Refresh action.
+Used by UI to populate module selection for model-change prefiltering independently of the refresh request.
 
 ## 5) Commit-message storage pipeline
 
@@ -163,4 +163,3 @@ Entry point: `AutoCommitMessageCommitMessageStoreService.StoreCommitMessage(...)
 - Add cancellation propagation in deep parse loops.
 - Extend specialised detail builders for uncovered high-volume model types.
 - Add contract tests for web-route output toggles and module-filter selection.
-

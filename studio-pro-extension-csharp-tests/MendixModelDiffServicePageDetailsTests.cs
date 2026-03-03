@@ -188,4 +188,67 @@ public class MendixModelDiffServicePageDetailsTests
             File.Delete(workingPath);
         }
     }
+
+    [Fact]
+    public void CompareDumps_AddedPage_EmitsFunctionalWidgetSummary()
+    {
+        var headDump = """
+        {
+            "units": []
+        }
+        """;
+
+        var workingDump = """
+        {
+            "units": [
+                {
+                    "$ID": "page-functional-1",
+                    "$Type": "Pages$Page",
+                    "$QualifiedName": "TestModule.Page_Functional",
+                    "$ContainerID": "module-1",
+                    "$ContainerProperty": "documents",
+                    "layoutCall": {
+                        "$ID": "layout-functional-1",
+                        "$Type": "Pages$LayoutCall",
+                        "layout": "Atlas_Core.Atlas_Default",
+                        "widgets": [
+                            { "$ID": "widget-1", "$Type": "Pages$ActionButton" },
+                            { "$ID": "widget-2", "$Type": "Pages$DataView" },
+                            { "$ID": "widget-3", "$Type": "Pages$DataGrid" },
+                            { "$ID": "widget-4", "$Type": "Pages$DataGrid2" },
+                            { "$ID": "widget-5", "$Type": "Pages$SnippetCallWidget" },
+                            { "$ID": "widget-6", "$Type": "Pages$DivContainer" }
+                        ]
+                    }
+                }
+            ]
+        }
+        """;
+
+        var headPath = WriteDumpToTemp(headDump);
+        var workingPath = WriteDumpToTemp(workingDump);
+
+        try
+        {
+            var changes = MendixModelDiffService.CompareDumps(workingPath, headPath);
+            var pageChange = changes.FirstOrDefault(change =>
+                change.ElementType == "Page" &&
+                change.ElementName == "TestModule.Page_Functional");
+
+            Assert.NotNull(pageChange);
+            Assert.Equal("Added", pageChange.ChangeType);
+            Assert.NotNull(pageChange.Details);
+            Assert.Contains("functional widgets (5):", pageChange.Details);
+            Assert.Contains("ActionButton x1", pageChange.Details);
+            Assert.Contains("DataView x1", pageChange.Details);
+            Assert.Contains("DataGrid x1", pageChange.Details);
+            Assert.Contains("DataGrid2 x1", pageChange.Details);
+            Assert.Contains("Snippet x1", pageChange.Details);
+        }
+        finally
+        {
+            File.Delete(headPath);
+            File.Delete(workingPath);
+        }
+    }
 }

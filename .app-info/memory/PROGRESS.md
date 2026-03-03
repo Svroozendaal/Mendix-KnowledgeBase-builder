@@ -12,6 +12,12 @@ NOTES: [...]
 
 ## LIVE_LOG
 
+## PROGRESS_ENTRY - 2026-03-02
+SCOPE: GAPSMITH DUAL_GAP fix for page/snippet `displayText` noise by surfacing functional widget anchors in diff details and rendering functional-only page output.
+FILES_CHANGED: studio-pro-extension-csharp/Processing/ModelDiff/MendixModelDiffService.cs, studio-pro-extension-csharp/Processing/Formatting/MendixModelChangeDisplayTextFormatter.cs, studio-pro-extension-csharp-tests/MendixModelDiffServicePageDetailsTests.cs, studio-pro-extension-csharp-tests/MendixModelChangeDisplayTextFormatterTests.cs, .app-info/skills/mendix-model-dump-inspection/references/RULE_LIBRARY.md, .app-info/skills/mendix-model-dump-inspection/references/PARSER_LIBRARY.md, .app-info/skills/mendix-technical-commit-message/references/RULE_LIBRARY.md, .app-info/memory/PROGRESS.md
+VALIDATION: `dotnet build .\\studio-pro-extension-csharp\\AutoCommitMessage.csproj -c Debug` passed (0 warnings, 0 errors). `dotnet test .\\studio-pro-extension-csharp-tests\\AutoCommitMessage.Tests.csproj --filter "FullyQualifiedName~MendixModelChangeDisplayTextFormatterTests|FullyQualifiedName~MendixModelDiffServicePageDetailsTests"` is currently blocked by pre-existing test-project compile errors (`IDisposable` missing namespace in unrelated test files).
+NOTES: Added deterministic `functional widgets` anchors (`ActionButton`, `DataView`, `DataGrid`, `DataGrid2`, `Snippet`) and converter rule C015 for functional-only page/snippet rendering.
+
 ## PROGRESS_ENTRY - 2026-02-18
 SCOPE: Phase 6 data collection and export implementation aligned to Phase 7 parser input.
 FILES_CHANGED: studio-pro-extension-csharp/GitChangesExportService.cs, studio-pro-extension-csharp/ExtensionDataPaths.cs, studio-pro-extension-csharp/ChangesPanel.cs, studio-pro-extension-csharp/ChangesPanel.Designer.cs, studio-pro-extension-csharp/GitChangesWebServerExtension.cs, studio-pro-extension-csharp/GitChangesPanelHtml.cs, studio-pro-extension-csharp/AutoCommitMessage.csproj, deploy-autocommitmessage.ps1, MendixCommitParser/Services/ParserDataPaths.cs, MendixCommitParser/Services/FileWatcherService.cs, MendixCommitParser/Storage/JsonStorage.cs, MendixCommitParser/Program.cs, studio-pro-extension-csharp/README.md, mendix-data/*

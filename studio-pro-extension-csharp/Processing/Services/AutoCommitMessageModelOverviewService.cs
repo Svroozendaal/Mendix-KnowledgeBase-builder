@@ -201,21 +201,15 @@ public static class AutoCommitMessageModelOverviewService
 
     public static ModelOverviewModuleListResult ListOverviewModules(string projectPath)
     {
-        var payload = AutoCommitMessageChangeService.ReadChanges(projectPath);
-        if (!payload.IsGitRepo)
+        if (string.IsNullOrWhiteSpace(projectPath))
         {
-            return BuildModuleListFailure("Current project is not a Git repository.");
-        }
-
-        if (!string.IsNullOrWhiteSpace(payload.Error))
-        {
-            return BuildModuleListFailure(payload.Error);
+            return BuildModuleListFailure("Project path is empty.");
         }
 
         var discoveredPath = Repository.Discover(projectPath);
         if (string.IsNullOrWhiteSpace(discoveredPath))
         {
-            return BuildModuleListFailure("Could not resolve repository root.");
+            return BuildModuleListFailure("Current project is not a Git repository.");
         }
 
         using var repository = new Repository(discoveredPath);

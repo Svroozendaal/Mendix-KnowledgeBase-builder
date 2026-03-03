@@ -198,6 +198,7 @@ Important query keys include:
 1. UI calls `?action=refresh`.
 2. `AutoCommitMessageChangeService.ReadChanges(...)` runs status/diff/model analysis.
 3. JSON payload returns branch + filtered file changes + grouped model deltas.
+4. Refresh does not trigger overview module-list loading; overview requests are user-initiated.
 
 ### Export
 
@@ -210,7 +211,7 @@ Important query keys include:
 
 ### Overview module list and generation
 
-1. UI loads module list via `?action=list-overview-modules`.
+1. UI loads module list via `?action=list-overview-modules` when the overview view needs it.
 2. Service reconstructs committed `.mpr` snapshots, dumps with `mx.exe`, and extracts module references.
 3. User selects modules and requests `?action=generate-overview-modules&modules=A,B,...`.
 4. Service creates run folder and writes JSON/pseudocode artefacts plus manifest.
@@ -278,4 +279,3 @@ Commit-message storage folder:
 - `MODEL_OVERVIEW_EXPORT_CONTRACT.md`
 - `REPOSITORY_WORKFLOWS.md`
 - `OPEN_QUESTIONS.md`
-

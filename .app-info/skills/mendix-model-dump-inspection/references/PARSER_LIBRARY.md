@@ -203,12 +203,20 @@ Observed dump evidence:
   - Status: implemented.
   - Parse target:
     - Count significant widget types under `layoutCall` and nested page widget trees.
+    - Derive deterministic functional subset counts for:
+      - `ActionButton`
+      - `DataView`
+      - `DataGrid`
+      - `DataGrid2`
+      - `Snippet` (including `SnippetCallWidget`)
   - Contract:
     - `widgets delta: added <n>, removed <n>` (when both snapshots exist and counts differ)
     - `widgets added (<n>): <WidgetType x#>`
     - `widgets removed (<n>): <WidgetType x#>`
     - Added rows: `widgets used (<n>): <WidgetType x#>`
     - Deleted rows: `widgets before deletion (<n>): <WidgetType x#>`
+    - Added rows (functional subset): `functional widgets (<n>): <WidgetType x#>`
+    - Deleted rows (functional subset): `functional widgets before deletion (<n>): <WidgetType x#>`
     - Modified rows: suppress widget count summaries when widget-level delta lines are already emitted by `BuildPageActionBindingsDetails`
 
 ## System configuration parsers

@@ -741,6 +741,7 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
 
                 changedModules = MendixV2ChangedModuleDetector.DetectChangedModules(repository, mprContentsPath);
             }
+            var changedModuleItems = BuildChangedModuleItems(mprFile, changedModules);
 
             await WriteJsonResponseAsync(
                 response,
@@ -750,6 +751,7 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
                     success = true,
                     mprVersion = isMprV2 ? "v2" : "v1",
                     modules = changedModules,
+                    moduleItems = changedModuleItems.Select(item => new { id = item.Id, name = item.Name }).ToArray(),
                     supportsPreFilter = isMprV2,
                 },
                 cancellationToken);
@@ -787,6 +789,129 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
         {
             return null;
         }
+    }
+
+    private static IReadOnlyList<ChangedModuleItem> BuildChangedModuleItems(
+        string? mprFilePath,
+        IReadOnlyList<string> changedModules)
+    {
+        if (changedModules.Count == 0)
+        {
+            return Array.Empty<ChangedModuleItem>();
+        }
+
+        var moduleNameLookup = TryBuildModuleNameLookup(mprFilePath);
+        return changedModules
+            .Select(moduleId => new ChangedModuleItem(moduleId, ResolveModuleDisplayName(moduleId, moduleNameLookup)))
+            .OrderBy(item => item.Name, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.Id, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static string ResolveModuleDisplayName(string moduleId, IReadOnlyDictionary<string, string> moduleNameLookup)
+    {
+        if (moduleNameLookup.TryGetValue(moduleId, out var moduleName) &&
+            !string.IsNullOrWhiteSpace(moduleName))
+        {
+            return moduleName;
+        }
+
+        var normalized = moduleId
+            .Replace('_', ' ')
+            .Replace('-', ' ')
+            .Trim();
+        return string.IsNullOrWhiteSpace(normalized) ? moduleId : normalized;
+    }
+
+    private static Dictionary<string, string> TryBuildModuleNameLookup(string? mprFilePath)
+    {
+        var moduleNameLookup = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (string.IsNullOrWhiteSpace(mprFilePath) || !File.Exists(mprFilePath))
+        {
+            return moduleNameLookup;
+        }
+
+        var dumpPath = Path.Combine(Path.GetTempPath(), $"autocommitmessage_module_lookup_{Guid.NewGuid():N}.json");
+        try
+        {
+            MxToolService.DumpMpr(mprFilePath, dumpPath);
+
+            using var stream = File.OpenRead(dumpPath);
+            using var document = JsonDocument.Parse(stream);
+            if (!document.RootElement.TryGetProperty("units", out var units) ||
+                units.ValueKind != JsonValueKind.Array)
+            {
+                return moduleNameLookup;
+            }
+
+            foreach (var unit in units.EnumerateArray())
+            {
+                if (!TryReadJsonStringProperty(unit, "$Type", out var modelType) ||
+                    !string.Equals(modelType, "Projects$Module", StringComparison.OrdinalIgnoreCase) ||
+                    !TryReadJsonStringProperty(unit, "name", out var moduleName))
+                {
+                    continue;
+                }
+
+                moduleName = moduleName.Trim();
+                if (moduleName.Length == 0)
+                {
+                    continue;
+                }
+
+                if (!moduleNameLookup.ContainsKey(moduleName))
+                {
+                    moduleNameLookup[moduleName] = moduleName;
+                }
+
+                if (TryReadJsonStringProperty(unit, "$ID", out var moduleId) &&
+                    moduleId.Length > 0 &&
+                    !moduleNameLookup.ContainsKey(moduleId))
+                {
+                    moduleNameLookup[moduleId] = moduleName;
+                }
+            }
+        }
+        catch
+        {
+            // Keep fallback behavior when module-name lookup cannot be resolved.
+        }
+        finally
+        {
+            try
+            {
+                if (File.Exists(dumpPath))
+                {
+                    File.Delete(dumpPath);
+                }
+            }
+            catch
+            {
+                // Ignore temporary cleanup failures.
+            }
+        }
+
+        return moduleNameLookup;
+    }
+
+    private static bool TryReadJsonStringProperty(JsonElement element, string propertyName, out string value)
+    {
+        value = string.Empty;
+        if (element.ValueKind != JsonValueKind.Object ||
+            !element.TryGetProperty(propertyName, out var property) ||
+            property.ValueKind != JsonValueKind.String)
+        {
+            return false;
+        }
+
+        var rawValue = property.GetString();
+        if (string.IsNullOrWhiteSpace(rawValue))
+        {
+            return false;
+        }
+
+        value = rawValue.Trim();
+        return value.Length > 0;
     }
 
     private static string? TryGetGitShortHash(string projectPath)
@@ -917,5 +1042,6 @@ public sealed class AutoCommitMessageWebServerExtension : WebServerExtension
         response.Headers["Pragma"] = "no-cache";
         response.Headers["Expires"] = "0";
     }
-}
 
+    private sealed record ChangedModuleItem(string Id, string Name);
+}

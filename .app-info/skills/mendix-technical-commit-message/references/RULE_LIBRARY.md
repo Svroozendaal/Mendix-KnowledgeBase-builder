@@ -237,6 +237,39 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
 - Example output:
   - `added: annotation Need validation`
 
+### C015 - Page Functional Widget-Only Rendering
+
+- Rule ID: `C015`
+- Purpose: keep page/snippet `displayText` focused on functional UI change signals and suppress layout/action metadata noise.
+- Applies to:
+  - `elementType = Page|Snippet|PageTemplate|BuildingBlock|Layout`
+- Logic:
+  - Prefer deterministic functional widget anchors when present:
+    - `functional widgets (...)`
+    - `functional widgets before deletion (...)`
+  - Parse and render only these functional widget groups:
+    - `ActionButton -> buttons`
+    - `DataView -> dataview`
+    - `DataGrid -> datagrid`
+    - `DataGrid2 -> datagrid2`
+    - `Snippet|SnippetCallWidget -> snippet`
+  - For widget delta lines, keep only functional widget types and render in bucket form:
+    - `added: ...`
+    - `modified: ...`
+    - `removed: ...`
+  - Suppress page metadata/action inventory sections in `displayText`:
+    - `layout=...`
+    - `title=...`
+    - `url=...`
+    - `popup=...`
+    - `actions used (...)`
+    - `action targets: ...`
+    - full `widgets used (...)` inventory
+- Example input:
+  - `layout=Atlas_Core.Atlas_Default; title=Pagina test; ...; widgets used (18): ActionButton x4, ...; functional widgets (8): ActionButton x4, DataView x1, DataGrid x1, DataGrid2 x1, Snippet x1`
+- Example output:
+  - `functional widgets: buttons x4, dataview x1, datagrid x1, datagrid2 x1, snippet x1`
+
 
 
 
@@ -345,5 +378,5 @@ Use this schema for each AI rule:
 
 ## Pending Rule Slots
 
-- Converter rules: `C014` next available
+- Converter rules: `C016` next available
 - AI rules: `A007` next available
