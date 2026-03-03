@@ -456,10 +456,34 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
 - Example evidence:
   - `New_Module.Pagina_test` (`Pages$Page`, Added) produced a broad `widgets used (...)` inventory where functional widget types can be hidden by `+N more`; this rule guarantees explicit functional-widget anchors for downstream converter formatting.
 
+## D080 - Page requested-widget converter anchor preservation
+
+- Applies to:
+  - `Pages$Page`
+  - `Pages$Snippet`
+  - `Pages$PageTemplate`
+  - `Pages$BuildingBlock`
+  - `Pages$Layout`
+- Purpose:
+  - preserve deterministic parser anchors required by converter rule `C016` to build requested widget summaries and widget details.
+- Required anchors:
+  - functional widget inventory:
+    - `functional widgets (<n>): <WidgetType x# list>` (or before-deletion variant)
+  - lifecycle action targets on added/deleted rows:
+    - `action targets: <kind=target list>`
+    - `action targets before deletion: <kind=target list>`
+  - widget delta lines on modified rows:
+    - `added <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
+    - `modified <WidgetType>(<optionalName>) (<bindingKey old->new | property-change summary>)`
+    - `removed <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
+- Rule:
+  - do not rename these anchors without same-change converter-rule updates.
+  - keep target kinds deterministic (`page`, `microflow`, `nanoflow`) for button-detail synthesis.
+
 ## Open Gaps
 
 - Full single-dump inventory is still out of scope for diff-only extraction.
 
 ## Next rule IDs
 
-- `D080` next available.
+- `D081` next available.

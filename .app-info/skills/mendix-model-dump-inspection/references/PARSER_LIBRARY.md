@@ -198,6 +198,12 @@ Observed dump evidence:
       - `added <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
       - `modified <WidgetType>(<optionalName>) (<bindingKey old->new | property updated ...>)`
       - `removed <WidgetType>(<optionalName>) (<bindingKey=value,...>)`
+  - Converter coupling:
+    - Preserve target kinds and names in `action targets` anchor for page lifecycle rows:
+      - `page=<PageName>`
+      - `microflow=<MicroflowName>`
+      - `nanoflow=<NanoflowName>`
+    - Preserve deterministic widget-delta row shape for C016 widget-detail synthesis.
 
 - `BuildPageWidgetSummaryDetails(JsonElement? working, JsonElement? head) -> string?`
   - Status: implemented.
@@ -218,6 +224,13 @@ Observed dump evidence:
     - Added rows (functional subset): `functional widgets (<n>): <WidgetType x#>`
     - Deleted rows (functional subset): `functional widgets before deletion (<n>): <WidgetType x#>`
     - Modified rows: suppress widget count summaries when widget-level delta lines are already emitted by `BuildPageActionBindingsDetails`
+  - Converter coupling:
+    - Functional widget anchors are consumed by C016 to generate requested widget summary labels:
+      - `ActionButton -> button`
+      - `DataView -> list`
+      - `DataGrid -> DG`
+      - `DataGrid2 -> DG2`
+      - `Snippet|SnippetCallWidget -> snippet`
 
 ## System configuration parsers
 

@@ -12,6 +12,12 @@ NOTES: [...]
 
 ## LIVE_LOG
 
+## PROGRESS_ENTRY - 2026-03-03
+SCOPE: GAPSMITH library alignment for page functional-widget display conversion rules.
+FILES_CHANGED: .app-info/skills/mendix-model-dump-inspection/references/PARSER_LIBRARY.md, .app-info/skills/mendix-model-dump-inspection/references/RULE_LIBRARY.md, .app-info/skills/mendix-technical-commit-message/references/RULE_LIBRARY.md, .app-info/memory/PROGRESS.md
+VALIDATION: Documentation/rule-library alignment review completed against current implementations in `MendixModelDiffService` and `MendixModelChangeDisplayTextFormatter`.
+NOTES: Added additive rules D080 and C016 to document the currently implemented requested-widget summary output (`added: button/list/DG/DG2/snippet; widget details: ...`) and parser-anchor coupling.
+
 ## PROGRESS_ENTRY - 2026-03-02
 SCOPE: GAPSMITH DUAL_GAP fix for page/snippet `displayText` noise by surfacing functional widget anchors in diff details and rendering functional-only page output.
 FILES_CHANGED: studio-pro-extension-csharp/Processing/ModelDiff/MendixModelDiffService.cs, studio-pro-extension-csharp/Processing/Formatting/MendixModelChangeDisplayTextFormatter.cs, studio-pro-extension-csharp-tests/MendixModelDiffServicePageDetailsTests.cs, studio-pro-extension-csharp-tests/MendixModelChangeDisplayTextFormatterTests.cs, .app-info/skills/mendix-model-dump-inspection/references/RULE_LIBRARY.md, .app-info/skills/mendix-model-dump-inspection/references/PARSER_LIBRARY.md, .app-info/skills/mendix-technical-commit-message/references/RULE_LIBRARY.md, .app-info/memory/PROGRESS.md

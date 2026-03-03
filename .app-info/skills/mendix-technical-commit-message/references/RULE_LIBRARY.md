@@ -270,6 +270,54 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
 - Example output:
   - `functional widgets: buttons x4, dataview x1, datagrid x1, datagrid2 x1, snippet x1`
 
+### C016 - Page Requested Widget Summary Rendering
+
+- Rule ID: `C016`
+- Purpose: render page/snippet `displayText` as requested-functional widget summaries with explicit widget behaviour details.
+- Applies to:
+  - `elementType = Page|Snippet|PageTemplate|BuildingBlock|Layout`
+- Match anchors:
+  - One or more of:
+    - `functional widgets (...)`
+    - `added <WidgetType>(...) ...`
+    - `action targets: ...`
+- Logic:
+  - Build requested widget summary labels in deterministic order from functional widget types:
+    - `ActionButton -> button`
+    - `DataView -> list`
+    - `DataGrid -> DG`
+    - `DataGrid2 -> DG2`
+    - `Snippet|SnippetCallWidget -> snippet`
+  - Prefer `added <WidgetType>(...)` widget delta rows when available to derive widget behaviour details.
+  - If only lifecycle anchors are available (for example Added pages), derive details from:
+    - `functional widgets (...)`
+    - `action targets: <kind=target list>`
+  - Render shape:
+    - `added: <RequestedWidgetList>; widget details: <WidgetDetailList>`
+  - Widget detail contracts:
+    - `ActionButton`:
+      - `button show page <PageName>` when page targets are present
+      - `button call MF <MicroflowName>` for microflow targets
+      - `button call nanoflow <NanoflowName>` for nanoflow targets
+      - fallback: `button <action unknown>`
+    - `DataGrid`:
+      - `DG <SourceName>` when source binding is present
+      - fallback: `DG <unknown source>`
+    - `DataGrid2`:
+      - `DG2 <SourceName>` when source binding is present
+      - fallback: `DG2 <unknown source>`
+    - `DataView`:
+      - `list <SourceName>` when source binding is present
+      - fallback: `list <unknown source>`
+    - `Snippet|SnippetCallWidget`:
+      - `snippet`
+  - Continue suppressing page metadata/action inventory noise in final `displayText`:
+    - `layout=...`, `title=...`, `url=...`, `popup=...`, `actions used (...)`, `widgets used (...)`, `functional widgets (...)`
+- Example input:
+  - `layout=Atlas_Core.Atlas_Default; ...; action targets: microflow=SmartExpenses.ACT_Balance_NewEdit, page=SmartExpenses.Balance_NewEdit; functional widgets (8): ActionButton x4, DataView x1, DataGrid x1, DataGrid2 x1, Snippet x1`
+- Example output:
+  - `added: button, list, DG, DG2, snippet; widget details: button call MF ACT_Balance_NewEdit, button show page Balance_NewEdit, list <unknown source>, DG <unknown source>, DG2 <unknown source>, snippet`
+
 
 
 
@@ -378,5 +426,5 @@ Use this schema for each AI rule:
 
 ## Pending Rule Slots
 
-- Converter rules: `C016` next available
+- Converter rules: `C017` next available
 - AI rules: `A007` next available
