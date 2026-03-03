@@ -52,6 +52,9 @@ Observed dump evidence:
   - Status: implemented.
   - Purpose:
     - Baseline details for flow resources when no action/loop/decision deltas exist (for example newly created empty microflows).
+  - Change-type scope:
+    - Emit for `Added` and `Deleted` flows only.
+    - Return `null` for `Modified` flows to avoid baseline metadata noise.
   - Suppression:
     - Do not emit `exportLevel` in flow metadata details.
   - Contract anchors:

@@ -341,6 +341,27 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
 - Example output:
   - `Accessrules changed`
 
+### C018 - Flow Allowed Roles-Only Compaction
+
+- Rule ID: `C018`
+- Purpose: suppress low-signal flow baseline metadata when only module-role permissions changed.
+- Applies to:
+  - `elementType = Microflow|Nanoflow`
+  - `changeType = Modified`
+- Match anchors:
+  - `allowedModuleRoles count <old>-><new>`
+  - optional trailing baseline-only flow segments:
+    - `flow structure: ...`
+    - `flow metadata: ...`
+- Logic:
+  - If `allowedModuleRoles` count delta is present and no action/decision/loop/annotation delta anchors are present, render:
+    - `modified allowed roles`
+  - Ignore baseline flow structure/metadata segments in this rendering path.
+- Example input:
+  - `allowedModuleRoles count 3->4; flow structure: actions=2, loops=0, decisions=0, sequenceFlows=3; flow metadata: modelType=Microflow, applyEntityAccess=false, allowConcurrentExecution=true, markAsUsed=false, allowedModuleRoles=4`
+- Example output:
+  - `modified allowed roles`
+
 
 
 
@@ -449,5 +470,5 @@ Use this schema for each AI rule:
 
 ## Pending Rule Slots
 
-- Converter rules: `C018` next available
+- Converter rules: `C019` next available
 - AI rules: `A007` next available

@@ -109,11 +109,13 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
   - `Microflows$Rule`
 - Trigger:
   - when action/loop/decision delta anchors are absent.
+  - and `changeType` is `Added` or `Deleted`.
 - Emit:
   - `flow structure: ...`
   - `flow metadata: ...`
 - Suppression:
   - Do not include `exportLevel` in emitted flow metadata.
+  - Do not emit baseline flow structure/metadata for `Modified` flows; rely on deterministic delta/property-change anchors.
 
 ## D015 - Flow annotation extraction and ownership fallback
 

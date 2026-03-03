@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AutoCommitMessage.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58cb8bf9ea00dd37b6d21073079a47e0c7cdfebe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f6d3d0314d6f9b8cf66a8d5df064763a98b65ea")]
 [assembly: System.Reflection.AssemblyProductAttribute("AutoCommitMessage.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AutoCommitMessage.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -106,6 +106,23 @@ public class MendixModelChangeDisplayTextFormatterTests
     }
 
     [Fact]
+    public void DisplayText_FlowAllowedRolesOnlyChange_IsCompacted()
+    {
+        var change = new MendixModelChange(
+            ChangeType: "Modified",
+            ElementType: "Microflow",
+            ElementName: "IXAGOProject.DS_ResearcherProfile_SelectableSections",
+            Details: "allowedModuleRoles count 3->4; flow structure: actions=2, loops=0, decisions=0, sequenceFlows=3; flow metadata: modelType=Microflow, applyEntityAccess=false, allowConcurrentExecution=true, markAsUsed=false, exportLevel=Hidden, allowedModuleRoles=4");
+
+        var displayText = change.DisplayText;
+
+        Assert.Contains("modified allowed roles", displayText, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("flow structure", displayText, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("flow metadata", displayText, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("exportLevel=Hidden", displayText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void DisplayText_PageAdded_ShowsAddedListAndWidgetExplanation()
     {
         var details =

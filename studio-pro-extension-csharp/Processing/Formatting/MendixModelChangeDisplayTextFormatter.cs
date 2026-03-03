@@ -106,6 +106,12 @@ internal static class MendixModelChangeDisplayTextFormatter
                 return entityAccessRulesSummary;
             }
 
+            var flowAllowedRolesSummary = TryBuildFlowAllowedRolesOnlySummary(changeType, elementType, normalizedDetails);
+            if (!string.IsNullOrWhiteSpace(flowAllowedRolesSummary))
+            {
+                return flowAllowedRolesSummary;
+            }
+
             var compactFlowDetails = TryBuildCompactFlowDetails(changeType, elementType, normalizedDetails);
             var compactPageDetails = TryBuildCompactPageDetails(changeType, elementType, normalizedDetails);
             var selectedDetails = !string.IsNullOrWhiteSpace(compactFlowDetails)
@@ -220,6 +226,53 @@ internal static class MendixModelChangeDisplayTextFormatter
         return Regex.IsMatch(details, @"\baccessRules\b", RegexOptions.IgnoreCase)
             ? "Accessrules changed"
             : null;
+    }
+
+    private static string? TryBuildFlowAllowedRolesOnlySummary(string changeType, string elementType, string details)
+    {
+        if (!IsFlowElementType(elementType) ||
+            !string.Equals(changeType, "Modified", StringComparison.OrdinalIgnoreCase) ||
+            string.IsNullOrWhiteSpace(details))
+        {
+            return null;
+        }
+
+        if (!Regex.IsMatch(details, @"\ballowedModuleRoles\s+count\s+\d+\s*->\s*\d+\b", RegexOptions.IgnoreCase))
+        {
+            return null;
+        }
+
+        if (details.Contains("actions delta:", StringComparison.OrdinalIgnoreCase) ||
+            details.Contains("decisions delta:", StringComparison.OrdinalIgnoreCase) ||
+            details.Contains("loops delta:", StringComparison.OrdinalIgnoreCase) ||
+            details.Contains("annotations delta:", StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        foreach (var segment in details.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var normalized = segment.Trim();
+            if (normalized.Length == 0)
+            {
+                continue;
+            }
+
+            if (Regex.IsMatch(normalized, @"^\ballowedModuleRoles\s+count\s+\d+\s*->\s*\d+\b", RegexOptions.IgnoreCase))
+            {
+                continue;
+            }
+
+            if (normalized.StartsWith("flow structure:", StringComparison.OrdinalIgnoreCase) ||
+                normalized.StartsWith("flow metadata:", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            return null;
+        }
+
+        return "modified allowed roles";
     }
 
     private static string RemoveZeroOnlyDetailSegments(string details)

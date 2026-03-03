@@ -755,6 +755,13 @@ public static class MendixModelDiffService
         JsonElement? workingResource,
         JsonElement? headResource)
     {
+        if (string.Equals(changeType, "Modified", StringComparison.OrdinalIgnoreCase))
+        {
+            // For modified flows, preserve explicit delta signals from generic diff
+            // and avoid re-introducing baseline structure/metadata noise.
+            return null;
+        }
+
         var flowResource = workingResource ?? headResource;
         if (flowResource is null)
         {
