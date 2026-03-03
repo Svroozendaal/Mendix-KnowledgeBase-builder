@@ -123,6 +123,23 @@ public class MendixModelChangeDisplayTextFormatterTests
     }
 
     [Fact]
+    public void DisplayText_FlowAllowedRolesOnly_WithGenericFallbackNoise_IsCompacted()
+    {
+        var change = new MendixModelChange(
+            ChangeType: "Modified",
+            ElementType: "Microflow",
+            ElementName: "IXAGOProject.ACT_ResearcherProfile_Save",
+            Details: "allowedModuleRoles count 2->3; modelType=Microflow; resource metadata: excluded=false, markAsUsed=false, applyEntityAccess=true, allowConcurrentExecution=true, allowedModuleRoles=3, flows=6; nested types (33): BezierCurve x6, SequenceFlow x6, ActionActivity x3");
+
+        var displayText = change.DisplayText;
+
+        Assert.Contains("modified allowed roles", displayText, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("modelType=Microflow", displayText, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("resource metadata:", displayText, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("nested types", displayText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public void DisplayText_PageAdded_ShowsAddedListAndWidgetExplanation()
     {
         var details =

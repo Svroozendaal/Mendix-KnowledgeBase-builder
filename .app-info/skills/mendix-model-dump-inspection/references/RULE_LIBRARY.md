@@ -486,10 +486,26 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
   - do not rename these anchors without same-change converter-rule updates.
   - keep target kinds deterministic (`page`, `microflow`, `nanoflow`) for button-detail synthesis.
 
+## D081 - Modified flow generic-fallback suppression
+
+- Applies to:
+  - `Microflows$Microflow`
+  - `Microflows$Nanoflow`
+  - `Nanoflows$Nanoflow`
+  - `Microflows$Rule`
+- Trigger:
+  - `changeType = Modified`
+  - flow parser output is empty after applying flow-specific rules (D010-D015 and D014 scope).
+- Rule:
+  - Do not append generic fallback inventory details (`modelType=...`, `resource metadata: ...`, `nested types (...)`) for modified flows.
+  - Preserve direct property-delta details emitted by generic modification diff (for example `allowedModuleRoles count <old>-><new>`).
+- Purpose:
+  - avoid low-signal inventory noise in commit message generation for role-only flow permission changes.
+
 ## Open Gaps
 
 - Full single-dump inventory is still out of scope for diff-only extraction.
 
 ## Next rule IDs
 
-- `D081` next available.
+- `D082` next available.

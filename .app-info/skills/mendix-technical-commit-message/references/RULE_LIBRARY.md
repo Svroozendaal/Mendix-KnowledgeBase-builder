@@ -350,15 +350,18 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
   - `changeType = Modified`
 - Match anchors:
   - `allowedModuleRoles count <old>-><new>`
-  - optional trailing baseline-only flow segments:
+  - optional trailing baseline-only or generic fallback segments:
     - `flow structure: ...`
     - `flow metadata: ...`
+    - `modelType=...`
+    - `resource metadata: ...`
+    - `nested types (...): ...`
 - Logic:
   - If `allowedModuleRoles` count delta is present and no action/decision/loop/annotation delta anchors are present, render:
     - `modified allowed roles`
-  - Ignore baseline flow structure/metadata segments in this rendering path.
+  - Ignore baseline and generic fallback inventory segments in this rendering path.
 - Example input:
-  - `allowedModuleRoles count 3->4; flow structure: actions=2, loops=0, decisions=0, sequenceFlows=3; flow metadata: modelType=Microflow, applyEntityAccess=false, allowConcurrentExecution=true, markAsUsed=false, allowedModuleRoles=4`
+  - `allowedModuleRoles count 2->3; modelType=Microflow; resource metadata: excluded=false, markAsUsed=false, applyEntityAccess=true, allowConcurrentExecution=true, allowedModuleRoles=3, flows=6; nested types (33): BezierCurve x6, SequenceFlow x6`
 - Example output:
   - `modified allowed roles`
 

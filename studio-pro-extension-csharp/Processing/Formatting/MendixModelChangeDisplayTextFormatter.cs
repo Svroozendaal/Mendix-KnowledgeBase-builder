@@ -264,7 +264,10 @@ internal static class MendixModelChangeDisplayTextFormatter
             }
 
             if (normalized.StartsWith("flow structure:", StringComparison.OrdinalIgnoreCase) ||
-                normalized.StartsWith("flow metadata:", StringComparison.OrdinalIgnoreCase))
+                normalized.StartsWith("flow metadata:", StringComparison.OrdinalIgnoreCase) ||
+                normalized.StartsWith("modelType=", StringComparison.OrdinalIgnoreCase) ||
+                normalized.StartsWith("resource metadata:", StringComparison.OrdinalIgnoreCase) ||
+                normalized.StartsWith("nested types", StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }

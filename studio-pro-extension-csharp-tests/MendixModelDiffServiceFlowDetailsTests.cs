@@ -189,6 +189,8 @@ public class MendixModelDiffServiceFlowDetailsTests
             Assert.Contains("allowedModuleRoles count 3->4", flowChange.Details);
             Assert.DoesNotContain("flow structure:", flowChange.Details, StringComparison.OrdinalIgnoreCase);
             Assert.DoesNotContain("flow metadata:", flowChange.Details, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("resource metadata:", flowChange.Details, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("nested types", flowChange.Details, StringComparison.OrdinalIgnoreCase);
         }
         finally
         {

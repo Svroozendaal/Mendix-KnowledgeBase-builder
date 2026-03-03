@@ -405,6 +405,15 @@ public static class MendixModelDiffService
                 reference.ModelType,
                 workingDescriptor?.Object,
                 headDescriptor?.Object);
+
+            if (string.IsNullOrWhiteSpace(details) &&
+                string.Equals(changeType, "Modified", StringComparison.OrdinalIgnoreCase))
+            {
+                // Keep modified flow output focused on deterministic property deltas
+                // (for example allowedModuleRoles count x->y) without generic inventory noise.
+                return null;
+            }
+
             return string.IsNullOrWhiteSpace(details)
                 ? BuildGenericResourceDetails(changeType, reference.ModelType, workingDescriptor?.Object, headDescriptor?.Object)
                 : details;

@@ -332,6 +332,7 @@ Observed dump evidence:
   - all remaining tracked resources -> `BuildGenericResourceDetails`
   - Generic-detail merge behavior:
     - For page-like model types (`Pages$Page`, `Pages$Snippet`, `Pages$PageTemplate`, `Pages$BuildingBlock`, `Pages$Layout`), prefer parser output only and do not merge generic `BuildModificationDetails(...)` noise when deterministic page/UI anchors are available.
+    - For modified flow model types (`Microflow`, `Nanoflow`) with no flow-delta/baseline parser output, do not append generic resource fallback inventories (`modelType`, `resource metadata`, `nested types`); keep deterministic property-delta details from direct diff (for example `allowedModuleRoles count <old>-><new>`).
 
 ## Rule linkage
 
