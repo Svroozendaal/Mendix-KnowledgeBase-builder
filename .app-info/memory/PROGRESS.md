@@ -13,6 +13,12 @@ NOTES: [...]
 ## LIVE_LOG
 
 ## PROGRESS_ENTRY - 2026-03-03
+SCOPE: GAPSMITH converter/diff gap fix for access-rules rendering, annotation payload suppression, hidden export-level suppression, and element-type-first row ordering.
+FILES_CHANGED: studio-pro-extension-csharp/Processing/Formatting/MendixModelChangeDisplayTextFormatter.cs, studio-pro-extension-csharp/Processing/ModelDiff/MendixModelDiffService.cs, studio-pro-extension-csharp/Processing/ModelDiff/MendixModelChangeStructurer.cs, studio-pro-extension-csharp/UI/Web/AutoCommitMessagePanelHtml.cs, studio-pro-extension-csharp-tests/MendixModelChangeDisplayTextFormatterTests.cs, .app-info/skills/mendix-technical-commit-message/references/RULE_LIBRARY.md, .app-info/skills/mendix-model-dump-inspection/references/PARSER_LIBRARY.md, .app-info/skills/mendix-model-dump-inspection/references/RULE_LIBRARY.md, .app-info/memory/PROGRESS.md
+VALIDATION: `dotnet build .\\studio-pro-extension-csharp\\AutoCommitMessage.csproj -c Debug` passed (0 warnings, 0 errors). `dotnet test .\\studio-pro-extension-csharp-tests\\AutoCommitMessage.Tests.csproj --filter "FullyQualifiedName~MendixModelChangeDisplayTextFormatterTests"` is blocked by pre-existing test-project compile errors in unrelated files (`IDisposable` missing namespace in `AutoCommitMessageHeadDumpCacheServiceTests.cs` and `MendixV2ChangedModuleDetectorTests.cs`).
+NOTES: Added converter rule `C017`; updated C006 ordering contract and C014 annotation rendering contract; removed `exportLevel` emission from flow/entity baseline diff metadata and normalized modified entity access-rules display to `Accessrules changed`.
+
+## PROGRESS_ENTRY - 2026-03-03
 SCOPE: GAPSMITH library alignment for page functional-widget display conversion rules.
 FILES_CHANGED: .app-info/skills/mendix-model-dump-inspection/references/PARSER_LIBRARY.md, .app-info/skills/mendix-model-dump-inspection/references/RULE_LIBRARY.md, .app-info/skills/mendix-technical-commit-message/references/RULE_LIBRARY.md, .app-info/memory/PROGRESS.md
 VALIDATION: Documentation/rule-library alignment review completed against current implementations in `MendixModelDiffService` and `MendixModelChangeDisplayTextFormatter`.

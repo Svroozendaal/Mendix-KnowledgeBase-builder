@@ -52,6 +52,8 @@ Observed dump evidence:
   - Status: implemented.
   - Purpose:
     - Baseline details for flow resources when no action/loop/decision deltas exist (for example newly created empty microflows).
+  - Suppression:
+    - Do not emit `exportLevel` in flow metadata details.
   - Contract anchors:
     - `flow structure: ...`
     - `flow metadata: ...`
@@ -120,6 +122,10 @@ Observed dump evidence:
     - `system members: disabled <flagList>`
   - Baseline fallback:
     - Emits `entity metadata: ...` or deterministic baseline text when attribute/metadata delta anchors are absent.
+  - Baseline suppression:
+    - Do not emit entity `exportLevel` in baseline metadata details.
+  - Converter coupling:
+    - Keep the `accessRules` anchor deterministic when present so converter rule `C017` can map it to `Accessrules changed`.
 
 - `BuildDomainAssociationDetails(JsonElement? working, JsonElement? head, DumpSnapshot workingSnapshot, DumpSnapshot headSnapshot) -> string?`
   - Status: implemented.

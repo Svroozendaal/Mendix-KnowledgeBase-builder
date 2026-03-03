@@ -112,6 +112,8 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
 - Emit:
   - `flow structure: ...`
   - `flow metadata: ...`
+- Suppression:
+  - Do not include `exportLevel` in emitted flow metadata.
 
 ## D015 - Flow annotation extraction and ownership fallback
 
@@ -255,6 +257,8 @@ Scope: dump comparison (`working-dump.json` vs `head-dump.json`) and `MendixMode
     - `system members: enabled <flagList>`
     - `system members: disabled <flagList>`
 - If no metadata signals exist, emit no metadata section.
+- Baseline suppression:
+  - Do not include entity `exportLevel` in baseline metadata output.
 
 ## D050 - Generic property diff fallback
 

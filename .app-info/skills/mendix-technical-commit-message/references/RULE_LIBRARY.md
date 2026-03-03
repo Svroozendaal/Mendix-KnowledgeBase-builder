@@ -103,6 +103,10 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
     - `pages`
     - `nanoflows`
     - `resources`
+  - Within each category (and copy/export rendering buckets), sort rows by:
+    - `elementType` (alphabetical)
+    - `elementName` (alphabetical, module prefix removed)
+    - `changeType` (alphabetical tie-breaker)
 
 ### C007 - Missing AI Rule Handling
 
@@ -229,13 +233,15 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
     - `annotations added (...)` -> `added`
     - `annotations modified (...)` -> `modified`
     - `annotations removed (...)` -> `removed`
-  - Render each entry as `annotation <label>` and append to the matching bucket list.
-  - If no label can be derived, use `annotation updated`.
+  - Do not render annotation payload text/captions in `displayText`.
+  - Render generic annotation phrases only:
+    - standalone bucket summary: `added annotation`, `modified annotation`, `removed annotation`
+    - mixed bucket summary (with other items): `annotation`
   - Do not emit a standalone `annotations:` section.
 - Example input:
   - `annotations delta: added 1, removed 0, modified 0; annotations added (1): text=Need validation`
 - Example output:
-  - `added: annotation Need validation`
+  - `added annotation`
 
 ### C015 - Page Functional Widget-Only Rendering
 
@@ -317,6 +323,23 @@ If `elementType` is not in the dictionary, leave abbreviation empty.
   - `layout=Atlas_Core.Atlas_Default; ...; action targets: microflow=SmartExpenses.ACT_Balance_NewEdit, page=SmartExpenses.Balance_NewEdit; functional widgets (8): ActionButton x4, DataView x1, DataGrid x1, DataGrid2 x1, Snippet x1`
 - Example output:
   - `added: button, list, DG, DG2, snippet; widget details: button call MF ACT_Balance_NewEdit, button show page Balance_NewEdit, list <unknown source>, DG <unknown source>, DG2 <unknown source>, snippet`
+
+### C017 - Access Rules and Hidden Export-Level Suppression
+
+- Rule ID: `C017`
+- Purpose: suppress low-signal metadata noise in final commit `displayText`.
+- Applies to:
+  - all categories for export-level suppression
+  - `elementType = Entity|NonPersistentEntity` for access-rules normalisation
+- Logic:
+  - Remove `exportLevel=Hidden` tokens from rendered details (including comma-separated metadata sections).
+  - For modified entity rows where details indicate access-rules metadata changes (`accessRules` anchor), render:
+    - `Accessrules changed`
+  - Suppress the original raw metadata phrase (`entity metadata: accessRules=..., ...`) in final `displayText`.
+- Example input:
+  - `entity metadata: accessRules=2, exportLevel=Hidden`
+- Example output:
+  - `Accessrules changed`
 
 
 
@@ -426,5 +449,5 @@ Use this schema for each AI rule:
 
 ## Pending Rule Slots
 
-- Converter rules: `C017` next available
+- Converter rules: `C018` next available
 - AI rules: `A007` next available

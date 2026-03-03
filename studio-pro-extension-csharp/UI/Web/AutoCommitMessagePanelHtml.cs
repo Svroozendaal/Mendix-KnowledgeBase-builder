@@ -1892,11 +1892,53 @@ internal static class AutoCommitMessagePanelHtml
       return buckets;
     }
 
+    function normalizeElementNameForCopySort(elementName) {
+      const rawName = typeof elementName === "string" ? elementName.trim() : "";
+      if (!rawName) {
+        return "";
+      }
+
+      const separatorIndex = rawName.indexOf(".");
+      if (separatorIndex > 0 && separatorIndex < rawName.length - 1) {
+        return rawName.slice(separatorIndex + 1).trim();
+      }
+
+      return rawName;
+    }
+
+    function compareCopyChanges(left, right) {
+      const leftType = left && typeof left.ElementType === "string"
+        ? left.ElementType.trim()
+        : "";
+      const rightType = right && typeof right.ElementType === "string"
+        ? right.ElementType.trim()
+        : "";
+      const typeComparison = leftType.localeCompare(rightType);
+      if (typeComparison !== 0) {
+        return typeComparison;
+      }
+
+      const leftName = normalizeElementNameForCopySort(left && left.ElementName);
+      const rightName = normalizeElementNameForCopySort(right && right.ElementName);
+      const nameComparison = leftName.localeCompare(rightName);
+      if (nameComparison !== 0) {
+        return nameComparison;
+      }
+
+      const leftChangeType = left && typeof left.ChangeType === "string"
+        ? left.ChangeType.trim()
+        : "";
+      const rightChangeType = right && typeof right.ChangeType === "string"
+        ? right.ChangeType.trim()
+        : "";
+      return leftChangeType.localeCompare(rightChangeType);
+    }
+
     function orderCopyRows(changes) {
-      return changes
+      return [...changes]
+        .sort(compareCopyChanges)
         .map((change) => getDisplayTextForCopy(change))
-        .filter((text) => text.length > 0)
-        .sort((left, right) => left.localeCompare(right));
+        .filter((text) => text.length > 0);
     }
 
     function buildCopyTextFromPayload(payload) {

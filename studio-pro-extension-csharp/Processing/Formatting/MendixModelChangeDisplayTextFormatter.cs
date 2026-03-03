@@ -99,7 +99,13 @@ internal static class MendixModelChangeDisplayTextFormatter
 
         if (!string.IsNullOrWhiteSpace(details))
         {
-            var normalizedDetails = details.Trim();
+            var normalizedDetails = RemoveSuppressedDetails(details.Trim());
+            var entityAccessRulesSummary = TryBuildEntityAccessRulesSummary(changeType, elementType, normalizedDetails);
+            if (!string.IsNullOrWhiteSpace(entityAccessRulesSummary))
+            {
+                return entityAccessRulesSummary;
+            }
+
             var compactFlowDetails = TryBuildCompactFlowDetails(changeType, elementType, normalizedDetails);
             var compactPageDetails = TryBuildCompactPageDetails(changeType, elementType, normalizedDetails);
             var selectedDetails = !string.IsNullOrWhiteSpace(compactFlowDetails)
@@ -140,6 +146,80 @@ internal static class MendixModelChangeDisplayTextFormatter
         }
 
         return "changed";
+    }
+
+    private static string RemoveSuppressedDetails(string details)
+    {
+        if (string.IsNullOrWhiteSpace(details))
+        {
+            return string.Empty;
+        }
+
+        var normalizedSegments = new List<string>();
+        foreach (var segment in details.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var cleanedSegment = RemoveSuppressedSegmentTokens(segment);
+            if (!string.IsNullOrWhiteSpace(cleanedSegment))
+            {
+                normalizedSegments.Add(cleanedSegment);
+            }
+        }
+
+        return normalizedSegments.Count == 0
+            ? string.Empty
+            : string.Join("; ", normalizedSegments);
+    }
+
+    private static string RemoveSuppressedSegmentTokens(string segment)
+    {
+        if (string.IsNullOrWhiteSpace(segment))
+        {
+            return string.Empty;
+        }
+
+        var parts = segment
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(part => Regex.Replace(
+                    part.Trim(),
+                    @"\bexportLevel\s*=\s*Hidden\b",
+                    string.Empty,
+                    RegexOptions.IgnoreCase)
+                .Trim())
+            .Where(part => part.Length > 0)
+            .ToList();
+
+        if (parts.Count == 0)
+        {
+            return string.Empty;
+        }
+
+        if (parts[0].EndsWith(":", StringComparison.Ordinal) && parts.Count > 1)
+        {
+            var prefix = parts[0][..^1].Trim();
+            if (prefix.Length > 0)
+            {
+                parts[1] = $"{prefix}: {parts[1]}";
+            }
+
+            parts.RemoveAt(0);
+        }
+
+        var normalized = string.Join(", ", parts).Trim();
+        return normalized.EndsWith(":", StringComparison.Ordinal) ? string.Empty : normalized;
+    }
+
+    private static string? TryBuildEntityAccessRulesSummary(string changeType, string elementType, string details)
+    {
+        if (!IsEntityElementType(elementType) ||
+            !string.Equals(changeType, "Modified", StringComparison.OrdinalIgnoreCase) ||
+            string.IsNullOrWhiteSpace(details))
+        {
+            return null;
+        }
+
+        return Regex.IsMatch(details, @"\baccessRules\b", RegexOptions.IgnoreCase)
+            ? "Accessrules changed"
+            : null;
     }
 
     private static string RemoveZeroOnlyDetailSegments(string details)
@@ -768,20 +848,9 @@ internal static class MendixModelChangeDisplayTextFormatter
         var returnChangeDetails = ParseReturnChangeDetails(details);
 
         var sections = new List<string>();
-        if (addedItems.Count > 0)
-        {
-            sections.Add($"added: {string.Join(", ", addedItems)}");
-        }
-
-        if (modifiedItems.Count > 0)
-        {
-            sections.Add($"modified: {string.Join(", ", modifiedItems)}");
-        }
-
-        if (removedItems.Count > 0)
-        {
-            sections.Add($"removed: {string.Join(", ", removedItems)}");
-        }
+        AddBucketSection(sections, "added", addedItems);
+        AddBucketSection(sections, "modified", modifiedItems);
+        AddBucketSection(sections, "removed", removedItems);
 
         if (loopDescriptors.Count > 0)
         {
@@ -799,6 +868,22 @@ internal static class MendixModelChangeDisplayTextFormatter
         }
 
         return string.Join("; ", sections);
+    }
+
+    private static void AddBucketSection(ICollection<string> sections, string bucket, IReadOnlyList<string> items)
+    {
+        if (items.Count == 0)
+        {
+            return;
+        }
+
+        if (items.Count == 1 && string.Equals(items[0], "annotation", StringComparison.OrdinalIgnoreCase))
+        {
+            sections.Add($"{bucket} annotation");
+            return;
+        }
+
+        sections.Add($"{bucket}: {string.Join(", ", items)}");
     }
 
     private static List<string> BuildActionBucketItems(
@@ -976,6 +1061,7 @@ internal static class MendixModelChangeDisplayTextFormatter
         IEnumerable<string> annotationLabels)
     {
         var seen = new HashSet<string>(bucketItems, StringComparer.OrdinalIgnoreCase);
+        var hasAnyLabel = false;
         foreach (var label in annotationLabels)
         {
             if (string.IsNullOrWhiteSpace(label))
@@ -983,11 +1069,18 @@ internal static class MendixModelChangeDisplayTextFormatter
                 continue;
             }
 
-            var phrase = $"annotation {label.Trim()}";
-            if (seen.Add(phrase))
-            {
-                bucketItems.Add(phrase);
-            }
+            hasAnyLabel = true;
+        }
+
+        if (!hasAnyLabel)
+        {
+            return;
+        }
+
+        const string phrase = "annotation";
+        if (seen.Add(phrase))
+        {
+            bucketItems.Add(phrase);
         }
     }
 

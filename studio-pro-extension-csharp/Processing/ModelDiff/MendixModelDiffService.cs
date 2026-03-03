@@ -785,7 +785,6 @@ public static class MendixModelDiffService
         AppendOption(metadata, "markAsUsed", TryReadStringProperty(flowObject, "markAsUsed"));
         AppendOption(metadata, "returnVariableName", TryReadStringProperty(flowObject, "returnVariableName"));
         AppendOption(metadata, "url", TryReadStringProperty(flowObject, "url"), maxLength: 160);
-        AppendOption(metadata, "exportLevel", TryReadStringProperty(flowObject, "exportLevel"));
         if (allowedRolesCount > 0)
         {
             metadata.Add($"allowedModuleRoles={allowedRolesCount}");
@@ -2267,8 +2266,6 @@ public static class MendixModelDiffService
         {
             parts.Add($"eventHandlers={eventHandlerCount}");
         }
-
-        AppendOption(parts, "exportLevel", TryReadStringProperty(entityResource.Value, "exportLevel"));
 
         var metadata = parts.Count == 0
             ? null

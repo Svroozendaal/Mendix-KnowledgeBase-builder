@@ -71,9 +71,9 @@ internal static class MendixModelChangeStructurer
 
     private static IReadOnlyList<MendixModelChange> OrderChanges(IEnumerable<MendixModelChange> changes) =>
         changes
-            .OrderBy(change => change.ElementName ?? string.Empty, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(change => change.ElementType ?? string.Empty, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(change => change.ElementName ?? string.Empty, StringComparer.OrdinalIgnoreCase)
             .ThenBy(change => change.ChangeType ?? string.Empty, StringComparer.OrdinalIgnoreCase)
-            .ThenBy(change => change.ElementType ?? string.Empty, StringComparer.OrdinalIgnoreCase)
             .ToArray();
 
     private static void PromoteAssociationsToDomainModel(MutableModuleBucket moduleBucket)

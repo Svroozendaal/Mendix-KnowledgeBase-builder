@@ -69,8 +69,40 @@ public class MendixModelChangeDisplayTextFormatterTests
 
         var displayText = change.DisplayText;
 
-        Assert.Contains("added: annotation Need validation", displayText);
+        Assert.Contains("added annotation", displayText);
+        Assert.DoesNotContain("Need validation", displayText, StringComparison.OrdinalIgnoreCase);
         Assert.DoesNotContain("annotations delta:", displayText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void DisplayText_EntityAccessRulesMetadata_IsNormalized()
+    {
+        var change = new MendixModelChange(
+            ChangeType: "Modified",
+            ElementType: "Entity",
+            ElementName: "IXAGOProject.CallId",
+            Details: "entity metadata: accessRules=2, exportLevel=Hidden");
+
+        var displayText = change.DisplayText;
+
+        Assert.Contains("Accessrules changed", displayText);
+        Assert.DoesNotContain("accessRules=2", displayText, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("exportLevel=Hidden", displayText, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void DisplayText_ExportLevelHidden_IsSuppressedFromFlowMetadata()
+    {
+        var change = new MendixModelChange(
+            ChangeType: "Modified",
+            ElementType: "Microflow",
+            ElementName: "IXAGOProject.ACT_Test",
+            Details: "flow metadata: exportLevel=Hidden, allowedModuleRoles=3");
+
+        var displayText = change.DisplayText;
+
+        Assert.Contains("allowedModuleRoles=3", displayText);
+        Assert.DoesNotContain("exportLevel=Hidden", displayText, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
