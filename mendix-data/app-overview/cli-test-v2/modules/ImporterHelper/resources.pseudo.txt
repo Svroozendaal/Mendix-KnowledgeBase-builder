@@ -1,6 +1,0 @@
-# Resources: ImporterHelper
-Constants: 1, Scheduled Events: 0
-
-## Constants
-CONSTANT ImporterHelper.CONST_RESTTransactionURL: StringType = http://localhost:8079/rest/restproducts/v1/transaction
-  Exposed to client: no
