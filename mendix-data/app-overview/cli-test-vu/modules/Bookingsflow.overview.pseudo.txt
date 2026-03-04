@@ -1,0 +1,1253 @@
+# Module: Bookingsflow
+Entities: 2, Associations: 0, Enumerations: 2
+Flows: 60
+
+## Domain Model
+- ENTITY Bookingsflow.BookingTracker (persistent)
+  - ATTR AllocationStatus: EnumerationAttributeType
+  - ATTR BookingsDate: DateTimeAttributeType
+  - ATTR CorrectionBookingStatus: EnumerationAttributeType
+  - ATTR CurrentlyRunningSimulation: EnumerationAttributeType
+  - ATTR LatestAllocationDate: DateTimeAttributeType
+  - ATTR LatestAllocationUser: StringAttributeType
+  - ATTR LatestErrorDate: DateTimeAttributeType
+  - ATTR LatestErrorUser: StringAttributeType
+  - ATTR LatestSimulationDate: DateTimeAttributeType
+  - ATTR LatestSimulationUser: StringAttributeType
+  - ATTR Month: EnumerationAttributeType
+  - ATTR RatesAreIn: BooleanAttributeType
+  - ATTR SimulationStatus: EnumerationAttributeType
+  - ATTR Year: EnumerationAttributeType
+- ENTITY Bookingsflow.JournalItem_PKA (persistent)
+  - ATTR Amount: DecimalAttributeType
+  - ATTR BaseUnit: StringAttributeType
+  - ATTR BookingType: EnumerationAttributeType
+  - ATTR CostCenterFromCode: StringAttributeType
+  - ATTR CostCenterFromName: StringAttributeType
+  - ATTR DocumentDate: DateTimeAttributeType
+  - ATTR DocumentItemText: StringAttributeType
+  - ATTR EntryType: EnumerationAttributeType
+  - ATTR FiscalPeriod: IntegerAttributeType
+  - ATTR FiscalYear: IntegerAttributeType
+  - ATTR FiscalYearPeriod: DateTimeAttributeType
+  - ATTR FiscalYearPeriodEnd: DateTimeAttributeType
+  - ATTR GLAccount: StringAttributeType
+  - ATTR Percentage: DecimalAttributeType
+  - ATTR PersonnelNumber: StringAttributeType
+  - ATTR PostingDate: DateTimeAttributeType
+  - ATTR Quantity: DecimalAttributeType
+  - ATTR ReferenceDocument: StringAttributeType
+  - ATTR TransactionCurrency: StringAttributeType
+  - ATTR _ID: IntegerAttributeType
+- ENUM Bookingsflow.CurrentlyRunningFlow: Allocation, ErrorCorrection, Simulation
+- ENUM Bookingsflow.SimulationFlowStatus: Failed, In_progress, Open
+
+## Flows
+
+FLOW Microflow: Bookingsflow.ACT_AllocationRunBooking_CheckIfCompleted
+NODES=5; EDGES=3
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted
+3. ACTION ShowMessageAction: show message (text=Controle afgerond. BookingTracker status is: {1}, type=Information, blocking=true)
+4. END
+
+FLOW Microflow: Bookingsflow.ACT_BookingsFlow_CreateTestData
+NODES=8; EDGES=6
+1. START
+2. DECISION Is production? expression=@Integration.Constant_Environment = 'P'
+3. BRANCH when EnumerationCase=false
+  4. ACTION RetrieveAction: retrieve EmployeeWithPKA from Masterdata.Employee
+  5. ACTION CreateListAction: CreateListAction (output=RateListToCommit, entity=Masterdata.Rate, errorHandlingType=Rollback)
+  6. LOOP iterate EmployeeWithPKA as IteratorEmployee
+    7. LOOP BODY
+      8. ACTION ChangeListAction: change RateListToCommit (type=Add, value=$Rate_FTE)
+      9. ACTION MicroflowCallAction: call microflow TWK.SUB_Employee_CreateDummyRate -> Rate_FTE
+      10. ACTION MicroflowCallAction: call microflow TWK.SUB_Employee_CreateDummyRate -> Rate_Amount
+      11. ACTION ChangeListAction: change RateListToCommit (type=Add, value=$Rate_Amount)
+  12. END
+13. BRANCH when EnumerationCase=true
+  14. END
+
+FLOW Microflow: Bookingsflow.ACT_BookingTracker_OpenAllocation
+NODES=4; EDGES=2
+1. START
+2. ACTION ChangeObjectAction: change BookingTracker (AllocationStatus=Bookingsflow.SimulationFlowStatus.Open, CurrentlyRunningSimulation=empty; refreshInClient=true)
+3. END
+
+FLOW Microflow: Bookingsflow.ACT_BookingTracker_OpenErrorCorrection
+NODES=4; EDGES=2
+1. START
+2. ACTION ChangeObjectAction: change BookingTracker (CorrectionBookingStatus=Bookingsflow.SimulationFlowStatus.Open; refreshInClient=true)
+3. END
+
+FLOW Microflow: Bookingsflow.ACT_BookingTracker_OpenSimulation
+NODES=4; EDGES=2
+1. START
+2. ACTION ChangeObjectAction: change BookingTracker (SimulationStatus=Bookingsflow.SimulationFlowStatus.Open, CurrentlyRunningSimulation=empty; refreshInClient=true)
+3. END
+
+FLOW Microflow: Bookingsflow.ACT_BookingTracker_Refresh
+NODES=4; EDGES=2
+1. START
+2. ACTION ChangeObjectAction: change BookingTracker (refreshInClient=true)
+3. END
+
+FLOW Microflow: Bookingsflow.ACT_BookintTracker_StartAllocationFlow
+NODES=6; EDGES=4
+1. START
+2. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+3. ACTION ChangeObjectAction: change BookingTracker (LatestAllocationUser=$currentUser/Name, LatestAllocationDate=[%CurrentDateTime%], AllocationStatus=Bookingsflow.SimulationFlowStatus.In_progress, CurrentlyRunningSimulation=Bookingsflow.CurrentlyRunningFlow.Allocation; refreshInClient=true)
+4. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_CallAllocationFlow -> Variable
+5. END
+
+FLOW Microflow: Bookingsflow.ACT_BookintTracker_StartAllocationFlow_CPI
+NODES=6; EDGES=4
+1. START
+2. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+3. ACTION ChangeObjectAction: change BookingTracker (LatestAllocationUser=$currentUser/Name, LatestAllocationDate=[%CurrentDateTime%], AllocationStatus=Bookingsflow.SimulationFlowStatus.In_progress, CurrentlyRunningSimulation=Bookingsflow.CurrentlyRunningFlow.Allocation; refreshInClient=true)
+4. ACTION JavaActionCallAction: call java action CommunityCommons.executeMicroflowInBackground
+5. END
+
+FLOW Microflow: Bookingsflow.ACT_BookintTracker_StartErrorCorrectionFlow
+NODES=6; EDGES=4
+1. START
+2. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+3. ACTION ChangeObjectAction: change BookingTracker (LatestErrorUser=$currentUser/Name, LatestErrorDate=[%CurrentDateTime%], CorrectionBookingStatus=Bookingsflow.SimulationFlowStatus.In_progress, CurrentlyRunningSimulation=Bookingsflow.CurrentlyRunningFlow.ErrorCorrection; refreshInClient=true)
+4. ACTION JavaActionCallAction: call java action CommunityCommons.executeMicroflowInBackground
+5. END
+
+FLOW Microflow: Bookingsflow.ACT_BookintTracker_StartSimulationFlow
+NODES=6; EDGES=4
+1. START
+2. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+3. ACTION ChangeObjectAction: change BookingTracker (LatestSimulationUser=$currentUser/Name, LatestSimulationDate=[%CurrentDateTime%], SimulationStatus=Bookingsflow.SimulationFlowStatus.In_progress, CurrentlyRunningSimulation=Bookingsflow.CurrentlyRunningFlow.Simulation; refreshInClient=true)
+4. ACTION JavaActionCallAction: call java action CommunityCommons.executeMicroflowInBackground
+5. END
+
+FLOW Microflow: Bookingsflow.ACT_PersoneelsKostenAllocatie_OpenLog
+NODES=5; EDGES=3
+1. START
+2. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+3. ACTION ShowPageAction: show page Bookingsflow.BookingLogItem_Overview
+4. END
+
+FLOW Microflow: Bookingsflow.ACT_PKA_BookSingle
+NODES=5; EDGES=3
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PKA_BookSingle -> BookingTracker
+3. ACTION CloseFormAction: close page
+4. END
+
+FLOW Microflow: Bookingsflow.ACT_PKA_CheckManualBooking
+NODES=9; EDGES=7
+1. START
+2. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNumber_Convert -> PersonnelNumberS4List
+3. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNrConvert_ProcessList -> PersonnelNumberS4
+4. DECISION S4 nr correct? expression=$PersoneelsKostenAllocatie/PersonnelNumber = $PersonnelNumberS4
+5. BRANCH when EnumerationCase=true
+  6. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PKA_BookSingle
+  7. END
+8. BRANCH when EnumerationCase=false
+  9. ACTION ShowPageAction: show page Bookingsflow.PersoneelsKostenAllocatie_CheckS4Number
+  10. END
+
+FLOW Microflow: Bookingsflow.ACT_ShowMessage_ActionRunning
+NODES=3; EDGES=2
+1. START
+2. ACTION ShowMessageAction: show message (text=This action is currently being run. It is not possible to run the same action multiple tim..., type=Information, blocking=true)
+3. END
+
+FLOW Microflow: Bookingsflow.ACT_SimulationBooking_PerformInBackground
+NODES=4; EDGES=2
+1. START
+2. ACTION JavaActionCallAction: call java action CommunityCommons.executeMicroflowInBackground
+3. END
+
+FLOW Microflow: Bookingsflow.ACT_Update_Workingtime_Percentage
+NODES=2; EDGES=1
+1. START
+2. END
+
+FLOW Microflow: Bookingsflow.Java_CallErrorCorrectionFlow
+NODES=13; EDGES=12
+1. START
+2. ACTION MicroflowCallAction: call microflow Integration.SUB_RetrieveToken -> ClientCredentials
+3. ACTION MicroflowCallAction: call microflow Integration.SUB_CheckEnvironment -> EnvironmentURL
+4. ACTION RestCallAction: RestCallAction (errorHandlingType=CustomWithoutRollBack)
+5. BRANCH
+  6. DECISION Correct Status? expression=$HttpResponse/StatusCode = 201 or $HttpResponse/StatusCode = 200
+  7. BRANCH when EnumerationCase=true
+    8. ACTION ChangeObjectAction: change BookingTracker (CorrectionBookingStatus=Bookingsflow.SimulationFlowStatus.Open, CurrentlyRunningSimulation=empty; refreshInClient=false)
+    9. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+    10. END
+  11. BRANCH when EnumerationCase=false
+    12. NODE ExclusiveMerge: ExclusiveMerge
+    13. ACTION ChangeObjectAction: change BookingTracker (CorrectionBookingStatus=Bookingsflow.SimulationFlowStatus.Failed, CurrentlyRunningSimulation=empty; refreshInClient=false)
+    14. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+    15. END
+16. BRANCH on error
+  17. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.Java_CallSimulationFlow
+NODES=5; EDGES=3
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_CleanPKAFields
+3. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_SimulationRun -> PersoneelsKostenAllocatieList_RequestStatusOpen
+4. END
+
+FLOW Microflow: Bookingsflow.Java_CallSimulationFlow_OLD
+NODES=13; EDGES=10
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_CleanPKAFields
+3. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime -> PersoneelsKostenAllocatieList_RequestStatusOpen
+4. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_RunSimulation -> RunStatus
+5. DECISION Correct Status? expression=$RunStatus = 201 or $RunStatus = 200
+6. BRANCH when EnumerationCase=true
+  7. ACTION ChangeObjectAction: change BookingTracker (SimulationStatus=Bookingsflow.SimulationFlowStatus.Open, CurrentlyRunningSimulation=empty; refreshInClient=false)
+  8. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  9. END
+10. BRANCH when EnumerationCase=false
+  11. ACTION ChangeObjectAction: change BookingTracker (SimulationStatus=Bookingsflow.SimulationFlowStatus.Failed, CurrentlyRunningSimulation=empty; refreshInClient=false)
+  12. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  13. END
+
+FLOW Microflow: Bookingsflow.NAV_BookingsFlow_OpenPage
+NODES=6; EDGES=5
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingTracker_RetrieveOrCreate -> BookingTracker
+3. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTime([%CurrentDateTime%], 'yyyy'))
+4. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTime([%CurrentDateTime%], 'MM'))-1
+5. ACTION ShowPageAction: show page Bookingsflow.BookingFlows
+6. END
+
+FLOW Microflow: Bookingsflow.OCh_BookingTracker_Commit
+NODES=4; EDGES=2
+1. START
+2. ACTION CommitAction: commit BookingTracker (refreshInClient=false, withEvents=true)
+3. END
+
+FLOW Microflow: Bookingsflow.SCRIPT_BookingflowTracker_Reset
+NODES=4; EDGES=3
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingTracker_RetrieveOrCreate -> BookingTracker
+3. ACTION ChangeObjectAction: change BookingTracker (AllocationStatus=Bookingsflow.SimulationFlowStatus.Open, CurrentlyRunningSimulation=empty; refreshInClient=true)
+4. END
+
+FLOW Microflow: Bookingsflow.SCRIPT_BookingLogItem_Create
+NODES=7; EDGES=5
+1. START
+2. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieList from TWK.PersoneelsKostenAllocatie
+3. ACTION CreateListAction: CreateListAction (output=BookingLogItemListToCommit, entity=TWK.BookingLogItem, errorHandlingType=Rollback)
+4. LOOP iterate PersoneelsKostenAllocatieList as IteratorPersoneelsKostenAllocatie
+  5. LOOP BODY
+    6. ACTION ChangeListAction: change BookingLogItemListToCommit (type=Add, value=$NewBookingLogItem)
+    7. ACTION CreateObjectAction: create TWK.BookingLogItem as NewBookingLogItem (ReqItemID=$IteratorPersoneelsKostenAllocatie/ReqItemID, BookingsDate=$IteratorPersoneelsKostenAllocatie/RequestPostingDate, RequestStatus=$IteratorPersoneelsKostenAllocatie/RequestStatus, RequestPostingStatus=$IteratorPersoneelsKostenAllocatie/RequestPostingStatus, Remarks=$IteratorPersoneelsKostenAllocatie/Remarks, BookingLogItem_Employee=$IteratorPersoneelsKostenAllocatie/TWK.PersoneelsKostenAllocatie_Employee/Masterdata.Employee)
+8. ACTION CommitAction: commit BookingLogItemListToCommit (refreshInClient=false, withEvents=true)
+9. END
+
+FLOW Microflow: Bookingsflow.SCRIPT_FillTaskQueue
+NODES=4; EDGES=3
+1. START
+2. ACTION CreateVariableAction: create variable TaskNr=0
+3. LOOP iterate
+  4. LOOP BODY
+    5. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_TaskqueueTest
+    6. ACTION ChangeVariableAction: change variable TaskNr=$TaskNr + 1
+7. END
+
+FLOW Microflow: Bookingsflow.SCRIPT_Project_FillCostBearers
+NODES=7; EDGES=5
+1. START
+2. ACTION RetrieveAction: retrieve ProjectList from Projects.Project
+3. LOOP iterate ProjectList as IteratorProject
+  4. LOOP BODY
+    5. DECISION CB project payoff section? expression=$Section/CostbearerProjectPayoffSection != empty
+    6. DECISION Section found? expression=$Section != empty
+    7. NODE ExclusiveMerge: ExclusiveMerge
+    8. ACTION RetrieveAction: retrieve Section over association Project_Section from IteratorProject
+    9. ACTION ChangeObjectAction: change IteratorProject (CostbearerOwnContribution=if $Section/CostbearerOwnContributionSection != empty then $Section/CostbearerOwnContributionSection else $IteratorProject/CostbearerOwnContribution; refreshInClient=false)
+    10. DECISION CB own contribution section? expression=$Section/CostbearerOwnContributionSection != empty
+    11. ACTION ChangeObjectAction: change IteratorProject (CostbearerOwnContribution=if $Department/CostbearerOwnContributionDepartment != empty then $Department/CostbearerOwnContributionDepartment else $IteratorProject/CostbearerOwnContribution, CostbearerProjectPayoff=if $Department/CostbearerProjectPayoffDepartment != empty then $Department/CostbearerProjectPayoffDepartment else $IteratorProject/CostbearerProjectPayoff; refreshInClient=false)
+    12. ACTION ChangeObjectAction: change IteratorProject (CostbearerProjectPayoff=if $Section/CostbearerProjectPayoffSection != empty then $Section/CostbearerProjectPayoffSection else $IteratorProject/CostbearerProjectPayoff; refreshInClient=false)
+    13. ACTION ChangeObjectAction: change IteratorProject (CostbearerProjectPayoff=if $Department/CostbearerProjectPayoffDepartment != empty then $Department/CostbearerProjectPayoffDepartment else $IteratorProject/CostbearerProjectPayoff; refreshInClient=false)
+    14. ACTION RetrieveAction: retrieve Department over association Project_Department from IteratorProject
+    15. ACTION ChangeObjectAction: change IteratorProject (CostbearerOwnContribution=if $Department/CostbearerOwnContributionDepartment != empty then $Department/CostbearerOwnContributionDepartment else $IteratorProject/CostbearerOwnContribution; refreshInClient=false)
+16. ACTION CommitAction: commit ProjectList (refreshInClient=false, withEvents=false)
+17. ACTION ShowMessageAction: show message (text=Script afgerond!, type=Information, blocking=true)
+18. END
+
+FLOW Microflow: Bookingsflow.SUB_Account_Get
+NODES=3; EDGES=2
+1. START
+2. ACTION RetrieveAction: retrieve MendixSSOUser from SSO_Custom.MendixSSOUser
+3. END
+
+FLOW Microflow: Bookingsflow.SUB_AllocationChecks
+NODES=23; EDGES=13
+1. START
+2. ACTION CreateVariableAction: create variable Remarks='Ready for Posting'
+3. ACTION RetrieveAction: retrieve Employee from Masterdata.Employee
+4. ACTION RetrieveAction: retrieve Rate_Amount from Masterdata.ActualRate
+5. DECISION Rate_Amount > 0 expression=if $Rate_Amount != empty then $Rate_Amount/Value > 0 else false
+6. BRANCH when EnumerationCase=true
+  7. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (hasRate=true; refreshInClient=false)
+  8. ACTION CreateVariableAction: create variable RemarkLine=''
+  9. LOOP iterate PersoneelsKostenAllocatieRegelList as IteratorPersoneelskostenAllocatieRegel
+    10. LOOP BODY
+      11. DECISION Receiver aanwezig? expression=$IteratorPersoneelskostenAllocatieRegel/ReceiverCostCenter != empty or $IteratorPersoneelskostenAllocatieRegel/ReceiverW...
+      12. ACTION ChangeVariableAction: change variable ProcessingStatus=$ReceiverWBS_DB/ProcessingStatus
+      13. NODE ExclusiveMerge: ExclusiveMerge
+      14. ACTION ChangeVariableAction: change variable ProcessingStatus=$ReceivingWBS/ProcessingStatus
+      15. ACTION ChangeVariableAction: change variable RemarkLine=$RemarkLine+' - WBS is niet vrijgegeven'
+      16. ACTION ChangeVariableAction: change variable RemarkLine=$RemarkLine+' - Kostenplaats closed for secondary posting'
+      17. NODE ExclusiveMerge: ExclusiveMerge
+      18. DECISION Correct WBS? expression=$ReceivingWBS!= empty and $ReceivingWBS/toDelete = false
+      19. ACTION ChangeObjectAction: change IteratorPersoneelskostenAllocatieRegel (Remarks='geen ontvangend costcenter of WBS'; refreshInClient=false)
+      20. ACTION ChangeObjectAction: change IteratorPersoneelskostenAllocatieRegel (Remarks='Ready for Posting'; refreshInClient=false)
+      21. ACTION ChangeVariableAction: change variable CCisBlocked=$ReceivingResponsibleCostCenter/IsBlkdForSecondaryCostsPosting
+      22. DECISION Open voor secondary cost posting expression=$CCisBlocked = false
+      23. ACTION CreateVariableAction: create variable ProcessingStatus=''
+      24. ACTION ChangeVariableAction: change variable CCisBlocked=$ReceivingResponsibleCostCenter_DB/IsBlkdForSecondaryCostsPosting
+      25. NODE ExclusiveMerge: ExclusiveMerge
+      26. ACTION RetrieveAction: retrieve ReceiverWBS_DB from TWK.WBSElement
+      27. ACTION CreateVariableAction: create variable CCisBlocked=false
+      28. NODE ContinueEvent: ContinueEvent
+      29. ACTION RetrieveAction: retrieve ReceivingResponsibleCostCenter over association PersoneelsKostenAllocatieRegel_Receiver_ResponsibleCostCenter from IteratorPersoneelskostenAllocatieRegel
+      30. ACTION ChangeObjectAction: change IteratorPersoneelskostenAllocatieRegel (Remarks='receiving costcenter niet open voor secondary post costing'; refreshInClient=false)
+      31. ACTION ChangeObjectAction: change IteratorPersoneelskostenAllocatieRegel (Remarks='WBS element is niet vrijgegeven'; refreshInClient=false)
+      32. ACTION ChangeVariableAction: change variable RemarkLine=$RemarkLine+' - Geen ontvangende WBS of kostenplaats gevonden'
+      33. NODE ContinueEvent: ContinueEvent
+      34. NODE ExclusiveMerge: ExclusiveMerge
+      35. NODE ContinueEvent: ContinueEvent
+      36. DECISION WBS is vrijgegeven expression=$ProcessingStatus= '12' or $ProcessingStatus = '10'
+      37. DECISION FOund? expression=$ReceivingResponsibleCostCenter != empty
+      38. DECISION Receiver is costcenter? expression=$IteratorPersoneelskostenAllocatieRegel/ReceiverCostCenter != empty and $IteratorPersoneelskostenAllocatieRegel/Receiver...
+      39. ACTION RetrieveAction: retrieve ReceivingResponsibleCostCenter_DB from Masterdata.ResponsibleCostCenter
+      40. NODE ExclusiveMerge: ExclusiveMerge
+      41. DECISION Receiver is WBS? expression=$IteratorPersoneelskostenAllocatieRegel/TWK.PersoneelsKostenAllocatieRegel_WBSElement != empty or ($IteratorPersoneelsko...
+      42. DECISION Receiver aanwezig? expression=$IteratorPersoneelskostenAllocatieRegel/ReceiverCostCenter != '' or $IteratorPersoneelskostenAllocatieRegel/ReceiverWBSE...
+      43. ACTION RetrieveAction: retrieve ReceivingWBS over association PersoneelsKostenAllocatieRegel_WBSElement from IteratorPersoneelskostenAllocatieRegel
+  44. DECISION RemarkLine empty? expression=$RemarkLine = ''
+  45. BRANCH when EnumerationCase=true
+    46. END
+  47. BRANCH when EnumerationCase=false
+    48. END
+49. BRANCH when EnumerationCase=false
+  50. ACTION ChangeListAction: change PersoneelsKostenAllocatieRegelList (type=Clear)
+  51. ACTION ChangeVariableAction: change variable Remarks='Er is geen tarief aanwezig of tarief is niet groter dan 0'
+  52. END
+
+FLOW Microflow: Bookingsflow.SUB_BookingLogItem_Create
+NODES=4; EDGES=2
+1. START
+2. ACTION CreateObjectAction: create TWK.BookingLogItem as NewBookingLogItem (ReqItemID=$PersoneelsKostenAllocatie/ReqItemID, BookingsDate=$PersoneelsKostenAllocatie/RequestPostingDate, RequestStatus=$PersoneelsKostenAllocatie/RequestStatus, RequestPostingStatus=$PersoneelsKostenAllocatie/RequestPostingStatus, Remarks=$PersoneelsKostenAllocatie/Remarks, BookingLogItem_Employee=$PersoneelsKostenAllocatie/TWK.PersoneelsKostenAllocatie_Employee/Masterdata.Employee)
+3. END
+
+FLOW Microflow: Bookingsflow.SUB_BookingTracker_CheckQueueStatus
+NODES=10; EDGES=9
+1. START
+2. ACTION RetrieveAction: retrieve QueuedTaskList from System.QueuedTask
+3. ACTION AggregateListAction: AggregateListAction (output=Queued_Task_Left, errorHandlingType=Rollback)
+4. DECISION Final task? expression=$Queued_Task_Left=1
+5. BRANCH when EnumerationCase=false
+  6. NODE ExclusiveMerge: ExclusiveMerge
+  7. END
+8. BRANCH when EnumerationCase=true
+  9. ACTION RetrieveAction: retrieve BookingTracker from Bookingsflow.BookingTracker
+  10. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  11. ACTION ChangeObjectAction: change BookingTracker (CurrentlyRunningSimulation=empty; refreshInClient=false)
+  12. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.SUB_BookingTracker_RetrieveOrCreate
+NODES=6; EDGES=5
+1. START
+2. ACTION RetrieveAction: retrieve BookingTracker from Bookingsflow.BookingTracker
+3. DECISION Found? expression=$BookingTracker != empty
+4. BRANCH when EnumerationCase=true
+  5. END
+6. BRANCH when EnumerationCase=false
+  7. ACTION CreateObjectAction: create Bookingsflow.BookingTracker as NewBookingTracker
+  8. END
+
+FLOW Microflow: Bookingsflow.SUB_Booking_PKA
+NODES=12; EDGES=8
+1. START
+2. DECISION Allocations to book? expression=$PersoneelsKostenAllocatieList_RequestStatusOpen!=empty
+3. BRANCH when EnumerationCase=true
+  4. LOOP iterate PersoneelsKostenAllocatieList_RequestStatusOpen as IteratorPersoneelsKostenAllocatie
+    5. LOOP BODY
+      6. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD
+  7. NODE ExclusiveMerge: ExclusiveMerge
+  8. END
+9. BRANCH when EnumerationCase=false
+  10. ACTION RetrieveAction: retrieve BookingTracker from Bookingsflow.BookingTracker
+  11. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  12. ACTION ChangeObjectAction: change BookingTracker (CurrentlyRunningSimulation=empty; refreshInClient=false)
+  13. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.SUB_Booking_PKASingle
+NODES=24; EDGES=20
+1. START
+2. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTimeUTC($BookingsDate,'yyyy'))
+3. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTimeUTC($BookingsDate,'MM'))
+4. ACTION CreateVariableAction: create variable Message=empty
+5. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PrepareAllocationToBook -> Remark
+6. DECISION Ready for Posting? expression=$Remark = 'Ready for Posting'
+7. BRANCH when EnumerationCase=true
+  8. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> AccountingDocument
+  9. DECISION Success? expression=$AccountingDocument != ''
+  10. BRANCH when EnumerationCase=true
+    11. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='POSTED', Remarks=$AccountingDocument, RequestPostingDate=$BookingsDate; refreshInClient=true)
+    12. NODE ExclusiveMerge: ExclusiveMerge
+    13. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+    14. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+    15. LOOP iterate PersoneelsKostenAllocatieRegelList as IteratorPersoneelsKostenAllocatieRegel
+      16. LOOP BODY
+        17. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatieRegel (WorkingTimePercentage=toString($Employee/FTE); refreshInClient=false)
+    18. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList (refreshInClient=true, withEvents=true)
+    19. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingLogItem_Create
+    20. END
+  21. BRANCH when EnumerationCase=false
+    22. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='ERROR', RequestPostingDate=$BookingsDate; refreshInClient=true)
+    23. REF ExclusiveMerge
+24. BRANCH when EnumerationCase=false
+  25. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='SKIPPED', Remarks=$Remark, RequestPostingDate=$BookingsDate; refreshInClient=true)
+  26. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingLogItem_Create
+  27. END
+
+FLOW Microflow: Bookingsflow.SUB_CallAllocationFlow
+NODES=6; EDGES=4
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Request_RetrieveLateRequest
+3. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_CleanPKAFields
+4. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_AllocationRun -> PersoneelsKostenAllocatieList_RequestStatusOpen
+5. END
+
+FLOW Microflow: Bookingsflow.SUB_CleanPKAFields
+NODES=15; EDGES=13
+1. START
+2. ACTION CreateVariableAction: create variable OffSet=0
+3. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieAll from TWK.PersoneelsKostenAllocatie
+4. ACTION AggregateListAction: AggregateListAction (output=PersoneelKostenAllocatieCount, errorHandlingType=Rollback)
+5. NODE ExclusiveMerge: ExclusiveMerge
+6. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieList from TWK.PersoneelsKostenAllocatie
+7. LOOP iterate PersoneelsKostenAllocatieList as IteratorPersoneelsKostenAllocatie
+  8. LOOP BODY
+    9. DECISION Duplicate booking? expression=$IteratorPersoneelsKostenAllocatie/RequestPostingStatus = 'POSTED' and $IteratorPersoneelsKostenAllocatie/RequestPosting...
+    10. NODE ContinueEvent: ContinueEvent
+    11. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatie (Remarks=empty, RequestPostingStatus=empty; refreshInClient=false)
+12. ACTION CommitAction: commit PersoneelsKostenAllocatieList (refreshInClient=false, withEvents=false)
+13. ACTION JavaActionCallAction: call java action CommunityCommons.EndTransaction
+14. ACTION JavaActionCallAction: call java action CommunityCommons.StartTransaction -> Variable
+15. DECISION Done? expression=$PersoneelKostenAllocatieCount < $OffSet
+16. BRANCH when EnumerationCase=false
+  17. ACTION ChangeVariableAction: change variable OffSet=$OffSet + 100
+  18. GOTO ExclusiveMerge // cycle
+19. BRANCH when EnumerationCase=true
+  20. END
+
+FLOW Microflow: Bookingsflow.SUB_CleanPKAFields_Single
+NODES=4; EDGES=2
+1. START
+2. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (Remarks=empty; refreshInClient=false)
+3. END
+
+FLOW Microflow: Bookingsflow.SUB_createItemType_PKA
+NODES=11; EDGES=5
+1. START
+2. ACTION CreateVariableAction: create variable CostCenterFromInteger=parseInteger($IteratorPersoneelsKostenAllocatieRegel/TWK.PersoneelsKostenAllocatieRegel_Sender_ResponsibleCostCenter/Masterdata.ResponsibleCostCenter/Code)
+3. BRANCH
+  4. NODE ExclusiveMerge: ExclusiveMerge
+  5. ACTION CreateObjectAction: create TWK.ItemType as ItemType (ItemType_AllocationPostingType=$AllocationPostingType, SenderCostCenter=if $IteratorPersoneelsKostenAllocatieRegel/SenderCostCenter = empty then $IteratorPersoneelsKostenAllocatieRegel/TWK.PersoneelsKostenAllocatieRegel_Sender_ResponsibleCostCenter/Mas..., CostCtrActivityType='U010', CostCtrActivityTypeQty=toString(round($IteratorPersoneelsKostenAllocatieRegel/FTEAllocation,3)), PriceTotalAmtInActlPostg=toString(round(($ActualRate/Value * $IteratorPersoneelsKostenAllocatieRegel/FTEAllocation),2)), PriceTotalAmtInActlPostgCurrencyCode='EUR', PersonnelNumber=$IteratorPersoneelsKostenAllocatieRegel/TWK.PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie/TWK.PersoneelsKostenAllocatie/PersonnelNumber, DocumentItemText='Allocatie '+ formatDateTime($BookingsDate,'MM.yyyy')+' ('+$IteratorPersoneelsKostenAllocatieRegel/TWK.PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie/TWK.PersoneelsKosten..., +3 more)
+  6. END
+7. BRANCH on error
+  8. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.SUB_JournalItem_APK_POST_DEEP
+NODES=32; EDGES=28
+1. START
+2. ACTION MicroflowCallAction: call microflow Integration.SUB_RetrieveToken -> ClientCredentials
+3. ACTION MicroflowCallAction: call microflow Integration.SUB_CheckEnvironment -> EnvironmentURL
+4. ACTION MicroflowCallAction: call microflow TWK.SUB_CSRF_Fetch -> HttpResponse
+5. ACTION RetrieveAction: retrieve HttpHeaderList over association HttpHeaders from HttpResponse
+6. ACTION ListOperationAction: ListOperationAction (output=CSRFToken, errorHandlingType=Rollback)
+7. ACTION ChangeObjectAction: change CSRFToken (Value=trim($CSRFToken/Value); refreshInClient=false)
+8. ACTION ListOperationAction: ListOperationAction (output=NewHttpHeaderList, errorHandlingType=Rollback)
+9. ACTION CreateVariableAction: create variable Cookie=''
+10. LOOP iterate NewHttpHeaderList as IteratorHttpHeader
+  11. LOOP BODY
+    12. ACTION ChangeVariableAction: change variable Cookie=$Cookie + $IteratorHttpHeader/Value + '; '
+13. NODE ExclusiveMerge: ExclusiveMerge
+14. ACTION CreateVariableAction: create variable FeedbackMessage=empty
+15. DECISION Succes? expression=$FeedbackMessage = ''
+16. BRANCH when EnumerationCase=true
+  17. ACTION RestCallAction: RestCallAction (errorHandlingType=CustomWithoutRollBack)
+  18. BRANCH
+    19. DECISION Correct Status? expression=$latestHttpResponse/StatusCode = 201 or $latestHttpResponse/StatusCode = 200
+    20. BRANCH when EnumerationCase=true
+      21. ACTION CreateVariableAction: create variable ContainsAccountingDocument=contains($DocumentInfo,'<AccountingDocument>')
+      22. DECISION Accounting document found? expression=$ContainsAccountingDocument
+      23. BRANCH when EnumerationCase=true
+        24. ACTION CreateVariableAction: create variable AccountingDocument=substring($DocumentInfo, find($DocumentInfo,'<AccountingDocument>'),30)
+        25. END
+      26. BRANCH when EnumerationCase=false
+        27. ACTION ChangeVariableAction: change variable FeedbackMessage=$DocumentInfo
+        28. END
+    29. BRANCH when EnumerationCase=false
+      30. NODE ExclusiveMerge: ExclusiveMerge
+      31. ACTION MicroflowCallAction: call microflow Integration.SUB_HttpResponse_Error
+      32. ACTION ChangeVariableAction: change variable FeedbackMessage=$latestError/Message
+      33. ACTION ShowMessageAction: show message (text=An error has occurred. Booking could not be send to SAP., type=Information, blocking=true)
+      34. END
+  35. BRANCH on error
+    36. REF ExclusiveMerge
+37. BRANCH when EnumerationCase=false
+  38. ACTION ShowMessageAction: show message (text={1}, type=Information, blocking=true)
+  39. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelskostenAllocatieRegel_CreateAllocationRequest_DEEP
+NODES=23; EDGES=16
+1. START
+2. ACTION CreateObjectAction: create TWK.AllocationPostingBulkCreateRequestType as AllocationPostingBulkCreateRequestType
+3. ACTION CreateObjectAction: create TWK.AllocationPostingCreateRequestType as AllocationPostingCreateRequestType (AllocationPostingCreateRequestType_AllocationPostingBulkCreateRequestType=$AllocationPostingBulkCreateRequestType)
+4. ACTION CreateObjectAction: create TWK.MessageHeaderType as MessageHeaderType (MessageHeaderType_AllocationPostingBulkCreateRequestType=$AllocationPostingBulkCreateRequestType, MessageHeaderType_AllocationPostingCreateRequestType=$AllocationPostingCreateRequestType, CreationDateTime=formatDateTimeUTC([%CurrentDateTime%],'yyyy-MM-dd') + 'T' + formatDateTimeUTC([%CurrentDateTime%],'HH:mm:ss') + 'Z')
+5. ACTION CreateObjectAction: create TWK.AllocationPostingType as AllocationPostingType (AllocationPostingType_AllocationPostingCreateRequestType=$AllocationPostingCreateRequestType)
+6. ACTION RetrieveAction: retrieve BookingPeriod from TWK.BookingPeriod
+7. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+8. ACTION RetrieveAction: retrieve Rate_Amount from Masterdata.ActualRate
+9. DECISION Found? expression=$BookingPeriod != empty
+10. BRANCH when EnumerationCase=true
+  11. ACTION CreateVariableAction: create variable PostingDate=formatDateTime($BookingsDate, 'yyyy-MM-dd')
+  12. BRANCH
+    13. ACTION CreateObjectAction: create TWK.HeaderType as HeaderType (HeaderType_AllocationPostingType=$AllocationPostingType, ControllingArea='A000', DocumentDate=$PostingDate, PostingDate=$PostingDate, ControllingDocumentHeaderText='Boeking voor '+$PersoneelsKostenAllocatie/ReqItemID, FiscalPeriod=if $Month < 10 then '00'+toString($Month) else '0'+toString($Month), FiscalYear=toString($Year))
+    14. LOOP iterate PersoneelsKostenAllocatieRegelList as IteratorPersoneelsKostenAllocatieRegel
+      15. LOOP BODY
+        16. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_createItemType_PKA
+        17. NODE ContinueEvent: ContinueEvent
+        18. DECISION Costcenterfrom = costcenterto? expression=if ($IteratorPersoneelsKostenAllocatieRegel/SenderCostCenter != empty or $IteratorPersoneelsKostenAllocatieRegel/Receive...
+    19. END
+  20. BRANCH on error
+    21. NODE ExclusiveMerge: ExclusiveMerge
+    22. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+    23. END
+24. BRANCH when EnumerationCase=false
+  25. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP
+NODES=37; EDGES=31
+1. START
+2. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+3. ACTION MicroflowCallAction: call microflow Integration.SUB_TokenPersistent_FindOrCreate -> ClientCredentials
+4. ACTION MicroflowCallAction: call microflow Integration.SUB_CheckEnvironment -> EnvironmentURL
+5. ACTION MicroflowCallAction: call microflow TWK.SUB_CSRF_Fetch -> HttpResponse
+6. ACTION RetrieveAction: retrieve HttpHeaderList over association HttpHeaders from HttpResponse
+7. ACTION ListOperationAction: ListOperationAction (output=CSRFToken, errorHandlingType=Rollback)
+8. ACTION ChangeObjectAction: change CSRFToken (Value=trim($CSRFToken/Value); refreshInClient=false)
+9. ACTION ListOperationAction: ListOperationAction (output=NewHttpHeaderList, errorHandlingType=Rollback)
+10. ACTION CreateVariableAction: create variable Cookie=''
+11. LOOP iterate NewHttpHeaderList as IteratorHttpHeader
+  12. LOOP BODY
+    13. ACTION ChangeVariableAction: change variable Cookie=$Cookie + $IteratorHttpHeader/Value + '; '
+14. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelskostenAllocatieRegel_CreateAllocationRequest_DEEP -> AllocationPostingRequest
+15. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_VAL_PersoneelskostenAllocatieRegelPost -> FeedbackMessage
+16. ACTION CreateVariableAction: create variable AccountingDocument=''
+17. DECISION Succes? expression=$FeedbackMessage = ''
+18. BRANCH when EnumerationCase=true
+  19. ACTION ExportXmlAction: ExportXmlAction (errorHandlingType=Rollback)
+  20. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  21. ACTION RestCallAction: RestCallAction (errorHandlingType=CustomWithoutRollBack)
+  22. BRANCH
+    23. DECISION Correct Status? expression=$latestHttpResponse/StatusCode = 201 or $latestHttpResponse/StatusCode = 200
+    24. BRANCH when EnumerationCase=true
+      25. ACTION CreateVariableAction: create variable ContainsAccountingDocument=contains($DocumentInfo,'<AccountingDocument>')
+      26. DECISION Accounting document found? expression=$ContainsAccountingDocument
+      27. BRANCH when EnumerationCase=true
+        28. ACTION ChangeVariableAction: change variable AccountingDocument=substring($DocumentInfo, find($DocumentInfo,'<AccountingDocument>'),30)
+        29. END
+      30. BRANCH when EnumerationCase=false
+        31. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (Remarks=$DocumentInfo; refreshInClient=false)
+        32. END
+    33. BRANCH when EnumerationCase=false
+      34. NODE ExclusiveMerge: ExclusiveMerge
+      35. ACTION MicroflowCallAction: call microflow Integration.SUB_HttpResponse_Error
+      36. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (Remarks=$latestError/Message + ' - '+ $latestError/Stacktrace; refreshInClient=false)
+      37. END
+  38. BRANCH on error
+    39. REF ExclusiveMerge
+40. BRANCH when EnumerationCase=false
+  41. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (Remarks=$FeedbackMessage; refreshInClient=false)
+  42. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_AllocationRun
+NODES=26; EDGES=22
+1. START
+2. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTime($BookingsDate, 'yyyy'))
+3. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTime($BookingsDate, 'MM'))
+4. ACTION CreateVariableAction: create variable OffSet=0
+5. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieList_ToUpdate from TWK.PersoneelsKostenAllocatie
+6. ACTION AggregateListAction: AggregateListAction (output=PersoneelKostenAllocatieCount, errorHandlingType=Rollback)
+7. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+8. DECISION Er zijn verwerkbare PKA expression=$PersoneelKostenAllocatieCount != 0
+9. BRANCH when EnumerationCase=true
+  10. NODE ExclusiveMerge: ExclusiveMerge
+  11. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  12. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieList from TWK.PersoneelsKostenAllocatie
+  13. LOOP iterate PersoneelsKostenAllocatieList as IteratorPersoneelsKostenAllocatie
+    14. LOOP BODY
+      15. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun
+  16. ACTION JavaActionCallAction: call java action CommunityCommons.EndTransaction
+  17. ACTION JavaActionCallAction: call java action CommunityCommons.StartTransaction
+  18. DECISION Done? expression=$PersoneelKostenAllocatieCount < $OffSet
+  19. BRANCH when EnumerationCase=false
+    20. NODE ExclusiveMerge: ExclusiveMerge
+    21. ACTION ChangeVariableAction: change variable OffSet=$OffSet + 100
+    22. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+    23. GOTO ExclusiveMerge // cycle
+  24. BRANCH when EnumerationCase=true
+    25. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+    26. END
+27. BRANCH when EnumerationCase=false
+  28. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  29. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_OLD
+NODES=17; EDGES=13
+1. START
+2. ACTION CreateVariableAction: create variable RemarkHeader=''
+3. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTime($BookingsDate, 'yyyy'))
+4. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTime($BookingsDate, 'MM'))
+5. ACTION CreateListAction: CreateListAction (output=PersoneelsKostenAllocatieRegelList_ToCommit, entity=TWK.PersoneelsKostenAllocatieRegel, errorHandlingType=Rollback)
+6. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieList_ToUpdate from TWK.PersoneelsKostenAllocatie
+7. DECISION Er zijn verwerkbare PKA expression=$PersoneelsKostenAllocatieList_ToUpdate != empty
+8. BRANCH when EnumerationCase=true
+  9. LOOP iterate PersoneelsKostenAllocatieList_ToUpdate as IteratorPersoneelsKostenAllocatie
+    10. LOOP BODY
+      11. ACTION ChangeVariableAction: change variable RemarkHeader='FTE is 0'
+      12. DECISION Startdate <= bookingsdate <= enddate expression=$IteratorPersoneelsKostenAllocatie/EndDate >= $BookingsDate and $IteratorPersoneelsKostenAllocatie/StartDate <= $Booking...
+      13. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatie (RequestStatus='OPEN'; refreshInClient=false)
+      14. NODE ExclusiveMerge: ExclusiveMerge
+      15. ACTION ChangeVariableAction: change variable RemarkHeader='Periode ligt buiten de boekingsperiode​'
+      16. ACTION ChangeVariableAction: change variable RemarkHeader='Geen FTE gevonden'
+      17. ACTION ChangeVariableAction: change variable RemarkHeader='Geen personeelskostenallocatieregels gevonden'
+      18. ACTION ChangeVariableAction: change variable RemarkHeader='S4 personeelsnummer is niet correct/actueel​'
+      19. DECISION not time writing? expression=not($IteratorPersoneelsKostenAllocatie/Timesheet )
+      20. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNumber_Convert -> PersonnelNumberS4List
+      21. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from IteratorPersoneelsKostenAllocatie
+      22. NODE ContinueEvent: ContinueEvent
+      23. ACTION RetrieveAction: retrieve RateEffectiveFTE from Masterdata.Rate
+      24. DECISION Duplicate booking? expression=$IteratorPersoneelsKostenAllocatie/RequestPostingStatus = 'POSTED' and $IteratorPersoneelsKostenAllocatie/RequestPosting...
+      25. DECISION Item found? expression=$PersoneelsKostenAllocatieRegelList != empty
+      26. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Update_AllocatieLineLevel -> PersoneelsKostenAllocatieRegelList
+      27. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from IteratorPersoneelsKostenAllocatie
+      28. DECISION S4 nr correct? expression=$IteratorPersoneelsKostenAllocatie/PersonnelNumber = $PersonnelNumber_S4
+      29. ACTION ChangeVariableAction: change variable RemarkHeader='Medewerker schrijft tijd'
+      30. DECISION FTE = 0? expression=$RateEffectiveFTE/Value = 0
+      31. ACTION ChangeListAction: change PersoneelsKostenAllocatieRegelList_ToCommit (type=Add, value=$PersoneelsKostenAllocatieRegelList)
+      32. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatie (RequestStatus='CLOSED', Remarks=$RemarkHeader; refreshInClient=false)
+      33. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatie (RequestStatus='CLOSED'; refreshInClient=false)
+      34. DECISION FTE found? expression=$RateEffectiveFTE != empty
+      35. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNrConvert_ProcessList -> PersonnelNumber_S4
+  36. ACTION CommitAction: commit PersoneelsKostenAllocatieList_ToUpdate (refreshInClient=false, withEvents=false)
+  37. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList_ToCommit (refreshInClient=false, withEvents=false)
+  38. ACTION ListOperationAction: ListOperationAction (output=PersoneelsKostenAllocatieList_RequestStatusOpen, errorHandlingType=Rollback)
+  39. END
+40. BRANCH when EnumerationCase=false
+  41. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  42. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_SimulationRun
+NODES=21; EDGES=17
+1. START
+2. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTime($BookingsDate, 'yyyy'))
+3. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTime($BookingsDate, 'MM'))
+4. ACTION CreateVariableAction: create variable OffSet=0
+5. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieList_ToUpdate from TWK.PersoneelsKostenAllocatie
+6. ACTION AggregateListAction: AggregateListAction (output=PersoneelKostenAllocatieCount, errorHandlingType=Rollback)
+7. DECISION Er zijn verwerkbare PKA expression=$PersoneelKostenAllocatieCount != 0
+8. BRANCH when EnumerationCase=true
+  9. NODE ExclusiveMerge: ExclusiveMerge
+  10. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieList from TWK.PersoneelsKostenAllocatie
+  11. LOOP iterate PersoneelsKostenAllocatieList as IteratorPersoneelsKostenAllocatie
+    12. LOOP BODY
+      13. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun
+  14. ACTION JavaActionCallAction: call java action CommunityCommons.EndTransaction
+  15. ACTION JavaActionCallAction: call java action CommunityCommons.StartTransaction
+  16. DECISION Done? expression=$PersoneelKostenAllocatieCount < $OffSet
+  17. BRANCH when EnumerationCase=false
+    18. ACTION ChangeVariableAction: change variable OffSet=$OffSet + 100
+    19. GOTO ExclusiveMerge // cycle
+  20. BRANCH when EnumerationCase=true
+    21. END
+22. BRANCH when EnumerationCase=false
+  23. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  24. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_Single
+NODES=29; EDGES=29
+1. START
+2. ACTION CreateVariableAction: create variable RemarkHeader=''
+3. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTime($BookingsDate, 'yyyy'))
+4. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTime($BookingsDate, 'MM'))
+5. ACTION CreateListAction: CreateListAction (output=PersoneelsKostenAllocatieRegelList_ToCommit, entity=TWK.PersoneelsKostenAllocatieRegel, errorHandlingType=Rollback)
+6. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+7. DECISION Startdate <= bookingsdate <= enddate expression=$PersoneelsKostenAllocatie/EndDate >= $BookingsDate and $PersoneelsKostenAllocatie/StartDate <= $BookingsDate
+8. BRANCH when EnumerationCase=false
+  9. ACTION ChangeVariableAction: change variable RemarkHeader='Periode ligt buiten de boekingsperiode​'
+  10. NODE ExclusiveMerge: ExclusiveMerge
+  11. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='CLOSED', Remarks=$RemarkHeader; refreshInClient=true)
+  12. END
+13. BRANCH when EnumerationCase=true
+  14. DECISION Item found? expression=$PersoneelsKostenAllocatieRegelList != empty
+  15. BRANCH when EnumerationCase=false
+    16. ACTION ChangeVariableAction: change variable RemarkHeader='Geen personeelskostenallocatieregels gevonden'
+    17. REF ExclusiveMerge
+  18. BRANCH when EnumerationCase=true
+    19. DECISION not time writing? expression=not($PersoneelsKostenAllocatie/Timesheet )
+    20. BRANCH when EnumerationCase=false
+      21. ACTION ChangeVariableAction: change variable RemarkHeader='Medewerker schrijft tijd'
+      22. REF ExclusiveMerge
+    23. BRANCH when EnumerationCase=true
+      24. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+      25. ACTION RetrieveAction: retrieve RateEffectiveFTE from Masterdata.TWKEffectiveFTERate
+      26. DECISION FTE found? expression=$RateEffectiveFTE != empty
+      27. BRANCH when EnumerationCase=false
+        28. ACTION ChangeVariableAction: change variable RemarkHeader='Geen FTE gevonden'
+        29. REF ExclusiveMerge
+      30. BRANCH when EnumerationCase=true
+        31. DECISION FTE = 0? expression=$RateEffectiveFTE/Value = 0
+        32. BRANCH when EnumerationCase=true
+          33. ACTION ChangeVariableAction: change variable RemarkHeader='FTE is 0'
+          34. REF ExclusiveMerge
+        35. BRANCH when EnumerationCase=false
+          36. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Update_AllocatieLineLevel -> PersoneelsKostenAllocatieRegelList
+          37. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='OPEN'; refreshInClient=true)
+          38. ACTION ChangeListAction: change PersoneelsKostenAllocatieRegelList_ToCommit (type=Add, value=$PersoneelsKostenAllocatieRegelList)
+          39. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList_ToCommit (refreshInClient=true, withEvents=false)
+          40. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New
+NODES=24; EDGES=20
+1. START
+2. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTimeUTC($BookingsDate,'yyyy'))
+3. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTimeUTC($BookingsDate,'MM'))
+4. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PrepareAllocationToBook -> Remark
+5. DECISION Ready for Posting? expression=$Remark = 'Ready for Posting'
+6. BRANCH when EnumerationCase=true
+  7. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> AccountingDocument
+  8. DECISION Success? expression=$AccountingDocument != ''
+  9. BRANCH when EnumerationCase=true
+    10. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='POSTED', Remarks=$AccountingDocument, RequestPostingDate=$BookingsDate; refreshInClient=false)
+    11. NODE ExclusiveMerge: ExclusiveMerge
+    12. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+    13. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+    14. LOOP iterate PersoneelsKostenAllocatieRegelList as IteratorPersoneelsKostenAllocatieRegel
+      15. LOOP BODY
+        16. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatieRegel (WorkingTimePercentage=toString($Employee/FTE); refreshInClient=false)
+    17. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList (refreshInClient=false, withEvents=true)
+    18. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingLogItem_Create
+    19. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted
+    20. END
+  21. BRANCH when EnumerationCase=false
+    22. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='ERROR', RequestPostingDate=$BookingsDate; refreshInClient=false)
+    23. REF ExclusiveMerge
+24. BRANCH when EnumerationCase=false
+  25. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='SKIPPED', Remarks=$Remark, RequestPostingDate=$BookingsDate; refreshInClient=false)
+  26. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingLogItem_Create
+  27. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD
+NODES=23; EDGES=20
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingTracker_CheckQueueStatus
+3. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTimeUTC($BookingsDate,'yyyy'))
+4. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTimeUTC($BookingsDate,'MM'))
+5. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PrepareAllocationToBook -> Remark
+6. DECISION Ready for Posting? expression=$Remark = 'Ready for Posting'
+7. BRANCH when EnumerationCase=true
+  8. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> AccountingDocument
+  9. DECISION Success? expression=$AccountingDocument != ''
+  10. BRANCH when EnumerationCase=true
+    11. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='POSTED', Remarks=$AccountingDocument, RequestPostingDate=$BookingsDate; refreshInClient=false)
+    12. NODE ExclusiveMerge: ExclusiveMerge
+    13. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+    14. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+    15. LOOP iterate PersoneelsKostenAllocatieRegelList as IteratorPersoneelsKostenAllocatieRegel
+      16. LOOP BODY
+        17. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatieRegel (WorkingTimePercentage=toString($Employee/FTE); refreshInClient=false)
+    18. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList (refreshInClient=false, withEvents=true)
+    19. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingLogItem_Create
+    20. END
+  21. BRANCH when EnumerationCase=false
+    22. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='ERROR', RequestPostingDate=$BookingsDate; refreshInClient=false)
+    23. REF ExclusiveMerge
+24. BRANCH when EnumerationCase=false
+  25. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus='SKIPPED', Remarks=$Remark, RequestPostingDate=$BookingsDate; refreshInClient=false)
+  26. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_BookingLogItem_Create
+  27. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun
+NODES=41; EDGES=40
+1. START
+2. ACTION CreateVariableAction: create variable RemarkHeader=''
+3. DECISION Duplicate booking? expression=$PersoneelsKostenAllocatie/RequestPostingStatus = 'POSTED' and $PersoneelsKostenAllocatie/RequestPostingDate = $Bookings...
+4. BRANCH when EnumerationCase=false
+  5. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+  6. DECISION Startdate <= bookingsdate <= enddate expression=$PersoneelsKostenAllocatie/EndDate >= $BookingsDate and $PersoneelsKostenAllocatie/StartDate <= $BookingsDate
+  7. BRANCH when EnumerationCase=false
+    8. ACTION ChangeVariableAction: change variable RemarkHeader='Periode ligt buiten de boekingsperiode​'
+    9. NODE ExclusiveMerge: ExclusiveMerge
+    10. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='CLOSED', Remarks=$RemarkHeader; refreshInClient=false)
+    11. NODE ExclusiveMerge: ExclusiveMerge
+    12. ACTION CommitAction: commit PersoneelsKostenAllocatie (refreshInClient=false, withEvents=false)
+    13. DECISION Status OPEN? expression=$PersoneelsKostenAllocatie/RequestStatus = 'OPEN'
+    14. BRANCH when EnumerationCase=true
+      15. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New
+      16. NODE ExclusiveMerge: ExclusiveMerge
+      17. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted
+      18. END
+    19. BRANCH when EnumerationCase=false
+      20. REF ExclusiveMerge
+  21. BRANCH when EnumerationCase=true
+    22. DECISION Item found? expression=$PersoneelsKostenAllocatieRegelList != empty
+    23. BRANCH when EnumerationCase=false
+      24. ACTION ChangeVariableAction: change variable RemarkHeader='Geen personeelskostenallocatieregels gevonden'
+      25. REF ExclusiveMerge
+    26. BRANCH when EnumerationCase=true
+      27. DECISION not time writing? expression=not($PersoneelsKostenAllocatie/Timesheet )
+      28. BRANCH when EnumerationCase=false
+        29. ACTION ChangeVariableAction: change variable RemarkHeader='Medewerker schrijft tijd'
+        30. REF ExclusiveMerge
+      31. BRANCH when EnumerationCase=true
+        32. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+        33. ACTION RetrieveAction: retrieve RateEffectiveFTE from Masterdata.TWKEffectiveFTERate
+        34. DECISION FTE found? expression=$RateEffectiveFTE != empty
+        35. BRANCH when EnumerationCase=false
+          36. ACTION ChangeVariableAction: change variable RemarkHeader='Geen FTE gevonden'
+          37. REF ExclusiveMerge
+        38. BRANCH when EnumerationCase=true
+          39. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNumber_Convert -> PersonnelNumberS4List
+          40. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNrConvert_ProcessList -> PersonnelNumber_S4
+          41. DECISION S4 nr correct? expression=$PersoneelsKostenAllocatie/PersonnelNumber = $PersonnelNumber_S4
+          42. BRANCH when EnumerationCase=false
+            43. ACTION ChangeVariableAction: change variable RemarkHeader='S4 personeelsnummer is niet correct/actueel​'
+            44. REF ExclusiveMerge
+          45. BRANCH when EnumerationCase=true
+            46. DECISION FTE = 0? expression=$RateEffectiveFTE/Value = 0
+            47. BRANCH when EnumerationCase=true
+              48. ACTION ChangeVariableAction: change variable RemarkHeader='FTE is 0'
+              49. REF ExclusiveMerge
+            50. BRANCH when EnumerationCase=false
+              51. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Update_AllocatieLineLevel -> PersoneelsKostenAllocatieRegelList
+              52. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='OPEN'; refreshInClient=false)
+              53. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList (refreshInClient=false, withEvents=true)
+              54. REF ExclusiveMerge
+55. BRANCH when EnumerationCase=true
+  56. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='CLOSED'; refreshInClient=false)
+  57. END
+
+FLOW Microflow: Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun
+NODES=48; EDGES=46
+1. START
+2. ACTION CreateVariableAction: create variable RemarkHeader=''
+3. DECISION Duplicate booking? expression=$PersoneelsKostenAllocatie/RequestPostingStatus = 'POSTED' and $PersoneelsKostenAllocatie/RequestPostingDate = $Bookings...
+4. BRANCH when EnumerationCase=false
+  5. ACTION RetrieveAction: retrieve PersoneelsKostenAllocatieRegelList over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+  6. DECISION Startdate <= bookingsdate <= enddate expression=$PersoneelsKostenAllocatie/EndDate >= $BookingsDate and $PersoneelsKostenAllocatie/StartDate <= $BookingsDate
+  7. BRANCH when EnumerationCase=false
+    8. ACTION ChangeVariableAction: change variable RemarkHeader='Periode ligt buiten de boekingsperiode​'
+    9. NODE ExclusiveMerge: ExclusiveMerge
+    10. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='CLOSED', Remarks=$RemarkHeader; refreshInClient=false)
+    11. NODE ExclusiveMerge: ExclusiveMerge
+    12. ACTION CommitAction: commit PersoneelsKostenAllocatie (refreshInClient=false, withEvents=true)
+    13. DECISION Status OPEN? expression=$PersoneelsKostenAllocatie/RequestStatus = 'OPEN'
+    14. BRANCH when EnumerationCase=true
+      15. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_RunSimulation -> Variable
+      16. NODE ExclusiveMerge: ExclusiveMerge
+      17. ACTION MicroflowCallAction: call microflow TaskQueueHelpers.DS_RetrieveQueueCounts -> QueueCountList
+      18. ACTION ListOperationAction: ListOperationAction (output=NewQueueCountList, errorHandlingType=Rollback)
+      19. ACTION ListOperationAction: ListOperationAction (output=Queue, errorHandlingType=Rollback)
+      20. DECISION No queued actions? expression=$Queue/WaitingCount = 0
+      21. BRANCH when EnumerationCase=true
+        22. ACTION ChangeObjectAction: change BookingTracker (SimulationStatus=Bookingsflow.SimulationFlowStatus.Open, CurrentlyRunningSimulation=empty; refreshInClient=true)
+        23. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+        24. END
+      25. BRANCH when EnumerationCase=false
+        26. END
+    27. BRANCH when EnumerationCase=false
+      28. REF ExclusiveMerge
+  29. BRANCH when EnumerationCase=true
+    30. DECISION Item found? expression=$PersoneelsKostenAllocatieRegelList != empty
+    31. BRANCH when EnumerationCase=false
+      32. ACTION ChangeVariableAction: change variable RemarkHeader='Geen personeelskostenallocatieregels gevonden'
+      33. REF ExclusiveMerge
+    34. BRANCH when EnumerationCase=true
+      35. DECISION not time writing? expression=not($PersoneelsKostenAllocatie/Timesheet )
+      36. BRANCH when EnumerationCase=false
+        37. ACTION ChangeVariableAction: change variable RemarkHeader='Medewerker schrijft tijd'
+        38. REF ExclusiveMerge
+      39. BRANCH when EnumerationCase=true
+        40. ACTION RetrieveAction: retrieve Employee over association PersoneelsKostenAllocatie_Employee from PersoneelsKostenAllocatie
+        41. ACTION RetrieveAction: retrieve RateEffectiveFTE from Masterdata.TWKEffectiveFTERate
+        42. DECISION FTE found? expression=$RateEffectiveFTE != empty
+        43. BRANCH when EnumerationCase=false
+          44. ACTION ChangeVariableAction: change variable RemarkHeader='Geen FTE gevonden'
+          45. REF ExclusiveMerge
+        46. BRANCH when EnumerationCase=true
+          47. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNumber_Convert -> PersonnelNumberS4List
+          48. ACTION MicroflowCallAction: call microflow TWK.SUB_EmployeeNrConvert_ProcessList -> PersonnelNumber_S4
+          49. DECISION S4 nr correct? expression=$PersoneelsKostenAllocatie/PersonnelNumber = $PersonnelNumber_S4
+          50. BRANCH when EnumerationCase=false
+            51. ACTION ChangeVariableAction: change variable RemarkHeader='S4 personeelsnummer is niet correct/actueel​'
+            52. REF ExclusiveMerge
+          53. BRANCH when EnumerationCase=true
+            54. DECISION FTE = 0? expression=$RateEffectiveFTE/Value = 0
+            55. BRANCH when EnumerationCase=true
+              56. ACTION ChangeVariableAction: change variable RemarkHeader='FTE is 0'
+              57. REF ExclusiveMerge
+            58. BRANCH when EnumerationCase=false
+              59. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Update_AllocatieLineLevel -> PersoneelsKostenAllocatieRegelList
+              60. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='OPEN'; refreshInClient=false)
+              61. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList (refreshInClient=false, withEvents=true)
+              62. REF ExclusiveMerge
+63. BRANCH when EnumerationCase=true
+  64. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestStatus='CLOSED'; refreshInClient=false)
+  65. END
+
+FLOW Microflow: Bookingsflow.SUB_PKA_BookSingle
+NODES=13; EDGES=12
+1. START
+2. ACTION RetrieveAction: retrieve BookingTracker from Bookingsflow.BookingTracker
+3. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_CleanPKAFields_Single
+4. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_Single -> PersoneelsKostenAllocatie
+5. DECISION OPEN? expression=$PersoneelsKostenAllocatie/RequestStatus = 'OPEN'
+6. BRANCH when EnumerationCase=true
+  7. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Booking_PKASingle -> Variable
+  8. DECISION Success? expression=$PersoneelsKostenAllocatie/RequestPostingStatus = 'POSTED'
+  9. BRANCH when EnumerationCase=true
+    10. ACTION ShowMessageAction: show message (text=Request has been succesfully booked., type=Information, blocking=true)
+    11. END
+  12. BRANCH when EnumerationCase=false
+    13. NODE ExclusiveMerge: ExclusiveMerge
+    14. ACTION ShowMessageAction: show message (text=Request can't be booked., type=Information, blocking=true)
+    15. END
+16. BRANCH when EnumerationCase=false
+  17. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.SUB_PKA_POSTJournalItems
+NODES=14; EDGES=10
+1. START
+2. ACTION CreateVariableAction: create variable isPostSuccess=true
+3. ACTION CreateVariableAction: create variable FeedbackMessage=''
+4. NODE ExclusiveMerge: ExclusiveMerge
+5. DECISION No Feedback? obv $FeedbackMessagePost_1 = $FeedbackMessage expression=$FeedbackMessage = ''
+6. BRANCH when EnumerationCase=true
+  7. ACTION ChangeVariableAction: change variable isPostSuccess=true
+  8. DECISION succes? expression=$isPostSuccess
+  9. BRANCH when EnumerationCase=true
+    10. END
+  11. BRANCH when EnumerationCase=false
+    12. ACTION ShowMessageAction: show message (text={1}, type=Information, blocking=true)
+    13. END
+14. BRANCH when EnumerationCase=false
+  15. END
+
+FLOW Microflow: Bookingsflow.SUB_PrepareAllocationToBook
+NODES=29; EDGES=19
+1. START
+2. ACTION CreateVariableAction: create variable Remarks='Ready for Posting'
+3. ACTION RetrieveAction: retrieve Employee from Masterdata.Employee
+4. ACTION RetrieveAction: retrieve ResponsibleCostCenter_Active from Masterdata.ResponsibleCostCenter
+5. ACTION RetrieveAction: retrieve Rate_Amount from Masterdata.ActualRate
+6. DECISION Rate_Amount > 0 expression=if $Rate_Amount != empty then $Rate_Amount/Value > 0 else false
+7. BRANCH when EnumerationCase=true
+  8. ACTION RetrieveAction: retrieve PersoneelskostenAllocatieRegelList_ToCheck over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from AllocationToCheck
+  9. ACTION ListOperationAction: ListOperationAction (output=PersoneelsKostenAllocatieRegelList_SenderIsReceiver, errorHandlingType=Rollback)
+  10. ACTION AggregateListAction: AggregateListAction (output=SumPercentage, errorHandlingType=Rollback)
+  11. DECISION sender=receiver is not fully booked expression=if $SumPercentage != empty then $SumPercentage < 100 else true
+  12. BRANCH when EnumerationCase=true
+    13. ACTION CreateVariableAction: create variable RemarkLine=''
+    14. LOOP iterate PersoneelskostenAllocatieRegelList_ToCheck as PersoneelskostenAllocatieRegel_ToCheck
+      15. LOOP BODY
+        16. DECISION Receiver is WBS? expression=$PersoneelskostenAllocatieRegel_ToCheck/TWK.PersoneelsKostenAllocatieRegel_WBSElement != empty
+        17. DECISION Receiver aanwezig? expression=$PersoneelskostenAllocatieRegel_ToCheck/ReceiverCostCenter != empty or $PersoneelskostenAllocatieRegel_ToCheck/ReceiverW...
+        18. DECISION Correct WBS? expression=$ReceivingWBS!= empty and $ReceivingWBS/toDelete = false
+        19. ACTION RetrieveAction: retrieve ReceivingResponsibleCostCenter over association PersoneelsKostenAllocatieRegel_Receiver_ResponsibleCostCenter from PersoneelskostenAllocatieRegel_ToCheck
+        20. ACTION ChangeVariableAction: change variable RemarkLine=$RemarkLine+' - WBS is niet vrijgegeven'
+        21. NODE ContinueEvent: ContinueEvent
+        22. NODE ExclusiveMerge: ExclusiveMerge
+        23. ACTION CreateVariableAction: create variable CCisBlocked=false
+        24. ACTION RetrieveAction: retrieve ReceivingWBS over association PersoneelsKostenAllocatieRegel_WBSElement from PersoneelskostenAllocatieRegel_ToCheck
+        25. ACTION ChangeObjectAction: change PersoneelskostenAllocatieRegel_ToCheck (Remarks='Ready for Posting'; refreshInClient=false)
+        26. ACTION CreateVariableAction: create variable ProcessingStatus=''
+        27. NODE ExclusiveMerge: ExclusiveMerge
+        28. ACTION ChangeVariableAction: change variable RemarkLine=$RemarkLine+' - Kostenplaats closed for secondary posting'
+        29. NODE ExclusiveMerge: ExclusiveMerge
+        30. ACTION RetrieveAction: retrieve ReceivingResponsibleCostCenter_DB from Masterdata.ResponsibleCostCenter
+        31. NODE ContinueEvent: ContinueEvent
+        32. DECISION Open voor secondary cost posting expression=$CCisBlocked = false
+        33. NODE ExclusiveMerge: ExclusiveMerge
+        34. ACTION ChangeVariableAction: change variable CCisBlocked=$ReceivingResponsibleCostCenter_DB/IsBlkdForSecondaryCostsPosting
+        35. ACTION ChangeObjectAction: change PersoneelskostenAllocatieRegel_ToCheck (Remarks='geen ontvangend costcenter of WSB'; refreshInClient=false)
+        36. ACTION ChangeVariableAction: change variable ProcessingStatus=$ReceivingWBS/ProcessingStatus
+        37. ACTION ChangeVariableAction: change variable CCisBlocked=$ReceivingResponsibleCostCenter/IsBlkdForSecondaryCostsPosting
+        38. ACTION RetrieveAction: retrieve ReceiverWBS_DB from TWK.WBSElement
+        39. DECISION FOund? expression=$ReceivingResponsibleCostCenter != empty
+        40. ACTION ChangeObjectAction: change PersoneelskostenAllocatieRegel_ToCheck (Remarks='receiving costcenter niet open voor secondary post costing'; refreshInClient=false)
+        41. ACTION ChangeVariableAction: change variable RemarkLine=$RemarkLine+' - Geen ontvangende WBS of kostenplaats gevonden'
+        42. DECISION Receiver is costcenter? expression=$PersoneelskostenAllocatieRegel_ToCheck/ReceiverCostCenter != empty and $PersoneelskostenAllocatieRegel_ToCheck/Receiver...
+        43. ACTION ChangeObjectAction: change PersoneelskostenAllocatieRegel_ToCheck (Remarks='WBS is niet vrijgegeven'; refreshInClient=false)
+        44. ACTION ChangeVariableAction: change variable ProcessingStatus=$ReceiverWBS_DB/ProcessingStatus
+        45. NODE ContinueEvent: ContinueEvent
+        46. DECISION WBS is vrijgegeven expression=$ProcessingStatus = '12' or $ProcessingStatus = '10'
+    47. ACTION CommitAction: commit PersoneelskostenAllocatieRegelList_ToCheck (refreshInClient=false, withEvents=false)
+    48. DECISION RemarkLine empty? expression=$RemarkLine = ''
+    49. BRANCH when EnumerationCase=true
+      50. END
+    51. BRANCH when EnumerationCase=false
+      52. END
+  53. BRANCH when EnumerationCase=false
+    54. ACTION ChangeVariableAction: change variable Remarks='Zendende kostenplaats is gelijk aan ontvangende kostenplaats'
+    55. END
+56. BRANCH when EnumerationCase=false
+  57. ACTION ChangeVariableAction: change variable Remarks='Er is geen tarief aanwezig of tarief is niet groter dan 0'
+  58. END
+
+FLOW Microflow: Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted
+NODES=17; EDGES=13
+1. START
+2. ACTION RetrieveAction: retrieve QueuedTaskList_1 from System.QueuedTask
+3. ACTION MicroflowCallAction: call microflow TaskQueueHelpers.DS_RetrieveQueueCounts -> QueueCountList
+4. ACTION ListOperationAction: ListOperationAction (output=NewQueueCountList, errorHandlingType=Rollback)
+5. ACTION ListOperationAction: ListOperationAction (output=Queue, errorHandlingType=Rollback)
+6. DECISION No queued actions? expression=$Queue/WaitingCount = 0
+7. BRANCH when EnumerationCase=true
+  8. NODE ExclusiveMerge: ExclusiveMerge
+  9. ACTION ChangeObjectAction: change BookingTracker (AllocationStatus=Bookingsflow.SimulationFlowStatus.Open, CurrentlyRunningSimulation=empty; refreshInClient=true)
+  10. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  11. END
+12. BRANCH when EnumerationCase=false
+  13. ACTION RetrieveAction: retrieve QueuedTaskList from System.QueuedTask
+  14. DECISION Finished? expression=$QueuedTaskList = empty
+  15. BRANCH when EnumerationCase=true
+    16. REF ExclusiveMerge
+  17. BRANCH when EnumerationCase=false
+    18. END
+
+FLOW Microflow: Bookingsflow.SUB_Request_RetrieveLateRequest
+NODES=9; EDGES=7
+1. START
+2. ACTION MicroflowCallAction: call microflow TWK.SUB_BookingsPeriod_GetActive -> BookingPeriod
+3. ACTION RetrieveAction: retrieve RequestList from TWK.Request
+4. ACTION CreateListAction: CreateListAction (output=JournalItemList_ToCommit, entity=TWK.JournalItem, errorHandlingType=Rollback)
+5. LOOP iterate RequestList as IteratorRequest
+  6. LOOP BODY
+    7. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Request_SetLate
+8. ACTION CommitAction: commit RequestList (refreshInClient=false, withEvents=true)
+9. ACTION CommitAction: commit JournalItemList_ToCommit (refreshInClient=false, withEvents=true)
+10. END
+
+FLOW Microflow: Bookingsflow.SUB_Request_SetLate
+NODES=15; EDGES=10
+1. START
+2. ACTION RetrieveAction: retrieve JournalItemList over association JournalItem_Request from Request
+3. LOOP iterate JournalItemList as IteratorJournalItem
+  4. LOOP BODY
+    5. ACTION ChangeObjectAction: change IteratorJournalItem (JournalItem_Employee_Controller=empty; refreshInClient=false)
+6. ACTION ChangeListAction: change JournalItemList_ToCommit (type=Add, value=$JournalItemList)
+7. ACTION MicroflowCallAction: call microflow TWK.SUB_Request_SetStatus
+8. ACTION ChangeObjectAction: change Request (isLate=true, isApprovedByPC=Projects.Enum_StatusApproved._empty, Request_Employee_Approver=empty; refreshInClient=false)
+9. ACTION CreateVariableAction: create variable RequestID=toString($Request/_ID)
+10. ACTION RetrieveAction: retrieve WorkflowList from System.Workflow
+11. LOOP iterate WorkflowList as IteratorWorkflow
+  12. LOOP BODY
+    13. ACTION WorkflowOperationAction: WorkflowOperationAction (errorHandlingType=Rollback)
+14. ACTION WorkflowCallAction: WorkflowCallAction (output=Workflow_Concept, errorHandlingType=Rollback)
+15. END
+
+FLOW Microflow: Bookingsflow.SUB_RunSimulation
+NODES=16; EDGES=14
+1. START
+2. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTime($BookingsDate, 'yyyy'))
+3. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTime($BookingsDate, 'MM'))
+4. ACTION CreateVariableAction: create variable SimulationStatus_PASS='SIMULATION_PASS'
+5. ACTION CreateVariableAction: create variable SimulationStatus_FAIL='SIMULATION_FAIL'
+6. ACTION RetrieveAction: retrieve PersoneelskostenAllocatieRegelList_ToCheck over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from PersoneelsKostenAllocatie
+7. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_AllocationChecks -> CheckResult
+8. DECISION 'Ready for Posting' expression=$CheckResult = 'Ready for Posting'
+9. BRANCH when EnumerationCase=true
+  10. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus=$SimulationStatus_PASS, Remarks=$CheckResult; refreshInClient=false)
+  11. NODE ExclusiveMerge: ExclusiveMerge
+  12. ACTION CommitAction: commit PersoneelskostenAllocatieRegelList_ToCheck (refreshInClient=false, withEvents=false)
+  13. ACTION CommitAction: commit PersoneelsKostenAllocatie (refreshInClient=false, withEvents=false)
+  14. END
+15. BRANCH when EnumerationCase=false
+  16. ACTION ChangeObjectAction: change PersoneelsKostenAllocatie (RequestPostingStatus=$SimulationStatus_FAIL, Remarks=$CheckResult; refreshInClient=false)
+  17. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.SUB_RunSimulation_OLD
+NODES=12; EDGES=9
+1. START
+2. ACTION CreateVariableAction: create variable Year=parseInteger(formatDateTime($BookingsDate, 'yyyy'))
+3. ACTION CreateVariableAction: create variable Month=parseInteger(formatDateTime($BookingsDate, 'MM'))
+4. ACTION CreateVariableAction: create variable SimulationStatus_PASS='SIMULATION_PASS'
+5. ACTION CreateVariableAction: create variable SimulationStatus_FAIL='SIMULATION_FAIL'
+6. ACTION CreateListAction: CreateListAction (output=PersoneelsKostenAllocatieRegelList_ToCommit, entity=TWK.PersoneelsKostenAllocatieRegel, errorHandlingType=Rollback)
+7. LOOP iterate PersoneelsKostenAllocatieList_RequestStatusOpen as IteratorPersoneelskostenAllocatie_Open
+  8. LOOP BODY
+    9. ACTION RetrieveAction: retrieve PersoneelskostenAllocatieRegelList_ToCheck over association PersoneelsKostenAllocatieRegel_PersoneelsKostenAllocatie from IteratorPersoneelskostenAllocatie_Open
+    10. ACTION ChangeObjectAction: change IteratorPersoneelskostenAllocatie_Open (RequestPostingStatus=$SimulationStatus_PASS, Remarks=$CheckResult; refreshInClient=false)
+    11. ACTION ChangeListAction: change PersoneelsKostenAllocatieRegelList_ToCommit (type=Add, value=$PersoneelskostenAllocatieRegelList_ToCheck)
+    12. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_AllocationChecks -> CheckResult
+    13. NODE ExclusiveMerge: ExclusiveMerge
+    14. DECISION 'Ready for Posting' expression=$CheckResult = 'Ready for Posting'
+    15. ACTION ChangeObjectAction: change IteratorPersoneelskostenAllocatie_Open (RequestPostingStatus=$SimulationStatus_FAIL, Remarks=$CheckResult; refreshInClient=false)
+16. ACTION CommitAction: commit PersoneelsKostenAllocatieRegelList_ToCommit (refreshInClient=false, withEvents=false)
+17. ACTION CommitAction: commit PersoneelsKostenAllocatieList_RequestStatusOpen (refreshInClient=false, withEvents=false)
+18. END
+
+FLOW Microflow: Bookingsflow.SUB_TaskqueueTest
+NODES=10; EDGES=9
+1. START
+2. ACTION RetrieveAction: retrieve QueuedTaskList from System.QueuedTask
+3. ACTION AggregateListAction: AggregateListAction (output=Queued_Task_Left, errorHandlingType=Rollback)
+4. DECISION Final task? expression=$Queued_Task_Left=1
+5. BRANCH when EnumerationCase=false
+  6. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  7. NODE ExclusiveMerge: ExclusiveMerge
+  8. END
+9. BRANCH when EnumerationCase=true
+  10. ACTION RetrieveAction: retrieve BookingTracker from Bookingsflow.BookingTracker
+  11. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)
+  12. REF ExclusiveMerge
+
+FLOW Microflow: Bookingsflow.SUB_Update_AllocatieLineLevel
+NODES=7; EDGES=3
+1. START
+2. ACTION CreateVariableAction: create variable WorkingTime=0
+3. LOOP iterate PersoneelsKostenAllocatieRegelList as IteratorPersoneelsKostenAllocatieRegel
+  4. LOOP BODY
+    5. ACTION ChangeObjectAction: change IteratorPersoneelsKostenAllocatieRegel (WorkingTimePercentage=toString(round($WorkingTime,3)), FTEAllocation=($WorkingTime*$IteratorPersoneelsKostenAllocatieRegel/QuantityInActlPostg_V)div 100; refreshInClient=false)
+    6. ACTION ChangeVariableAction: change variable WorkingTime=$EffectiveFTE
+7. END
+
+FLOW Microflow: Bookingsflow.SUB_VAL_PersoneelskostenAllocatieRegelPost
+NODES=16; EDGES=14
+1. START
+2. ACTION CreateVariableAction: create variable Message=''
+3. DECISION not empty? expression=$AllocationPostingBulkCreateRequestType != empty
+4. BRANCH when EnumerationCase=true
+  5. ACTION RetrieveAction: retrieve AllocationPostingCreateRequestType over association AllocationPostingCreateRequestType_AllocationPostingBulkCreateRequestType from AllocationPostingBulkCreateRequestType
+  6. ACTION RetrieveAction: retrieve AllocationPostingType over association AllocationPostingType_AllocationPostingCreateRequestType from AllocationPostingCreateRequestType
+  7. ACTION RetrieveAction: retrieve ItemTypeList over association ItemType_AllocationPostingType from AllocationPostingType
+  8. LOOP iterate ItemTypeList as IteratorItemType
+    9. LOOP BODY
+      10. DECISION Fields not empty? expression=$IteratorItemType/PersonnelNumber != empty and $IteratorItemType/SenderCostCenter!= empty and ( $IteratorItemType/Receiv...
+      11. ACTION ChangeVariableAction: change variable Message=if $Message != '' then $Message + ' - Niet alle velden zijn gevuld (Personeelsnummer/Kostenplaats Van/Kostenplaats Naar/WBS)' else '- Niet alle velden zijn gevuld (Persneelsnummer/Kostenplaats Van/Kostenplaats Naar/WBS)'
+      12. NODE ContinueEvent: ContinueEvent
+  13. ACTION RetrieveAction: retrieve HeaderType over association HeaderType_AllocationPostingType from AllocationPostingType
+  14. DECISION Posting date fillled? expression=$HeaderType/PostingDate != empty
+  15. BRANCH when EnumerationCase=true
+    16. NODE ExclusiveMerge: ExclusiveMerge
+    17. END
+  18. BRANCH when EnumerationCase=false
+    19. ACTION ChangeVariableAction: change variable Message=if $Message != '' then $Message + ' - Er is geen open boekingsperiode onderhouden in de TWK configuratie (wordt onderhouden door een functioneel beheerder)' else '- Er is geen open boekingsperiode onderhouden in de TWK c...
+    20. REF ExclusiveMerge
+21. BRANCH when EnumerationCase=false
+  22. ACTION ChangeVariableAction: change variable Message='De TWK configuratie is niet goed onderhouden. het is niet mogelijk om een boeking te maken'
+  23. END
+
+FLOW Nanoflow: Bookingsflow.ACT_BookingTracker_StartAllocationFlow
+NODES=7; EDGES=5
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Account_Get -> MendixSSOUser
+3. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Abort)
+4. ACTION ChangeObjectAction: change BookingTracker (LatestAllocationUser=$MendixSSOUser/Name, LatestAllocationDate=[%CurrentDateTime%], AllocationStatus=Bookingsflow.SimulationFlowStatus.In_progress, CurrentlyRunningSimulation=Bookingsflow.CurrentlyRunningFlow.Allocation; refreshInClient=true)
+5. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_CallAllocationFlow -> Variable
+6. END
+
+FLOW Nanoflow: Bookingsflow.ACT_BookingTracker_StartSimulationFlow
+NODES=7; EDGES=5
+1. START
+2. ACTION MicroflowCallAction: call microflow Bookingsflow.SUB_Account_Get -> MendixSSOUser
+3. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Abort)
+4. ACTION ChangeObjectAction: change BookingTracker (LatestSimulationUser=$MendixSSOUser/Name, LatestSimulationDate=[%CurrentDateTime%], SimulationStatus=Bookingsflow.SimulationFlowStatus.In_progress, CurrentlyRunningSimulation=Bookingsflow.CurrentlyRunningFlow.Simulation; refreshInClient=true)
+5. ACTION MicroflowCallAction: call microflow Bookingsflow.ACT_SimulationBooking_PerformInBackground
+6. END
+
+## Outgoing Calls
+- Bookingsflow.ACT_AllocationRunBooking_CheckIfCompleted -> Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted (Microflow, internal)
+- Bookingsflow.ACT_BookingsFlow_CreateTestData -> TWK.SUB_Employee_CreateDummyRate (Microflow, external)
+- Bookingsflow.ACT_BookingsFlow_CreateTestData -> TWK.SUB_Employee_CreateDummyRate (Microflow, external)
+- Bookingsflow.ACT_BookingTracker_StartAllocationFlow -> Bookingsflow.SUB_Account_Get (Microflow, internal)
+- Bookingsflow.ACT_BookingTracker_StartAllocationFlow -> Bookingsflow.SUB_CallAllocationFlow (Microflow, internal)
+- Bookingsflow.ACT_BookingTracker_StartSimulationFlow -> Bookingsflow.ACT_SimulationBooking_PerformInBackground (Microflow, internal)
+- Bookingsflow.ACT_BookingTracker_StartSimulationFlow -> Bookingsflow.SUB_Account_Get (Microflow, internal)
+- Bookingsflow.ACT_BookintTracker_StartAllocationFlow -> Bookingsflow.SUB_CallAllocationFlow (Microflow, internal)
+- Bookingsflow.ACT_PKA_BookSingle -> Bookingsflow.SUB_PKA_BookSingle (Microflow, internal)
+- Bookingsflow.ACT_PKA_CheckManualBooking -> Bookingsflow.SUB_PKA_BookSingle (Microflow, internal)
+- Bookingsflow.ACT_PKA_CheckManualBooking -> TWK.SUB_EmployeeNrConvert_ProcessList (Microflow, internal)
+- Bookingsflow.ACT_PKA_CheckManualBooking -> TWK.SUB_EmployeeNumber_Convert (Microflow, internal)
+- Bookingsflow.Java_CallErrorCorrectionFlow -> Integration.SUB_CheckEnvironment (Microflow, internal)
+- Bookingsflow.Java_CallErrorCorrectionFlow -> Integration.SUB_RetrieveToken (Microflow, internal)
+- Bookingsflow.Java_CallSimulationFlow -> Bookingsflow.SUB_CleanPKAFields (Microflow, internal)
+- Bookingsflow.Java_CallSimulationFlow -> Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_SimulationRun (Microflow, internal)
+- Bookingsflow.Java_CallSimulationFlow_OLD -> Bookingsflow.SUB_CleanPKAFields (Microflow, internal)
+- Bookingsflow.Java_CallSimulationFlow_OLD -> Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime (Microflow, external)
+- Bookingsflow.Java_CallSimulationFlow_OLD -> Bookingsflow.SUB_RunSimulation (Microflow, internal)
+- Bookingsflow.NAV_BookingsFlow_OpenPage -> Bookingsflow.SUB_BookingTracker_RetrieveOrCreate (Microflow, internal)
+- Bookingsflow.SCRIPT_BookingflowTracker_Reset -> Bookingsflow.SUB_BookingTracker_RetrieveOrCreate (Microflow, internal)
+- Bookingsflow.SCRIPT_FillTaskQueue -> Bookingsflow.SUB_TaskqueueTest (Microflow, internal)
+- Bookingsflow.SUB_Booking_PKA -> Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD (Microflow, internal)
+- Bookingsflow.SUB_Booking_PKASingle -> Bookingsflow.SUB_BookingLogItem_Create (Microflow, internal)
+- Bookingsflow.SUB_Booking_PKASingle -> Bookingsflow.SUB_BookingLogItem_Create (Microflow, internal)
+- Bookingsflow.SUB_Booking_PKASingle -> Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP (Microflow, internal)
+- Bookingsflow.SUB_Booking_PKASingle -> Bookingsflow.SUB_PrepareAllocationToBook (Microflow, internal)
+- Bookingsflow.SUB_CallAllocationFlow -> Bookingsflow.SUB_CleanPKAFields (Microflow, internal)
+- Bookingsflow.SUB_CallAllocationFlow -> Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_AllocationRun (Microflow, internal)
+- Bookingsflow.SUB_CallAllocationFlow -> Bookingsflow.SUB_Request_RetrieveLateRequest (Microflow, internal)
+- Bookingsflow.SUB_JournalItem_APK_POST_DEEP -> Integration.SUB_CheckEnvironment (Microflow, internal)
+- Bookingsflow.SUB_JournalItem_APK_POST_DEEP -> Integration.SUB_HttpResponse_Error (Microflow, internal)
+- Bookingsflow.SUB_JournalItem_APK_POST_DEEP -> Integration.SUB_RetrieveToken (Microflow, internal)
+- Bookingsflow.SUB_JournalItem_APK_POST_DEEP -> TWK.SUB_CSRF_Fetch (Microflow, internal)
+- Bookingsflow.SUB_PersoneelskostenAllocatieRegel_CreateAllocationRequest_DEEP -> Bookingsflow.SUB_createItemType_PKA (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> Bookingsflow.SUB_PersoneelskostenAllocatieRegel_CreateAllocationRequest_DEEP (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> Bookingsflow.SUB_VAL_PersoneelskostenAllocatieRegelPost (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> Integration.SUB_CheckEnvironment (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> Integration.SUB_HttpResponse_Error (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> Integration.SUB_TokenPersistent_FindOrCreate (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP -> TWK.SUB_CSRF_Fetch (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_AllocationRun -> Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_OLD -> Bookingsflow.SUB_Update_AllocatieLineLevel (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_OLD -> TWK.SUB_EmployeeNrConvert_ProcessList (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_OLD -> TWK.SUB_EmployeeNumber_Convert (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_SimulationRun -> Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_Single -> Bookingsflow.SUB_Update_AllocatieLineLevel (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New -> Bookingsflow.SUB_BookingLogItem_Create (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New -> Bookingsflow.SUB_BookingLogItem_Create (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New -> Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New -> Bookingsflow.SUB_PrepareAllocationToBook (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New -> Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD -> Bookingsflow.SUB_BookingLogItem_Create (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD -> Bookingsflow.SUB_BookingLogItem_Create (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD -> Bookingsflow.SUB_BookingTracker_CheckQueueStatus (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD -> Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_POST_DEEP (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_OLD -> Bookingsflow.SUB_PrepareAllocationToBook (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun -> Bookingsflow.SUB_PersoneelsKostenAllocatie_BookAllocation_New (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun -> Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun -> Bookingsflow.SUB_Update_AllocatieLineLevel (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun -> TWK.SUB_EmployeeNrConvert_ProcessList (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_AllocationRun -> TWK.SUB_EmployeeNumber_Convert (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun -> Bookingsflow.SUB_RunSimulation (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun -> Bookingsflow.SUB_Update_AllocatieLineLevel (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun -> TaskQueueHelpers.DS_RetrieveQueueCounts (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun -> TWK.SUB_EmployeeNrConvert_ProcessList (Microflow, internal)
+- Bookingsflow.SUB_PersoneelsKostenAllocatie_Iterate_SimulationRun -> TWK.SUB_EmployeeNumber_Convert (Microflow, internal)
+- Bookingsflow.SUB_PKA_BookSingle -> Bookingsflow.SUB_Booking_PKASingle (Microflow, internal)
+- Bookingsflow.SUB_PKA_BookSingle -> Bookingsflow.SUB_CleanPKAFields_Single (Microflow, internal)
+- Bookingsflow.SUB_PKA_BookSingle -> Bookingsflow.SUB_PersoneelsKostenAllocatieRegel_SetWorkingTime_Single (Microflow, internal)
+- Bookingsflow.SUB_Queue_AllocationRunBooking_CheckIfCompleted -> TaskQueueHelpers.DS_RetrieveQueueCounts (Microflow, internal)
+- Bookingsflow.SUB_Request_RetrieveLateRequest -> Bookingsflow.SUB_Request_SetLate (Microflow, internal)
+- Bookingsflow.SUB_Request_RetrieveLateRequest -> TWK.SUB_BookingsPeriod_GetActive (Microflow, internal)
+- Bookingsflow.SUB_Request_SetLate -> TWK.SUB_Request_SetStatus (Microflow, internal)
+- Bookingsflow.SUB_RunSimulation -> Bookingsflow.SUB_AllocationChecks (Microflow, internal)
+- Bookingsflow.SUB_RunSimulation_OLD -> Bookingsflow.SUB_AllocationChecks (Microflow, internal)

@@ -75,11 +75,20 @@ Primary technical docs:
 
 ## Operational workflow summary
 
+### Extension workflow (production)
+
 1. Developer builds and deploys extension into app `extensions/AutoCommitMessage`.
 2. Developer starts Studio Pro with extension development enabled.
 3. Developer opens pane and validates change analysis.
-4. Developer exports payload to `mendix-data/exports`.
+4. Developer exports payload to `mendix-data/raw-changes`.
 5. Downstream parser pipeline consumes and processes exported payloads.
+
+### CLI workflow (development iteration)
+
+1. Developer edits parser/formatter in `studio-pro-extension-csharp/`.
+2. Developer runs `.\run-model-overview.ps1` to build and generate overview from pre-existing dumps.
+3. Developer inspects output in `mendix-data/app-overview/`.
+4. Repeat without opening Studio Pro.
 
 Detailed workflow documentation:
 

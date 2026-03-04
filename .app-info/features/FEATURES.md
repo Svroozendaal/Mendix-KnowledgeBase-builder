@@ -11,6 +11,7 @@ This file is the index of all implemented features in this application.
 | Full model overview export (app + modules) | DONE | `model-overview-export-pipeline.md` | 8 |
 | Commit parser handoff contract | DONE | `commit-parser-agent.md` | 7 |
 | `.env`-based developer workflow | DONE | `developer-workflow-env.md` | 3 |
+| Model overview CLI test harness | DONE | `model-overview-cli.md` | 8+ |
 
 ## Status values
 

@@ -29,7 +29,9 @@ This folder contains the primary technical documentation for the `AutoCommitMess
 - `UI/` (dockable pane, menu, route handler, embedded web UI)
 - `Processing/` (Git analysis, dump diffing, overview parsing, export, storage)
 - `manifest.json` and `AutoCommitMessage.csproj`
+- `model-overview-cli/` (standalone CLI test harness for overview generation — calls the extension's parser directly)
 - Root scripts:
   - `deploy-autocommitmessage.ps1`
   - `start-mendix-app.ps1`
+  - `run-model-overview.ps1` (interactive CLI launcher for model overview)
 

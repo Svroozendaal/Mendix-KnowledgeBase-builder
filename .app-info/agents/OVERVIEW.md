@@ -34,6 +34,8 @@ Use `.agents/skills/agent-extender/SKILL.md` to write a new extension correctly.
 | Commit Message Writer | `COMMIT_MESSAGE_WRITER.md` | Mendix export to technical commit text workflow with rule-gap capture and iterative rule growth |
 | GAPSMITH | `GAPSMITH.md` | End-to-end gap loop for dump diff rules (`Dxxx`) and display-text/commit rules (`Cxxx`/`Axxx`) with implementation mapping |
 | OVERVIEWSMITH | `OVERVIEWSMITH.md` | Full-model overview export workflow for single-dump parsing, flow ordering, and app/module pseudocode artefacts |
+| OVERVIEW_KB_BUILDER | `OVERVIEW_KB_BUILDER.md` | Orchestrates app/module interpretation and routing synthesis to build an LLM-ready application knowledge base |
+| OVERVIEW_KB_READER | `OVERVIEW_KB_READER.md` | Reads the generated knowledge base and answers architecture/functionality questions with pointer-backed evidence |
 
 ## Notes
 

@@ -13,6 +13,12 @@ NOTES: [...]
 ## LIVE_LOG
 
 ## PROGRESS_ENTRY - 2026-03-03
+SCOPE: Scaffold app-overview interpretation knowledge-base layer (skills + agents) for Markdown routing and functional readout.
+FILES_CHANGED: .app-info/skills/mendix-overview-general-interpretation/SKILL.md, .app-info/skills/mendix-overview-module-interpretation/SKILL.md, .app-info/skills/mendix-overview-routing-synthesis/SKILL.md, .app-info/skills/OVERVIEW.md, .app-info/agents/OVERVIEW_KB_BUILDER.md, .app-info/agents/OVERVIEW_KB_READER.md, .app-info/agents/OVERVIEW.md, .app-info/memory/PROGRESS.md
+VALIDATION: Structural validation passed (new skill folders/files created, overview indexes updated, Markdown/frontmatter formatting aligned to existing app-specific skills and agents).
+NOTES: Analysis of `mendix-data/app-overview/cli-test-run` confirms page-level documentation is mostly inferred from flow actions (`ShowPageAction`) rather than explicit page object payloads in module overview exports.
+
+## PROGRESS_ENTRY - 2026-03-03
 SCOPE: GAPSMITH regression fix for modified-flow role-only changes leaking generic fallback inventory (`modelType`, `resource metadata`, `nested types`) into commit message output.
 FILES_CHANGED: studio-pro-extension-csharp/Processing/ModelDiff/MendixModelDiffService.cs, studio-pro-extension-csharp/Processing/Formatting/MendixModelChangeDisplayTextFormatter.cs, studio-pro-extension-csharp-tests/MendixModelDiffServiceFlowDetailsTests.cs, studio-pro-extension-csharp-tests/MendixModelChangeDisplayTextFormatterTests.cs, .app-info/skills/mendix-model-dump-inspection/references/RULE_LIBRARY.md, .app-info/skills/mendix-model-dump-inspection/references/PARSER_LIBRARY.md, .app-info/skills/mendix-technical-commit-message/references/RULE_LIBRARY.md, .app-info/memory/PROGRESS.md
 VALIDATION: `dotnet build .\\studio-pro-extension-csharp\\AutoCommitMessage.csproj -c Debug` passed (1 pre-existing warning in `AutoCommitMessageChangeService.cs`). `dotnet test .\\studio-pro-extension-csharp-tests\\AutoCommitMessage.Tests.csproj --filter "FullyQualifiedName~MendixModelDiffServiceFlowDetailsTests|FullyQualifiedName~MendixModelChangeDisplayTextFormatterTests"` remains blocked by pre-existing test-project compile errors (`IDisposable` missing namespace in `AutoCommitMessageHeadDumpCacheServiceTests.cs` and `MendixV2ChangedModuleDetectorTests.cs`).

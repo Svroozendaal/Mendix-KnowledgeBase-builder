@@ -12,6 +12,12 @@ ALTERNATIVES_REJECTED: [...]
 
 ## LIVE_LOG
 
+## DECISION - 015 - 2026-03-03
+CONTEXT: App-overview exports are structurally rich but heavy for direct LLM consumption, and current artefacts do not provide a dedicated routing knowledge layer.
+DECISION: Add a separate interpretation layer with three app-specific skills (general interpretation, module interpretation, routing synthesis) and two standalone app-specific agents (`OVERVIEW_KB_BUILDER`, `OVERVIEW_KB_READER`) to build and consume a Markdown knowledge base.
+RATIONALE: Keeps raw export generation concerns separated from interpretation concerns, improves navigability for AI analysis, and enables deterministic pointer-based documentation.
+ALTERNATIVES_REJECTED: Extending `OVERVIEWSMITH` alone to own export + interpretation + readback responsibilities in one agent.
+
 ## DECISION - 001 - 2026-02-18
 CONTEXT: Phase 6 requires raw export files that must be consumed by the existing Phase 7 parser contract.
 DECISION: Export payload now uses parser-compatible fields (`timestamp`, `projectName`, `branchName`, `userName`, `userEmail`, `changes[*].filePath/status/isStaged/diffText/modelChanges`) with added optional `schemaVersion`.

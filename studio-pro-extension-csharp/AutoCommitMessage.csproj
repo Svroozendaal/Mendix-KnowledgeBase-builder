@@ -34,6 +34,7 @@
       <_Parameter1>MendixDataRoot</_Parameter1>
       <_Parameter2>$(MendixDataRoot)</_Parameter2>
     </AssemblyAttribute>
+    <InternalsVisibleTo Include="ModelOverviewCli" />
   </ItemGroup>
 
 </Project>

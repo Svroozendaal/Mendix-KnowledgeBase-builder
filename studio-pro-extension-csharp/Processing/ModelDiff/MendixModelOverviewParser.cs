@@ -22,12 +22,21 @@ internal static class MendixModelOverviewParser
     private const string InheritanceSplitModelType = "Microflows$InheritanceSplit";
     private const string SequenceFlowModelType = "Microflows$SequenceFlow";
 
+    private const string ProjectSecurityModelType = "Security$ProjectSecurity";
+    private const string ModuleSecurityModelType = "Security$ModuleSecurity";
+    private const string PageModelType = "Pages$Page";
+    private const string SnippetModelType = "Pages$Snippet";
+    private const string ConstantModelType = "Constants$Constant";
+    private const string ScheduledEventModelType = "ScheduledEvents$ScheduledEvent";
+    private const string ProjectModuleModelType = "Projects$Module";
+
     private static readonly string[] NameFields = { "$QualifiedName", "name", "$ID" };
 
     private static readonly HashSet<string> TrackableContainerProperties = new(StringComparer.OrdinalIgnoreCase)
     {
         "documents",
         "projectDocuments",
+        "moduleSecurity",
     };
 
     private static readonly HashSet<string> TrackableDomainModelTypes = new(StringComparer.OrdinalIgnoreCase)
@@ -63,18 +72,21 @@ internal static class MendixModelOverviewParser
         using var document = ParseDumpDocument(dumpJsonPath);
         var snapshot = BuildSnapshot(document.RootElement);
         var modules = BuildModuleOverviews(snapshot);
+        var projectSecurity = ParseProjectSecurityFromSnapshot(snapshot);
         var flowLookup = modules
             .SelectMany(module => module.Flows)
-            .ToDictionary(flow => flow.QualifiedName, flow => flow, StringComparer.OrdinalIgnoreCase);
+            .GroupBy(flow => flow.QualifiedName, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
 
         var callGraph = BuildCallGraph(modules, flowLookup);
         var summary = BuildSummary(modules, callGraph);
 
         return new ModelOverviewDocument(
-            SchemaVersion: "1.0",
+            SchemaVersion: "2.0",
             GeneratedAtUtc: generatedAtUtc,
             SourceMprPath: sourceMprPath,
             SourceDumpPath: dumpJsonPath,
+            ProjectSecurity: projectSecurity,
             Summary: summary,
             Modules: modules,
             FlowCallGraph: callGraph,
@@ -90,10 +102,25 @@ internal static class MendixModelOverviewParser
         builder.AppendLine($"Entities: {module.DomainModel.Entities.Count}, Associations: {module.DomainModel.Associations.Count}, Enumerations: {module.DomainModel.Enumerations.Count}");
         builder.AppendLine($"Flows: {module.Flows.Count}");
 
+        builder.AppendLine();
+        builder.Append(BuildDomainModelPseudocode(module));
+
+        builder.AppendLine();
+        builder.Append(BuildFlowsPseudocode(module, callGraph));
+
+        return builder.ToString().TrimEnd();
+    }
+
+    public static string BuildDomainModelPseudocode(OverviewModule module)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine($"# Domain Model: {module.Module}");
+        builder.AppendLine($"Entities: {module.DomainModel.Entities.Count}, Associations: {module.DomainModel.Associations.Count}, Enumerations: {module.DomainModel.Enumerations.Count}");
+
         if (module.DomainModel.Entities.Count > 0)
         {
             builder.AppendLine();
-            builder.AppendLine("## Domain Model");
+            builder.AppendLine("## Entities");
             foreach (var entity in module.DomainModel.Entities)
             {
                 var persistenceLabel = entity.IsPersistable ? "persistent" : "non-persistent";
@@ -107,27 +134,60 @@ internal static class MendixModelOverviewParser
                     var typeLabel = string.IsNullOrWhiteSpace(attribute.Type) ? "<unknown>" : attribute.Type;
                     builder.AppendLine($"  - ATTR {attribute.Name}: {typeLabel}");
                 }
-            }
 
+                foreach (var rule in entity.AccessRules)
+                {
+                    var rolesLabel = rule.ModuleRoles.Count > 0 ? string.Join(", ", rule.ModuleRoles) : "<none>";
+                    builder.AppendLine($"  - ACCESS_RULE [{rolesLabel}] Create={BoolLabel(rule.AllowCreate)}, Delete={BoolLabel(rule.AllowDelete)}, Default={rule.DefaultMemberAccessRights ?? "None"}");
+                    if (!string.IsNullOrWhiteSpace(rule.XPathConstraint))
+                    {
+                        builder.AppendLine($"    XPath: {rule.XPathConstraint}");
+                    }
+
+                    foreach (var member in rule.MemberAccesses)
+                    {
+                        builder.AppendLine($"    - MEMBER {member.MemberName}: {member.AccessRights ?? "None"}");
+                    }
+                }
+            }
+        }
+
+        if (module.DomainModel.Associations.Count > 0)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Associations");
             foreach (var association in module.DomainModel.Associations)
             {
                 builder.AppendLine($"- ASSOC {association.Name}: {association.ParentEntity} [{association.Cardinality}] {association.ChildEntity}");
             }
+        }
 
+        if (module.DomainModel.Enumerations.Count > 0)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Enumerations");
             foreach (var enumeration in module.DomainModel.Enumerations)
             {
                 builder.AppendLine($"- ENUM {enumeration.Name}: {string.Join(", ", enumeration.Values)}");
             }
         }
 
+        return builder.ToString().TrimEnd();
+    }
+
+    public static string BuildFlowsPseudocode(OverviewModule module, IReadOnlyList<OverviewCallEdge> callGraph)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine($"# Flows: {module.Module}");
+        builder.AppendLine($"Flows: {module.Flows.Count}");
+
         if (module.Flows.Count > 0)
         {
             builder.AppendLine();
-            builder.AppendLine("## Flows");
             foreach (var flow in module.Flows)
             {
-                builder.AppendLine();
                 builder.AppendLine(flow.Pseudocode);
+                builder.AppendLine();
             }
         }
 
@@ -138,7 +198,6 @@ internal static class MendixModelOverviewParser
             .ToArray();
         if (moduleCalls.Length > 0)
         {
-            builder.AppendLine();
             builder.AppendLine("## Outgoing Calls");
             foreach (var edge in moduleCalls)
             {
@@ -149,6 +208,210 @@ internal static class MendixModelOverviewParser
 
         return builder.ToString().TrimEnd();
     }
+
+    public static string BuildPagesPseudocode(OverviewModule module)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine($"# Pages: {module.Module}");
+        builder.AppendLine($"Pages: {module.Pages.Count}, Snippets: {module.Snippets.Count}");
+
+        if (module.Pages.Count > 0)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Pages");
+            foreach (var page in module.Pages)
+            {
+                builder.AppendLine();
+                builder.AppendLine($"PAGE {page.QualifiedName}");
+                if (!string.IsNullOrWhiteSpace(page.Title))
+                    builder.AppendLine($"  Title: \"{page.Title}\"");
+                if (!string.IsNullOrWhiteSpace(page.Layout))
+                {
+                    var layoutInfo = page.Layout;
+                    if (page.IsPopup)
+                        layoutInfo += $" (popup {page.PopupWidth}x{page.PopupHeight}, resizable={BoolLabel(page.PopupResizable)})";
+                    builder.AppendLine($"  Layout: {layoutInfo}");
+                }
+
+                if (page.AllowedRoles.Count > 0)
+                    builder.AppendLine($"  Allowed roles: {string.Join(", ", page.AllowedRoles)}");
+                if (page.Parameters.Count > 0)
+                {
+                    var paramDescs = page.Parameters.Select(p =>
+                        string.IsNullOrWhiteSpace(p.EntityType) ? p.Name : $"{p.Name} ({p.EntityType})");
+                    builder.AppendLine($"  Parameters: {string.Join(", ", paramDescs)}");
+                }
+
+                if (!string.IsNullOrWhiteSpace(page.Url))
+                    builder.AppendLine($"  URL: {page.Url}");
+                if (page.Excluded)
+                    builder.AppendLine("  [EXCLUDED]");
+            }
+        }
+
+        if (module.Snippets.Count > 0)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Snippets");
+            foreach (var snippet in module.Snippets)
+            {
+                var typeLabel = string.IsNullOrWhiteSpace(snippet.Type) ? "" : $" ({snippet.Type})";
+                builder.AppendLine($"- SNIPPET {snippet.QualifiedName}{typeLabel}");
+                if (snippet.Parameters.Count > 0)
+                {
+                    var paramDescs = snippet.Parameters.Select(p =>
+                        string.IsNullOrWhiteSpace(p.EntityType) ? p.Name : $"{p.Name} ({p.EntityType})");
+                    builder.AppendLine($"  Parameters: {string.Join(", ", paramDescs)}");
+                }
+            }
+        }
+
+        return builder.ToString().TrimEnd();
+    }
+
+    public static string BuildResourcesPseudocode(OverviewModule module)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine($"# Resources: {module.Module}");
+        builder.AppendLine($"Constants: {module.Constants.Count}, Scheduled Events: {module.ScheduledEvents.Count}");
+
+        if (module.Constants.Count > 0)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Constants");
+            foreach (var constant in module.Constants)
+            {
+                var typeLabel = string.IsNullOrWhiteSpace(constant.Type) ? "<unknown>" : constant.Type;
+                var valueLabel = string.IsNullOrWhiteSpace(constant.DefaultValue) ? "<empty>" : constant.DefaultValue;
+                builder.AppendLine($"CONSTANT {constant.QualifiedName}: {typeLabel} = {valueLabel}");
+                if (!string.IsNullOrWhiteSpace(constant.Documentation))
+                    builder.AppendLine($"  Documentation: \"{constant.Documentation}\"");
+                builder.AppendLine($"  Exposed to client: {BoolLabel(constant.ExposedToClient)}");
+            }
+        }
+
+        if (module.ScheduledEvents.Count > 0)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Scheduled Events");
+            foreach (var evt in module.ScheduledEvents)
+            {
+                builder.AppendLine($"SCHEDULED_EVENT {evt.QualifiedName}");
+                if (!string.IsNullOrWhiteSpace(evt.Documentation))
+                    builder.AppendLine($"  Documentation: \"{evt.Documentation}\"");
+            }
+        }
+
+        if (module.OtherResources.Count > 0)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Other Resources");
+            foreach (var resource in module.OtherResources)
+            {
+                builder.AppendLine($"- {resource.ResourceType}: {resource.QualifiedName}");
+            }
+        }
+
+        return builder.ToString().TrimEnd();
+    }
+
+    public static string BuildAppInfoPseudocode(ModelOverviewDocument document)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine("# Application Info");
+        builder.AppendLine($"Schema version: {document.SchemaVersion}");
+        builder.AppendLine($"Generated: {document.GeneratedAtUtc:u}");
+        builder.AppendLine($"Source: {document.SourceMprPath}");
+        builder.AppendLine();
+        builder.AppendLine("## Summary");
+        builder.AppendLine($"Modules: {document.Summary.ModuleCount}");
+        builder.AppendLine($"Entities: {document.Summary.EntityCount}");
+        builder.AppendLine($"Associations: {document.Summary.AssociationCount}");
+        builder.AppendLine($"Enumerations: {document.Summary.EnumerationCount}");
+        builder.AppendLine($"Flows: {document.Summary.FlowCount} (Microflows: {document.Summary.MicroflowCount}, Nanoflows: {document.Summary.NanoflowCount}, Rules: {document.Summary.RuleCount}, Workflows: {document.Summary.WorkflowCount})");
+
+        if (document.ProjectSecurity is { } security)
+        {
+            builder.AppendLine();
+            builder.AppendLine("## Security");
+            builder.AppendLine($"Security level: {security.SecurityLevel ?? "<unknown>"}");
+            builder.AppendLine($"Admin user: {security.AdminUserName ?? "<not set>"}");
+            builder.AppendLine($"Guest access: {BoolLabel(security.EnableGuestAccess)}");
+            if (security.EnableGuestAccess && !string.IsNullOrWhiteSpace(security.GuestUserRoleName))
+                builder.AppendLine($"Guest role: {security.GuestUserRoleName}");
+        }
+
+        return builder.ToString().TrimEnd();
+    }
+
+    public static string BuildUserRolesPseudocode(ModelOverviewDocument document)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine("# User Roles");
+
+        if (document.ProjectSecurity is not { } security || security.UserRoles.Count == 0)
+        {
+            builder.AppendLine("<no user roles found>");
+            return builder.ToString().TrimEnd();
+        }
+
+        builder.AppendLine($"Roles: {security.UserRoles.Count}");
+
+        foreach (var role in security.UserRoles)
+        {
+            builder.AppendLine();
+            builder.AppendLine($"USER_ROLE {role.Name}");
+            if (role.ModuleRoles.Count > 0)
+                builder.AppendLine($"  Module roles: {string.Join(", ", role.ModuleRoles)}");
+            builder.AppendLine($"  Manage all roles: {BoolLabel(role.ManageAllRoles)}");
+            builder.AppendLine($"  Check security: {BoolLabel(role.CheckSecurity)}");
+        }
+
+        return builder.ToString().TrimEnd();
+    }
+
+    public static string BuildAllModulesOverviewPseudocode(ModelOverviewDocument document)
+    {
+        var builder = new StringBuilder();
+        builder.AppendLine("# All Modules Overview");
+        builder.AppendLine($"Total modules: {document.Modules.Count}");
+
+        foreach (var module in document.Modules)
+        {
+            var categoryLabel = string.IsNullOrWhiteSpace(module.Category) ? "" : $" ({module.Category})";
+            builder.AppendLine();
+            builder.AppendLine($"MODULE {module.Module}{categoryLabel}");
+            if (module.ModuleRoles.Count > 0)
+                builder.AppendLine($"  Roles: {string.Join(", ", module.ModuleRoles.Select(r => r.Name))}");
+            builder.AppendLine($"  Entities: {module.DomainModel.Entities.Count}, Flows: {module.Flows.Count}, Pages: {module.Pages.Count}, Constants: {module.Constants.Count}");
+        }
+
+        return builder.ToString().TrimEnd();
+    }
+
+    public static string BuildMarketplaceModulesPseudocode(ModelOverviewDocument document)
+    {
+        var marketplaceModules = document.Modules
+            .Where(m => string.Equals(m.Category, "Marketplace", StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+
+        var builder = new StringBuilder();
+        builder.AppendLine("# Marketplace Modules");
+        builder.AppendLine($"Total: {marketplaceModules.Length}");
+
+        foreach (var module in marketplaceModules)
+        {
+            builder.AppendLine();
+            builder.AppendLine($"MODULE {module.Module}");
+            if (module.ModuleRoles.Count > 0)
+                builder.AppendLine($"  Roles: {string.Join(", ", module.ModuleRoles.Select(r => r.Name))}");
+            builder.AppendLine($"  Entities: {module.DomainModel.Entities.Count}, Flows: {module.Flows.Count}, Pages: {module.Pages.Count}");
+        }
+
+        return builder.ToString().TrimEnd();
+    }
+
+    private static string BoolLabel(bool value) => value ? "yes" : "no";
 
     private static IReadOnlyList<OverviewModule> BuildModuleOverviews(DumpSnapshot snapshot)
     {
@@ -197,7 +460,70 @@ internal static class MendixModelOverviewParser
             if (string.Equals(descriptor.ModelType, WorkflowModelType, StringComparison.OrdinalIgnoreCase))
             {
                 mutable.Flows.Add(ParseWorkflow(descriptor, moduleName));
+                continue;
             }
+
+            if (string.Equals(descriptor.ModelType, ModuleSecurityModelType, StringComparison.OrdinalIgnoreCase))
+            {
+                var roles = ParseModuleRoles(descriptor.Object);
+                // ModuleSecurity has no $QualifiedName — resolve module from first role's qualified name
+                var resolvedModuleName = ResolveModuleNameFromRoles(roles, descriptor, snapshot);
+                if (!string.Equals(resolvedModuleName, moduleName, StringComparison.OrdinalIgnoreCase) &&
+                    !string.Equals(resolvedModuleName, "Unknown", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (!modules.TryGetValue(resolvedModuleName, out var targetModule))
+                    {
+                        targetModule = new MutableOverviewModule(resolvedModuleName);
+                        modules[resolvedModuleName] = targetModule;
+                    }
+                    targetModule.ModuleRoles.AddRange(roles);
+                }
+                else
+                {
+                    mutable.ModuleRoles.AddRange(roles);
+                }
+                continue;
+            }
+
+            if (string.Equals(descriptor.ModelType, PageModelType, StringComparison.OrdinalIgnoreCase))
+            {
+                mutable.Pages.Add(ParsePage(descriptor.Object, descriptor.ElementName));
+                continue;
+            }
+
+            if (string.Equals(descriptor.ModelType, SnippetModelType, StringComparison.OrdinalIgnoreCase))
+            {
+                mutable.Snippets.Add(ParseSnippet(descriptor.Object, descriptor.ElementName));
+                continue;
+            }
+
+            if (string.Equals(descriptor.ModelType, ConstantModelType, StringComparison.OrdinalIgnoreCase))
+            {
+                mutable.Constants.Add(ParseConstant(descriptor.Object, descriptor.ElementName));
+                continue;
+            }
+
+            if (string.Equals(descriptor.ModelType, ScheduledEventModelType, StringComparison.OrdinalIgnoreCase))
+            {
+                mutable.ScheduledEvents.Add(ParseScheduledEvent(descriptor.Object, descriptor.ElementName));
+                continue;
+            }
+        }
+
+        // Populate module metadata (category, fromAppStore) from Projects$Module entries
+        foreach (var (moduleName, moduleElement) in snapshot.ModuleMetadata)
+        {
+            if (!modules.TryGetValue(moduleName, out var mutable))
+            {
+                mutable = new MutableOverviewModule(moduleName);
+                modules[moduleName] = mutable;
+            }
+
+            var fromAppStore = TryReadBoolProperty(moduleElement, "fromAppStore");
+            mutable.FromAppStore = fromAppStore;
+            mutable.Category = string.Equals(moduleName, "System", StringComparison.OrdinalIgnoreCase)
+                ? "System"
+                : fromAppStore ? "Marketplace" : "Custom";
         }
 
         return modules.Values
@@ -314,11 +640,13 @@ internal static class MendixModelOverviewParser
 
         var generalization = ResolveEntityGeneralization(entityObject);
         var attributes = ParseEntityAttributes(entityObject);
+        var accessRules = ParseEntityAccessRules(entityObject);
         return new OverviewEntity(
             Name: name,
             IsPersistable: IsPersistableEntity(entityObject),
             Generalization: generalization,
-            Attributes: attributes);
+            Attributes: attributes,
+            AccessRules: accessRules);
     }
 
     private static string? ResolveEntityGeneralization(JsonElement entityObject)
@@ -390,6 +718,311 @@ internal static class MendixModelOverviewParser
         return attributes
             .OrderBy(attribute => attribute.Name, StringComparer.OrdinalIgnoreCase)
             .ToArray();
+    }
+
+    private static IReadOnlyList<OverviewAccessRule> ParseEntityAccessRules(JsonElement entityObject)
+    {
+        if (!TryReadProperty(entityObject, "accessRules", out var rulesElement) ||
+            rulesElement.ValueKind != JsonValueKind.Array)
+        {
+            return Array.Empty<OverviewAccessRule>();
+        }
+
+        var rules = new List<OverviewAccessRule>();
+        foreach (var ruleElement in rulesElement.EnumerateArray())
+        {
+            if (ruleElement.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var moduleRoles = ReadStringArray(ruleElement, "moduleRoles");
+            TryReadBooleanProperty(ruleElement, "allowCreate", out var allowCreate);
+            TryReadBooleanProperty(ruleElement, "allowDelete", out var allowDelete);
+            var defaultAccess = TryReadStringProperty(ruleElement, "defaultMemberAccessRights");
+            var xPathConstraint = TryReadStringProperty(ruleElement, "xPathConstraint");
+
+            var memberAccesses = new List<OverviewMemberAccess>();
+            if (TryReadProperty(ruleElement, "memberAccesses", out var membersElement) &&
+                membersElement.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var memberElement in membersElement.EnumerateArray())
+                {
+                    if (memberElement.ValueKind != JsonValueKind.Object)
+                        continue;
+
+                    var attr = TryReadStringProperty(memberElement, "attribute");
+                    var assoc = TryReadStringProperty(memberElement, "association");
+                    var accessRights = TryReadStringProperty(memberElement, "accessRights");
+
+                    var memberName = !string.IsNullOrWhiteSpace(attr) ? attr : assoc ?? "<unknown>";
+                    var memberKind = !string.IsNullOrWhiteSpace(attr) ? "Attribute" : "Association";
+
+                    memberAccesses.Add(new OverviewMemberAccess(
+                        MemberName: memberName,
+                        MemberKind: memberKind,
+                        AccessRights: accessRights));
+                }
+            }
+
+            rules.Add(new OverviewAccessRule(
+                ModuleRoles: moduleRoles,
+                AllowCreate: allowCreate,
+                AllowDelete: allowDelete,
+                DefaultMemberAccessRights: defaultAccess,
+                XPathConstraint: string.IsNullOrWhiteSpace(xPathConstraint) ? null : xPathConstraint,
+                MemberAccesses: memberAccesses));
+        }
+
+        return rules;
+    }
+
+    private static OverviewProjectSecurity? ParseProjectSecurityFromSnapshot(DumpSnapshot snapshot)
+    {
+        if (snapshot.ProjectSecurityElement is not { } secElement)
+            return null;
+
+        var securityLevel = TryReadStringProperty(secElement, "securityLevel");
+        var adminUserName = TryReadStringProperty(secElement, "adminUserName");
+        TryReadBooleanProperty(secElement, "enableGuestAccess", out var enableGuestAccess);
+        var guestUserRoleName = TryReadStringProperty(secElement, "guestUserRoleName");
+
+        var userRoles = new List<OverviewUserRole>();
+        if (TryReadProperty(secElement, "userRoles", out var rolesElement) &&
+            rolesElement.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var roleElement in rolesElement.EnumerateArray())
+            {
+                if (roleElement.ValueKind != JsonValueKind.Object)
+                    continue;
+
+                var name = TryReadStringProperty(roleElement, "name") ?? "<unknown>";
+                var moduleRoles = ReadStringArray(roleElement, "moduleRoles");
+                TryReadBooleanProperty(roleElement, "manageAllRoles", out var manageAllRoles);
+                TryReadBooleanProperty(roleElement, "checkSecurity", out var checkSecurity);
+
+                userRoles.Add(new OverviewUserRole(
+                    Name: name,
+                    ModuleRoles: moduleRoles,
+                    ManageAllRoles: manageAllRoles,
+                    CheckSecurity: checkSecurity));
+            }
+        }
+
+        return new OverviewProjectSecurity(
+            SecurityLevel: securityLevel,
+            AdminUserName: adminUserName,
+            EnableGuestAccess: enableGuestAccess,
+            GuestUserRoleName: guestUserRoleName,
+            UserRoles: userRoles);
+    }
+
+    private static IReadOnlyList<OverviewModuleRole> ParseModuleRoles(JsonElement moduleSecurityObject)
+    {
+        if (!TryReadProperty(moduleSecurityObject, "moduleRoles", out var rolesElement) ||
+            rolesElement.ValueKind != JsonValueKind.Array)
+        {
+            return Array.Empty<OverviewModuleRole>();
+        }
+
+        var roles = new List<OverviewModuleRole>();
+        foreach (var roleElement in rolesElement.EnumerateArray())
+        {
+            if (roleElement.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var name = TryReadStringProperty(roleElement, "name") ?? "<unknown>";
+            var description = TryReadStringProperty(roleElement, "description");
+            roles.Add(new OverviewModuleRole(Name: name, Description: description));
+        }
+
+        return roles;
+    }
+
+    private static OverviewPage ParsePage(JsonElement pageObject, string fallbackName)
+    {
+        var qualifiedName = TryReadStringProperty(pageObject, "$QualifiedName") ?? fallbackName;
+        var name = TryReadStringProperty(pageObject, "name") ?? fallbackName;
+        var title = ParseTextTranslation(pageObject, "title");
+        var allowedRoles = ReadStringArray(pageObject, "allowedRoles");
+        TryReadBooleanProperty(pageObject, "excluded", out var excluded);
+
+        string? layout = null;
+        if (TryReadProperty(pageObject, "layoutCall", out var layoutCallElement) &&
+            layoutCallElement.ValueKind == JsonValueKind.Object)
+        {
+            layout = TryReadStringProperty(layoutCallElement, "layout");
+        }
+
+        int popupWidth = 0, popupHeight = 0;
+        bool popupResizable = false;
+        if (TryReadIntProperty(pageObject, "popupWidth", out var pw)) popupWidth = pw;
+        if (TryReadIntProperty(pageObject, "popupHeight", out var ph)) popupHeight = ph;
+        TryReadBooleanProperty(pageObject, "popupResizable", out popupResizable);
+
+        var url = TryReadStringProperty(pageObject, "url");
+        var isPopup = popupWidth > 0 || popupHeight > 0 ||
+                      (layout is not null && layout.Contains("Popup", StringComparison.OrdinalIgnoreCase));
+
+        var parameters = ParsePageParameters(pageObject);
+
+        return new OverviewPage(
+            QualifiedName: qualifiedName,
+            Name: name,
+            Title: title,
+            Layout: layout,
+            AllowedRoles: allowedRoles,
+            Parameters: parameters,
+            IsPopup: isPopup,
+            PopupWidth: popupWidth,
+            PopupHeight: popupHeight,
+            PopupResizable: popupResizable,
+            Url: string.IsNullOrWhiteSpace(url) ? null : url,
+            Excluded: excluded);
+    }
+
+    private static IReadOnlyList<OverviewPageParameter> ParsePageParameters(JsonElement parentObject)
+    {
+        if (!TryReadProperty(parentObject, "parameters", out var paramsElement) ||
+            paramsElement.ValueKind != JsonValueKind.Array)
+        {
+            return Array.Empty<OverviewPageParameter>();
+        }
+
+        var parameters = new List<OverviewPageParameter>();
+        foreach (var param in paramsElement.EnumerateArray())
+        {
+            if (param.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var name = TryReadStringProperty(param, "name") ?? "<unknown>";
+            string? entityType = null;
+            if (TryReadProperty(param, "parameterType", out var paramTypeElement) &&
+                paramTypeElement.ValueKind == JsonValueKind.Object)
+            {
+                entityType = TryReadStringProperty(paramTypeElement, "entity");
+            }
+
+            parameters.Add(new OverviewPageParameter(Name: name, EntityType: entityType));
+        }
+
+        return parameters;
+    }
+
+    private static OverviewSnippet ParseSnippet(JsonElement snippetObject, string fallbackName)
+    {
+        var qualifiedName = TryReadStringProperty(snippetObject, "$QualifiedName") ?? fallbackName;
+        var name = TryReadStringProperty(snippetObject, "name") ?? fallbackName;
+        var type = TryReadStringProperty(snippetObject, "type");
+        var parameters = ParsePageParameters(snippetObject);
+
+        return new OverviewSnippet(
+            QualifiedName: qualifiedName,
+            Name: name,
+            Type: type,
+            Parameters: parameters);
+    }
+
+    private static OverviewConstant ParseConstant(JsonElement constantObject, string fallbackName)
+    {
+        var qualifiedName = TryReadStringProperty(constantObject, "$QualifiedName") ?? fallbackName;
+        var name = TryReadStringProperty(constantObject, "name") ?? fallbackName;
+        var defaultValue = TryReadStringProperty(constantObject, "defaultValue");
+        var documentation = TryReadStringProperty(constantObject, "documentation");
+        TryReadBooleanProperty(constantObject, "exposedToClient", out var exposedToClient);
+
+        string? type = null;
+        if (TryReadProperty(constantObject, "type", out var typeElement) &&
+            typeElement.ValueKind == JsonValueKind.Object)
+        {
+            var modelType = TryReadStringProperty(typeElement, "$Type");
+            type = modelType is not null ? ShortTypeName(modelType) : null;
+        }
+
+        return new OverviewConstant(
+            QualifiedName: qualifiedName,
+            Name: name,
+            Type: type,
+            DefaultValue: defaultValue,
+            Documentation: string.IsNullOrWhiteSpace(documentation) ? null : documentation,
+            ExposedToClient: exposedToClient);
+    }
+
+    private static OverviewScheduledEvent ParseScheduledEvent(JsonElement eventObject, string fallbackName)
+    {
+        var qualifiedName = TryReadStringProperty(eventObject, "$QualifiedName") ?? fallbackName;
+        var name = TryReadStringProperty(eventObject, "name") ?? fallbackName;
+        var documentation = TryReadStringProperty(eventObject, "documentation");
+
+        return new OverviewScheduledEvent(
+            QualifiedName: qualifiedName,
+            Name: name,
+            Documentation: string.IsNullOrWhiteSpace(documentation) ? null : documentation);
+    }
+
+    private static string? ParseTextTranslation(JsonElement parentObject, string propertyName)
+    {
+        if (!TryReadProperty(parentObject, propertyName, out var textElement) ||
+            textElement.ValueKind != JsonValueKind.Object)
+        {
+            return null;
+        }
+
+        if (!TryReadProperty(textElement, "translations", out var translationsElement) ||
+            translationsElement.ValueKind != JsonValueKind.Array)
+        {
+            return null;
+        }
+
+        foreach (var translation in translationsElement.EnumerateArray())
+        {
+            if (translation.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var text = TryReadStringProperty(translation, "text");
+            if (!string.IsNullOrWhiteSpace(text))
+                return text;
+        }
+
+        return null;
+    }
+
+    private static IReadOnlyList<string> ReadStringArray(JsonElement parent, string propertyName)
+    {
+        if (!TryReadProperty(parent, propertyName, out var arrayElement) ||
+            arrayElement.ValueKind != JsonValueKind.Array)
+        {
+            return Array.Empty<string>();
+        }
+
+        var result = new List<string>();
+        foreach (var item in arrayElement.EnumerateArray())
+        {
+            if (item.ValueKind == JsonValueKind.String)
+            {
+                var value = item.GetString();
+                if (!string.IsNullOrWhiteSpace(value))
+                    result.Add(value);
+            }
+        }
+
+        return result;
+    }
+
+    private static bool TryReadBoolProperty(JsonElement element, string propertyName)
+    {
+        TryReadBooleanProperty(element, propertyName, out var value);
+        return value;
+    }
+
+    private static bool TryReadIntProperty(JsonElement element, string propertyName, out int value)
+    {
+        value = 0;
+        if (!TryReadProperty(element, propertyName, out var prop))
+            return false;
+
+        if (prop.ValueKind == JsonValueKind.Number && prop.TryGetInt32(out value))
+            return true;
+
+        return false;
     }
 
     private static string? ReadAttributeType(JsonElement attribute)
@@ -1896,6 +2529,39 @@ internal static class MendixModelOverviewParser
         return string.IsNullOrWhiteSpace(moduleName) ? "Unknown" : moduleName;
     }
 
+    private static string ResolveModuleNameFromRoles(
+        IReadOnlyList<OverviewModuleRole> roles, ResourceDescriptor descriptor, DumpSnapshot snapshot)
+    {
+        // Try to resolve from the first role's $QualifiedName (e.g., "Toast.User" -> "Toast")
+        if (TryReadProperty(descriptor.Object, "moduleRoles", out var rolesElement) &&
+            rolesElement.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var roleElement in rolesElement.EnumerateArray())
+            {
+                if (roleElement.ValueKind != JsonValueKind.Object) continue;
+                var qualifiedName = TryReadStringProperty(roleElement, "$QualifiedName");
+                if (!string.IsNullOrWhiteSpace(qualifiedName))
+                {
+                    var resolved = ResolveModuleName(qualifiedName);
+                    if (!string.Equals(resolved, "Unknown", StringComparison.OrdinalIgnoreCase))
+                        return resolved;
+                }
+            }
+        }
+
+        // Fallback: walk parent chain via $ContainerID to find module folder name
+        var containerId = TryReadStringProperty(descriptor.Object, "$ContainerID");
+        if (!string.IsNullOrWhiteSpace(containerId) &&
+            snapshot.ObjectsById.TryGetValue(containerId, out var parentElement))
+        {
+            var parentName = TryReadStringProperty(parentElement, "name");
+            if (!string.IsNullOrWhiteSpace(parentName))
+                return parentName;
+        }
+
+        return "Unknown";
+    }
+
     private static bool IsFlowModelType(string modelType)
     {
         return string.Equals(modelType, MicroflowModelType, StringComparison.OrdinalIgnoreCase) ||
@@ -1948,6 +2614,21 @@ internal static class MendixModelOverviewParser
 
                         var modelType = TryReadStringProperty(current, "$Type");
                         var containerProperty = TryReadStringProperty(current, "$ContainerProperty");
+
+                        if (string.Equals(modelType, ProjectSecurityModelType, StringComparison.OrdinalIgnoreCase))
+                        {
+                            snapshot.ProjectSecurityElement = clone;
+                        }
+
+                        if (string.Equals(modelType, ProjectModuleModelType, StringComparison.OrdinalIgnoreCase))
+                        {
+                            var moduleName = TryReadStringProperty(clone, "name");
+                            if (!string.IsNullOrWhiteSpace(moduleName))
+                            {
+                                snapshot.ModuleMetadata[moduleName] = clone;
+                            }
+                        }
+
                         if (IsTrackableResource(modelType, containerProperty))
                         {
                             var descriptor = BuildResourceDescriptor(clone);
@@ -2249,6 +2930,10 @@ internal static class MendixModelOverviewParser
         public Dictionary<string, string> ParentById { get; } = new(StringComparer.OrdinalIgnoreCase);
 
         public Dictionary<string, ResourceDescriptor> ResourcesById { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        public JsonElement? ProjectSecurityElement { get; set; }
+
+        public Dictionary<string, JsonElement> ModuleMetadata { get; } = new(StringComparer.OrdinalIgnoreCase);
     }
 
     private sealed record ResourceDescriptor(
@@ -2287,6 +2972,12 @@ internal static class MendixModelOverviewParser
 
         public string Module { get; }
 
+        public string? Category { get; set; }
+
+        public bool FromAppStore { get; set; }
+
+        public List<OverviewModuleRole> ModuleRoles { get; } = new();
+
         public List<OverviewEntity> Entities { get; } = new();
 
         public List<OverviewAssociation> Associations { get; } = new();
@@ -2295,9 +2986,24 @@ internal static class MendixModelOverviewParser
 
         public List<OverviewFlow> Flows { get; } = new();
 
+        public List<OverviewPage> Pages { get; } = new();
+
+        public List<OverviewSnippet> Snippets { get; } = new();
+
+        public List<OverviewConstant> Constants { get; } = new();
+
+        public List<OverviewScheduledEvent> ScheduledEvents { get; } = new();
+
+        public List<OverviewResource> OtherResources { get; } = new();
+
         public OverviewModule ToImmutable() =>
             new(
                 Module,
+                Category,
+                FromAppStore,
+                ModuleRoles
+                    .OrderBy(role => role.Name, StringComparer.OrdinalIgnoreCase)
+                    .ToArray(),
                 new OverviewDomainModel(
                     Entities
                         .OrderBy(entity => entity.Name, StringComparer.OrdinalIgnoreCase)
@@ -2311,6 +3017,21 @@ internal static class MendixModelOverviewParser
                 Flows
                     .OrderBy(flow => flow.Kind, StringComparer.OrdinalIgnoreCase)
                     .ThenBy(flow => flow.QualifiedName, StringComparer.OrdinalIgnoreCase)
+                    .ToArray(),
+                Pages
+                    .OrderBy(page => page.QualifiedName, StringComparer.OrdinalIgnoreCase)
+                    .ToArray(),
+                Snippets
+                    .OrderBy(snippet => snippet.QualifiedName, StringComparer.OrdinalIgnoreCase)
+                    .ToArray(),
+                Constants
+                    .OrderBy(constant => constant.QualifiedName, StringComparer.OrdinalIgnoreCase)
+                    .ToArray(),
+                ScheduledEvents
+                    .OrderBy(evt => evt.QualifiedName, StringComparer.OrdinalIgnoreCase)
+                    .ToArray(),
+                OtherResources
+                    .OrderBy(resource => resource.QualifiedName, StringComparer.OrdinalIgnoreCase)
                     .ToArray());
     }
 }
@@ -2320,6 +3041,7 @@ internal sealed record ModelOverviewDocument(
     DateTimeOffset GeneratedAtUtc,
     string SourceMprPath,
     string SourceDumpPath,
+    OverviewProjectSecurity? ProjectSecurity,
     OverviewSummary Summary,
     IReadOnlyList<OverviewModule> Modules,
     IReadOnlyList<OverviewCallEdge> FlowCallGraph,
@@ -2341,8 +3063,16 @@ internal sealed record OverviewSummary(
 
 internal sealed record OverviewModule(
     string Module,
+    string? Category,
+    bool FromAppStore,
+    IReadOnlyList<OverviewModuleRole> ModuleRoles,
     OverviewDomainModel DomainModel,
-    IReadOnlyList<OverviewFlow> Flows);
+    IReadOnlyList<OverviewFlow> Flows,
+    IReadOnlyList<OverviewPage> Pages,
+    IReadOnlyList<OverviewSnippet> Snippets,
+    IReadOnlyList<OverviewConstant> Constants,
+    IReadOnlyList<OverviewScheduledEvent> ScheduledEvents,
+    IReadOnlyList<OverviewResource> OtherResources);
 
 internal sealed record OverviewDomainModel(
     IReadOnlyList<OverviewEntity> Entities,
@@ -2353,7 +3083,8 @@ internal sealed record OverviewEntity(
     string Name,
     bool IsPersistable,
     string? Generalization,
-    IReadOnlyList<OverviewAttribute> Attributes);
+    IReadOnlyList<OverviewAttribute> Attributes,
+    IReadOnlyList<OverviewAccessRule> AccessRules);
 
 internal sealed record OverviewAttribute(
     string Name,
@@ -2416,3 +3147,75 @@ internal sealed record OverviewCallEdge(
     string TargetModule,
     string TargetFlow,
     bool IsInternal);
+
+internal sealed record OverviewProjectSecurity(
+    string? SecurityLevel,
+    string? AdminUserName,
+    bool EnableGuestAccess,
+    string? GuestUserRoleName,
+    IReadOnlyList<OverviewUserRole> UserRoles);
+
+internal sealed record OverviewUserRole(
+    string Name,
+    IReadOnlyList<string> ModuleRoles,
+    bool ManageAllRoles,
+    bool CheckSecurity);
+
+internal sealed record OverviewModuleRole(
+    string Name,
+    string? Description);
+
+internal sealed record OverviewAccessRule(
+    IReadOnlyList<string> ModuleRoles,
+    bool AllowCreate,
+    bool AllowDelete,
+    string? DefaultMemberAccessRights,
+    string? XPathConstraint,
+    IReadOnlyList<OverviewMemberAccess> MemberAccesses);
+
+internal sealed record OverviewMemberAccess(
+    string MemberName,
+    string MemberKind,
+    string? AccessRights);
+
+internal sealed record OverviewPage(
+    string QualifiedName,
+    string Name,
+    string? Title,
+    string? Layout,
+    IReadOnlyList<string> AllowedRoles,
+    IReadOnlyList<OverviewPageParameter> Parameters,
+    bool IsPopup,
+    int PopupWidth,
+    int PopupHeight,
+    bool PopupResizable,
+    string? Url,
+    bool Excluded);
+
+internal sealed record OverviewPageParameter(
+    string Name,
+    string? EntityType);
+
+internal sealed record OverviewSnippet(
+    string QualifiedName,
+    string Name,
+    string? Type,
+    IReadOnlyList<OverviewPageParameter> Parameters);
+
+internal sealed record OverviewConstant(
+    string QualifiedName,
+    string Name,
+    string? Type,
+    string? DefaultValue,
+    string? Documentation,
+    bool ExposedToClient);
+
+internal sealed record OverviewScheduledEvent(
+    string QualifiedName,
+    string Name,
+    string? Documentation);
+
+internal sealed record OverviewResource(
+    string QualifiedName,
+    string Name,
+    string ResourceType);

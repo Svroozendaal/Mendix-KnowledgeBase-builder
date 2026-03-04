@@ -17,7 +17,19 @@
       "Bash(echo \"Found System$Constant\")",
       "Bash(echo \"System$Constant not found\")",
       "Bash(awk 'NR>=10 && NR<=20')",
-      "Bash(dotnet build)"
+      "Bash(dotnet build)",
+      "Bash(dotnet sln add model-overview-cli/ModelOverviewCli.csproj)",
+      "Bash(dotnet build model-overview-cli/ModelOverviewCli.csproj --configuration Debug)",
+      "Bash(dotnet run --project model-overview-cli -- --dump \"mendix-data/dumps/2026-03-02T15-20-39.802Z_App.mpr_086e2d7045254049b65ab730faa2bd4c/working-dump.json\" --list-modules)",
+      "Bash(dotnet run --project model-overview-cli -- --dump \"mendix-data/dumps/2026-03-02T15-20-39.802Z_App.mpr_086e2d7045254049b65ab730faa2bd4c/working-dump.json\" --output \"mendix-data/app-overview/cli-test\" --modules \"SmartExpenses,ImporterHelper\")",
+      "Bash(dotnet run --project model-overview-cli -- --dump \"mendix-data/dumps/2026-03-02T15-20-39.802Z_App.mpr_086e2d7045254049b65ab730faa2bd4c/working-dump.json\" --output \"mendix-data/app-overview/cli-test-run\" --modules \"SmartExpenses,ImporterHelper,New_Module\")",
+      "Bash(dotnet run --project model-overview-cli -- --dump \"mendix-data/dumps/2026-03-02T09-57-55.861Z_VU Project Budgetting.mpr_769a41dc8a75405ba09b37eb34e433a6/working-dump.json\" --list-modules)",
+      "Bash(dotnet run --project model-overview-cli -- --dump \"mendix-data/dumps/2026-03-02T09-57-55.861Z_VU Project Budgetting.mpr_769a41dc8a75405ba09b37eb34e433a6/working-dump.json\" --output \"mendix-data/app-overview/cli-test-vu\" --modules \"Projects,DeclarationForm,Bookingsflow\")",
+      "Bash(dotnet build model-overview-cli/ModelOverviewCli.csproj -q)",
+      "Bash(dotnet build model-overview-cli/ModelOverviewCli.csproj)",
+      "Bash(dotnet build studio-pro-extension-csharp/AutoCommitMessage.csproj)",
+      "Bash(powershell -ExecutionPolicy Bypass -File run-kb-scaffold.ps1 -RunFolder mendix-data/app-overview/cli-test-v2 -AppName SmartExpenses)",
+      "Bash(powershell -ExecutionPolicy Bypass -File run-kb-scaffold.ps1 -Validate -OutputRoot mendix-data/knowledge-base -AppName SmartExpenses)"
     ]
   }
 }

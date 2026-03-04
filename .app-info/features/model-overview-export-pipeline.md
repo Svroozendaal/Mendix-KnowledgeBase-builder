@@ -28,10 +28,12 @@ Adds a full-model overview pipeline that exports complete application and module
 - `studio-pro-extension-csharp/UI/Web/AutoCommitMessageWebServerExtension.cs`
 - `studio-pro-extension-csharp/UI/Web/AutoCommitMessagePanelHtml.cs`
 - `studio-pro-extension-csharp/Docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md`
+- `model-overview-cli/Program.cs` (CLI test harness — calls the same parser)
+- `run-model-overview.ps1` (interactive CLI launcher)
 
 ## Output contract
 
-- Location: `mendix-data/structured/overviews/<run-folder>`
+- Location: `mendix-data/app-overview/<run-folder>`
 - Artefacts:
   - app overview JSON + pseudocode
   - module overview JSON + pseudocode

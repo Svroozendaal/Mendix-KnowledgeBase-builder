@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "2.0",
+  "generatedAtUtc": "2026-03-03T20:58:20.2195652\u002B00:00",
+  "selectedModules": [
+    "ImporterHelper",
+    "SmartExpenses"
+  ],
+  "artifactCount": 24,
+  "artifacts": [
+    {
+      "type": "general-app-info-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\app-info.json"
+    },
+    {
+      "type": "general-app-info-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\app-info.pseudo.txt"
+    },
+    {
+      "type": "general-user-roles-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\user-roles.json"
+    },
+    {
+      "type": "general-user-roles-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\user-roles.pseudo.txt"
+    },
+    {
+      "type": "general-all-modules-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\all-modules.json"
+    },
+    {
+      "type": "general-all-modules-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\all-modules.pseudo.txt"
+    },
+    {
+      "type": "general-marketplace-modules-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\marketplace-modules.json"
+    },
+    {
+      "type": "general-marketplace-modules-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\general\\marketplace-modules.pseudo.txt"
+    },
+    {
+      "type": "module-domain-model-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\domain-model.json"
+    },
+    {
+      "type": "module-domain-model-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\domain-model.pseudo.txt"
+    },
+    {
+      "type": "module-flows-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\flows.json"
+    },
+    {
+      "type": "module-flows-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\flows.pseudo.txt"
+    },
+    {
+      "type": "module-pages-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\pages.json"
+    },
+    {
+      "type": "module-pages-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\pages.pseudo.txt"
+    },
+    {
+      "type": "module-resources-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\resources.json"
+    },
+    {
+      "type": "module-resources-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\ImporterHelper\\resources.pseudo.txt"
+    },
+    {
+      "type": "module-domain-model-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\domain-model.json"
+    },
+    {
+      "type": "module-domain-model-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\domain-model.pseudo.txt"
+    },
+    {
+      "type": "module-flows-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\flows.json"
+    },
+    {
+      "type": "module-flows-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\flows.pseudo.txt"
+    },
+    {
+      "type": "module-pages-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\pages.json"
+    },
+    {
+      "type": "module-pages-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\pages.pseudo.txt"
+    },
+    {
+      "type": "module-resources-json",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\resources.json"
+    },
+    {
+      "type": "module-resources-pseudo",
+      "path": "mendix-data/app-overview/cli-test-v2\\modules\\SmartExpenses\\resources.pseudo.txt"
+    }
+  ]
+}

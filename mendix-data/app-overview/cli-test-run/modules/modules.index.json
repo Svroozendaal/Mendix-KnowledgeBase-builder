@@ -1,0 +1,17 @@
+[
+  {
+    "module": "ImporterHelper",
+    "jsonPath": "mendix-data/app-overview/cli-test-run\\modules\\ImporterHelper.overview.json",
+    "pseudocodePath": "mendix-data/app-overview/cli-test-run\\modules\\ImporterHelper.overview.pseudo.txt"
+  },
+  {
+    "module": "New_Module",
+    "jsonPath": "mendix-data/app-overview/cli-test-run\\modules\\New_Module.overview.json",
+    "pseudocodePath": "mendix-data/app-overview/cli-test-run\\modules\\New_Module.overview.pseudo.txt"
+  },
+  {
+    "module": "SmartExpenses",
+    "jsonPath": "mendix-data/app-overview/cli-test-run\\modules\\SmartExpenses.overview.json",
+    "pseudocodePath": "mendix-data/app-overview/cli-test-run\\modules\\SmartExpenses.overview.pseudo.txt"
+  }
+]

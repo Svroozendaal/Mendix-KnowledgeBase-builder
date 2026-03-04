@@ -89,6 +89,26 @@ Use the root launcher script:
 
 It reads `MENDIX_APP_PATH` from `.env`, locates `studiopro.exe`, and starts Studio Pro with extension development enabled using `--enable-extension-development`.
 
+## Generate model overview via CLI (test harness)
+
+A standalone CLI test harness allows model overview generation from pre-existing dump files without opening Studio Pro. The CLI calls the **same parser code** from the extension project via `InternalsVisibleTo` — no code duplication.
+
+Interactive launcher:
+
+```powershell
+.\run-model-overview.ps1
+```
+
+This discovers available dumps, presents an interactive module picker, builds the CLI, and generates overview output (JSON + pseudocode).
+
+Direct mode (skip interactive menus):
+
+```powershell
+.\run-model-overview.ps1 -DumpPath "mendix-data\dumps\<folder>\working-dump.json" -Modules "SmartExpenses,Admin"
+```
+
+CLI project: `model-overview-cli/ModelOverviewCli.csproj`
+
 ## Notes
 
 - No localhost web server or `npm` workflow is required.

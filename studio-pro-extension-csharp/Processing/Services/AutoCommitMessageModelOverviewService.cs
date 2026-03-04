@@ -915,7 +915,7 @@ public static class AutoCommitMessageModelOverviewService
 
     private sealed record OverviewArtifactEntry(string Type, string Path);
 
-    private sealed record ModuleOverviewExport(
+    internal sealed record ModuleOverviewExport(
         string SchemaVersion,
         DateTimeOffset GeneratedAtUtc,
         string SourceMprPath,

@@ -143,6 +143,8 @@ Behaviour:
 
 ## 5) Model overview flow
 
+### Via extension (production)
+
 Module list:
 
 1. UI calls `list-overview-modules`.
@@ -155,6 +157,15 @@ Generation:
 2. UI calls `generate-overview-modules&modules=A,B,...`.
 3. Service generates selected module overviews from committed dump state.
 4. Output includes JSON, pseudocode, module index, and manifest.
+
+### Via CLI test harness (development)
+
+1. Developer runs `.\run-model-overview.ps1` or invokes `model-overview-cli` directly.
+2. CLI reads a pre-existing dump JSON file (from `mendix-data/dumps/`).
+3. CLI calls `MendixModelOverviewParser.ParseDump()` from the extension project (same code, no duplication).
+4. Output is identical: JSON, pseudocode, module index, and manifest in `mendix-data/app-overview/`.
+
+This enables rapid parser iteration without opening Studio Pro.
 
 ## 6) Commit-message composition
 
@@ -232,7 +243,17 @@ Persisted client settings (localStorage):
 4. Folder naming drift exists between runtime services and deployment script pre-created folders.
 5. Commit-message storage endpoint exists, but UI integration is partial.
 
+## CLI test harness layer
+
+- CLI project: `model-overview-cli/ModelOverviewCli.csproj`
+- CLI entry point: `model-overview-cli/Program.cs`
+- Interactive launcher: `run-model-overview.ps1`
+- Reuses extension's `MendixModelOverviewParser` via `InternalsVisibleTo` — same code, no duplication
+- Output contracts identical to extension overview pipeline
+
 ## Operational workflow summary
+
+### Extension workflow (production)
 
 1. Build and deploy extension to target Mendix app.
 2. Start Studio Pro with extension development enabled.
@@ -240,6 +261,13 @@ Persisted client settings (localStorage):
 4. Review grouped model changes.
 5. Export selected artefacts.
 6. Downstream tooling consumes raw changes and/or overview outputs.
+
+### CLI workflow (development iteration)
+
+1. Edit parser/formatter in `studio-pro-extension-csharp/`.
+2. Run `.\run-model-overview.ps1` (auto-builds and generates from pre-existing dumps).
+3. Inspect output in `mendix-data/app-overview/`.
+4. Repeat without opening Studio Pro.
 
 ## Technical references
 

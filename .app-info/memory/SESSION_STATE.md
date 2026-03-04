@@ -128,6 +128,12 @@ DELIVERABLES:
 - Updated ARCHITECTURE.md (detection documentation section)
 - MendixInstallationDetectorServiceTests.cs (unit tests for all scenarios)
 
+## HANDOFF - DOCUMENTER - 2026-03-03T16:51:25+01:00
+STATUS: COMPLETE
+NEXT_AGENT: OVERVIEW_KB_BUILDER
+SUMMARY: Added skeletons for overview interpretation knowledge-base workflow: three new app-specific skills (general/module/routing) and two standalone agents (build/read). Updated app-specific skill and agent indexes and logged interpretation architecture decision.
+BLOCKERS: Page-level documentation currently depends on inferred page references from flow actions because module overview exports do not yet provide rich standalone page objects.
+
 ## HANDOFF - Prompt Refiner - 2026-02-28T15:18:29+01:00
 STATUS: COMPLETE
 NEXT_AGENT: none

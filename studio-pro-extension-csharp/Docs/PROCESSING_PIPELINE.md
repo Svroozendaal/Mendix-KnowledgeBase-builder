@@ -127,6 +127,28 @@ Entry point: `AutoCommitMessageCommitMessageStoreService.StoreCommitMessage(...)
 3. Derive file token from first line (sanitised, length-limited).
 4. Write UTF-8 text via temp file + atomic move.
 
+## 6) CLI test harness pipeline
+
+Entry point: `model-overview-cli/Program.cs` (standalone console application)
+
+The CLI reuses the extension's parser directly — no separate parsing logic. It provides two modes:
+
+`--list-modules`:
+
+1. Read dump JSON from disk.
+2. Extract `Projects$Module` entries and classify as `System`, `Marketplace`, or `Custom`.
+3. Output module list as JSON to stdout.
+
+`--dump <path> --output <dir> [--modules <csv>]`:
+
+1. Call `MendixModelOverviewParser.ParseDump(...)` from the extension project.
+2. Filter to selected modules (or export all if none specified).
+3. Write identical artefacts as pipeline 3: app JSON, app pseudocode, per-module JSON/pseudocode, module index, and manifest.
+
+The `run-model-overview.ps1` launcher wraps this with interactive dump and module selection.
+
+**Key difference from pipeline 3:** The CLI skips Git repository resolution, `mx dump-mpr` execution, and HEAD reconstruction. It works from pre-existing dump files only. Output contracts are identical.
+
 ## Service responsibilities
 
 | Service | Responsibility |

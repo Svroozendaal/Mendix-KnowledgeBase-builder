@@ -272,6 +272,35 @@ Commit-message storage folder:
 - Some resources still rely on generic detail summaries rather than dedicated semantic parsers.
 - Commit-message storage endpoint exists server-side; current embedded UI primarily supports copy-to-clipboard composition.
 
+## CLI test harness (`model-overview-cli`)
+
+A separate .NET 8.0 console project provides a standalone test harness for the model overview pipeline. It exists purely for development iteration — the extension remains the production entry point.
+
+### Architecture
+
+- **Project:** `model-overview-cli/ModelOverviewCli.csproj`
+- **References:** `AutoCommitMessage.csproj` via `<ProjectReference>`
+- **Access:** Extension exposes internals via `InternalsVisibleTo("ModelOverviewCli")`
+- **No code duplication:** The CLI calls `MendixModelOverviewParser.ParseDump()` and `.BuildModulePseudocode()` directly from the extension project
+
+### What it does
+
+- Reads a pre-existing dump JSON file (from `mendix-data/dumps/`)
+- Lists available modules (`--list-modules`)
+- Generates app and module overview artefacts (JSON + pseudocode) identical to extension output
+- Writes to `mendix-data/app-overview/`
+
+### Launcher
+
+`run-model-overview.ps1` wraps the CLI with interactive dump selection and module multi-select. See `REPOSITORY_WORKFLOWS.md` for usage.
+
+### Visibility changes to the extension
+
+- `InternalsVisibleTo("ModelOverviewCli")` added to `AutoCommitMessage.csproj`
+- `ModuleOverviewExport` record changed from `private` to `internal` in `AutoCommitMessageModelOverviewService.cs`
+
+These changes have no effect on extension runtime behaviour.
+
 ## Related documents
 
 - `PROCESSING_PIPELINE.md`

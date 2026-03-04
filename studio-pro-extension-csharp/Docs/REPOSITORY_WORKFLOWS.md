@@ -15,8 +15,10 @@ Describes current development and runtime workflows for the Studio Pro extension
 
 - Extension project: `studio-pro-extension-csharp/AutoCommitMessage.csproj`
 - Extension manifest: `studio-pro-extension-csharp/manifest.json`
+- CLI test harness: `model-overview-cli/ModelOverviewCli.csproj`
 - Deploy script: `deploy-autocommitmessage.ps1`
 - Studio Pro launcher: `start-mendix-app.ps1`
+- CLI overview launcher: `run-model-overview.ps1`
 - Default data root: `<project-or-configured-base>/mendix-data`
 
 ## `.env` keys used by scripts
@@ -77,6 +79,46 @@ What it does:
    - dumps
    - overview structured output
    - overview pseudocode output
+
+## CLI overview workflow (test harness)
+
+The CLI test harness allows model overview generation without Studio Pro. It calls the same parser code from the extension project.
+
+Interactive mode:
+
+```powershell
+.\run-model-overview.ps1
+```
+
+What it does:
+
+1. Reads `MENDIX_DATA_ROOT` from `.env`.
+2. Discovers dump folders in `mendix-data/dumps/` and presents numbered selection.
+3. Builds the CLI project (`dotnet build`).
+4. Lists available modules from the selected dump.
+5. Presents interactive module multi-select (comma-separated numbers or `*` for all).
+6. Generates overview artefacts to `mendix-data/app-overview/`.
+
+Direct mode (skip interactive menus):
+
+```powershell
+.\run-model-overview.ps1 -DumpPath "mendix-data\dumps\<folder>\working-dump.json" -Modules "SmartExpenses"
+.\run-model-overview.ps1 -SkipBuild -DumpPath <path> -OutputPath <dir> -Modules "A,B"
+```
+
+CLI direct usage (without launcher):
+
+```powershell
+dotnet run --project model-overview-cli -- --dump <path> --list-modules
+dotnet run --project model-overview-cli -- --dump <path> --output <dir> --modules "A,B"
+```
+
+Development iteration loop:
+
+1. Edit parser/formatter in `studio-pro-extension-csharp/`.
+2. Run `.\run-model-overview.ps1` (auto-builds).
+3. Inspect output in `mendix-data/app-overview/`.
+4. Repeat.
 
 ## Data-output workflow
 

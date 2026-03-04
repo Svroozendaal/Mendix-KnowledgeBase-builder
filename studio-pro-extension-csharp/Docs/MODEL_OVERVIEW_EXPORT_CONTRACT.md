@@ -23,7 +23,7 @@ Overview generation modes:
 - `Modules`
 - `Both`
 
-Web actions:
+### Web actions (extension)
 
 - `generate-overview-app`
 - `generate-overview-modules`
@@ -33,6 +33,15 @@ Web actions:
 Module discovery action:
 
 - `list-overview-modules`
+
+### CLI test harness
+
+The `model-overview-cli` console app produces identical output using the same parser. It reads pre-existing dump files instead of running `mx dump-mpr`.
+
+- `ModelOverviewCli --dump <path> --list-modules`
+- `ModelOverviewCli --dump <path> --output <dir> [--modules "A,B"]`
+
+Output format and artefact structure are identical to the web actions above.
 
 ## Run folder naming
 

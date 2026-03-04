@@ -1,0 +1,38 @@
+# Module: New_Module
+Entities: 5, Associations: 2, Enumerations: 0
+Flows: 2
+
+## Domain Model
+- ENTITY New_Module.Entity2 (persistent)
+  - ATTR Attribute: StringAttributeType
+- ENTITY New_Module.Entity3assossiatatedwithEntity2 (persistent)
+- ENTITY New_Module.Entity5 (non-persistent)
+  - ATTR test_attribute: StringAttributeType
+- ENTITY New_Module.Entitywith10attributes (persistent)
+  - ATTR Attribute1STring: StringAttributeType
+  - ATTR Attribute2int: IntegerAttributeType
+  - ATTR Attribute3datetime: DateTimeAttributeType
+- ENTITY New_Module.GeneralizationEntityImage (persistent, generalization=System.Image)
+- ASSOC New_Module.Entity3assossiatatedwithEntity2_Entity2: New_Module.Entity3assossiatatedwithEntity2 [*-1] New_Module.Entity2
+- ASSOC New_Module.Entitywith10attributes_Entity2: New_Module.Entitywith10attributes [*-1] New_Module.Entity2
+
+## Flows
+
+FLOW Microflow: New_Module.ACO_new
+NODES=10; EDGES=7
+1. START
+2. ACTION RetrieveAction: retrieve Entity2 over association Entitywith10attributes_Entity2 from Entitywith10attributes
+3. DECISION filled? expression=$Entity2 != empty
+4. BRANCH when EnumerationCase=true
+  5. ACTION ChangeObjectAction: change Entity2 (Attribute=' jooo nieuwe tekst'; refreshInClient=false)
+  6. ACTION CommitAction: commit Entity2 (refreshInClient=false, withEvents=true)
+  7. END
+8. BRANCH when EnumerationCase=false
+  9. ACTION ShowMessageAction: show message (text=helaas!, type=Information, blocking=true)
+  10. END
+
+FLOW Microflow: New_Module.BCO_new
+NODES=4; EDGES=2
+1. START
+2. ACTION ChangeObjectAction: change Entitywith10attributes (Attribute2int=$Entitywith10attributes/Attribute2int + 15; refreshInClient=false)
+3. END
