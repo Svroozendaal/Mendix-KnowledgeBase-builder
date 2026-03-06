@@ -1,0 +1,249 @@
+﻿{
+    "name":  "SmartExpenses Pilot Custom Benchmark",
+    "scenarios":  [
+                      {
+                          "id":  "Q1",
+                          "question":  "How is a transaction created and saved?",
+                          "critical":  true,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "modules/SmartExpenses/FLOWS.md",
+                                               "patterns":  [
+                                                                "ACT_Transaction_Create",
+                                                                "ACT_Transaction_NewEdit_Save"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "modules/SmartExpenses/PAGES.md",
+                                               "patterns":  [
+                                                                "SmartExpenses.Transaction_New",
+                                                                "Page-Flow Links"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q2",
+                          "question":  "Which flows can change SmartExpenses.Transaction and under which role constraints?",
+                          "critical":  true,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "modules/SmartExpenses/DOMAIN.md",
+                                               "patterns":  [
+                                                                "SmartExpenses.Transaction",
+                                                                "Entity Lifecycle Matrix"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "modules/SmartExpenses/FLOWS.md",
+                                               "patterns":  [
+                                                                "SUB_Transaction_setStatus",
+                                                                "Tier 1 Deep Narratives"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "app/SECURITY.md",
+                                               "patterns":  [
+                                                                "SmartExpenses.Transaction",
+                                                                "Role-to-Module-Role Matrix"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q3",
+                          "question":  "What does ImporterHelper call in SmartExpenses?",
+                          "critical":  true,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "routes/cross-module.md",
+                                               "patterns":  [
+                                                                "ImporterHelper.ACT_ImportTransaction_AcceptTransactions",
+                                                                "SmartExpenses.SUB_Transaction_setStatus"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "app/CALL_GRAPH.md",
+                                               "patterns":  [
+                                                                "ImporterHelper",
+                                                                "SmartExpenses"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q4",
+                          "question":  "Which pages are shown during budget type management?",
+                          "critical":  false,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "modules/SmartExpenses/PAGES.md",
+                                               "patterns":  [
+                                                                "BudgetType",
+                                                                "Page-Flow Links"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "routes/by-page.md",
+                                               "patterns":  [
+                                                                "SmartExpenses.BudgetType",
+                                                                "Shown by flows"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q5",
+                          "question":  "What entity lifecycle exists for BudgetTerm?",
+                          "critical":  false,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "modules/SmartExpenses/DOMAIN.md",
+                                               "patterns":  [
+                                                                "SmartExpenses.BudgetTerm",
+                                                                "Entity Lifecycle Matrix"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q6",
+                          "question":  "Which user roles can access parent home paths?",
+                          "critical":  false,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "app/SECURITY.md",
+                                               "patterns":  [
+                                                                "Parent",
+                                                                "Role-to-Module-Role Matrix"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "routes/by-page.md",
+                                               "patterns":  [
+                                                                "SmartExpenses.Home_Parent"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q7",
+                          "question":  "Where is transaction status determined?",
+                          "critical":  true,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "modules/SmartExpenses/FLOWS.md",
+                                               "patterns":  [
+                                                                "SUB_Transaction_setStatus",
+                                                                "Tier 1 Deep Narratives"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "routes/by-flow.md",
+                                               "patterns":  [
+                                                                "SmartExpenses.SUB_Transaction_setStatus",
+                                                                "Touches Entities"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q8",
+                          "question":  "What scheduled/system automation affects custom modules?",
+                          "critical":  false,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "modules/SmartExpenses/RESOURCES.md",
+                                               "patterns":  [
+                                                                "Scheduled Events"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "routes/cross-module.md",
+                                               "patterns":  [
+                                                                "Custom-boundary dependency lens"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q9",
+                          "question":  "Which module is the custom orchestration hub?",
+                          "critical":  true,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "app/CALL_GRAPH.md",
+                                               "patterns":  [
+                                                                "Custom Module Boundary"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "routes/cross-module.md",
+                                               "patterns":  [
+                                                                "Hub/leaf module classification"
+                                                            ]
+                                           }
+                                       ]
+                      },
+                      {
+                          "id":  "Q10",
+                          "question":  "What is still unknown and why?",
+                          "critical":  false,
+                          "weight":  10,
+                          "naIfMissingFiles":  [
+                                                   "modules/SmartExpenses/README.md"
+                                               ],
+                          "evidence":  [
+                                           {
+                                               "file":  "READER.md",
+                                               "patterns":  [
+                                                                "Confidence levels",
+                                                                "Unknown"
+                                                            ]
+                                           },
+                                           {
+                                               "file":  "modules/SmartExpenses/README.md",
+                                               "patterns":  [
+                                                                "Top risks/unknowns in model understanding"
+                                                            ]
+                                           }
+                                       ]
+                      }
+                  ]
+}

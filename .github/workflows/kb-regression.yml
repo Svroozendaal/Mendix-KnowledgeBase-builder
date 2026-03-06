@@ -1,0 +1,20 @@
+name: KB Regression
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  regression:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run KB reference regression
+        shell: pwsh
+        run: |
+          ./KnowledgeBase-Creator/scripts/run-reference-regression.ps1

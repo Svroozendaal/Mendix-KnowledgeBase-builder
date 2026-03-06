@@ -1,31 +1,21 @@
-# Temporary local build outputs used for lock-safe validation builds.
-studio-pro-extension-csharp/obj-build*/
-studio-pro-extension-csharp/bin-build*/
-build-artifacts/
-studio-pro-extension-csharp/bin/
-studio-pro-extension-csharp/obj/
-studio-pro-extension-csharp/build-artifacts/
-studio-pro-extension-csharp/build-artifacts-run-*/
-studio-pro-extension-csharp/build-check/
-
 # Local developer configuration
 .env
 .env.local
+!KnowledgeBase-Creator/.env
 
 # Local throwaway files
 temp-write-test.txt
 tmp*/
 
-# Mendix runtime data (keep folder structure, ignore generated content)
-mendix-data/exports/*
-!mendix-data/exports/.gitkeep
-mendix-data/processed/*
-!mendix-data/processed/.gitkeep
-mendix-data/errors/*
-!mendix-data/errors/.gitkeep
-mendix-data/structured/*
-!mendix-data/structured/.gitkeep
-mendix-data/dumps/*
-!mendix-data/dumps/.gitkeep
+# Build artifacts
+**/bin/
+**/obj/
+build-artifacts/
+
+# Mendix runtime data (large dumps, temp files)
+mendix-data/dumps/
 mendix-data/tmp*/
 mendix-data/*.log
+mendix-data/*
+tests/*
+

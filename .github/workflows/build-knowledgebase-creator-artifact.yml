@@ -1,0 +1,57 @@
+﻿name: Build KnowledgeBase Creator Artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build parser binary from artifact source
+        shell: pwsh
+        run: |
+          dotnet publish ./KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/ModelOverviewCli.csproj `
+            -c Release `
+            -r win-x64 `
+            --self-contained false `
+            -o ./KnowledgeBase-Creator/Mendix-model-overview-parser/bin/win-x64
+
+      - name: Clean source build outputs inside artifact
+        shell: pwsh
+        run: |
+          $paths = @(
+            "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/bin",
+            "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/obj",
+            "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/bin",
+            "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/obj"
+          )
+          foreach ($path in $paths) {
+            if (Test-Path $path) {
+              Remove-Item -Recurse -Force $path
+            }
+          }
+
+      - name: Create zip package
+        shell: pwsh
+        run: |
+          if (Test-Path KnowledgeBase-Creator.zip) {
+            Remove-Item KnowledgeBase-Creator.zip -Force
+          }
+          Compress-Archive -Path KnowledgeBase-Creator -DestinationPath KnowledgeBase-Creator.zip
+
+      - name: Upload artifact folder and zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: KnowledgeBase-Creator
+          path: |
+            KnowledgeBase-Creator/
+            KnowledgeBase-Creator.zip
