@@ -31,18 +31,46 @@ By default, output is written to:
 
 Generated structure:
 
-- `mendix-data/.agents/`
-- `mendix-data/app-overview/<run-folder>/`
-- `mendix-data/dumps/<timestamp>_<app>/`
-- `mendix-data/knowledge-base/`
+- `mendix-data/app-overview/<run-folder>/` - parsed model exports
+- `mendix-data/dumps/<timestamp>_<app>/` - raw dump files
+- `mendix-data/knowledge-base/` - the standalone AI-navigable KB
+  - `knowledge-base/.agents/` - AI interpretation agents (shipped with KB)
+  - `knowledge-base/CLAUDE.md` - AI bootstrap entry point
+  - `knowledge-base/_sources/creator-link.json` - linkage back to this creator package for `/enrichkb` and `/initkb`
 
 Each `mendix-data` folder is treated as one app workspace. The generated knowledge base lives directly inside `knowledge-base`, not inside `knowledge-base/<app-name>`.
+The `knowledge-base/` folder is self-contained and can be copied/shared standalone.
 If a non-empty `mendix-data` folder already exists, a fresh parser run now fails instead of overwriting it.
+
+## AI-Assisted KB Creation
+
+Use the `/initkb` slash command from inside `KnowledgeBase-Creator` to run the full pipeline and then guide AI enrichment with the existing creator agents and skills:
+
+```
+/initkb
+```
+
+This is a creator-package command, not a generated-KB command. It runs the pipeline (Phase 1), continues with semantic enrichment guidance (Phase 2), and finishes with scaffold and quality-gate revalidation. See `AGENTS.md` for the full creation workflow.
+
+If the pipeline already completed and you only want phase 2 AI enrichment, use:
+
+```text
+/enrichkb
+```
+
+Inside a generated KB, `/enrichkb` is the explicit in-place AI enrichment command. `/initkb` remains available as the full rebuild or compatibility path.
+
+The executable backend behind `/initkb` is:
+
+```powershell
+.\wizard\run-initkb.ps1
+```
 
 ## Script Locations
 
-Core pipeline scripts now live in `wizard/`:
+Core pipeline scripts live in `wizard/`:
 
+- `wizard/run-initkb.ps1`
 - `wizard/run-dump-parser.ps1`
 - `wizard/run-kb-scaffold.ps1`
 - `wizard/run-kb-compose.ps1`
@@ -78,6 +106,24 @@ When no MPR path is configured, script mode also auto-detects a single `.mpr` in
 ## Script Usage (Advanced / CI)
 
 Full run:
+
+```powershell
+.\wizard\run-initkb.ps1 -OpenVsCode
+```
+
+AI enrichment only:
+
+```text
+/enrichkb
+```
+
+Target an existing generated KB:
+
+```powershell
+.\wizard\run-initkb.ps1 -KnowledgeBaseRoot "C:\path\to\knowledge-base" -OpenVsCode
+```
+
+Pipeline primitive only:
 
 ```powershell
 .\wizard\run-dump-parser.ps1

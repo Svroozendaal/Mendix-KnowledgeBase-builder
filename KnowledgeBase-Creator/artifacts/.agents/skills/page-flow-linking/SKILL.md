@@ -10,7 +10,7 @@ KB UX Interpreter, KB Navigator, User Story Interpreter
 
 ## Procedure
 
-1. Read `modules/<Module>/PAGES.md` for the page definition.
+1. Read `modules/<Module>/PAGES.md` for app and system modules, or `modules/_marktplace/<Module>/PAGES.md` for marketplace modules, to get the page definition.
 2. Identify data source flows (DS_ microflows or nanoflows that feed data views / list views).
 3. Identify action flows (ACT_ microflows triggered by buttons or events).
 4. Identify validation flows (VAL_ microflows called before commits).

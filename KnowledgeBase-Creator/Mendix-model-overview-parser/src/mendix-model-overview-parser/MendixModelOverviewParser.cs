@@ -24,6 +24,7 @@ internal static class MendixModelOverviewParser
 
     private const string ProjectSecurityModelType = "Security$ProjectSecurity";
     private const string ModuleSecurityModelType = "Security$ModuleSecurity";
+    private const string NavigationDocumentModelType = "Navigation$NavigationDocument";
     private const string PageModelType = "Pages$Page";
     private const string SnippetModelType = "Pages$Snippet";
     private const string ConstantModelType = "Constants$Constant";
@@ -138,7 +139,7 @@ internal static class MendixModelOverviewParser
                 foreach (var rule in entity.AccessRules)
                 {
                     var rolesLabel = rule.ModuleRoles.Count > 0 ? string.Join(", ", rule.ModuleRoles) : "<none>";
-                    builder.AppendLine($"  - ACCESS_RULE [{rolesLabel}] Create={BoolLabel(rule.AllowCreate)}, Delete={BoolLabel(rule.AllowDelete)}, Default={rule.DefaultMemberAccessRights ?? "None"}");
+                    builder.AppendLine($"  - ACCESS_RULE {rule.RuleKey} [{rolesLabel}] Create={BoolLabel(rule.AllowCreate)}, Delete={BoolLabel(rule.AllowDelete)}, Default={rule.DefaultMemberAccessRights ?? "None"}");
                     if (!string.IsNullOrWhiteSpace(rule.XPathConstraint))
                     {
                         builder.AppendLine($"    XPath: {rule.XPathConstraint}");
@@ -241,6 +242,12 @@ internal static class MendixModelOverviewParser
                         string.IsNullOrWhiteSpace(p.EntityType) ? p.Name : $"{p.Name} ({p.EntityType})");
                     builder.AppendLine($"  Parameters: {string.Join(", ", paramDescs)}");
                 }
+                if (page.DataSources.Count > 0)
+                    builder.AppendLine($"  Data sources: {string.Join(" | ", page.DataSources.Select(source => source.Summary))}");
+                if (page.ClientActions.Count > 0)
+                    builder.AppendLine($"  Client actions: {string.Join(" | ", page.ClientActions.Select(action => action.Summary))}");
+                if (page.NavigationProvenance.Count > 0)
+                    builder.AppendLine($"  Navigation provenance: {string.Join(" | ", page.NavigationProvenance.Select(item => item.Summary))}");
 
                 if (!string.IsNullOrWhiteSpace(page.Url))
                     builder.AppendLine($"  URL: {page.Url}");
@@ -487,7 +494,7 @@ internal static class MendixModelOverviewParser
 
             if (string.Equals(descriptor.ModelType, PageModelType, StringComparison.OrdinalIgnoreCase))
             {
-                mutable.Pages.Add(ParsePage(descriptor.Object, descriptor.ElementName));
+                mutable.Pages.Add(ParsePage(descriptor.Object, descriptor.ElementName, snapshot));
                 continue;
             }
 
@@ -729,16 +736,28 @@ internal static class MendixModelOverviewParser
         }
 
         var rules = new List<OverviewAccessRule>();
+        var ruleIndex = 0;
         foreach (var ruleElement in rulesElement.EnumerateArray())
         {
             if (ruleElement.ValueKind != JsonValueKind.Object)
+            {
+                ruleIndex++;
                 continue;
+            }
 
             var moduleRoles = ReadStringArray(ruleElement, "moduleRoles");
             TryReadBooleanProperty(ruleElement, "allowCreate", out var allowCreate);
             TryReadBooleanProperty(ruleElement, "allowDelete", out var allowDelete);
             var defaultAccess = TryReadStringProperty(ruleElement, "defaultMemberAccessRights");
             var xPathConstraint = TryReadStringProperty(ruleElement, "xPathConstraint");
+            var ruleKey = $"rule-{ruleIndex + 1}";
+            OverviewXPathEvidence? xPathEvidence = null;
+            if (!string.IsNullOrWhiteSpace(xPathConstraint))
+            {
+                xPathEvidence = new OverviewXPathEvidence(
+                    Constraint: xPathConstraint,
+                    Summary: NormalizeInlineText(xPathConstraint, 220));
+            }
 
             var memberAccesses = new List<OverviewMemberAccess>();
             if (TryReadProperty(ruleElement, "memberAccesses", out var membersElement) &&
@@ -764,12 +783,15 @@ internal static class MendixModelOverviewParser
             }
 
             rules.Add(new OverviewAccessRule(
+                RuleKey: ruleKey,
                 ModuleRoles: moduleRoles,
                 AllowCreate: allowCreate,
                 AllowDelete: allowDelete,
                 DefaultMemberAccessRights: defaultAccess,
                 XPathConstraint: string.IsNullOrWhiteSpace(xPathConstraint) ? null : xPathConstraint,
+                XPathEvidence: xPathEvidence,
                 MemberAccesses: memberAccesses));
+            ruleIndex++;
         }
 
         return rules;
@@ -837,7 +859,7 @@ internal static class MendixModelOverviewParser
         return roles;
     }
 
-    private static OverviewPage ParsePage(JsonElement pageObject, string fallbackName)
+    private static OverviewPage ParsePage(JsonElement pageObject, string fallbackName, DumpSnapshot snapshot)
     {
         var qualifiedName = TryReadStringProperty(pageObject, "$QualifiedName") ?? fallbackName;
         var name = TryReadStringProperty(pageObject, "name") ?? fallbackName;
@@ -863,6 +885,9 @@ internal static class MendixModelOverviewParser
                       (layout is not null && layout.Contains("Popup", StringComparison.OrdinalIgnoreCase));
 
         var parameters = ParsePageParameters(pageObject);
+        var dataSources = ParsePageDataSources(pageObject);
+        var clientActions = ParsePageClientActions(pageObject);
+        var navigationProvenance = ParsePageNavigationProvenance(snapshot, qualifiedName);
 
         return new OverviewPage(
             QualifiedName: qualifiedName,
@@ -876,7 +901,10 @@ internal static class MendixModelOverviewParser
             PopupHeight: popupHeight,
             PopupResizable: popupResizable,
             Url: string.IsNullOrWhiteSpace(url) ? null : url,
-            Excluded: excluded);
+            Excluded: excluded,
+            DataSources: dataSources,
+            ClientActions: clientActions,
+            NavigationProvenance: navigationProvenance);
     }
 
     private static IReadOnlyList<OverviewPageParameter> ParsePageParameters(JsonElement parentObject)
@@ -905,6 +933,262 @@ internal static class MendixModelOverviewParser
         }
 
         return parameters;
+    }
+
+    private static IReadOnlyList<OverviewPageDataSource> ParsePageDataSources(JsonElement pageObject)
+    {
+        var results = new List<OverviewPageDataSource>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var candidate in EnumerateNestedObjects(pageObject))
+        {
+            var modelType = TryReadStringProperty(candidate, "$Type");
+            if (string.IsNullOrWhiteSpace(modelType) ||
+                modelType.IndexOf("DataSource", StringComparison.OrdinalIgnoreCase) < 0)
+            {
+                continue;
+            }
+
+            var sourceId = TryReadStringProperty(candidate, "$ID") ?? $"datasource-{results.Count + 1}";
+            if (!seen.Add(sourceId))
+            {
+                continue;
+            }
+
+            var sourceType = ShortTypeName(modelType);
+            var entity = TryReadAnyStringProperty(candidate, "entity", "sourceEntity", "entityName");
+            var constraint = TryReadAnyStringProperty(candidate, "xPathConstraint", "xpathConstraint", "xPath");
+            var flowName = TryReadAnyStringProperty(candidate, "microflow", "nanoflow", "dataSourceMicroflow");
+
+            var summaryParts = new List<string> { sourceType };
+            if (!string.IsNullOrWhiteSpace(entity))
+                summaryParts.Add($"entity={entity}");
+            if (!string.IsNullOrWhiteSpace(flowName))
+                summaryParts.Add($"flow={flowName}");
+            if (!string.IsNullOrWhiteSpace(constraint))
+                summaryParts.Add($"xPath={NormalizeInlineText(constraint, 140)}");
+
+            results.Add(new OverviewPageDataSource(
+                SourceId: sourceId,
+                SourceType: sourceType,
+                Summary: string.Join(", ", summaryParts),
+                Entity: entity,
+                Constraint: string.IsNullOrWhiteSpace(constraint) ? null : constraint,
+                FlowName: string.IsNullOrWhiteSpace(flowName) ? null : flowName));
+        }
+
+        return results
+            .OrderBy(item => item.SourceType, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.SourceId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static IReadOnlyList<OverviewPageClientAction> ParsePageClientActions(JsonElement pageObject)
+    {
+        var results = new List<OverviewPageClientAction>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var candidate in EnumerateNestedObjects(pageObject))
+        {
+            var modelType = TryReadStringProperty(candidate, "$Type");
+            if (string.IsNullOrWhiteSpace(modelType) ||
+                !modelType.EndsWith("ClientAction", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var actionId = TryReadStringProperty(candidate, "$ID") ?? $"client-action-{results.Count + 1}";
+            if (!seen.Add(actionId))
+            {
+                continue;
+            }
+
+            var actionType = ShortTypeName(modelType);
+            var targetPage = ResolvePageTargetFromClientAction(candidate);
+            var flowName = ResolveFlowTargetFromClientAction(candidate);
+
+            var summaryParts = new List<string> { actionType };
+            if (!string.IsNullOrWhiteSpace(targetPage))
+                summaryParts.Add($"page={targetPage}");
+            if (!string.IsNullOrWhiteSpace(flowName))
+                summaryParts.Add($"flow={flowName}");
+
+            results.Add(new OverviewPageClientAction(
+                ActionId: actionId,
+                ActionType: actionType,
+                Summary: string.Join(", ", summaryParts),
+                TargetPage: string.IsNullOrWhiteSpace(targetPage) ? null : targetPage,
+                FlowName: string.IsNullOrWhiteSpace(flowName) ? null : flowName));
+        }
+
+        return results
+            .OrderBy(item => item.ActionType, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.ActionId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static IReadOnlyList<OverviewPageNavigationProvenance> ParsePageNavigationProvenance(
+        DumpSnapshot snapshot,
+        string qualifiedPageName)
+    {
+        if (snapshot.NavigationDocumentElement is not { } navigationElement)
+        {
+            return Array.Empty<OverviewPageNavigationProvenance>();
+        }
+
+        var results = new List<OverviewPageNavigationProvenance>();
+        if (!TryReadProperty(navigationElement, "profiles", out var profilesElement) ||
+            profilesElement.ValueKind != JsonValueKind.Array)
+        {
+            return Array.Empty<OverviewPageNavigationProvenance>();
+        }
+
+        foreach (var profileElement in profilesElement.EnumerateArray())
+        {
+            if (profileElement.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var profileName = TryReadStringProperty(profileElement, "name") ?? "<profile>";
+
+            if (TryReadProperty(profileElement, "homePage", out var homePageElement) &&
+                homePageElement.ValueKind == JsonValueKind.Object &&
+                string.Equals(TryReadStringProperty(homePageElement, "page"), qualifiedPageName, StringComparison.OrdinalIgnoreCase))
+            {
+                results.Add(new OverviewPageNavigationProvenance(
+                    ProvenanceId: TryReadStringProperty(homePageElement, "$ID") ?? $"homepage-{profileName}",
+                    SourceType: "HomePage",
+                    Summary: $"Homepage in profile {profileName}",
+                    Page: qualifiedPageName,
+                    UserRole: null,
+                    FlowName: EmptyToNull(TryReadStringProperty(homePageElement, "microflow"))));
+            }
+
+            if (TryReadProperty(profileElement, "roleBasedHomePages", out var roleHomePagesElement) &&
+                roleHomePagesElement.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var roleHomePage in roleHomePagesElement.EnumerateArray())
+                {
+                    if (roleHomePage.ValueKind != JsonValueKind.Object ||
+                        !string.Equals(TryReadStringProperty(roleHomePage, "page"), qualifiedPageName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    var userRole = TryReadStringProperty(roleHomePage, "userRole");
+                    results.Add(new OverviewPageNavigationProvenance(
+                        ProvenanceId: TryReadStringProperty(roleHomePage, "$ID") ?? $"role-homepage-{profileName}-{userRole}",
+                        SourceType: "RoleBasedHomePage",
+                        Summary: $"Role-based homepage in profile {profileName}" +
+                                 (string.IsNullOrWhiteSpace(userRole) ? string.Empty : $" for role {userRole}"),
+                        Page: qualifiedPageName,
+                        UserRole: EmptyToNull(userRole),
+                        FlowName: EmptyToNull(TryReadStringProperty(roleHomePage, "microflow"))));
+                }
+            }
+
+            if (TryReadProperty(profileElement, "menuItemCollection", out var menuCollectionElement) &&
+                menuCollectionElement.ValueKind == JsonValueKind.Object)
+            {
+                AppendMenuItemNavigationProvenance(menuCollectionElement, qualifiedPageName, profileName, results);
+            }
+        }
+
+        return results
+            .OrderBy(item => item.SourceType, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(item => item.Summary, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static void AppendMenuItemNavigationProvenance(
+        JsonElement menuCollectionElement,
+        string qualifiedPageName,
+        string profileName,
+        ICollection<OverviewPageNavigationProvenance> results)
+    {
+        if (!TryReadProperty(menuCollectionElement, "items", out var itemsElement) ||
+            itemsElement.ValueKind != JsonValueKind.Array)
+        {
+            return;
+        }
+
+        foreach (var itemElement in itemsElement.EnumerateArray())
+        {
+            if (itemElement.ValueKind != JsonValueKind.Object)
+                continue;
+
+            var caption = ParseTextTranslation(itemElement, "caption") ?? TryReadStringProperty(itemElement, "name") ?? "Menu item";
+            if (TryReadProperty(itemElement, "action", out var actionElement) &&
+                actionElement.ValueKind == JsonValueKind.Object)
+            {
+                var targetPage = ResolvePageTargetFromClientAction(actionElement);
+                if (string.Equals(targetPage, qualifiedPageName, StringComparison.OrdinalIgnoreCase))
+                {
+                    results.Add(new OverviewPageNavigationProvenance(
+                        ProvenanceId: TryReadStringProperty(itemElement, "$ID") ?? $"menu-item-{caption}",
+                        SourceType: "MenuItem",
+                        Summary: $"Menu item \"{caption}\" in profile {profileName}",
+                        Page: qualifiedPageName,
+                        UserRole: null,
+                        FlowName: ResolveFlowTargetFromClientAction(actionElement)));
+                }
+            }
+
+            AppendMenuItemNavigationProvenance(itemElement, qualifiedPageName, profileName, results);
+        }
+    }
+
+    private static IEnumerable<JsonElement> EnumerateNestedObjects(JsonElement root)
+    {
+        var stack = new Stack<JsonElement>();
+        stack.Push(root);
+
+        while (stack.Count > 0)
+        {
+            var current = stack.Pop();
+            if (current.ValueKind == JsonValueKind.Object)
+            {
+                yield return current;
+                foreach (var property in current.EnumerateObject())
+                {
+                    stack.Push(property.Value);
+                }
+            }
+            else if (current.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var item in current.EnumerateArray())
+                {
+                    stack.Push(item);
+                }
+            }
+        }
+    }
+
+    private static string? ResolvePageTargetFromClientAction(JsonElement actionElement)
+    {
+        if (TryReadProperty(actionElement, "pageSettings", out var pageSettingsElement) &&
+            pageSettingsElement.ValueKind == JsonValueKind.Object)
+        {
+            return EmptyToNull(TryReadStringProperty(pageSettingsElement, "page"));
+        }
+
+        return EmptyToNull(TryReadStringProperty(actionElement, "page"));
+    }
+
+    private static string? ResolveFlowTargetFromClientAction(JsonElement actionElement)
+    {
+        if (TryReadProperty(actionElement, "microflowSettings", out var microflowSettingsElement) &&
+            microflowSettingsElement.ValueKind == JsonValueKind.Object)
+        {
+            var microflow = TryReadStringProperty(microflowSettingsElement, "microflow");
+            if (!string.IsNullOrWhiteSpace(microflow))
+                return microflow;
+
+            var nanoflow = TryReadStringProperty(microflowSettingsElement, "nanoflow");
+            if (!string.IsNullOrWhiteSpace(nanoflow))
+                return nanoflow;
+        }
+
+        return EmptyToNull(TryReadAnyStringProperty(actionElement, "microflow", "nanoflow"));
     }
 
     private static OverviewSnippet ParseSnippet(JsonElement snippetObject, string fallbackName)
@@ -1192,23 +1476,28 @@ internal static class MendixModelOverviewParser
             mainEdges,
             startNodeIds,
             loopBodyMap);
+        var immutableNodes = nodesById.Values
+            .Select(node => node.ToImmutable())
+            .OrderBy(node => node.NodeType, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(node => node.Label, StringComparer.OrdinalIgnoreCase)
+            .ThenBy(node => node.NodeId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
 
         return new OverviewFlow(
             FlowId: descriptor.ResourceId,
             Kind: ResolveFlowKind(descriptor.ModelType),
             QualifiedName: descriptor.ElementName,
             Module: moduleName,
-            Nodes: nodesById.Values
-                .Select(node => node.ToImmutable())
-                .OrderBy(node => node.NodeType, StringComparer.OrdinalIgnoreCase)
-                .ThenBy(node => node.Label, StringComparer.OrdinalIgnoreCase)
-                .ThenBy(node => node.NodeId, StringComparer.OrdinalIgnoreCase)
-                .ToArray(),
+            Nodes: immutableNodes,
             Edges: edges,
             Calls: calls,
             StartNodeIds: startNodeIds,
             PrimaryExecutionOrderNodeIds: primaryOrder,
-            Pseudocode: pseudocode);
+            Pseudocode: pseudocode,
+            RetrieveActions: ExtractRetrieveActions(immutableNodes),
+            DecisionActions: ExtractDecisionActions(immutableNodes),
+            ShowPageActions: ExtractShowPageActions(immutableNodes),
+            MutationActions: ExtractMutationActions(immutableNodes));
     }
 
     private static OverviewFlow ParseWorkflow(ResourceDescriptor descriptor, string moduleName)
@@ -1285,16 +1574,17 @@ internal static class MendixModelOverviewParser
             edges,
             startNodeIds,
             new Dictionary<string, IReadOnlyList<string>>(StringComparer.OrdinalIgnoreCase));
+        var immutableNodes = nodes.Values
+            .Select(node => node.ToImmutable())
+            .OrderBy(node => node.NodeId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
 
         return new OverviewFlow(
             FlowId: descriptor.ResourceId,
             Kind: "Workflow",
             QualifiedName: descriptor.ElementName,
             Module: moduleName,
-            Nodes: nodes.Values
-                .Select(node => node.ToImmutable())
-                .OrderBy(node => node.NodeId, StringComparer.OrdinalIgnoreCase)
-                .ToArray(),
+            Nodes: immutableNodes,
             Edges: edges
                 .OrderBy(edge => edge.EdgeId, StringComparer.OrdinalIgnoreCase)
                 .ToArray(),
@@ -1303,7 +1593,175 @@ internal static class MendixModelOverviewParser
                 .ToArray(),
             StartNodeIds: startNodeIds,
             PrimaryExecutionOrderNodeIds: primaryOrder,
-            Pseudocode: pseudocode);
+            Pseudocode: pseudocode,
+            RetrieveActions: ExtractRetrieveActions(immutableNodes),
+            DecisionActions: ExtractDecisionActions(immutableNodes),
+            ShowPageActions: ExtractShowPageActions(immutableNodes),
+            MutationActions: ExtractMutationActions(immutableNodes));
+    }
+
+    private static IReadOnlyList<OverviewFlowRetrieveAction> ExtractRetrieveActions(IReadOnlyList<OverviewFlowNode> nodes)
+    {
+        return nodes
+            .Select(node =>
+            {
+                var text = GetFlowNodeEvidenceText(node);
+                if (string.IsNullOrWhiteSpace(text) ||
+                    text.IndexOf("retrieve", StringComparison.OrdinalIgnoreCase) < 0)
+                {
+                    return null;
+                }
+
+                var sourceKind = text.IndexOf("over association", StringComparison.OrdinalIgnoreCase) >= 0
+                    ? "Association"
+                    : text.IndexOf(" from ", StringComparison.OrdinalIgnoreCase) >= 0
+                        ? "Database"
+                        : "Unknown";
+                var entity = FirstRegexGroup(text, @"\bfrom\s+([A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*)");
+                var association = FirstRegexGroup(text, @"\bover association\s+([A-Za-z_][A-Za-z0-9_]*)");
+                var xPath = FirstRegexGroup(text, @"\bxPath=([^,\r\n)]+)");
+
+                return new OverviewFlowRetrieveAction(
+                    NodeId: node.NodeId,
+                    Summary: NormalizeInlineText(text, 220),
+                    SourceKind: sourceKind,
+                    Entity: EmptyToNull(entity),
+                    Association: EmptyToNull(association),
+                    XPath: EmptyToNull(xPath));
+            })
+            .Where(item => item is not null)
+            .Cast<OverviewFlowRetrieveAction>()
+            .OrderBy(item => item.NodeId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static IReadOnlyList<OverviewFlowDecisionAction> ExtractDecisionActions(IReadOnlyList<OverviewFlowNode> nodes)
+    {
+        return nodes
+            .Select(node =>
+            {
+                var text = GetFlowNodeEvidenceText(node);
+                var expression = FirstRegexGroup(text, @"\bexpression=([^\r\n]+)");
+                if (string.IsNullOrWhiteSpace(expression))
+                {
+                    return null;
+                }
+
+                var caption = text;
+                var expressionIndex = caption.IndexOf("expression=", StringComparison.OrdinalIgnoreCase);
+                if (expressionIndex >= 0)
+                {
+                    caption = caption[..expressionIndex].Trim().TrimEnd(',', ';');
+                }
+
+                return new OverviewFlowDecisionAction(
+                    NodeId: node.NodeId,
+                    Summary: NormalizeInlineText(text, 220),
+                    Caption: NormalizeInlineText(caption, 140),
+                    Expression: NormalizeInlineText(expression, 220));
+            })
+            .Where(item => item is not null)
+            .Cast<OverviewFlowDecisionAction>()
+            .OrderBy(item => item.NodeId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static IReadOnlyList<OverviewFlowShowPageAction> ExtractShowPageActions(IReadOnlyList<OverviewFlowNode> nodes)
+    {
+        return nodes
+            .Select(node =>
+            {
+                var text = GetFlowNodeEvidenceText(node);
+                var targetPage = FirstRegexGroup(text, @"\bshow page\s+([A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*)");
+                if (string.IsNullOrWhiteSpace(targetPage))
+                {
+                    return null;
+                }
+
+                return new OverviewFlowShowPageAction(
+                    NodeId: node.NodeId,
+                    Summary: NormalizeInlineText(text, 220),
+                    TargetPage: targetPage);
+            })
+            .Where(item => item is not null)
+            .Cast<OverviewFlowShowPageAction>()
+            .OrderBy(item => item.NodeId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static IReadOnlyList<OverviewFlowMutationAction> ExtractMutationActions(IReadOnlyList<OverviewFlowNode> nodes)
+    {
+        return nodes
+            .Select(node =>
+            {
+                var text = GetFlowNodeEvidenceText(node);
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    return null;
+                }
+
+                string? actionKind = null;
+                if (text.IndexOf("CreateObjectAction", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    text.IndexOf("create ", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    actionKind = "Create";
+                }
+                else if (text.IndexOf("ChangeObjectAction", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                         text.IndexOf("ChangeListAction", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                         text.IndexOf("change ", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    actionKind = "Change";
+                }
+                else if (text.IndexOf("CommitAction", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                         text.IndexOf("commit", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    actionKind = "Commit";
+                }
+                else if (text.IndexOf("DeleteAction", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                         text.IndexOf("delete ", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    actionKind = "Delete";
+                }
+
+                if (string.IsNullOrWhiteSpace(actionKind))
+                {
+                    return null;
+                }
+
+                var entity = FirstRegexGroup(text, @"\b([A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*)\b");
+                var memberSummary = FirstRegexGroup(text, @"\(([^)]+)\)");
+
+                return new OverviewFlowMutationAction(
+                    NodeId: node.NodeId,
+                    ActionKind: actionKind,
+                    Summary: NormalizeInlineText(text, 220),
+                    Entity: EmptyToNull(entity),
+                    MemberSummary: EmptyToNull(memberSummary));
+            })
+            .Where(item => item is not null)
+            .Cast<OverviewFlowMutationAction>()
+            .OrderBy(item => item.NodeId, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
+    private static string GetFlowNodeEvidenceText(OverviewFlowNode node)
+    {
+        var text = ((node.Label ?? string.Empty) + " " + (node.Detail ?? string.Empty)).Trim();
+        return NormalizeInlineText(text, 220);
+    }
+
+    private static string? FirstRegexGroup(string text, string pattern)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return null;
+        }
+
+        var match = System.Text.RegularExpressions.Regex.Match(
+            text,
+            pattern,
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        return match.Success ? match.Groups[1].Value.Trim() : null;
     }
 
     private static string[] ResolveStartNodeIds(
@@ -2446,6 +2904,9 @@ internal static class MendixModelOverviewParser
         options.Add($"{key}={normalized}");
     }
 
+    private static string? EmptyToNull(string? value) =>
+        string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+
     private static string? TryReadAnyStringProperty(JsonElement element, params string[] propertyNameCandidates)
     {
         foreach (var propertyName in propertyNameCandidates)
@@ -2618,6 +3079,11 @@ internal static class MendixModelOverviewParser
                         if (string.Equals(modelType, ProjectSecurityModelType, StringComparison.OrdinalIgnoreCase))
                         {
                             snapshot.ProjectSecurityElement = clone;
+                        }
+
+                        if (string.Equals(modelType, NavigationDocumentModelType, StringComparison.OrdinalIgnoreCase))
+                        {
+                            snapshot.NavigationDocumentElement = clone;
                         }
 
                         if (string.Equals(modelType, ProjectModuleModelType, StringComparison.OrdinalIgnoreCase))
@@ -2933,6 +3399,8 @@ internal static class MendixModelOverviewParser
 
         public JsonElement? ProjectSecurityElement { get; set; }
 
+        public JsonElement? NavigationDocumentElement { get; set; }
+
         public Dictionary<string, JsonElement> ModuleMetadata { get; } = new(StringComparer.OrdinalIgnoreCase);
     }
 
@@ -3113,7 +3581,11 @@ internal sealed record OverviewFlow(
     IReadOnlyList<OverviewFlowCall> Calls,
     IReadOnlyList<string> StartNodeIds,
     IReadOnlyList<string> PrimaryExecutionOrderNodeIds,
-    string Pseudocode);
+    string Pseudocode,
+    IReadOnlyList<OverviewFlowRetrieveAction> RetrieveActions,
+    IReadOnlyList<OverviewFlowDecisionAction> DecisionActions,
+    IReadOnlyList<OverviewFlowShowPageAction> ShowPageActions,
+    IReadOnlyList<OverviewFlowMutationAction> MutationActions);
 
 internal sealed record OverviewFlowNode(
     string NodeId,
@@ -3148,6 +3620,32 @@ internal sealed record OverviewCallEdge(
     string TargetFlow,
     bool IsInternal);
 
+internal sealed record OverviewFlowRetrieveAction(
+    string NodeId,
+    string Summary,
+    string SourceKind,
+    string? Entity,
+    string? Association,
+    string? XPath);
+
+internal sealed record OverviewFlowDecisionAction(
+    string NodeId,
+    string Summary,
+    string Caption,
+    string Expression);
+
+internal sealed record OverviewFlowShowPageAction(
+    string NodeId,
+    string Summary,
+    string TargetPage);
+
+internal sealed record OverviewFlowMutationAction(
+    string NodeId,
+    string ActionKind,
+    string Summary,
+    string? Entity,
+    string? MemberSummary);
+
 internal sealed record OverviewProjectSecurity(
     string? SecurityLevel,
     string? AdminUserName,
@@ -3166,12 +3664,18 @@ internal sealed record OverviewModuleRole(
     string? Description);
 
 internal sealed record OverviewAccessRule(
+    string RuleKey,
     IReadOnlyList<string> ModuleRoles,
     bool AllowCreate,
     bool AllowDelete,
     string? DefaultMemberAccessRights,
     string? XPathConstraint,
+    OverviewXPathEvidence? XPathEvidence,
     IReadOnlyList<OverviewMemberAccess> MemberAccesses);
+
+internal sealed record OverviewXPathEvidence(
+    string Constraint,
+    string Summary);
 
 internal sealed record OverviewMemberAccess(
     string MemberName,
@@ -3190,11 +3694,37 @@ internal sealed record OverviewPage(
     int PopupHeight,
     bool PopupResizable,
     string? Url,
-    bool Excluded);
+    bool Excluded,
+    IReadOnlyList<OverviewPageDataSource> DataSources,
+    IReadOnlyList<OverviewPageClientAction> ClientActions,
+    IReadOnlyList<OverviewPageNavigationProvenance> NavigationProvenance);
 
 internal sealed record OverviewPageParameter(
     string Name,
     string? EntityType);
+
+internal sealed record OverviewPageDataSource(
+    string SourceId,
+    string SourceType,
+    string Summary,
+    string? Entity,
+    string? Constraint,
+    string? FlowName);
+
+internal sealed record OverviewPageClientAction(
+    string ActionId,
+    string ActionType,
+    string Summary,
+    string? TargetPage,
+    string? FlowName);
+
+internal sealed record OverviewPageNavigationProvenance(
+    string ProvenanceId,
+    string SourceType,
+    string Summary,
+    string? Page,
+    string? UserRole,
+    string? FlowName);
 
 internal sealed record OverviewSnippet(
     string QualifiedName,

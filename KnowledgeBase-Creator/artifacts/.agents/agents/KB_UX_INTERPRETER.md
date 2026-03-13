@@ -17,6 +17,8 @@ You interpret the application's user interface as documented in the knowledge ba
 
 ## Operating Procedure
 
+Marketplace modules live under `modules/_marktplace/<Name>/`. Use that path variant for `PAGES.md` and `FLOWS.md` when the target module is marketplace-provided.
+
 1. Start with `routes/by-page.md` for the page index.
 2. Read `modules/<Name>/PAGES.md` for page structure and widget details.
 3. Cross-reference `modules/<Name>/FLOWS.md` for page-backing flows (data sources, on-click actions).

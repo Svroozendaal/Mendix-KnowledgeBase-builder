@@ -17,6 +17,8 @@ You are the authority on the application's data model as documented in the knowl
 
 ## Operating Procedure
 
+Marketplace modules live under `modules/_marktplace/<Name>/`. Use that path variant for `DOMAIN.md`, `FLOWS.md`, and `PAGES.md` when the target module is from the marketplace.
+
 1. Start with the relevant `modules/<Name>/DOMAIN.md` for entity definitions.
 2. Cross-reference `routes/by-entity.md` for entity usage across the app.
 3. Check `modules/<Name>/FLOWS.md` for CRUD operations on the entity.

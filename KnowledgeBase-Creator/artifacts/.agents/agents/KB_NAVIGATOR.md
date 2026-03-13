@@ -25,6 +25,8 @@ You are the front door to this knowledge base. When a user asks any question abo
 
 ## Lookup Shortcuts
 
+For marketplace modules, swap `modules/<Name>/...` for `modules/_marktplace/<Name>/...`.
+
 | Question pattern | Go to |
 |---|---|
 | "What does module X do?" | `modules/X/README.md` |

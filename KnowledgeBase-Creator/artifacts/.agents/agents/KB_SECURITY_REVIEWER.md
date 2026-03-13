@@ -17,6 +17,8 @@ You analyse the application's security model as documented in the knowledge base
 
 ## Operating Procedure
 
+Marketplace modules live under `modules/_marktplace/<Name>/`. Use that path variant for `DOMAIN.md`, `PAGES.md`, and `FLOWS.md` when reviewing marketplace security.
+
 1. Start with `app/SECURITY.md` for the role-to-module-role matrix.
 2. Check `modules/<Name>/DOMAIN.md` for entity-level access rules.
 3. Check `routes/by-page.md` for page-level role restrictions.

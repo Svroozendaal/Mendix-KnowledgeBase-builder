@@ -461,7 +461,14 @@ foreach ($row in @($entityRows)) {
         [string]$row.'Read flows',
         [string]$row.'Shown on pages'
     )
-    if (@($cells | Where-Object { Is-MeaningfulCellValue -Value $_ }).Count -gt 0) {
+    $hasMeaningfulCell = $false
+    foreach ($cell in @($cells)) {
+        if (Is-MeaningfulCellValue -Value ([string]$cell)) {
+            $hasMeaningfulCell = $true
+            break
+        }
+    }
+    if ($hasMeaningfulCell) {
         $routeHasCrossRefs = $true
         break
     }
@@ -478,7 +485,10 @@ if (-not $routeHasCrossRefs) {
 if (-not $routeHasCrossRefs) {
     $flowRows = Get-MarkdownTableRows -FilePath $byFlowFile
     foreach ($row in @($flowRows)) {
-        if (Is-MeaningfulCellValue -Value ([string]$row.'Shows Pages') -or Is-MeaningfulCellValue -Value ([string]$row.'Touches Entities')) {
+        if (
+            (Is-MeaningfulCellValue -Value ([string]$row.'Shows Pages')) -or
+            (Is-MeaningfulCellValue -Value ([string]$row.'Touches Entities'))
+        ) {
             $routeHasCrossRefs = $true
             break
         }

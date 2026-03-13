@@ -123,20 +123,93 @@ function Check-Links {
 
     if (-not (Test-Path $File)) { return }
     $text = Get-Content -Raw $File
+    $text = [regex]::Replace($text, '(?ms)```.*?```', '')
     $matches = [regex]::Matches($text, "\[[^\]]+\]\(([^)]+)\)")
     foreach ($m in $matches) {
         $target = $m.Groups[1].Value
         if ($target -match "^(https?|mailto):") { continue }
-        if ($target.StartsWith("#")) { continue }
+        $parts = $target.Split("#", 2)
+        $clean = $parts[0]
+        $fragment = if ($parts.Count -gt 1) { [uri]::UnescapeDataString($parts[1]) } else { "" }
 
-        $clean = $target.Split("#")[0]
-        if ([string]::IsNullOrWhiteSpace($clean)) { continue }
+        try {
+            $resolved = if ([string]::IsNullOrWhiteSpace($clean)) {
+                $File
+            } elseif ([System.IO.Path]::IsPathRooted($clean)) {
+                [System.IO.Path]::GetFullPath($clean)
+            } else {
+                Join-Path (Split-Path -Parent $File) $clean
+            }
+        }
+        catch {
+            Add-Issue -Severity "error" -File $File -Message "Invalid link target: $target"
+            continue
+        }
 
-        $resolved = Join-Path (Split-Path -Parent $File) $clean
         if (-not (Test-Path $resolved)) {
-            Add-Issue -Severity "error" -File $File -Message "Broken relative link: $target"
+            Add-Issue -Severity "error" -File $File -Message "Broken link target: $target"
+            continue
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($fragment)) {
+            $resolvedText = Get-Content -Raw $resolved
+            $anchorPattern = '<a\s+id="' + [regex]::Escape($fragment) + '"\s*></a>'
+            if ($resolvedText -notmatch $anchorPattern) {
+                Add-Issue -Severity "error" -File $File -Message "Broken link fragment: $target"
+            }
         }
     }
+}
+
+function Assert-SectionIsPopulated {
+    param(
+        [string]$FilePath,
+        [string]$Heading,
+        [string[]]$PlaceholderPatterns
+    )
+
+    if (-not (Test-Path $FilePath -PathType Leaf)) { return }
+
+    $text = Get-Content -Raw $FilePath
+    $escapedHeading = [regex]::Escape($Heading)
+    $match = [regex]::Match($text, "(?ms)$escapedHeading\s*(?<body>.*?)(^\#|\z)")
+    if (-not $match.Success) {
+        Add-Issue -Severity "error" -File $FilePath -Message "Missing section body for $Heading"
+        return
+    }
+
+    $body = $match.Groups["body"].Value.Trim()
+    if ([string]::IsNullOrWhiteSpace($body)) {
+        Add-Issue -Severity "error" -File $FilePath -Message "Empty section body for $Heading"
+        return
+    }
+
+    foreach ($pattern in $PlaceholderPatterns) {
+        if ($body -match $pattern) {
+            Add-Issue -Severity "error" -File $FilePath -Message "Unpopulated section body for $Heading"
+            return
+        }
+    }
+}
+
+function Resolve-SourceArtifactPath {
+    param(
+        [string]$KbRootPath,
+        [string]$ArtifactPath
+    )
+
+    if ([string]::IsNullOrWhiteSpace($ArtifactPath)) { return $null }
+    if ([System.IO.Path]::IsPathRooted($ArtifactPath)) {
+        return $ArtifactPath
+    }
+
+    $dataRoot = Split-Path -Parent $KbRootPath
+    $candidate = Join-Path $dataRoot $ArtifactPath
+    if (Test-Path $candidate -PathType Leaf) {
+        return $candidate
+    }
+
+    return [System.IO.Path]::GetFullPath($ArtifactPath)
 }
 
 function Resolve-RunFolderFromSources {
@@ -158,9 +231,10 @@ function Resolve-RunFolderFromSources {
     }
 
     if ([string]::IsNullOrWhiteSpace($artifactPath)) { return $null }
-    if (-not (Test-Path $artifactPath -PathType Leaf)) { return $null }
+    $resolvedArtifactPath = Resolve-SourceArtifactPath -KbRootPath $KbRootPath -ArtifactPath $artifactPath
+    if (-not (Test-Path $resolvedArtifactPath -PathType Leaf)) { return $null }
 
-    $artifactParent = Split-Path -Parent $artifactPath
+    $artifactParent = Split-Path -Parent $resolvedArtifactPath
     $folderName = Split-Path -Leaf $artifactParent
     if ($folderName -eq "general") {
         return (Split-Path -Parent $artifactParent)
@@ -224,6 +298,37 @@ function Is-MeaningfulCellValue {
     if ($trimmed -match "^none(\b|\s|\()") { return $false }
     if ($trimmed -match "^n/a$") { return $false }
     return $true
+}
+
+function Get-KbModuleDirectories {
+    param([string]$KbRootPath)
+
+    $result = New-Object System.Collections.Generic.List[object]
+    $modulesDir = Join-Path $KbRootPath "modules"
+    if (-not (Test-Path $modulesDir -PathType Container)) {
+        return @()
+    }
+
+    foreach ($dir in @(Get-ChildItem $modulesDir -Directory | Where-Object { $_.Name -ne "_marktplace" } | Sort-Object Name)) {
+        $result.Add([pscustomobject]@{
+            Name = $dir.Name
+            FullName = $dir.FullName
+            Category = "Direct"
+        }) | Out-Null
+    }
+
+    $marketplaceDir = Join-Path $modulesDir "_marktplace"
+    if (Test-Path $marketplaceDir -PathType Container) {
+        foreach ($dir in @(Get-ChildItem $marketplaceDir -Directory | Sort-Object Name)) {
+            $result.Add([pscustomobject]@{
+                Name = $dir.Name
+                FullName = $dir.FullName
+                Category = "Marketplace"
+            }) | Out-Null
+        }
+    }
+
+    return @($result | Sort-Object Name)
 }
 
 # Root and app-level files
@@ -292,7 +397,7 @@ if (-not (Test-Path $modulesDir)) {
     Add-Issue -Severity "error" -File $modulesDir -Message "Missing modules directory."
 }
 else {
-    $moduleDirs = Get-ChildItem $modulesDir -Directory | Sort-Object Name
+    $moduleDirs = Get-KbModuleDirectories -KbRootPath $kbRoot
     foreach ($mod in $moduleDirs) {
         $readme = Join-Path $mod.FullName "README.md"
         $domain = Join-Path $mod.FullName "DOMAIN.md"
@@ -304,6 +409,8 @@ else {
             "## Summary",
             "## Purpose",
             "## Navigation",
+            "## Source Pointers",
+            "## Interpretation",
             "## Cross-Module Dependencies",
             "## Source"
         )
@@ -314,11 +421,16 @@ else {
                 Add-Issue -Severity "error" -File $readme -Message "Missing shared-entities dependency line."
             }
         }
+        Assert-SectionIsPopulated -FilePath $readme -Heading "## Source Pointers" -PlaceholderPatterns @(
+            "Export overview:\s*none"
+        )
 
         Assert-Headings -File $domain -Headings @(
             "## Entities",
             "## Associations",
-            "## Enumerations"
+            "## Enumerations",
+            "## Entity Evidence",
+            "## Domain Interpretation"
         )
 
         Assert-Headings -File $flows -Headings @(
@@ -328,13 +440,17 @@ else {
             "### Validation Flows (VAL_*)",
             "### Other Flows",
             "## Cross-Module Calls",
-            "## Flow Details"
+            "## Flow Details",
+            "## Flow Evidence",
+            "## Flow Interpretation"
         )
 
         Assert-Headings -File $pages -Headings @(
             "## Page Inventory",
             "## Page-Flow Links",
-            "## Snippets"
+            "## Snippets",
+            "## Page Evidence",
+            "## Page Interpretation"
         )
 
         Assert-Headings -File $resources -Headings @(
@@ -365,7 +481,7 @@ Assert-TemplateHeadings -FilePath (Join-Path $routesDir "by-flow.md") -TemplateP
 Assert-TemplateHeadings -FilePath (Join-Path $routesDir "cross-module.md") -TemplatePath (Join-Path $artifactsRoot "ROUTE_CROSS_MODULE_TEMPLATE.md")
 
 if (Test-Path $modulesDir -PathType Container) {
-    foreach ($mod in @(Get-ChildItem $modulesDir -Directory | Sort-Object Name)) {
+    foreach ($mod in @(Get-KbModuleDirectories -KbRootPath $kbRoot)) {
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "README.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_README_TEMPLATE.md")
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "DOMAIN.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_DOMAIN_TEMPLATE.md")
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "FLOWS.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_FLOWS_TEMPLATE.md")
@@ -423,7 +539,50 @@ else {
     }
     else {
         $allModules = Get-Content -Raw $allModulesPath | ConvertFrom-Json
+        $moduleCategoryByName = @{}
+        foreach ($moduleInfo in @($allModules.modules)) {
+            $moduleCategoryByName[[string]$moduleInfo.module] = [string]$moduleInfo.category
+        }
         $customModules = @($allModules.modules | Where-Object { $_.category -eq "Custom" } | ForEach-Object { $_.module } | Sort-Object -Unique)
+        foreach ($moduleName in @($moduleCategoryByName.Keys | Sort-Object)) {
+            $relativeModuleDir = if ($moduleCategoryByName[$moduleName] -eq "Marketplace") {
+                "modules/_marktplace/$moduleName"
+            } else {
+                "modules/$moduleName"
+            }
+            $moduleDir = Join-Path $kbRoot $relativeModuleDir
+            if (-not (Test-Path $moduleDir -PathType Container)) { continue }
+
+            $domainJsonPath = Join-Path $runFolder "modules/$moduleName/domain-model.json"
+            if (Test-Path $domainJsonPath -PathType Leaf) {
+                $domainJson = Get-Content -Raw $domainJsonPath | ConvertFrom-Json
+                if (@($domainJson.domainModel.entities).Count -gt 0) {
+                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "DOMAIN.md") -Heading "## Entity Evidence" -PlaceholderPatterns @(
+                        "No entity evidence sections"
+                    )
+                }
+            }
+
+            $flowsJsonPath = Join-Path $runFolder "modules/$moduleName/flows.json"
+            if (Test-Path $flowsJsonPath -PathType Leaf) {
+                $flowsJson = Get-Content -Raw $flowsJsonPath | ConvertFrom-Json
+                if (@($flowsJson.flows).Count -gt 0) {
+                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "FLOWS.md") -Heading "## Flow Evidence" -PlaceholderPatterns @(
+                        "No flow evidence sections"
+                    )
+                }
+            }
+
+            $pagesJsonPath = Join-Path $runFolder "modules/$moduleName/pages.json"
+            if (Test-Path $pagesJsonPath -PathType Leaf) {
+                $pagesJson = Get-Content -Raw $pagesJsonPath | ConvertFrom-Json
+                if (@($pagesJson.pages).Count -gt 0) {
+                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "PAGES.md") -Heading "## Page Evidence" -PlaceholderPatterns @(
+                        "No page evidence sections"
+                    )
+                }
+            }
+        }
 
         $customEntities = @{}
         $customPages = @{}

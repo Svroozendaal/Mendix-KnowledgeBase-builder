@@ -21,6 +21,14 @@ Inferred: Unknown
 - [PAGES.md](PAGES.md)
 - [RESOURCES.md](RESOURCES.md)
 
+## Source Pointers
+
+- Export overview: none
+
+## Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.
+
 ## Cross-Module Dependencies
 
 - Calls to: none

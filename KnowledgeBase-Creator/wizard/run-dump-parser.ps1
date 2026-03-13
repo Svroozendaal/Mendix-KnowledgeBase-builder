@@ -14,6 +14,7 @@ $packageRoot = Split-Path -Parent $wizardRoot
 $envPath = Join-Path $packageRoot ".env"
 $artifactsRoot = Join-Path $packageRoot "artifacts/templates"
 $agentsArtifactRoot = Join-Path $packageRoot "artifacts/.agents"
+$dataRootArtifactsRoot = Join-Path $packageRoot "artifacts/data-root"
 
 function Read-DotEnv {
     param([string]$Path)
@@ -237,16 +238,49 @@ function Get-ModulesFromManifest {
     param([string]$ManifestPath)
 
     $manifest = Get-Content -Raw $ManifestPath | ConvertFrom-Json
-    $modules = @()
+    $modulesByName = @{}
 
     foreach ($artifact in @($manifest.artifacts)) {
         if ($artifact.type -ne "module-domain-model-json") { continue }
-        if ($artifact.path -match "[\\/]modules(?:[\\/]marketplace)?[\\/]([^\\/]+)[\\/]domain-model\.json$") {
-            $modules += $matches[1]
+        $artifactPath = [string]$artifact.path
+        if ([string]::IsNullOrWhiteSpace($artifactPath)) { continue }
+
+        if ($artifactPath -match "[\\/]modules[\\/]marketplace[\\/]([^\\/]+)[\\/]domain-model\.json$") {
+            $modulesByName[$matches[1]] = [pscustomobject]@{
+                Name = $matches[1]
+                Category = "Marketplace"
+            }
+            continue
+        }
+
+        if ($artifactPath -match "[\\/]modules[\\/]([^\\/]+)[\\/]domain-model\.json$") {
+            $modulesByName[$matches[1]] = [pscustomobject]@{
+                Name = $matches[1]
+                Category = "Unknown"
+            }
         }
     }
 
-    return @($modules | Sort-Object -Unique)
+    return @($modulesByName.Values | Sort-Object Name)
+}
+
+function Get-ModuleRelativePath {
+    param(
+        [object]$Module,
+        [string]$FileName = ""
+    )
+
+    $base = if ([string]$Module.Category -eq "Marketplace") {
+        "modules/_marktplace/$($Module.Name)"
+    } else {
+        "modules/$($Module.Name)"
+    }
+
+    if ([string]::IsNullOrWhiteSpace($FileName)) {
+        return $base
+    }
+
+    return "$base/$FileName"
 }
 
 function Apply-Template {
@@ -269,8 +303,32 @@ function Apply-Template {
     Set-Content -Path $TargetPath -Value $content -Encoding UTF8
 }
 
+function Get-DisplayPath {
+    param(
+        [string]$BasePath,
+        [string]$TargetPath
+    )
+
+    if ([string]::IsNullOrWhiteSpace($TargetPath)) { return "" }
+    if ([string]::IsNullOrWhiteSpace($BasePath)) { return $TargetPath }
+
+    try {
+        $resolvedBase = (Resolve-Path $BasePath -ErrorAction Stop).Path
+        $resolvedTarget = (Resolve-Path $TargetPath -ErrorAction Stop).Path
+        $relative = [System.IO.Path]::GetRelativePath($resolvedBase, $resolvedTarget)
+        if (-not [string]::IsNullOrWhiteSpace($relative) -and -not $relative.StartsWith("..")) {
+            return ($relative -replace "\\", "/")
+        }
+    }
+    catch {
+        # Fall back to the original path when relative resolution is not possible.
+    }
+
+    return $TargetPath
+}
+
 function Get-ModuleIndexRows {
-    param([string[]]$Modules)
+    param([object[]]$Modules)
 
     if ($Modules.Count -eq 0) {
         return "| none | Unknown | none |"
@@ -278,7 +336,7 @@ function Get-ModuleIndexRows {
 
     $rows = @()
     foreach ($module in $Modules) {
-        $rows += "| $module | Unknown | [README](modules/$module/README.md) |"
+        $rows += "| $($module.Name) | $($module.Category) | [README]($(Get-ModuleRelativePath -Module $module -FileName 'README.md')) |"
     }
 
     return ($rows -join "`n")
@@ -327,6 +385,7 @@ function Seed-KbTemplates {
     param(
         [string]$ArtifactsRoot,
         [string]$AgentsRoot,
+        [string]$DataRoot,
         [string]$KbRoot,
         [string]$AppName,
         [string]$RunFolder,
@@ -334,10 +393,11 @@ function Seed-KbTemplates {
     )
 
     $generatedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+    $runFolderDisplay = Get-DisplayPath -BasePath $DataRoot -TargetPath $RunFolder
     $commonTokens = @{
         APP_NAME = $AppName
         GENERATED_AT_UTC = $generatedAt
-        RUN_FOLDER = $RunFolder
+        RUN_FOLDER = $runFolderDisplay
         KB_FORMAT_VERSION = "1.0"
         MODULE_COUNT = [string]$Modules.Count
         MODULE_INDEX_ROWS = (Get-ModuleIndexRows -Modules $Modules)
@@ -374,9 +434,9 @@ function Seed-KbTemplates {
     foreach ($module in @($Modules)) {
         $moduleTokens = @{}
         foreach ($k in $commonTokens.Keys) { $moduleTokens[$k] = $commonTokens[$k] }
-        $moduleTokens["MODULE_NAME"] = $module
+        $moduleTokens["MODULE_NAME"] = $module.Name
 
-        $moduleDir = Join-Path $KbRoot "modules/$module"
+        $moduleDir = Join-Path $KbRoot (Get-ModuleRelativePath -Module $module)
         New-Item -ItemType Directory -Path $moduleDir -Force | Out-Null
 
         Apply-Template -TemplatePath (Join-Path $ArtifactsRoot "MODULE_README_TEMPLATE.md") -TargetPath (Join-Path $moduleDir "README.md") -Tokens $moduleTokens
@@ -385,6 +445,48 @@ function Seed-KbTemplates {
         Apply-Template -TemplatePath (Join-Path $ArtifactsRoot "MODULE_PAGES_TEMPLATE.md") -TargetPath (Join-Path $moduleDir "PAGES.md") -Tokens $moduleTokens
         Apply-Template -TemplatePath (Join-Path $ArtifactsRoot "MODULE_RESOURCES_TEMPLATE.md") -TargetPath (Join-Path $moduleDir "RESOURCES.md") -Tokens $moduleTokens
     }
+}
+
+function Seed-DataRootGuides {
+    param(
+        [string]$TemplatesRoot,
+        [string]$DataRoot,
+        [string]$KbRoot,
+        [string]$RunFolder,
+        [string]$AppName,
+        [string]$DumpPath
+    )
+
+    if (-not (Test-Path $TemplatesRoot -PathType Container)) {
+        return
+    }
+
+    $generatedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+    $runFolderDisplay = Get-DisplayPath -BasePath $DataRoot -TargetPath $RunFolder
+    $kbRootDisplay = Get-DisplayPath -BasePath $DataRoot -TargetPath $KbRoot
+    $dumpDisplay = Get-DisplayPath -BasePath $DataRoot -TargetPath $DumpPath
+    $dumpGuidance = if ([string]::IsNullOrWhiteSpace($dumpDisplay)) { "dumps/" } else { $dumpDisplay }
+
+    $tokens = @{
+        APP_NAME = $AppName
+        GENERATED_AT_UTC = $generatedAt
+        DATA_ROOT = (Split-Path $DataRoot -Leaf)
+        KB_ROOT = $kbRootDisplay
+        KB_READER = "$kbRootDisplay/READER.md"
+        KB_ROUTING = "$kbRootDisplay/ROUTING.md"
+        KB_AGENTS = "$kbRootDisplay/.agents/AGENTS.md"
+        RUN_FOLDER = $runFolderDisplay
+        RUN_NAME = (Split-Path $RunFolder -Leaf)
+        APP_OVERVIEW_ROOT = "app-overview/"
+        DUMPS_ROOT = "dumps/"
+        DUMP_GUIDANCE = $dumpGuidance
+    }
+
+    Apply-Template -TemplatePath (Join-Path $TemplatesRoot "README_TEMPLATE.md") -TargetPath (Join-Path $DataRoot "README.md") -Tokens $tokens
+    Apply-Template -TemplatePath (Join-Path $TemplatesRoot "CURRENT_RUN_TEMPLATE.md") -TargetPath (Join-Path $DataRoot "CURRENT_RUN.md") -Tokens $tokens
+    Apply-Template -TemplatePath (Join-Path $TemplatesRoot ".agents/AGENTS.md") -TargetPath (Join-Path $DataRoot ".agents/AGENTS.md") -Tokens $tokens
+    Apply-Template -TemplatePath (Join-Path $TemplatesRoot ".agents/FRAMEWORK.md") -TargetPath (Join-Path $DataRoot ".agents/FRAMEWORK.md") -Tokens $tokens
+    Apply-Template -TemplatePath (Join-Path $TemplatesRoot ".agents/AI_WORKFLOW.md") -TargetPath (Join-Path $DataRoot ".agents/AI_WORKFLOW.md") -Tokens $tokens
 }
 
 function Test-DirectoryHasEntries {
@@ -396,6 +498,107 @@ function Test-DirectoryHasEntries {
 
     $items = Get-ChildItem -Path $Path -Force
     return @($items).Count -gt 0
+}
+
+function Resolve-MprPathIfAvailable {
+    param([hashtable]$Settings)
+
+    try {
+        return Resolve-MprPath -Settings $Settings
+    }
+    catch {
+        return $null
+    }
+}
+
+function Write-CreatorLinkFile {
+    param(
+        [string]$KbRoot,
+        [string]$DataRoot,
+        [string]$AppName,
+        [string]$RunFolder,
+        [string]$MprPath
+    )
+
+    if (-not (Test-Path $KbRoot -PathType Container)) {
+        return $null
+    }
+
+    $sourcesRoot = Join-Path $KbRoot "_sources"
+    New-Item -Path $sourcesRoot -ItemType Directory -Force | Out-Null
+
+    $payload = [ordered]@{
+        schemaVersion = "1.0"
+        creatorRoot = $packageRoot
+        creatorInitkbRunner = (Join-Path $wizardRoot "run-initkb.ps1")
+        appName = $AppName
+        mprPath = $MprPath
+        dataRoot = $DataRoot
+        knowledgeBaseRoot = $KbRoot
+        lastRunFolder = $RunFolder
+        updatedAtUtc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+    }
+
+    $linkPath = Join-Path $sourcesRoot "creator-link.json"
+    $payload | ConvertTo-Json -Depth 5 | Set-Content -Path $linkPath -Encoding UTF8
+    return $linkPath
+}
+
+function Write-InitKbHandoffFile {
+    param(
+        [string]$KbRoot,
+        [string]$DataRoot,
+        [string]$AppName,
+        [string]$RunFolder,
+        [string]$CreatorLinkPath
+    )
+
+    if (-not (Test-Path $KbRoot -PathType Container)) {
+        return $null
+    }
+
+    $sourcesRoot = Join-Path $KbRoot "_sources"
+    New-Item -Path $sourcesRoot -ItemType Directory -Force | Out-Null
+
+    $handoffPath = Join-Path $sourcesRoot "INITKB_HANDOFF.md"
+    $contentLines = @(
+        "# Init KB Handoff",
+        "",
+        "## Resolved paths",
+        "",
+        "- Creator root: $packageRoot",
+        "- Creator runner: $(Join-Path $wizardRoot 'run-initkb.ps1')",
+        "- Data root: $DataRoot",
+        "- Knowledge base root: $KbRoot",
+        "- Source run folder: $RunFolder",
+        "- Creator link: $CreatorLinkPath",
+        "",
+        "## Purpose",
+        "",
+        "- Use `/enrichkb` inside this KB to add the AI narrative layer in place.",
+        "- `/initkb` remains available as a compatibility entry point and rebuild handoff.",
+        "- Do not rerun dump, parser, scaffold, or compose from this KB.",
+        "- Rebuild from source only through the creator package.",
+        "",
+        "## Enrichment focus",
+        "",
+        "- Read `ROUTING.md` and `_reports/UNKNOWN_TODO.md` first.",
+        "- Prioritise custom modules over marketplace and system modules.",
+        "- Use pseudo source files from the run folder as evidence for inferred narratives.",
+        "- Never remove export-backed data or change required headings, tables, or links.",
+        "",
+        "## Revalidation",
+        "",
+        'Run from the creator package after enrichment:',
+        "",
+        '```powershell',
+        ".\wizard\run-kb-scaffold.ps1 -Validate -OutputRoot `"$KbRoot`" -AppName `"$AppName`"",
+        ".\wizard\run-kb-quality-gate.ps1 -OutputRoot `"$KbRoot`" -AppName `"$AppName`"",
+        '```'
+    )
+
+    $contentLines | Set-Content -Path $handoffPath -Encoding UTF8
+    return $handoffPath
 }
 
 $settings = Read-DotEnv -Path $envPath
@@ -569,7 +772,7 @@ if (-not $SkipScaffold) {
     Invoke-PwshScript -ScriptPath $scaffoldScript -Arguments @("-RunFolder", $resolvedRunFolder, "-OutputRoot", $knowledgeBaseRoot, "-AppName", $appName) -ErrorPrefix "run-kb-scaffold.ps1"
 
     Write-Host "[4/8] Seeding KB templates..." -ForegroundColor Yellow
-    Seed-KbTemplates -ArtifactsRoot $artifactsRoot -AgentsRoot $agentsArtifactRoot -KbRoot $kbRoot -AppName $appName -RunFolder $resolvedRunFolder -Modules $modules
+    Seed-KbTemplates -ArtifactsRoot $artifactsRoot -AgentsRoot $agentsArtifactRoot -DataRoot $dataRoot -KbRoot $kbRoot -AppName $appName -RunFolder $resolvedRunFolder -Modules $modules
 } else {
     Write-Host "[3/8] Scaffold step skipped." -ForegroundColor DarkYellow
     Write-Host "[4/8] Template seeding skipped." -ForegroundColor DarkYellow
@@ -578,10 +781,21 @@ if (-not $SkipScaffold) {
     }
 }
 
+Write-Host "[4b/8] Seeding standalone mendix-data guides..." -ForegroundColor Yellow
+Seed-DataRootGuides -TemplatesRoot $dataRootArtifactsRoot -DataRoot $dataRoot -KbRoot $kbRoot -RunFolder $resolvedRunFolder -AppName $appName -DumpPath $dumpPath
+
 Write-Host "[5/8] Composing behaviour-rich KB content..." -ForegroundColor Yellow
 $composeArgs = @("-RunFolder", $resolvedRunFolder, "-OutputRoot", $knowledgeBaseRoot, "-AppName", $appName)
 if ($SkipScaffold) { $composeArgs += "-SkipScaffold" }
 Invoke-PwshScript -ScriptPath $composeScript -Arguments $composeArgs -ErrorPrefix "run-kb-compose.ps1"
+
+$creatorLinkMprPath = if (-not [string]::IsNullOrWhiteSpace($mprPath)) {
+    $mprPath
+} else {
+    Resolve-MprPathIfAvailable -Settings $settings
+}
+$creatorLinkPath = Write-CreatorLinkFile -KbRoot $kbRoot -DataRoot $dataRoot -AppName $appName -RunFolder $resolvedRunFolder -MprPath $creatorLinkMprPath
+$initKbHandoffPath = Write-InitKbHandoffFile -KbRoot $kbRoot -DataRoot $dataRoot -AppName $appName -RunFolder $resolvedRunFolder -CreatorLinkPath $creatorLinkPath
 
 Write-Host "[6/8] Running scaffold validation..." -ForegroundColor Yellow
 Invoke-PwshScript -ScriptPath $scaffoldScript -Arguments @("-Validate", "-OutputRoot", $knowledgeBaseRoot, "-AppName", $appName) -ErrorPrefix "Scaffold validation"
@@ -627,6 +841,12 @@ Write-Host "Structural validation status: $structuralValidationStatus"
 Write-Host "Quality gate status:         $qualityGateStatus"
 Write-Host "Benchmark status:            $benchmarkStatus"
 Write-Host "KB folder:                   $kbRoot"
+if (-not [string]::IsNullOrWhiteSpace($creatorLinkPath)) {
+    Write-Host "Creator link:                $creatorLinkPath"
+}
+if (-not [string]::IsNullOrWhiteSpace($initKbHandoffPath)) {
+    Write-Host "Init KB handoff:             $initKbHandoffPath"
+}
 Write-Host "Start AI with:               AGENTS.md"
 
 if ($OpenOutput -and (Test-Path $kbRoot -PathType Container)) {

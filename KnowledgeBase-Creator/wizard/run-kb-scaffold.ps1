@@ -68,27 +68,105 @@ $kbRoot = $OutputRoot
 
 # --- Discover modules from manifest ---
 function Get-ModulesFromManifest($manifest) {
-    $modules = @()
+    $modulesByName = @{}
     foreach ($artifact in $manifest.artifacts) {
-        if ($artifact.type -eq "module-domain-model-json") {
-            $parts = $artifact.path -split '[/\\]'
-            # Supports both:
-            # .../modules/<ModuleName>/domain-model.json
-            # .../modules/marketplace/<ModuleName>/domain-model.json
-            if ($parts.Length -lt 2) { continue }
-            $fileName = $parts[$parts.Length - 1]
-            if ($fileName -ne "domain-model.json") { continue }
+        if ($artifact.type -ne "module-domain-model-json") { continue }
 
-            $moduleIndex = [Array]::IndexOf($parts, "modules")
-            if ($moduleIndex -lt 0) { continue }
+        $artifactPath = [string]$artifact.path
+        if ([string]::IsNullOrWhiteSpace($artifactPath)) { continue }
 
-            $moduleName = $parts[$parts.Length - 2]
-            if (-not [string]::IsNullOrWhiteSpace($moduleName)) {
-                $modules += $moduleName
+        if ($artifactPath -match "[\\/]modules[\\/]marketplace[\\/]([^\\/]+)[\\/]domain-model\.json$") {
+            $modulesByName[$matches[1]] = [pscustomobject]@{
+                Name = $matches[1]
+                Category = "Marketplace"
+            }
+            continue
+        }
+
+        if ($artifactPath -match "[\\/]modules[\\/]([^\\/]+)[\\/]domain-model\.json$") {
+            $modulesByName[$matches[1]] = [pscustomobject]@{
+                Name = $matches[1]
+                Category = "Unknown"
             }
         }
     }
-    return $modules | Sort-Object -Unique
+
+    return @($modulesByName.Values | Sort-Object Name)
+}
+
+function Get-ModuleRelativePath {
+    param(
+        [object]$Module,
+        [string]$FileName = ""
+    )
+
+    $base = if ([string]$Module.Category -eq "Marketplace") {
+        "modules/_marktplace/$($Module.Name)"
+    } else {
+        "modules/$($Module.Name)"
+    }
+
+    if ([string]::IsNullOrWhiteSpace($FileName)) {
+        return $base
+    }
+
+    return "$base/$FileName"
+}
+
+function Get-ModulesFromKbRoot {
+    param([string]$KbRootPath)
+
+    $modules = New-Object System.Collections.Generic.List[object]
+    $modulesDir = Join-Path $KbRootPath "modules"
+    if (-not (Test-Path $modulesDir -PathType Container)) {
+        return @()
+    }
+
+    foreach ($dir in @(Get-ChildItem $modulesDir -Directory | Where-Object { $_.Name -ne "_marktplace" } | Sort-Object Name)) {
+        $modules.Add([pscustomobject]@{
+            Name = $dir.Name
+            Category = "Unknown"
+        }) | Out-Null
+    }
+
+    $marketplaceDir = Join-Path $modulesDir "_marktplace"
+    if (Test-Path $marketplaceDir -PathType Container) {
+        foreach ($dir in @(Get-ChildItem $marketplaceDir -Directory | Sort-Object Name)) {
+            $modules.Add([pscustomobject]@{
+                Name = $dir.Name
+                Category = "Marketplace"
+            }) | Out-Null
+        }
+    }
+
+    return @($modules | Sort-Object Name)
+}
+
+function Get-DisplayPath {
+    param(
+        [string]$BasePath,
+        [string]$TargetPath
+    )
+
+    if ([string]::IsNullOrWhiteSpace($TargetPath)) { return "" }
+    if ([string]::IsNullOrWhiteSpace($BasePath)) { return $TargetPath }
+
+    try {
+        $resolvedBase = (Resolve-Path $BasePath -ErrorAction Stop).Path
+        $resolvedTarget = (Resolve-Path $TargetPath -ErrorAction Stop).Path
+        $baseWithSeparator = $resolvedBase.TrimEnd('\', '/') + [System.IO.Path]::DirectorySeparatorChar
+        $baseUri = [System.Uri]::new($baseWithSeparator)
+        $targetUri = [System.Uri]::new($resolvedTarget)
+        $relative = $baseUri.MakeRelativeUri($targetUri).ToString()
+        if (-not [string]::IsNullOrWhiteSpace($relative) -and -not $relative.StartsWith("..")) {
+            return ($relative -replace "\\", "/")
+        }
+    }
+    catch {
+        # Use the original path if relative resolution fails.
+    }
+
+    return $TargetPath
 }
 
 # --- Expected file list ---
@@ -108,11 +186,11 @@ function Get-ExpectedFiles($modules) {
         "_sources/SOURCE_REF.md"
     )
     foreach ($mod in $modules) {
-        $files += "modules/$mod/README.md"
-        $files += "modules/$mod/DOMAIN.md"
-        $files += "modules/$mod/FLOWS.md"
-        $files += "modules/$mod/PAGES.md"
-        $files += "modules/$mod/RESOURCES.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "README.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "DOMAIN.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "FLOWS.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "PAGES.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "RESOURCES.md"
     }
     return $files
 }
@@ -134,13 +212,7 @@ if ($Validate) {
     } elseif ($manifest) {
         $modules = Get-ModulesFromManifest $manifest
     } else {
-        # Fall back to scanning modules/ folder
-        $modulesDir = Join-Path $kbRoot "modules"
-        if (Test-Path $modulesDir) {
-            $modules = Get-ChildItem $modulesDir -Directory | ForEach-Object { $_.Name } | Sort-Object
-        } else {
-            $modules = @()
-        }
+        $modules = Get-ModulesFromKbRoot -KbRootPath $kbRoot
     }
 
     $expected = Get-ExpectedFiles $modules
@@ -159,7 +231,7 @@ if ($Validate) {
     Write-Host ""
     Write-Host "=== KB Validation: $AppName ==="
     Write-Host "Root: $kbRoot"
-    Write-Host "Modules: $($modules -join ', ')"
+    Write-Host "Modules: $((@($modules | ForEach-Object { $_.Name }) -join ', '))"
     Write-Host "Expected files: $($expected.Count)"
     Write-Host "Present: $($present.Count)"
     Write-Host "Missing: $($missing.Count)"
@@ -188,8 +260,22 @@ Write-Host "=== KB Scaffold ==="
 Write-Host "Source: $runFolderDisplay"
 Write-Host "Output: $kbRoot"
 Write-Host "App: $AppName"
-Write-Host "Modules: $($modules -join ', ')"
+Write-Host "Modules: $((@($modules | ForEach-Object { $_.Name }) -join ', '))"
 Write-Host ""
+
+$expectedModuleDirectories = @(
+    $modules | ForEach-Object { Join-Path $kbRoot (Get-ModuleRelativePath -Module $_) }
+) | ForEach-Object { [System.IO.Path]::GetFullPath($_) }
+$modulesRoot = Join-Path $kbRoot "modules"
+if (Test-Path $modulesRoot -PathType Container) {
+    $existingModuleDirs = Get-ChildItem -Path $modulesRoot -Directory -Recurse | Where-Object { $_.FullName -ne (Join-Path $modulesRoot "_marktplace") }
+    foreach ($dir in @($existingModuleDirs | Sort-Object FullName -Descending)) {
+        if ($expectedModuleDirectories -notcontains $dir.FullName) {
+            Remove-Item -Path $dir.FullName -Recurse -Force
+            Write-Host "  Removed stale module folder: $($dir.FullName)"
+        }
+    }
+}
 
 # Create folder tree
 $folders = @(
@@ -200,7 +286,7 @@ $folders = @(
     (Join-Path $kbRoot "_sources")
 )
 foreach ($mod in $modules) {
-    $folders += Join-Path $kbRoot "modules/$mod"
+    $folders += Join-Path $kbRoot (Get-ModuleRelativePath -Module $mod)
 }
 
 foreach ($folder in $folders) {
@@ -216,11 +302,13 @@ Copy-Item $manifestPath $destManifest -Force
 Write-Host "  Copied: manifest.json -> _sources/manifest.json"
 
 # Write source-reference file
+$dataRoot = Split-Path -Parent $kbRoot
+$runFolderForDisplay = Get-DisplayPath -BasePath $dataRoot -TargetPath $RunFolder
 $sourceRef = @"
 # Source Reference
 
 This knowledge base was generated from:
-- Run folder: $runFolderDisplay
+- Run folder: $runFolderForDisplay
 - Generated at: $($manifest.generatedAtUtc)
 - Schema version: $($manifest.schemaVersion)
 - Selected modules: $($manifest.selectedModules -join ', ')

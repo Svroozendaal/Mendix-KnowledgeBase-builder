@@ -47,7 +47,10 @@
       "Bash(mkdir -p artifacts/templates)",
       "Bash(mv artifacts/*.md artifacts/templates/)",
       "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File wizard/run-dump-parser.ps1 -SkipDump -SkipParser)",
-      "Bash(find /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/artifacts/.agents -type f -name *)"
+      "Bash(find /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/artifacts/.agents -type f -name *)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet publish:*)",
+      "Bash(tasklist)"
     ]
   }
 }

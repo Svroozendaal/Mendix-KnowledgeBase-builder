@@ -114,10 +114,182 @@ function Get-LocalNameFromQualified {
     return $parts[$parts.Length - 1]
 }
 
+function Get-MarkdownAnchorId {
+    param(
+        [string]$Prefix,
+        [string]$Value
+    )
+
+    $slug = ([string]$Value).ToLowerInvariant() -replace "[^a-z0-9]+", "-"
+    $slug = $slug.Trim("-")
+    if ([string]::IsNullOrWhiteSpace($slug)) {
+        $slug = "item"
+    }
+    return "$Prefix-$slug"
+}
+
+function Get-RelativeMarkdownPath {
+    param(
+        [string]$FromFilePath,
+        [string]$ToPath
+    )
+
+    if ([string]::IsNullOrWhiteSpace($FromFilePath) -or [string]::IsNullOrWhiteSpace($ToPath)) {
+        return $null
+    }
+
+    $fromDir = [System.IO.Path]::GetFullPath((Split-Path -Parent $FromFilePath))
+    $targetFull = if ([System.IO.Path]::IsPathRooted($ToPath)) {
+        [System.IO.Path]::GetFullPath($ToPath)
+    } else {
+        [System.IO.Path]::GetFullPath((Join-Path (Get-Location) $ToPath))
+    }
+
+    $fromDirWithSeparator = $fromDir.TrimEnd('\', '/') + [System.IO.Path]::DirectorySeparatorChar
+    $fromUri = [System.Uri]::new($fromDirWithSeparator)
+    $targetUri = [System.Uri]::new($targetFull)
+    return $fromUri.MakeRelativeUri($targetUri).ToString()
+}
+
+function New-MarkdownLink {
+    param(
+        [string]$Label,
+        [string]$TargetPath
+    )
+
+    if ([string]::IsNullOrWhiteSpace($TargetPath)) { return "none" }
+    return "[$Label]($TargetPath)"
+}
+
+function Format-FlowActionEvidence {
+    param(
+        [object[]]$Actions,
+        [ValidateSet("retrieve","decision","show-page","mutation")]
+        [string]$Kind
+    )
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    foreach ($action in @($Actions)) {
+        switch ($Kind) {
+            "retrieve" {
+                $entity = if ([string]::IsNullOrWhiteSpace([string]$action.entity)) { "" } else { "; entity=$([string]$action.entity)" }
+                $association = if ([string]::IsNullOrWhiteSpace([string]$action.association)) { "" } else { "; association=$([string]$action.association)" }
+                $xPath = if ([string]::IsNullOrWhiteSpace([string]$action.xPath)) { "" } else { "; xPath=$([string]$action.xPath)" }
+                $sourceKind = if ([string]::IsNullOrWhiteSpace([string]$action.sourceKind)) { "Unknown" } else { [string]$action.sourceKind }
+                $lines.Add("- nodeId=$([string]$action.nodeId); sourceKind=$sourceKind$entity$association$xPath; summary=$(Escape-Md ([string]$action.summary))") | Out-Null
+            }
+            "decision" {
+                $caption = if ([string]::IsNullOrWhiteSpace([string]$action.caption)) { "none" } else { Escape-Md ([string]$action.caption) }
+                $expression = if ([string]::IsNullOrWhiteSpace([string]$action.expression)) { "none" } else { Escape-Md ([string]$action.expression) }
+                $lines.Add("- nodeId=$([string]$action.nodeId); caption=$caption; expression=$expression") | Out-Null
+            }
+            "show-page" {
+                $targetPage = if ([string]::IsNullOrWhiteSpace([string]$action.targetPage)) { "none" } else { [string]$action.targetPage }
+                $lines.Add("- nodeId=$([string]$action.nodeId); targetPage=$targetPage; summary=$(Escape-Md ([string]$action.summary))") | Out-Null
+            }
+            "mutation" {
+                $entity = if ([string]::IsNullOrWhiteSpace([string]$action.entity)) { "" } else { "; entity=$([string]$action.entity)" }
+                $memberSummary = if ([string]::IsNullOrWhiteSpace([string]$action.memberSummary)) { "" } else { "; members=$(Escape-Md ([string]$action.memberSummary))" }
+                $actionKind = if ([string]::IsNullOrWhiteSpace([string]$action.actionKind)) { "Unknown" } else { [string]$action.actionKind }
+                $lines.Add("- nodeId=$([string]$action.nodeId); actionKind=$actionKind$entity$memberSummary; summary=$(Escape-Md ([string]$action.summary))") | Out-Null
+            }
+        }
+    }
+
+    if ($lines.Count -eq 0) {
+        return @("- none")
+    }
+
+    return $lines.ToArray()
+}
+
+function Format-PageDataSourceEvidence {
+    param([object[]]$DataSources)
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    foreach ($source in @($DataSources)) {
+        $entity = if ([string]::IsNullOrWhiteSpace([string]$source.entity)) { "" } else { "; entity=$([string]$source.entity)" }
+        $constraint = if ([string]::IsNullOrWhiteSpace([string]$source.constraint)) { "" } else { "; constraint=$(Escape-Md ([string]$source.constraint))" }
+        $flowName = if ([string]::IsNullOrWhiteSpace([string]$source.flowName)) { "" } else { "; flow=$([string]$source.flowName)" }
+        $sourceType = if ([string]::IsNullOrWhiteSpace([string]$source.sourceType)) { "Unknown" } else { [string]$source.sourceType }
+        $lines.Add("- sourceId=$([string]$source.sourceId); sourceType=$sourceType$entity$constraint$flowName; summary=$(Escape-Md ([string]$source.summary))") | Out-Null
+    }
+
+    if ($lines.Count -eq 0) {
+        return @("- none")
+    }
+
+    return $lines.ToArray()
+}
+
+function Format-PageClientActionEvidence {
+    param([object[]]$ClientActions)
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    foreach ($action in @($ClientActions)) {
+        $targetPage = if ([string]::IsNullOrWhiteSpace([string]$action.targetPage)) { "" } else { "; targetPage=$([string]$action.targetPage)" }
+        $flowName = if ([string]::IsNullOrWhiteSpace([string]$action.flowName)) { "" } else { "; flow=$([string]$action.flowName)" }
+        $actionType = if ([string]::IsNullOrWhiteSpace([string]$action.actionType)) { "Unknown" } else { [string]$action.actionType }
+        $lines.Add("- actionId=$([string]$action.actionId); actionType=$actionType$targetPage$flowName; summary=$(Escape-Md ([string]$action.summary))") | Out-Null
+    }
+
+    if ($lines.Count -eq 0) {
+        return @("- none")
+    }
+
+    return $lines.ToArray()
+}
+
+function Format-PageNavigationEvidence {
+    param([object[]]$NavigationProvenance)
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    foreach ($item in @($NavigationProvenance)) {
+        $userRole = if ([string]::IsNullOrWhiteSpace([string]$item.userRole)) { "" } else { "; role=$([string]$item.userRole)" }
+        $flowName = if ([string]::IsNullOrWhiteSpace([string]$item.flowName)) { "" } else { "; flow=$([string]$item.flowName)" }
+        $sourceType = if ([string]::IsNullOrWhiteSpace([string]$item.sourceType)) { "Unknown" } else { [string]$item.sourceType }
+        $lines.Add("- provenanceId=$([string]$item.provenanceId); sourceType=$sourceType$userRole$flowName; summary=$(Escape-Md ([string]$item.summary))") | Out-Null
+    }
+
+    if ($lines.Count -eq 0) {
+        return @("- none")
+    }
+
+    return $lines.ToArray()
+}
+
 function Get-ComplexityScore {
     param([object]$ModuleMeta)
     if (-not $ModuleMeta) { return 0 }
     return ([int]$ModuleMeta.entityCount * 3) + ([int]$ModuleMeta.flowCount * 2) + ([int]$ModuleMeta.pageCount)
+}
+
+function Get-KbModuleRelativeDir {
+    param(
+        [string]$ModuleName,
+        [hashtable]$ModuleMetaByName
+    )
+
+    $category = ""
+    if ($ModuleMetaByName.ContainsKey($ModuleName)) {
+        $category = [string]$ModuleMetaByName[$ModuleName].category
+    }
+
+    if ($category -eq "Marketplace") {
+        return "modules/_marktplace/$ModuleName"
+    }
+
+    return "modules/$ModuleName"
+}
+
+function Get-KbModuleRelativeFile {
+    param(
+        [string]$ModuleName,
+        [string]$FileName,
+        [hashtable]$ModuleMetaByName
+    )
+
+    return "$(Get-KbModuleRelativeDir -ModuleName $ModuleName -ModuleMetaByName $ModuleMetaByName)/$FileName"
 }
 
 function Get-FlowTier {
@@ -218,6 +390,257 @@ function Extract-ShownPages {
     return @($pages | Sort-Object)
 }
 
+function Extract-RetrieveSummaries {
+    param(
+        [object]$Flow,
+        [object[]]$Nodes
+    )
+
+    $summaries = New-Object System.Collections.Generic.List[string]
+    $typedRetrieveActions = @()
+    if ($null -ne $Flow -and $Flow.PSObject.Properties.Name -contains "retrieveActions") {
+        $typedRetrieveActions = @($Flow.retrieveActions)
+    }
+
+    foreach ($action in $typedRetrieveActions) {
+        $summary = [string]$action.summary
+        if ([string]::IsNullOrWhiteSpace($summary)) { continue }
+        if (-not $summaries.Contains($summary)) {
+            $summaries.Add($summary) | Out-Null
+        }
+    }
+
+    if ($summaries.Count -gt 0) {
+        return @($summaries | Select-Object -First 2)
+    }
+
+    foreach ($node in @($Nodes)) {
+        $text = if (-not [string]::IsNullOrWhiteSpace([string]$node.detail)) {
+            [string]$node.detail
+        } else {
+            [string]$node.label
+        }
+        if ([string]::IsNullOrWhiteSpace($text)) { continue }
+        if ($text -match "RetrieveAction|\bretrieve\b") {
+            $summary = $text -replace "^RetrieveAction:\s*", ""
+            if (-not [string]::IsNullOrWhiteSpace($summary) -and -not $summaries.Contains($summary)) {
+                $summaries.Add($summary) | Out-Null
+            }
+        }
+    }
+
+    return @($summaries | Select-Object -First 2)
+}
+
+function Extract-DecisionSummaries {
+    param(
+        [object]$Flow,
+        [object[]]$Nodes
+    )
+
+    $summaries = New-Object System.Collections.Generic.List[string]
+    $typedDecisionActions = @()
+    if ($null -ne $Flow -and $Flow.PSObject.Properties.Name -contains "decisionActions") {
+        $typedDecisionActions = @($Flow.decisionActions)
+    }
+
+    foreach ($action in $typedDecisionActions) {
+        $summary = [string]$action.expression
+        if ([string]::IsNullOrWhiteSpace($summary)) {
+            $summary = [string]$action.summary
+        }
+        if (-not [string]::IsNullOrWhiteSpace($summary) -and -not $summaries.Contains($summary)) {
+            $summaries.Add($summary) | Out-Null
+        }
+    }
+
+    if ($summaries.Count -gt 0) {
+        return @($summaries | Select-Object -First 2)
+    }
+
+    foreach ($node in @($Nodes)) {
+        $text = (([string]$node.label) + " " + ([string]$node.detail)).Trim()
+        if ([string]::IsNullOrWhiteSpace($text)) { continue }
+
+        $summary = $null
+        if ($text -match "expression=([^`r`n]+)") {
+            $summary = $matches[1].Trim()
+        } elseif ($node.nodeType -match "Split" -or $text -match "^\s*DECISION\b") {
+            $summary = $text
+        }
+
+        if (-not [string]::IsNullOrWhiteSpace($summary) -and -not $summaries.Contains($summary)) {
+            $summaries.Add($summary) | Out-Null
+        }
+    }
+
+    return @($summaries | Select-Object -First 2)
+}
+
+function Get-FlowRetrieveActions {
+    param([object]$Flow)
+
+    if ($null -ne $Flow -and $Flow.PSObject.Properties.Name -contains "retrieveActions" -and @($Flow.retrieveActions).Count -gt 0) {
+        return @($Flow.retrieveActions)
+    }
+
+    $fallback = New-Object System.Collections.Generic.List[object]
+    foreach ($node in @($Flow.nodes)) {
+        $text = if (-not [string]::IsNullOrWhiteSpace([string]$node.detail)) { [string]$node.detail } else { [string]$node.label }
+        if ([string]::IsNullOrWhiteSpace($text) -or $text -notmatch "RetrieveAction|\bretrieve\b") { continue }
+        $summary = $text -replace "^RetrieveAction:\s*", ""
+        $fallback.Add([pscustomobject]@{
+            nodeId = [string]$node.nodeId
+            summary = $summary
+            sourceKind = $(if ($summary -match "over association") { "Association" } elseif ($summary -match "\bfrom\b") { "Database" } else { "Unknown" })
+            entity = $(if ($summary -match "\bfrom\s+([A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*)") { $matches[1] } else { $null })
+            association = $(if ($summary -match "\bover association\s+([A-Za-z_][A-Za-z0-9_]*)") { $matches[1] } else { $null })
+            xPath = $(if ($summary -match "\bxPath=([^,\r\n)]+)") { $matches[1].Trim() } else { $null })
+        }) | Out-Null
+    }
+    return $fallback.ToArray()
+}
+
+function Get-FlowDecisionActions {
+    param([object]$Flow)
+
+    if ($null -ne $Flow -and $Flow.PSObject.Properties.Name -contains "decisionActions" -and @($Flow.decisionActions).Count -gt 0) {
+        return @($Flow.decisionActions)
+    }
+
+    $fallback = New-Object System.Collections.Generic.List[object]
+    foreach ($node in @($Flow.nodes)) {
+        $text = (([string]$node.label) + " " + ([string]$node.detail)).Trim()
+        if ([string]::IsNullOrWhiteSpace($text)) { continue }
+        if ($text -match "expression=([^`r`n]+)") {
+            $expression = $matches[1].Trim()
+            $fallback.Add([pscustomobject]@{
+                nodeId = [string]$node.nodeId
+                summary = $text
+                caption = ($text -replace "\s*expression=.*$", "").Trim()
+                expression = $expression
+            }) | Out-Null
+        }
+    }
+    return $fallback.ToArray()
+}
+
+function Get-FlowShowPageActions {
+    param([object]$Flow)
+
+    if ($null -ne $Flow -and $Flow.PSObject.Properties.Name -contains "showPageActions" -and @($Flow.showPageActions).Count -gt 0) {
+        return @($Flow.showPageActions)
+    }
+
+    $fallback = New-Object System.Collections.Generic.List[object]
+    foreach ($node in @($Flow.nodes)) {
+        $text = (([string]$node.label) + " " + ([string]$node.detail)).Trim()
+        if ([string]::IsNullOrWhiteSpace($text)) { continue }
+        foreach ($m in [regex]::Matches($text, "show page\s+([A-Za-z0-9_]+\.[A-Za-z0-9_]+)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+            $fallback.Add([pscustomobject]@{
+                nodeId = [string]$node.nodeId
+                summary = $text
+                targetPage = $m.Groups[1].Value
+            }) | Out-Null
+        }
+    }
+    return $fallback.ToArray()
+}
+
+function Get-FlowMutationActions {
+    param([object]$Flow)
+
+    if ($null -ne $Flow -and $Flow.PSObject.Properties.Name -contains "mutationActions" -and @($Flow.mutationActions).Count -gt 0) {
+        return @($Flow.mutationActions)
+    }
+
+    $fallback = New-Object System.Collections.Generic.List[object]
+    foreach ($node in @($Flow.nodes)) {
+        $text = (([string]$node.label) + " " + ([string]$node.detail)).Trim()
+        if ([string]::IsNullOrWhiteSpace($text)) { continue }
+
+        $actionKind = $null
+        if ($text -match "CreateObjectAction|\bcreate\b") { $actionKind = "Create" }
+        elseif ($text -match "ChangeObjectAction|ChangeListAction|\bchange\b") { $actionKind = "Change" }
+        elseif ($text -match "CommitAction|\bcommit\b") { $actionKind = "Commit" }
+        elseif ($text -match "DeleteAction|\bdelete\b") { $actionKind = "Delete" }
+
+        if ($null -eq $actionKind) { continue }
+
+        $fallback.Add([pscustomobject]@{
+            nodeId = [string]$node.nodeId
+            actionKind = $actionKind
+            summary = $text
+            entity = $(if ($text -match "\b([A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*)\b") { $matches[1] } else { $null })
+            memberSummary = $(if ($text -match "\(([^)]+)\)") { $matches[1] } else { $null })
+        }) | Out-Null
+    }
+    return $fallback.ToArray()
+}
+
+function Get-PageDataSources {
+    param([object]$Page)
+
+    if ($null -ne $Page -and $Page.PSObject.Properties.Name -contains "dataSources") {
+        return @($Page.dataSources)
+    }
+
+    return @()
+}
+
+function Get-PageClientActions {
+    param([object]$Page)
+
+    if ($null -ne $Page -and $Page.PSObject.Properties.Name -contains "clientActions") {
+        return @($Page.clientActions)
+    }
+
+    return @()
+}
+
+function Get-PageNavigationProvenance {
+    param([object]$Page)
+
+    if ($null -ne $Page -and $Page.PSObject.Properties.Name -contains "navigationProvenance") {
+        return @($Page.navigationProvenance)
+    }
+
+    return @()
+}
+
+function Get-EntryProvenanceLabel {
+    param(
+        [object[]]$ShownByFlows,
+        [object[]]$NavigationProvenance
+    )
+
+    if (@($ShownByFlows).Count -gt 0) {
+        return "ShowPageAction"
+    }
+
+    $navKinds = @($NavigationProvenance | ForEach-Object { [string]$_.sourceType } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
+    if ($navKinds.Count -gt 0) {
+        return ($navKinds -join ", ")
+    }
+
+    return "Unknown (navigation metadata not exported)"
+}
+
+function Get-ModuleArtifactPath {
+    param(
+        [string]$ModuleName,
+        [string]$ArtifactType,
+        [hashtable]$ArtifactPathByTypeModule
+    )
+
+    $key = "$ArtifactType|$ModuleName"
+    if ($ArtifactPathByTypeModule.ContainsKey($key)) {
+        return [string]$ArtifactPathByTypeModule[$key]
+    }
+
+    return $null
+}
+
 if (-not (Test-Path $RunFolder -PathType Container)) {
     throw "RunFolder not found: $RunFolder"
 }
@@ -228,16 +651,28 @@ if ($manifest.schemaVersion -ne "2.0") {
     throw "Expected schema version 2.0, got $($manifest.schemaVersion)"
 }
 
+$artifactPathByTypeModule = @{}
+foreach ($artifact in @($manifest.artifacts)) {
+    $artifactType = [string]$artifact.type
+    if ($artifactType -notlike "module-*") { continue }
+
+    $artifactPath = [string]$artifact.path
+    if ([string]::IsNullOrWhiteSpace($artifactPath)) { continue }
+
+    $moduleArtifactDir = Split-Path -Path $artifactPath -Parent
+    if ([string]::IsNullOrWhiteSpace($moduleArtifactDir)) { continue }
+
+    $moduleName = Split-Path -Path $moduleArtifactDir -Leaf
+    if ([string]::IsNullOrWhiteSpace($moduleName)) { continue }
+
+    $artifactPathByTypeModule["$artifactType|$moduleName"] = $artifactPath
+}
+
 $kbRoot = $OutputRoot
 if (-not (Test-Path $kbRoot -PathType Container)) {
     throw "KB root does not exist. Run scaffold first: $kbRoot"
 }
 
-$generatedAtUtc = if ([string]::IsNullOrWhiteSpace($GeneratedAtUtc)) {
-    (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
-} else {
-    $GeneratedAtUtc
-}
 $kbFormatVersion = "1.0"
 $runFolderName = Split-Path $RunFolder -Leaf
 
@@ -248,6 +683,15 @@ $appInfoPath = Join-Path $RunFolder "general/app-info.json"
 $allModules = Load-Json -Path $allModulesPath
 $userRoles = Load-Json -Path $userRolesPath
 $appInfo = Load-Json -Path $appInfoPath
+$generatedAtUtc = if ([string]::IsNullOrWhiteSpace($GeneratedAtUtc)) {
+    if ($manifest.PSObject.Properties.Name -contains "generatedAtUtc" -and -not [string]::IsNullOrWhiteSpace([string]$manifest.generatedAtUtc)) {
+        [string]$manifest.generatedAtUtc
+    } else {
+        (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+    }
+} else {
+    $GeneratedAtUtc
+}
 
 $moduleMetaByName = @{}
 foreach ($m in @($allModules.modules)) {
@@ -311,7 +755,18 @@ foreach ($module in $moduleNames) {
         $qualified = [string]$flow.qualifiedName
         $localName = Get-LocalNameFromQualified -QualifiedName $qualified
         $callsOut = @(@($flow.calls) | ForEach-Object { [string]$_.targetFlowName } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
-        $shownPages = Extract-ShownPages -Nodes @($flow.nodes)
+        $retrieveActions = Get-FlowRetrieveActions -Flow $flow
+        $decisionActions = Get-FlowDecisionActions -Flow $flow
+        $showPageActions = Get-FlowShowPageActions -Flow $flow
+        $mutationActions = Get-FlowMutationActions -Flow $flow
+        $shownPages = @(
+            @($showPageActions | ForEach-Object { [string]$_.targetPage }) +
+            @(Extract-ShownPages -Nodes @($flow.nodes)) |
+            Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+            Sort-Object -Unique
+        )
+        $retrieveSummaries = Extract-RetrieveSummaries -Flow $flow -Nodes @($flow.nodes)
+        $decisionSummaries = Extract-DecisionSummaries -Flow $flow -Nodes @($flow.nodes)
         $actionFlags = Get-ActionFlags -Nodes @($flow.nodes)
 
         $mentions = New-Object System.Collections.Generic.HashSet[string]
@@ -342,11 +797,19 @@ foreach ($module in $moduleNames) {
             fanIn = 0
             fanOut = @($callsOut).Count
             shownPages = $shownPages
+            retrieveSummaries = $retrieveSummaries
+            decisionSummaries = $decisionSummaries
+            retrieveActions = $retrieveActions
+            decisionActions = $decisionActions
+            showPageActions = $showPageActions
+            mutationActions = $mutationActions
             touchesEntities = $touchesEntities
             hasCrossModuleEdge = $false
             writesPersistent = $writesPersistent
             hasBehaviouralAction = [bool]$actionFlags.HasBehaviouralAction
             actionFlags = $actionFlags
+            pseudocode = [string]$flow.pseudocode
+            flowId = [string]$flow.flowId
         }
 
         $flowFacts[$qualified] = $fact
@@ -401,6 +864,9 @@ foreach ($module in $moduleNames) {
             allowedRoles = @($page.allowedRoles)
             parameters = @($page.parameters)
             isPopup = [bool]$page.isPopup
+            dataSources = @(Get-PageDataSources -Page $page)
+            clientActions = @(Get-PageClientActions -Page $page)
+            navigationProvenance = @(Get-PageNavigationProvenance -Page $page)
         }
         $pageByQualified[$fact.qualifiedName] = $fact
         $pageFacts += $fact
@@ -487,6 +953,12 @@ $qualityMetrics["CustomTier1Count"] = [int]$customTier1Count
 $qualityMetrics["CrossModuleEdgeCount"] = [int]$crossModuleEdges.Count
 $qualityMetrics["PageLinksDerived"] = [int](@($shownByPage.Keys).Count)
 
+$moduleDocPathsByName = @{}
+$appSecurityPath = Join-Path $kbRoot "app/SECURITY.md"
+$byEntityPath = Join-Path $kbRoot "routes/by-entity.md"
+$byPagePath = Join-Path $kbRoot "routes/by-page.md"
+$byFlowPath = Join-Path $kbRoot "routes/by-flow.md"
+
 $readerPath = Join-Path $kbRoot "READER.md"
 $readerContent = @"
 # How to Read This Knowledge Base
@@ -501,18 +973,32 @@ Confidence: Export-backed
 
 - Start at [ROUTING.md](ROUTING.md) for index-style lookup.
 - Use [app/APP_OVERVIEW.md](app/APP_OVERVIEW.md) for app mission and key behaviours.
-- Use ``modules/<Module>/`` files for module-level behaviour, domain, pages, and resources.
+- Use ``modules/<Module>/`` for app and system modules, and ``modules/_marktplace/<Module>/`` for marketplace modules.
 - Use ``routes/`` files for cross-cut indexes by entity, page, and flow.
+- Use ``KB detail`` links for KB-local drill-down.
+- Use ``Evidence pseudo`` and ``Evidence json`` links when you need exact exported behaviour.
 
 Confidence: Export-backed
 
 ## How to answer questions
 
 - For behaviour questions, trace: trigger -> flow chain -> entity mutations -> shown pages -> role constraints.
+- For exact microflow questions, open the flow evidence ladder before raw JSON.
+- For exact retrieve or XPath questions, follow the route-table evidence links before manual search.
 - Prefer custom modules for deep app-specific answers.
 - Use support modules mainly for dependencies that affect custom behaviour.
 
 Confidence: Inferred
+
+## KB Commands
+
+- This KB remains read-only for normal interpretation.
+- ``/enrichkb`` is the explicit in-place AI enrichment command.
+- ``/initkb`` remains available as a compatibility entry point and rebuild handoff.
+- Both commands use ``_sources/creator-link.json`` to find the linked ``lastRunFolder``.
+- If the source run folder is missing, ``/initkb`` should fall back to a creator-side rebuild handoff.
+
+Confidence: Export-backed
 
 ## Confidence levels
 
@@ -527,6 +1013,7 @@ Confidence: Inferred
 - KB Format Version: $kbFormatVersion
 - Schema version: $($manifest.schemaVersion)
 - Unknown TODO backlog: [_reports/UNKNOWN_TODO.md](_reports/UNKNOWN_TODO.md)
+- If present, ``_sources/creator-link.json`` links this KB back to its creator workspace.
 "@
 Write-Utf8NoBom -Path $readerPath -Content $readerContent
 
@@ -534,7 +1021,7 @@ $moduleIndexRows = New-Object System.Collections.Generic.List[string]
 foreach ($module in $moduleNames) {
     $cat = [string]$moduleMetaByName[$module].category
     $complexity = Get-ComplexityScore -ModuleMeta $moduleMetaByName[$module]
-    $moduleIndexRows.Add("| $module | $cat | $complexity | [README](modules/$module/README.md) |") | Out-Null
+    $moduleIndexRows.Add("| $module | $cat | $complexity | [README]($(Get-KbModuleRelativeFile -ModuleName $module -FileName 'README.md' -ModuleMetaByName $moduleMetaByName)) |") | Out-Null
 }
 
 $routingPath = Join-Path $kbRoot "ROUTING.md"
@@ -553,6 +1040,9 @@ $routingContent = @"
 | Page-level lookup | [routes/by-page.md](routes/by-page.md) |
 | Flow-level lookup | [routes/by-flow.md](routes/by-flow.md) |
 | Cross-module dependencies | [routes/cross-module.md](routes/cross-module.md) |
+| Exact microflow body | [routes/by-flow.md](routes/by-flow.md) |
+| Exact retrieve or XPath evidence | [routes/by-flow.md](routes/by-flow.md) |
+| Why a page opens | [routes/by-page.md](routes/by-page.md) |
 
 ## Module index
 
@@ -570,6 +1060,12 @@ $($moduleIndexRows -join "`n")
 - Derived page-flow links: $($qualityMetrics.PageLinksDerived)
 - Known gaps: pending (computed after composition)
 
+## Deep lookup
+
+- Route tables provide ``KB detail`` links into module sections.
+- Route tables provide direct ``Evidence`` links back to the current ``app-overview`` export.
+- Use KB sections first, then the linked export artefacts only when exact current behaviour is required.
+
 ## Source
 
 - Generated at: $generatedAtUtc
@@ -580,7 +1076,7 @@ Write-Utf8NoBom -Path $routingPath -Content $routingContent
 $capabilityRows = New-Object System.Collections.Generic.List[string]
 foreach ($module in $customModules) {
     $moduleFlows = @($flowList | Where-Object { $_.module -eq $module })
-    $capabilityRows.Add("| $module | $($moduleFlows.Count) | $(@($moduleFlows | Where-Object { $_.tier -eq 1 }).Count) | [FLOWS](../modules/$module/FLOWS.md) |") | Out-Null
+    $capabilityRows.Add("| $module | $($moduleFlows.Count) | $(@($moduleFlows | Where-Object { $_.tier -eq 1 }).Count) | [FLOWS](../$(Get-KbModuleRelativeFile -ModuleName $module -FileName 'FLOWS.md' -ModuleMetaByName $moduleMetaByName)) |") | Out-Null
 }
 
 $entryRows = New-Object System.Collections.Generic.List[string]
@@ -592,7 +1088,7 @@ foreach ($flow in $topEntryPoints) {
     if ($flow.fanIn -ge 2) { $reason += "fan-in $($flow.fanIn)" }
     if ($flow.fanOut -ge 2) { $reason += "fan-out $($flow.fanOut)" }
     if ($reason.Count -eq 0) { $reason += "behavioural action" }
-    $entryRows.Add("| $($flow.qualifiedName) | Tier $($flow.tier) | $(Join-OrDefault -Items $reason -Default "behavioural action") | [Flow](../modules/$($flow.module)/FLOWS.md) |") | Out-Null
+    $entryRows.Add("| $($flow.qualifiedName) | Tier $($flow.tier) | $(Join-OrDefault -Items $reason -Default "behavioural action") | [Flow](../$(Get-KbModuleRelativeFile -ModuleName $flow.module -FileName 'FLOWS.md' -ModuleMetaByName $moduleMetaByName)) |") | Out-Null
 }
 
 $appOverviewPath = Join-Path $kbRoot "app/APP_OVERVIEW.md"
@@ -790,7 +1286,27 @@ Write-Utf8NoBom -Path $callGraphPath -Content $callGraphContent
 foreach ($module in $moduleNames) {
     $meta = $moduleMetaByName[$module]
     $category = [string]$meta.category
-    $moduleDir = Join-Path $kbRoot "modules/$module"
+    $moduleDir = Join-Path $kbRoot (Get-KbModuleRelativeDir -ModuleName $module -ModuleMetaByName $moduleMetaByName)
+    $readmePath = Join-Path $moduleDir "README.md"
+    $domainPath = Join-Path $moduleDir "DOMAIN.md"
+    $flowsPath = Join-Path $moduleDir "FLOWS.md"
+    $pagesPath = Join-Path $moduleDir "PAGES.md"
+    $resourcesPath = Join-Path $moduleDir "RESOURCES.md"
+    $moduleDocPathsByName[$module] = @{
+        README = $readmePath
+        DOMAIN = $domainPath
+        FLOWS = $flowsPath
+        PAGES = $pagesPath
+        RESOURCES = $resourcesPath
+    }
+    $moduleFlowsJsonPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-flows-json" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $moduleFlowsPseudoPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-flows-pseudo" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $modulePagesJsonPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-pages-json" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $modulePagesPseudoPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-pages-pseudo" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $moduleDomainJsonPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-domain-model-json" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $moduleDomainPseudoPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-domain-model-pseudo" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $moduleResourcesJsonPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-resources-json" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $moduleResourcesPseudoPath = Get-ModuleArtifactPath -ModuleName $module -ArtifactType "module-resources-pseudo" -ArtifactPathByTypeModule $artifactPathByTypeModule
     $moduleFlows = @($flowList | Where-Object { $_.module -eq $module } | Sort-Object localName)
     $modulePages = @($pageFacts | Where-Object { $_.module -eq $module } | Sort-Object name)
     $moduleEntities = @($domainsByModule[$module].domainModel.entities)
@@ -850,7 +1366,6 @@ foreach ($module in $moduleNames) {
         $riskRows += "- No major derivation gaps detected for this module."
     }
 
-    $readmePath = Join-Path $moduleDir "README.md"
     $readmeContent = @"
 # Module: $module
 
@@ -891,6 +1406,22 @@ $($riskRows -join "`n")
 - [FLOWS.md](FLOWS.md)
 - [PAGES.md](PAGES.md)
 - [RESOURCES.md](RESOURCES.md)
+- Use the evidence ladders in ``FLOWS.md`` and ``PAGES.md`` for exact drill-down.
+
+## Source Pointers
+
+- Domain export: $(New-MarkdownLink -Label "domain-model.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $moduleDomainPseudoPath)) and $(New-MarkdownLink -Label "domain-model.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $moduleDomainJsonPath)).
+- Flow export: $(New-MarkdownLink -Label "flows.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $moduleFlowsPseudoPath)) and $(New-MarkdownLink -Label "flows.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $moduleFlowsJsonPath)).
+- Page export: $(New-MarkdownLink -Label "pages.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $modulePagesPseudoPath)) and $(New-MarkdownLink -Label "pages.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $modulePagesJsonPath)).
+- Resource export: $(New-MarkdownLink -Label "resources.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $moduleResourcesPseudoPath)) and $(New-MarkdownLink -Label "resources.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $readmePath -ToPath $moduleResourcesJsonPath)).
+- Ask `DOMAIN.md` for entity shape, access rules, associations, and XPath evidence.
+- Ask `FLOWS.md` for exact flow behaviour, retrieves, decisions, mutations, and pseudocode.
+- Ask `PAGES.md` for page entry points, roles, datasources, client actions, and navigation provenance.
+- Ask `RESOURCES.md` for constants, scheduled events, and supporting module resources.
+
+## Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.
 
 ## Cross-Module Dependencies
 
@@ -954,7 +1485,111 @@ $($riskRows -join "`n")
         $enumRows.Add("| none | 0 | none |") | Out-Null
     }
 
-    $domainPath = Join-Path $moduleDir "DOMAIN.md"
+    $entityEvidenceSections = New-Object System.Collections.Generic.List[string]
+    foreach ($entity in $moduleEntities) {
+        $life = $entityLifecycle[$entity.name]
+        $entityAnchor = Get-MarkdownAnchorId -Prefix "entity" -Value $entity.name
+        $domainPseudoLink = New-MarkdownLink -Label "domain-model.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $domainPath -ToPath $moduleDomainPseudoPath)
+        $domainJsonLink = New-MarkdownLink -Label "domain-model.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $domainPath -ToPath $moduleDomainJsonPath)
+        $entityPages = New-Object System.Collections.Generic.HashSet[string]
+        foreach ($page in $modulePages) {
+            foreach ($param in @($page.parameters)) {
+                if ([string]$param.entityType -eq [string]$entity.name) {
+                    [void]$entityPages.Add($page.qualifiedName)
+                }
+            }
+        }
+
+        $hasXPath = $false
+        foreach ($rule in @($entity.accessRules)) {
+            if (-not [string]::IsNullOrWhiteSpace([string]$rule.xPathConstraint)) {
+                $hasXPath = $true
+                break
+            }
+        }
+
+        $associationEvidence = @(
+            $moduleAssociations |
+            Where-Object { $_.parentEntity -eq $entity.name -or $_.childEntity -eq $entity.name } |
+            ForEach-Object { "$($_.name): $($_.parentEntity) -> $($_.childEntity)" } |
+            Sort-Object -Unique
+        )
+        $accessRuleEvidence = @(
+            @($entity.accessRules) |
+            ForEach-Object {
+                $ruleKey = if ($_.PSObject.Properties.Name -contains "ruleKey") { [string]$_.ruleKey } else { "" }
+                $roles = Join-OrDefault -Items @($_.moduleRoles) -Default "none"
+                $xPath = if ([string]::IsNullOrWhiteSpace([string]$_.xPathConstraint)) { "none" } else { [string]$_.xPathConstraint }
+                if ([string]::IsNullOrWhiteSpace($ruleKey)) {
+                    "roles=$roles; xPath=$xPath"
+                } else {
+                    "${ruleKey}: roles=$roles; xPath=$xPath"
+                }
+            }
+        )
+        $xpathEvidence = @(
+            @($entity.accessRules) |
+            Where-Object { $_.PSObject.Properties.Name -contains "xPathEvidence" -and $null -ne $_.xPathEvidence } |
+            ForEach-Object {
+                $ruleKey = if ($_.PSObject.Properties.Name -contains "ruleKey" -and -not [string]::IsNullOrWhiteSpace([string]$_.ruleKey)) { [string]$_.ruleKey } else { "rule" }
+                $summary = if ($_.xPathEvidence.PSObject.Properties.Name -contains "summary" -and -not [string]::IsNullOrWhiteSpace([string]$_.xPathEvidence.summary)) { [string]$_.xPathEvidence.summary } else { [string]$_.xPathConstraint }
+                "${ruleKey}: $(Escape-Md $summary)"
+            }
+        )
+
+        $readFlow = @($life.Read | Sort-Object | Select-Object -First 1)
+        $writeFlow = @(
+            @($life.Create) + @($life.Update) + @($life.Delete) |
+            Sort-Object -Unique |
+            Select-Object -First 1
+        )
+
+        $readFlowLink = if ($readFlow.Count -gt 0) {
+            $qualified = [string]$readFlow[0]
+            $flowAnchor = Get-MarkdownAnchorId -Prefix "flow" -Value $qualified
+            New-MarkdownLink -Label $qualified -TargetPath ((Get-RelativeMarkdownPath -FromFilePath $domainPath -ToPath $flowsPath) + "#$flowAnchor")
+        } else {
+            "none"
+        }
+        $writeFlowLink = if ($writeFlow.Count -gt 0) {
+            $qualified = [string]$writeFlow[0]
+            $flowAnchor = Get-MarkdownAnchorId -Prefix "flow" -Value $qualified
+            New-MarkdownLink -Label $qualified -TargetPath ((Get-RelativeMarkdownPath -FromFilePath $domainPath -ToPath $flowsPath) + "#$flowAnchor")
+        } else {
+            "none"
+        }
+        $securityLink = if ($hasXPath) {
+            New-MarkdownLink -Label "app security" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $domainPath -ToPath $appSecurityPath)
+        } else {
+            "none"
+        }
+
+        $entityEvidenceSection = @(
+            ('<a id="{0}"></a>' -f $entityAnchor),
+            "### $($entity.name)",
+            "",
+            "- Stable handle: entity=$($entity.name).",
+            "- Generalization: $(if ([string]::IsNullOrWhiteSpace([string]$entity.generalization)) { 'none' } else { [string]$entity.generalization }).",
+            "- Source pseudo: $domainPseudoLink.",
+            "- Source json: $domainJsonLink.",
+            "- Create flows: $(Join-OrDefault -Items @($life.Create) -Default 'none').",
+            "- Update flows: $(Join-OrDefault -Items @($life.Update) -Default 'none').",
+            "- Delete flows: $(Join-OrDefault -Items @($life.Delete) -Default 'none').",
+            "- Read flows: $(Join-OrDefault -Items @($life.Read) -Default 'none').",
+            "- Shown on pages: $(Join-OrDefault -Items @($entityPages) -Default 'none').",
+            "- Associations: $(Join-OrDefault -Items $associationEvidence -Default 'none').",
+            "- Access-rule handles: $(Join-OrDefault -Items $accessRuleEvidence -Default 'none').",
+            "- XPath evidence payloads: $(Join-OrDefault -Items $xpathEvidence -Default 'none').",
+            "- Read evidence: $readFlowLink.",
+            "- Write evidence: $writeFlowLink.",
+            "- Security/XPath evidence: $securityLink."
+        ) -join "`n"
+        $entityEvidenceSections.Add($entityEvidenceSection) | Out-Null
+    }
+    if ($entityEvidenceSections.Count -eq 0) {
+        $entityEvidenceSections.Add("No entity evidence sections for this module.") | Out-Null
+    }
+
     $domainContent = @"
 # Domain: $module
 
@@ -993,6 +1628,14 @@ $($assocRows -join "`n")
 | Enumeration | Value count | Sample values |
 |---|---:|---|
 $($enumRows -join "`n")
+
+## Entity Evidence
+
+$($entityEvidenceSections -join "`n")
+
+## Domain Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.
 "@
     Write-Utf8NoBom -Path $domainPath -Content $domainContent
 
@@ -1063,7 +1706,62 @@ $($enumRows -join "`n")
         $tier1Sections.Add("No Tier 1 narrative required for this module category.") | Out-Null
     }
 
-    $flowsPath = Join-Path $moduleDir "FLOWS.md"
+    $flowEvidenceSections = New-Object System.Collections.Generic.List[string]
+    foreach ($f in $moduleFlows) {
+        $flowAnchor = Get-MarkdownAnchorId -Prefix "flow" -Value $f.qualifiedName
+        $pseudoLink = New-MarkdownLink -Label "flows.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $flowsPath -ToPath $moduleFlowsPseudoPath)
+        $jsonLink = New-MarkdownLink -Label "flows.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $flowsPath -ToPath $moduleFlowsJsonPath)
+        $bodyBlock = if ([string]::IsNullOrWhiteSpace([string]$f.pseudocode)) {
+            "_No pseudocode exported for this flow._"
+        } else {
+            ('```text' + "`n" + [string]$f.pseudocode + "`n" + '```')
+        }
+        $retrieveEvidenceLines = Format-FlowActionEvidence -Actions $f.retrieveActions -Kind "retrieve"
+        $decisionEvidenceLines = Format-FlowActionEvidence -Actions $f.decisionActions -Kind "decision"
+        $showPageEvidenceLines = Format-FlowActionEvidence -Actions $f.showPageActions -Kind "show-page"
+        $mutationEvidenceLines = Format-FlowActionEvidence -Actions $f.mutationActions -Kind "mutation"
+
+        $flowEvidenceSection = @(
+            ('<a id="{0}"></a>' -f $flowAnchor),
+            "### $($f.qualifiedName)",
+            "",
+            "- Stable handle: qualifiedName=$($f.qualifiedName); flowId=$(if ([string]::IsNullOrWhiteSpace([string]$f.flowId)) { 'none' } else { [string]$f.flowId }).",
+            "- KB summary: tier=$($f.tier), kind=$($f.kind), nodes=$($f.nodeCount), calls out=$($f.fanOut), called by=$($f.fanIn).",
+            "- Source pseudo: $pseudoLink.",
+            "- Source json: $jsonLink.",
+            "- Top retrieve actions: $(Join-OrDefault -Items $f.retrieveSummaries -Default 'none').",
+            "- Top decision expressions: $(Join-OrDefault -Items $f.decisionSummaries -Default 'none').",
+            "- Shown pages: $(Join-OrDefault -Items $f.shownPages -Default 'none').",
+            "- Called flows: $(Join-OrDefault -Items $f.callsOut -Default 'none').",
+            "- Called by flows: $(Join-OrDefault -Items $f.calledBy -Default 'none').",
+            "- Touched entities: $(Join-OrDefault -Items $f.touchesEntities -Default 'none').",
+            "",
+            "#### Retrieve Actions",
+            "",
+            ($retrieveEvidenceLines -join "`n"),
+            "",
+            "#### Decision Actions",
+            "",
+            ($decisionEvidenceLines -join "`n"),
+            "",
+            "#### Show-Page Actions",
+            "",
+            ($showPageEvidenceLines -join "`n"),
+            "",
+            "#### Mutation Actions",
+            "",
+            ($mutationEvidenceLines -join "`n"),
+            "",
+            "#### Current Pseudocode",
+            "",
+            $bodyBlock
+        ) -join "`n"
+        $flowEvidenceSections.Add($flowEvidenceSection) | Out-Null
+    }
+    if ($flowEvidenceSections.Count -eq 0) {
+        $flowEvidenceSections.Add("No flow evidence sections for this module.") | Out-Null
+    }
+
     $flowsContent = @"
 # Flows: $module
 
@@ -1108,6 +1806,14 @@ $($flowDetailRows -join "`n")
 ## Tier 1 Deep Narratives
 
 $($tier1Sections -join "`n")
+
+## Flow Evidence
+
+$($flowEvidenceSections -join "`n")
+
+## Flow Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.
 "@
     Write-Utf8NoBom -Path $flowsPath -Content $flowsContent
 
@@ -1142,7 +1848,48 @@ $($tier1Sections -join "`n")
     }
     if ($journeyRowsByPage.Count -eq 0) { $journeyRowsByPage.Add("| none | none |") | Out-Null }
 
-    $pagesPath = Join-Path $moduleDir "PAGES.md"
+    $pageEvidenceSections = New-Object System.Collections.Generic.List[string]
+    foreach ($p in $modulePages) {
+        $shownBy = if ($shownByPage.ContainsKey($p.qualifiedName)) { @($shownByPage[$p.qualifiedName] | Sort-Object -Unique) } else { @() }
+        $pageAnchor = Get-MarkdownAnchorId -Prefix "page" -Value $p.qualifiedName
+        $pagePseudoLink = New-MarkdownLink -Label "pages.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $pagesPath -ToPath $modulePagesPseudoPath)
+        $pageJsonLink = New-MarkdownLink -Label "pages.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $pagesPath -ToPath $modulePagesJsonPath)
+        $paramSummary = @($p.parameters | ForEach-Object { "$($_.name):$($_.entityType)" })
+        $dataSourceEvidenceLines = Format-PageDataSourceEvidence -DataSources $p.dataSources
+        $clientActionEvidenceLines = Format-PageClientActionEvidence -ClientActions $p.clientActions
+        $navigationEvidenceLines = Format-PageNavigationEvidence -NavigationProvenance $p.navigationProvenance
+
+        $pageEvidenceSection = @(
+            ('<a id="{0}"></a>' -f $pageAnchor),
+            "### $($p.qualifiedName)",
+            "",
+            "- Stable handle: qualifiedName=$($p.qualifiedName).",
+            "- Entry provenance: $(Get-EntryProvenanceLabel -ShownByFlows $shownBy -NavigationProvenance $p.navigationProvenance).",
+            "- Shown by flows: $(Join-OrDefault -Items $shownBy -Default 'none').",
+            "- Navigation/homepage status: $(if (@($p.navigationProvenance).Count -gt 0) { 'Navigation metadata exported' } elseif ($shownBy.Count -gt 0) { 'Flow-linked page' } else { 'Unknown in current export' }).",
+            "- Allowed roles: $(Join-OrDefault -Items $p.allowedRoles -Default 'none').",
+            "- Parameters: $(Join-OrDefault -Items $paramSummary -Default 'none').",
+            "- Source pseudo: $pagePseudoLink.",
+            "- Source json: $pageJsonLink.",
+            "",
+            "#### Data Sources",
+            "",
+            ($dataSourceEvidenceLines -join "`n"),
+            "",
+            "#### Client Actions",
+            "",
+            ($clientActionEvidenceLines -join "`n"),
+            "",
+            "#### Navigation Provenance",
+            "",
+            ($navigationEvidenceLines -join "`n")
+        ) -join "`n"
+        $pageEvidenceSections.Add($pageEvidenceSection) | Out-Null
+    }
+    if ($pageEvidenceSections.Count -eq 0) {
+        $pageEvidenceSections.Add("No page evidence sections for this module.") | Out-Null
+    }
+
     $pagesContent = @"
 # Pages: $module
 
@@ -1167,6 +1914,14 @@ $($journeyRowsByPage -join "`n")
 ## Snippets
 
 Snippet-level page widget behaviour is not exported in current overview contract.
+
+## Page Evidence
+
+$($pageEvidenceSections -join "`n")
+
+## Page Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.
 "@
     Write-Utf8NoBom -Path $pagesPath -Content $pagesContent
 
@@ -1225,6 +1980,11 @@ $($otherRowsResource -join "`n")
 $entityRouteRows = New-Object System.Collections.Generic.List[string]
 foreach ($entityName in @($entityLookup.Keys | Sort-Object)) {
     $life = $entityLifecycle[$entityName]
+    $entityModuleName = $entityModule[$entityName]
+    $domainDocPath = $moduleDocPathsByName[$entityModuleName].DOMAIN
+    $flowsDocPath = $moduleDocPathsByName[$entityModuleName].FLOWS
+    $entityAnchor = Get-MarkdownAnchorId -Prefix "entity" -Value $entityName
+    $kbDetailLink = New-MarkdownLink -Label "detail" -TargetPath ((Get-RelativeMarkdownPath -FromFilePath $byEntityPath -ToPath $domainDocPath) + "#$entityAnchor")
     $shownPagesForEntity = New-Object System.Collections.Generic.HashSet[string]
     foreach ($page in $pageFacts) {
         foreach ($param in @($page.parameters)) {
@@ -1233,42 +1993,89 @@ foreach ($entityName in @($entityLookup.Keys | Sort-Object)) {
             }
         }
     }
-    $entityRouteRows.Add("| $entityName | [$($entityModule[$entityName])](../modules/$($entityModule[$entityName])/DOMAIN.md) | $(Join-OrDefault -Items @($life.Create) -Default "none") | $(Join-OrDefault -Items @($life.Update) -Default "none") | $(Join-OrDefault -Items @($life.Delete) -Default "none") | $(Join-OrDefault -Items @($life.Read) -Default "none") | $(Join-OrDefault -Items @($shownPagesForEntity) -Default "none") |") | Out-Null
+
+    $readEvidenceFlow = @($life.Read | Sort-Object | Select-Object -First 1)
+    $writeEvidenceFlow = @(
+        @($life.Create) + @($life.Update) + @($life.Delete) |
+        Sort-Object -Unique |
+        Select-Object -First 1
+    )
+
+    $readEvidenceLink = if ($readEvidenceFlow.Count -gt 0) {
+        $qualified = [string]$readEvidenceFlow[0]
+        $flowAnchor = Get-MarkdownAnchorId -Prefix "flow" -Value $qualified
+        New-MarkdownLink -Label $qualified -TargetPath ((Get-RelativeMarkdownPath -FromFilePath $byEntityPath -ToPath $flowsDocPath) + "#$flowAnchor")
+    } else {
+        "none"
+    }
+    $writeEvidenceLink = if ($writeEvidenceFlow.Count -gt 0) {
+        $qualified = [string]$writeEvidenceFlow[0]
+        $flowAnchor = Get-MarkdownAnchorId -Prefix "flow" -Value $qualified
+        New-MarkdownLink -Label $qualified -TargetPath ((Get-RelativeMarkdownPath -FromFilePath $byEntityPath -ToPath $flowsDocPath) + "#$flowAnchor")
+    } else {
+        "none"
+    }
+    $securityEvidenceLink = if (@($domainsByModule[$entityModuleName].domainModel.entities | Where-Object { $_.name -eq $entityName } | ForEach-Object { $_.accessRules } | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_.xPathConstraint) }).Count -gt 0) {
+        New-MarkdownLink -Label "security" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $byEntityPath -ToPath $appSecurityPath)
+    } else {
+        "none"
+    }
+
+    $entityRouteRows.Add("| $entityName | [$entityModuleName]($(Get-RelativeMarkdownPath -FromFilePath $byEntityPath -ToPath $domainDocPath)) | $kbDetailLink | $(Join-OrDefault -Items @($life.Create) -Default "none") | $(Join-OrDefault -Items @($life.Update) -Default "none") | $(Join-OrDefault -Items @($life.Delete) -Default "none") | $(Join-OrDefault -Items @($life.Read) -Default "none") | $readEvidenceLink | $writeEvidenceLink | $securityEvidenceLink | $(Join-OrDefault -Items @($shownPagesForEntity) -Default "none") |") | Out-Null
 }
 
-$byEntityPath = Join-Path $kbRoot "routes/by-entity.md"
 $byEntityContent = @"
 # Entity Index
 
-| Entity | Module | Create flows | Update flows | Delete flows | Read flows | Shown on pages |
-|---|---|---|---|---|---|---|
+| Entity | Module | KB detail | Create flows | Update flows | Delete flows | Read flows | Read evidence | Write evidence | Security/XPath evidence | Shown on pages |
+|---|---|---|---|---|---|---|---|---|---|---|
 $($entityRouteRows -join "`n")
 "@
 Write-Utf8NoBom -Path $byEntityPath -Content $byEntityContent
 
 $byPageRows = New-Object System.Collections.Generic.List[string]
 foreach ($page in @($pageFacts | Sort-Object qualifiedName)) {
+    $pagesDocPath = $moduleDocPathsByName[$page.module].PAGES
+    $pageAnchor = Get-MarkdownAnchorId -Prefix "page" -Value $page.qualifiedName
+    $pagesPseudoArtifactPath = Get-ModuleArtifactPath -ModuleName $page.module -ArtifactType "module-pages-pseudo" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $pagesJsonArtifactPath = Get-ModuleArtifactPath -ModuleName $page.module -ArtifactType "module-pages-json" -ArtifactPathByTypeModule $artifactPathByTypeModule
     $shownBy = if ($shownByPage.ContainsKey($page.qualifiedName)) { @($shownByPage[$page.qualifiedName] | Sort-Object -Unique) } else { @() }
     $shownByText = Join-OrUnknown -Items $shownBy `
         -UnknownScope "$($page.module).$([string]$page.name)" `
         -UnknownField "routes/by-page.Shown by flows" `
         -Reason "Page appears in model, but no ShowPageAction evidence was derived from flows." `
         -FixHint "Improve show-page extraction or enrich parser output with resolved page-route links."
-    $byPageRows.Add("| $($page.qualifiedName) | [$($page.module)](../modules/$($page.module)/PAGES.md) | $(Join-OrDefault -Items $page.allowedRoles -Default "none") | $shownByText |") | Out-Null
+    $kbDetailLink = New-MarkdownLink -Label "detail" -TargetPath ((Get-RelativeMarkdownPath -FromFilePath $byPagePath -ToPath $pagesDocPath) + "#$pageAnchor")
+    $pseudoLink = New-MarkdownLink -Label "pages.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $byPagePath -ToPath $pagesPseudoArtifactPath)
+    $jsonLink = New-MarkdownLink -Label "pages.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $byPagePath -ToPath $pagesJsonArtifactPath)
+    $entryProvenance = Get-EntryProvenanceLabel -ShownByFlows $shownBy -NavigationProvenance $page.navigationProvenance
+    $primaryDatasourceOrAction = if (@($page.dataSources).Count -gt 0) {
+        [string]$page.dataSources[0].summary
+    } elseif (@($page.clientActions).Count -gt 0) {
+        [string]$page.clientActions[0].summary
+    } elseif (@($page.navigationProvenance).Count -gt 0) {
+        [string]$page.navigationProvenance[0].summary
+    } else {
+        "none"
+    }
+    $byPageRows.Add("| $($page.qualifiedName) | [$($page.module)]($(Get-RelativeMarkdownPath -FromFilePath $byPagePath -ToPath $pagesDocPath)) | $(Join-OrDefault -Items $page.allowedRoles -Default "none") | $(Escape-Md $entryProvenance) | $kbDetailLink | $pseudoLink | $jsonLink | $(Escape-Md $primaryDatasourceOrAction) | $shownByText |") | Out-Null
 }
 
-$byPagePath = Join-Path $kbRoot "routes/by-page.md"
 $byPageContent = @"
 # Page Index
 
-| Page | Module | Roles | Shown by flows |
-|---|---|---|---|
+| Page | Module | Roles | Entry provenance | KB detail | Evidence pseudo | Evidence json | Primary datasource/action | Shown by flows |
+|---|---|---|---|---|---|---|---|---|
 $($byPageRows -join "`n")
 "@
 Write-Utf8NoBom -Path $byPagePath -Content $byPageContent
 
 $byFlowRows = New-Object System.Collections.Generic.List[string]
 foreach ($flow in @($flowList | Sort-Object qualifiedName)) {
+    $flowsDocPath = $moduleDocPathsByName[$flow.module].FLOWS
+    $flowAnchor = Get-MarkdownAnchorId -Prefix "flow" -Value $flow.qualifiedName
+    $flowPseudoArtifactPath = Get-ModuleArtifactPath -ModuleName $flow.module -ArtifactType "module-flows-pseudo" -ArtifactPathByTypeModule $artifactPathByTypeModule
+    $flowJsonArtifactPath = Get-ModuleArtifactPath -ModuleName $flow.module -ArtifactType "module-flows-json" -ArtifactPathByTypeModule $artifactPathByTypeModule
     $touchesEntitiesText = if (@($flow.touchesEntities).Count -gt 0) {
         Join-OrDefault -Items $flow.touchesEntities -Default "none"
     } elseif ($flow.hasBehaviouralAction) {
@@ -1281,15 +2088,20 @@ foreach ($flow in @($flowList | Sort-Object qualifiedName)) {
         "none"
     }
 
-    $byFlowRows.Add("| $($flow.qualifiedName) | $($flow.kind) | [$($flow.module)](../modules/$($flow.module)/FLOWS.md) | $($flow.tier) | $($flow.fanOut) | $($flow.fanIn) | $(Join-OrDefault -Items $flow.shownPages -Default "none") | $touchesEntitiesText |") | Out-Null
+    $kbDetailLink = New-MarkdownLink -Label "detail" -TargetPath ((Get-RelativeMarkdownPath -FromFilePath $byFlowPath -ToPath $flowsDocPath) + "#$flowAnchor")
+    $pseudoLink = New-MarkdownLink -Label "flows.pseudo.txt" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $byFlowPath -ToPath $flowPseudoArtifactPath)
+    $jsonLink = New-MarkdownLink -Label "flows.json" -TargetPath (Get-RelativeMarkdownPath -FromFilePath $byFlowPath -ToPath $flowJsonArtifactPath)
+    $retrieveSummary = Escape-Md (Join-OrDefault -Items $flow.retrieveSummaries -Default "none")
+    $decisionSummary = Escape-Md (Join-OrDefault -Items $flow.decisionSummaries -Default "none")
+
+    $byFlowRows.Add("| $($flow.qualifiedName) | $($flow.kind) | [$($flow.module)]($(Get-RelativeMarkdownPath -FromFilePath $byFlowPath -ToPath $flowsDocPath)) | $($flow.tier) | $kbDetailLink | $pseudoLink | $jsonLink | $retrieveSummary | $decisionSummary | $($flow.fanOut) | $($flow.fanIn) | $(Join-OrDefault -Items $flow.shownPages -Default "none") | $touchesEntitiesText |") | Out-Null
 }
 
-$byFlowPath = Join-Path $kbRoot "routes/by-flow.md"
 $byFlowContent = @"
 # Flow Index
 
-| Flow | Type | Module | Tier | Calls | Called by | Shows Pages | Touches Entities |
-|---|---|---|---:|---:|---:|---|---|
+| Flow | Type | Module | Tier | KB detail | Evidence pseudo | Evidence json | Retrieve summary | Decision summary | Calls | Called by | Shows Pages | Touches Entities |
+|---|---|---|---:|---|---|---|---|---|---:|---:|---|---|
 $($byFlowRows -join "`n")
 "@
 Write-Utf8NoBom -Path $byFlowPath -Content $byFlowContent

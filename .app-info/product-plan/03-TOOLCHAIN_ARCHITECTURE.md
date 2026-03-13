@@ -31,7 +31,9 @@ Define the script-level architecture for generating an AI-useful KB with current
    - `general/*.json`
    - `modules/*/{domain-model,flows,pages,resources}.json`
 2. Output:
-   - `mendix-data/knowledge-base/<app>/...` markdown files
+   - `mendix-data/knowledge-base/...` markdown files
+   - `mendix-data/knowledge-base/_reports/...` report files
+   - `mendix-data/knowledge-base/_sources/...` traceability and handoff files
    - benchmark/validation terminal report.
 
 ## Generation Boundaries

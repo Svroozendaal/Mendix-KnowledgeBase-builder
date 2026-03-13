@@ -6,9 +6,11 @@ internal sealed class WizardForm : Form
     private readonly TextBox _appNameBox = new() { Dock = DockStyle.Fill };
     private readonly TextBox _installRootBox = new() { Dock = DockStyle.Fill };
     private readonly TextBox _mxPathBox = new() { Dock = DockStyle.Fill };
-    private readonly Label _dataRootLabel = new() { AutoSize = true };
+    private readonly TextBox _dataRootBox = new() { Dock = DockStyle.Fill };
     private readonly TextBox _appFolderBox = new() { Dock = DockStyle.Fill, ReadOnly = true };
     private readonly Button _runButton = new() { Text = "Run Pipeline", AutoSize = true };
+    private readonly Button _enrichButton = new() { Text = "Enrich KB", AutoSize = true, Enabled = false };
+    private readonly CheckBox _autoEnrichCheck = new() { Text = "Auto-enrich after pipeline", AutoSize = true };
     private readonly TextBox _logBox = new()
     {
         Multiline = true,
@@ -22,6 +24,7 @@ internal sealed class WizardForm : Form
     private readonly string _packageRoot;
     private readonly string _configPath;
     private WizardConfig _config;
+    private string? _suggestedDataRoot;
 
     public WizardForm()
     {
@@ -55,7 +58,7 @@ internal sealed class WizardForm : Form
         {
             Dock = DockStyle.Top,
             ColumnCount = 4,
-            RowCount = 8,
+            RowCount = 9,
             AutoSize = true,
             Padding = new Padding(12),
         };
@@ -70,6 +73,8 @@ internal sealed class WizardForm : Form
         browseInstallButton.Click += (_, _) => BrowseInstallRoot();
         var browseMxButton = new Button { Text = "Browse...", AutoSize = true };
         browseMxButton.Click += (_, _) => BrowseMx();
+        var browseDataRootButton = new Button { Text = "Browse...", AutoSize = true };
+        browseDataRootButton.Click += (_, _) => BrowseDataRoot();
         var autoDetectMxButton = new Button { Text = "Auto detect", AutoSize = true };
         autoDetectMxButton.Click += (_, _) => AutoDetectMx();
 
@@ -79,11 +84,13 @@ internal sealed class WizardForm : Form
         AddRow(settings, 1, "App name", _appNameBox, EmptyControl(), EmptyControl());
         AddRow(settings, 2, "Mendix install root", _installRootBox, browseInstallButton, EmptyControl());
         AddRow(settings, 3, "mx.exe", _mxPathBox, autoDetectMxButton, browseMxButton);
-        AddRow(settings, 4, "Output data root", _dataRootLabel, EmptyControl(), EmptyControl());
+        AddRow(settings, 4, "Output data root", _dataRootBox, browseDataRootButton, EmptyControl());
         AddRow(settings, 5, "Mendix app folder", _appFolderBox, EmptyControl(), EmptyControl());
-        AddRow(settings, 6, string.Empty, _runButton, EmptyControl(), EmptyControl());
+        AddRow(settings, 6, string.Empty, _autoEnrichCheck, EmptyControl(), EmptyControl());
+        AddRow(settings, 7, string.Empty, _runButton, _enrichButton, EmptyControl());
 
         _runButton.Click += async (_, _) => await RunPipelineAsync();
+        _enrichButton.Click += async (_, _) => await RunEnrichmentAsync();
         root.Controls.Add(settings, 0, 0);
 
         var logPanel = new GroupBox
@@ -113,6 +120,8 @@ internal sealed class WizardForm : Form
         _appNameBox.Text = _config.LastAppName ?? string.Empty;
         _installRootBox.Text = WizardRuntime.ResolveInstallRootDefault(_config);
         _mxPathBox.Text = _config.LastMxExePath ?? string.Empty;
+        _dataRootBox.Text = _config.LastDataRoot ?? string.Empty;
+        _autoEnrichCheck.Checked = _config.AutoEnrichAfterPipeline ?? false;
         RefreshDataRoot();
     }
 
@@ -131,12 +140,22 @@ internal sealed class WizardForm : Form
         var mprPath = _mprPathBox.Text.Trim();
         if (File.Exists(mprPath))
         {
-            _dataRootLabel.Text = Path.Combine(Path.GetDirectoryName(mprPath)!, "mendix-data");
+            var suggested = WizardRuntime.GetSuggestedDataRoot(mprPath);
+            if (string.IsNullOrWhiteSpace(_dataRootBox.Text) ||
+                string.Equals(_dataRootBox.Text.Trim(), _suggestedDataRoot, StringComparison.OrdinalIgnoreCase))
+            {
+                _dataRootBox.Text = suggested;
+            }
+            _suggestedDataRoot = suggested;
             _appFolderBox.Text = Path.GetDirectoryName(mprPath)!;
         }
         else
         {
-            _dataRootLabel.Text = "<select a valid .mpr file>";
+            if (string.Equals(_dataRootBox.Text.Trim(), _suggestedDataRoot, StringComparison.OrdinalIgnoreCase))
+            {
+                _dataRootBox.Text = string.Empty;
+            }
+            _suggestedDataRoot = null;
             _appFolderBox.Text = "<select a valid .mpr file>";
         }
     }
@@ -192,6 +211,21 @@ internal sealed class WizardForm : Form
         }
     }
 
+    private void BrowseDataRoot()
+    {
+        using var dialog = new FolderBrowserDialog
+        {
+            Description = "Select the target mendix-data or knowledge-base folder",
+            UseDescriptionForTitle = true,
+            InitialDirectory = string.IsNullOrWhiteSpace(_dataRootBox.Text) ? _appFolderBox.Text : _dataRootBox.Text,
+        };
+
+        if (dialog.ShowDialog(this) == DialogResult.OK)
+        {
+            _dataRootBox.Text = dialog.SelectedPath;
+        }
+    }
+
     private void AutoDetectMx()
     {
         try
@@ -241,14 +275,16 @@ internal sealed class WizardForm : Form
             }
 
             var mxPath = WizardRuntime.ValidateMxPath(mxPathInput);
-            var dataRoot = Path.Combine(Path.GetDirectoryName(mprPath)!, "mendix-data");
+            var dataRoot = WizardRuntime.NormalizeDataRootInput(_dataRootBox.Text);
             var kbRoot = Path.Combine(dataRoot, "knowledge-base");
+            var creatorLinkPath = Path.Combine(kbRoot, "_sources", "creator-link.json");
 
-            AppendLog("Starting full pipeline...");
+            AppendLog("Starting pipeline...");
             AppendLog($"MPR: {mprPath}");
             AppendLog($"App: {appName}");
             AppendLog($"mx.exe: {mxPath}");
             AppendLog($"Data root: {dataRoot}");
+            AppendLog($"Knowledge base root: {kbRoot}");
 
             _config = new WizardConfig
             {
@@ -256,7 +292,8 @@ internal sealed class WizardForm : Form
                 LastAppName = appName,
                 LastInstallRoot = _installRootBox.Text.Trim(),
                 LastMxExePath = mxPath,
-                LastOpenVsCode = _config.LastOpenVsCode,
+                LastDataRoot = dataRoot,
+                AutoEnrichAfterPipeline = _autoEnrichCheck.Checked,
             };
             WizardRuntime.SaveConfig(_configPath, _config);
 
@@ -279,12 +316,35 @@ internal sealed class WizardForm : Form
 
             AppendLog("Pipeline completed successfully.");
             AppendLog($"Knowledge base: {kbRoot}");
+
+            var runFolder = WizardRuntime.FindLatestRunFolder(dataRoot);
+            if (!string.IsNullOrWhiteSpace(runFolder))
+            {
+                creatorLinkPath = WizardRuntime.WriteCreatorLink(
+                    _packageRoot, kbRoot, dataRoot, appName, mprPath, runFolder);
+                AppendLog($"Creator link written: {creatorLinkPath}");
+            }
+            else
+            {
+                AppendLog("WARNING: Could not find run folder — creator-link.json not written.");
+            }
+
             AppendLog($"Mendix app folder: {Path.GetDirectoryName(mprPath)}");
+
+            _enrichReady = true;
+            _enrichButton.Enabled = true;
+
+            if (_autoEnrichCheck.Checked)
+            {
+                AppendLog("Auto-enrich is enabled. Starting enrichment...");
+                await RunEnrichmentAsync();
+                return;
+            }
 
             var appFolder = Path.GetDirectoryName(mprPath)!;
             MessageBox.Show(
                 this,
-                $"Knowledge base creation completed.{Environment.NewLine}{Environment.NewLine}Mendix app folder:{Environment.NewLine}{appFolder}",
+                $"Knowledge base creation completed.{Environment.NewLine}{Environment.NewLine}Knowledge base:{Environment.NewLine}{kbRoot}{Environment.NewLine}{Environment.NewLine}Click \"Enrich KB\" to add AI narratives.{Environment.NewLine}{Environment.NewLine}Mendix app folder:{Environment.NewLine}{appFolder}",
                 "Success",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
@@ -301,9 +361,112 @@ internal sealed class WizardForm : Form
         }
     }
 
+    private async Task RunEnrichmentAsync()
+    {
+        try
+        {
+            ToggleUi(false);
+            AppendLog("");
+            AppendLog("=== Starting AI enrichment ===");
+
+            var dataRoot = WizardRuntime.NormalizeDataRootInput(_dataRootBox.Text);
+            var kbRoot = Path.Combine(dataRoot, "knowledge-base");
+            var creatorLinkPath = Path.Combine(kbRoot, "_sources", "creator-link.json");
+
+            if (!File.Exists(creatorLinkPath))
+            {
+                AppendLog("ERROR: creator-link.json not found. Run the pipeline first.");
+                MessageBox.Show(
+                    this,
+                    $"creator-link.json not found at:{Environment.NewLine}{creatorLinkPath}{Environment.NewLine}{Environment.NewLine}Run the pipeline first to generate the knowledge base.",
+                    "Enrichment not available",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            var appName = _appNameBox.Text.Trim();
+            var claudePath = _config.LastClaudePath;
+
+            AppendLog($"Knowledge base: {kbRoot}");
+            AppendLog($"App name: {appName}");
+
+            var (claudeFound, detectedClaudePath) = WizardRuntime.DetectClaudeCli(claudePath);
+            if (claudeFound)
+            {
+                AppendLog($"Claude CLI: {detectedClaudePath}");
+            }
+
+            var exitCode = await WizardRuntime.RunEnrichmentAsync(
+                packageRoot: _packageRoot,
+                wizardRoot: _wizardRoot,
+                kbRoot: kbRoot,
+                appName: appName,
+                claudePath: claudePath,
+                log: AppendLog
+            );
+
+            if (exitCode == 2)
+            {
+                AppendLog("Claude CLI not found. Install it to use AI enrichment.");
+                MessageBox.Show(
+                    this,
+                    $"Claude CLI not found.{Environment.NewLine}{Environment.NewLine}Install with:{Environment.NewLine}npm install -g @anthropic-ai/claude-code{Environment.NewLine}{Environment.NewLine}Then authenticate with:{Environment.NewLine}claude login",
+                    "Claude CLI required",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            if (exitCode == 3)
+            {
+                AppendLog("Claude CLI authentication failed.");
+                MessageBox.Show(
+                    this,
+                    $"Claude CLI authentication failed.{Environment.NewLine}{Environment.NewLine}Run the following command to authenticate:{Environment.NewLine}claude login",
+                    "Authentication required",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            if (exitCode != 0)
+            {
+                AppendLog($"Enrichment failed with exit code {exitCode}.");
+                MessageBox.Show(this, $"Enrichment failed with exit code {exitCode}.", "Enrichment failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            AppendLog("Enrichment completed successfully.");
+            MessageBox.Show(
+                this,
+                $"AI enrichment completed.{Environment.NewLine}{Environment.NewLine}Knowledge base:{Environment.NewLine}{kbRoot}{Environment.NewLine}{Environment.NewLine}Review the enriched files and check the log for validation results.",
+                "Enrichment complete",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+        catch (Exception ex)
+        {
+            AppendLog($"ERROR: {ex.Message}");
+            MessageBox.Show(this, ex.Message, "Enrichment failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            ToggleUi(true);
+        }
+    }
+
+    private bool _enrichReady;
+
     private void ToggleUi(bool enabled)
     {
         _runButton.Enabled = enabled;
+        _autoEnrichCheck.Enabled = enabled;
+        _enrichButton.Enabled = enabled && _enrichReady;
         Cursor = enabled ? Cursors.Default : Cursors.WaitCursor;
     }
 

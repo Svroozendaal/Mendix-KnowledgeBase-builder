@@ -42,7 +42,7 @@ Out of scope:
 ## Document Map
 
 1. [01-END_STATE_KB_SPEC.md](01-END_STATE_KB_SPEC.md)  
-   Final required KB structure and per-file acceptance contract.
+   Final required KB structure, generated KB root layout, and per-file acceptance contract.
 2. [02-CONTENT_MODEL_CUSTOM_DEPTH.md](02-CONTENT_MODEL_CUSTOM_DEPTH.md)  
    Behaviour-first content model and tiered flow narrative rules.
 3. [03-TOOLCHAIN_ARCHITECTURE.md](03-TOOLCHAIN_ARCHITECTURE.md)  

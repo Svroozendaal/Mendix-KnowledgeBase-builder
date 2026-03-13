@@ -17,3 +17,11 @@
 | Snippet | Type | Parameters |
 |---|---|---|
 | none | none | none |
+
+## Page Evidence
+
+No page evidence documented yet.
+
+## Page Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.

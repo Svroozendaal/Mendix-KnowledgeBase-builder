@@ -25,6 +25,7 @@ Read this file after `.agents/AGENTS.md` and `.agents/FRAMEWORK.md` to understan
 - Generate a KB: `agents/KNOWLEDGEBASE_CREATOR.md`
 - Build KB content: `agents/OVERVIEW_KB_BUILDER.md`
 - Query a KB: `agents/OVERVIEW_KB_READER.md`
+- Paste-ready product overview: `docs/PRODUCT_OVERVIEW_CHATBOT.md`
 - Plan context interview agent: `product-plan/11-CONTEXT_CONVERSATION_AGENT_SPEC.md` and `development/prompts/11-CONTEXT_AGENT_ROLE_AND_BOUNDARY.md`
 - Investigate structural gaps: `agents/GAPSMITH.md`
 - Find a skill: `skills/OVERVIEW.md`
@@ -39,7 +40,7 @@ Mendix .mpr file
   -> (mx dump-mpr + MendixModelOverviewParser)
 Model Overview Export (v2.0) -> mendix-data/app-overview/<run>/
   -> (KNOWLEDGEBASE_CREATOR)
-AI-Navigable Knowledge Base -> mendix-data/knowledge-base/<app-name>/
+AI-Navigable Knowledge Base -> mendix-data/knowledge-base/
   -> (GAPSMITH structural gap audit)
 
 Portable package output -> KnowledgeBase-Creator/

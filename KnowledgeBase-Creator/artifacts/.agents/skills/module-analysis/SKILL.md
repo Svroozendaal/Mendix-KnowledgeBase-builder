@@ -10,11 +10,11 @@ KB Navigator, KB Analyst, KB Domain Expert, Mendix Developer
 
 ## Procedure
 
-1. Read `modules/<Module>/README.md` for the module summary.
-2. Read `modules/<Module>/DOMAIN.md` for the data model.
-3. Read `modules/<Module>/FLOWS.md` for business logic.
-4. Read `modules/<Module>/PAGES.md` for UI components.
-5. Read `modules/<Module>/RESOURCES.md` for constants and scheduled events.
+1. Read `modules/<Module>/README.md` for app and system modules, or `modules/_marktplace/<Module>/README.md` for marketplace modules, for the module summary.
+2. Read `modules/<Module>/DOMAIN.md` for app and system modules, or `modules/_marktplace/<Module>/DOMAIN.md` for marketplace modules, for the data model.
+3. Read `modules/<Module>/FLOWS.md` for app and system modules, or `modules/_marktplace/<Module>/FLOWS.md` for marketplace modules, for business logic.
+4. Read `modules/<Module>/PAGES.md` for app and system modules, or `modules/_marktplace/<Module>/PAGES.md` for marketplace modules, for UI components.
+5. Read `modules/<Module>/RESOURCES.md` for app and system modules, or `modules/_marktplace/<Module>/RESOURCES.md` for marketplace modules, for constants and scheduled events.
 6. Cross-reference `routes/by-entity.md` for entities used outside this module.
 7. Cross-reference `routes/cross-module.md` for module dependencies.
 

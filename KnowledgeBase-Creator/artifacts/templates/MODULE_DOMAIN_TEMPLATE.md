@@ -13,3 +13,11 @@ No entities documented yet.
 ## Enumerations
 
 No enumerations documented yet.
+
+## Entity Evidence
+
+No entity evidence documented yet.
+
+## Domain Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.

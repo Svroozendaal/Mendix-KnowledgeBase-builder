@@ -19,10 +19,13 @@ dotnet publish .\src\KnowledgeBaseCreator.Wizard\KnowledgeBaseCreator.Wizard.csp
 
 ## Scripts
 
+- `run-initkb.ps1`
 - `run-dump-parser.ps1`
 - `run-kb-scaffold.ps1`
 - `run-kb-compose.ps1`
 - `run-kb-quality-gate.ps1`
 - `run-kb-semantic-benchmark.ps1`
 
-Root-level `run-*.ps1` files in `KnowledgeBase-Creator/` are compatibility wrappers that forward to these scripts.
+All executable pipeline scripts, including `run-initkb.ps1`, live in `wizard/`.
+
+The standard `run-dump-parser.ps1` pipeline also writes `knowledge-base/_sources/creator-link.json` so generated KBs can run `/enrichkb` in place and use `/initkb` when a creator-side rebuild is required.

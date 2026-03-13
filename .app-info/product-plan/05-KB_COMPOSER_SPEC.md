@@ -15,7 +15,12 @@ Specify deterministic markdown composition rules for `run-kb-compose.ps1`.
 
 Writes all required KB markdown files under:
 
-`mendix-data/knowledge-base/<app-name>/`
+`mendix-data/knowledge-base/`
+
+The composer also writes additive report output used by enrichment and validation:
+
+1. `_reports/UNKNOWN_TODO.md`
+2. updates `ROUTING.md` known-gaps summary to reflect unresolved evidence gaps
 
 ## Core Composition Steps
 

@@ -10,7 +10,9 @@ internal sealed class WizardConfig
     public string? LastAppName { get; set; }
     public string? LastInstallRoot { get; set; }
     public string? LastMxExePath { get; set; }
-    public bool? LastOpenVsCode { get; set; }
+    public string? LastDataRoot { get; set; }
+    public string? LastClaudePath { get; set; }
+    public bool? AutoEnrichAfterPipeline { get; set; }
 }
 
 internal sealed class DetectionResult
@@ -129,6 +131,38 @@ internal static class WizardRuntime
         {
             throw new ArgumentException($"Path is not mx.exe: {fullPath}");
         }
+        return fullPath;
+    }
+
+    public static string GetSuggestedDataRoot(string mprPath)
+    {
+        return Path.Combine(Path.GetDirectoryName(mprPath)!, "mendix-data");
+    }
+
+    public static string NormalizeDataRootInput(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            throw new ArgumentException("Output data root is required.");
+        }
+
+        var fullPath = Path.GetFullPath(path.Trim().Trim('"'));
+        if (File.Exists(fullPath))
+        {
+            throw new ArgumentException($"Output data root points to a file: {fullPath}");
+        }
+
+        if (string.Equals(Path.GetFileName(fullPath), "knowledge-base", StringComparison.OrdinalIgnoreCase))
+        {
+            var parent = Directory.GetParent(fullPath)?.FullName;
+            if (string.IsNullOrWhiteSpace(parent))
+            {
+                throw new ArgumentException($"Could not derive mendix-data folder from knowledge-base path: {fullPath}");
+            }
+
+            return parent;
+        }
+
         return fullPath;
     }
 
@@ -254,45 +288,163 @@ internal static class WizardRuntime
         return process.ExitCode;
     }
 
-    public static bool IsCodeOnPath()
+    public static async Task<int> RunEnrichmentAsync(
+        string packageRoot,
+        string wizardRoot,
+        string kbRoot,
+        string appName,
+        string? claudePath,
+        Action<string>? log = null)
     {
+        var runScript = Path.Combine(wizardRoot, "run-enrichkb.ps1");
+        if (!File.Exists(runScript))
+        {
+            throw new FileNotFoundException($"Enrichment script not found: {runScript}");
+        }
+
+        var psi = new ProcessStartInfo
+        {
+            FileName = "powershell",
+            UseShellExecute = false,
+            WorkingDirectory = packageRoot,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true,
+        };
+        psi.ArgumentList.Add("-NoProfile");
+        psi.ArgumentList.Add("-ExecutionPolicy");
+        psi.ArgumentList.Add("Bypass");
+        psi.ArgumentList.Add("-File");
+        psi.ArgumentList.Add(runScript);
+
+        psi.Environment["KNOWLEDGE_BASE_ROOT"] = kbRoot;
+        psi.Environment["APP_NAME"] = appName;
+        psi.Environment["CREATOR_ROOT"] = packageRoot;
+
+        if (!string.IsNullOrWhiteSpace(claudePath))
+        {
+            psi.Environment["CLAUDE_CLI_PATH"] = claudePath;
+        }
+
+        using var process = new Process { StartInfo = psi, EnableRaisingEvents = true };
+        process.OutputDataReceived += (_, e) => { if (!string.IsNullOrWhiteSpace(e.Data)) { log?.Invoke(e.Data); } };
+        process.ErrorDataReceived += (_, e) => { if (!string.IsNullOrWhiteSpace(e.Data)) { log?.Invoke($"[ERR] {e.Data}"); } };
+
+        if (!process.Start())
+        {
+            throw new InvalidOperationException("Failed to start PowerShell enrichment process.");
+        }
+
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        await process.WaitForExitAsync().ConfigureAwait(false);
+        return process.ExitCode;
+    }
+
+    public static string? FindLatestRunFolder(string dataRoot)
+    {
+        var appOverviewRoot = Path.Combine(dataRoot, "app-overview");
+        if (!Directory.Exists(appOverviewRoot))
+        {
+            return null;
+        }
+
+        return Directory.GetDirectories(appOverviewRoot)
+            .Where(d => File.Exists(Path.Combine(d, "manifest.json")))
+            .OrderByDescending(d => new DirectoryInfo(d).LastWriteTimeUtc)
+            .FirstOrDefault();
+    }
+
+    public static string WriteCreatorLink(
+        string packageRoot,
+        string kbRoot,
+        string dataRoot,
+        string appName,
+        string mprPath,
+        string runFolder)
+    {
+        var sourcesDir = Path.Combine(kbRoot, "_sources");
+        Directory.CreateDirectory(sourcesDir);
+
+        var payload = new Dictionary<string, object>
+        {
+            ["schemaVersion"] = "1.0",
+            ["creatorRoot"] = packageRoot,
+            ["appName"] = appName,
+            ["mprPath"] = mprPath,
+            ["dataRoot"] = dataRoot,
+            ["knowledgeBaseRoot"] = kbRoot,
+            ["lastRunFolder"] = runFolder,
+            ["updatedAtUtc"] = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+        };
+
+        var linkPath = Path.Combine(sourcesDir, "creator-link.json");
+        var json = JsonSerializer.Serialize(payload, JsonOptions);
+        File.WriteAllText(linkPath, json);
+        return linkPath;
+    }
+
+    public static (bool Found, string? Path) DetectClaudeCli(string? userPath = null)
+    {
+        if (!string.IsNullOrWhiteSpace(userPath))
+        {
+            var fullPath = Path.GetFullPath(userPath.Trim().Trim('"'));
+            if (File.Exists(fullPath))
+            {
+                return (true, fullPath);
+            }
+        }
+
         try
         {
             var psi = new ProcessStartInfo
             {
-                FileName = "where.exe",
+                FileName = "where",
                 RedirectStandardOutput = true,
-                RedirectStandardError = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
             };
-            psi.ArgumentList.Add("code");
+            psi.ArgumentList.Add("claude");
 
             using var process = Process.Start(psi);
-            if (process is null)
+            if (process is not null)
             {
-                return false;
+                var output = process.StandardOutput.ReadToEnd().Trim();
+                process.WaitForExit();
+                if (process.ExitCode == 0 && !string.IsNullOrWhiteSpace(output))
+                {
+                    var firstLine = output.Split('\n', StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+                    if (File.Exists(firstLine))
+                    {
+                        return (true, firstLine);
+                    }
+                }
             }
-
-            process.WaitForExit();
-            return process.ExitCode == 0;
         }
         catch
         {
-            return false;
+            // where command failed; continue to fallback checks
         }
-    }
 
-    public static void OpenInVsCode(string path)
-    {
-        var psi = new ProcessStartInfo
+        var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+        string?[] candidates =
+        [
+            string.IsNullOrWhiteSpace(localAppData) ? null : Path.Combine(localAppData, "Programs", "claude", "claude.exe"),
+            string.IsNullOrWhiteSpace(appData) ? null : Path.Combine(appData, "npm", "claude.cmd"),
+            string.IsNullOrWhiteSpace(localAppData) ? null : Path.Combine(localAppData, "Microsoft", "WinGet", "Links", "claude.exe"),
+        ];
+
+        foreach (var candidate in candidates)
         {
-            FileName = "code",
-            UseShellExecute = false,
-            WorkingDirectory = path,
-        };
-        psi.ArgumentList.Add(path);
-        Process.Start(psi);
+            if (!string.IsNullOrWhiteSpace(candidate) && File.Exists(candidate))
+            {
+                return (true, candidate);
+            }
+        }
+
+        return (false, null);
     }
 
     private static IEnumerable<string> GetCandidateMxPaths(string installRoot)

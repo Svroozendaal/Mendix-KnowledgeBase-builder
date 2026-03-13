@@ -10,7 +10,7 @@ KB Navigator, KB Analyst, Mendix Developer, User Story Interpreter
 
 ## Procedure
 
-1. Read the flow entry in `modules/<Module>/FLOWS.md`.
+1. Read the flow entry in `modules/<Module>/FLOWS.md` for app and system modules, or `modules/_marktplace/<Module>/FLOWS.md` for marketplace modules.
 2. Classify the flow by its prefix or description:
    - `ACT_` — Action flow (business logic, side effects).
    - `DS_` — Data source (retrieves data for a page or widget).

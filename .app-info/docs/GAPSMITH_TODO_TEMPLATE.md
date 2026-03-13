@@ -4,7 +4,7 @@ Use this template when GAPSMITH audits a generated knowledge base.
 
 Output target should usually be:
 
-- `mendix-data/knowledge-base/<app>/_reports/GAPSMITH_TODO.md`
+- `<kb-root>/_reports/GAPSMITH_TODO.md`
 
 ```markdown
 # GAPSMITH TODO - <AppName>
@@ -20,13 +20,13 @@ Output target should usually be:
 
 ## PARSER_GAP
 
-| Gap ID | Priority | Location | Symptom | Evidence | Root Cause | Fix Track | Acceptance Test |
+| Gap ID | Priority | Location | Symptom | Evidence | Root Cause | Owner Track | Acceptance Test |
 |---|---|---|---|---|---|---|---|
 | GS-001 | P1 | <path> | <text> | <text> | <text> | Parser | <command/check> |
 
 ## AI_INTERPRETATION_GAP
 
-| Gap ID | Priority | Location | Symptom | Evidence | Root Cause | Fix Track | Acceptance Test |
+| Gap ID | Priority | Location | Symptom | Evidence | Root Cause | Owner Track | Acceptance Test |
 |---|---|---|---|---|---|---|---|
 | GS-010 | P1 | <path> | <text> | <text> | <text> | Composer/Routing | <command/check> |
 

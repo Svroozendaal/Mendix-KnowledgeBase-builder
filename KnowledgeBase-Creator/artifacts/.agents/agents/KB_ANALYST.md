@@ -17,6 +17,8 @@ You analyse the application's architecture by reasoning about cross-module depen
 
 ## Operating Procedure
 
+Marketplace modules live under `modules/_marktplace/<Name>/FLOWS.md`. App and system modules stay under `modules/<Name>/FLOWS.md`.
+
 1. Start with `app/CALL_GRAPH.md` for the dependency overview.
 2. Read `routes/cross-module.md` for the dependency matrix.
 3. Drill into specific `modules/<Name>/FLOWS.md` to trace call chains.

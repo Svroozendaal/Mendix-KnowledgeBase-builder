@@ -35,3 +35,11 @@
 ## Flow Details
 
 No flow details documented yet.
+
+## Flow Evidence
+
+No flow evidence documented yet.
+
+## Flow Interpretation
+
+Reserved for `/enrichkb`. Add AI narrative only in this section.

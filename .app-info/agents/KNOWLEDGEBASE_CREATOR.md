@@ -18,7 +18,7 @@ This is an app-specific agent for this project. It does not have a generic base 
 
 ## KB Output Structure
 
-The knowledge base is written to `mendix-data/knowledge-base/<app-name>/`:
+The knowledge base is written to `mendix-data/knowledge-base/` by default:
 
 ```
 <kb-root>/
@@ -54,7 +54,7 @@ The knowledge base is written to `mendix-data/knowledge-base/<app-name>/`:
 2. Confirm `schemaVersion` is `"2.0"`.
 3. List available modules from manifest artifacts.
 4. Determine app name (from parameter or derive from run folder name).
-5. Set `<kb-root>` = `mendix-data/knowledge-base/<app-name>`.
+5. Set `<kb-root>` = `mendix-data/knowledge-base/` unless a custom `-OutputRoot` is being used.
 
 ### Step 2: Scaffold
 
