@@ -25,6 +25,19 @@ jobs:
             --self-contained false `
             -o ./KnowledgeBase-Creator/Mendix-model-overview-parser/bin/win-x64
 
+      - name: Build wizard executable
+        shell: pwsh
+        run: |
+          dotnet publish ./KnowledgeBase-Creator/wizard/src/KnowledgeBaseCreator.Wizard/KnowledgeBaseCreator.Wizard.csproj `
+            -c Release `
+            -r win-x64 `
+            --self-contained true `
+            -p:PublishSingleFile=true `
+            -p:EnableCompressionInSingleFile=true `
+            -p:DebugType=None `
+            -p:DebugSymbols=false `
+            -o ./KnowledgeBase-Creator
+
       - name: Clean source build outputs inside artifact
         shell: pwsh
         run: |
@@ -32,7 +45,9 @@ jobs:
             "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/bin",
             "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/obj",
             "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/bin",
-            "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/obj"
+            "./KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/obj",
+            "./KnowledgeBase-Creator/wizard/src/KnowledgeBaseCreator.Wizard/bin",
+            "./KnowledgeBase-Creator/wizard/src/KnowledgeBaseCreator.Wizard/obj"
           )
           foreach ($path in $paths) {
             if (Test-Path $path) {

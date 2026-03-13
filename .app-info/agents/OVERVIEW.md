@@ -40,8 +40,8 @@ Knowledge Base:
        -> mendix-overview-module-interpretation    (per-module docs)
        -> mendix-overview-routing-synthesis        (cross-reference layer)
     -> READER.md embedding
-    -> KnowledgeBase-Creator/run-kb-scaffold.ps1 -Validate
-    -> KnowledgeBase-Creator/run-kb-quality-gate.ps1
+    -> KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1 -Validate
+    -> KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1
 ```
 
 ## Adding a New Agent
@@ -54,3 +54,4 @@ Knowledge Base:
 
 The repository now also ships a portable `KnowledgeBase-Creator/` package.
 That package contains a curated subset of these KB-generation agents and skills, plus parser binaries, for use on other laptops.
+

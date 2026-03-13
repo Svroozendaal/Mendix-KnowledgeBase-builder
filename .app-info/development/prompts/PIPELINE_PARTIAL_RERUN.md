@@ -1,15 +1,15 @@
-# PROMPT 07: Add Partial Re-Run Flags to Pipeline
+﻿# PROMPT 07: Add Partial Re-Run Flags to Pipeline
 
 ## Priority
 
-Medium — saves significant development iteration time and is a prerequisite for comfortable daily use.
+Medium â€” saves significant development iteration time and is a prerequisite for comfortable daily use.
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/03-TOOLCHAIN_ARCHITECTURE.md` — partial re-run strategy section.
+2. `.app-info/product-plan/03-TOOLCHAIN_ARCHITECTURE.md` â€” partial re-run strategy section.
 
 ## Problem Statement
 
@@ -23,23 +23,23 @@ There is no way to:
 
 ## Entry Criteria
 
-1. Pipeline script exists at `KnowledgeBase-Creator/run-dump-parser.ps1`.
+1. Pipeline script exists at `KnowledgeBase-Creator/wizard/run-dump-parser.ps1`.
 2. The script has a clear step structure (steps 1-8).
 
 ## Acceptance Criteria
 
 1. Four new parameters are supported:
-   - `-SkipDump` (switch) — skip step 1 (`mx dump-mpr`).
-   - `-SkipParser` (switch) — skip step 2 (`ModelOverviewCli`).
-   - `-SkipScaffold` (switch) — skip step 3 (scaffold creation) and step 4 (template seeding).
-   - `-RunFolder` (string) — explicit run folder path, bypassing auto-detection.
+   - `-SkipDump` (switch) â€” skip step 1 (`mx dump-mpr`).
+   - `-SkipParser` (switch) â€” skip step 2 (`ModelOverviewCli`).
+   - `-SkipScaffold` (switch) â€” skip step 3 (scaffold creation) and step 4 (template seeding).
+   - `-RunFolder` (string) â€” explicit run folder path, bypassing auto-detection.
 2. Parameters are validated:
    - `-SkipDump` requires either `-RunFolder` or an existing run folder from a previous execution.
    - `-SkipParser` requires parsed JSON files to exist in the run folder.
    - `-SkipScaffold` requires the KB output folder to already exist.
    - `-RunFolder` must point to an existing directory containing `manifest.json`.
-3. Step output clearly indicates when a step is skipped: `[1/8] Dump .mpr — SKIPPED (--SkipDump)`.
-4. Skipped steps do not affect subsequent steps — all downstream steps receive the correct paths.
+3. Step output clearly indicates when a step is skipped: `[1/8] Dump .mpr â€” SKIPPED (--SkipDump)`.
+4. Skipped steps do not affect subsequent steps â€” all downstream steps receive the correct paths.
 5. The full pipeline (no skip flags) continues to work identically to today.
 6. Combined usage works: `.\run-dump-parser.ps1 -SkipDump -SkipParser -SkipScaffold -RunFolder "path/to/run"` runs only steps 5-8 (compose, validate, quality gate, benchmark).
 
@@ -47,7 +47,7 @@ There is no way to:
 
 ### Files to Modify
 
-1. `KnowledgeBase-Creator/run-dump-parser.ps1` — add parameters and skip logic.
+1. `KnowledgeBase-Creator/wizard/run-dump-parser.ps1` â€” add parameters and skip logic.
 
 ### Specific Changes
 
@@ -121,7 +121,7 @@ For each of the 8 steps, wrap in a conditional:
 ```powershell
 # Step 1: Dump
 if ($SkipDump) {
-    Write-Host "`n[1/8] Dump .mpr — SKIPPED (-SkipDump)" -ForegroundColor Yellow
+    Write-Host "`n[1/8] Dump .mpr â€” SKIPPED (-SkipDump)" -ForegroundColor Yellow
 } else {
     Write-Host "`n[1/8] Dumping .mpr..."
     # existing dump logic
@@ -129,7 +129,7 @@ if ($SkipDump) {
 
 # Step 2: Parser
 if ($SkipParser) {
-    Write-Host "`n[2/8] Run parser — SKIPPED (-SkipParser)" -ForegroundColor Yellow
+    Write-Host "`n[2/8] Run parser â€” SKIPPED (-SkipParser)" -ForegroundColor Yellow
 } else {
     Write-Host "`n[2/8] Running parser..."
     # existing parser logic
@@ -137,8 +137,8 @@ if ($SkipParser) {
 
 # Step 3 & 4: Scaffold + templates
 if ($SkipScaffold) {
-    Write-Host "`n[3/8] Scaffold KB — SKIPPED (-SkipScaffold)" -ForegroundColor Yellow
-    Write-Host "`n[4/8] Seed templates — SKIPPED (-SkipScaffold)" -ForegroundColor Yellow
+    Write-Host "`n[3/8] Scaffold KB â€” SKIPPED (-SkipScaffold)" -ForegroundColor Yellow
+    Write-Host "`n[4/8] Seed templates â€” SKIPPED (-SkipScaffold)" -ForegroundColor Yellow
 } else {
     Write-Host "`n[3/8] Scaffolding KB..."
     # existing scaffold logic
@@ -175,7 +175,7 @@ Re-run from parser onwards (when .mpr has not changed):
 
 ### What NOT to Change
 
-1. Do not change the step logic itself — only wrap it in conditionals.
+1. Do not change the step logic itself â€” only wrap it in conditionals.
 2. Do not change the `.env` loading behaviour.
 3. Do not change the composer, quality gate, or benchmark scripts.
 4. Do not change the step ordering (1-8).
@@ -184,7 +184,7 @@ Re-run from parser onwards (when .mpr has not changed):
 
 After implementing:
 
-1. Run the full pipeline (no flags) — must work identically to before:
+1. Run the full pipeline (no flags) â€” must work identically to before:
    ```powershell
    .\run-dump-parser.ps1
    ```
@@ -217,3 +217,4 @@ Moderate change to `run-dump-parser.ps1`:
 - Add validation logic (~30 lines).
 - Wrap 4 steps in skip guards (~20 lines of conditionals).
 - Update README (~10 lines).
+

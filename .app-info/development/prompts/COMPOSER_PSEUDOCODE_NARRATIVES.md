@@ -1,17 +1,17 @@
-# PROMPT 01: Integrate Pseudocode into Tier 1 Narratives
+﻿# PROMPT 01: Integrate Pseudocode into Tier 1 Narratives
 
 ## Priority
 
-Critical — this is the single highest-impact improvement to KB output quality.
+Critical â€” this is the single highest-impact improvement to KB output quality.
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` — behaviour-first narrative template and tiered flow rules.
-3. `.app-info/product-plan/05-KB_COMPOSER_SPEC.md` — composer specification.
-4. `.app-info/product-plan/07-QUALITY_GATE_HYBRID_SPEC.md` — known evidence extraction limitations.
+2. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` â€” behaviour-first narrative template and tiered flow rules.
+3. `.app-info/product-plan/05-KB_COMPOSER_SPEC.md` â€” composer specification.
+4. `.app-info/product-plan/07-QUALITY_GATE_HYBRID_SPEC.md` â€” known evidence extraction limitations.
 
 ## Problem Statement
 
@@ -24,7 +24,7 @@ The `run-kb-compose.ps1` script generates Tier 1 "Deep Narratives" for custom-mo
 - Security constraints: module roles derived via page permissions and entity access rules.
 ```
 
-This renders the Tier 1 narratives useless for AI reasoning — an AI cannot understand what a flow does beyond what the catalogue table already shows.
+This renders the Tier 1 narratives useless for AI reasoning â€” an AI cannot understand what a flow does beyond what the catalogue table already shows.
 
 ## Root Cause
 
@@ -42,16 +42,16 @@ This `pseudocode` field is **never read by the composer**. It is the single rich
 
 ## Entry Criteria
 
-1. Composer script exists at `KnowledgeBase-Creator/run-kb-compose.ps1`.
+1. Composer script exists at `KnowledgeBase-Creator/wizard/run-kb-compose.ps1`.
 2. A valid app-overview export exists under `mendix-data/app-overview/`.
 3. The `pseudocode` field is present on flow objects in `flows.json` files.
 
 ## Acceptance Criteria
 
 1. Tier 1 flow narratives include the `pseudocode` content, formatted as a readable step-by-step section.
-2. Each Tier 1 narrative has a unique, flow-specific description — no two narratives should have identical text.
+2. Each Tier 1 narrative has a unique, flow-specific description â€” no two narratives should have identical text.
 3. The `Intent` field is derived from the first meaningful action in the pseudocode (e.g. "Creates a new BudgetType entity and associates it with the current FBGProfile" rather than "User action flow").
-4. The narrative template from `02-CONTENT_MODEL_CUSTOM_DEPTH.md` is followed: trigger → flow chain → entity mutations → UI impact → security → external dependencies → known unknowns.
+4. The narrative template from `02-CONTENT_MODEL_CUSTOM_DEPTH.md` is followed: trigger â†’ flow chain â†’ entity mutations â†’ UI impact â†’ security â†’ external dependencies â†’ known unknowns.
 5. All existing quality gate checks still pass after the change.
 6. The semantic benchmark score does not decrease.
 7. Determinism is preserved: same input produces the same output.
@@ -60,7 +60,7 @@ This `pseudocode` field is **never read by the composer**. It is the single rich
 
 ### Files to Modify
 
-1. `KnowledgeBase-Creator/run-kb-compose.ps1` — the only file that needs changes.
+1. `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` â€” the only file that needs changes.
 
 ### Specific Code Locations
 
@@ -121,7 +121,7 @@ Write a function `Get-FlowIntentSummary` that takes the pseudocode string and re
    - If the flow contains `ShowPageAction`, include "...and shows the [PageName] page".
    - If the flow contains `ExclusiveSplit` with a validation expression, include "Validates that...".
    - If the flow only calls other flows, include "Orchestrates [called flow names]".
-6. Keep the summary deterministic — same pseudocode always produces the same intent string.
+6. Keep the summary deterministic â€” same pseudocode always produces the same intent string.
 7. Fallback: if pseudocode is empty/null, fall back to the current prefix-based label ("User action flow" etc.).
 
 #### Step 3: Include pseudocode as a "Logic steps" section in each Tier 1 narrative
@@ -162,13 +162,13 @@ Tier 2 flows currently have no narrative section. Add a brief behavioural summar
 
 #### Step 5: Enhance the "Called by" information
 
-Currently only counts are shown (`in=3`). When a flow has inbound callers, list the caller qualified names. The data is available from `$flowFacts` — for each flow in the call graph, the callers are known. Include the names, especially flagging cross-module callers.
+Currently only counts are shown (`in=3`). When a flow has inbound callers, list the caller qualified names. The data is available from `$flowFacts` â€” for each flow in the call graph, the callers are known. Include the names, especially flagging cross-module callers.
 
 ### What NOT to Change
 
-1. Do not change the Tier 1/2/3 classification logic — it is correct.
-2. Do not change the flow catalogue tables — they are correct.
-3. Do not change the existing `touchesEntities` or `shownPages` derivation — those remain as-is.
+1. Do not change the Tier 1/2/3 classification logic â€” it is correct.
+2. Do not change the flow catalogue tables â€” they are correct.
+3. Do not change the existing `touchesEntities` or `shownPages` derivation â€” those remain as-is.
 4. Do not change any other KB files (DOMAIN.md, PAGES.md, etc.) in this prompt.
 5. Do not modify the quality gate or benchmark scripts.
 6. Do not add external dependencies.
@@ -188,9 +188,9 @@ After implementing:
 5. Verify that `run-kb-quality-gate.ps1` still passes.
 6. Verify that `run-kb-semantic-benchmark.ps1` still scores >= 85.
 7. Spot-check three specific flows:
-   - `SmartExpenses.ACT_Transaction_NewEdit_Save` — should now show its save logic.
-   - `SmartExpenses.SUB_Transaction_setStatus` — should now show its status-setting logic.
-   - `SmartExpenses.ACR_FBGProfile_setStandardBudgets` — should show the BudgetType/BudgetTerm creation loop.
+   - `SmartExpenses.ACT_Transaction_NewEdit_Save` â€” should now show its save logic.
+   - `SmartExpenses.SUB_Transaction_setStatus` â€” should now show its status-setting logic.
+   - `SmartExpenses.ACR_FBGProfile_setStandardBudgets` â€” should show the BudgetType/BudgetTerm creation loop.
 8. Verify determinism: run the composer twice on the same input and diff the output. Must be identical.
 
 ## Exit Criteria
@@ -206,6 +206,7 @@ After implementing:
 Changes are confined to `run-kb-compose.ps1`:
 
 - Add 1 new function (`Get-FlowIntentSummary`, ~30-50 lines).
-- Modify 1 existing code block (Tier 1 narrative generation, ~30 lines → ~50 lines).
+- Modify 1 existing code block (Tier 1 narrative generation, ~30 lines â†’ ~50 lines).
 - Add 1 new code block (Tier 2 brief summary, ~15 lines).
 - Modify fact-building loop to capture `pseudocode` field (~2 lines).
+

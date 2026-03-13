@@ -14,7 +14,8 @@ Enable users to move one package to another laptop and run one command to:
 ## Ownership
 
 - CI packaging workflow: `.github/workflows/build-knowledgebase-creator-artifact.yml`
-- Runtime entry command: `KnowledgeBase-Creator/run-dump-parser.ps1`
+- Runtime entry command: `KnowledgeBase-Creator/KnowledgeBaseCreator.exe`
+- Advanced script bootstrap: `KnowledgeBase-Creator/wizard/run-dump-parser.ps1`
 - Package source of truth: `KnowledgeBase-Creator/`
 
 ## Scope boundary

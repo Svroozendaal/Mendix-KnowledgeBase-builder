@@ -1,17 +1,17 @@
-# PROMPT 06: Generalise Semantic Benchmark
+﻿# PROMPT 06: Generalise Semantic Benchmark
 
 ## Priority
 
-Medium — required for Phase 9 (Generalisation Readiness) and blocks use on any non-SmartExpenses app.
+Medium â€” required for Phase 9 (Generalisation Readiness) and blocks use on any non-SmartExpenses app.
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/08-SEMANTIC_BENCHMARK_SUITE.md` — benchmark specification including the new two-tier model.
-3. `.app-info/product-plan/09-IMPLEMENTATION_ROADMAP.md` — Phase 9 deliverables.
-4. `.app-info/product-plan/10-RISK_REGISTER.md` — R8 (benchmark portability risk).
+2. `.app-info/product-plan/08-SEMANTIC_BENCHMARK_SUITE.md` â€” benchmark specification including the new two-tier model.
+3. `.app-info/product-plan/09-IMPLEMENTATION_ROADMAP.md` â€” Phase 9 deliverables.
+4. `.app-info/product-plan/10-RISK_REGISTER.md` â€” R8 (benchmark portability risk).
 
 ## Problem Statement
 
@@ -24,7 +24,7 @@ The updated product plan (08-SEMANTIC_BENCHMARK_SUITE.md) specifies a two-tier b
 
 ## Entry Criteria
 
-1. Benchmark script exists at `KnowledgeBase-Creator/run-kb-semantic-benchmark.ps1`.
+1. Benchmark script exists at `KnowledgeBase-Creator/wizard/run-kb-semantic-benchmark.ps1`.
 2. A valid generated KB exists under `mendix-data/knowledge-base/<AppName>/`.
 3. The updated product plan spec (08) defines all 10 structural scenarios.
 
@@ -44,7 +44,7 @@ The updated product plan (08-SEMANTIC_BENCHMARK_SUITE.md) specifies a two-tier b
    - S8: At least one route index has non-`Unknown` cross-references.
    - S9: Hub/leaf classification exists in `cross-module.md`.
    - S10: Source metadata (`_sources/manifest.json` and `SOURCE_REF.md`) present and non-empty.
-3. Critical structural scenarios: S1, S2, S3 — any critical failure blocks pass.
+3. Critical structural scenarios: S1, S2, S3 â€” any critical failure blocks pass.
 4. Structural scoring: `10 x 10` model, pass threshold `>= 80`.
 5. App-specific scoring: retained at `10 x 10`, pass threshold `>= 85`.
 6. Final score: structural score alone when no custom scenarios; weighted average when both.
@@ -57,7 +57,7 @@ The updated product plan (08-SEMANTIC_BENCHMARK_SUITE.md) specifies a two-tier b
 
 ### Files to Modify
 
-1. `KnowledgeBase-Creator/run-kb-semantic-benchmark.ps1` — major refactor.
+1. `KnowledgeBase-Creator/wizard/run-kb-semantic-benchmark.ps1` â€” major refactor.
 
 ### Specific Changes
 
@@ -133,7 +133,7 @@ Move the current 10 hard-coded SmartExpenses scenarios into a separate function 
 Option A: Keep them inline but gated behind `-CustomScenarios "SmartExpenses"` (simple).
 Option B: Extract to a JSON/PSON config file that can be provided per app (more portable).
 
-Recommend Option A for now — keeps the script self-contained.
+Recommend Option A for now â€” keeps the script self-contained.
 
 #### Step 4: Update scoring and reporting
 
@@ -165,7 +165,7 @@ The benchmark report should include:
 
 ## Final Verdict
 
-**PASS** — Structural: 95/100, App-specific: 100/100
+**PASS** â€” Structural: 95/100, App-specific: 100/100
 ```
 
 #### Step 5: Update `run-dump-parser.ps1` integration
@@ -174,7 +174,7 @@ The master pipeline script calls the benchmark. Update the call to pass the new 
 
 ### What NOT to Change
 
-1. Do not delete the SmartExpenses scenario definitions — move/gate them.
+1. Do not delete the SmartExpenses scenario definitions â€” move/gate them.
 2. Do not change the quality gate script.
 3. Do not change any KB file rendering.
 
@@ -215,3 +215,4 @@ Major refactor of `run-kb-semantic-benchmark.ps1`:
 - Refactor existing 10 scenarios into gated section (~30 lines moved/wrapped).
 - Update scoring/reporting logic (~50 lines).
 - Update `run-dump-parser.ps1` benchmark call (~5 lines).
+

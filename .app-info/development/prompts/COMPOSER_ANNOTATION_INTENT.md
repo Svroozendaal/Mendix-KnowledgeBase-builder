@@ -1,17 +1,17 @@
-# PROMPT 02: Surface Annotation Nodes as Intent Descriptions
+﻿# PROMPT 02: Surface Annotation Nodes as Intent Descriptions
 
 ## Priority
 
-High — developer-written annotations are the most directly useful business-intent descriptions available.
+High â€” developer-written annotations are the most directly useful business-intent descriptions available.
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` — behaviour-first narrative template.
-3. `.app-info/product-plan/05-KB_COMPOSER_SPEC.md` — composer specification.
-4. Prompt 01 (`COMPOSER_PSEUDOCODE_NARRATIVES.md`) must be completed first — this prompt builds on its narrative structure.
+2. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` â€” behaviour-first narrative template.
+3. `.app-info/product-plan/05-KB_COMPOSER_SPEC.md` â€” composer specification.
+4. Prompt 01 (`COMPOSER_PSEUDOCODE_NARRATIVES.md`) must be completed first â€” this prompt builds on its narrative structure.
 
 ## Problem Statement
 
@@ -26,7 +26,7 @@ Mendix developers place `Annotation` nodes on the flow canvas to document intent
 }
 ```
 
-These annotations are **already in the parsed JSON** but are completely ignored by the composer. They never appear in any KB output. This is a significant loss — annotations are the closest thing to developer intent documentation available from the model export.
+These annotations are **already in the parsed JSON** but are completely ignored by the composer. They never appear in any KB output. This is a significant loss â€” annotations are the closest thing to developer intent documentation available from the model export.
 
 ## Entry Criteria
 
@@ -38,7 +38,7 @@ These annotations are **already in the parsed JSON** but are completely ignored 
 
 1. Annotation text from flow nodes is surfaced in the Tier 1 narrative section as a "Developer notes" field.
 2. When a flow has no annotation nodes, the "Developer notes" field is omitted (not shown as "none").
-3. Annotation text is displayed verbatim — no interpretation or summarisation.
+3. Annotation text is displayed verbatim â€” no interpretation or summarisation.
 4. Multiple annotations in the same flow are concatenated with a separator.
 5. Annotations are also used to improve the `Intent` line: if an annotation exists, it takes precedence over the pseudocode-derived intent from Prompt 01.
 6. Quality gate and benchmark still pass.
@@ -48,7 +48,7 @@ These annotations are **already in the parsed JSON** but are completely ignored 
 
 ### Files to Modify
 
-1. `KnowledgeBase-Creator/run-kb-compose.ps1` — the only file that needs changes.
+1. `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` â€” the only file that needs changes.
 
 ### Specific Code Locations and Changes
 
@@ -83,7 +83,7 @@ Modify the `Get-FlowIntentSummary` function (added in Prompt 01):
 3. If annotations are empty or too short (< 10 chars), fall back to the pseudocode-based derivation from Prompt 01.
 
 Priority order for intent:
-1. Developer annotation text (most trustworthy — human-written intent).
+1. Developer annotation text (most trustworthy â€” human-written intent).
 2. Pseudocode-derived summary (deterministic but mechanical).
 3. Prefix-based label ("User action flow" etc.) as final fallback.
 
@@ -119,7 +119,7 @@ If a Tier 2 flow has annotations, include them as the primary description instea
 
 ### What NOT to Change
 
-1. Do not modify annotation text — preserve it verbatim from the export.
+1. Do not modify annotation text â€” preserve it verbatim from the export.
 2. Do not add annotations to Tier 3 (catalogue-only) flows.
 3. Do not modify the flow catalogue tables.
 4. Do not change any other KB files beyond `FLOWS.md` content generation.
@@ -134,7 +134,7 @@ After implementing:
    cd KnowledgeBase-Creator
    .\run-dump-parser.ps1
    ```
-2. Open `mendix-data/knowledge-base/SmartExpenses/modules/ImporterHelper/FLOWS.md` — the ImporterHelper flows have known annotations. Verify they appear.
+2. Open `mendix-data/knowledge-base/SmartExpenses/modules/ImporterHelper/FLOWS.md` â€” the ImporterHelper flows have known annotations. Verify they appear.
 3. Check that flows without annotations do not show a "Developer notes: none" line.
 4. Verify quality gate passes.
 5. Verify benchmark score >= 85.
@@ -156,3 +156,4 @@ Changes are confined to `run-kb-compose.ps1`:
 - Modify `Get-FlowIntentSummary` to accept and prefer annotations (~10 lines).
 - Modify Tier 1 narrative template to include developer notes (~5 lines).
 - Modify Tier 2 summary template to include annotations (~5 lines).
+

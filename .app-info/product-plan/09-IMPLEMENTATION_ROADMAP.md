@@ -1,4 +1,4 @@
-# Implementation Roadmap
+﻿# Implementation Roadmap
 
 ## Objective
 
@@ -18,7 +18,7 @@ Gate:
 
 Deliverables:
 
-1. `KnowledgeBase-Creator/run-kb-compose.ps1` (new).
+1. `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` (new).
 2. Deterministic extraction for:
    - page-flow links
    - entity touch evidence
@@ -145,3 +145,4 @@ Gate:
 
 1. CI workflow runs on PR and push to main.
 2. Pipeline failure blocks merge.
+

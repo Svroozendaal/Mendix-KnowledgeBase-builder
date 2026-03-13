@@ -172,5 +172,6 @@ Generate routing structure:
 2. Every relative link written to `ROUTING.md` and `routes/*.md` must resolve on disk.
 3. `Known gaps: none` is only valid when no required-field values are marked `Unknown` in generated KB outputs.
 4. `by-flow.md` must include `Shows Pages` and `Touches Entities` columns as defined in the output contract.
-5. Routing outputs must satisfy `KnowledgeBase-Creator/run-kb-quality-gate.ps1` before handoff.
+5. Routing outputs must satisfy `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` before handoff.
+
 

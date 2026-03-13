@@ -215,5 +215,6 @@ Module roles: [list]
    - `### Other Flows`
    - `## Flow Details`
 4. `PAGES.md` must always include `## Page-Flow Links`, including `none` rows where relevant.
-5. Module outputs must satisfy `KnowledgeBase-Creator/run-kb-quality-gate.ps1` before handoff.
+5. Module outputs must satisfy `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` before handoff.
+
 

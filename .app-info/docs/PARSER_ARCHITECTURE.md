@@ -1,4 +1,4 @@
-# AutoCommitMessage Architecture
+﻿# AutoCommitMessage Architecture
 
 ## Purpose and scope
 
@@ -50,15 +50,15 @@ The extension automatically detects and uses the correct `mx.exe` installation f
 
 Detection runs once at pane startup and follows three steps:
 
-**Step 1 — Determine required version:**
+**Step 1 â€” Determine required version:**
 - Scans the Mendix installations root (default: `C:\Program Files\Mendix\`) for any available `mx.exe`.
 - Runs `mx.exe show-version <mprFilePath>` on the first found to determine the Mendix version required by the project.
 
-**Step 2 — Find matching installation:**
+**Step 2 â€” Find matching installation:**
 - Searches for `<installRoot>\<requiredVersion>\modeler\mx.exe` (exact version match).
 - Returns this path if found.
 
-**Step 3 — Fallback to major.minor match:**
+**Step 3 â€” Fallback to major.minor match:**
 - If no exact match exists, searches for `<installRoot>\<majorMinor>.x\modeler\mx.exe` (e.g., `10.24.x`).
 - Logs a warning if fallback matching is used.
 - Fails with a user-facing error if no match is found.
@@ -86,9 +86,9 @@ The **Mendix Installation** section in Settings displays:
 - **Detected version:** The version string from `show-version`.
 - **mx.exe path:** The full path to the detected (or fallback) `mx.exe`.
 - **Status indicator:**
-  - Green (✓) if exact match found.
-  - Amber (⚠) if fallback major.minor match used.
-  - Red (✗) with failure reason if detection failed.
+  - Green (âœ“) if exact match found.
+  - Amber (âš ) if fallback major.minor match used.
+  - Red (âœ—) with failure reason if detection failed.
 - **Manual override input:** Allows user to specify an alternative Mendix installations folder.
 - **Re-detect button:** Triggers detection with the current override and updates the status display.
 
@@ -274,7 +274,7 @@ Commit-message storage folder:
 
 ## CLI test harness (`model-overview-cli`)
 
-A separate .NET 8.0 console project provides a standalone test harness for the model overview pipeline. It exists purely for development iteration — the extension remains the production entry point.
+A separate .NET 8.0 console project provides a standalone test harness for the model overview pipeline. It exists purely for development iteration â€” the extension remains the production entry point.
 
 ### Architecture
 
@@ -292,7 +292,7 @@ A separate .NET 8.0 console project provides a standalone test harness for the m
 
 ### Launcher
 
-`KnowledgeBase-Creator/run-dump-parser.ps1` is the current launcher for dump + parser export + KB scaffold seeding.
+`KnowledgeBase-Creator/wizard/run-dump-parser.ps1` is the current launcher for dump + parser export + KB scaffold seeding.
 
 ### Visibility changes to the extension
 
@@ -308,3 +308,4 @@ These changes have no effect on extension runtime behaviour.
 - `MODEL_OVERVIEW_EXPORT_CONTRACT.md`
 - `REPOSITORY_WORKFLOWS.md`
 - `OPEN_QUESTIONS.md`
+

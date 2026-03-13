@@ -154,5 +154,6 @@ Generate app-level documentation under:
 1. `APP_OVERVIEW.md`, `MODULE_LANDSCAPE.md`, `SECURITY.md`, and `CALL_GRAPH.md` must each include at least one explicit confidence marker (`Export-backed`, `Inferred`, or `Unknown`).
 2. If data is unavailable, keep the required section and mark values as `Unknown`; do not remove sections.
 3. `MODULE_LANDSCAPE.md` must include non-placeholder purpose text for modules; avoid repeating generic phrases for every marketplace module.
-4. App-level outputs must satisfy `KnowledgeBase-Creator/run-kb-quality-gate.ps1` before handoff.
+4. App-level outputs must satisfy `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` before handoff.
+
 

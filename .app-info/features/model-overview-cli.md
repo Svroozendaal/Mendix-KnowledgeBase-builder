@@ -1,4 +1,4 @@
-# Model Overview CLI
+﻿# Model Overview CLI
 
 ## Status
 
@@ -10,10 +10,10 @@ Standalone console tool for model overview generation from `mx dump-mpr` output.
 
 ## Key files
 
-- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/MendixModelOverviewParser.csproj` — parser library
-- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/ModelOverviewCli.csproj` — .NET 8.0 console project referencing the parser
-- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/Program.cs` — CLI entry point
-- `KnowledgeBase-Creator/run-dump-parser.ps1` — central PowerShell launcher
+- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/MendixModelOverviewParser.csproj` â€” parser library
+- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/ModelOverviewCli.csproj` â€” .NET 8.0 console project referencing the parser
+- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/Program.cs` â€” CLI entry point
+- `KnowledgeBase-Creator/wizard/run-dump-parser.ps1` â€” central PowerShell launcher
 
 ## Capabilities
 
@@ -30,3 +30,4 @@ See `.app-info/docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md`.
 
 1. No parser code is duplicated; changes to the parser library are automatically picked up on rebuild.
 2. Output artefacts write to `mendix-data/app-overview/` using the same folder conventions.
+

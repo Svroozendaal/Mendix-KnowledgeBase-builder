@@ -15,7 +15,8 @@ This is the **Mendix KnowledgeBase Builder** â€” a pipeline that converts M
 ### Key entry points
 
 - **Portable KB creator package**: `KnowledgeBase-Creator/`
-- **Run full creation bootstrap**: `KnowledgeBase-Creator/run-dump-parser.ps1`
-- **AI start file**: `KnowledgeBase-Creator/agents.md`
-- **Understand a generated KB**: read `READER.md` inside `KnowledgeBase-Creator/mendix-data/knowledge-base/<app>/`
+- **Launch the standalone creator**: `KnowledgeBase-Creator/KnowledgeBaseCreator.exe`
+- **Advanced script bootstrap**: `KnowledgeBase-Creator/wizard/run-dump-parser.ps1`
+- **AI start file**: `KnowledgeBase-Creator/AGENTS.md`
+- **Understand a generated KB**: read `READER.md` inside `KnowledgeBase-Creator/mendix-data/knowledge-base/`
 

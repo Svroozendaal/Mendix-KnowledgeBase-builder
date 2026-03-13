@@ -1,46 +1,92 @@
 # KnowledgeBase Creator
 
-Portable toolchain for generating an AI-usable Mendix knowledge base from parser export JSON while preserving the existing KB file contract.
+Standalone Windows toolchain for generating an AI-usable Mendix knowledge base from a `.mpr` file while preserving the KB file contract.
 
-## Included Scripts
+Root layout contract:
 
-- `run-dump-parser.ps1`: full pipeline entrypoint (dump -> parser -> scaffold -> compose -> validate -> quality -> benchmark).
-- `run-kb-scaffold.ps1`: scaffold and structural file-presence validation.
-- `run-kb-compose.ps1`: deterministic KB composition with conservative `Unknown` handling and `_reports/UNKNOWN_TODO.md`.
-- `run-kb-quality-gate.ps1`: structural + semantic completeness gate.
-- `run-kb-semantic-benchmark.ps1`: structural benchmark (mandatory) + optional app-specific benchmark.
+- `.env`
+- `AGENTS.md`
+- `README.md`
+- `KnowledgeBaseCreator.exe`
+- all folders
 
-## `.env` Contract
+## Default Entry Point (Wizard EXE)
 
-Required for dump step:
+Run:
 
-- `STUDIO_PRO_PATH`
-- `MPR_FILE_PATH`
+```powershell
+.\KnowledgeBaseCreator.exe
+```
+
+The wizard guides you through:
+
+1. Selecting the source `.mpr` file.
+2. Auto-detecting the correct Mendix `mx.exe` (with manual override).
+3. Running the full pipeline (dump -> parser -> scaffold -> compose -> validate -> quality -> benchmark).
+4. Showing the Mendix app folder path that was used as source.
+
+By default, output is written to:
+
+`<mpr-folder>\mendix-data\`
+
+Generated structure:
+
+- `mendix-data/.agents/`
+- `mendix-data/app-overview/<run-folder>/`
+- `mendix-data/dumps/<timestamp>_<app>/`
+- `mendix-data/knowledge-base/`
+
+Each `mendix-data` folder is treated as one app workspace. The generated knowledge base lives directly inside `knowledge-base`, not inside `knowledge-base/<app-name>`.
+If a non-empty `mendix-data` folder already exists, a fresh parser run now fails instead of overwriting it.
+
+## Script Locations
+
+Core pipeline scripts now live in `wizard/`:
+
+- `wizard/run-dump-parser.ps1`
+- `wizard/run-kb-scaffold.ps1`
+- `wizard/run-kb-compose.ps1`
+- `wizard/run-kb-quality-gate.ps1`
+- `wizard/run-kb-semantic-benchmark.ps1`
+
+## `.env` + Environment Contract
+
+Script mode still supports `.env` in `KnowledgeBase-Creator/.env`.
+
+Runtime precedence:
+
+1. Process environment variables
+2. `.env` values
+3. Built-in defaults
+
+Common settings:
+
 - `APP_NAME`
-
-Optional:
-
-- `MENDIX_MX_EXE` (explicit `mx.exe` override)
-- `MENDIX_DATA_ROOT` (default: `../mendix-data`)
+- `MPR_FILE_PATH` (or `MENDIX_MPR_PATH`)
+- `MENDIX_MX_EXE` (preferred explicit `mx.exe` path)
+- `STUDIO_PRO_PATH` / `MENDIX_STUDIO_PRO_PATH` (fallback when `MENDIX_MX_EXE` is not set)
+- `MENDIX_DATA_ROOT` (default: `../mendix-data` in script mode)
 - `MENDIX_MODULES` (default: `*`)
 - `STRICT_MODE` (`true|false`, default: `false`)
-- `CUSTOM_SCENARIOS_PATH` (optional app-specific benchmark JSON)
-- `DUMP_FILE_PATH` (when using `-SkipDump` without `-SkipParser`)
+- `CUSTOM_SCENARIOS_PATH` (optional)
+- `DUMP_FILE_PATH` (for `-SkipDump` without `-SkipParser`)
 
-Backward-compatible aliases are still accepted (`MENDIX_STUDIO_PRO_PATH`, `MENDIX_MPR_PATH`, `MENDIX_APP_PATH`, `STRICT_QUALITY_GATE`).
+Backward-compatible aliases remain accepted (`MENDIX_APP_PATH`, `STRICT_QUALITY_GATE`, `CUSTOM_SCENARIOS`, `DUMP_PATH`).
 
-## Main Usage
+When no MPR path is configured, script mode also auto-detects a single `.mpr` in the parent folder of `KnowledgeBase-Creator` (or in `KnowledgeBase-Creator` itself).
+
+## Script Usage (Advanced / CI)
 
 Full run:
 
 ```powershell
-./run-dump-parser.ps1
+.\wizard\run-dump-parser.ps1
 ```
 
 Resume from existing parser run folder:
 
 ```powershell
-./run-dump-parser.ps1 -SkipDump -SkipParser -SkipScaffold -RunFolder "mendix-data/app-overview/cli_2026-03-05T14-38-13.865Z"
+.\wizard\run-dump-parser.ps1 -SkipDump -SkipParser -SkipScaffold -RunFolder "mendix-data/app-overview/cli_2026-03-05T14-38-13.865Z"
 ```
 
 ## Quality + Benchmark Policy
@@ -56,18 +102,6 @@ Resume from existing parser run folder:
 - Final benchmark score:
   - structural-only when no custom scenarios;
   - weighted score when both run (default weights: structural `0.7`, custom `0.3`).
-
-## App-Specific Scenarios
-
-SmartExpenses pilot scenarios are provided at:
-
-- `benchmarks/smartexpenses-custom-scenarios.json`
-
-Run directly:
-
-```powershell
-./run-kb-semantic-benchmark.ps1 -OutputRoot mendix-data/knowledge-base -AppName SmartExpenses -CustomScenarios benchmarks/smartexpenses-custom-scenarios.json
-```
 
 ## CI Regression
 

@@ -1,18 +1,18 @@
-# PROMPT 10: Create the KB Content Enrichment Agent
+﻿# PROMPT 10: Create the KB Content Enrichment Agent
 
 ## Priority
 
-High — this is the agent that makes the KB genuinely useful for AI consumers, adding the reasoning layer that deterministic scripts cannot provide.
+High â€” this is the agent that makes the KB genuinely useful for AI consumers, adding the reasoning layer that deterministic scripts cannot provide.
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/01-END_STATE_KB_SPEC.md` — AI consumption strategy and content density contract.
-3. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` — behaviour-first narrative template.
-4. Prompt 08 (`AGENTS_POST_COMPOSITION_ROLE.md`) — must be completed first or at least understood for role separation.
-5. `.app-info/agents/OVERVIEW_KB_BUILDER.md` — current builder agent (to be refactored/replaced).
+2. `.app-info/product-plan/01-END_STATE_KB_SPEC.md` â€” AI consumption strategy and content density contract.
+3. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` â€” behaviour-first narrative template.
+4. Prompt 08 (`AGENTS_POST_COMPOSITION_ROLE.md`) â€” must be completed first or at least understood for role separation.
+5. `.app-info/agents/OVERVIEW_KB_BUILDER.md` â€” current builder agent (to be refactored/replaced).
 
 ## Problem Statement
 
@@ -26,7 +26,7 @@ After the deterministic composer runs, the KB is structurally complete but seman
 6. Anomalies (orphan entities, unsecured pages, naming typos) go unflagged.
 7. Non-custom modules have no dependency-relevance context for custom modules.
 
-An AI consumer reading this KB can navigate the structure but cannot understand the domain — it knows SmartExpenses has a `Transaction` entity with 7 attributes but doesn't know that transactions track family income and expenditure.
+An AI consumer reading this KB can navigate the structure but cannot understand the domain â€” it knows SmartExpenses has a `Transaction` entity with 7 attributes but doesn't know that transactions track family income and expenditure.
 
 **The enrichment agent bridges this gap.** It reads the composer output plus the raw JSON source data and applies domain reasoning to produce genuinely useful content.
 
@@ -54,9 +54,9 @@ Improve the semantic quality of a deterministically-generated KB by adding domai
 2. `.app-info/skills/mendix-overview-general-interpretation/SKILL.md` (updated per Prompt 09)
 3. `.app-info/skills/mendix-overview-module-interpretation/SKILL.md` (updated per Prompt 09)
 4. `.app-info/skills/mendix-overview-routing-synthesis/SKILL.md` (updated per Prompt 09)
-5. `<kb-root>/` — the composer-generated KB
-6. `<run-folder>/` — the raw JSON export
-7. `KnowledgeBase-Creator/run-kb-quality-gate.ps1` — for validation after enrichment
+5. `<kb-root>/` â€” the composer-generated KB
+6. `<run-folder>/` â€” the raw JSON export
+7. `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` â€” for validation after enrichment
 
 ### Core Workflow
 
@@ -66,18 +66,18 @@ Improve the semantic quality of a deterministically-generated KB by adding domai
 2. Read `<run-folder>/general/all-modules.json` to identify custom, marketplace, and system modules.
 3. Read `<run-folder>/general/user-roles.json` to understand security model.
 4. For each custom module, read:
-   - `<run-folder>/modules/<Module>/domain-model.json` — entity names, attributes, associations, access rules.
-   - `<run-folder>/modules/<Module>/flows.json` — flow names, pseudocode, annotations, node details.
-   - `<run-folder>/modules/<Module>/pages.json` — page titles (often in the app's language), parameters, roles.
-   - `<run-folder>/modules/<Module>/resources.json` — constants with default values, scheduled events.
+   - `<run-folder>/modules/<Module>/domain-model.json` â€” entity names, attributes, associations, access rules.
+   - `<run-folder>/modules/<Module>/flows.json` â€” flow names, pseudocode, annotations, node details.
+   - `<run-folder>/modules/<Module>/pages.json` â€” page titles (often in the app's language), parameters, roles.
+   - `<run-folder>/modules/<Module>/resources.json` â€” constants with default values, scheduled events.
 
 #### Phase 2: Domain Inference
 
 Before writing any changes, build a mental model of the application domain:
 
 1. **App purpose**: What does this app do? Infer from:
-   - Custom entity names (Transaction, Balance, BudgetType, FBGProfile → personal finance / budget management).
-   - Flow prefixes and names (ACT_Transaction_NewEdit_Save, ACT_BudgetType_Save → CRUD operations on financial entities).
+   - Custom entity names (Transaction, Balance, BudgetType, FBGProfile â†’ personal finance / budget management).
+   - Flow prefixes and names (ACT_Transaction_NewEdit_Save, ACT_BudgetType_Save â†’ CRUD operations on financial entities).
    - Page titles (especially non-English titles which reveal the target audience's language).
    - Role names (FBG = Family Budget Guardian, Parent = parental observer role).
    - Constants (REST URLs, configuration values).
@@ -106,7 +106,7 @@ Before writing any changes, build a mental model of the application domain:
 
 Modify these files in-place, preserving all existing headings and tables:
 
-##### `app/APP_OVERVIEW.md` — Mission Summary
+##### `app/APP_OVERVIEW.md` â€” Mission Summary
 
 Replace the generic mission summary with a domain-specific 2-3 sentence description. Include:
 - What the app does (e.g. "family budget management").
@@ -115,11 +115,11 @@ Replace the generic mission summary with a domain-specific 2-3 sentence descript
 
 Mark the enriched summary as `Confidence: Inferred (AI-enriched from entity/flow/page naming patterns)`.
 
-##### `app/MODULE_LANDSCAPE.md` — Module Purpose Descriptions
+##### `app/MODULE_LANDSCAPE.md` â€” Module Purpose Descriptions
 
 Replace generic "Implements app-specific behaviour" / "Support capability from marketplace" strings with module-specific descriptions. For well-known marketplace modules (Administration, ExcelImporter, MxModelReflection, etc.), use standard descriptions. For custom modules, infer from entity/flow naming.
 
-##### `app/SECURITY.md` — XPath Plain Language and Role Descriptions
+##### `app/SECURITY.md` â€” XPath Plain Language and Role Descriptions
 
 1. Replace mechanical XPath substitutions with genuine plain-language explanations that describe the business meaning.
 2. Add a `## Role Descriptions` section (or enhance the existing role matrix) with 1-2 sentence descriptions of each user role's business purpose.
@@ -128,11 +128,11 @@ Replace generic "Implements app-specific behaviour" / "Support capability from m
 
 For each **custom** module:
 
-##### `modules/<Module>/README.md` — Purpose Section
+##### `modules/<Module>/README.md` â€” Purpose Section
 
 Replace the generic purpose text with a domain-specific description. Example for SmartExpenses: "Core application module for family budget management. Handles budget profiles (FBGProfile), budget categories (BudgetType) and terms (BudgetTerm), financial transactions (Transaction), and account balances (Balance)."
 
-##### `modules/<Module>/FLOWS.md` — Tier 1 Intent Lines
+##### `modules/<Module>/FLOWS.md` â€” Tier 1 Intent Lines
 
 Review each Tier 1 narrative's intent line. If the intent is still mechanical ("Creates a BudgetType entity"), enrich it with domain context ("Creates a new budget category for a family profile, such as groceries or utilities"). Only improve intents where the domain meaning is reasonably clear from naming patterns.
 
@@ -144,7 +144,7 @@ Add a `## Anomalies and Observations` section to `ROUTING.md` (or a separate `_r
 
 1. List all detected anomalies with severity (Info, Warning, Concern).
 2. Include the file and location where the anomaly was found.
-3. Do not remove or change anomalous data — only flag it.
+3. Do not remove or change anomalous data â€” only flag it.
 
 #### Phase 6: Validate
 
@@ -162,14 +162,14 @@ After all enrichments:
 
 ### Guardrails
 
-1. **Never remove content** — only add or replace text within existing sections.
-2. **Never change table structure** — only modify cell content or add new rows/sections.
-3. **Never remove required headings** — the quality gate depends on them.
-4. **Preserve deterministic content** — tables, metrics, and cross-references from the composer must not be altered.
-5. **Mark enriched content** — use `Confidence: Inferred (AI-enriched)` or similar markers to distinguish AI additions from export-backed facts.
-6. **Be conservative** — only make claims that are clearly supported by naming patterns and structural evidence. When unsure, use "likely" or "appears to" qualifiers.
-7. **Preserve the original language** — if page titles or enum values are in Dutch (or any other language), keep them. Add English translations in parentheses if helpful.
-8. **Run validation after every file change** — do not batch all changes and validate at the end.
+1. **Never remove content** â€” only add or replace text within existing sections.
+2. **Never change table structure** â€” only modify cell content or add new rows/sections.
+3. **Never remove required headings** â€” the quality gate depends on them.
+4. **Preserve deterministic content** â€” tables, metrics, and cross-references from the composer must not be altered.
+5. **Mark enriched content** â€” use `Confidence: Inferred (AI-enriched)` or similar markers to distinguish AI additions from export-backed facts.
+6. **Be conservative** â€” only make claims that are clearly supported by naming patterns and structural evidence. When unsure, use "likely" or "appears to" qualifiers.
+7. **Preserve the original language** â€” if page titles or enum values are in Dutch (or any other language), keep them. Add English translations in parentheses if helpful.
+8. **Run validation after every file change** â€” do not batch all changes and validate at the end.
 
 ### Output Template
 
@@ -199,7 +199,7 @@ Confidence notes:
 ## Acceptance Criteria
 
 1. `OVERVIEW_KB_ENRICHER.md` exists with the complete specification above.
-2. The agent follows the six-phase workflow (Read → Infer → Enrich App → Enrich Modules → Flag → Validate).
+2. The agent follows the six-phase workflow (Read â†’ Infer â†’ Enrich App â†’ Enrich Modules â†’ Flag â†’ Validate).
 3. Guardrails prevent destructive changes to composer output.
 4. The agent is callable from `KNOWLEDGEBASE_CREATOR.md` as a post-composition step.
 5. The output template enables tracking of what was enriched.
@@ -230,3 +230,4 @@ After creating the agent file:
 ## Estimated Scope
 
 New agent file (~200-250 lines) plus integration update to KNOWLEDGEBASE_CREATOR.md (~10 lines).
+

@@ -17,7 +17,7 @@ This agent is called by `KNOWLEDGEBASE_CREATOR` and should not be invoked direct
    - `<run-folder>/general/` (app-info, user-roles, all-modules, marketplace-modules)
    - `<run-folder>/modules/<Module>/` (domain-model, flows, pages, resources)
 7. KB output root path (provided by KNOWLEDGEBASE_CREATOR)
-8. Quality gate contract in `KnowledgeBase-Creator/run-kb-quality-gate.ps1`
+8. Quality gate contract in `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1`
 
 ## Core Workflow
 
@@ -70,8 +70,8 @@ Execute the `mendix-overview-routing-synthesis` skill:
 
 ### Phase 5: Completeness and contract check
 
-1. Verify all expected files exist (use the expected file list from `KnowledgeBase-Creator/run-kb-scaffold.ps1`).
-2. Verify all generated markdown documents satisfy the quality contract used by `KnowledgeBase-Creator/run-kb-quality-gate.ps1`:
+1. Verify all expected files exist (use the expected file list from `KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1`).
+2. Verify all generated markdown documents satisfy the quality contract used by `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1`:
    - Required headings/sections per file type.
    - No placeholder links (for example `modules/X/README.md`).
    - All internal relative links resolve.
@@ -114,3 +114,4 @@ Handoff:
 - STATUS: [complete/partial]
 - NEXT: KNOWLEDGEBASE_CREATOR (for READER.md embedding and final validation)
 ```
+

@@ -2,6 +2,7 @@
 .env
 .env.local
 !KnowledgeBase-Creator/.env
+KnowledgeBase-Creator/wizard/config.last.json
 
 # Local throwaway files
 temp-write-test.txt

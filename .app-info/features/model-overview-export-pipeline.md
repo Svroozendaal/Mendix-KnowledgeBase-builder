@@ -1,4 +1,4 @@
-# Model Overview Export Pipeline
+﻿# Model Overview Export Pipeline
 
 ## Status
 
@@ -19,10 +19,10 @@ Full-model overview pipeline that exports complete application and module-level 
 
 ## Key files
 
-- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/MendixModelOverviewParser.cs` — the parser
-- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/Program.cs` — CLI entry point
-- `KnowledgeBase-Creator/run-dump-parser.ps1` — central dump+parser launcher
-- `.app-info/docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md` — export format contract
+- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/mendix-model-overview-parser/MendixModelOverviewParser.cs` â€” the parser
+- `KnowledgeBase-Creator/Mendix-model-overview-parser/src/model-overview-cli/Program.cs` â€” CLI entry point
+- `KnowledgeBase-Creator/wizard/run-dump-parser.ps1` â€” central dump+parser launcher
+- `.app-info/docs/MODEL_OVERVIEW_EXPORT_CONTRACT.md` â€” export format contract
 
 ## Output contract
 
@@ -36,3 +36,4 @@ Full-model overview pipeline that exports complete application and module-level 
 
 1. Keep output deterministic to support parser/AI downstream usage.
 2. Keep artefact naming and folder contracts stable.
+

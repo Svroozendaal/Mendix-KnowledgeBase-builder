@@ -1,16 +1,16 @@
-# PROMPT 05: Fix Non-Custom Module Rendering
+﻿# PROMPT 05: Fix Non-Custom Module Rendering
 
 ## Priority
 
-Medium — non-custom modules currently show contradictory data (README summary counts vs empty detail files).
+Medium â€” non-custom modules currently show contradictory data (README summary counts vs empty detail files).
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/01-END_STATE_KB_SPEC.md` — scope policy for non-custom modules.
-3. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` — marketplace/system coverage model.
+2. `.app-info/product-plan/01-END_STATE_KB_SPEC.md` â€” scope policy for non-custom modules.
+3. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` â€” marketplace/system coverage model.
 
 ## Problem Statement
 
@@ -24,7 +24,7 @@ The product plan spec (01-END_STATE_KB_SPEC.md) says non-custom modules should h
 2. Concise summaries.
 3. Dependency-aware context (relevance to custom modules).
 
-"Concise summaries" means the tables should be populated — just without Tier 1 narratives.
+"Concise summaries" means the tables should be populated â€” just without Tier 1 narratives.
 
 ### Current state example (Administration/DOMAIN.md):
 
@@ -49,7 +49,7 @@ The product plan spec (01-END_STATE_KB_SPEC.md) says non-custom modules should h
 
 ## Entry Criteria
 
-1. Composer script exists at `KnowledgeBase-Creator/run-kb-compose.ps1`.
+1. Composer script exists at `KnowledgeBase-Creator/wizard/run-kb-compose.ps1`.
 2. Non-custom module data is loaded from JSON (verify by checking `$domainsByModule["Administration"]` is non-empty).
 
 ## Acceptance Criteria
@@ -59,7 +59,7 @@ The product plan spec (01-END_STATE_KB_SPEC.md) says non-custom modules should h
 3. Non-custom module `PAGES.md` files show page inventory tables populated from the export data.
 4. Non-custom modules do NOT get Tier 1 deep narratives (catalogue-only, as specified in plan).
 5. Non-custom modules do NOT get entity lifecycle matrices (custom-module-only feature).
-6. Non-custom modules include a dependency note: "This module supports custom-module behaviour through [specific relevance]" — or "No direct custom-module dependency detected" if no cross-module edges exist.
+6. Non-custom modules include a dependency note: "This module supports custom-module behaviour through [specific relevance]" â€” or "No direct custom-module dependency detected" if no cross-module edges exist.
 7. Quality gate and benchmark still pass.
 8. Deterministic output preserved.
 
@@ -67,7 +67,7 @@ The product plan spec (01-END_STATE_KB_SPEC.md) says non-custom modules should h
 
 ### Files to Modify
 
-1. `KnowledgeBase-Creator/run-kb-compose.ps1` — rendering logic for non-custom modules.
+1. `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` â€” rendering logic for non-custom modules.
 
 ### Investigation Required
 
@@ -128,7 +128,7 @@ After implementing:
 8. Verify that no non-custom module has Tier 1 narratives.
 9. Verify quality gate passes.
 10. Verify benchmark score >= 85.
-11. Spot-check `ExcelImporter` module (196 flows) — should show populated tables without deep narratives.
+11. Spot-check `ExcelImporter` module (196 flows) â€” should show populated tables without deep narratives.
 
 ## Exit Criteria
 
@@ -146,3 +146,4 @@ Investigation + fix:
 - Debug the loading/rendering path for non-custom modules (~30 min investigation).
 - Fix loader or renderer (~10-30 lines depending on root cause).
 - Add dependency relevance note to non-custom README rendering (~10 lines).
+

@@ -12,16 +12,17 @@ It is designed for KB creation only.
 
 - Minimal `.agents/` subset for KB creation workflow
 - `agents.md` AI launcher entry point
-- `run-dump-parser.ps1` central command
+- `KnowledgeBaseCreator.exe` main launcher
+- `wizard/run-dump-parser.ps1` advanced script bootstrap
 - `Mendix-model-overview-parser/` source and prebuilt parser binaries
 - `artifacts/` markdown templates copied into generated KB folders
 - `.env` for local path configuration
 
 ## Central flow
 
-1. Run `KnowledgeBase-Creator/run-dump-parser.ps1`.
-2. Script runs `mx dump-mpr` and parser export.
-3. Script scaffolds KB structure and seeds required markdown templates.
+1. Run `KnowledgeBase-Creator/KnowledgeBaseCreator.exe`.
+2. The wizard collects the `.mpr` path and Mendix installation details.
+3. The wizard runs `wizard/run-dump-parser.ps1`, which performs dump, parser export, scaffold, composition, and validation.
 4. AI agent uses `agents.md` + included agents/skills to complete KB content.
 
 ## Automation

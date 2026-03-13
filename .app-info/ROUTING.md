@@ -28,7 +28,8 @@ Read this file after `.agents/AGENTS.md` and `.agents/FRAMEWORK.md` to understan
 - Plan context interview agent: `product-plan/11-CONTEXT_CONVERSATION_AGENT_SPEC.md` and `development/prompts/11-CONTEXT_AGENT_ROLE_AND_BOUNDARY.md`
 - Investigate structural gaps: `agents/GAPSMITH.md`
 - Find a skill: `skills/OVERVIEW.md`
-- Run portable drop-in package: `../KnowledgeBase-Creator/run-dump-parser.ps1`
+- Run portable drop-in package: `../KnowledgeBase-Creator/KnowledgeBaseCreator.exe`
+- Advanced script bootstrap: `../KnowledgeBase-Creator/wizard/run-dump-parser.ps1`
 - Build downloadable artifact package: `../.github/workflows/build-knowledgebase-creator-artifact.yml` (`workflow_dispatch`)
 
 ## Pipeline Overview
@@ -48,6 +49,9 @@ Portable package output -> KnowledgeBase-Creator/
 
 | Script | Purpose |
 |---|---|
-| `KnowledgeBase-Creator/run-dump-parser.ps1` | Run dump + parser + KB scaffold + template seeding + validation |
-| `KnowledgeBase-Creator/run-kb-scaffold.ps1` | Scaffold KB folder structure or validate completeness |
-| `KnowledgeBase-Creator/run-kb-quality-gate.ps1` | Validate KB content contract (required headings, links, and quality markers) |
+| `KnowledgeBase-Creator/KnowledgeBaseCreator.exe` | Interactive Windows launcher for full KB creation workflow |
+| `KnowledgeBase-Creator/wizard/run-dump-parser.ps1` | Advanced script bootstrap for dump, parser, scaffold, composition, and validation |
+| `KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1` | Scaffold KB folder structure or validate completeness |
+| `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` | Compose deterministic knowledge-base markdown from model overview exports |
+| `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` | Validate KB content contract (required headings, links, and quality markers) |
+| `KnowledgeBase-Creator/wizard/run-kb-semantic-benchmark.ps1` | Run structural and optional app-specific semantic benchmark checks |

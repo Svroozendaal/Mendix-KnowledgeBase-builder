@@ -32,5 +32,6 @@ Convert a Mendix `.mpr` model into:
 
 Do not report completion unless both pass:
 
-1. `./run-kb-scaffold.ps1 -Validate -OutputRoot mendix-data/knowledge-base -AppName <app-name>`
-2. `./run-kb-quality-gate.ps1 -OutputRoot mendix-data/knowledge-base -AppName <app-name>`
+1. `./wizard/run-kb-scaffold.ps1 -Validate -OutputRoot mendix-data/knowledge-base -AppName <app-name>`
+2. `./wizard/run-kb-quality-gate.ps1 -OutputRoot mendix-data/knowledge-base -AppName <app-name>`
+

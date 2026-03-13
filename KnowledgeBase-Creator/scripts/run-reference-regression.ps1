@@ -16,13 +16,13 @@ $referenceRunFolderPath = Join-Path $repoRoot $ReferenceRunFolder
 $baselineKbFolderPath = Join-Path $repoRoot $BaselineKbFolder
 $tempOutputRootPath = Join-Path $repoRoot $TempOutputRoot
 $runToken = (Get-Date).ToUniversalTime().ToString("yyyyMMddHHmmss")
-$generatedOutputRoot = Join-Path $tempOutputRootPath "run_$runToken"
-$generatedKbFolder = Join-Path $generatedOutputRoot $AppName
+$generatedRunRoot = Join-Path $tempOutputRootPath "run_$runToken"
+$generatedKbFolder = Join-Path $generatedRunRoot $AppName
 
-$scaffoldScript = Join-Path $repoRoot "KnowledgeBase-Creator/run-kb-scaffold.ps1"
-$composeScript = Join-Path $repoRoot "KnowledgeBase-Creator/run-kb-compose.ps1"
-$qualityScript = Join-Path $repoRoot "KnowledgeBase-Creator/run-kb-quality-gate.ps1"
-$benchmarkScript = Join-Path $repoRoot "KnowledgeBase-Creator/run-kb-semantic-benchmark.ps1"
+$scaffoldScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1"
+$composeScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-compose.ps1"
+$qualityScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1"
+$benchmarkScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-semantic-benchmark.ps1"
 
 if (-not (Test-Path $referenceRunFolderPath -PathType Container)) {
     throw "Reference run folder not found: $referenceRunFolderPath"
@@ -31,7 +31,7 @@ if (-not (Test-Path $baselineKbFolderPath -PathType Container)) {
     throw "Baseline KB folder not found: $baselineKbFolderPath"
 }
 
-New-Item -ItemType Directory -Path $generatedOutputRoot -Force | Out-Null
+New-Item -ItemType Directory -Path $generatedKbFolder -Force | Out-Null
 
 Write-Host ""
 Write-Host "=== Reference Regression ===" -ForegroundColor Cyan
@@ -39,16 +39,16 @@ Write-Host "Reference run: $ReferenceRunFolder"
 Write-Host "Baseline KB:   $BaselineKbFolder"
 Write-Host "Generated KB:  $generatedKbFolder"
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File $scaffoldScript -RunFolder $ReferenceRunFolder -OutputRoot $generatedOutputRoot -AppName $AppName
+& powershell -NoProfile -ExecutionPolicy Bypass -File $scaffoldScript -RunFolder $ReferenceRunFolder -OutputRoot $generatedKbFolder -AppName $AppName
 if ($LASTEXITCODE -ne 0) { throw "Scaffold failed with exit code $LASTEXITCODE" }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File $composeScript -RunFolder $ReferenceRunFolder -OutputRoot $generatedOutputRoot -AppName $AppName -GeneratedAtUtc $GeneratedAtUtc
+& powershell -NoProfile -ExecutionPolicy Bypass -File $composeScript -RunFolder $ReferenceRunFolder -OutputRoot $generatedKbFolder -AppName $AppName -GeneratedAtUtc $GeneratedAtUtc
 if ($LASTEXITCODE -ne 0) { throw "Compose failed with exit code $LASTEXITCODE" }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File $qualityScript -OutputRoot $generatedOutputRoot -AppName $AppName
+& powershell -NoProfile -ExecutionPolicy Bypass -File $qualityScript -OutputRoot $generatedKbFolder -AppName $AppName
 if ($LASTEXITCODE -ne 0) { throw "Quality gate failed with exit code $LASTEXITCODE" }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File $benchmarkScript -OutputRoot $generatedOutputRoot -AppName $AppName -GeneratedAtUtc $GeneratedAtUtc -KbRootDisplay "reference/$AppName"
+& powershell -NoProfile -ExecutionPolicy Bypass -File $benchmarkScript -OutputRoot $generatedKbFolder -AppName $AppName -GeneratedAtUtc $GeneratedAtUtc -KbRootDisplay "reference/$AppName"
 if ($LASTEXITCODE -ne 0) { throw "Semantic benchmark failed with exit code $LASTEXITCODE" }
 
 Write-Host "Running regression diff against baseline..." -ForegroundColor Yellow

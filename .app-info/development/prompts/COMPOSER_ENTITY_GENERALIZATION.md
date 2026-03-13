@@ -1,16 +1,16 @@
-# PROMPT 04: Surface Entity Generalization Chains
+﻿# PROMPT 04: Surface Entity Generalization Chains
 
 ## Priority
 
-High — inheritance chains hide attributes and behaviour from AI consumers.
+High â€” inheritance chains hide attributes and behaviour from AI consumers.
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/01-END_STATE_KB_SPEC.md` — mandatory module-level content for DOMAIN.md.
-3. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` — entity lifecycle model.
+2. `.app-info/product-plan/01-END_STATE_KB_SPEC.md` â€” mandatory module-level content for DOMAIN.md.
+3. `.app-info/product-plan/02-CONTENT_MODEL_CUSTOM_DEPTH.md` â€” entity lifecycle model.
 
 ## Problem Statement
 
@@ -18,7 +18,7 @@ Mendix entities can inherit from other entities (generalisation). For example, `
 
 The composer currently ignores the `generalization` field completely. In the generated DOMAIN.md:
 
-- `SmartExpenses.Logo` shows `0` attributes — because it has no locally-declared attributes.
+- `SmartExpenses.Logo` shows `0` attributes â€” because it has no locally-declared attributes.
 - There is no mention that Logo inherits from System.Image.
 - An AI reading the KB would conclude Logo has no attributes and no meaningful structure.
 
@@ -30,7 +30,7 @@ This is misleading. The generalization chain determines:
 
 ## Entry Criteria
 
-1. Composer script exists at `KnowledgeBase-Creator/run-kb-compose.ps1`.
+1. Composer script exists at `KnowledgeBase-Creator/wizard/run-kb-compose.ps1`.
 2. The `generalization` field is present on entity objects in `domain-model.json` (value is either a qualified entity name string or `null`).
 
 ## Acceptance Criteria
@@ -46,8 +46,8 @@ This is misleading. The generalization chain determines:
 
 ### Files to Modify
 
-1. `KnowledgeBase-Creator/run-kb-compose.ps1`
-2. `KnowledgeBase-Creator/artifacts/MODULE_DOMAIN_TEMPLATE.md` — update table header.
+1. `KnowledgeBase-Creator/wizard/run-kb-compose.ps1`
+2. `KnowledgeBase-Creator/artifacts/MODULE_DOMAIN_TEMPLATE.md` â€” update table header.
 
 ### Specific Code Locations and Changes
 
@@ -90,7 +90,7 @@ Change to:
 In the rendering loop for entity rows, add:
 
 ```powershell
-$gen = if ($entityGeneralization[$entity.name]) { $entityGeneralization[$entity.name] } else { "—" }
+$gen = if ($entityGeneralization[$entity.name]) { $entityGeneralization[$entity.name] } else { "â€”" }
 ```
 
 Clarify the attribute count is "local" attributes (not inherited).
@@ -104,7 +104,7 @@ After the entity table, add a conditional section when any entity in the module 
 
 | Entity | Parent | Implication |
 |---|---|---|
-| SmartExpenses.Logo | System.Image | Inherits file-handling attributes (Name, Size, Contents, etc.) from System.Image → System.FileDocument. Entity supports binary file storage. |
+| SmartExpenses.Logo | System.Image | Inherits file-handling attributes (Name, Size, Contents, etc.) from System.Image â†’ System.FileDocument. Entity supports binary file storage. |
 ```
 
 Build the "Implication" text deterministically based on well-known Mendix parent entities:
@@ -128,7 +128,7 @@ Update `KnowledgeBase-Creator/artifacts/MODULE_DOMAIN_TEMPLATE.md` to include th
 ### What NOT to Change
 
 1. Do not attempt to resolve the full inheritance chain (e.g. Image -> FileDocument -> object). Only show the direct parent.
-2. Do not list inherited attributes individually (the parent entity's attributes are defined in the parent module's DOMAIN.md — keep the indirection).
+2. Do not list inherited attributes individually (the parent entity's attributes are defined in the parent module's DOMAIN.md â€” keep the indirection).
 3. Do not change the entity lifecycle matrix.
 4. Do not change the access rules / role impacts section.
 
@@ -140,7 +140,7 @@ After implementing:
 2. Open `mendix-data/knowledge-base/SmartExpenses/modules/SmartExpenses/DOMAIN.md`.
 3. Verify that `SmartExpenses.Logo` shows `System.Image` in the Generalises column.
 4. Verify that the "Inheritance Notes" section appears and explains the Image inheritance.
-5. Verify that entities without generalisation (e.g. `SmartExpenses.Transaction`) show "—" in the Generalises column.
+5. Verify that entities without generalisation (e.g. `SmartExpenses.Transaction`) show "â€”" in the Generalises column.
 6. Verify that modules without any generalised entities do not show the Inheritance Notes section.
 7. Open `mendix-data/knowledge-base/SmartExpenses/routes/by-entity.md` and verify Logo has a generalisation note.
 8. Verify quality gate passes.
@@ -162,3 +162,4 @@ After implementing:
 - Add conditional inheritance notes section (~20 lines).
 - Modify entity route index rendering (~5 lines).
 - Update 1 template file.
+

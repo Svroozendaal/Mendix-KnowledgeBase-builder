@@ -13,8 +13,8 @@ This is an app-specific agent for this project. It does not have a generic base 
 4. `.app-info/agents/KNOWLEDGEBASE_CREATOR.md` - this file (for self-reference).
 5. Source export run folder path (e.g. `mendix-data/app-overview/cli-test-v2`).
 6. App name for the KB (e.g. `SmartExpenses`).
-7. `KnowledgeBase-Creator/run-kb-scaffold.ps1` - file completeness scaffold/validation script.
-8. `KnowledgeBase-Creator/run-kb-quality-gate.ps1` - KB content and structure quality validation script.
+7. `KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1` - file completeness scaffold/validation script.
+8. `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` - KB content and structure quality validation script.
 
 ## KB Output Structure
 
@@ -160,8 +160,8 @@ See `_sources/SOURCE_REF.md` for details about the export run that produced this
 2. Do not modify source export files - they are read-only inputs.
 3. Keep the KB self-contained: all internal links must be relative to KB root.
 4. Run both validations after every KB generation:
-   - `KnowledgeBase-Creator/run-kb-scaffold.ps1` for file completeness
-   - `KnowledgeBase-Creator/run-kb-quality-gate.ps1` for content structure and link quality
+   - `KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1` for file completeness
+   - `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` for content structure and link quality
 5. The READER.md must always be the last file written (it references all other files).
 6. Do not mark `Known gaps: none` if required fields still contain `Unknown` due to missing source detail.
 
@@ -197,3 +197,4 @@ Known gaps: [list or "none"]
 
 Next: open READER.md to start querying the knowledge base.
 ```
+

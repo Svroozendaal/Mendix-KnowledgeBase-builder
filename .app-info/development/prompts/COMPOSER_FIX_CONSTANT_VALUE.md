@@ -1,15 +1,15 @@
-# PROMPT 03: Fix Constant defaultValue Bug
+﻿# PROMPT 03: Fix Constant defaultValue Bug
 
 ## Priority
 
-High — this is a data-loss bug where available information is silently dropped.
+High â€” this is a data-loss bug where available information is silently dropped.
 
 ## Context
 
 Read before starting:
 
 1. `.agents/AGENTS.md` and `.agents/FRAMEWORK.md`
-2. `.app-info/product-plan/05-KB_COMPOSER_SPEC.md` — composer specification.
+2. `.app-info/product-plan/05-KB_COMPOSER_SPEC.md` â€” composer specification.
 
 ## Problem Statement
 
@@ -54,7 +54,7 @@ The bug: `$c.value` should be `$c.defaultValue`. The field `value` does not exis
 
 ## Entry Criteria
 
-1. Composer script exists at `KnowledgeBase-Creator/run-kb-compose.ps1`.
+1. Composer script exists at `KnowledgeBase-Creator/wizard/run-kb-compose.ps1`.
 2. At least one module has constants in its `resources.json` (ImporterHelper has 1).
 
 ## Acceptance Criteria
@@ -68,7 +68,7 @@ The bug: `$c.value` should be `$c.defaultValue`. The field `value` does not exis
 
 ### Files to Modify
 
-1. `KnowledgeBase-Creator/run-kb-compose.ps1` — single line fix plus minor enhancements.
+1. `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` â€” single line fix plus minor enhancements.
 
 ### Specific Changes
 
@@ -102,10 +102,10 @@ Update the table header to match:
 
 #### Fix 3: Add documentation when available
 
-If `$c.documentation` is non-null and non-empty, append it in a secondary row or as a tooltip-style note. Keep it simple — an extra column or an inline note after the value:
+If `$c.documentation` is non-null and non-empty, append it in a secondary row or as a tooltip-style note. Keep it simple â€” an extra column or an inline note after the value:
 
 ```powershell
-$doc = if (-not [string]::IsNullOrWhiteSpace([string]$c.documentation)) { " — $([string]$c.documentation)" } else { "" }
+$doc = if (-not [string]::IsNullOrWhiteSpace([string]$c.documentation)) { " â€” $([string]$c.documentation)" } else { "" }
 ```
 
 #### Fix 4: Update the template file
@@ -130,7 +130,7 @@ After implementing:
 2. Open `mendix-data/knowledge-base/SmartExpenses/modules/ImporterHelper/RESOURCES.md`.
 3. Verify that `CONST_RESTTransactionURL` shows its value: `http://localhost:8079/rest/restproducts/v1/transaction`.
 4. Verify the `Exposed to Client` column shows `No`.
-5. Open `mendix-data/knowledge-base/SmartExpenses/modules/SmartExpenses/RESOURCES.md` — constants section should still show `none` (SmartExpenses has no constants).
+5. Open `mendix-data/knowledge-base/SmartExpenses/modules/SmartExpenses/RESOURCES.md` â€” constants section should still show `none` (SmartExpenses has no constants).
 6. Verify quality gate passes.
 7. Verify benchmark score >= 85.
 
@@ -149,3 +149,4 @@ Minimal change:
 - Fix 1 property name on 1 line.
 - Add 1 column to constant table rendering (~3 lines).
 - Update 1 template file header.
+

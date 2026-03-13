@@ -42,7 +42,12 @@
       "Bash(OUTPUT=\"c:/Workspaces/Mendix-KnowledgeBase-Builder/mendix-data/app-overview/smart-expenses-full\")",
       "Bash(dotnet run --project model-overview-cli/ModelOverviewCli.csproj --no-build -- --dump \"$DUMP\" --output \"$OUTPUT\")",
       "Bash(powershell -ExecutionPolicy Bypass -File run-kb-scaffold.ps1 -RunFolder \"mendix-data/app-overview/smart-expenses-full\" -AppName \"SmartExpenses\")",
-      "Bash(ls \"c:\\\\Workspaces\\\\Mendix-KnowledgeBase-Builder\\\\mendix-data\\\\knowledge-base\\\\SmartExpenses\\\\_sources\"\" 2>/dev/null && echo \"EXISTS\" || echo \"NOT_FOUND \")"
+      "Bash(ls \"c:\\\\Workspaces\\\\Mendix-KnowledgeBase-Builder\\\\mendix-data\\\\knowledge-base\\\\SmartExpenses\\\\_sources\"\" 2>/dev/null && echo \"EXISTS\" || echo \"NOT_FOUND \")",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File wizard/run-dump-parser.ps1)",
+      "Bash(mkdir -p artifacts/templates)",
+      "Bash(mv artifacts/*.md artifacts/templates/)",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -File wizard/run-dump-parser.ps1 -SkipDump -SkipParser)",
+      "Bash(find /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/artifacts/.agents -type f -name *)"
     ]
   }
 }
