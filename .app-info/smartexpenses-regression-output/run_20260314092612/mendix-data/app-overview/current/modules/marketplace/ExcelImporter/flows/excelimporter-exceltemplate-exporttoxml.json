@@ -1,0 +1,272 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ExcelTemplate_ExportToXML",
+                  "stableId":  "aa1c8812-4ba4-4563-9ffe-276fd2ad392b",
+                  "slug":  "excelimporter-exceltemplate-exporttoxml",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-exceltemplate-exporttoxml.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-exceltemplate-exporttoxml.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-exceltemplate-exporttoxml.json",
+                  "l2Logical":  "flow:ExcelImporter.ExcelTemplate_ExportToXML",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "aa1c8812-4ba4-4563-9ffe-276fd2ad392b",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.ExcelTemplate_ExportToXML",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "6805c751-614e-4727-90de-015a46aeeedb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewXMLDocumentTemplate (Name=\u0027ExcelTemplate_\u0027 + $Template/Title + \u0027_\u0027 + formatDateTime([%CurrentDateTime%], \u0027yyyy-MM-dd_HHmm\u0027) + \u0027.xml\u0027; refreshInClient=false)",
+                      "detail":  "change NewXMLDocumentTemplate (Name=\u0027ExcelTemplate_\u0027 + $Template/Title + \u0027_\u0027 + formatDateTime([%CurrentDateTime%], \u0027yyyy-MM-dd_HHmm\u0027) + \u0027.xml\u0027; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d3e3ea0b-3f0a-422b-bdf7-3cb0bcea4e6a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewXMLDocumentTemplate (XMLDocumentTemplate_Template=$Template; refreshInClient=false)",
+                      "detail":  "change NewXMLDocumentTemplate (XMLDocumentTemplate_Template=$Template; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "309481bf-bf55-497f-aa07-cb532b2ee838",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.XMLDocumentTemplate as NewXMLDocumentTemplate",
+                      "detail":  "create ExcelImporter.XMLDocumentTemplate as NewXMLDocumentTemplate",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a0a8a0a9-5e09-4595-b1de-711fa18862d0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DownloadFileAction: DownloadFileAction (errorHandlingType=Rollback)",
+                      "detail":  "DownloadFileAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cb1a69af-6c48-43f9-aa71-f7de19509bb7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ExportXmlAction: ExportXmlAction (errorHandlingType=Custom)",
+                      "detail":  "ExportXmlAction (errorHandlingType=Custom)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "53edcb1d-c5d7-474b-aad2-5872396cd4ef",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c8b4f843-16f7-4189-8c1e-536f5f50e929",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text={1}, type=Error, blocking=true)",
+                      "detail":  "show message (text={1}, type=Error, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9a5069ac-a9d7-4786-a8e6-bb6a00ea0d65",
+                      "nodeType":  "Annotation",
+                      "label":  "Based on MB_ExportToXML in the DatabaseReplication module. This microflow is used to export the Excel Template in the Template parameter to XML.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "19e54c33-d81c-46fb-9a8e-fd688708a482",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c203abd9-056c-4528-b2b0-ecfe795f353b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "284701b6-5a04-45f5-9aec-646f7ffe35f8",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0568a60e-6b8c-4ac7-b241-a835c0774133",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "22c90afa-9035-4b13-9397-5ed76b5310f6",
+                      "originNodeId":  "0568a60e-6b8c-4ac7-b241-a835c0774133",
+                      "destinationNodeId":  "309481bf-bf55-497f-aa07-cb532b2ee838",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7fa141e7-2030-4502-b94a-4aff4b20898c",
+                      "originNodeId":  "309481bf-bf55-497f-aa07-cb532b2ee838",
+                      "destinationNodeId":  "d3e3ea0b-3f0a-422b-bdf7-3cb0bcea4e6a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "37ab631c-abf3-41b7-87cd-600164599a12",
+                      "originNodeId":  "d3e3ea0b-3f0a-422b-bdf7-3cb0bcea4e6a",
+                      "destinationNodeId":  "cb1a69af-6c48-43f9-aa71-f7de19509bb7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f0f60dc2-0fa1-4f30-8fad-d17c9899a0aa",
+                      "originNodeId":  "a0a8a0a9-5e09-4595-b1de-711fa18862d0",
+                      "destinationNodeId":  "c203abd9-056c-4528-b2b0-ecfe795f353b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "51417bf9-2542-4577-9bf5-36f71ab45f74",
+                      "originNodeId":  "6805c751-614e-4727-90de-015a46aeeedb",
+                      "destinationNodeId":  "a0a8a0a9-5e09-4595-b1de-711fa18862d0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "af426461-b3a2-4da6-a7fc-fc8645136369",
+                      "originNodeId":  "cb1a69af-6c48-43f9-aa71-f7de19509bb7",
+                      "destinationNodeId":  "6805c751-614e-4727-90de-015a46aeeedb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3c20a856-9e5b-47a0-9ad3-bcfbc1c5ac2f",
+                      "originNodeId":  "cb1a69af-6c48-43f9-aa71-f7de19509bb7",
+                      "destinationNodeId":  "c8b4f843-16f7-4189-8c1e-536f5f50e929",
+                      "condition":  null,
+                      "isErrorHandler":  true,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "d25318c0-c7d9-4622-bc76-c5564207cdcc",
+                      "originNodeId":  "c8b4f843-16f7-4189-8c1e-536f5f50e929",
+                      "destinationNodeId":  "53edcb1d-c5d7-474b-aad2-5872396cd4ef",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "c6dee57b-5e8c-437d-ab6f-6fb6fd67585a",
+                      "originNodeId":  "53edcb1d-c5d7-474b-aad2-5872396cd4ef",
+                      "destinationNodeId":  "19e54c33-d81c-46fb-9a8e-fd688708a482",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "0568a60e-6b8c-4ac7-b241-a835c0774133"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "0568a60e-6b8c-4ac7-b241-a835c0774133",
+                                         "309481bf-bf55-497f-aa07-cb532b2ee838",
+                                         "d3e3ea0b-3f0a-422b-bdf7-3cb0bcea4e6a",
+                                         "cb1a69af-6c48-43f9-aa71-f7de19509bb7",
+                                         "6805c751-614e-4727-90de-015a46aeeedb",
+                                         "a0a8a0a9-5e09-4595-b1de-711fa18862d0",
+                                         "c203abd9-056c-4528-b2b0-ecfe795f353b",
+                                         "c8b4f843-16f7-4189-8c1e-536f5f50e929",
+                                         "53edcb1d-c5d7-474b-aad2-5872396cd4ef",
+                                         "19e54c33-d81c-46fb-9a8e-fd688708a482"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.ExcelTemplate_ExportToXML\r\nNODES=12; EDGES=9\r\n1. START\r\n2. ACTION CreateObjectAction: create ExcelImporter.XMLDocumentTemplate as NewXMLDocumentTemplate\r\n3. ACTION ChangeObjectAction: change NewXMLDocumentTemplate (XMLDocumentTemplate_Template=$Template; refreshInClient=false)\r\n4. ACTION ExportXmlAction: ExportXmlAction (errorHandlingType=Custom)\r\n5. BRANCH\r\n  6. ACTION ChangeObjectAction: change NewXMLDocumentTemplate (Name=\u0027ExcelTemplate_\u0027 + $Template/Title + \u0027_\u0027 + formatDateTime([%CurrentDateTime%], \u0027yyyy-MM-dd_HHmm\u0027) + \u0027.xml\u0027; refreshInClient=false)\r\n  7. ACTION DownloadFileAction: DownloadFileAction (errorHandlingType=Rollback)\r\n  8. END\r\n9. BRANCH on error\r\n  10. ACTION ShowMessageAction: show message (text={1}, type=Error, blocking=true)\r\n  11. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  12. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

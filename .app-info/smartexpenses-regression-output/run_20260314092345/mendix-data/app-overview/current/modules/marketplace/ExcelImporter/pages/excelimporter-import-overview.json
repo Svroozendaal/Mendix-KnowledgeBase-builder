@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.Import_Overview",
+                  "stableId":  "ExcelImporter.Import_Overview",
+                  "slug":  "excelimporter-import-overview",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-import-overview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-import-overview.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/pages/excelimporter-import-overview.json",
+                  "l2Logical":  "page:ExcelImporter.Import_Overview",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/pages/INDEX.json"
+              },
+    "qualifiedName":  "ExcelImporter.Import_Overview",
+    "name":  "Import_Overview",
+    "title":  "Import files overview",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "ExcelImporter.Configurator"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

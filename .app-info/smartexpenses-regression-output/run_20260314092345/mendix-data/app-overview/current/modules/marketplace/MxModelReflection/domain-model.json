@@ -1,0 +1,1773 @@
+{
+  "module": "MxModelReflection",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "MxModelReflection.DbSizeEstimate",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CalculatedSizeInBytes",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "CalculatedSizeInKiloBytes",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "FindObjectType",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "NrOfRecords",
+            "type": "IntegerAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator",
+              "MxModelReflection.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.DbSizeEstimate.NrOfRecords",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.DbSizeEstimate.CalculatedSizeInBytes",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.DbSizeEstimate.CalculatedSizeInKiloBytes",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.DbSizeEstimate.FindObjectType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.DbSizeEstimate_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.InheritsFromContainer",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Summary",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.InheritsFromContainer.Summary",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.Microflows",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CompleteName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Module",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Microflows.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows.Module",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows_InputParameter",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows_Output_Type",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows_Module",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Microflows.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows.Module",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows_InputParameter",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows_Output_Type",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Microflows_Module",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.Module",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ModuleName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "SynchronizeObjectsWithinModule",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Module.ModuleName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Module.SynchronizeObjectsWithinModule",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Module.ModuleName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Module.SynchronizeObjectsWithinModule",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.MxObjectEnum",
+        "isPersistable": true,
+        "generalization": "MxModelReflection.MxObjectMember",
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeTypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.DescriptiveName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.FieldLength",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.IsVirtual",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Values",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_Type",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeTypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.DescriptiveName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.FieldLength",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.IsVirtual",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Values",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_Type",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.MxObjectEnumCaptions",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Caption",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "LanguageCode",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "LanguageName",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectEnumCaptions.Caption",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectEnumCaptions.LanguageCode",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectEnumCaptions.LanguageName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectEnumCaptions.Caption",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectEnumCaptions.LanguageCode",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectEnumCaptions.LanguageName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.MxObjectEnumValue",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectEnumValue.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Captions",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectEnumValue.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Captions",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.MxObjectMember",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AttributeName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "AttributeType",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "AttributeTypeEnum",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "CompleteName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "DescriptiveName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FieldLength",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "IsVirtual",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeTypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.DescriptiveName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.FieldLength",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.IsVirtual",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_Type",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.AttributeTypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.DescriptiveName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.FieldLength",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember.IsVirtual",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectMember_Type",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.MxObjectReference",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AssociationOwner",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "CompleteName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Module",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ParentEntity",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ReadableName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ReferenceType",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectReference.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.Module",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.ReadableName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.ReferenceType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.AssociationOwner",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.ParentEntity",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_MxObjectType_Child",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_MxObjectType_Parent",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_Module",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectReference.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.Module",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.ReadableName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.ReferenceType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.AssociationOwner",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference.ParentEntity",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_MxObjectType_Child",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_MxObjectType_Parent",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectReference_Module",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.MxObjectType",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CompleteName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Module",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "PersistenceType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ReadableName",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectType.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.Module",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.ReadableName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.PersistenceType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType_SubClassOf_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType_Module",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.MxObjectType.CompleteName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.Module",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.ReadableName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType.PersistenceType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType_SubClassOf_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.MxObjectType_Module",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.Parameter",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Parameter.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Parameter_ValueType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Parameter_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Parameter.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Parameter_ValueType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Parameter_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.StringValue",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Value",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator",
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.StringValue.Value",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.TestPattern",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AttributeTypeEnum",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "BooleanAttribute",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "DateTimeAttribute",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "DecimalAttribute",
+            "type": "DecimalAttributeType"
+          },
+          {
+            "name": "DisplayPattern",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "IntegerAttribute",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "LongAttribute",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "Result",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StringAttribute",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.TestPattern.DisplayPattern",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.AttributeTypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.BooleanAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.DecimalAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.DateTimeAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.IntegerAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.LongAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.StringAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.TestPattern.Result",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.Token",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CombinedToken",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "DisplayPattern",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindMember",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindMemberReference",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindObjectReference",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindObjectStart",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindReference",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "IsOptional",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "MetaModelPath",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Prefix",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Status",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Suffix",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Token",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "TokenType",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Token.Token",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Prefix",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Suffix",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.CombinedToken",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.MetaModelPath",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.TokenType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindObjectStart",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindObjectReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindMember",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindMemberReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.IsOptional",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token.DisplayPattern",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectMember",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectType_Start",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectType_Referenced",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectReference",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.Token.Token",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Prefix",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Suffix",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.CombinedToken",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.MetaModelPath",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.TokenType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindObjectStart",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindObjectReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindMember",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.FindMemberReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.IsOptional",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token.DisplayPattern",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectMember",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectType_Start",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectType_Referenced",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.Token_MxObjectReference",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MxModelReflection.ValueType",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "TypeEnum",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "MxModelReflection.Readonly",
+              "MxModelReflection.TokenUser"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.ValueType.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.ValueType.TypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.ValueType_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "MxModelReflection.ModelAdministrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "MxModelReflection.ValueType.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.ValueType.TypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "MxModelReflection.ValueType_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "associations": [
+      {
+        "name": "MxModelReflection.Captions",
+        "parentEntity": "MxModelReflection.MxObjectEnumValue",
+        "childEntity": "MxModelReflection.MxObjectEnumCaptions",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.DbSizeEstimate_MxObjectType",
+        "parentEntity": "MxModelReflection.DbSizeEstimate",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Microflows_InputParameter",
+        "parentEntity": "MxModelReflection.Microflows",
+        "childEntity": "MxModelReflection.Parameter",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Microflows_Module",
+        "parentEntity": "MxModelReflection.Microflows",
+        "childEntity": "MxModelReflection.Module",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Microflows_Output_Type",
+        "parentEntity": "MxModelReflection.Microflows",
+        "childEntity": "MxModelReflection.ValueType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectMember_MxObjectType",
+        "parentEntity": "MxModelReflection.MxObjectMember",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectMember_Type",
+        "parentEntity": "MxModelReflection.MxObjectMember",
+        "childEntity": "MxModelReflection.ValueType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectReference_Module",
+        "parentEntity": "MxModelReflection.MxObjectReference",
+        "childEntity": "MxModelReflection.Module",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectReference_MxObjectType",
+        "parentEntity": "MxModelReflection.MxObjectReference",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectReference_MxObjectType_Child",
+        "parentEntity": "MxModelReflection.MxObjectReference",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectReference_MxObjectType_Parent",
+        "parentEntity": "MxModelReflection.MxObjectReference",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectType_Module",
+        "parentEntity": "MxModelReflection.MxObjectType",
+        "childEntity": "MxModelReflection.Module",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.MxObjectType_SubClassOf_MxObjectType",
+        "parentEntity": "MxModelReflection.MxObjectType",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Parameter_MxObjectType",
+        "parentEntity": "MxModelReflection.Parameter",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Parameter_ValueType",
+        "parentEntity": "MxModelReflection.Parameter",
+        "childEntity": "MxModelReflection.ValueType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Token_MxObjectMember",
+        "parentEntity": "MxModelReflection.Token",
+        "childEntity": "MxModelReflection.MxObjectMember",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Token_MxObjectReference",
+        "parentEntity": "MxModelReflection.Token",
+        "childEntity": "MxModelReflection.MxObjectReference",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Token_MxObjectType_Referenced",
+        "parentEntity": "MxModelReflection.Token",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Token_MxObjectType_Start",
+        "parentEntity": "MxModelReflection.Token",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.Values",
+        "parentEntity": "MxModelReflection.MxObjectEnum",
+        "childEntity": "MxModelReflection.MxObjectEnumValue",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "MxModelReflection.ValueType_MxObjectType",
+        "parentEntity": "MxModelReflection.ValueType",
+        "childEntity": "MxModelReflection.MxObjectType",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      }
+    ],
+    "enumerations": [
+      {
+        "name": "MxModelReflection.AssociationOwner",
+        "values": [
+          "Both",
+          "_Default"
+        ]
+      },
+      {
+        "name": "MxModelReflection.AttributeTypes",
+        "values": [
+          "AutoNumber",
+          "BooleanType",
+          "DateTime",
+          "Decimal",
+          "EnumType",
+          "HashString",
+          "IntegerType",
+          "LongType",
+          "StringType"
+        ]
+      },
+      {
+        "name": "MxModelReflection.PersistenceType",
+        "values": [
+          "Non_persistent",
+          "Persistable"
+        ]
+      },
+      {
+        "name": "MxModelReflection.PrimitiveTypes",
+        "values": [
+          "AutoNumber",
+          "BooleanType",
+          "DateTime",
+          "Decimal",
+          "EnumType",
+          "HashString",
+          "IntegerType",
+          "LongType",
+          "ObjectList",
+          "ObjectType",
+          "StringType"
+        ]
+      },
+      {
+        "name": "MxModelReflection.ReferenceType",
+        "values": [
+          "Reference",
+          "ReferenceSet"
+        ]
+      },
+      {
+        "name": "MxModelReflection.Status",
+        "values": [
+          "Invalid",
+          "Valid"
+        ]
+      },
+      {
+        "name": "MxModelReflection.TokenType",
+        "values": [
+          "Attribute",
+          "Reference"
+        ]
+      }
+    ]
+  }
+}

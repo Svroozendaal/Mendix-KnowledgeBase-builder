@@ -1,0 +1,198 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_TimelineViewer_WorkflowActivityRecords_Tasks",
+                  "stableId":  "f69fcd72-3eb8-4a5c-964d-b5fa99a2228a",
+                  "slug":  "workflowcommons-ds-timelineviewer-workflowactivityrecords-tasks",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-timelineviewer-workflowactivityrecords-tasks.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-timelineviewer-workflowactivityrecords-tasks.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-timelineviewer-workflowactivityrecords-tasks.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_TimelineViewer_WorkflowActivityRecords_Tasks",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "f69fcd72-3eb8-4a5c-964d-b5fa99a2228a",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_TimelineViewer_WorkflowActivityRecords_Tasks",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "01d9c861-a3a3-4f50-aa11-eaa23b45edb2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "GetWorkflowActivityRecordsAction: GetWorkflowActivityRecordsAction (output=WorkflowActivityRecords, errorHandlingType=Rollback)",
+                      "detail":  "GetWorkflowActivityRecordsAction (output=WorkflowActivityRecords, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7c9b057a-d8cc-47d7-a1ad-535b45a49ba5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ListOperationAction: ListOperationAction (output=UserTaskActivityRecordList, errorHandlingType=Rollback)",
+                      "detail":  "ListOperationAction (output=UserTaskActivityRecordList, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "86adfaec-eb63-4fb8-b2ae-cb510e73209e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow over association TimelineViewer_Workflow from TimelineViewer",
+                      "detail":  "retrieve Workflow over association TimelineViewer_Workflow from TimelineViewer",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a4f5bc41-1842-4111-865a-71a676069692",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ec7761d3-e101-45ea-a5e5-61f43b03f86f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "818ae9df-6750-4540-8bdd-bd098dd45315",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Workflow? expression=$TimelineViewer/WorkflowCommons.TimelineViewer_Workflow != empty",
+                      "detail":  "Workflow? expression=$TimelineViewer/WorkflowCommons.TimelineViewer_Workflow != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2baba7de-b939-40f2-bb48-96db75eec4fd",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b7063478-333d-4197-ac6f-c28e9632ae09",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "3e3514c9-18ca-449b-b27f-ed23be14db17",
+                      "originNodeId":  "b7063478-333d-4197-ac6f-c28e9632ae09",
+                      "destinationNodeId":  "818ae9df-6750-4540-8bdd-bd098dd45315",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d53947af-d5c3-4e5c-a031-6e974ea92506",
+                      "originNodeId":  "818ae9df-6750-4540-8bdd-bd098dd45315",
+                      "destinationNodeId":  "86adfaec-eb63-4fb8-b2ae-cb510e73209e",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3bc9adb6-ace6-4a1b-8275-90cdcb680e2e",
+                      "originNodeId":  "818ae9df-6750-4540-8bdd-bd098dd45315",
+                      "destinationNodeId":  "a4f5bc41-1842-4111-865a-71a676069692",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "4366d7f3-729c-4931-886e-dec53ea0473a",
+                      "originNodeId":  "01d9c861-a3a3-4f50-aa11-eaa23b45edb2",
+                      "destinationNodeId":  "7c9b057a-d8cc-47d7-a1ad-535b45a49ba5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fb188da2-c636-4693-ad58-0aa5efb19930",
+                      "originNodeId":  "86adfaec-eb63-4fb8-b2ae-cb510e73209e",
+                      "destinationNodeId":  "01d9c861-a3a3-4f50-aa11-eaa23b45edb2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "740b8b62-2835-4599-8bb9-65629fd680d1",
+                      "originNodeId":  "7c9b057a-d8cc-47d7-a1ad-535b45a49ba5",
+                      "destinationNodeId":  "ec7761d3-e101-45ea-a5e5-61f43b03f86f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "b7063478-333d-4197-ac6f-c28e9632ae09"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "b7063478-333d-4197-ac6f-c28e9632ae09",
+                                         "818ae9df-6750-4540-8bdd-bd098dd45315",
+                                         "86adfaec-eb63-4fb8-b2ae-cb510e73209e",
+                                         "01d9c861-a3a3-4f50-aa11-eaa23b45edb2",
+                                         "7c9b057a-d8cc-47d7-a1ad-535b45a49ba5",
+                                         "ec7761d3-e101-45ea-a5e5-61f43b03f86f",
+                                         "a4f5bc41-1842-4111-865a-71a676069692"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_TimelineViewer_WorkflowActivityRecords_Tasks\r\nNODES=8; EDGES=6\r\n1. START\r\n2. DECISION Workflow? expression=$TimelineViewer/WorkflowCommons.TimelineViewer_Workflow != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION RetrieveAction: retrieve Workflow over association TimelineViewer_Workflow from TimelineViewer\r\n  5. ACTION GetWorkflowActivityRecordsAction: GetWorkflowActivityRecordsAction (output=WorkflowActivityRecords, errorHandlingType=Rollback)\r\n  6. ACTION ListOperationAction: ListOperationAction (output=UserTaskActivityRecordList, errorHandlingType=Rollback)\r\n  7. END\r\n8. BRANCH when EnumerationCase=false\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

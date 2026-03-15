@@ -1,0 +1,322 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                  "stableId":  "5e949125-595f-428b-af6b-2283b9fd5c28",
+                  "slug":  "workflowcommons-sub-taskdashboard-update",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-taskdashboard-update.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-taskdashboard-update.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-taskdashboard-update.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_TaskDashboard_Update",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "5e949125-595f-428b-af6b-2283b9fd5c28",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_TaskDashboard_Update",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "f09ad371-ec41-4c26-b882-8f1a2445b502",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.DashboardContext_GetSelectedWorkflowDefinition -\u003e WorkflowDefinition_Selected",
+                      "detail":  "call microflow WorkflowCommons.DashboardContext_GetSelectedWorkflowDefinition -\u003e WorkflowDefinition_Selected",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.DashboardContext_GetSelectedWorkflowDefinition",
+                                        "sourceNodeId":  "f09ad371-ec41-4c26-b882-8f1a2445b502"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "f348668e-1492-4564-90fa-25159ce1d907",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.DashboardContext_GetSelectedWorkflowTaskDefinition -\u003e TaskDefinition_Selected",
+                      "detail":  "call microflow WorkflowCommons.DashboardContext_GetSelectedWorkflowTaskDefinition -\u003e TaskDefinition_Selected",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.DashboardContext_GetSelectedWorkflowTaskDefinition",
+                                        "sourceNodeId":  "f348668e-1492-4564-90fa-25159ce1d907"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "fd4a373e-c9b0-42f7-b188-4722c701c8f1",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_DashboardContext_UpdateSettings",
+                      "detail":  "call microflow WorkflowCommons.SUB_DashboardContext_UpdateSettings",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_DashboardContext_UpdateSettings",
+                                        "sourceNodeId":  "fd4a373e-c9b0-42f7-b188-4722c701c8f1"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "279c81c3-d1f2-4a3c-8ced-342097763aaa",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskSeries_CreateOrUpdate",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskSeries_CreateOrUpdate",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskSeries_CreateOrUpdate",
+                                        "sourceNodeId":  "279c81c3-d1f2-4a3c-8ced-342097763aaa"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "4b40704b-c3db-475f-a8bc-14091352d494",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskSummary_CreateOrUpdate -\u003e TaskSummary",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskSummary_CreateOrUpdate -\u003e TaskSummary",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskSummary_CreateOrUpdate",
+                                        "sourceNodeId":  "4b40704b-c3db-475f-a8bc-14091352d494"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "72c7ee63-26da-49ad-950e-e0b987b38e7e",
+                      "nodeType":  "Annotation",
+                      "label":  "Could add logic here that checks if the update is really required, e.g. check if new tasks been completed or initiated.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "12d6a4a8-8e89-41b8-946a-078be3e5180a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "53b8e98c-37b3-467e-87aa-c075ebf09957",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a0b1d9d9-6d58-4dec-824f-fd62f1a77fa9",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "3ed585d5-670a-4d8d-9e9a-5227cfbbb807",
+                      "originNodeId":  "a0b1d9d9-6d58-4dec-824f-fd62f1a77fa9",
+                      "destinationNodeId":  "fd4a373e-c9b0-42f7-b188-4722c701c8f1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "41991f51-2a4a-4b6b-85aa-e7f541006e04",
+                      "originNodeId":  "4b40704b-c3db-475f-a8bc-14091352d494",
+                      "destinationNodeId":  "279c81c3-d1f2-4a3c-8ced-342097763aaa",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5b3a8568-0214-4d32-89ab-5400d1748ce2",
+                      "originNodeId":  "279c81c3-d1f2-4a3c-8ced-342097763aaa",
+                      "destinationNodeId":  "12d6a4a8-8e89-41b8-946a-078be3e5180a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9d5d66b8-a0ce-4797-9146-245a2dfb1b00",
+                      "originNodeId":  "fd4a373e-c9b0-42f7-b188-4722c701c8f1",
+                      "destinationNodeId":  "f09ad371-ec41-4c26-b882-8f1a2445b502",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3bb83ec6-1c72-4f19-bc06-997c7c05e11e",
+                      "originNodeId":  "f09ad371-ec41-4c26-b882-8f1a2445b502",
+                      "destinationNodeId":  "f348668e-1492-4564-90fa-25159ce1d907",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3abb051d-dbbf-458d-ba0b-4911db75e1e6",
+                      "originNodeId":  "f348668e-1492-4564-90fa-25159ce1d907",
+                      "destinationNodeId":  "4b40704b-c3db-475f-a8bc-14091352d494",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.DashboardContext_GetSelectedWorkflowDefinition",
+                      "sourceNodeId":  "f09ad371-ec41-4c26-b882-8f1a2445b502"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.DashboardContext_GetSelectedWorkflowTaskDefinition",
+                      "sourceNodeId":  "f348668e-1492-4564-90fa-25159ce1d907"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_DashboardContext_UpdateSettings",
+                      "sourceNodeId":  "fd4a373e-c9b0-42f7-b188-4722c701c8f1"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskSeries_CreateOrUpdate",
+                      "sourceNodeId":  "279c81c3-d1f2-4a3c-8ced-342097763aaa"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskSummary_CreateOrUpdate",
+                      "sourceNodeId":  "4b40704b-c3db-475f-a8bc-14091352d494"
+                  }
+              ],
+    "startNodeIds":  [
+                         "a0b1d9d9-6d58-4dec-824f-fd62f1a77fa9"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "a0b1d9d9-6d58-4dec-824f-fd62f1a77fa9",
+                                         "fd4a373e-c9b0-42f7-b188-4722c701c8f1",
+                                         "f09ad371-ec41-4c26-b882-8f1a2445b502",
+                                         "f348668e-1492-4564-90fa-25159ce1d907",
+                                         "4b40704b-c3db-475f-a8bc-14091352d494",
+                                         "279c81c3-d1f2-4a3c-8ced-342097763aaa",
+                                         "12d6a4a8-8e89-41b8-946a-078be3e5180a"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_TaskDashboard_Update\r\nNODES=9; EDGES=6\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_DashboardContext_UpdateSettings\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.DashboardContext_GetSelectedWorkflowDefinition -\u003e WorkflowDefinition_Selected\r\n4. ACTION MicroflowCallAction: call microflow WorkflowCommons.DashboardContext_GetSelectedWorkflowTaskDefinition -\u003e TaskDefinition_Selected\r\n5. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskSummary_CreateOrUpdate -\u003e TaskSummary\r\n6. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskSeries_CreateOrUpdate\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_TaskDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "05811c96-aa33-4afa-8d39-1f4f259c4f5b",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.OCh_DashboardContext_UpdateTaskDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "f09ad371-ec41-4c26-b882-8f1a2445b502",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.DashboardContext_GetSelectedWorkflowDefinition",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "f348668e-1492-4564-90fa-25159ce1d907",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.DashboardContext_GetSelectedWorkflowTaskDefinition",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "fd4a373e-c9b0-42f7-b188-4722c701c8f1",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_DashboardContext_UpdateSettings",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "279c81c3-d1f2-4a3c-8ced-342097763aaa",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskSeries_CreateOrUpdate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "4b40704b-c3db-475f-a8bc-14091352d494",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskSummary_CreateOrUpdate",
+                          "isInternal":  true
+                      }
+                  ]
+}

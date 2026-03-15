@@ -1,0 +1,141 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_TaskCount",
+                  "stableId":  "29ed64fd-c239-4d28-a0db-8bbcc346ae1f",
+                  "slug":  "workflowcommons-ds-taskcount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-taskcount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-taskcount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-taskcount.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_TaskCount",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "29ed64fd-c239-4d28-a0db-8bbcc346ae1f",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_TaskCount",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "a7803836-978a-4cf7-965b-1cac115d09eb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.TaskCount as NewTaskCount",
+                      "detail":  "create WorkflowCommons.TaskCount as NewTaskCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a95c6b9c-ded7-49e0-908e-6df3937aadcc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskCount_Update",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskCount_Update",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskCount_Update",
+                                        "sourceNodeId":  "a95c6b9c-ded7-49e0-908e-6df3937aadcc"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "2229cc29-a4f4-46b5-ba56-2cbee6225c4e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c5bedf6e-aefc-41fe-acba-a39291eae7f0",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "f6ea6a4e-682a-494a-83a2-c2db73a376ce",
+                      "originNodeId":  "c5bedf6e-aefc-41fe-acba-a39291eae7f0",
+                      "destinationNodeId":  "a7803836-978a-4cf7-965b-1cac115d09eb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fbbb9311-d9ea-4793-8158-f634fe1eb130",
+                      "originNodeId":  "a7803836-978a-4cf7-965b-1cac115d09eb",
+                      "destinationNodeId":  "a95c6b9c-ded7-49e0-908e-6df3937aadcc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3e715198-e698-4f82-875c-73c9065a3633",
+                      "originNodeId":  "a95c6b9c-ded7-49e0-908e-6df3937aadcc",
+                      "destinationNodeId":  "2229cc29-a4f4-46b5-ba56-2cbee6225c4e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskCount_Update",
+                      "sourceNodeId":  "a95c6b9c-ded7-49e0-908e-6df3937aadcc"
+                  }
+              ],
+    "startNodeIds":  [
+                         "c5bedf6e-aefc-41fe-acba-a39291eae7f0"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "c5bedf6e-aefc-41fe-acba-a39291eae7f0",
+                                         "a7803836-978a-4cf7-965b-1cac115d09eb",
+                                         "a95c6b9c-ded7-49e0-908e-6df3937aadcc",
+                                         "2229cc29-a4f4-46b5-ba56-2cbee6225c4e"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_TaskCount\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create WorkflowCommons.TaskCount as NewTaskCount\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskCount_Update\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_TaskCount",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "a95c6b9c-ded7-49e0-908e-6df3937aadcc",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskCount_Update",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,131 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_UserTask_AssignToMe",
+                  "stableId":  "fb96c963-354f-40df-ab83-a640fc0b0cfc",
+                  "slug":  "workflowcommons-act-usertask-assigntome",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-usertask-assigntome.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-usertask-assigntome.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-usertask-assigntome.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_UserTask_AssignToMe",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "fb96c963-354f-40df-ab83-a640fc0b0cfc",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_UserTask_AssignToMe",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "2c3ef361-4806-4621-ac32-6d54ba34522c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_Assign -\u003e IsAssigned",
+                      "detail":  "call microflow WorkflowCommons.SUB_UserTask_Assign -\u003e IsAssigned",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_UserTask_Assign",
+                                        "sourceNodeId":  "2c3ef361-4806-4621-ac32-6d54ba34522c"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "7fd318ad-3660-4ed8-b3df-2f3a56df742c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2543d372-a84a-4018-9cf4-8a225111080c",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e7072a0d-6f99-4a24-9dda-9509d17ec272",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "3cc67094-02fc-48cd-b99f-9faf63913294",
+                      "originNodeId":  "e7072a0d-6f99-4a24-9dda-9509d17ec272",
+                      "destinationNodeId":  "2c3ef361-4806-4621-ac32-6d54ba34522c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0c1d88c3-51dd-4a5b-901b-d8965dd01aff",
+                      "originNodeId":  "2c3ef361-4806-4621-ac32-6d54ba34522c",
+                      "destinationNodeId":  "7fd318ad-3660-4ed8-b3df-2f3a56df742c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_UserTask_Assign",
+                      "sourceNodeId":  "2c3ef361-4806-4621-ac32-6d54ba34522c"
+                  }
+              ],
+    "startNodeIds":  [
+                         "e7072a0d-6f99-4a24-9dda-9509d17ec272"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "e7072a0d-6f99-4a24-9dda-9509d17ec272",
+                                         "2c3ef361-4806-4621-ac32-6d54ba34522c",
+                                         "7fd318ad-3660-4ed8-b3df-2f3a56df742c"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_UserTask_AssignToMe\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_Assign -\u003e IsAssigned\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_UserTask_AssignToMe",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "2c3ef361-4806-4621-ac32-6d54ba34522c",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_Assign",
+                          "isInternal":  true
+                      }
+                  ]
+}

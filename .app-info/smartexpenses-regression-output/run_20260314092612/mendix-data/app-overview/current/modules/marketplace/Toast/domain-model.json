@@ -1,0 +1,18 @@
+{
+  "module": "Toast",
+  "domainModel": {
+    "entities": [],
+    "associations": [],
+    "enumerations": [
+      {
+        "name": "Toast.Enum_ToastType",
+        "values": [
+          "Failed",
+          "Information",
+          "Success",
+          "Warning"
+        ]
+      }
+    ]
+  }
+}

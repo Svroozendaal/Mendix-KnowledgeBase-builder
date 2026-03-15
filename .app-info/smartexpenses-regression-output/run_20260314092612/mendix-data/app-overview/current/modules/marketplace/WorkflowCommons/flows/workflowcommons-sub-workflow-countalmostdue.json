@@ -1,0 +1,240 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_Workflow_CountAlmostDue",
+                  "stableId":  "c4513fe1-0115-4671-8123-6ad54922b4c3",
+                  "slug":  "workflowcommons-sub-workflow-countalmostdue",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflow-countalmostdue.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflow-countalmostdue.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflow-countalmostdue.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_Workflow_CountAlmostDue",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "c4513fe1-0115-4671-8123-6ad54922b4c3",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_Workflow_CountAlmostDue",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "ddc7ba37-db6e-49a4-a004-6f2d9a7cc519",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=CountInProgressAlmostDue, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=CountInProgressAlmostDue, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7f612c85-57ea-46e3-90d2-12a8e5080912",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable AlmostDueDate=addDays([%CurrentDateTime%], @WorkflowCommons.DueDateExpirationInDays)",
+                      "detail":  "create variable AlmostDueDate=addDays([%CurrentDateTime%], @WorkflowCommons.DueDateExpirationInDays)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5b3ffc66-fd40-48e1-b1d0-28e3a5a47609",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreStartedAfter=$StartedAfter = empty",
+                      "detail":  "create variable IgnoreStartedAfter=$StartedAfter = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8b0062f3-9070-4b18-a600-31a1c91033ec",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreStartedBefore=$StartedBefore = empty",
+                      "detail":  "create variable IgnoreStartedBefore=$StartedBefore = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "260875e1-b63e-4c4c-8b99-3fa60e8eb608",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow_InProgress_AlmostDue from System.Workflow",
+                      "detail":  "retrieve Workflow_InProgress_AlmostDue from System.Workflow",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "48a99f3e-0b9f-417a-b25f-36d23563fdf0",
+                      "nodeType":  "Annotation",
+                      "label":  "Count using the system entity for in progress workflows, since the due date might not be up to date on the WorkflowView object.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0556d68f-ec8a-46f1-8acf-10323caae6a0",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9719b087-487d-4d2a-910d-6589c640bd75",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c2031e44-5893-45e2-bc71-449784aa76b2",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c692e660-d5ea-4e81-969d-3ded886e79b1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1d05a391-b067-4b0e-af07-3d60170c0ad3",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "fa80fb0b-0bbb-4fbc-9fda-facd74f2379e",
+                      "originNodeId":  "1d05a391-b067-4b0e-af07-3d60170c0ad3",
+                      "destinationNodeId":  "5b3ffc66-fd40-48e1-b1d0-28e3a5a47609",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6bc6fb0a-bb49-4101-b293-1f761be8429e",
+                      "originNodeId":  "ddc7ba37-db6e-49a4-a004-6f2d9a7cc519",
+                      "destinationNodeId":  "0556d68f-ec8a-46f1-8acf-10323caae6a0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f8940423-e222-426d-807b-521419287f72",
+                      "originNodeId":  "260875e1-b63e-4c4c-8b99-3fa60e8eb608",
+                      "destinationNodeId":  "ddc7ba37-db6e-49a4-a004-6f2d9a7cc519",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7c7271a6-1c99-4969-892f-3fa16cc24edb",
+                      "originNodeId":  "5b3ffc66-fd40-48e1-b1d0-28e3a5a47609",
+                      "destinationNodeId":  "8b0062f3-9070-4b18-a600-31a1c91033ec",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bb489886-34a7-4987-82a4-11720c548d57",
+                      "originNodeId":  "8b0062f3-9070-4b18-a600-31a1c91033ec",
+                      "destinationNodeId":  "7f612c85-57ea-46e3-90d2-12a8e5080912",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8b3a00c1-56c0-4cfb-8593-81365c9ac76d",
+                      "originNodeId":  "7f612c85-57ea-46e3-90d2-12a8e5080912",
+                      "destinationNodeId":  "260875e1-b63e-4c4c-8b99-3fa60e8eb608",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "1d05a391-b067-4b0e-af07-3d60170c0ad3"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "1d05a391-b067-4b0e-af07-3d60170c0ad3",
+                                         "5b3ffc66-fd40-48e1-b1d0-28e3a5a47609",
+                                         "8b0062f3-9070-4b18-a600-31a1c91033ec",
+                                         "7f612c85-57ea-46e3-90d2-12a8e5080912",
+                                         "260875e1-b63e-4c4c-8b99-3fa60e8eb608",
+                                         "ddc7ba37-db6e-49a4-a004-6f2d9a7cc519",
+                                         "0556d68f-ec8a-46f1-8acf-10323caae6a0"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_Workflow_CountAlmostDue\r\nNODES=11; EDGES=6\r\n1. START\r\n2. ACTION CreateVariableAction: create variable IgnoreStartedAfter=$StartedAfter = empty\r\n3. ACTION CreateVariableAction: create variable IgnoreStartedBefore=$StartedBefore = empty\r\n4. ACTION CreateVariableAction: create variable AlmostDueDate=addDays([%CurrentDateTime%], @WorkflowCommons.DueDateExpirationInDays)\r\n5. ACTION RetrieveAction: retrieve Workflow_InProgress_AlmostDue from System.Workflow\r\n6. ACTION AggregateListAction: AggregateListAction (output=CountInProgressAlmostDue, errorHandlingType=Rollback)\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "25b9d95a-22f7-44dc-b19d-4a9417dd6b8d",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Workflow_CountAlmostDue",
+                          "isInternal":  true
+                      }
+                  ]
+}

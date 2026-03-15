@@ -1,0 +1,163 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Remove",
+                  "stableId":  "68233197-00bc-4fea-ac20-89d8809bfd19",
+                  "slug":  "workflowcommons-act-workflowusertask-targetusers-remove",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-targetusers-remove.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-targetusers-remove.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-targetusers-remove.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Remove",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "68233197-00bc-4fea-ac20-89d8809bfd19",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Remove",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "5bbdd130-b6e5-4b43-a1cc-39c9d1ece037",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4fa96ad3-b85f-46c2-a952-58109762e855",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                      "detail":  "call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                                        "sourceNodeId":  "4fa96ad3-b85f-46c2-a952-58109762e855"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "9072ddcf-84e8-4925-8b15-4be9bfef74b0",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4848260a-f523-4b0d-80b5-bbf8cb8de7cc",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a239fceb-bad2-494f-95b8-5d2a8160c640",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1df57369-aa5a-4405-8ebb-d7b85b01777e",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "48aa2d79-4d13-4065-97b3-47f99353f679",
+                      "originNodeId":  "1df57369-aa5a-4405-8ebb-d7b85b01777e",
+                      "destinationNodeId":  "4fa96ad3-b85f-46c2-a952-58109762e855",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "82dc08a1-6740-4895-bd83-6eb54f96a776",
+                      "originNodeId":  "4fa96ad3-b85f-46c2-a952-58109762e855",
+                      "destinationNodeId":  "5bbdd130-b6e5-4b43-a1cc-39c9d1ece037",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c265a71b-7b2b-48cd-bb53-1435ae92f528",
+                      "originNodeId":  "5bbdd130-b6e5-4b43-a1cc-39c9d1ece037",
+                      "destinationNodeId":  "9072ddcf-84e8-4925-8b15-4be9bfef74b0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                      "sourceNodeId":  "4fa96ad3-b85f-46c2-a952-58109762e855"
+                  }
+              ],
+    "startNodeIds":  [
+                         "1df57369-aa5a-4405-8ebb-d7b85b01777e"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "1df57369-aa5a-4405-8ebb-d7b85b01777e",
+                                         "4fa96ad3-b85f-46c2-a952-58109762e855",
+                                         "5bbdd130-b6e5-4b43-a1cc-39c9d1ece037",
+                                         "9072ddcf-84e8-4925-8b15-4be9bfef74b0"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Remove\r\nNODES=6; EDGES=3\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Remove\r\n3. ACTION CloseFormAction: close page\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Remove",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "4fa96ad3-b85f-46c2-a952-58109762e855",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                          "isInternal":  true
+                      }
+                  ]
+}

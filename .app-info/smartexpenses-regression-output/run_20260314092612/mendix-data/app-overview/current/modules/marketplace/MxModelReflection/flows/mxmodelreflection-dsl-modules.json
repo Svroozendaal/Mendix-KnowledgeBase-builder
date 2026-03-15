@@ -1,0 +1,192 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.DSL_Modules",
+                  "stableId":  "8e23863e-b3e2-42cb-8742-dbf582aecd70",
+                  "slug":  "mxmodelreflection-dsl-modules",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-dsl-modules.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-dsl-modules.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-dsl-modules.json",
+                  "l2Logical":  "flow:MxModelReflection.DSL_Modules",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "8e23863e-b3e2-42cb-8742-dbf582aecd70",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.DSL_Modules",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "868e2be3-2ee4-48f4-95f2-cce8b5539b73",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow MxModelReflection.IVK_SyncObjects",
+                      "detail":  "call microflow MxModelReflection.IVK_SyncObjects",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "MxModelReflection.IVK_SyncObjects",
+                                        "sourceNodeId":  "868e2be3-2ee4-48f4-95f2-cce8b5539b73"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "b27f43c6-2294-4263-afc0-fbfe39313234",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve ModuleList from MxModelReflection.Module",
+                      "detail":  "retrieve ModuleList from MxModelReflection.Module",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8c6ec01b-0313-45c8-a14f-c4abd8d57c88",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6e3fe0b3-01ef-4532-ae93-39ee776faeff",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9b5bc86b-36b8-4260-babd-bc0d476b1922",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "not empty expression=$ModuleList != empty",
+                      "detail":  "not empty expression=$ModuleList != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0a385eff-8c06-4285-ae79-0b2c563270ea",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "657d055b-03cd-4864-aad7-0dbcf2207390",
+                      "originNodeId":  "0a385eff-8c06-4285-ae79-0b2c563270ea",
+                      "destinationNodeId":  "6e3fe0b3-01ef-4532-ae93-39ee776faeff",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "973decb5-9c81-420f-b75b-cbf859dbc50b",
+                      "originNodeId":  "b27f43c6-2294-4263-afc0-fbfe39313234",
+                      "destinationNodeId":  "9b5bc86b-36b8-4260-babd-bc0d476b1922",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d3bcca5a-24b9-45da-984b-f9e3d578e305",
+                      "originNodeId":  "9b5bc86b-36b8-4260-babd-bc0d476b1922",
+                      "destinationNodeId":  "8c6ec01b-0313-45c8-a14f-c4abd8d57c88",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1ae46ec0-1476-46d9-a8d3-0e0e175b3469",
+                      "originNodeId":  "9b5bc86b-36b8-4260-babd-bc0d476b1922",
+                      "destinationNodeId":  "868e2be3-2ee4-48f4-95f2-cce8b5539b73",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "362aaa1e-fb14-42a5-bf8c-446232e2a833",
+                      "originNodeId":  "6e3fe0b3-01ef-4532-ae93-39ee776faeff",
+                      "destinationNodeId":  "b27f43c6-2294-4263-afc0-fbfe39313234",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "69300358-765f-42fe-a0f9-125587f3d86d",
+                      "originNodeId":  "868e2be3-2ee4-48f4-95f2-cce8b5539b73",
+                      "destinationNodeId":  "6e3fe0b3-01ef-4532-ae93-39ee776faeff",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  3,
+                      "destinationConnectionIndex":  2
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "MxModelReflection.IVK_SyncObjects",
+                      "sourceNodeId":  "868e2be3-2ee4-48f4-95f2-cce8b5539b73"
+                  }
+              ],
+    "startNodeIds":  [
+                         "0a385eff-8c06-4285-ae79-0b2c563270ea"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "0a385eff-8c06-4285-ae79-0b2c563270ea",
+                                         "6e3fe0b3-01ef-4532-ae93-39ee776faeff",
+                                         "b27f43c6-2294-4263-afc0-fbfe39313234",
+                                         "9b5bc86b-36b8-4260-babd-bc0d476b1922",
+                                         "8c6ec01b-0313-45c8-a14f-c4abd8d57c88",
+                                         "868e2be3-2ee4-48f4-95f2-cce8b5539b73"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.DSL_Modules\r\nNODES=6; EDGES=6\r\n1. START\r\n2. NODE ExclusiveMerge: ExclusiveMerge\r\n3. ACTION RetrieveAction: retrieve ModuleList from MxModelReflection.Module\r\n4. DECISION not empty expression=$ModuleList != empty\r\n5. BRANCH when EnumerationCase=true\r\n  6. END\r\n7. BRANCH when EnumerationCase=false\r\n  8. ACTION MicroflowCallAction: call microflow MxModelReflection.IVK_SyncObjects\r\n  9. GOTO ExclusiveMerge // cycle",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "MxModelReflection",
+                          "callerFlow":  "MxModelReflection.DSL_Modules",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "868e2be3-2ee4-48f4-95f2-cce8b5539b73",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.IVK_SyncObjects",
+                          "isInternal":  true
+                      }
+                  ]
+}

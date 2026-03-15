@@ -1,0 +1,160 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_TaskDashboard",
+                  "stableId":  "f2d0d784-85a3-4143-9dd0-296a0ee0995e",
+                  "slug":  "workflowcommons-ds-taskdashboard",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-taskdashboard.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-taskdashboard.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-taskdashboard.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_TaskDashboard",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "f2d0d784-85a3-4143-9dd0-296a0ee0995e",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_TaskDashboard",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "1a8e86a9-dd33-4656-b2a3-57de8933a3a3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate -\u003e DashboardContext",
+                      "detail":  "call microflow WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate -\u003e DashboardContext",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+                                        "sourceNodeId":  "1a8e86a9-dd33-4656-b2a3-57de8933a3a3"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "05811c96-aa33-4afa-8d39-1f4f259c4f5b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskDashboard_Update",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskDashboard_Update",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                                        "sourceNodeId":  "05811c96-aa33-4afa-8d39-1f4f259c4f5b"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "71dc441d-24ff-45d2-83fc-0a344acd49da",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "961489ff-5c92-4214-aefd-c9417f71450d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ec8c135f-d8b0-4947-a184-bb24504d7594",
+                      "originNodeId":  "961489ff-5c92-4214-aefd-c9417f71450d",
+                      "destinationNodeId":  "1a8e86a9-dd33-4656-b2a3-57de8933a3a3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0d2bccb1-14c5-4bec-b1cd-4fc28b219a0a",
+                      "originNodeId":  "1a8e86a9-dd33-4656-b2a3-57de8933a3a3",
+                      "destinationNodeId":  "05811c96-aa33-4afa-8d39-1f4f259c4f5b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ae2f6e6a-a8d2-439c-98d6-085ba3b27ea7",
+                      "originNodeId":  "05811c96-aa33-4afa-8d39-1f4f259c4f5b",
+                      "destinationNodeId":  "71dc441d-24ff-45d2-83fc-0a344acd49da",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+                      "sourceNodeId":  "1a8e86a9-dd33-4656-b2a3-57de8933a3a3"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                      "sourceNodeId":  "05811c96-aa33-4afa-8d39-1f4f259c4f5b"
+                  }
+              ],
+    "startNodeIds":  [
+                         "961489ff-5c92-4214-aefd-c9417f71450d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "961489ff-5c92-4214-aefd-c9417f71450d",
+                                         "1a8e86a9-dd33-4656-b2a3-57de8933a3a3",
+                                         "05811c96-aa33-4afa-8d39-1f4f259c4f5b",
+                                         "71dc441d-24ff-45d2-83fc-0a344acd49da"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_TaskDashboard\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate -\u003e DashboardContext\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskDashboard_Update\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_TaskDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1a8e86a9-dd33-4656-b2a3-57de8933a3a3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_TaskDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "05811c96-aa33-4afa-8d39-1f4f259c4f5b",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "isInternal":  true
+                      }
+                  ]
+}

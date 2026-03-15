@@ -1,0 +1,145 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.NewAccount",
+                  "stableId":  "47b53023-9646-4029-9a89-d2037b732b78",
+                  "slug":  "administration-newaccount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-newaccount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-newaccount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/flows/administration-newaccount.json",
+                  "l2Logical":  "flow:Administration.NewAccount",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Administration/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Administration/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/flows/INDEX.json"
+              },
+    "flowId":  "47b53023-9646-4029-9a89-d2037b732b78",
+    "kind":  "Microflow",
+    "qualifiedName":  "Administration.NewAccount",
+    "module":  "Administration",
+    "nodes":  [
+                  {
+                      "nodeId":  "85ea3469-4b4a-459b-bcf2-e4ad3f93c8f9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create Administration.Account as NewAccount",
+                      "detail":  "create Administration.Account as NewAccount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e4d4e7ee-d8a1-4e1d-b9aa-e25257a0daf1",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create Administration.AccountPasswordData as AccountPasswordData (AccountPasswordData_Account=$NewAccount)",
+                      "detail":  "create Administration.AccountPasswordData as AccountPasswordData (AccountPasswordData_Account=$NewAccount)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f61740a0-91e9-4e8b-80b1-eab8dea4e411",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page Administration.Account_New",
+                      "detail":  "show page Administration.Account_New",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5e6f050b-1228-4205-b31f-abee9189f781",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "18f4ea62-90bd-4e0a-9956-2fe2bb64de0d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "5c337630-80d8-45a3-8bfb-d20be90ca9d3",
+                      "originNodeId":  "18f4ea62-90bd-4e0a-9956-2fe2bb64de0d",
+                      "destinationNodeId":  "85ea3469-4b4a-459b-bcf2-e4ad3f93c8f9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b842218d-0dce-436c-86dd-22886d8d3c8f",
+                      "originNodeId":  "85ea3469-4b4a-459b-bcf2-e4ad3f93c8f9",
+                      "destinationNodeId":  "e4d4e7ee-d8a1-4e1d-b9aa-e25257a0daf1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cd613dbe-9814-4509-a691-bff8f4638883",
+                      "originNodeId":  "e4d4e7ee-d8a1-4e1d-b9aa-e25257a0daf1",
+                      "destinationNodeId":  "f61740a0-91e9-4e8b-80b1-eab8dea4e411",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c506e88b-1eea-43ed-84c8-b32d2ec99d2f",
+                      "originNodeId":  "f61740a0-91e9-4e8b-80b1-eab8dea4e411",
+                      "destinationNodeId":  "5e6f050b-1228-4205-b31f-abee9189f781",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "18f4ea62-90bd-4e0a-9956-2fe2bb64de0d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "18f4ea62-90bd-4e0a-9956-2fe2bb64de0d",
+                                         "85ea3469-4b4a-459b-bcf2-e4ad3f93c8f9",
+                                         "e4d4e7ee-d8a1-4e1d-b9aa-e25257a0daf1",
+                                         "f61740a0-91e9-4e8b-80b1-eab8dea4e411",
+                                         "5e6f050b-1228-4205-b31f-abee9189f781"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Administration.NewAccount\r\nNODES=5; EDGES=4\r\n1. START\r\n2. ACTION CreateObjectAction: create Administration.Account as NewAccount\r\n3. ACTION CreateObjectAction: create Administration.AccountPasswordData as AccountPasswordData (AccountPasswordData_Account=$NewAccount)\r\n4. ACTION ShowPageAction: show page Administration.Account_New\r\n5. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

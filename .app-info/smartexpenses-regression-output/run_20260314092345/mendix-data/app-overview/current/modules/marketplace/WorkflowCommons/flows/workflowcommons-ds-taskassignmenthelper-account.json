@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_TaskAssignmentHelper_Account",
+                  "stableId":  "02798947-fa91-4a80-8e68-d17767781396",
+                  "slug":  "workflowcommons-ds-taskassignmenthelper-account",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-taskassignmenthelper-account.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-taskassignmenthelper-account.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-taskassignmenthelper-account.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_TaskAssignmentHelper_Account",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "02798947-fa91-4a80-8e68-d17767781396",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_TaskAssignmentHelper_Account",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "1ff1db22-0c9e-4c82-b2e0-d3d66e6feb05",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve AccountList from Administration.Account",
+                      "detail":  "retrieve AccountList from Administration.Account",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "227848ad-903b-45a1-9758-0ef30b92a88d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve SelectedUser over association TaskAssignmentHelper_Account from TaskAssignmentHelper",
+                      "detail":  "retrieve SelectedUser over association TaskAssignmentHelper_Account from TaskAssignmentHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bf78ed45-58bb-4a50-b3b9-d75fe366d7a4",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "406bc33a-e193-40ed-81e5-4fd57fd0535a",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "be65845c-7ba9-4bda-8879-efb87a4c47eb",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "5fe8af15-595d-4f85-a18d-fd8caea960de",
+                      "originNodeId":  "227848ad-903b-45a1-9758-0ef30b92a88d",
+                      "destinationNodeId":  "1ff1db22-0c9e-4c82-b2e0-d3d66e6feb05",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bfa63ce0-b8df-409f-86fc-d27c6abf9cc6",
+                      "originNodeId":  "be65845c-7ba9-4bda-8879-efb87a4c47eb",
+                      "destinationNodeId":  "227848ad-903b-45a1-9758-0ef30b92a88d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "02c231f5-bf48-4427-b6fa-308136d02911",
+                      "originNodeId":  "1ff1db22-0c9e-4c82-b2e0-d3d66e6feb05",
+                      "destinationNodeId":  "bf78ed45-58bb-4a50-b3b9-d75fe366d7a4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "be65845c-7ba9-4bda-8879-efb87a4c47eb"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "be65845c-7ba9-4bda-8879-efb87a4c47eb",
+                                         "227848ad-903b-45a1-9758-0ef30b92a88d",
+                                         "1ff1db22-0c9e-4c82-b2e0-d3d66e6feb05",
+                                         "bf78ed45-58bb-4a50-b3b9-d75fe366d7a4"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_TaskAssignmentHelper_Account\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve SelectedUser over association TaskAssignmentHelper_Account from TaskAssignmentHelper\r\n3. ACTION RetrieveAction: retrieve AccountList from Administration.Account\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

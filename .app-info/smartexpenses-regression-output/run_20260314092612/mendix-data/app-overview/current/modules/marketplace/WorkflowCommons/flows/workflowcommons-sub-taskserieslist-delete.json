@@ -1,0 +1,144 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_TaskSeriesList_Delete",
+                  "stableId":  "626f631e-27d4-4349-9d53-b09ef1f6953a",
+                  "slug":  "workflowcommons-sub-taskserieslist-delete",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-taskserieslist-delete.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-taskserieslist-delete.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-taskserieslist-delete.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_TaskSeriesList_Delete",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "626f631e-27d4-4349-9d53-b09ef1f6953a",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_TaskSeriesList_Delete",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "a34cb5ad-b258-441f-b08f-44d63608030c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DeleteAction: delete TaskSeriesList (refreshInClient=false)",
+                      "detail":  "delete TaskSeriesList (refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8a661aab-e6d4-4a88-be82-610d0ead9a69",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve TaskSeriesList over association TaskSeries_DashboardContext from DashboardContext",
+                      "detail":  "retrieve TaskSeriesList over association TaskSeries_DashboardContext from DashboardContext",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "07a8719e-6adf-4e49-bb14-e403b882db46",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7a1ede31-4eaa-4787-ab68-c5e460335188",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d342c722-8aa0-46d5-8208-ca1ec36ff5e9",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "7eab7833-1493-479f-bfd0-e64923664ef5",
+                      "originNodeId":  "8a661aab-e6d4-4a88-be82-610d0ead9a69",
+                      "destinationNodeId":  "a34cb5ad-b258-441f-b08f-44d63608030c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1efaf599-0209-4b84-94ee-1284f4313b15",
+                      "originNodeId":  "d342c722-8aa0-46d5-8208-ca1ec36ff5e9",
+                      "destinationNodeId":  "8a661aab-e6d4-4a88-be82-610d0ead9a69",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1fdded86-ce26-4645-88c3-e1f02a3b7459",
+                      "originNodeId":  "a34cb5ad-b258-441f-b08f-44d63608030c",
+                      "destinationNodeId":  "07a8719e-6adf-4e49-bb14-e403b882db46",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "d342c722-8aa0-46d5-8208-ca1ec36ff5e9"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "d342c722-8aa0-46d5-8208-ca1ec36ff5e9",
+                                         "8a661aab-e6d4-4a88-be82-610d0ead9a69",
+                                         "a34cb5ad-b258-441f-b08f-44d63608030c",
+                                         "07a8719e-6adf-4e49-bb14-e403b882db46"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_TaskSeriesList_Delete\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve TaskSeriesList over association TaskSeries_DashboardContext from DashboardContext\r\n3. ACTION DeleteAction: delete TaskSeriesList (refreshInClient=false)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskSeries_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "ac8a58a2-80fb-4c3a-9b21-bf2c61eaf4a9",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskSeriesList_Delete",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,198 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.DS_FBGProfile_Retreive_current",
+                  "stableId":  "e0fbb6fd-b188-47a5-9ded-065a5de3475e",
+                  "slug":  "smartexpenses-ds-fbgprofile-retreive-current",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-ds-fbgprofile-retreive-current.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-ds-fbgprofile-retreive-current.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-ds-fbgprofile-retreive-current.json",
+                  "l2Logical":  "flow:SmartExpenses.DS_FBGProfile_Retreive_current",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "e0fbb6fd-b188-47a5-9ded-065a5de3475e",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.DS_FBGProfile_Retreive_current",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "d711bf37-dedd-469f-8b0d-8f669882779a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.FBGProfile as NewFBGProfile (FBGProfile_Account=$Account)",
+                      "detail":  "create SmartExpenses.FBGProfile as NewFBGProfile (FBGProfile_Account=$Account)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "db087929-a19f-4414-9e3b-89b5249866ef",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Account from Administration.Account",
+                      "detail":  "retrieve Account from Administration.Account",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8a53ce71-fb66-4d4e-9f80-ae6b5ce54a1c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve FBGProfile over association FBGProfile_Account from Account",
+                      "detail":  "retrieve FBGProfile over association FBGProfile_Account from Account",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9b7fab18-857f-432a-a686-e9ea0d81cf60",
+                      "nodeType":  "Annotation",
+                      "label":  "Create FBGProfile for user when account does not have any",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b7224dd1-afb0-4bbb-90f6-c0df11fb483c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b8a22cab-9241-4e29-b5c5-d6b5a6400703",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b2c5d02e-756c-41e1-b294-4277d5c43101",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "FBGProfile exists? expression=$FBGProfile != empty",
+                      "detail":  "FBGProfile exists? expression=$FBGProfile != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4fb1867d-ec3d-4e6c-b132-a0ba7aafa0a0",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "394d7309-32cc-48ab-8830-2355a2a3bc04",
+                      "originNodeId":  "b2c5d02e-756c-41e1-b294-4277d5c43101",
+                      "destinationNodeId":  "b7224dd1-afb0-4bbb-90f6-c0df11fb483c",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cef9a689-f91e-4887-8598-4f5c3f786328",
+                      "originNodeId":  "b2c5d02e-756c-41e1-b294-4277d5c43101",
+                      "destinationNodeId":  "d711bf37-dedd-469f-8b0d-8f669882779a",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b76b8424-8b78-4d2e-b20d-0c1d7c98b4e8",
+                      "originNodeId":  "d711bf37-dedd-469f-8b0d-8f669882779a",
+                      "destinationNodeId":  "b8a22cab-9241-4e29-b5c5-d6b5a6400703",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "16f5b09e-2371-4398-9456-1b85032f9fc8",
+                      "originNodeId":  "8a53ce71-fb66-4d4e-9f80-ae6b5ce54a1c",
+                      "destinationNodeId":  "b2c5d02e-756c-41e1-b294-4277d5c43101",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "15407fa3-8a7d-48f1-a19f-fb01595e2a6c",
+                      "originNodeId":  "4fb1867d-ec3d-4e6c-b132-a0ba7aafa0a0",
+                      "destinationNodeId":  "db087929-a19f-4414-9e3b-89b5249866ef",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a9fab4ff-f12d-4618-87a2-688895adaa20",
+                      "originNodeId":  "db087929-a19f-4414-9e3b-89b5249866ef",
+                      "destinationNodeId":  "8a53ce71-fb66-4d4e-9f80-ae6b5ce54a1c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "4fb1867d-ec3d-4e6c-b132-a0ba7aafa0a0"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "4fb1867d-ec3d-4e6c-b132-a0ba7aafa0a0",
+                                         "db087929-a19f-4414-9e3b-89b5249866ef",
+                                         "8a53ce71-fb66-4d4e-9f80-ae6b5ce54a1c",
+                                         "b2c5d02e-756c-41e1-b294-4277d5c43101",
+                                         "d711bf37-dedd-469f-8b0d-8f669882779a",
+                                         "b8a22cab-9241-4e29-b5c5-d6b5a6400703",
+                                         "b7224dd1-afb0-4bbb-90f6-c0df11fb483c"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.DS_FBGProfile_Retreive_current\r\nNODES=8; EDGES=6\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Account from Administration.Account\r\n3. ACTION RetrieveAction: retrieve FBGProfile over association FBGProfile_Account from Account\r\n4. DECISION FBGProfile exists? expression=$FBGProfile != empty\r\n5. BRANCH when EnumerationCase=false\r\n  6. ACTION CreateObjectAction: create SmartExpenses.FBGProfile as NewFBGProfile (FBGProfile_Account=$Account)\r\n  7. END\r\n8. BRANCH when EnumerationCase=true\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,227 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_Workflow_Retry_RerunUserTargeting",
+                  "stableId":  "b0674f54-f00c-45fc-adf3-ea69975cb664",
+                  "slug":  "workflowcommons-act-workflow-retry-rerunusertargeting",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-retry-rerunusertargeting.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-retry-rerunusertargeting.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflow-retry-rerunusertargeting.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_Workflow_Retry_RerunUserTargeting",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "b0674f54-f00c-45fc-adf3-ea69975cb664",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_Workflow_Retry_RerunUserTargeting",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "10e54d73-b045-48bd-a53b-2b7805f2e294",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change IteratorWorkflowUserTask (WorkflowUserTask_TargetUsers=empty; refreshInClient=false)",
+                      "detail":  "change IteratorWorkflowUserTask (WorkflowUserTask_TargetUsers=empty; refreshInClient=false)",
+                      "loopOwnerId":  "dcc27ed8-9cb7-4c3a-9c8b-f8f9a1dbdb17",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1f9e4cdc-7d9f-4793-b93f-7c75961e2a6b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "11d650dc-0b11-42cc-ae0d-3cac19afdcd7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CommitAction: commit WorkflowUserTaskList (refreshInClient=false, withEvents=true)",
+                      "detail":  "commit WorkflowUserTaskList (refreshInClient=false, withEvents=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "87fb64a4-27f1-4e83-9b70-2ecdc21204bd",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_Retry",
+                      "detail":  "call microflow WorkflowCommons.SUB_Workflow_Retry",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Workflow_Retry",
+                                        "sourceNodeId":  "87fb64a4-27f1-4e83-9b70-2ecdc21204bd"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "1511fa1d-bcd8-4422-88aa-a32e979c6dd2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowUserTaskList from System.WorkflowUserTask",
+                      "detail":  "retrieve WorkflowUserTaskList from System.WorkflowUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "465efc30-06c8-4943-9125-3bbb23975e55",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dcc27ed8-9cb7-4c3a-9c8b-f8f9a1dbdb17",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate WorkflowUserTaskList as IteratorWorkflowUserTask",
+                      "detail":  "iterate WorkflowUserTaskList as IteratorWorkflowUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f39176d0-c59c-49b7-869a-1d79af679dd3",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e198fe95-cad1-4a6d-bb9f-0e1f3ec5c52a",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ff179268-ecc7-494c-8802-3a341c09d6dc",
+                      "originNodeId":  "e198fe95-cad1-4a6d-bb9f-0e1f3ec5c52a",
+                      "destinationNodeId":  "1511fa1d-bcd8-4422-88aa-a32e979c6dd2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "402a82fc-935a-4509-88db-861615f41ad7",
+                      "originNodeId":  "1511fa1d-bcd8-4422-88aa-a32e979c6dd2",
+                      "destinationNodeId":  "dcc27ed8-9cb7-4c3a-9c8b-f8f9a1dbdb17",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "adab63a9-5bc8-4bab-a10f-028ab52d83dd",
+                      "originNodeId":  "dcc27ed8-9cb7-4c3a-9c8b-f8f9a1dbdb17",
+                      "destinationNodeId":  "11d650dc-0b11-42cc-ae0d-3cac19afdcd7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "af9c733c-913b-438f-bfb7-2717cdfe6def",
+                      "originNodeId":  "11d650dc-0b11-42cc-ae0d-3cac19afdcd7",
+                      "destinationNodeId":  "1f9e4cdc-7d9f-4793-b93f-7c75961e2a6b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "46ad26b3-4306-4736-ab4a-171dc2a41968",
+                      "originNodeId":  "87fb64a4-27f1-4e83-9b70-2ecdc21204bd",
+                      "destinationNodeId":  "465efc30-06c8-4943-9125-3bbb23975e55",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "acc13304-3411-43f4-916c-b8d4d769cc37",
+                      "originNodeId":  "1f9e4cdc-7d9f-4793-b93f-7c75961e2a6b",
+                      "destinationNodeId":  "87fb64a4-27f1-4e83-9b70-2ecdc21204bd",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Workflow_Retry",
+                      "sourceNodeId":  "87fb64a4-27f1-4e83-9b70-2ecdc21204bd"
+                  }
+              ],
+    "startNodeIds":  [
+                         "e198fe95-cad1-4a6d-bb9f-0e1f3ec5c52a"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "e198fe95-cad1-4a6d-bb9f-0e1f3ec5c52a",
+                                         "1511fa1d-bcd8-4422-88aa-a32e979c6dd2",
+                                         "dcc27ed8-9cb7-4c3a-9c8b-f8f9a1dbdb17",
+                                         "10e54d73-b045-48bd-a53b-2b7805f2e294",
+                                         "11d650dc-0b11-42cc-ae0d-3cac19afdcd7",
+                                         "1f9e4cdc-7d9f-4793-b93f-7c75961e2a6b",
+                                         "87fb64a4-27f1-4e83-9b70-2ecdc21204bd",
+                                         "465efc30-06c8-4943-9125-3bbb23975e55"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_Workflow_Retry_RerunUserTargeting\r\nNODES=8; EDGES=6\r\n1. START\r\n2. ACTION RetrieveAction: retrieve WorkflowUserTaskList from System.WorkflowUserTask\r\n3. LOOP iterate WorkflowUserTaskList as IteratorWorkflowUserTask\r\n  4. LOOP BODY\r\n    5. ACTION ChangeObjectAction: change IteratorWorkflowUserTask (WorkflowUserTask_TargetUsers=empty; refreshInClient=false)\r\n6. ACTION CommitAction: commit WorkflowUserTaskList (refreshInClient=false, withEvents=true)\r\n7. ACTION CloseFormAction: close page\r\n8. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_Retry\r\n9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_Workflow_Retry_RerunUserTargeting",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "87fb64a4-27f1-4e83-9b70-2ecdc21204bd",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Workflow_Retry",
+                          "isInternal":  true
+                      }
+                  ]
+}

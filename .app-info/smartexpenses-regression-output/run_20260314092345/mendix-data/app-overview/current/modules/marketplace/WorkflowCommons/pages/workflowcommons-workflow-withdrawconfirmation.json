@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.Workflow_WithdrawConfirmation",
+                  "stableId":  "WorkflowCommons.Workflow_WithdrawConfirmation",
+                  "slug":  "workflowcommons-workflow-withdrawconfirmation",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflow-withdrawconfirmation.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflow-withdrawconfirmation.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/workflowcommons-workflow-withdrawconfirmation.json",
+                  "l2Logical":  "page:WorkflowCommons.Workflow_WithdrawConfirmation",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/INDEX.json"
+              },
+    "qualifiedName":  "WorkflowCommons.Workflow_WithdrawConfirmation",
+    "name":  "Workflow_WithdrawConfirmation",
+    "title":  "Withdraw Workflow",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "WorkflowComment",
+                           "entityType":  "WorkflowCommons.WorkflowComment"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

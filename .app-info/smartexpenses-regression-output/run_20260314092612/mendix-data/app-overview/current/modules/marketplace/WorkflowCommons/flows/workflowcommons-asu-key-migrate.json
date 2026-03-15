@@ -1,0 +1,356 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ASu_Key_Migrate",
+                  "stableId":  "2acca671-7284-4ae0-824f-69c06a583493",
+                  "slug":  "workflowcommons-asu-key-migrate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-asu-key-migrate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-asu-key-migrate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-asu-key-migrate.json",
+                  "l2Logical":  "flow:WorkflowCommons.ASu_Key_Migrate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "2acca671-7284-4ae0-824f-69c06a583493",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ASu_Key_Migrate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "65155a17-94ac-4c82-b911-91db2eaebe7a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Configuration (VerifiedKeyMigration=true, ShowKeyMigration=false; refreshInClient=true)",
+                      "detail":  "change Configuration (VerifiedKeyMigration=true, ShowKeyMigration=false; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "39a885b6-e47e-4451-9141-f69cbbce64be",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "416e7362-9bc6-4108-a586-303d1d2226e3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Configuration_FindOrCreate -\u003e Configuration",
+                      "detail":  "call microflow WorkflowCommons.SUB_Configuration_FindOrCreate -\u003e Configuration",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                                        "sourceNodeId":  "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "2cf64d59-b55c-4739-a4f0-39c76b73bbdc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_KeyMigration_Verify -\u003e MigrationRequired",
+                      "detail":  "call microflow WorkflowCommons.SUB_KeyMigration_Verify -\u003e MigrationRequired",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_KeyMigration_Verify",
+                                        "sourceNodeId":  "2cf64d59-b55c-4739-a4f0-39c76b73bbdc"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "a81076e6-7097-4015-9967-9c818cb9ea37",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskKey_Migrate -\u003e MigratedTaskKeyCount",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskKey_Migrate -\u003e MigratedTaskKeyCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskKey_Migrate",
+                                        "sourceNodeId":  "a81076e6-7097-4015-9967-9c818cb9ea37"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "beffa1d4-45df-494b-bad8-d11027cff295",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowKey_Migrate -\u003e MigratedWorkflowKeyCount",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowKey_Migrate -\u003e MigratedWorkflowKeyCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowKey_Migrate",
+                                        "sourceNodeId":  "beffa1d4-45df-494b-bad8-d11027cff295"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "1980ca30-486d-4338-9704-8924fb5ca989",
+                      "nodeType":  "Annotation",
+                      "label":  "This migration will add a workflow key to all to workflows and a task key to all \u0027In progress\u0027 user tasks to make them compatible with the new event handlers. T...",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "62623228-f824-401a-bb49-998a7f38de24",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6981e88c-da2d-425f-9bd3-e05d309b989b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b772b10a-7e93-429f-8f10-95d2841320b9",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Migration required? expression=$MigrationRequired",
+                      "detail":  "Migration required? expression=$MigrationRequired",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "179c5c99-35e9-410a-8724-4920fddc5eff",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "b41f745c-50fe-4110-ae0c-c8275f8f403e",
+                      "originNodeId":  "179c5c99-35e9-410a-8724-4920fddc5eff",
+                      "destinationNodeId":  "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8d089a5f-c9d7-4cd8-9323-914249c54495",
+                      "originNodeId":  "2cf64d59-b55c-4739-a4f0-39c76b73bbdc",
+                      "destinationNodeId":  "b772b10a-7e93-429f-8f10-95d2841320b9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "87fb4be0-26e9-4c3f-8f58-d8cd653d3254",
+                      "originNodeId":  "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a",
+                      "destinationNodeId":  "2cf64d59-b55c-4739-a4f0-39c76b73bbdc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "72f7fb30-281e-4519-b20f-2409e270b0f1",
+                      "originNodeId":  "a81076e6-7097-4015-9967-9c818cb9ea37",
+                      "destinationNodeId":  "beffa1d4-45df-494b-bad8-d11027cff295",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "44154a4d-393f-40bb-9463-d9502e3d5cdf",
+                      "originNodeId":  "b772b10a-7e93-429f-8f10-95d2841320b9",
+                      "destinationNodeId":  "a81076e6-7097-4015-9967-9c818cb9ea37",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "270d2ad6-98a2-4e0f-95f0-373a45ce1402",
+                      "originNodeId":  "b772b10a-7e93-429f-8f10-95d2841320b9",
+                      "destinationNodeId":  "39a885b6-e47e-4451-9141-f69cbbce64be",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "30b6b2dc-0dbc-4346-a4af-7dc57b3a13af",
+                      "originNodeId":  "416e7362-9bc6-4108-a586-303d1d2226e3",
+                      "destinationNodeId":  "6981e88c-da2d-425f-9bd3-e05d309b989b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "320ec483-8b4f-485e-8ef8-98fec8ee54be",
+                      "originNodeId":  "39a885b6-e47e-4451-9141-f69cbbce64be",
+                      "destinationNodeId":  "62623228-f824-401a-bb49-998a7f38de24",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "718e2872-d1d8-4450-bd88-e9a3d80b1114",
+                      "originNodeId":  "beffa1d4-45df-494b-bad8-d11027cff295",
+                      "destinationNodeId":  "65155a17-94ac-4c82-b911-91db2eaebe7a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b3f07fe1-3949-42a4-bc2a-169e0a146d3d",
+                      "originNodeId":  "65155a17-94ac-4c82-b911-91db2eaebe7a",
+                      "destinationNodeId":  "416e7362-9bc6-4108-a586-303d1d2226e3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                      "sourceNodeId":  "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_KeyMigration_Verify",
+                      "sourceNodeId":  "2cf64d59-b55c-4739-a4f0-39c76b73bbdc"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskKey_Migrate",
+                      "sourceNodeId":  "a81076e6-7097-4015-9967-9c818cb9ea37"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowKey_Migrate",
+                      "sourceNodeId":  "beffa1d4-45df-494b-bad8-d11027cff295"
+                  }
+              ],
+    "startNodeIds":  [
+                         "179c5c99-35e9-410a-8724-4920fddc5eff"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "179c5c99-35e9-410a-8724-4920fddc5eff",
+                                         "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a",
+                                         "2cf64d59-b55c-4739-a4f0-39c76b73bbdc",
+                                         "b772b10a-7e93-429f-8f10-95d2841320b9",
+                                         "a81076e6-7097-4015-9967-9c818cb9ea37",
+                                         "beffa1d4-45df-494b-bad8-d11027cff295",
+                                         "65155a17-94ac-4c82-b911-91db2eaebe7a",
+                                         "416e7362-9bc6-4108-a586-303d1d2226e3",
+                                         "6981e88c-da2d-425f-9bd3-e05d309b989b",
+                                         "39a885b6-e47e-4451-9141-f69cbbce64be",
+                                         "62623228-f824-401a-bb49-998a7f38de24"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ASu_Key_Migrate\r\nNODES=12; EDGES=10\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Configuration_FindOrCreate -\u003e Configuration\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_KeyMigration_Verify -\u003e MigrationRequired\r\n4. DECISION Migration required? expression=$MigrationRequired\r\n5. BRANCH when EnumerationCase=true\r\n  6. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskKey_Migrate -\u003e MigratedTaskKeyCount\r\n  7. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowKey_Migrate -\u003e MigratedWorkflowKeyCount\r\n  8. ACTION ChangeObjectAction: change Configuration (VerifiedKeyMigration=true, ShowKeyMigration=false; refreshInClient=true)\r\n  9. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  10. END\r\n11. BRANCH when EnumerationCase=false\r\n  12. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  13. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Key_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Key_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "2cf64d59-b55c-4739-a4f0-39c76b73bbdc",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_KeyMigration_Verify",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Key_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "a81076e6-7097-4015-9967-9c818cb9ea37",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskKey_Migrate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Key_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "beffa1d4-45df-494b-bad8-d11027cff295",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowKey_Migrate",
+                          "isInternal":  true
+                      }
+                  ]
+}

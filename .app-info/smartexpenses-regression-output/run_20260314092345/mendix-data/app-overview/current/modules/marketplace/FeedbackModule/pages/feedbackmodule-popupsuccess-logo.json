@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.PopupSuccess_Logo",
+                  "stableId":  "FeedbackModule.PopupSuccess_Logo",
+                  "slug":  "feedbackmodule-popupsuccess-logo",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/pages/feedbackmodule-popupsuccess-logo.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/pages/feedbackmodule-popupsuccess-logo.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/pages/feedbackmodule-popupsuccess-logo.json",
+                  "l2Logical":  "page:FeedbackModule.PopupSuccess_Logo",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/pages/INDEX.json"
+              },
+    "qualifiedName":  "FeedbackModule.PopupSuccess_Logo",
+    "name":  "PopupSuccess_Logo",
+    "title":  "Feedback Submitted",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "FeedbackModule.User"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "Response",
+                           "entityType":  "FeedbackModule.ResponseHelper"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  false,
+    "url":  null,
+    "excluded":  true,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

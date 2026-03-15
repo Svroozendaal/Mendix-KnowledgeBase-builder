@@ -1,0 +1,103 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowAuditTrailRecord_Refresh",
+                  "stableId":  "ccb3ca50-874b-4b63-9ea3-d1b2705b2bd6",
+                  "slug":  "workflowcommons-act-workflowaudittrailrecord-refresh",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowaudittrailrecord-refresh.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowaudittrailrecord-refresh.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowaudittrailrecord-refresh.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowAuditTrailRecord_Refresh",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "ccb3ca50-874b-4b63-9ea3-d1b2705b2bd6",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowAuditTrailRecord_Refresh",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "04ed50b1-0275-4146-92c3-112c25120083",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action NanoflowCommons.RefreshEntity -\u003e Variable",
+                      "detail":  "call javascript action NanoflowCommons.RefreshEntity -\u003e Variable",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b9e550f8-2ac2-45ba-beaa-377c83d1cdf2",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7f26d3ca-32fd-4965-8365-f3b0959fe88d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "0b6010a9-fe08-41e8-bd52-0e571b22adbe",
+                      "originNodeId":  "7f26d3ca-32fd-4965-8365-f3b0959fe88d",
+                      "destinationNodeId":  "04ed50b1-0275-4146-92c3-112c25120083",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8d2e28b2-9e73-4f57-998a-e949820e7ecb",
+                      "originNodeId":  "04ed50b1-0275-4146-92c3-112c25120083",
+                      "destinationNodeId":  "b9e550f8-2ac2-45ba-beaa-377c83d1cdf2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "7f26d3ca-32fd-4965-8365-f3b0959fe88d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7f26d3ca-32fd-4965-8365-f3b0959fe88d",
+                                         "04ed50b1-0275-4146-92c3-112c25120083",
+                                         "b9e550f8-2ac2-45ba-beaa-377c83d1cdf2"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.ACT_WorkflowAuditTrailRecord_Refresh\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION JavaScriptActionCallAction: call javascript action NanoflowCommons.RefreshEntity -\u003e Variable\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

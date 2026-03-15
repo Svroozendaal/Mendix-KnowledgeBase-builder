@@ -1,0 +1,282 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_Workflow_CountOverdue",
+                  "stableId":  "ac755e1d-f19c-4f0c-a0eb-43387d44efa4",
+                  "slug":  "workflowcommons-sub-workflow-countoverdue",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflow-countoverdue.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflow-countoverdue.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflow-countoverdue.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_Workflow_CountOverdue",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "ac755e1d-f19c-4f0c-a0eb-43387d44efa4",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_Workflow_CountOverdue",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "40167439-aca9-4cb1-9d02-f91bbd15b938",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=CountInProgressOverdue, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=CountInProgressOverdue, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "de3f6557-fe96-466e-8d9f-4ee239220594",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=CountOverdue, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=CountOverdue, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "99f10e34-24d5-4a26-b7d9-bbfcc2446415",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable CountOverdueTotal=$CountOverdue + $CountInProgressOverdue",
+                      "detail":  "create variable CountOverdueTotal=$CountOverdue + $CountInProgressOverdue",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b76af92b-74bc-42da-ac5e-43f71d5ec417",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreStartedAfter=$StartedAfter = empty",
+                      "detail":  "create variable IgnoreStartedAfter=$StartedAfter = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "98e3a167-10ad-45ea-be90-26ade7054c50",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreStartedBefore=$StartedBefore = empty",
+                      "detail":  "create variable IgnoreStartedBefore=$StartedBefore = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a07d1907-62ad-44fc-a637-2f3951256620",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowView_Overdue from WorkflowCommons.WorkflowView",
+                      "detail":  "retrieve WorkflowView_Overdue from WorkflowCommons.WorkflowView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e95c9353-c33e-4605-bbfc-0307da4effcf",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow_InProgress_Overdue from System.Workflow",
+                      "detail":  "retrieve Workflow_InProgress_Overdue from System.Workflow",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f194752c-14d9-4b6f-8786-b15744306cd1",
+                      "nodeType":  "Annotation",
+                      "label":  "Count using the system entity for in progress workflows, since the due date might not be up to date on the WorkflowView object.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "78eb447e-d48d-4f8a-8516-fe9fecefb282",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6e88a7af-a538-4b54-b3cc-5f18f64a0b3d",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b20445b7-5e30-4838-861f-fbf985bb007e",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d064edcb-81cb-46a4-a77f-83111a19e487",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c659e4c8-c18f-438d-8234-e8b687a199a2",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "266baea7-9156-40c8-a6f5-8b5d4874c4f6",
+                      "originNodeId":  "a07d1907-62ad-44fc-a637-2f3951256620",
+                      "destinationNodeId":  "de3f6557-fe96-466e-8d9f-4ee239220594",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a965f1b9-d0be-4527-b8fe-c3b539948986",
+                      "originNodeId":  "c659e4c8-c18f-438d-8234-e8b687a199a2",
+                      "destinationNodeId":  "b76af92b-74bc-42da-ac5e-43f71d5ec417",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "08fc13dd-0c39-449b-a3d9-f468c3ce9704",
+                      "originNodeId":  "40167439-aca9-4cb1-9d02-f91bbd15b938",
+                      "destinationNodeId":  "99f10e34-24d5-4a26-b7d9-bbfcc2446415",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "43964027-3a69-4763-92f3-02755ae21eb9",
+                      "originNodeId":  "99f10e34-24d5-4a26-b7d9-bbfcc2446415",
+                      "destinationNodeId":  "78eb447e-d48d-4f8a-8516-fe9fecefb282",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "51000b95-e677-4155-b787-ee0833a038fd",
+                      "originNodeId":  "de3f6557-fe96-466e-8d9f-4ee239220594",
+                      "destinationNodeId":  "e95c9353-c33e-4605-bbfc-0307da4effcf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d63c686c-f142-4bf6-8372-ab7a18ee37cd",
+                      "originNodeId":  "e95c9353-c33e-4605-bbfc-0307da4effcf",
+                      "destinationNodeId":  "40167439-aca9-4cb1-9d02-f91bbd15b938",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "98f1c997-d39a-40d0-b9fa-40e09d47144c",
+                      "originNodeId":  "b76af92b-74bc-42da-ac5e-43f71d5ec417",
+                      "destinationNodeId":  "98e3a167-10ad-45ea-be90-26ade7054c50",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5a7a0979-a727-45ea-8cbf-e79ed38a4da9",
+                      "originNodeId":  "98e3a167-10ad-45ea-be90-26ade7054c50",
+                      "destinationNodeId":  "a07d1907-62ad-44fc-a637-2f3951256620",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "c659e4c8-c18f-438d-8234-e8b687a199a2"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "c659e4c8-c18f-438d-8234-e8b687a199a2",
+                                         "b76af92b-74bc-42da-ac5e-43f71d5ec417",
+                                         "98e3a167-10ad-45ea-be90-26ade7054c50",
+                                         "a07d1907-62ad-44fc-a637-2f3951256620",
+                                         "de3f6557-fe96-466e-8d9f-4ee239220594",
+                                         "e95c9353-c33e-4605-bbfc-0307da4effcf",
+                                         "40167439-aca9-4cb1-9d02-f91bbd15b938",
+                                         "99f10e34-24d5-4a26-b7d9-bbfcc2446415",
+                                         "78eb447e-d48d-4f8a-8516-fe9fecefb282"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_Workflow_CountOverdue\r\nNODES=13; EDGES=8\r\n1. START\r\n2. ACTION CreateVariableAction: create variable IgnoreStartedAfter=$StartedAfter = empty\r\n3. ACTION CreateVariableAction: create variable IgnoreStartedBefore=$StartedBefore = empty\r\n4. ACTION RetrieveAction: retrieve WorkflowView_Overdue from WorkflowCommons.WorkflowView\r\n5. ACTION AggregateListAction: AggregateListAction (output=CountOverdue, errorHandlingType=Rollback)\r\n6. ACTION RetrieveAction: retrieve Workflow_InProgress_Overdue from System.Workflow\r\n7. ACTION AggregateListAction: AggregateListAction (output=CountInProgressOverdue, errorHandlingType=Rollback)\r\n8. ACTION CreateVariableAction: create variable CountOverdueTotal=$CountOverdue + $CountInProgressOverdue\r\n9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "199c9f33-f9c0-484b-82dd-418eb63eecd9",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Workflow_CountOverdue",
+                          "isInternal":  true
+                      }
+                  ]
+}

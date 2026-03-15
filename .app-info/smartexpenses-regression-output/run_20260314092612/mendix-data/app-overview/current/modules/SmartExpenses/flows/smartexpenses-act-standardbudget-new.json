@@ -1,0 +1,145 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_StandardBudget_New",
+                  "stableId":  "816defd3-1d78-4280-82d4-61755fc68aa7",
+                  "slug":  "smartexpenses-act-standardbudget-new",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-standardbudget-new.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-standardbudget-new.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-standardbudget-new.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_StandardBudget_New",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "816defd3-1d78-4280-82d4-61755fc68aa7",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_StandardBudget_New",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "06a87d64-2bfd-4d01-a83c-bc980a852bbb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.Logo as NewLogo",
+                      "detail":  "create SmartExpenses.Logo as NewLogo",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e1c9ce21-74f8-40b0-b799-1e3b9d1beeb9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.StandardBudget as StandardBudget (Logo_StandardBudget=$NewLogo)",
+                      "detail":  "create SmartExpenses.StandardBudget as StandardBudget (Logo_StandardBudget=$NewLogo)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1c32471f-3fc9-4fd7-b6a6-a5b371de1ee5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page SmartExpenses.StandardBudget_NewEdit",
+                      "detail":  "show page SmartExpenses.StandardBudget_NewEdit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6c6afa0e-af01-4f83-9740-2dc806f94785",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b00962dd-9d52-4424-8604-c314832a168f",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ead1c183-ea83-4a1b-abe9-b7f5dfccd9c3",
+                      "originNodeId":  "1c32471f-3fc9-4fd7-b6a6-a5b371de1ee5",
+                      "destinationNodeId":  "6c6afa0e-af01-4f83-9740-2dc806f94785",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8a8b05dd-5ef9-4093-9fec-ae46bade8bca",
+                      "originNodeId":  "e1c9ce21-74f8-40b0-b799-1e3b9d1beeb9",
+                      "destinationNodeId":  "1c32471f-3fc9-4fd7-b6a6-a5b371de1ee5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "db59db22-6c2b-412b-b0f7-337de4ab0968",
+                      "originNodeId":  "06a87d64-2bfd-4d01-a83c-bc980a852bbb",
+                      "destinationNodeId":  "e1c9ce21-74f8-40b0-b799-1e3b9d1beeb9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "60de5b70-1313-4e1c-b13a-ee56baae97a3",
+                      "originNodeId":  "b00962dd-9d52-4424-8604-c314832a168f",
+                      "destinationNodeId":  "06a87d64-2bfd-4d01-a83c-bc980a852bbb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "b00962dd-9d52-4424-8604-c314832a168f"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "b00962dd-9d52-4424-8604-c314832a168f",
+                                         "06a87d64-2bfd-4d01-a83c-bc980a852bbb",
+                                         "e1c9ce21-74f8-40b0-b799-1e3b9d1beeb9",
+                                         "1c32471f-3fc9-4fd7-b6a6-a5b371de1ee5",
+                                         "6c6afa0e-af01-4f83-9740-2dc806f94785"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_StandardBudget_New\r\nNODES=5; EDGES=4\r\n1. START\r\n2. ACTION CreateObjectAction: create SmartExpenses.Logo as NewLogo\r\n3. ACTION CreateObjectAction: create SmartExpenses.StandardBudget as StandardBudget (Logo_StandardBudget=$NewLogo)\r\n4. ACTION ShowPageAction: show page SmartExpenses.StandardBudget_NewEdit\r\n5. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

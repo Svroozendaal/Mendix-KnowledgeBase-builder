@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.ReferenceObjects",
+                  "stableId":  "31e8a4ac-f40f-41b8-91ac-96d1ce3a88b9",
+                  "slug":  "mxmodelreflection-referenceobjects",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-referenceobjects.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-referenceobjects.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-referenceobjects.json",
+                  "l2Logical":  "flow:MxModelReflection.ReferenceObjects",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "31e8a4ac-f40f-41b8-91ac-96d1ce3a88b9",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.ReferenceObjects",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "20fff5d9-05d8-4ad4-8ee6-97163fb3afd7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create MxModelReflection.StringValue as NewStringValue (Value=$ReturnValueName)",
+                      "detail":  "create MxModelReflection.StringValue as NewStringValue (Value=$ReturnValueName)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3731077a-53fd-4e44-9cc4-8182cf8edd99",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action MxModelReflection.JA_ReferenceObjects -\u003e ReturnValueName",
+                      "detail":  "call java action MxModelReflection.JA_ReferenceObjects -\u003e ReturnValueName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "242eab4c-545f-4f2a-a410-197f6198a68e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bad61a9c-e4d5-4cc3-9ef9-1a3795bd94b7",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0d3529fb-46a4-46a5-9f27-93aa75276d4c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "63291134-6e64-474b-bd33-61c5c28a242b",
+                      "originNodeId":  "0d3529fb-46a4-46a5-9f27-93aa75276d4c",
+                      "destinationNodeId":  "3731077a-53fd-4e44-9cc4-8182cf8edd99",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0d62bd9b-28a9-4b8f-88df-cd41d6632b75",
+                      "originNodeId":  "3731077a-53fd-4e44-9cc4-8182cf8edd99",
+                      "destinationNodeId":  "20fff5d9-05d8-4ad4-8ee6-97163fb3afd7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "70bf3f6b-56e3-415f-8249-085bbb8ed123",
+                      "originNodeId":  "20fff5d9-05d8-4ad4-8ee6-97163fb3afd7",
+                      "destinationNodeId":  "242eab4c-545f-4f2a-a410-197f6198a68e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "0d3529fb-46a4-46a5-9f27-93aa75276d4c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "0d3529fb-46a4-46a5-9f27-93aa75276d4c",
+                                         "3731077a-53fd-4e44-9cc4-8182cf8edd99",
+                                         "20fff5d9-05d8-4ad4-8ee6-97163fb3afd7",
+                                         "242eab4c-545f-4f2a-a410-197f6198a68e"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.ReferenceObjects\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION JavaActionCallAction: call java action MxModelReflection.JA_ReferenceObjects -\u003e ReturnValueName\r\n3. ACTION CreateObjectAction: create MxModelReflection.StringValue as NewStringValue (Value=$ReturnValueName)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

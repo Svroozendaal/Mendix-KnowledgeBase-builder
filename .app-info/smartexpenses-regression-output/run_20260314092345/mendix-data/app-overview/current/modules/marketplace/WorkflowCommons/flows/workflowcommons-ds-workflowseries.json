@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowSeries",
+                  "stableId":  "06dc9215-272c-42f4-8738-719a632f1fd1",
+                  "slug":  "workflowcommons-ds-workflowseries",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowseries.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowseries.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowseries.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowSeries",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "06dc9215-272c-42f4-8738-719a632f1fd1",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowSeries",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "0c1adf4e-9031-45bc-bc85-1c425e3b7a36",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ListOperationAction: ListOperationAction (output=SortedWorkflowSeriesList, errorHandlingType=Rollback)",
+                      "detail":  "ListOperationAction (output=SortedWorkflowSeriesList, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "16f20447-c8a5-4da7-9801-0c8593005c63",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowSeriesList over association WorkflowSeries_DashboardContext from DashboardContext",
+                      "detail":  "retrieve WorkflowSeriesList over association WorkflowSeries_DashboardContext from DashboardContext",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "87742b2f-b1be-4d73-940b-9f71b4f2999a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1e0641cd-dbd5-4368-a486-ee80bfa6fa65",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9cda7855-fbe6-4865-b887-0bb5bd3ce551",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "106048a1-1799-451a-8f09-47e7ef6b1067",
+                      "originNodeId":  "9cda7855-fbe6-4865-b887-0bb5bd3ce551",
+                      "destinationNodeId":  "16f20447-c8a5-4da7-9801-0c8593005c63",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "182bbfa2-b811-4214-9bb8-ea8f7a3b417a",
+                      "originNodeId":  "16f20447-c8a5-4da7-9801-0c8593005c63",
+                      "destinationNodeId":  "0c1adf4e-9031-45bc-bc85-1c425e3b7a36",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f755b826-7609-4a88-8ea3-c7640207d52f",
+                      "originNodeId":  "0c1adf4e-9031-45bc-bc85-1c425e3b7a36",
+                      "destinationNodeId":  "87742b2f-b1be-4d73-940b-9f71b4f2999a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "9cda7855-fbe6-4865-b887-0bb5bd3ce551"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "9cda7855-fbe6-4865-b887-0bb5bd3ce551",
+                                         "16f20447-c8a5-4da7-9801-0c8593005c63",
+                                         "0c1adf4e-9031-45bc-bc85-1c425e3b7a36",
+                                         "87742b2f-b1be-4d73-940b-9f71b4f2999a"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_WorkflowSeries\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve WorkflowSeriesList over association WorkflowSeries_DashboardContext from DashboardContext\r\n3. ACTION ListOperationAction: ListOperationAction (output=SortedWorkflowSeriesList, errorHandlingType=Rollback)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

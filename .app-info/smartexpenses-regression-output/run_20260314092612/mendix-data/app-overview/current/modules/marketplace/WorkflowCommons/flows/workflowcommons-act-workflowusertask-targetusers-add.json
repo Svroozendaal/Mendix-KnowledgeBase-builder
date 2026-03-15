@@ -1,0 +1,163 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Add",
+                  "stableId":  "78558e67-40dc-48e7-a8a5-dbf887d0b4e4",
+                  "slug":  "workflowcommons-act-workflowusertask-targetusers-add",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-targetusers-add.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-targetusers-add.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-targetusers-add.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Add",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "78558e67-40dc-48e7-a8a5-dbf887d0b4e4",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Add",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "78c56382-d959-475e-9fe0-7d39db21536b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3e1fa431-d1e7-46f9-9efc-738a0eaabd37",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Add",
+                      "detail":  "call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Add",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Add",
+                                        "sourceNodeId":  "3e1fa431-d1e7-46f9-9efc-738a0eaabd37"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "bbab4ded-f96f-4a9a-974b-06c664b09c26",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0bda1fd7-bb1f-4317-ab1a-3d4dce6fb1fe",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f75635f6-96ac-4807-9b68-8ee4ea2458a5",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0a5778c1-3aed-4cd1-8b5e-c1d51dae84a3",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "59e6da40-3c80-4b33-84aa-46eff17cd110",
+                      "originNodeId":  "0a5778c1-3aed-4cd1-8b5e-c1d51dae84a3",
+                      "destinationNodeId":  "3e1fa431-d1e7-46f9-9efc-738a0eaabd37",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1fb6dc2a-fcde-4043-941c-65d1fbab6841",
+                      "originNodeId":  "3e1fa431-d1e7-46f9-9efc-738a0eaabd37",
+                      "destinationNodeId":  "78c56382-d959-475e-9fe0-7d39db21536b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "40694b5a-b9e4-4e1e-86db-b18cae0240a5",
+                      "originNodeId":  "78c56382-d959-475e-9fe0-7d39db21536b",
+                      "destinationNodeId":  "bbab4ded-f96f-4a9a-974b-06c664b09c26",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Add",
+                      "sourceNodeId":  "3e1fa431-d1e7-46f9-9efc-738a0eaabd37"
+                  }
+              ],
+    "startNodeIds":  [
+                         "0a5778c1-3aed-4cd1-8b5e-c1d51dae84a3"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "0a5778c1-3aed-4cd1-8b5e-c1d51dae84a3",
+                                         "3e1fa431-d1e7-46f9-9efc-738a0eaabd37",
+                                         "78c56382-d959-475e-9fe0-7d39db21536b",
+                                         "bbab4ded-f96f-4a9a-974b-06c664b09c26"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Add\r\nNODES=6; EDGES=3\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Add\r\n3. ACTION CloseFormAction: close page\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Add",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3e1fa431-d1e7-46f9-9efc-738a0eaabd37",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUsers_Add",
+                          "isInternal":  true
+                      }
+                  ]
+}

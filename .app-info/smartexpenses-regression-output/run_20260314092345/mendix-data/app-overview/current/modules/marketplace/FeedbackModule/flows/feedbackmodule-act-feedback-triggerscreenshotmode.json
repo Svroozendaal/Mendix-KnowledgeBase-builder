@@ -1,0 +1,323 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.ACT_Feedback_TriggerScreenshotMode",
+                  "stableId":  "538dc61b-b86a-4771-bd4e-ba598d0e0be1",
+                  "slug":  "feedbackmodule-act-feedback-triggerscreenshotmode",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-act-feedback-triggerscreenshotmode.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-act-feedback-triggerscreenshotmode.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-act-feedback-triggerscreenshotmode.json",
+                  "l2Logical":  "flow:FeedbackModule.ACT_Feedback_TriggerScreenshotMode",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "538dc61b-b86a-4771-bd4e-ba598d0e0be1",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "FeedbackModule.ACT_Feedback_TriggerScreenshotMode",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Feedback (ImageB64=$base64FromWidget; refreshInClient=true)",
+                      "detail":  "change Feedback (ImageB64=$base64FromWidget; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1574ddd2-335c-4087-a79d-9a552708d667",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0cae1687-1475-40ca-924b-f0b7bff419fc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action FeedbackModule.JS_ToggleFeedbackScreenshotWidget -\u003e base64FromWidget",
+                      "detail":  "call javascript action FeedbackModule.JS_ToggleFeedbackScreenshotWidget -\u003e base64FromWidget",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a04427ef-6919-44a4-b602-a28d6765ddf0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page FeedbackModule.ShareFeedback",
+                      "detail":  "show page FeedbackModule.ShareFeedback",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ecd59c78-ffed-418c-9296-956a6d113e2c",
+                      "nodeType":  "Annotation",
+                      "label":  "This JS Action triggers the Screenshot pop-up mode in the Feedback Widget. The widget will send back to the mendix client browser a base64 formatted image.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "47e10b4d-0b09-46ce-a244-fe249732be6c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "72195fda-4b0a-4e52-9803-424098ac7618",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4850c058-cefd-4f89-b6c4-6911437827db",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "02a922e5-5b66-4c33-8149-43453e9210c2",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "is not Empty? expression=$base64FromWidget != empty",
+                      "detail":  "is not Empty? expression=$base64FromWidget != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Upload Not Cancelled? expression=$base64FromWidget != \u0027uploadCancelled\u0027",
+                      "detail":  "Upload Not Cancelled? expression=$base64FromWidget != \u0027uploadCancelled\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d9736659-6f9e-4e35-99cd-0396bb6e5f86",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "579a017b-d131-4e98-92bb-bd903e7887dc",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ac36ef24-e6c1-4b39-9041-0a72a397225c",
+                      "originNodeId":  "579a017b-d131-4e98-92bb-bd903e7887dc",
+                      "destinationNodeId":  "1574ddd2-335c-4087-a79d-9a552708d667",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a9dfe3bc-bf75-4f69-9a77-770e982edada",
+                      "originNodeId":  "0cae1687-1475-40ca-924b-f0b7bff419fc",
+                      "destinationNodeId":  "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2efae4c2-5854-44b9-a092-b55a34f9404e",
+                      "originNodeId":  "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+                      "destinationNodeId":  "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a11e68e9-fb68-4102-9f93-9f64baf41156",
+                      "originNodeId":  "02a922e5-5b66-4c33-8149-43453e9210c2",
+                      "destinationNodeId":  "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "991cefa6-3d1f-46cc-bca7-0c203f0bb75c",
+                      "originNodeId":  "02a922e5-5b66-4c33-8149-43453e9210c2",
+                      "destinationNodeId":  "47e10b4d-0b09-46ce-a244-fe249732be6c",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "6e15ef3c-3763-448a-b4f0-71d704bc08bd",
+                      "originNodeId":  "a04427ef-6919-44a4-b602-a28d6765ddf0",
+                      "destinationNodeId":  "72195fda-4b0a-4e52-9803-424098ac7618",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "90c1eb35-cf3d-427e-88e8-9f888fa972a9",
+                      "originNodeId":  "1574ddd2-335c-4087-a79d-9a552708d667",
+                      "destinationNodeId":  "0cae1687-1475-40ca-924b-f0b7bff419fc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9c1494d7-a6c3-42cf-91aa-072538c96e4b",
+                      "originNodeId":  "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+                      "destinationNodeId":  "02a922e5-5b66-4c33-8149-43453e9210c2",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d60b8218-ea39-45c3-bdb6-9bb03eb27d3e",
+                      "originNodeId":  "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+                      "destinationNodeId":  "4850c058-cefd-4f89-b6c4-6911437827db",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "95aeb102-befc-461f-bdae-e85c42828789",
+                      "originNodeId":  "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+                      "destinationNodeId":  "a04427ef-6919-44a4-b602-a28d6765ddf0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "557e72fc-27b1-4ae8-8fa8-e60f2511119e",
+                      "originNodeId":  "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+                      "destinationNodeId":  "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "195fac55-91ec-4317-ad0d-c856eeae40b9",
+                      "originNodeId":  "4850c058-cefd-4f89-b6c4-6911437827db",
+                      "destinationNodeId":  "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "579a017b-d131-4e98-92bb-bd903e7887dc"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "579a017b-d131-4e98-92bb-bd903e7887dc",
+                                         "1574ddd2-335c-4087-a79d-9a552708d667",
+                                         "0cae1687-1475-40ca-924b-f0b7bff419fc",
+                                         "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+                                         "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+                                         "4850c058-cefd-4f89-b6c4-6911437827db",
+                                         "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+                                         "a04427ef-6919-44a4-b602-a28d6765ddf0",
+                                         "72195fda-4b0a-4e52-9803-424098ac7618",
+                                         "02a922e5-5b66-4c33-8149-43453e9210c2",
+                                         "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+                                         "47e10b4d-0b09-46ce-a244-fe249732be6c"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: FeedbackModule.ACT_Feedback_TriggerScreenshotMode\r\nNODES=14; EDGES=12\r\n1. START\r\n2. ACTION CloseFormAction: close page\r\n3. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.JS_ToggleFeedbackScreenshotWidget -\u003e base64FromWidget\r\n4. DECISION Upload Not Cancelled? expression=$base64FromWidget != \u0027uploadCancelled\u0027\r\n5. BRANCH when EnumerationCase=false\r\n  6. NODE ExclusiveMerge: ExclusiveMerge\r\n  7. NODE ExclusiveMerge: ExclusiveMerge\r\n  8. NODE ExclusiveMerge: ExclusiveMerge\r\n  9. ACTION ShowPageAction: show page FeedbackModule.ShareFeedback\r\n  10. END\r\n11. BRANCH when EnumerationCase=true\r\n  12. DECISION is not Empty? expression=$base64FromWidget != empty\r\n  13. BRANCH when EnumerationCase=true\r\n    14. ACTION ChangeObjectAction: change Feedback (ImageB64=$base64FromWidget; refreshInClient=true)\r\n    15. REF ExclusiveMerge\r\n  16. BRANCH when EnumerationCase=false\r\n    17. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

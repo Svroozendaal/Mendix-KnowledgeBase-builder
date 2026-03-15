@@ -1,0 +1,46 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.WorkflowCommentHelper_Edit",
+                  "stableId":  "WorkflowCommons.WorkflowCommentHelper_Edit",
+                  "slug":  "workflowcommons-workflowcommenthelper-edit",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowcommenthelper-edit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowcommenthelper-edit.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/workflowcommons-workflowcommenthelper-edit.json",
+                  "l2Logical":  "page:WorkflowCommons.WorkflowCommentHelper_Edit",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/INDEX.json"
+              },
+    "qualifiedName":  "WorkflowCommons.WorkflowCommentHelper_Edit",
+    "name":  "WorkflowCommentHelper_Edit",
+    "title":  "Edit Comment",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "WorkflowCommons.User",
+                         "WorkflowCommons.Administrator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "WorkflowCommentHelper",
+                           "entityType":  "WorkflowCommons.WorkflowCommentHelper"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  1000,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

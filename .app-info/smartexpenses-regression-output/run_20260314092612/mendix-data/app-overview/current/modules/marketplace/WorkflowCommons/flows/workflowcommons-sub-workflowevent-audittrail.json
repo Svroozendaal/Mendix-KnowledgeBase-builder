@@ -1,0 +1,229 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_WorkflowEvent_AuditTrail",
+                  "stableId":  "d6eb7b81-e111-49c3-befa-f7d0830ce6df",
+                  "slug":  "workflowcommons-sub-workflowevent-audittrail",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowevent-audittrail.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowevent-audittrail.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflowevent-audittrail.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_WorkflowEvent_AuditTrail",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "d6eb7b81-e111-49c3-befa-f7d0830ce6df",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_WorkflowEvent_AuditTrail",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "05a150e0-863e-43c6-b8e4-5979e13ccf8b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.WorkflowAuditTrailRecord as NewWorkflowAuditTrail (EventTimestamp=$WorkflowEvent/EventTime, EventType=$WorkflowEvent/EventType, EventLevel=$EventLevel, ActivityCaption=$WorkflowActivityRecord/Caption, EventInitiator=$WorkflowEvent/System.WorkflowEvent_Initiator/System.User/Name, WorkflowKey=$WorkflowRecord/WorkflowKey, WorkflowName=$WorkflowRecord/Name, WorkflowState=$WorkflowRecord/State, +9 more)",
+                      "detail":  "create WorkflowCommons.WorkflowAuditTrailRecord as NewWorkflowAuditTrail (EventTimestamp=$WorkflowEvent/EventTime, EventType=$WorkflowEvent/EventType, EventLevel=$EventLevel, ActivityCaption=$WorkflowActivityRecord/Caption, EventInitiator=$WorkflowEvent/System.WorkflowEvent_Initiator/System.User/Name, WorkflowKey=$WorkflowRecord/WorkflowKey, WorkflowName=$WorkflowRecord/Name, WorkflowState=$WorkflowRecord/State, +9 more)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0acacc5e-170e-4c97-8216-7c5b31c381ee",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable ActivityKey=if $WorkflowActivityRecord/ActivityType != System.WorkflowActivityType.UserTask and $WorkflowActivityRecord/ActivityType != System.WorkflowActivityType.MultiInputUserTask then $WorkflowActivityRecord/ActivityKey else emp...",
+                      "detail":  "create variable ActivityKey=if $WorkflowActivityRecord/ActivityType != System.WorkflowActivityType.UserTask and $WorkflowActivityRecord/ActivityType != System.WorkflowActivityType.MultiInputUserTask then $WorkflowActivityRecord/ActivityKey else emp...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d3c19034-a091-4171-a791-94316e587a34",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable EventLevel=if $WorkflowActivityRecord/ActivityType != empty then WorkflowCommons.Enum_AuditTrail_EventLevel.ActivityEvent else WorkflowCommons.Enum_AuditTrail_EventLevel.WorkflowEvent",
+                      "detail":  "create variable EventLevel=if $WorkflowActivityRecord/ActivityType != empty then WorkflowCommons.Enum_AuditTrail_EventLevel.ActivityEvent else WorkflowCommons.Enum_AuditTrail_EventLevel.WorkflowEvent",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3f3b0115-7ba0-4f23-8306-e81650807d23",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable Reason=if $WorkflowActivityRecord/Reason != empty then $WorkflowActivityRecord/Reason else $WorkflowRecord/Reason",
+                      "detail":  "create variable Reason=if $WorkflowActivityRecord/Reason != empty then $WorkflowActivityRecord/Reason else $WorkflowRecord/Reason",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7a397ae8-eeda-4715-aca3-3211577e0839",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable UserTaskKey=if $WorkflowActivityRecord/ActivityType = System.WorkflowActivityType.UserTask or $WorkflowActivityRecord/ActivityType = System.WorkflowActivityType.MultiInputUserTask then $WorkflowActivityRecord/TaskKey else empty",
+                      "detail":  "create variable UserTaskKey=if $WorkflowActivityRecord/ActivityType = System.WorkflowActivityType.UserTask or $WorkflowActivityRecord/ActivityType = System.WorkflowActivityType.MultiInputUserTask then $WorkflowActivityRecord/TaskKey else empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "747fe5af-005f-4f34-92fc-88b5d1d532a1",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b8ea7831-e759-4824-9e3e-a29de0a39c48",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c916154f-74b6-4cad-ad04-3c15372f10cf",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cade826b-c095-4d3a-b749-f7d714935685",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7c05efc6-a48e-4c24-9b63-f99f747b8e71",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "b8acb19a-ecfa-4746-a004-27b01a50fd99",
+                      "originNodeId":  "7c05efc6-a48e-4c24-9b63-f99f747b8e71",
+                      "destinationNodeId":  "7a397ae8-eeda-4715-aca3-3211577e0839",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1f0b5060-e908-497c-bd8d-bb0330a2c5ff",
+                      "originNodeId":  "05a150e0-863e-43c6-b8e4-5979e13ccf8b",
+                      "destinationNodeId":  "747fe5af-005f-4f34-92fc-88b5d1d532a1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "14f9bda9-c5c7-4a22-83ac-db3732d914ed",
+                      "originNodeId":  "7a397ae8-eeda-4715-aca3-3211577e0839",
+                      "destinationNodeId":  "0acacc5e-170e-4c97-8216-7c5b31c381ee",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "04b0c040-b3c3-44e8-82a8-dee12e6129b6",
+                      "originNodeId":  "0acacc5e-170e-4c97-8216-7c5b31c381ee",
+                      "destinationNodeId":  "3f3b0115-7ba0-4f23-8306-e81650807d23",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7f57871e-12e6-4afd-9847-5e593bd8413c",
+                      "originNodeId":  "3f3b0115-7ba0-4f23-8306-e81650807d23",
+                      "destinationNodeId":  "d3c19034-a091-4171-a791-94316e587a34",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7fb0664a-c45f-4400-be3d-e117d0911853",
+                      "originNodeId":  "d3c19034-a091-4171-a791-94316e587a34",
+                      "destinationNodeId":  "05a150e0-863e-43c6-b8e4-5979e13ccf8b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "7c05efc6-a48e-4c24-9b63-f99f747b8e71"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7c05efc6-a48e-4c24-9b63-f99f747b8e71",
+                                         "7a397ae8-eeda-4715-aca3-3211577e0839",
+                                         "0acacc5e-170e-4c97-8216-7c5b31c381ee",
+                                         "3f3b0115-7ba0-4f23-8306-e81650807d23",
+                                         "d3c19034-a091-4171-a791-94316e587a34",
+                                         "05a150e0-863e-43c6-b8e4-5979e13ccf8b",
+                                         "747fe5af-005f-4f34-92fc-88b5d1d532a1"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_WorkflowEvent_AuditTrail\r\nNODES=10; EDGES=6\r\n1. START\r\n2. ACTION CreateVariableAction: create variable UserTaskKey=if $WorkflowActivityRecord/ActivityType = System.WorkflowActivityType.UserTask or $WorkflowActivityRecord/ActivityType = System.WorkflowActivityType.MultiInputUserTask then $WorkflowActivityRecord/TaskKey else empty\r\n3. ACTION CreateVariableAction: create variable ActivityKey=if $WorkflowActivityRecord/ActivityType != System.WorkflowActivityType.UserTask and $WorkflowActivityRecord/ActivityType != System.WorkflowActivityType.MultiInputUserTask then $WorkflowActivityRecord/ActivityKey else emp...\r\n4. ACTION CreateVariableAction: create variable Reason=if $WorkflowActivityRecord/Reason != empty then $WorkflowActivityRecord/Reason else $WorkflowRecord/Reason\r\n5. ACTION CreateVariableAction: create variable EventLevel=if $WorkflowActivityRecord/ActivityType != empty then WorkflowCommons.Enum_AuditTrail_EventLevel.ActivityEvent else WorkflowCommons.Enum_AuditTrail_EventLevel.WorkflowEvent\r\n6. ACTION CreateObjectAction: create WorkflowCommons.WorkflowAuditTrailRecord as NewWorkflowAuditTrail (EventTimestamp=$WorkflowEvent/EventTime, EventType=$WorkflowEvent/EventType, EventLevel=$EventLevel, ActivityCaption=$WorkflowActivityRecord/Caption, EventInitiator=$WorkflowEvent/System.WorkflowEvent_Initiator/System.User/Name, WorkflowKey=$WorkflowRecord/WorkflowKey, WorkflowName=$WorkflowRecord/Name, WorkflowState=$WorkflowRecord/State, +9 more)\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.WFEH_WorkflowEvent_AuditTrail",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "c38dd5e8-f82e-46ba-9e53-fce43e8fadc1",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowEvent_AuditTrail",
+                          "isInternal":  true
+                      }
+                  ]
+}

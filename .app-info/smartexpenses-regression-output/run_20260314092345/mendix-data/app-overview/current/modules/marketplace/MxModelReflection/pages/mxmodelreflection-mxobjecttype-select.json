@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.MxObjectType_Select",
+                  "stableId":  "MxModelReflection.MxObjectType_Select",
+                  "slug":  "mxmodelreflection-mxobjecttype-select",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-mxobjecttype-select.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-mxobjecttype-select.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/pages/mxmodelreflection-mxobjecttype-select.json",
+                  "l2Logical":  "page:MxModelReflection.MxObjectType_Select",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/pages/INDEX.json"
+              },
+    "qualifiedName":  "MxModelReflection.MxObjectType_Select",
+    "name":  "MxObjectType_Select",
+    "title":  "Select an objecttype",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

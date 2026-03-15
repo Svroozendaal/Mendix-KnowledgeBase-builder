@@ -1,0 +1,152 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowDefinitionHelper_ShowUnlockPage",
+                  "stableId":  "98989cb8-5338-49fd-b93b-eb4192832bd7",
+                  "slug":  "workflowcommons-act-workflowdefinitionhelper-showunlockpage",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowdefinitionhelper-showunlockpage.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowdefinitionhelper-showunlockpage.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowdefinitionhelper-showunlockpage.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowDefinitionHelper_ShowUnlockPage",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "98989cb8-5338-49fd-b93b-eb4192832bd7",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowDefinitionHelper_ShowUnlockPage",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "be327476-d56f-4ad2-919c-68d6931b73fc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowDefinitionHelper_FindOrCreate -\u003e WorkflowDefinitionHelper",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowDefinitionHelper_FindOrCreate -\u003e WorkflowDefinitionHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowDefinitionHelper_FindOrCreate",
+                                        "sourceNodeId":  "be327476-d56f-4ad2-919c-68d6931b73fc"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "5bd7689a-8a7f-4b35-962d-433d90e3bf0e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page WorkflowCommons.WorkflowDefinition_Unlock",
+                      "detail":  "show page WorkflowCommons.WorkflowDefinition_Unlock",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "167dcb50-9968-4c7d-a516-9d37eb51f352",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c2d3329f-de55-4a8a-aac4-8d95e4d151a4",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "338cb137-9c6e-4d56-b69f-d6f1c92a3f21",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "16d5c844-7318-49da-bd8e-1b420f051a10",
+                      "originNodeId":  "338cb137-9c6e-4d56-b69f-d6f1c92a3f21",
+                      "destinationNodeId":  "be327476-d56f-4ad2-919c-68d6931b73fc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c88dadf0-2193-446d-ad4d-0c7ce42dfd52",
+                      "originNodeId":  "be327476-d56f-4ad2-919c-68d6931b73fc",
+                      "destinationNodeId":  "5bd7689a-8a7f-4b35-962d-433d90e3bf0e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0480ac18-ce53-41ff-b8f1-c75967cea237",
+                      "originNodeId":  "5bd7689a-8a7f-4b35-962d-433d90e3bf0e",
+                      "destinationNodeId":  "167dcb50-9968-4c7d-a516-9d37eb51f352",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowDefinitionHelper_FindOrCreate",
+                      "sourceNodeId":  "be327476-d56f-4ad2-919c-68d6931b73fc"
+                  }
+              ],
+    "startNodeIds":  [
+                         "338cb137-9c6e-4d56-b69f-d6f1c92a3f21"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "338cb137-9c6e-4d56-b69f-d6f1c92a3f21",
+                                         "be327476-d56f-4ad2-919c-68d6931b73fc",
+                                         "5bd7689a-8a7f-4b35-962d-433d90e3bf0e",
+                                         "167dcb50-9968-4c7d-a516-9d37eb51f352"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowDefinitionHelper_ShowUnlockPage\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowDefinitionHelper_FindOrCreate -\u003e WorkflowDefinitionHelper\r\n3. ACTION ShowPageAction: show page WorkflowCommons.WorkflowDefinition_Unlock\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowDefinitionHelper_ShowUnlockPage",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "be327476-d56f-4ad2-919c-68d6931b73fc",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowDefinitionHelper_FindOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.WorkflowAdminCenter",
+                  "stableId":  "WorkflowCommons.WorkflowAdminCenter",
+                  "slug":  "workflowcommons-workflowadmincenter",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowadmincenter.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowadmincenter.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/workflowcommons-workflowadmincenter.json",
+                  "l2Logical":  "page:WorkflowCommons.WorkflowAdminCenter",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/INDEX.json"
+              },
+    "qualifiedName":  "WorkflowCommons.WorkflowAdminCenter",
+    "name":  "WorkflowAdminCenter",
+    "title":  "Workflow Admin Center",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "WorkflowCommons.Administrator"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

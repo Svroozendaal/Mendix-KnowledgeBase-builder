@@ -1,0 +1,103 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowCommentHelper_InitializeNew",
+                  "stableId":  "9a902c53-58a1-4c53-a57d-e68fd2fb25f6",
+                  "slug":  "workflowcommons-ds-workflowcommenthelper-initializenew",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowcommenthelper-initializenew.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowcommenthelper-initializenew.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowcommenthelper-initializenew.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowCommentHelper_InitializeNew",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "9a902c53-58a1-4c53-a57d-e68fd2fb25f6",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowCommentHelper_InitializeNew",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "b266e1e5-69e7-4b50-928b-3c503bb356fa",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.WorkflowCommentHelper as NewWorkflowCommentHelper",
+                      "detail":  "create WorkflowCommons.WorkflowCommentHelper as NewWorkflowCommentHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7bf50f5f-266b-4bfb-9047-ea6a23407bcf",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f3ec4f05-5f67-453b-82ac-009b3489fe8d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "afea296d-561b-482e-9232-db8023710ceb",
+                      "originNodeId":  "f3ec4f05-5f67-453b-82ac-009b3489fe8d",
+                      "destinationNodeId":  "b266e1e5-69e7-4b50-928b-3c503bb356fa",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "dd22fc49-b623-412e-b1da-74f2e77d2656",
+                      "originNodeId":  "b266e1e5-69e7-4b50-928b-3c503bb356fa",
+                      "destinationNodeId":  "7bf50f5f-266b-4bfb-9047-ea6a23407bcf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "f3ec4f05-5f67-453b-82ac-009b3489fe8d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "f3ec4f05-5f67-453b-82ac-009b3489fe8d",
+                                         "b266e1e5-69e7-4b50-928b-3c503bb356fa",
+                                         "7bf50f5f-266b-4bfb-9047-ea6a23407bcf"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_WorkflowCommentHelper_InitializeNew\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION CreateObjectAction: create WorkflowCommons.WorkflowCommentHelper as NewWorkflowCommentHelper\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

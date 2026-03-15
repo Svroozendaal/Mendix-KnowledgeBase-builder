@@ -1,0 +1,50 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.BudgetTerm_NewEdit",
+                  "stableId":  "SmartExpenses.BudgetTerm_NewEdit",
+                  "slug":  "smartexpenses-budgetterm-newedit",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-budgetterm-newedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-budgetterm-newedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/pages/smartexpenses-budgetterm-newedit.json",
+                  "l2Logical":  "page:SmartExpenses.BudgetTerm_NewEdit",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/pages/INDEX.json"
+              },
+    "qualifiedName":  "SmartExpenses.BudgetTerm_NewEdit",
+    "name":  "BudgetTerm_NewEdit",
+    "title":  "Budget",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "SmartExpenses.Admin",
+                         "SmartExpenses.User"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "BudgetType",
+                           "entityType":  "SmartExpenses.BudgetType"
+                       },
+                       {
+                           "name":  "BudgetTerm",
+                           "entityType":  "SmartExpenses.BudgetTerm"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

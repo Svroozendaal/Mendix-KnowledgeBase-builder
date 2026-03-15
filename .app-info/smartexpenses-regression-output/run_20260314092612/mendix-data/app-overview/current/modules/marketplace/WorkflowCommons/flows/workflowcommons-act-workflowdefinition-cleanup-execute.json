@@ -1,0 +1,213 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowDefinition_CleanUp_Execute",
+                  "stableId":  "c16727dc-9b74-4853-96a8-c8ecd652ddbc",
+                  "slug":  "workflowcommons-act-workflowdefinition-cleanup-execute",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowdefinition-cleanup-execute.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowdefinition-cleanup-execute.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowdefinition-cleanup-execute.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowDefinition_CleanUp_Execute",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "c16727dc-9b74-4853-96a8-c8ecd652ddbc",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowDefinition_CleanUp_Execute",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "cb7cb378-679e-4c61-b6bd-8426725717d3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c5b675fc-49fe-4208-a33b-30a73a2d42ff",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_CleanupHelper_Execute_Workflow -\u003e WorkflowCount",
+                      "detail":  "call microflow WorkflowCommons.SUB_CleanupHelper_Execute_Workflow -\u003e WorkflowCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_CleanupHelper_Execute_Workflow",
+                                        "sourceNodeId":  "c5b675fc-49fe-4208-a33b-30a73a2d42ff"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "01cbeb33-9de2-4440-bf81-87236d1d1da4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_CleanupHelper_Execute_WorkflowView -\u003e WorkflowViewCount",
+                      "detail":  "call microflow WorkflowCommons.SUB_CleanupHelper_Execute_WorkflowView -\u003e WorkflowViewCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_CleanupHelper_Execute_WorkflowView",
+                                        "sourceNodeId":  "01cbeb33-9de2-4440-bf81-87236d1d1da4"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "aa77d3c1-0bc8-4d0c-8a2c-ec0a06ced4b4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=Successfully deleted {1} Workflow objects and {2} WorkflowView objects., type=Information, blocking=true)",
+                      "detail":  "show message (text=Successfully deleted {1} Workflow objects and {2} WorkflowView objects., type=Information, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4a63b2a0-1afd-410f-bde9-d257fd4d72ce",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "29690284-1f49-42dd-b969-76baa70e03bd",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d510a086-339d-4070-a015-25a1169106ba",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "6b1f134f-ef3e-40ba-bd70-ba334c4c1f4e",
+                      "originNodeId":  "d510a086-339d-4070-a015-25a1169106ba",
+                      "destinationNodeId":  "c5b675fc-49fe-4208-a33b-30a73a2d42ff",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "34724196-cfb1-4c92-953b-8d24a0455447",
+                      "originNodeId":  "c5b675fc-49fe-4208-a33b-30a73a2d42ff",
+                      "destinationNodeId":  "01cbeb33-9de2-4440-bf81-87236d1d1da4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9cb22874-bede-472b-a814-038f02929f0b",
+                      "originNodeId":  "01cbeb33-9de2-4440-bf81-87236d1d1da4",
+                      "destinationNodeId":  "aa77d3c1-0bc8-4d0c-8a2c-ec0a06ced4b4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "646f7826-5cbc-4eac-98c6-550d6acb1f29",
+                      "originNodeId":  "cb7cb378-679e-4c61-b6bd-8426725717d3",
+                      "destinationNodeId":  "4a63b2a0-1afd-410f-bde9-d257fd4d72ce",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2488b7ae-bf7f-4472-b2b7-d12273059e58",
+                      "originNodeId":  "aa77d3c1-0bc8-4d0c-8a2c-ec0a06ced4b4",
+                      "destinationNodeId":  "cb7cb378-679e-4c61-b6bd-8426725717d3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_CleanupHelper_Execute_Workflow",
+                      "sourceNodeId":  "c5b675fc-49fe-4208-a33b-30a73a2d42ff"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_CleanupHelper_Execute_WorkflowView",
+                      "sourceNodeId":  "01cbeb33-9de2-4440-bf81-87236d1d1da4"
+                  }
+              ],
+    "startNodeIds":  [
+                         "d510a086-339d-4070-a015-25a1169106ba"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "d510a086-339d-4070-a015-25a1169106ba",
+                                         "c5b675fc-49fe-4208-a33b-30a73a2d42ff",
+                                         "01cbeb33-9de2-4440-bf81-87236d1d1da4",
+                                         "aa77d3c1-0bc8-4d0c-8a2c-ec0a06ced4b4",
+                                         "cb7cb378-679e-4c61-b6bd-8426725717d3",
+                                         "4a63b2a0-1afd-410f-bde9-d257fd4d72ce"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowDefinition_CleanUp_Execute\r\nNODES=7; EDGES=5\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_CleanupHelper_Execute_Workflow -\u003e WorkflowCount\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_CleanupHelper_Execute_WorkflowView -\u003e WorkflowViewCount\r\n4. ACTION ShowMessageAction: show message (text=Successfully deleted {1} Workflow objects and {2} WorkflowView objects., type=Information, blocking=true)\r\n5. ACTION CloseFormAction: close page\r\n6. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowDefinition_CleanUp_Execute",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "c5b675fc-49fe-4208-a33b-30a73a2d42ff",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_CleanupHelper_Execute_Workflow",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowDefinition_CleanUp_Execute",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "01cbeb33-9de2-4440-bf81-87236d1d1da4",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_CleanupHelper_Execute_WorkflowView",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,393 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                  "stableId":  "cbe7c8ec-4cf5-4af6-9c83-c90f92f56f1e",
+                  "slug":  "workflowcommons-sub-workflowaudittrailrecord-cleanup",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowaudittrailrecord-cleanup.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowaudittrailrecord-cleanup.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflowaudittrailrecord-cleanup.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "cbe7c8ec-4cf5-4af6-9c83-c90f92f56f1e",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "d8e0f512-c36e-4481-9c42-806b37a2a4df",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=WorkflowInstanceCount, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=WorkflowInstanceCount, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "71a6e4af-8d1d-45c7-a2fa-e54302b4e92a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable TotalRecordCount=$TotalRecordCount + $RecordCount",
+                      "detail":  "change variable TotalRecordCount=$TotalRecordCount + $RecordCount",
+                      "loopOwnerId":  "7da54f98-0d7d-4475-8877-bb20468b96fb",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e0d0bf8b-e4f7-4f11-88ec-4aba3083f326",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable TotalWorkflowInstanceCount=$TotalWorkflowInstanceCount + $WorkflowInstanceCount",
+                      "detail":  "change variable TotalWorkflowInstanceCount=$TotalWorkflowInstanceCount + $WorkflowInstanceCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ee27d6e8-ca40-4e2f-8f0d-c3860b428b33",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable Amount=100",
+                      "detail":  "create variable Amount=100",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bb716691-7a1f-4c3a-9646-1682ef6d8666",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable RetentionPeriod=addDays([%CurrentDateTime%],-$RetentionInDays)",
+                      "detail":  "create variable RetentionPeriod=addDays([%CurrentDateTime%],-$RetentionInDays)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "62014544-fb2f-4b23-9eba-79edc0854f83",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable TotalRecordCount=0",
+                      "detail":  "create variable TotalRecordCount=0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "26a1bce0-9a4b-4a97-b8ad-2af714e5ed6b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable TotalWorkflowInstanceCount=0",
+                      "detail":  "create variable TotalWorkflowInstanceCount=0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "64c34e2c-7ba4-4ef4-a4af-3bd09d930d68",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "00241462-b56d-437e-9c0b-e428a05885c3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey -\u003e RecordCount",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey -\u003e RecordCount",
+                      "loopOwnerId":  "7da54f98-0d7d-4475-8877-bb20468b96fb",
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey",
+                                        "sourceNodeId":  "00241462-b56d-437e-9c0b-e428a05885c3"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "b10a031c-1802-4b5e-9862-b09ec59b2e05",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowAuditTrailRecordList from WorkflowCommons.WorkflowAuditTrailRecord",
+                      "detail":  "retrieve WorkflowAuditTrailRecordList from WorkflowCommons.WorkflowAuditTrailRecord",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a2bbd2a9-e013-4497-ac24-be290f60bc9b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b097826a-1802-4e71-ab2d-0d82e9f8d695",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "076b5ee0-ec03-4327-876b-2023d73e41d1",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "More? expression=$WorkflowInstanceCount = $Amount",
+                      "detail":  "More? expression=$WorkflowInstanceCount = $Amount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7da54f98-0d7d-4475-8877-bb20468b96fb",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate WorkflowAuditTrailRecordList as IteratorWorkflowAuditTrailRecord",
+                      "detail":  "iterate WorkflowAuditTrailRecordList as IteratorWorkflowAuditTrailRecord",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "51fa8a4b-5ee6-40a3-b277-55f47df4e637",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "26bbdc93-3ad6-4167-b73d-bb9d455fab7d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ccc9c7ac-5536-45d1-8662-2c4eb62c5fb3",
+                      "originNodeId":  "26bbdc93-3ad6-4167-b73d-bb9d455fab7d",
+                      "destinationNodeId":  "bb716691-7a1f-4c3a-9646-1682ef6d8666",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cc44da90-6273-4ba6-a9a7-276b1310bec2",
+                      "originNodeId":  "b10a031c-1802-4b5e-9862-b09ec59b2e05",
+                      "destinationNodeId":  "7da54f98-0d7d-4475-8877-bb20468b96fb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "616cbeeb-43c6-4e70-bc48-15791fc40da3",
+                      "originNodeId":  "bb716691-7a1f-4c3a-9646-1682ef6d8666",
+                      "destinationNodeId":  "26a1bce0-9a4b-4a97-b8ad-2af714e5ed6b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "77d1bdb0-0e7c-4fe4-ad6a-0ce5ff793366",
+                      "originNodeId":  "7da54f98-0d7d-4475-8877-bb20468b96fb",
+                      "destinationNodeId":  "d8e0f512-c36e-4481-9c42-806b37a2a4df",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cecc535c-17ff-476f-8d47-b5a88380fe24",
+                      "originNodeId":  "ee27d6e8-ca40-4e2f-8f0d-c3860b428b33",
+                      "destinationNodeId":  "b097826a-1802-4e71-ab2d-0d82e9f8d695",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a0afea23-85e6-4444-a32b-e83d0f84562b",
+                      "originNodeId":  "d8e0f512-c36e-4481-9c42-806b37a2a4df",
+                      "destinationNodeId":  "e0d0bf8b-e4f7-4f11-88ec-4aba3083f326",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "69b313e2-8f38-470f-8339-2c5e782befb3",
+                      "originNodeId":  "b097826a-1802-4e71-ab2d-0d82e9f8d695",
+                      "destinationNodeId":  "b10a031c-1802-4b5e-9862-b09ec59b2e05",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b873142f-cae4-4a82-9cfa-abb377cc71af",
+                      "originNodeId":  "26a1bce0-9a4b-4a97-b8ad-2af714e5ed6b",
+                      "destinationNodeId":  "62014544-fb2f-4b23-9eba-79edc0854f83",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7786ccd7-e2fa-4b94-8ac7-23f35685fae0",
+                      "originNodeId":  "62014544-fb2f-4b23-9eba-79edc0854f83",
+                      "destinationNodeId":  "ee27d6e8-ca40-4e2f-8f0d-c3860b428b33",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "89e7fd9c-4eb5-4eb9-a4e6-71585fc76add",
+                      "originNodeId":  "00241462-b56d-437e-9c0b-e428a05885c3",
+                      "destinationNodeId":  "71a6e4af-8d1d-45c7-a2fa-e54302b4e92a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "55cd007a-af30-49c7-8a3e-50d3444049d7",
+                      "originNodeId":  "64c34e2c-7ba4-4ef4-a4af-3bd09d930d68",
+                      "destinationNodeId":  "a2bbd2a9-e013-4497-ac24-be290f60bc9b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ef613822-c757-4a45-ade7-ac4cab398d4f",
+                      "originNodeId":  "076b5ee0-ec03-4327-876b-2023d73e41d1",
+                      "destinationNodeId":  "64c34e2c-7ba4-4ef4-a4af-3bd09d930d68",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5edcb21e-bf48-45cc-af8c-a3a38439c4c9",
+                      "originNodeId":  "e0d0bf8b-e4f7-4f11-88ec-4aba3083f326",
+                      "destinationNodeId":  "076b5ee0-ec03-4327-876b-2023d73e41d1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d123024f-e308-4aef-9c90-3dba3dea6935",
+                      "originNodeId":  "076b5ee0-ec03-4327-876b-2023d73e41d1",
+                      "destinationNodeId":  "b097826a-1802-4e71-ab2d-0d82e9f8d695",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey",
+                      "sourceNodeId":  "00241462-b56d-437e-9c0b-e428a05885c3"
+                  }
+              ],
+    "startNodeIds":  [
+                         "26bbdc93-3ad6-4167-b73d-bb9d455fab7d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "26bbdc93-3ad6-4167-b73d-bb9d455fab7d",
+                                         "bb716691-7a1f-4c3a-9646-1682ef6d8666",
+                                         "26a1bce0-9a4b-4a97-b8ad-2af714e5ed6b",
+                                         "62014544-fb2f-4b23-9eba-79edc0854f83",
+                                         "ee27d6e8-ca40-4e2f-8f0d-c3860b428b33",
+                                         "b097826a-1802-4e71-ab2d-0d82e9f8d695",
+                                         "b10a031c-1802-4b5e-9862-b09ec59b2e05",
+                                         "7da54f98-0d7d-4475-8877-bb20468b96fb",
+                                         "00241462-b56d-437e-9c0b-e428a05885c3",
+                                         "71a6e4af-8d1d-45c7-a2fa-e54302b4e92a",
+                                         "d8e0f512-c36e-4481-9c42-806b37a2a4df",
+                                         "e0d0bf8b-e4f7-4f11-88ec-4aba3083f326",
+                                         "076b5ee0-ec03-4327-876b-2023d73e41d1",
+                                         "64c34e2c-7ba4-4ef4-a4af-3bd09d930d68",
+                                         "a2bbd2a9-e013-4497-ac24-be290f60bc9b"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp\r\nNODES=14; EDGES=13\r\n1. START\r\n2. ACTION CreateVariableAction: create variable RetentionPeriod=addDays([%CurrentDateTime%],-$RetentionInDays)\r\n3. ACTION CreateVariableAction: create variable TotalWorkflowInstanceCount=0\r\n4. ACTION CreateVariableAction: create variable TotalRecordCount=0\r\n5. ACTION CreateVariableAction: create variable Amount=100\r\n6. NODE ExclusiveMerge: ExclusiveMerge\r\n7. ACTION RetrieveAction: retrieve WorkflowAuditTrailRecordList from WorkflowCommons.WorkflowAuditTrailRecord\r\n8. LOOP iterate WorkflowAuditTrailRecordList as IteratorWorkflowAuditTrailRecord\r\n  9. LOOP BODY\r\n    10. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey -\u003e RecordCount\r\n    11. ACTION ChangeVariableAction: change variable TotalRecordCount=$TotalRecordCount + $RecordCount\r\n12. ACTION AggregateListAction: AggregateListAction (output=WorkflowInstanceCount, errorHandlingType=Rollback)\r\n13. ACTION ChangeVariableAction: change variable TotalWorkflowInstanceCount=$TotalWorkflowInstanceCount + $WorkflowInstanceCount\r\n14. DECISION More? expression=$WorkflowInstanceCount = $Amount\r\n15. BRANCH when EnumerationCase=true\r\n  16. GOTO ExclusiveMerge // cycle\r\n17. BRANCH when EnumerationCase=false\r\n  18. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  19. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SE_WorkflowAuditTrailRecord_CleanUp",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "fa5552f3-4466-475e-be4f-1975347f5220",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "00241462-b56d-437e-9c0b-e428a05885c3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey",
+                          "isInternal":  true
+                      }
+                  ]
+}

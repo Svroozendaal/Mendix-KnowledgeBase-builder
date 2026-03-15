@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.Workflow_JumpTo_Options",
+                  "stableId":  "WorkflowCommons.Workflow_JumpTo_Options",
+                  "slug":  "workflowcommons-workflow-jumpto-options",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflow-jumpto-options.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflow-jumpto-options.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/workflowcommons-workflow-jumpto-options.json",
+                  "l2Logical":  "page:WorkflowCommons.Workflow_JumpTo_Options",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/INDEX.json"
+              },
+    "qualifiedName":  "WorkflowCommons.Workflow_JumpTo_Options",
+    "name":  "Workflow_JumpTo_Options",
+    "title":  "Jump to activity",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "WorkflowJumpToDetails",
+                           "entityType":  "System.WorkflowJumpToDetails"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

@@ -1,0 +1,141 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_AuditTrailViewer",
+                  "stableId":  "28010f5b-2674-4cea-a0e1-c0513cd34b9c",
+                  "slug":  "workflowcommons-ds-audittrailviewer",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-audittrailviewer.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-audittrailviewer.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-audittrailviewer.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_AuditTrailViewer",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "28010f5b-2674-4cea-a0e1-c0513cd34b9c",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.DS_AuditTrailViewer",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "a9721078-9249-40ea-b544-c647bb01901d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.AuditTrailViewer as NewAuditTrailViewer",
+                      "detail":  "create WorkflowCommons.AuditTrailViewer as NewAuditTrailViewer",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "21df84ce-28bd-4077-bf6c-a921598906f4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "NanoflowCallAction: call nanoflow WorkflowCommons.SUB_AuditTrailViewer_Default",
+                      "detail":  "call nanoflow WorkflowCommons.SUB_AuditTrailViewer_Default",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Nanoflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_AuditTrailViewer_Default",
+                                        "sourceNodeId":  "21df84ce-28bd-4077-bf6c-a921598906f4"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "cf08d8ca-2904-43eb-a9ef-2fea5a3db49f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "76bce497-9421-4966-8bf5-c79417f678ed",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "99ab28b9-4aa5-4a77-b5fd-cccfee65de56",
+                      "originNodeId":  "76bce497-9421-4966-8bf5-c79417f678ed",
+                      "destinationNodeId":  "a9721078-9249-40ea-b544-c647bb01901d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e9d109c9-7f7d-4914-be00-e5fc0d8f3472",
+                      "originNodeId":  "a9721078-9249-40ea-b544-c647bb01901d",
+                      "destinationNodeId":  "21df84ce-28bd-4077-bf6c-a921598906f4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c6f1dddf-2a51-4f0b-b20e-ab0fabacd1bb",
+                      "originNodeId":  "21df84ce-28bd-4077-bf6c-a921598906f4",
+                      "destinationNodeId":  "cf08d8ca-2904-43eb-a9ef-2fea5a3db49f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Nanoflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_AuditTrailViewer_Default",
+                      "sourceNodeId":  "21df84ce-28bd-4077-bf6c-a921598906f4"
+                  }
+              ],
+    "startNodeIds":  [
+                         "76bce497-9421-4966-8bf5-c79417f678ed"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "76bce497-9421-4966-8bf5-c79417f678ed",
+                                         "a9721078-9249-40ea-b544-c647bb01901d",
+                                         "21df84ce-28bd-4077-bf6c-a921598906f4",
+                                         "cf08d8ca-2904-43eb-a9ef-2fea5a3db49f"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.DS_AuditTrailViewer\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create WorkflowCommons.AuditTrailViewer as NewAuditTrailViewer\r\n3. ACTION NanoflowCallAction: call nanoflow WorkflowCommons.SUB_AuditTrailViewer_Default\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_AuditTrailViewer",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Nanoflow",
+                          "sourceNodeId":  "21df84ce-28bd-4077-bf6c-a921598906f4",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_AuditTrailViewer_Default",
+                          "isInternal":  true
+                      }
+                  ]
+}

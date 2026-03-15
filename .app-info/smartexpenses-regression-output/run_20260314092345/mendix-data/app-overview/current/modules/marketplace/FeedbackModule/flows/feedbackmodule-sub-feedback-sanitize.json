@@ -1,0 +1,323 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.SUB_Feedback_Sanitize",
+                  "stableId":  "dfdadaa6-381b-4f63-96d2-f1710eb151ac",
+                  "slug":  "feedbackmodule-sub-feedback-sanitize",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-sub-feedback-sanitize.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-sub-feedback-sanitize.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-sub-feedback-sanitize.json",
+                  "l2Logical":  "flow:FeedbackModule.SUB_Feedback_Sanitize",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "dfdadaa6-381b-4f63-96d2-f1710eb151ac",
+    "kind":  "Microflow",
+    "qualifiedName":  "FeedbackModule.SUB_Feedback_Sanitize",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "aaee993a-b74b-4c22-9628-fd5a292fb489",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Feedback (Subject=$SanitizedSubject, Description=$SanitizedDescription, SubmitterUUID=$SanitizedSubmitterUUID, SubmitterEmail=$SanitizedSubmitterEmail, SubmitterDisplayName=$SanitizedSubmitterDisplayName, ActiveUserRoles=$SanitizedActiveUserRoles, PageName=$SanitizedPageName, Browser=$SanitizedBrowser, +1 more; refreshInClient=false)",
+                      "detail":  "change Feedback (Subject=$SanitizedSubject, Description=$SanitizedDescription, SubmitterUUID=$SanitizedSubmitterUUID, SubmitterEmail=$SanitizedSubmitterEmail, SubmitterDisplayName=$SanitizedSubmitterDisplayName, ActiveUserRoles=$SanitizedActiveUserRoles, PageName=$SanitizedPageName, Browser=$SanitizedBrowser, +1 more; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2986836f-fc03-43a3-9e09-afb20465666b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedActiveUserRoles",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedActiveUserRoles",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedBrowser",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedBrowser",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedDescription",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedDescription",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d8244b5a-c63f-4994-919e-05e55502ba1a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedEnvironmentURL",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedEnvironmentURL",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedPageName",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedPageName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubject",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubject",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterDisplayName",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterDisplayName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterEmail",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterEmail",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterUUID",
+                      "detail":  "call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterUUID",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5d35478a-9d7e-4f10-81fc-7208e994f7cc",
+                      "nodeType":  "Annotation",
+                      "label":  "The feedback is sanitized to prevent XSS.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5e5013c2-f058-4e31-a7e8-1f186f87f1d7",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9f0118ac-8121-41d8-8614-1f47376b2905",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "979dfa01-10e3-483c-afb7-89a9f3cfa00c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "8f0e279e-714a-4415-9526-3246e08adb96",
+                      "originNodeId":  "979dfa01-10e3-483c-afb7-89a9f3cfa00c",
+                      "destinationNodeId":  "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2ac6df9b-3a40-489c-928d-5a44f6a2f889",
+                      "originNodeId":  "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+                      "destinationNodeId":  "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "dd8eac8e-43bd-41be-993a-53b5877c93d9",
+                      "originNodeId":  "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+                      "destinationNodeId":  "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4724c795-ae35-4d23-819d-b13ecd239284",
+                      "originNodeId":  "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+                      "destinationNodeId":  "d8244b5a-c63f-4994-919e-05e55502ba1a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "03e65938-e917-40dc-a331-fa3b3cec2b49",
+                      "originNodeId":  "d8244b5a-c63f-4994-919e-05e55502ba1a",
+                      "destinationNodeId":  "2986836f-fc03-43a3-9e09-afb20465666b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "abab6cb2-35ab-429e-9ebb-0c0f3b27d15e",
+                      "originNodeId":  "2986836f-fc03-43a3-9e09-afb20465666b",
+                      "destinationNodeId":  "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2f67c0a4-6213-4925-9f40-56f2fd4e8690",
+                      "originNodeId":  "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+                      "destinationNodeId":  "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f8a9bb9f-a7df-4053-a0a5-598bb2d46a08",
+                      "originNodeId":  "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+                      "destinationNodeId":  "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1c80f0e1-5a23-4ee4-9044-3b66fcc661bf",
+                      "originNodeId":  "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+                      "destinationNodeId":  "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3c3d05b0-b08b-4901-95fa-b002cf4a826f",
+                      "originNodeId":  "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+                      "destinationNodeId":  "aaee993a-b74b-4c22-9628-fd5a292fb489",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9ad19ccf-0133-4cfe-bb7a-4a19d828d0fa",
+                      "originNodeId":  "aaee993a-b74b-4c22-9628-fd5a292fb489",
+                      "destinationNodeId":  "5e5013c2-f058-4e31-a7e8-1f186f87f1d7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "979dfa01-10e3-483c-afb7-89a9f3cfa00c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "979dfa01-10e3-483c-afb7-89a9f3cfa00c",
+                                         "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+                                         "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+                                         "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+                                         "d8244b5a-c63f-4994-919e-05e55502ba1a",
+                                         "2986836f-fc03-43a3-9e09-afb20465666b",
+                                         "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+                                         "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+                                         "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+                                         "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+                                         "aaee993a-b74b-4c22-9628-fd5a292fb489",
+                                         "5e5013c2-f058-4e31-a7e8-1f186f87f1d7"
+                                     ],
+    "pseudocode":  "FLOW Microflow: FeedbackModule.SUB_Feedback_Sanitize\r\nNODES=14; EDGES=11\r\n1. START\r\n2. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubject\r\n3. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedDescription\r\n4. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedBrowser\r\n5. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedEnvironmentURL\r\n6. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedActiveUserRoles\r\n7. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedPageName\r\n8. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterDisplayName\r\n9. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterEmail\r\n10. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003e SanitizedSubmitterUUID\r\n11. ACTION ChangeObjectAction: change Feedback (Subject=$SanitizedSubject, Description=$SanitizedDescription, SubmitterUUID=$SanitizedSubmitterUUID, SubmitterEmail=$SanitizedSubmitterEmail, SubmitterDisplayName=$SanitizedSubmitterDisplayName, ActiveUserRoles=$SanitizedActiveUserRoles, PageName=$SanitizedPageName, Browser=$SanitizedBrowser, +1 more; refreshInClient=false)\r\n12. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "FeedbackModule",
+                          "callerFlow":  "FeedbackModule.SUB_Feedback_SendToServer",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "d393115b-6aed-4f76-92a3-fe1cba48a22a",
+                          "targetModule":  "FeedbackModule",
+                          "targetFlow":  "FeedbackModule.SUB_Feedback_Sanitize",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.TemplateDocument_NewEdit",
+                  "stableId":  "ExcelImporter.TemplateDocument_NewEdit",
+                  "slug":  "excelimporter-templatedocument-newedit",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-templatedocument-newedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-templatedocument-newedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/pages/excelimporter-templatedocument-newedit.json",
+                  "l2Logical":  "page:ExcelImporter.TemplateDocument_NewEdit",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/pages/INDEX.json"
+              },
+    "qualifiedName":  "ExcelImporter.TemplateDocument_NewEdit",
+    "name":  "TemplateDocument_NewEdit",
+    "title":  "Edit Template document",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "ExcelImporter.Configurator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "TemplateDocument",
+                           "entityType":  "ExcelImporter.TemplateDocument"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

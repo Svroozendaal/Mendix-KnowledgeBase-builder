@@ -1,0 +1,1169 @@
+{
+  "module": "ExcelImporter",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "ExcelImporter.AdditionalProperties",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CommitUnchangedObjects_MainObject",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "IgnoreEmptyKeys",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "PrintNotFoundMessages_MainObject",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "PrintStatisticsMessages",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "RemoveUnsyncedObjects",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ResetEmptyAssociations",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ExcelImporter.Configurator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.PrintStatisticsMessages",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.PrintNotFoundMessages_MainObject",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.IgnoreEmptyKeys",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.CommitUnchangedObjects_MainObject",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.RemoveUnsyncedObjects",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.ResetEmptyAssociations",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template_AdditionalProperties",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties_MxObjectMember_RemoveIndicator",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "ExcelImporter.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.PrintStatisticsMessages",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.PrintNotFoundMessages_MainObject",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.IgnoreEmptyKeys",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.CommitUnchangedObjects_MainObject",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.RemoveUnsyncedObjects",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties.ResetEmptyAssociations",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template_AdditionalProperties",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.AdditionalProperties_MxObjectMember_RemoveIndicator",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ExcelImporter.Column",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AttributeTypeEnum",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "CaseSensitive",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ColNumber",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "DataSource",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Details",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindAttribute",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindMicroflow",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindObjectType",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FindReference",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "InputMask",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "IsKey",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "IsReferenceKey",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "MappingType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Status",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Text",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ExcelImporter.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.Column.ColNumber",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.Text",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.MappingType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.IsKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.IsReferenceKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.Details",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.CaseSensitive",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindObjectType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindMicroflow",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.DataSource",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.AttributeTypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column.InputMask",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_Template",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MasterColumn",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectType_Reference",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectMember",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectMember_Reference",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectReference",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_Microflows",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Column_ValueType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "ExcelImporter.Configurator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.Column.ColNumber",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.Text",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.MappingType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.IsKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.IsReferenceKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.Details",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.CaseSensitive",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindReference",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindObjectType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.FindMicroflow",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.DataSource",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.AttributeTypeEnum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column.InputMask",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_Template",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MasterColumn",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectType_Reference",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectMember",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectMember_Reference",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_MxObjectReference",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_Microflows",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Column_ValueType",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ExcelImporter.Log",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Logline",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ExcelImporter.Configurator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.Log.Logline",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Log_XMLDocumentTemplate",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ExcelImporter.ReferenceHandling",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CommitUnchangedObjects",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "DataHandling",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Handling",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "IgnoreEmptyKeys",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "PrintNotFoundMessages",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ExcelImporter.Configurator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.Handling",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.DataHandling",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.PrintNotFoundMessages",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.CommitUnchangedObjects",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.IgnoreEmptyKeys",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling_Template",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling_MxObjectReference",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "ExcelImporter.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.Handling",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.DataHandling",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.PrintNotFoundMessages",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.CommitUnchangedObjects",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling.IgnoreEmptyKeys",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling_Template",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.ReferenceHandling_MxObjectReference",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ExcelImporter.Template",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FirstDataRowNumber",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "HeaderRowNumber",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "ImportAction",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Nr",
+            "type": "AutoNumberAttributeType"
+          },
+          {
+            "name": "SheetIndex",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "Status",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "TemplateType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Title",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ExcelImporter.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.Template.Nr",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.Title",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.SheetIndex",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.HeaderRowNumber",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.FirstDataRowNumber",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.ImportAction",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.TemplateType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template_AdditionalProperties",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template_MasterTemplate",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template_MxObjectReference_ParentAssociation",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "ExcelImporter.Configurator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ExcelImporter.Template.Nr",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.Template.Title",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template.SheetIndex",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template.HeaderRowNumber",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template.FirstDataRowNumber",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template.ImportAction",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template.TemplateType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template_AdditionalProperties",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template_MasterTemplate",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template_MxObjectType",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ExcelImporter.Template_MxObjectReference_ParentAssociation",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ExcelImporter.TemplateDocument",
+        "isPersistable": true,
+        "generalization": "System.FileDocument",
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ExcelImporter.Configurator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.TemplateDocument_Template",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "ExcelImporter.Readonly"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.TemplateDocument_Template",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ExcelImporter.XMLDocumentTemplate",
+        "isPersistable": true,
+        "generalization": "System.FileDocument",
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ExcelImporter.Configurator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ExcelImporter.XMLDocumentTemplate_Template",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "associations": [
+      {
+        "name": "ExcelImporter.Column_MasterColumn",
+        "parentEntity": "ExcelImporter.Column",
+        "childEntity": "ExcelImporter.Column",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ExcelImporter.Column_Template",
+        "parentEntity": "ExcelImporter.Column",
+        "childEntity": "ExcelImporter.Template",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ExcelImporter.Log_XMLDocumentTemplate",
+        "parentEntity": "ExcelImporter.Log",
+        "childEntity": "ExcelImporter.XMLDocumentTemplate",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ExcelImporter.ReferenceHandling_Template",
+        "parentEntity": "ExcelImporter.ReferenceHandling",
+        "childEntity": "ExcelImporter.Template",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ExcelImporter.TemplateDocument_Template",
+        "parentEntity": "ExcelImporter.TemplateDocument",
+        "childEntity": "ExcelImporter.Template",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ExcelImporter.Template_AdditionalProperties",
+        "parentEntity": "ExcelImporter.Template",
+        "childEntity": "ExcelImporter.AdditionalProperties",
+        "cardinality": "1-1",
+        "type": "Reference",
+        "owner": "Both",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ExcelImporter.Template_MasterTemplate",
+        "parentEntity": "ExcelImporter.Template",
+        "childEntity": "ExcelImporter.Template",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ExcelImporter.XMLDocumentTemplate_Template",
+        "parentEntity": "ExcelImporter.XMLDocumentTemplate",
+        "childEntity": "ExcelImporter.Template",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      }
+    ],
+    "enumerations": [
+      {
+        "name": "ExcelImporter.DataSource",
+        "values": [
+          "CellValue",
+          "DocumentPropertyRowNr",
+          "DocumentPropertySheetNr",
+          "StaticValue"
+        ]
+      },
+      {
+        "name": "ExcelImporter.ImportActions",
+        "values": [
+          "CreateObjects",
+          "OnlyCreateNewObjects",
+          "SynchronizeObjects",
+          "SynchronizeOnlyExisting"
+        ]
+      },
+      {
+        "name": "ExcelImporter.MappingType",
+        "values": [
+          "Attribute",
+          "DoNotUse",
+          "Reference"
+        ]
+      },
+      {
+        "name": "ExcelImporter.ReferenceDataHandling",
+        "values": [
+          "Append",
+          "Overwrite"
+        ]
+      },
+      {
+        "name": "ExcelImporter.ReferenceHandlingEnum",
+        "values": [
+          "CreateEverything",
+          "FindCreate",
+          "FindIgnore",
+          "OnlyCreateNewObjects"
+        ]
+      },
+      {
+        "name": "ExcelImporter.ReferenceKeyType",
+        "values": [
+          "NoKey",
+          "YesMainAndAssociatedObject",
+          "YesOnlyAssociatedObject",
+          "YesOnlyMainObject"
+        ]
+      },
+      {
+        "name": "ExcelImporter.RemoveIndicator",
+        "values": [
+          "Nothing",
+          "RemoveUnchangedObjects",
+          "TrackChanges"
+        ]
+      },
+      {
+        "name": "ExcelImporter.StatisticsLevel",
+        "values": [
+          "AllStatistics",
+          "NoStatistics",
+          "OnlyFinalStatistics"
+        ]
+      },
+      {
+        "name": "ExcelImporter.Status",
+        "values": [
+          "INFO",
+          "INVALID",
+          "VALID"
+        ]
+      },
+      {
+        "name": "ExcelImporter.TemplateType",
+        "values": [
+          "Normal",
+          "Wizard"
+        ]
+      },
+      {
+        "name": "ExcelImporter.ValidationResult",
+        "values": [
+          "InvalidAttribute",
+          "InvalidAutoNumberSelection",
+          "InvalidReference",
+          "InvalidReferencedObject",
+          "NoAssociationKeys",
+          "NoAttributeSelected",
+          "NoReferencedObjectSelected",
+          "NoReferenceSelected",
+          "UnUsed",
+          "ValidAttribute",
+          "ValidReference"
+        ]
+      },
+      {
+        "name": "ExcelImporter.ValidationResult2",
+        "values": [
+          "NoInputParams",
+          "Valid",
+          "WrongNrOfInputParams",
+          "WrongReturnType"
+        ]
+      },
+      {
+        "name": "ExcelImporter.YesNo",
+        "values": [
+          "No",
+          "Yes"
+        ]
+      }
+    ]
+  }
+}

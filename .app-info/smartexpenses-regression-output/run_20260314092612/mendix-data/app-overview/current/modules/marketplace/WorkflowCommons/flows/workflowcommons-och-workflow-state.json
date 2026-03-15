@@ -1,0 +1,173 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.OCh_Workflow_State",
+                  "stableId":  "7895c6a3-0dfa-46eb-832f-27430e14b2bf",
+                  "slug":  "workflowcommons-och-workflow-state",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-workflow-state.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-workflow-state.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-och-workflow-state.json",
+                  "l2Logical":  "flow:WorkflowCommons.OCh_Workflow_State",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "7895c6a3-0dfa-46eb-832f-27430e14b2bf",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.OCh_Workflow_State",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "260673d9-0368-4591-ab3d-0a3fd59b8933",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change WorkflowView (EndTime=$Workflow/EndTime, DueDate=$Workflow/DueDate, State=$Workflow/State, Reason=$Workflow/Reason; refreshInClient=true)",
+                      "detail":  "change WorkflowView (EndTime=$Workflow/EndTime, DueDate=$Workflow/DueDate, State=$Workflow/State, Reason=$Workflow/Reason; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c0ff227e-7682-46fb-9ed6-0b8452285dc2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowView_FindOrCreate -\u003e WorkflowView",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowView_FindOrCreate -\u003e WorkflowView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                                        "sourceNodeId":  "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "9fd754e0-eba0-40b2-9f40-43fc1a12d183",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "09d08e82-bd3d-4eff-b0a5-eea7a2afd343",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a55a4233-ef75-4c0e-8695-fb2c310b4aea",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "19ffde09-acf3-4aa7-a415-850ad040c9e1",
+                      "originNodeId":  "a55a4233-ef75-4c0e-8695-fb2c310b4aea",
+                      "destinationNodeId":  "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8a1332ec-0030-43ed-b63b-77498bd318da",
+                      "originNodeId":  "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3",
+                      "destinationNodeId":  "c0ff227e-7682-46fb-9ed6-0b8452285dc2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4a99e633-cb32-4e55-8528-b0e1c13e9599",
+                      "originNodeId":  "260673d9-0368-4591-ab3d-0a3fd59b8933",
+                      "destinationNodeId":  "9fd754e0-eba0-40b2-9f40-43fc1a12d183",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f003d0ae-7f87-4459-ad93-e61874c06697",
+                      "originNodeId":  "c0ff227e-7682-46fb-9ed6-0b8452285dc2",
+                      "destinationNodeId":  "260673d9-0368-4591-ab3d-0a3fd59b8933",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                      "sourceNodeId":  "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3"
+                  }
+              ],
+    "startNodeIds":  [
+                         "a55a4233-ef75-4c0e-8695-fb2c310b4aea"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "a55a4233-ef75-4c0e-8695-fb2c310b4aea",
+                                         "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3",
+                                         "c0ff227e-7682-46fb-9ed6-0b8452285dc2",
+                                         "260673d9-0368-4591-ab3d-0a3fd59b8933",
+                                         "9fd754e0-eba0-40b2-9f40-43fc1a12d183"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.OCh_Workflow_State\r\nNODES=6; EDGES=4\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowView_FindOrCreate -\u003e WorkflowView\r\n3. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n4. ACTION ChangeObjectAction: change WorkflowView (EndTime=$Workflow/EndTime, DueDate=$Workflow/DueDate, State=$Workflow/State, Reason=$Workflow/Reason; refreshInClient=true)\r\n5. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.OCh_Workflow_State",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

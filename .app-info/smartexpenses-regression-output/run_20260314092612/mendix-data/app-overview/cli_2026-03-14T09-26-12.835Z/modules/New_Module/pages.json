@@ -1,0 +1,37 @@
+{
+  "module": "New_Module",
+  "pages": [
+    {
+      "qualifiedName": "New_Module.Pagina_test",
+      "name": "Pagina_test",
+      "title": "Pagina test",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [],
+      "parameters": [
+        {
+          "name": "Entity2",
+          "entityType": "New_Module.Entity2"
+        }
+      ],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    }
+  ],
+  "snippets": [
+    {
+      "qualifiedName": "New_Module.SNP_testsnippet",
+      "name": "SNP_testsnippet",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "GeneralizationEntityImage",
+          "entityType": "New_Module.GeneralizationEntityImage"
+        }
+      ]
+    }
+  ]
+}

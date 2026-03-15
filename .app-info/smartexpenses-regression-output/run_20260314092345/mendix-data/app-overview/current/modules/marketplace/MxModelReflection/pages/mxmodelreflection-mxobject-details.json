@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.MxObject_Details",
+                  "stableId":  "MxModelReflection.MxObject_Details",
+                  "slug":  "mxmodelreflection-mxobject-details",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-mxobject-details.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-mxobject-details.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/pages/mxmodelreflection-mxobject-details.json",
+                  "l2Logical":  "page:MxModelReflection.MxObject_Details",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/pages/INDEX.json"
+              },
+    "qualifiedName":  "MxModelReflection.MxObject_Details",
+    "name":  "MxObject_Details",
+    "title":  "Object details",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "MxModelReflection.ModelAdministrator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "MxObjectType",
+                           "entityType":  "MxModelReflection.MxObjectType"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  1000,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

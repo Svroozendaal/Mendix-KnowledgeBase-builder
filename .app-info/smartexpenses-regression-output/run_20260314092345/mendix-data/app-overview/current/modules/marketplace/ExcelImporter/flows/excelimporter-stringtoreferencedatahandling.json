@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.StringToReferenceDataHandling",
+                  "stableId":  "c5c4ae5c-8a9a-4d1d-8ba7-6b87fe212c59",
+                  "slug":  "excelimporter-stringtoreferencedatahandling",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtoreferencedatahandling.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtoreferencedatahandling.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-stringtoreferencedatahandling.json",
+                  "l2Logical":  "flow:ExcelImporter.StringToReferenceDataHandling",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "c5c4ae5c-8a9a-4d1d-8ba7-6b87fe212c59",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.StringToReferenceDataHandling",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "4c97aae1-cfe3-4d25-be8b-b3a60ff43da6",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "753957dc-5767-49e2-a699-b0ec5ddd9151",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a2ca8a4d-955c-4b08-b651-b81f42a03d4c",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=toString( ExcelImporter.ReferenceDataHandling.Overwrite ) = $DataHandling",
+                      "detail":  "expression=toString( ExcelImporter.ReferenceDataHandling.Overwrite ) = $DataHandling",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c2ac7806-9c45-42d8-a777-ccf2a5e7a388",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ba7f2434-4c1e-4760-8b60-a921dd5620c5",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ab261d43-e8a5-4c7e-9ded-ca25fd51d713",
+                      "originNodeId":  "a2ca8a4d-955c-4b08-b651-b81f42a03d4c",
+                      "destinationNodeId":  "753957dc-5767-49e2-a699-b0ec5ddd9151",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0b98ae8f-d0d0-48b8-a8c4-d470c234154f",
+                      "originNodeId":  "ba7f2434-4c1e-4760-8b60-a921dd5620c5",
+                      "destinationNodeId":  "a2ca8a4d-955c-4b08-b651-b81f42a03d4c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ba9ab396-abbe-4d2c-9527-79944d57b5c2",
+                      "originNodeId":  "a2ca8a4d-955c-4b08-b651-b81f42a03d4c",
+                      "destinationNodeId":  "4c97aae1-cfe3-4d25-be8b-b3a60ff43da6",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "ba7f2434-4c1e-4760-8b60-a921dd5620c5"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "ba7f2434-4c1e-4760-8b60-a921dd5620c5",
+                                         "a2ca8a4d-955c-4b08-b651-b81f42a03d4c",
+                                         "753957dc-5767-49e2-a699-b0ec5ddd9151",
+                                         "4c97aae1-cfe3-4d25-be8b-b3a60ff43da6"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.StringToReferenceDataHandling\r\nNODES=5; EDGES=3\r\n1. START\r\n2. DECISION expression=toString( ExcelImporter.ReferenceDataHandling.Overwrite ) = $DataHandling\r\n3. BRANCH when EnumerationCase=true\r\n  4. END\r\n5. BRANCH when EnumerationCase=false\r\n  6. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

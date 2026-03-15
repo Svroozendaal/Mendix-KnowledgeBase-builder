@@ -1,0 +1,209 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_TaskAssignmentHelper_Reassign_Show",
+                  "stableId":  "153f8d01-aeba-48e4-9803-99d89ebd93c2",
+                  "slug":  "workflowcommons-act-taskassignmenthelper-reassign-show",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskassignmenthelper-reassign-show.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskassignmenthelper-reassign-show.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-taskassignmenthelper-reassign-show.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_TaskAssignmentHelper_Reassign_Show",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "153f8d01-aeba-48e4-9803-99d89ebd93c2",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_TaskAssignmentHelper_Reassign_Show",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "6333ef51-ca51-4486-b690-f4b83e6e42c3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change TaskAssignmentHelper (TaskAssignmentHelper_WorkflowUserTask=$WorkflowUserTaskList; refreshInClient=false)",
+                      "detail":  "change TaskAssignmentHelper (TaskAssignmentHelper_WorkflowUserTask=$WorkflowUserTaskList; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ea07e87a-af1a-4e3e-b62b-fdc20c832881",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=Select one or more tasks to continue., type=Error, blocking=true)",
+                      "detail":  "show message (text=Select one or more tasks to continue., type=Error, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0994fdb9-88b9-44a4-8424-8534056fee3e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page WorkflowCommons.TaskAssignmentHelper_UserTask_Reassign",
+                      "detail":  "show page WorkflowCommons.TaskAssignmentHelper_UserTask_Reassign",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6253c0c0-a991-4d5a-b1aa-63fe9a78998a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d0b33474-00e7-4655-bfe0-380fbaa7480a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7dc4e70b-5144-45c3-a4d0-fb7ae8f40985",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Task selected? expression=$WorkflowUserTaskList != empty",
+                      "detail":  "Task selected? expression=$WorkflowUserTaskList != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0aa8e6e2-81bc-43f0-86e4-dfba977917e2",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8c7bf8d3-4e9c-4546-af62-16f19ac43cd5",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f74377e0-1590-40ee-a377-419958de6873",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "5e0cade0-69cc-401a-acf8-d0ff9ddd0dc3",
+                      "originNodeId":  "f74377e0-1590-40ee-a377-419958de6873",
+                      "destinationNodeId":  "7dc4e70b-5144-45c3-a4d0-fb7ae8f40985",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9e0dea18-1fa1-4aef-b663-f4f707aee19e",
+                      "originNodeId":  "0994fdb9-88b9-44a4-8424-8534056fee3e",
+                      "destinationNodeId":  "6253c0c0-a991-4d5a-b1aa-63fe9a78998a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "61996251-1103-4fc8-ad00-de2797922ddc",
+                      "originNodeId":  "6333ef51-ca51-4486-b690-f4b83e6e42c3",
+                      "destinationNodeId":  "0994fdb9-88b9-44a4-8424-8534056fee3e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3f1ebae7-2e45-44fd-8a5e-5a79dc3899bc",
+                      "originNodeId":  "ea07e87a-af1a-4e3e-b62b-fdc20c832881",
+                      "destinationNodeId":  "d0b33474-00e7-4655-bfe0-380fbaa7480a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "031001da-c87d-4c62-9182-f173cff20724",
+                      "originNodeId":  "7dc4e70b-5144-45c3-a4d0-fb7ae8f40985",
+                      "destinationNodeId":  "ea07e87a-af1a-4e3e-b62b-fdc20c832881",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "38aa8cc2-af7c-4634-af1e-4b4bf5854f65",
+                      "originNodeId":  "7dc4e70b-5144-45c3-a4d0-fb7ae8f40985",
+                      "destinationNodeId":  "6333ef51-ca51-4486-b690-f4b83e6e42c3",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "f74377e0-1590-40ee-a377-419958de6873"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "f74377e0-1590-40ee-a377-419958de6873",
+                                         "7dc4e70b-5144-45c3-a4d0-fb7ae8f40985",
+                                         "6333ef51-ca51-4486-b690-f4b83e6e42c3",
+                                         "0994fdb9-88b9-44a4-8424-8534056fee3e",
+                                         "6253c0c0-a991-4d5a-b1aa-63fe9a78998a",
+                                         "ea07e87a-af1a-4e3e-b62b-fdc20c832881",
+                                         "d0b33474-00e7-4655-bfe0-380fbaa7480a"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_TaskAssignmentHelper_Reassign_Show\r\nNODES=9; EDGES=6\r\n1. START\r\n2. DECISION Task selected? expression=$WorkflowUserTaskList != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION ChangeObjectAction: change TaskAssignmentHelper (TaskAssignmentHelper_WorkflowUserTask=$WorkflowUserTaskList; refreshInClient=false)\r\n  5. ACTION ShowPageAction: show page WorkflowCommons.TaskAssignmentHelper_UserTask_Reassign\r\n  6. END\r\n7. BRANCH when EnumerationCase=false\r\n  8. ACTION ShowMessageAction: show message (text=Select one or more tasks to continue., type=Error, blocking=true)\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

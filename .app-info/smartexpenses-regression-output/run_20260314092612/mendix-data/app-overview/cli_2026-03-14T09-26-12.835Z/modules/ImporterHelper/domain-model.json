@@ -1,0 +1,182 @@
+{
+  "module": "ImporterHelper",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "ImporterHelper.ExcelFileImport",
+        "isPersistable": true,
+        "generalization": "System.FileDocument",
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ImporterHelper.ExcelImporter"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ImporterHelper.ImportTransaction",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Bedrag",
+            "type": "DecimalAttributeType"
+          },
+          {
+            "name": "Datum",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Number",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "Omschrijving",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Tegenpartij",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Transactiereferentie",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ImporterHelper.ExcelImporter",
+              "ImporterHelper.RESTImporter"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ImporterHelper.ImportTransaction.Datum",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ImporterHelper.ImportTransaction.Bedrag",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ImporterHelper.ImportTransaction.Tegenpartij",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ImporterHelper.ImportTransaction.Transactiereferentie",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ImporterHelper.ImportTransaction.Omschrijving",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "ImporterHelper.ImportTransaction.Number",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "ImporterHelper.ImportTransaction_ImportTransactionHelper",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ImporterHelper.ImportTransactionHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "ImporterHelper.ExcelImporter",
+              "ImporterHelper.RESTImporter"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "ImporterHelper.ImportTransactionHelper_ExcelFileImport",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "associations": [
+      {
+        "name": "ImporterHelper.ImportTransactionHelper_ExcelFileImport",
+        "parentEntity": "ImporterHelper.ImportTransactionHelper",
+        "childEntity": "ImporterHelper.ExcelFileImport",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "ImporterHelper.ImportTransaction_ImportTransactionHelper",
+        "parentEntity": "ImporterHelper.ImportTransaction",
+        "childEntity": "ImporterHelper.ImportTransactionHelper",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      }
+    ],
+    "enumerations": []
+  }
+}

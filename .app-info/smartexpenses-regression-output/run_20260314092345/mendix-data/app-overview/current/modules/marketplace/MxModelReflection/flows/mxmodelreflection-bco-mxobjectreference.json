@@ -1,0 +1,156 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.BCo_MxObjectReference",
+                  "stableId":  "f9e73d76-ebee-4630-9d21-4d22217bbf3e",
+                  "slug":  "mxmodelreflection-bco-mxobjectreference",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bco-mxobjectreference.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bco-mxobjectreference.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-bco-mxobjectreference.json",
+                  "l2Logical":  "flow:MxModelReflection.BCo_MxObjectReference",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "f9e73d76-ebee-4630-9d21-4d22217bbf3e",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.BCo_MxObjectReference",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "fd98612b-b6e2-4f11-9a0c-30f520f79b0d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change MxObjectReference (ReadableName=$MxObjectReference/CompleteName; refreshInClient=false)",
+                      "detail":  "change MxObjectReference (ReadableName=$MxObjectReference/CompleteName; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "540eabe8-a292-4539-a98e-b77ca11536f0",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c9f31b5a-a8a0-42eb-847e-ab8fbb32a389",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "107e7576-0c0d-4d36-bd19-9d7335037687",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "has readable name? expression=$MxObjectReference/ReadableName != empty and $MxObjectReference/ReadableName != \u0027\u0027",
+                      "detail":  "has readable name? expression=$MxObjectReference/ReadableName != empty and $MxObjectReference/ReadableName != \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "707e925d-d22a-4821-9a03-07c49f5a0178",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7835a489-798d-433c-b352-cb1b8012ded0",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "604b51e2-15bb-4468-a909-7f7c21db50c2",
+                      "originNodeId":  "7835a489-798d-433c-b352-cb1b8012ded0",
+                      "destinationNodeId":  "107e7576-0c0d-4d36-bd19-9d7335037687",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6d4f6ca4-fe68-423e-92ad-00ef7164dc6f",
+                      "originNodeId":  "fd98612b-b6e2-4f11-9a0c-30f520f79b0d",
+                      "destinationNodeId":  "540eabe8-a292-4539-a98e-b77ca11536f0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0b82714a-1d5b-483f-9165-7fab14abdfd0",
+                      "originNodeId":  "107e7576-0c0d-4d36-bd19-9d7335037687",
+                      "destinationNodeId":  "fd98612b-b6e2-4f11-9a0c-30f520f79b0d",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "336f6489-f79c-448c-a68d-d8aa99c0178d",
+                      "originNodeId":  "107e7576-0c0d-4d36-bd19-9d7335037687",
+                      "destinationNodeId":  "c9f31b5a-a8a0-42eb-847e-ab8fbb32a389",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "7835a489-798d-433c-b352-cb1b8012ded0"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7835a489-798d-433c-b352-cb1b8012ded0",
+                                         "107e7576-0c0d-4d36-bd19-9d7335037687",
+                                         "fd98612b-b6e2-4f11-9a0c-30f520f79b0d",
+                                         "540eabe8-a292-4539-a98e-b77ca11536f0",
+                                         "c9f31b5a-a8a0-42eb-847e-ab8fbb32a389"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.BCo_MxObjectReference\r\nNODES=6; EDGES=4\r\n1. START\r\n2. DECISION has readable name? expression=$MxObjectReference/ReadableName != empty and $MxObjectReference/ReadableName != \u0027\u0027\r\n3. BRANCH when EnumerationCase=false\r\n  4. ACTION ChangeObjectAction: change MxObjectReference (ReadableName=$MxObjectReference/CompleteName; refreshInClient=false)\r\n  5. END\r\n6. BRANCH when EnumerationCase=true\r\n  7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

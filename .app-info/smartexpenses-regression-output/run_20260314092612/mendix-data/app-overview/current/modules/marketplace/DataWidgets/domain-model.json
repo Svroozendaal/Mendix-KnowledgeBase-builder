@@ -1,0 +1,26 @@
+{
+  "module": "DataWidgets",
+  "domainModel": {
+    "entities": [],
+    "associations": [],
+    "enumerations": [
+      {
+        "name": "DataWidgets.Filter_Operators",
+        "values": [
+          "between",
+          "contains",
+          "empty",
+          "endsWith",
+          "equal",
+          "greater",
+          "greaterEqual",
+          "notEmpty",
+          "notEqual",
+          "smaller",
+          "smallerEqual",
+          "startsWith"
+        ]
+      }
+    ]
+  }
+}

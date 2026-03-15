@@ -1,0 +1,2235 @@
+{
+  "module": "WorkflowCommons",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "WorkflowCommons.AssignmentHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "IsAssignedUser",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.AssignmentHelper.IsAssignedUser",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.AuditTrailViewer",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ActiveView",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Configuration",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.AuditTrailViewer.Configuration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.AuditTrailViewer.ActiveView",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.CleanupHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "EndDateEnd",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EndDateStart",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "IncludeAborted",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "IncludeCompleted",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "StartDateEnd",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "StartDateStart",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "TotalCount",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "WorkflowName",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.TotalCount",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.WorkflowName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.StartDateStart",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.StartDateEnd",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.EndDateStart",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.EndDateEnd",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.IncludeCompleted",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper.IncludeAborted",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.CleanupHelper_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.Configuration",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ShowAssigneeMigration",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "ShowKeyMigration",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "VerifiedAssigneeMigration",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "VerifiedKeyMigration",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.Configuration.VerifiedAssigneeMigration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.Configuration.ShowAssigneeMigration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.Configuration.VerifiedKeyMigration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.Configuration.ShowKeyMigration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.DashboardContext",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "LastUpdate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "TimeFrame",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "TimeFrameEnd",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "TimeFrameStart",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "TimeFrameStepUnit",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.DashboardContext.TimeFrame",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext.TimeFrameStart",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext.TimeFrameEnd",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext.LastUpdate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext.TimeFrameStepUnit",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_WorkflowSummary",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_TaskSummary",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_DefinitionHelperWorkflow",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_DefinitionHelperTask",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_Session",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_WorkflowTaskDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.DefinitionHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "DisplayText",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Key",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.DefinitionHelper.DisplayText",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DefinitionHelper.Key",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.DefinitionHelper_DefinitionHelperParent",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DefinitionHelper_DashboardContext",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_DefinitionHelperWorkflow",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_DefinitionHelperTask",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.DurationHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Duration",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.DurationHelper.Duration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.NotificationArea",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AlertMessage",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "AlertTitle",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "RenderAs",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.NotificationArea.AlertTitle",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.NotificationArea.AlertMessage",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.NotificationArea.RenderAs",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.TaskAssignmentHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AssigneeSearch",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "OnlyTargetUser",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "TargetUserSearch",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.TaskAssignmentHelper.AssigneeSearch",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskAssignmentHelper.TargetUserSearch",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskAssignmentHelper.OnlyTargetUser",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskAssignmentHelper_Account",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskAssignmentHelper_WorkflowUserTask",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.TaskCount",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AllOpenTaskCount",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "AssigneeSearch",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "CompletedTaskCount",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "MyOpenTaskCount",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "UnassignedTaskCount",
+            "type": "IntegerAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.TaskCount.MyOpenTaskCount",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskCount.AllOpenTaskCount",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskCount.UnassignedTaskCount",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskCount.CompletedTaskCount",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskCount.AssigneeSearch",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.TaskSeries",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AverageTaskHandlingTime",
+            "type": "DecimalAttributeType"
+          },
+          {
+            "name": "Date",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "DateDisplay",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "NumberofTasksCompletedOnTime",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfTasksCompletedOverdue",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "TasksHandledOnTime",
+            "type": "DecimalAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.TaskSeries.DateDisplay",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSeries.Date",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSeries.NumberofTasksCompletedOnTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSeries.AverageTaskHandlingTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSeries.TasksHandledOnTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSeries.NumberOfTasksCompletedOverdue",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSeries_DashboardContext",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.TaskSummary",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "NumberOfTasksAlmostDue",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfTasksCompleted",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfTasksFailed",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfTasksInProgress",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfTasksOverdue",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "TaskAverageHandlingTime",
+            "type": "DecimalAttributeType"
+          },
+          {
+            "name": "TasksHandledInTime",
+            "type": "DecimalAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.TaskSummary.NumberOfTasksOverdue",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSummary.NumberOfTasksAlmostDue",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSummary.NumberOfTasksInProgress",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSummary.NumberOfTasksFailed",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSummary.NumberOfTasksCompleted",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSummary.TaskAverageHandlingTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.TaskSummary.TasksHandledInTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_TaskSummary",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.TimelineViewer",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.TimelineViewer_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.UserTaskOutcomeView",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Outcome",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Time",
+            "type": "DateTimeAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView.Time",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView_UserTaskView",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView_User",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView_WorkflowUserTaskOutcome",
+                "memberKind": "Association",
+                "accessRights": "None"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[WorkflowCommons.UserTaskOutcomeView_UserTaskView/WorkflowCommons.UserTaskView[WorkflowCommons.UserTaskView_Assignees = \u0027[%CurrentUser%]\u0027 or WorkflowCommons.UserTaskView_TargetUsers = \u0027[%CurrentUser%]\u0027]]",
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView.Time",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView_UserTaskView",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView_User",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskOutcomeView_WorkflowUserTaskOutcome",
+                "memberKind": "Association",
+                "accessRights": "None"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.UserTaskTimeLine",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Assignees",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "CompletedOn",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "CompletionType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Outcome",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartedOn",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "State",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "TaskName",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.UserTaskTimeLine.TaskName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskTimeLine.CompletedOn",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskTimeLine.CompletionType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskTimeLine.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskTimeLine.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskTimeLine.StartedOn",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskTimeLine.Assignees",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.UserTaskView",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CompletionType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "DueDate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EndTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Outcome",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "State",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "TaskKey",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[WorkflowCommons.UserTaskView_Assignees = \u0027[%CurrentUser%]\u0027 or WorkflowCommons.UserTaskView_TargetUsers = \u0027[%CurrentUser%]\u0027]",
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.UserTaskView.TaskKey",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.CompletionType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_WorkflowView",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_WorkflowUserTask",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_WorkflowUserTaskDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_Assignees",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_TargetUsers",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_Assignee",
+                "memberKind": "Association",
+                "accessRights": "None"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.UserTaskView.TaskKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.CompletionType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_WorkflowView",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_WorkflowUserTask",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_WorkflowUserTaskDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_Assignees",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_TargetUsers",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.UserTaskView_Assignee",
+                "memberKind": "Association",
+                "accessRights": "None"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowAttachment",
+        "isPersistable": true,
+        "generalization": "System.FileDocument",
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAttachment_WorkflowComment",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": "[WorkflowCommons.WorkflowAttachment_WorkflowComment/WorkflowCommons.WorkflowComment/WorkflowCommons.WorkflowComment_WorkflowView/WorkflowCommons.WorkflowView/WorkflowCommons.UserTaskView_WorkflowView/WorkflowCommons.UserTaskView/WorkflowCommons.UserTaskView_TargetUsers = \u0027[%CurrentUser%]\u0027]",
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAttachment_WorkflowComment",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": "[System.owner = \u0027[%CurrentUser%]\u0027]\n[WorkflowCommons.WorkflowAttachment_WorkflowComment/WorkflowCommons.WorkflowComment/WorkflowCommons.WorkflowComment_WorkflowView/WorkflowCommons.WorkflowView[State = \u0027InProgress\u0027]/WorkflowCommons.UserTaskView_WorkflowView/WorkflowCommons.UserTaskView/WorkflowCommons.UserTaskView_TargetUsers = \u0027[%CurrentUser%]\u0027]\n",
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAttachment_WorkflowComment",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowAuditTrailRecord",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ActivityCaption",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ActivityKey",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ActivityState",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ActivityType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "EventInitiator",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "EventLevel",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "EventTimestamp",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EventType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Outcome",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Reason",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "UserTaskKey",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "WorkflowDefinition",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "WorkflowKey",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "WorkflowName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "WorkflowState",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.EventTimestamp",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.EventType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.EventLevel",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.EventInitiator",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.WorkflowDefinition",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.WorkflowName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.WorkflowKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.WorkflowState",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.ActivityCaption",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.ActivityType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.ActivityKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.ActivityState",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.UserTaskKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowAuditTrailRecord_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowComment",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Content",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowComment.Content",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowComment_WorkflowView",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowComment_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": "[WorkflowCommons.WorkflowComment_WorkflowView/WorkflowCommons.WorkflowView/WorkflowCommons.UserTaskView_WorkflowView/WorkflowCommons.UserTaskView/WorkflowCommons.UserTaskView_TargetUsers = \u0027[%CurrentUser%]\u0027]",
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowComment.Content",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowComment_WorkflowView",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowComment_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": "[System.owner = \u0027[%CurrentUser%]\u0027]\n[WorkflowCommons.WorkflowComment_WorkflowView/WorkflowCommons.WorkflowView[State = \u0027InProgress\u0027]/WorkflowCommons.UserTaskView_WorkflowView/WorkflowCommons.UserTaskView/WorkflowCommons.UserTaskView_TargetUsers = \u0027[%CurrentUser%]\u0027]",
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowComment.Content",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowComment_WorkflowView",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowComment_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowCommentHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Content",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowCommentHelper.Content",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowCommentHelper_WorkflowComment",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowDefinitionHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "UpdateInstances",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowDefinitionHelper.UpdateInstances",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowDefinitionHelper_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowSelectionHelper",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowSelectionHelper_WorkflowView",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowSeries",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AverageWorkflowHandlingTime",
+            "type": "DecimalAttributeType"
+          },
+          {
+            "name": "Date",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "DateDisplay",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "NumberofWorkflowsCompleted",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberofWorkflowsCompletedOverdue",
+            "type": "IntegerAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowSeries.DateDisplay",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSeries.Date",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSeries.NumberofWorkflowsCompleted",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSeries.AverageWorkflowHandlingTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSeries.NumberofWorkflowsCompletedOverdue",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSeries_DashboardContext",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowSummary",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "IsLocked",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "IsObsolete",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "NumberOfWorkflowAlmostDue",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfWorkflowOverdue",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfWorkflowsCompleted",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "NumberOfWorkflowsInProgress",
+            "type": "IntegerAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowSummary.NumberOfWorkflowsInProgress",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSummary.NumberOfWorkflowOverdue",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSummary.NumberOfWorkflowAlmostDue",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSummary.NumberOfWorkflowsCompleted",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSummary.IsLocked",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSummary.IsObsolete",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.DashboardContext_WorkflowSummary",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowSummary_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowTaskDetail",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "TaskAverageHandlingTime",
+            "type": "DecimalAttributeType"
+          },
+          {
+            "name": "TaskName",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator",
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowTaskDetail.TaskName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowTaskDetail.TaskAverageHandlingTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowTaskDetail_DashboardContext",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WorkflowCommons.WorkflowView",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "DueDate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EndTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Reason",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "State",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "WorkflowKey",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "WorkflowCommons.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[WorkflowCommons.WorkflowView_Initiator = \u0027[%CurrentUser%]\u0027 or WorkflowCommons.UserTaskView_WorkflowView/WorkflowCommons.UserTaskView[WorkflowCommons.UserTaskView_Assignees = \u0027[%CurrentUser%]\u0027 or WorkflowCommons.UserTaskView_TargetUsers = \u0027[%CurrentUser%]\u0027]]",
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowView.WorkflowKey",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView_Initiator",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "WorkflowCommons.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "WorkflowCommons.WorkflowView.WorkflowKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView_Initiator",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "WorkflowCommons.WorkflowView_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "associations": [
+      {
+        "name": "WorkflowCommons.DashboardContext_DefinitionHelperTask",
+        "parentEntity": "WorkflowCommons.DashboardContext",
+        "childEntity": "WorkflowCommons.DefinitionHelper",
+        "cardinality": "1-1",
+        "type": "Reference",
+        "owner": "Both",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.DashboardContext_DefinitionHelperWorkflow",
+        "parentEntity": "WorkflowCommons.DashboardContext",
+        "childEntity": "WorkflowCommons.DefinitionHelper",
+        "cardinality": "1-1",
+        "type": "Reference",
+        "owner": "Both",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.DashboardContext_TaskSummary",
+        "parentEntity": "WorkflowCommons.DashboardContext",
+        "childEntity": "WorkflowCommons.TaskSummary",
+        "cardinality": "1-1",
+        "type": "Reference",
+        "owner": "Both",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.DashboardContext_WorkflowSummary",
+        "parentEntity": "WorkflowCommons.DashboardContext",
+        "childEntity": "WorkflowCommons.WorkflowSummary",
+        "cardinality": "1-1",
+        "type": "Reference",
+        "owner": "Both",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.DefinitionHelper_DashboardContext",
+        "parentEntity": "WorkflowCommons.DefinitionHelper",
+        "childEntity": "WorkflowCommons.DashboardContext",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.DefinitionHelper_DefinitionHelperParent",
+        "parentEntity": "WorkflowCommons.DefinitionHelper",
+        "childEntity": "WorkflowCommons.DefinitionHelper",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.TaskSeries_DashboardContext",
+        "parentEntity": "WorkflowCommons.TaskSeries",
+        "childEntity": "WorkflowCommons.DashboardContext",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.UserTaskOutcomeView_UserTaskView",
+        "parentEntity": "WorkflowCommons.UserTaskOutcomeView",
+        "childEntity": "WorkflowCommons.UserTaskView",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.UserTaskView_WorkflowView",
+        "parentEntity": "WorkflowCommons.UserTaskView",
+        "childEntity": "WorkflowCommons.WorkflowView",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.WorkflowAttachment_WorkflowComment",
+        "parentEntity": "WorkflowCommons.WorkflowAttachment",
+        "childEntity": "WorkflowCommons.WorkflowComment",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.WorkflowCommentHelper_WorkflowComment",
+        "parentEntity": "WorkflowCommons.WorkflowCommentHelper",
+        "childEntity": "WorkflowCommons.WorkflowComment",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.WorkflowComment_WorkflowView",
+        "parentEntity": "WorkflowCommons.WorkflowComment",
+        "childEntity": "WorkflowCommons.WorkflowView",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.WorkflowSelectionHelper_WorkflowView",
+        "parentEntity": "WorkflowCommons.WorkflowSelectionHelper",
+        "childEntity": "WorkflowCommons.WorkflowView",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.WorkflowSeries_DashboardContext",
+        "parentEntity": "WorkflowCommons.WorkflowSeries",
+        "childEntity": "WorkflowCommons.DashboardContext",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "WorkflowCommons.WorkflowTaskDetail_DashboardContext",
+        "parentEntity": "WorkflowCommons.WorkflowTaskDetail",
+        "childEntity": "WorkflowCommons.DashboardContext",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      }
+    ],
+    "enumerations": [
+      {
+        "name": "WorkflowCommons.Enum_AuditTrail_EventLevel",
+        "values": [
+          "ActivityEvent",
+          "WorkflowEvent"
+        ]
+      },
+      {
+        "name": "WorkflowCommons.Enum_AuditTrail_View",
+        "values": [
+          "All",
+          "Minimal",
+          "_Default"
+        ]
+      },
+      {
+        "name": "WorkflowCommons.Enum_DashboardTimeFrame",
+        "values": [
+          "Last_3_months",
+          "Last_4_weeks",
+          "Last_6_months",
+          "Last_7_days",
+          "This_year"
+        ]
+      },
+      {
+        "name": "WorkflowCommons.Enum_DurationUnit",
+        "values": [
+          "Days",
+          "Hours",
+          "Minutes",
+          "Seconds"
+        ]
+      },
+      {
+        "name": "WorkflowCommons.Enum_LogNode",
+        "values": [
+          "WorkflowCommons"
+        ]
+      },
+      {
+        "name": "WorkflowCommons.Enum_NotificationArea_RenderAs",
+        "values": [
+          "Error",
+          "Info",
+          "Success",
+          "Warning"
+        ]
+      },
+      {
+        "name": "WorkflowCommons.Enum_TimeFrameStepUnit",
+        "values": [
+          "Day",
+          "Month",
+          "Week"
+        ]
+      }
+    ]
+  }
+}

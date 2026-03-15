@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.StringToColumnYesNo",
+                  "stableId":  "4184aafd-754a-4d11-98f6-1316e7a924cb",
+                  "slug":  "excelimporter-stringtocolumnyesno",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtocolumnyesno.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtocolumnyesno.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-stringtocolumnyesno.json",
+                  "l2Logical":  "flow:ExcelImporter.StringToColumnYesNo",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "4184aafd-754a-4d11-98f6-1316e7a924cb",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.StringToColumnYesNo",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "71c4e7a6-296c-43ee-bcb9-f680ced43901",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable Enum=if $Input = \u0027No\u0027 then ExcelImporter.YesNo.No else if $Input = \u0027Yes\u0027 then ExcelImporter.YesNo.Yes else empty",
+                      "detail":  "create variable Enum=if $Input = \u0027No\u0027 then ExcelImporter.YesNo.No else if $Input = \u0027Yes\u0027 then ExcelImporter.YesNo.Yes else empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b789c415-2170-400f-9809-9722e99b5832",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse String value to YesNo Enumeration.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e9a329df-32e0-448f-adf6-7d2fb8091c06",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b7736e4f-e426-49f4-a9f6-c32a5377033d",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9174685d-d13a-4fd6-b290-3fc4824cc72d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "83c4c4b9-43a2-4b99-be36-f9d59af86eab",
+                      "originNodeId":  "9174685d-d13a-4fd6-b290-3fc4824cc72d",
+                      "destinationNodeId":  "71c4e7a6-296c-43ee-bcb9-f680ced43901",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6396f0cb-3ead-47b9-a823-de461393402c",
+                      "originNodeId":  "71c4e7a6-296c-43ee-bcb9-f680ced43901",
+                      "destinationNodeId":  "e9a329df-32e0-448f-adf6-7d2fb8091c06",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "9174685d-d13a-4fd6-b290-3fc4824cc72d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "9174685d-d13a-4fd6-b290-3fc4824cc72d",
+                                         "71c4e7a6-296c-43ee-bcb9-f680ced43901",
+                                         "e9a329df-32e0-448f-adf6-7d2fb8091c06"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.StringToColumnYesNo\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable Enum=if $Input = \u0027No\u0027 then ExcelImporter.YesNo.No else if $Input = \u0027Yes\u0027 then ExcelImporter.YesNo.Yes else empty\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

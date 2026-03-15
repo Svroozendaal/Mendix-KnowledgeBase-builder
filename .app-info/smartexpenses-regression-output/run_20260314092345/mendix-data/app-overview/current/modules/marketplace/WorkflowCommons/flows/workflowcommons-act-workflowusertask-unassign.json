@@ -1,0 +1,152 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowUserTask_Unassign",
+                  "stableId":  "01bb0f06-862b-4d82-8cad-d177ae6fc9e9",
+                  "slug":  "workflowcommons-act-workflowusertask-unassign",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-unassign.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-unassign.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowusertask-unassign.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowUserTask_Unassign",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "01bb0f06-862b-4d82-8cad-d177ae6fc9e9",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowUserTask_Unassign",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "9d69d31a-6259-46b2-9ecc-889baab588db",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_Assignees_Remove",
+                      "detail":  "call microflow WorkflowCommons.SUB_UserTask_Assignees_Remove",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_UserTask_Assignees_Remove",
+                                        "sourceNodeId":  "9d69d31a-6259-46b2-9ecc-889baab588db"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "d540cfe0-fd62-489b-bb24-965c46a33cbe",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserList over association WorkflowUserTask_Assignees from WorkflowUserTask",
+                      "detail":  "retrieve UserList over association WorkflowUserTask_Assignees from WorkflowUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "84b2bd04-960f-481b-8f5b-4634b9e8734f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4f320bab-9d17-4351-b485-149a9fe28be5",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f6b19695-5072-4ba3-9008-d9424ad5c53f",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "f1e0421d-9638-44b1-a3cb-878aa90745e1",
+                      "originNodeId":  "f6b19695-5072-4ba3-9008-d9424ad5c53f",
+                      "destinationNodeId":  "d540cfe0-fd62-489b-bb24-965c46a33cbe",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e1d10d18-2f33-4daa-9115-5e68a734bed8",
+                      "originNodeId":  "d540cfe0-fd62-489b-bb24-965c46a33cbe",
+                      "destinationNodeId":  "9d69d31a-6259-46b2-9ecc-889baab588db",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d44ca8c4-2e40-45fa-b07a-1aafcfac547c",
+                      "originNodeId":  "9d69d31a-6259-46b2-9ecc-889baab588db",
+                      "destinationNodeId":  "84b2bd04-960f-481b-8f5b-4634b9e8734f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_UserTask_Assignees_Remove",
+                      "sourceNodeId":  "9d69d31a-6259-46b2-9ecc-889baab588db"
+                  }
+              ],
+    "startNodeIds":  [
+                         "f6b19695-5072-4ba3-9008-d9424ad5c53f"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "f6b19695-5072-4ba3-9008-d9424ad5c53f",
+                                         "d540cfe0-fd62-489b-bb24-965c46a33cbe",
+                                         "9d69d31a-6259-46b2-9ecc-889baab588db",
+                                         "84b2bd04-960f-481b-8f5b-4634b9e8734f"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowUserTask_Unassign\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve UserList over association WorkflowUserTask_Assignees from WorkflowUserTask\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_Assignees_Remove\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowUserTask_Unassign",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "9d69d31a-6259-46b2-9ecc-889baab588db",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_Assignees_Remove",
+                          "isInternal":  true
+                      }
+                  ]
+}

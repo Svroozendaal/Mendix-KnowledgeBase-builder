@@ -1,0 +1,152 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.OCh_DashboardContext_UpdateWorkflowDashboard",
+                  "stableId":  "e7713c6c-9c91-4d7c-aa45-98fb395d950e",
+                  "slug":  "workflowcommons-och-dashboardcontext-updateworkflowdashboard",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-dashboardcontext-updateworkflowdashboard.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-dashboardcontext-updateworkflowdashboard.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-och-dashboardcontext-updateworkflowdashboard.json",
+                  "l2Logical":  "flow:WorkflowCommons.OCh_DashboardContext_UpdateWorkflowDashboard",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "e7713c6c-9c91-4d7c-aa45-98fb395d950e",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.OCh_DashboardContext_UpdateWorkflowDashboard",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "86a3c235-da1d-4958-b586-3301be739f0f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change DashboardContext (refreshInClient=true)",
+                      "detail":  "change DashboardContext (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "19b02b81-8bf6-435a-a654-26202361c73c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowDashboard_Update",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowDashboard_Update",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowDashboard_Update",
+                                        "sourceNodeId":  "19b02b81-8bf6-435a-a654-26202361c73c"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "87b0931e-1917-47ee-bdd2-5a91342438b9",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a77ce671-ed39-43c6-a9aa-978df54f96bd",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0cbc026a-6dae-48c5-8744-839399f219b1",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "20681d1d-6a31-4519-8530-b572a1523dbb",
+                      "originNodeId":  "0cbc026a-6dae-48c5-8744-839399f219b1",
+                      "destinationNodeId":  "19b02b81-8bf6-435a-a654-26202361c73c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "34e438f2-02bd-40e6-a49d-4cc284f8e87f",
+                      "originNodeId":  "19b02b81-8bf6-435a-a654-26202361c73c",
+                      "destinationNodeId":  "86a3c235-da1d-4958-b586-3301be739f0f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "02d98cc9-3832-4915-9101-f2a6d5e81d9a",
+                      "originNodeId":  "86a3c235-da1d-4958-b586-3301be739f0f",
+                      "destinationNodeId":  "87b0931e-1917-47ee-bdd2-5a91342438b9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowDashboard_Update",
+                      "sourceNodeId":  "19b02b81-8bf6-435a-a654-26202361c73c"
+                  }
+              ],
+    "startNodeIds":  [
+                         "0cbc026a-6dae-48c5-8744-839399f219b1"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "0cbc026a-6dae-48c5-8744-839399f219b1",
+                                         "19b02b81-8bf6-435a-a654-26202361c73c",
+                                         "86a3c235-da1d-4958-b586-3301be739f0f",
+                                         "87b0931e-1917-47ee-bdd2-5a91342438b9"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.OCh_DashboardContext_UpdateWorkflowDashboard\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowDashboard_Update\r\n3. ACTION ChangeObjectAction: change DashboardContext (refreshInClient=true)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.OCh_DashboardContext_UpdateWorkflowDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "19b02b81-8bf6-435a-a654-26202361c73c",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowDashboard_Update",
+                          "isInternal":  true
+                      }
+                  ]
+}

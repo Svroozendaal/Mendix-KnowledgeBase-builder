@@ -1,0 +1,282 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.BDe_MxObjectType",
+                  "stableId":  "8021e248-c865-4faa-a04a-3e3fd04974f8",
+                  "slug":  "mxmodelreflection-bde-mxobjecttype",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bde-mxobjecttype.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bde-mxobjecttype.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-bde-mxobjecttype.json",
+                  "l2Logical":  "flow:MxModelReflection.BDe_MxObjectType",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "8021e248-c865-4faa-a04a-3e3fd04974f8",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.BDe_MxObjectType",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "8ce51b6d-df69-4d24-9a8d-6ed8ea014e34",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=count, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=count, errorHandlingType=Rollback)",
+                      "loopOwnerId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "76e9df81-cadd-4ead-be52-474fa76da364",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DeleteAction: delete Reference (refreshInClient=false)",
+                      "detail":  "delete Reference (refreshInClient=false)",
+                      "loopOwnerId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "55c809e2-b224-49aa-89a2-fb27247db1db",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectReferenceList over association MxObjectReference_MxObjectType_Parent from Reference",
+                      "detail":  "retrieve MxObjectReferenceList over association MxObjectReference_MxObjectType_Parent from Reference",
+                      "loopOwnerId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "caeb2308-c02f-468d-99ac-85bdb779d5b5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectReferenceList_Parent over association MxObjectReference_MxObjectType_Parent from MxObjectType",
+                      "detail":  "retrieve MxObjectReferenceList_Parent over association MxObjectReference_MxObjectType_Parent from MxObjectType",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e07068be-86e0-41fd-8a32-304f10db5e1d",
+                      "nodeType":  "ContinueEvent",
+                      "label":  "ContinueEvent",
+                      "detail":  null,
+                      "loopOwnerId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f1a62660-5d0b-4f10-8948-c003cb2e1ad1",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "83ba8889-e6cc-462e-bf9f-eb9bb513ac5f",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a490d73e-fe69-4d7a-a494-ac932d0e3408",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "= 1 expression=$count = 1",
+                      "detail":  "= 1 expression=$count = 1",
+                      "loopOwnerId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cb8e942c-6640-411a-917a-f3b44545fe84",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "child object empty? expression=$Reference/MxModelReflection.MxObjectReference_MxObjectType_Child = empty",
+                      "detail":  "child object empty? expression=$Reference/MxModelReflection.MxObjectReference_MxObjectType_Child = empty",
+                      "loopOwnerId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate MxObjectReferenceList_Parent as Reference",
+                      "detail":  "iterate MxObjectReferenceList_Parent as Reference",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b5d54677-ad34-4f91-aad6-c481c00b3f09",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "44042e0a-e896-475b-abf0-b6d884ddff31",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "321ba296-95f2-4a0c-9995-0510a264a95a",
+                      "originNodeId":  "44042e0a-e896-475b-abf0-b6d884ddff31",
+                      "destinationNodeId":  "caeb2308-c02f-468d-99ac-85bdb779d5b5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2c974abb-664f-456f-8862-43e535a33241",
+                      "originNodeId":  "caeb2308-c02f-468d-99ac-85bdb779d5b5",
+                      "destinationNodeId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "929568fe-b59e-4775-b4ab-a0593e39e9a0",
+                      "originNodeId":  "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                      "destinationNodeId":  "f1a62660-5d0b-4f10-8948-c003cb2e1ad1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "254d9cb0-97cf-4683-9559-802df08e6659",
+                      "originNodeId":  "cb8e942c-6640-411a-917a-f3b44545fe84",
+                      "destinationNodeId":  "55c809e2-b224-49aa-89a2-fb27247db1db",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "76ac0e6c-6cb8-4c56-b195-b2fe5a90b693",
+                      "originNodeId":  "cb8e942c-6640-411a-917a-f3b44545fe84",
+                      "destinationNodeId":  "83ba8889-e6cc-462e-bf9f-eb9bb513ac5f",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d7f59f4a-9ae2-4b4d-87e9-442779f7088e",
+                      "originNodeId":  "55c809e2-b224-49aa-89a2-fb27247db1db",
+                      "destinationNodeId":  "8ce51b6d-df69-4d24-9a8d-6ed8ea014e34",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4be8e250-2da6-4461-a93a-9c9319cd3ef8",
+                      "originNodeId":  "8ce51b6d-df69-4d24-9a8d-6ed8ea014e34",
+                      "destinationNodeId":  "a490d73e-fe69-4d7a-a494-ac932d0e3408",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ff793374-4e95-40aa-b599-3b8b3896c31f",
+                      "originNodeId":  "a490d73e-fe69-4d7a-a494-ac932d0e3408",
+                      "destinationNodeId":  "83ba8889-e6cc-462e-bf9f-eb9bb513ac5f",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "d66975d0-4e43-437b-a04d-2fe443b42390",
+                      "originNodeId":  "83ba8889-e6cc-462e-bf9f-eb9bb513ac5f",
+                      "destinationNodeId":  "76e9df81-cadd-4ead-be52-474fa76da364",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5ce52360-13b9-4428-8d33-073f2fca5623",
+                      "originNodeId":  "a490d73e-fe69-4d7a-a494-ac932d0e3408",
+                      "destinationNodeId":  "e07068be-86e0-41fd-8a32-304f10db5e1d",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "44042e0a-e896-475b-abf0-b6d884ddff31"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "44042e0a-e896-475b-abf0-b6d884ddff31",
+                                         "caeb2308-c02f-468d-99ac-85bdb779d5b5",
+                                         "3b0324ba-95db-4eaa-99de-5cfe667eef12",
+                                         "55c809e2-b224-49aa-89a2-fb27247db1db",
+                                         "76e9df81-cadd-4ead-be52-474fa76da364",
+                                         "83ba8889-e6cc-462e-bf9f-eb9bb513ac5f",
+                                         "8ce51b6d-df69-4d24-9a8d-6ed8ea014e34",
+                                         "a490d73e-fe69-4d7a-a494-ac932d0e3408",
+                                         "cb8e942c-6640-411a-917a-f3b44545fe84",
+                                         "e07068be-86e0-41fd-8a32-304f10db5e1d",
+                                         "f1a62660-5d0b-4f10-8948-c003cb2e1ad1"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.BDe_MxObjectType\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve MxObjectReferenceList_Parent over association MxObjectReference_MxObjectType_Parent from MxObjectType\r\n3. LOOP iterate MxObjectReferenceList_Parent as Reference\r\n  4. LOOP BODY\r\n    5. ACTION RetrieveAction: retrieve MxObjectReferenceList over association MxObjectReference_MxObjectType_Parent from Reference\r\n    6. ACTION DeleteAction: delete Reference (refreshInClient=false)\r\n    7. NODE ExclusiveMerge: ExclusiveMerge\r\n    8. ACTION AggregateListAction: AggregateListAction (output=count, errorHandlingType=Rollback)\r\n    9. DECISION = 1 expression=$count = 1\r\n    10. DECISION child object empty? expression=$Reference/MxModelReflection.MxObjectReference_MxObjectType_Child = empty\r\n    11. NODE ContinueEvent: ContinueEvent\r\n12. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

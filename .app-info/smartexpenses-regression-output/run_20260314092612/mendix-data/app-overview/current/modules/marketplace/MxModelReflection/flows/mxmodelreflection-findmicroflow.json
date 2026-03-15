@@ -1,0 +1,238 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.FindMicroflow",
+                  "stableId":  "3714a2b3-af5a-4655-b6d1-5aa46b861382",
+                  "slug":  "mxmodelreflection-findmicroflow",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-findmicroflow.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-findmicroflow.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-findmicroflow.json",
+                  "l2Logical":  "flow:MxModelReflection.FindMicroflow",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "3714a2b3-af5a-4655-b6d1-5aa46b861382",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.FindMicroflow",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "4eadbd69-7914-4c35-9ab8-7f844c73a32a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedMicroflow from MxModelReflection.Microflows",
+                      "detail":  "retrieve RetrievedMicroflow from MxModelReflection.Microflows",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ed013b20-0e1f-4ca4-bda6-0a5d0d320b4f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedMicroflow_1 from MxModelReflection.Microflows",
+                      "detail":  "retrieve RetrievedMicroflow_1 from MxModelReflection.Microflows",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4683a568-9a36-4090-b3c3-d21c64ed075b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "958f25d9-4a33-4579-a91e-d9a7df6809be",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9843af68-c196-40ec-a3c7-4c2912e93c3b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "77ece010-3871-477b-8935-0c84c9540e65",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "is RetrivedMicroflow? expression=$RetrievedMicroflow != empty",
+                      "detail":  "is RetrivedMicroflow? expression=$RetrievedMicroflow != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "72a95833-4fb5-4844-a249-112b338a45e7",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "search str != empty expression=$MicroflowSearchString != empty",
+                      "detail":  "search str != empty expression=$MicroflowSearchString != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9ffb15e5-bc06-4cde-8fc9-e62634a09558",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "873b6b8e-88c0-4b7b-86e3-28bc84d95b44",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "b67c79ca-338c-48ed-b0f1-ea03b6769014",
+                      "originNodeId":  "873b6b8e-88c0-4b7b-86e3-28bc84d95b44",
+                      "destinationNodeId":  "72a95833-4fb5-4844-a249-112b338a45e7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "af4d91bc-d7a8-4616-87d9-832d5b54b2b5",
+                      "originNodeId":  "4eadbd69-7914-4c35-9ab8-7f844c73a32a",
+                      "destinationNodeId":  "77ece010-3871-477b-8935-0c84c9540e65",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4f05d664-b3a3-4050-b774-c20269bda3af",
+                      "originNodeId":  "72a95833-4fb5-4844-a249-112b338a45e7",
+                      "destinationNodeId":  "4eadbd69-7914-4c35-9ab8-7f844c73a32a",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ed077dfa-28c5-4fb7-91be-f08df47ce55b",
+                      "originNodeId":  "72a95833-4fb5-4844-a249-112b338a45e7",
+                      "destinationNodeId":  "958f25d9-4a33-4579-a91e-d9a7df6809be",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "e877f6a2-02ef-47e9-9ce6-274ada7d42b1",
+                      "originNodeId":  "ed013b20-0e1f-4ca4-bda6-0a5d0d320b4f",
+                      "destinationNodeId":  "9843af68-c196-40ec-a3c7-4c2912e93c3b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5cf53bd2-89bf-4fda-9f50-d72dde64125e",
+                      "originNodeId":  "77ece010-3871-477b-8935-0c84c9540e65",
+                      "destinationNodeId":  "ed013b20-0e1f-4ca4-bda6-0a5d0d320b4f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "649ccbe1-28fe-4b0c-a0f8-0f86d2810c4c",
+                      "originNodeId":  "77ece010-3871-477b-8935-0c84c9540e65",
+                      "destinationNodeId":  "4683a568-9a36-4090-b3c3-d21c64ed075b",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "873b6b8e-88c0-4b7b-86e3-28bc84d95b44"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "873b6b8e-88c0-4b7b-86e3-28bc84d95b44",
+                                         "72a95833-4fb5-4844-a249-112b338a45e7",
+                                         "4eadbd69-7914-4c35-9ab8-7f844c73a32a",
+                                         "77ece010-3871-477b-8935-0c84c9540e65",
+                                         "ed013b20-0e1f-4ca4-bda6-0a5d0d320b4f",
+                                         "9843af68-c196-40ec-a3c7-4c2912e93c3b",
+                                         "4683a568-9a36-4090-b3c3-d21c64ed075b",
+                                         "958f25d9-4a33-4579-a91e-d9a7df6809be"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.FindMicroflow\r\nNODES=9; EDGES=7\r\n1. START\r\n2. DECISION search str != empty expression=$MicroflowSearchString != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION RetrieveAction: retrieve RetrievedMicroflow from MxModelReflection.Microflows\r\n  5. DECISION is RetrivedMicroflow? expression=$RetrievedMicroflow != empty\r\n  6. BRANCH when EnumerationCase=false\r\n    7. ACTION RetrieveAction: retrieve RetrievedMicroflow_1 from MxModelReflection.Microflows\r\n    8. END\r\n  9. BRANCH when EnumerationCase=true\r\n    10. END\r\n11. BRANCH when EnumerationCase=false\r\n  12. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.Ch_FindMicroflow",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "245af0ea-1529-4986-81f0-cb4cea7b816f",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindMicroflow",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.SetupColumn",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "d73ff20b-9475-42b5-98cd-86f912543853",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindMicroflow",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_Comment_Delete",
+                  "stableId":  "8ac4b7a1-fa67-4eac-b40d-c71b1cedc419",
+                  "slug":  "workflowcommons-act-comment-delete",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-comment-delete.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-comment-delete.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-comment-delete.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_Comment_Delete",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "8ac4b7a1-fa67-4eac-b40d-c71b1cedc419",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_Comment_Delete",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "1baaa7c3-a1ec-4576-967e-d835d168b2e8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DeleteAction: delete WorkflowComment (refreshInClient=true)",
+                      "detail":  "delete WorkflowComment (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "06d6219b-bd6c-48a8-8a8a-d5445662eac9",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "32c70cbf-a478-4cad-a5b1-38a90930565d",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d73806d6-a7a9-44df-883c-7214a4027ec9",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "32182285-e2d8-40a5-beec-8c1f78e4d7df",
+                      "originNodeId":  "d73806d6-a7a9-44df-883c-7214a4027ec9",
+                      "destinationNodeId":  "1baaa7c3-a1ec-4576-967e-d835d168b2e8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3db9164b-7420-4cff-8923-f12a129ece04",
+                      "originNodeId":  "1baaa7c3-a1ec-4576-967e-d835d168b2e8",
+                      "destinationNodeId":  "06d6219b-bd6c-48a8-8a8a-d5445662eac9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "d73806d6-a7a9-44df-883c-7214a4027ec9"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "d73806d6-a7a9-44df-883c-7214a4027ec9",
+                                         "1baaa7c3-a1ec-4576-967e-d835d168b2e8",
+                                         "06d6219b-bd6c-48a8-8a8a-d5445662eac9"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_Comment_Delete\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION DeleteAction: delete WorkflowComment (refreshInClient=true)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

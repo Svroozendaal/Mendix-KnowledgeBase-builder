@@ -1,0 +1,3384 @@
+{
+  "module": "FeedbackModule",
+  "flows": [
+    {
+      "flowId": "1d4a8b6f-1c14-4acc-9541-918751322066",
+      "kind": "Microflow",
+      "qualifiedName": "FeedbackModule.ConvertBase64String",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "0e74a7e5-c717-44b0-8c76-a4cb79199e20",
+          "nodeType": "Annotation",
+          "label": "We need to separate the section containing the base64 string. The original value is used to render the base64 on the ShareFeedback page.",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "10e78ec7-4da0-48e0-bcd5-e1e4f57b96f3",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "5f77e7d9-f53f-4b9a-9784-1d65b2eb2f3c",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d625c9b4-a0fd-4b5f-9284-0bb0ad85fe78",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "8e9a44c6-fb06-4127-ad5b-73b13a582bea",
+          "nodeType": "ExclusiveSplit",
+          "label": "Has Screenshot? expression=$ImageB64 != empty and $ImageB64 != \u0027\u0027",
+          "detail": "Has Screenshot? expression=$ImageB64 != empty and $ImageB64 != \u0027\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "ded71092-3e37-47cd-9a68-c29e5c65b411",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "28a9eb8b-abbd-48ad-9055-3b4b6757dcf1",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "e2d10cd4-2980-43ba-8ae0-6e38944ad0ce",
+          "originNodeId": "28a9eb8b-abbd-48ad-9055-3b4b6757dcf1",
+          "destinationNodeId": "8e9a44c6-fb06-4127-ad5b-73b13a582bea",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "51fbf4ec-55c0-4ac6-bfc1-4470a6571e9b",
+          "originNodeId": "8e9a44c6-fb06-4127-ad5b-73b13a582bea",
+          "destinationNodeId": "10e78ec7-4da0-48e0-bcd5-e1e4f57b96f3",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "67fc867d-de63-4655-b885-a86822146c62",
+          "originNodeId": "8e9a44c6-fb06-4127-ad5b-73b13a582bea",
+          "destinationNodeId": "d625c9b4-a0fd-4b5f-9284-0bb0ad85fe78",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "40578c9c-f4cd-4ac0-907a-57158df7c83d",
+          "originNodeId": "d625c9b4-a0fd-4b5f-9284-0bb0ad85fe78",
+          "destinationNodeId": "5f77e7d9-f53f-4b9a-9784-1d65b2eb2f3c",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "28a9eb8b-abbd-48ad-9055-3b4b6757dcf1"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "28a9eb8b-abbd-48ad-9055-3b4b6757dcf1",
+        "8e9a44c6-fb06-4127-ad5b-73b13a582bea",
+        "10e78ec7-4da0-48e0-bcd5-e1e4f57b96f3",
+        "d625c9b4-a0fd-4b5f-9284-0bb0ad85fe78",
+        "5f77e7d9-f53f-4b9a-9784-1d65b2eb2f3c"
+      ],
+      "pseudocode": "FLOW Microflow: FeedbackModule.ConvertBase64String\r\nNODES=7; EDGES=4\r\n1. START\r\n2. DECISION Has Screenshot? expression=$ImageB64 != empty and $ImageB64 != \u0027\u0027\r\n3. BRANCH when EnumerationCase=true\r\n  4. END\r\n5. BRANCH when EnumerationCase=false\r\n  6. NODE ExclusiveMerge: ExclusiveMerge\r\n  7. END"
+    },
+    {
+      "flowId": "706d7213-b370-4e76-b2e0-78abc88c8324",
+      "kind": "Microflow",
+      "qualifiedName": "FeedbackModule.ConvertUUIDToURL",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "be3d3b3b-3ac5-43bb-9306-bac36aaa554d",
+          "nodeType": "Annotation",
+          "label": "The URL for the submitted feedback is generated here.",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "6943ad45-a8e8-48c2-9930-e7a80e9c099c",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "a3447b98-d5e2-49fc-bc21-124bb3cc005c",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "e226a6eb-738a-43a4-84e9-6d99680d233f",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "ea1045b8-c96c-4989-a03b-6bf9b9158e60",
+          "originNodeId": "e226a6eb-738a-43a4-84e9-6d99680d233f",
+          "destinationNodeId": "6943ad45-a8e8-48c2-9930-e7a80e9c099c",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "e226a6eb-738a-43a4-84e9-6d99680d233f"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "e226a6eb-738a-43a4-84e9-6d99680d233f",
+        "6943ad45-a8e8-48c2-9930-e7a80e9c099c"
+      ],
+      "pseudocode": "FLOW Microflow: FeedbackModule.ConvertUUIDToURL\r\nNODES=4; EDGES=1\r\n1. START\r\n2. END"
+    },
+    {
+      "flowId": "fcb24873-eb91-4027-bbe1-20a1777fc351",
+      "kind": "Microflow",
+      "qualifiedName": "FeedbackModule.PopulateUserAttributes",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "805365c2-38ff-439d-aeee-754693f9fa3c",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (SubmitterUUID=$currentUser/Name, SubmitterDisplayName=$CurrentUser/Name; refreshInClient=false)",
+          "detail": "change Feedback (SubmitterUUID=$currentUser/Name, SubmitterDisplayName=$CurrentUser/Name; refreshInClient=false)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "cfa507c4-5571-46a8-b3e7-3981c8ff0899",
+          "nodeType": "ActionActivity",
+          "label": "RetrieveAction: retrieve CurrentUser from System.User",
+          "detail": "retrieve CurrentUser from System.User",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "b109f895-4dde-47f1-a448-643c8724840d",
+          "nodeType": "Annotation",
+          "label": "Change this retrieve the current user in your app and use the action next to it to populate submitter attributes of the feedback. This will indicate the submitt...",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "37fd0783-58bd-43ce-9223-eb7a58b5966f",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "59f82b67-51f4-4a37-85e3-e4e7676b4427",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "e9f399d8-b1a5-42ff-86fd-aeac75ee0864",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "da55d5c7-831d-4be0-9ab2-e1bc26adf53f",
+          "originNodeId": "e9f399d8-b1a5-42ff-86fd-aeac75ee0864",
+          "destinationNodeId": "cfa507c4-5571-46a8-b3e7-3981c8ff0899",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "23999a4e-8939-472a-907b-04d02a5366df",
+          "originNodeId": "cfa507c4-5571-46a8-b3e7-3981c8ff0899",
+          "destinationNodeId": "805365c2-38ff-439d-aeee-754693f9fa3c",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "71fceca4-aba8-41f0-9f5b-8a5e57badb13",
+          "originNodeId": "805365c2-38ff-439d-aeee-754693f9fa3c",
+          "destinationNodeId": "37fd0783-58bd-43ce-9223-eb7a58b5966f",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "e9f399d8-b1a5-42ff-86fd-aeac75ee0864"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "e9f399d8-b1a5-42ff-86fd-aeac75ee0864",
+        "cfa507c4-5571-46a8-b3e7-3981c8ff0899",
+        "805365c2-38ff-439d-aeee-754693f9fa3c",
+        "37fd0783-58bd-43ce-9223-eb7a58b5966f"
+      ],
+      "pseudocode": "FLOW Microflow: FeedbackModule.PopulateUserAttributes\r\nNODES=6; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve CurrentUser from System.User\r\n3. ACTION ChangeObjectAction: change Feedback (SubmitterUUID=$currentUser/Name, SubmitterDisplayName=$CurrentUser/Name; refreshInClient=false)\r\n4. END"
+    },
+    {
+      "flowId": "b0c18557-2a2b-4b53-92ba-272ffd8010a7",
+      "kind": "Microflow",
+      "qualifiedName": "FeedbackModule.SUB_Feedback_PostToAppInsights",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "e88c7409-fd67-4bb1-b6a6-2b261de9d774",
+          "nodeType": "ActionActivity",
+          "label": "CreateVariableAction: create variable ServerLocation=\u0027https://feedback-api.mendix.com/v2/feedback-items\u0027",
+          "detail": "create variable ServerLocation=\u0027https://feedback-api.mendix.com/v2/feedback-items\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "26c4568c-7dca-474c-a2fe-5583e6c4b458",
+          "nodeType": "ActionActivity",
+          "label": "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+          "detail": "LogMessageAction (errorHandlingType=Rollback)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f085c1bd-21c4-4fe8-8f1e-7646ce8c59e0",
+          "nodeType": "ActionActivity",
+          "label": "RestCallAction: RestCallAction (errorHandlingType=CustomWithoutRollBack)",
+          "detail": "RestCallAction (errorHandlingType=CustomWithoutRollBack)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "541c4bb6-f505-4b82-bf26-857730b3732f",
+          "nodeType": "Annotation",
+          "label": "This microflow sends the feedback to App Insights.",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "2a7722ca-190e-4a6f-8a29-5e114b851cdf",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "662bc5ca-be89-40ac-baf7-81cd26d4c620",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "11186980-a0d5-4948-b650-1a2366e3f9c9",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "e381490e-0c62-4cde-840b-8a81a0e69c29",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "b1d91818-d450-44e7-af37-322f5416eaf4",
+          "originNodeId": "e88c7409-fd67-4bb1-b6a6-2b261de9d774",
+          "destinationNodeId": "f085c1bd-21c4-4fe8-8f1e-7646ce8c59e0",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "42990180-d00c-489d-a97a-5b0f5eb59d6e",
+          "originNodeId": "e381490e-0c62-4cde-840b-8a81a0e69c29",
+          "destinationNodeId": "e88c7409-fd67-4bb1-b6a6-2b261de9d774",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "74980ef6-5c2d-4ec0-bead-656eda325354",
+          "originNodeId": "f085c1bd-21c4-4fe8-8f1e-7646ce8c59e0",
+          "destinationNodeId": "662bc5ca-be89-40ac-baf7-81cd26d4c620",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "4c0fa9e5-0f69-4b33-b948-59e7be1911a9",
+          "originNodeId": "f085c1bd-21c4-4fe8-8f1e-7646ce8c59e0",
+          "destinationNodeId": "26c4568c-7dca-474c-a2fe-5583e6c4b458",
+          "condition": null,
+          "isErrorHandler": true,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "ce5daa06-dfb2-4426-8ef4-1ac576c52835",
+          "originNodeId": "26c4568c-7dca-474c-a2fe-5583e6c4b458",
+          "destinationNodeId": "2a7722ca-190e-4a6f-8a29-5e114b851cdf",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "e381490e-0c62-4cde-840b-8a81a0e69c29"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "e381490e-0c62-4cde-840b-8a81a0e69c29",
+        "e88c7409-fd67-4bb1-b6a6-2b261de9d774",
+        "f085c1bd-21c4-4fe8-8f1e-7646ce8c59e0",
+        "662bc5ca-be89-40ac-baf7-81cd26d4c620",
+        "26c4568c-7dca-474c-a2fe-5583e6c4b458",
+        "2a7722ca-190e-4a6f-8a29-5e114b851cdf"
+      ],
+      "pseudocode": "FLOW Microflow: FeedbackModule.SUB_Feedback_PostToAppInsights\r\nNODES=8; EDGES=5\r\n1. START\r\n2. ACTION CreateVariableAction: create variable ServerLocation=\u0027https://feedback-api.mendix.com/v2/feedback-items\u0027\r\n3. ACTION RestCallAction: RestCallAction (errorHandlingType=CustomWithoutRollBack)\r\n4. BRANCH\r\n  5. END\r\n6. BRANCH on error\r\n  7. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  8. END"
+    },
+    {
+      "flowId": "dfdadaa6-381b-4f63-96d2-f1710eb151ac",
+      "kind": "Microflow",
+      "qualifiedName": "FeedbackModule.SUB_Feedback_Sanitize",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "aaee993a-b74b-4c22-9628-fd5a292fb489",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (Subject=$SanitizedSubject, Description=$SanitizedDescription, SubmitterUUID=$SanitizedSubmitterUUID, SubmitterEmail=$SanitizedSubmitterEmail, SubmitterDisplayName=$SanitizedSubmitterDisplayName, ActiveUserRoles=$SanitizedActiveUserRoles, PageName=$SanitizedPageName, Browser=$SanitizedBrowser, \u002B1 more; refreshInClient=false)",
+          "detail": "change Feedback (Subject=$SanitizedSubject, Description=$SanitizedDescription, SubmitterUUID=$SanitizedSubmitterUUID, SubmitterEmail=$SanitizedSubmitterEmail, SubmitterDisplayName=$SanitizedSubmitterDisplayName, ActiveUserRoles=$SanitizedActiveUserRoles, PageName=$SanitizedPageName, Browser=$SanitizedBrowser, \u002B1 more; refreshInClient=false)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "2986836f-fc03-43a3-9e09-afb20465666b",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedActiveUserRoles",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedActiveUserRoles",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedBrowser",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedBrowser",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedDescription",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedDescription",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d8244b5a-c63f-4994-919e-05e55502ba1a",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedEnvironmentURL",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedEnvironmentURL",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedPageName",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedPageName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubject",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubject",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterDisplayName",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterDisplayName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterEmail",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterEmail",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterUUID",
+          "detail": "call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterUUID",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "5d35478a-9d7e-4f10-81fc-7208e994f7cc",
+          "nodeType": "Annotation",
+          "label": "The feedback is sanitized to prevent XSS.",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "5e5013c2-f058-4e31-a7e8-1f186f87f1d7",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "9f0118ac-8121-41d8-8614-1f47376b2905",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "979dfa01-10e3-483c-afb7-89a9f3cfa00c",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "8f0e279e-714a-4415-9526-3246e08adb96",
+          "originNodeId": "979dfa01-10e3-483c-afb7-89a9f3cfa00c",
+          "destinationNodeId": "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2ac6df9b-3a40-489c-928d-5a44f6a2f889",
+          "originNodeId": "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+          "destinationNodeId": "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "dd8eac8e-43bd-41be-993a-53b5877c93d9",
+          "originNodeId": "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+          "destinationNodeId": "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "4724c795-ae35-4d23-819d-b13ecd239284",
+          "originNodeId": "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+          "destinationNodeId": "d8244b5a-c63f-4994-919e-05e55502ba1a",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "03e65938-e917-40dc-a331-fa3b3cec2b49",
+          "originNodeId": "d8244b5a-c63f-4994-919e-05e55502ba1a",
+          "destinationNodeId": "2986836f-fc03-43a3-9e09-afb20465666b",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "abab6cb2-35ab-429e-9ebb-0c0f3b27d15e",
+          "originNodeId": "2986836f-fc03-43a3-9e09-afb20465666b",
+          "destinationNodeId": "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2f67c0a4-6213-4925-9f40-56f2fd4e8690",
+          "originNodeId": "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+          "destinationNodeId": "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "f8a9bb9f-a7df-4053-a0a5-598bb2d46a08",
+          "originNodeId": "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+          "destinationNodeId": "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "1c80f0e1-5a23-4ee4-9044-3b66fcc661bf",
+          "originNodeId": "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+          "destinationNodeId": "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "3c3d05b0-b08b-4901-95fa-b002cf4a826f",
+          "originNodeId": "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+          "destinationNodeId": "aaee993a-b74b-4c22-9628-fd5a292fb489",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "9ad19ccf-0133-4cfe-bb7a-4a19d828d0fa",
+          "originNodeId": "aaee993a-b74b-4c22-9628-fd5a292fb489",
+          "destinationNodeId": "5e5013c2-f058-4e31-a7e8-1f186f87f1d7",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "979dfa01-10e3-483c-afb7-89a9f3cfa00c"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "979dfa01-10e3-483c-afb7-89a9f3cfa00c",
+        "4f6e4e9f-db79-4727-a6ef-eabdee1d756e",
+        "528ce3ef-d8a3-4640-986f-00a9ca793b0b",
+        "914d9d14-f9f6-44d3-92e6-eaaee25a5f56",
+        "d8244b5a-c63f-4994-919e-05e55502ba1a",
+        "2986836f-fc03-43a3-9e09-afb20465666b",
+        "1ffe76b2-b011-44b0-a215-76f05b8c60f6",
+        "b38c2ff1-2bba-4494-9c90-c327cb57301d",
+        "e0da8156-354b-4d6f-859d-67f1768e3ed0",
+        "5aaac23d-8c9c-4456-8b6b-d9a61424c278",
+        "aaee993a-b74b-4c22-9628-fd5a292fb489",
+        "5e5013c2-f058-4e31-a7e8-1f186f87f1d7"
+      ],
+      "pseudocode": "FLOW Microflow: FeedbackModule.SUB_Feedback_Sanitize\r\nNODES=14; EDGES=11\r\n1. START\r\n2. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubject\r\n3. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedDescription\r\n4. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedBrowser\r\n5. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedEnvironmentURL\r\n6. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedActiveUserRoles\r\n7. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedPageName\r\n8. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterDisplayName\r\n9. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterEmail\r\n10. ACTION JavaActionCallAction: call java action FeedbackModule.XSS_Sanitizer -\u003E SanitizedSubmitterUUID\r\n11. ACTION ChangeObjectAction: change Feedback (Subject=$SanitizedSubject, Description=$SanitizedDescription, SubmitterUUID=$SanitizedSubmitterUUID, SubmitterEmail=$SanitizedSubmitterEmail, SubmitterDisplayName=$SanitizedSubmitterDisplayName, ActiveUserRoles=$SanitizedActiveUserRoles, PageName=$SanitizedPageName, Browser=$SanitizedBrowser, \u002B1 more; refreshInClient=false)\r\n12. END"
+    },
+    {
+      "flowId": "b274f46b-d997-4a5b-8856-570de6c0bf5c",
+      "kind": "Microflow",
+      "qualifiedName": "FeedbackModule.SUB_Feedback_SendToServer",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "2b1f52ce-2523-4c24-8da9-774e623193ff",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (ScreenshotName=\u0027screenshot-\u0027 \u002B formatDateTime([%CurrentDateTime%],\u0027yyyy-MM-dd-HH-mm-ss\u0027)\u002B\u0027.\u0027\u002B toLowerCase(substring($Feedback/ImageB64,find($Feedback/ImageB64, \u0027data:image/\u0027) \u002B 11,3)); refreshInClient=false)",
+          "detail": "change Feedback (ScreenshotName=\u0027screenshot-\u0027 \u002B formatDateTime([%CurrentDateTime%],\u0027yyyy-MM-dd-HH-mm-ss\u0027)\u002B\u0027.\u0027\u002B toLowerCase(substring($Feedback/ImageB64,find($Feedback/ImageB64, \u0027data:image/\u0027) \u002B 11,3)); refreshInClient=false)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "07e6f1ce-0b85-473e-b4d6-12fe6b3ff066",
+          "nodeType": "ActionActivity",
+          "label": "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+          "detail": "LogMessageAction (errorHandlingType=Rollback)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "57dd6fab-de0d-429d-a8ee-5c57398c47f6",
+          "nodeType": "ActionActivity",
+          "label": "MicroflowCallAction: call microflow FeedbackModule.SUB_Feedback_PostToAppInsights -\u003E Response",
+          "detail": "call microflow FeedbackModule.SUB_Feedback_PostToAppInsights -\u003E Response",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": [
+            {
+              "callKind": "Microflow",
+              "targetFlowName": "FeedbackModule.SUB_Feedback_PostToAppInsights",
+              "sourceNodeId": "57dd6fab-de0d-429d-a8ee-5c57398c47f6"
+            }
+          ]
+        },
+        {
+          "nodeId": "d393115b-6aed-4f76-92a3-fe1cba48a22a",
+          "nodeType": "ActionActivity",
+          "label": "MicroflowCallAction: call microflow FeedbackModule.SUB_Feedback_Sanitize",
+          "detail": "call microflow FeedbackModule.SUB_Feedback_Sanitize",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": [
+            {
+              "callKind": "Microflow",
+              "targetFlowName": "FeedbackModule.SUB_Feedback_Sanitize",
+              "sourceNodeId": "d393115b-6aed-4f76-92a3-fe1cba48a22a"
+            }
+          ]
+        },
+        {
+          "nodeId": "b48ced4d-4b77-4297-9fe3-59b52f4c522a",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f8326f74-b630-4324-ad3e-01ef51216d23",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "19514a0a-395d-465d-99ae-a8a074f03290",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4c07e572-3226-4670-b05c-5cbf5760adc4",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "6edc722e-ab6f-4b31-b3cb-6399b676e5f5",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "70a96116-8812-4729-ad3c-4a25ad8bde42",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "8b2138aa-35e3-43ab-96db-3266ede31d42",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "2881b0d5-e832-460d-98a6-0ea0b72bc40f",
+          "nodeType": "ExclusiveSplit",
+          "label": "AppId is not empty or 1? expression=$Feedback/AppID != \u00271\u0027 and $Feedback/AppID != empty and $Feedback/AppID != \u0027\u0027",
+          "detail": "AppId is not empty or 1? expression=$Feedback/AppID != \u00271\u0027 and $Feedback/AppID != empty and $Feedback/AppID != \u0027\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "36a10077-7d28-4e5a-9ef8-402494d8c718",
+          "nodeType": "ExclusiveSplit",
+          "label": "Has Screenshot? expression=$Feedback/ImageB64 != empty and $Feedback/ImageB64 != \u0027\u0027",
+          "detail": "Has Screenshot? expression=$Feedback/ImageB64 != empty and $Feedback/ImageB64 != \u0027\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4d9cde83-b2aa-4ca0-90e1-3f4272a6885e",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "b5449293-99e2-4643-8fe8-5de18e7d6c66",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "6854a227-35d2-4dc2-b94e-a1b14add9b3c",
+          "originNodeId": "b5449293-99e2-4643-8fe8-5de18e7d6c66",
+          "destinationNodeId": "d393115b-6aed-4f76-92a3-fe1cba48a22a",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "aa8662d4-e95e-4068-a56d-afdb47cacfcf",
+          "originNodeId": "2b1f52ce-2523-4c24-8da9-774e623193ff",
+          "destinationNodeId": "6edc722e-ab6f-4b31-b3cb-6399b676e5f5",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "9b42adfb-b1b4-48c8-af5c-49692fdc51ec",
+          "originNodeId": "36a10077-7d28-4e5a-9ef8-402494d8c718",
+          "destinationNodeId": "2b1f52ce-2523-4c24-8da9-774e623193ff",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "0315acd6-d7ad-46af-bbf8-bfcbcf151bd0",
+          "originNodeId": "6edc722e-ab6f-4b31-b3cb-6399b676e5f5",
+          "destinationNodeId": "2881b0d5-e832-460d-98a6-0ea0b72bc40f",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "4aa042ec-8f85-45e3-8a7a-f46dcbf31d1e",
+          "originNodeId": "36a10077-7d28-4e5a-9ef8-402494d8c718",
+          "destinationNodeId": "8b2138aa-35e3-43ab-96db-3266ede31d42",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 0,
+          "destinationConnectionIndex": 2
+        },
+        {
+          "edgeId": "6dab174d-843c-490f-903d-4adbaf252014",
+          "originNodeId": "8b2138aa-35e3-43ab-96db-3266ede31d42",
+          "destinationNodeId": "4c07e572-3226-4670-b05c-5cbf5760adc4",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "07fc3249-235c-4089-8dce-fcc543393fa3",
+          "originNodeId": "4c07e572-3226-4670-b05c-5cbf5760adc4",
+          "destinationNodeId": "6edc722e-ab6f-4b31-b3cb-6399b676e5f5",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "fb294434-9819-4a1f-b8be-da430cdb9211",
+          "originNodeId": "19514a0a-395d-465d-99ae-a8a074f03290",
+          "destinationNodeId": "f8326f74-b630-4324-ad3e-01ef51216d23",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "23ae1b51-4c81-4bc0-b551-f70ee824b69c",
+          "originNodeId": "07e6f1ce-0b85-473e-b4d6-12fe6b3ff066",
+          "destinationNodeId": "70a96116-8812-4729-ad3c-4a25ad8bde42",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "ff18f95d-962c-42d3-b7ed-498e66468d07",
+          "originNodeId": "70a96116-8812-4729-ad3c-4a25ad8bde42",
+          "destinationNodeId": "19514a0a-395d-465d-99ae-a8a074f03290",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2051b87f-c53d-4954-abc4-6b838f6fe151",
+          "originNodeId": "2881b0d5-e832-460d-98a6-0ea0b72bc40f",
+          "destinationNodeId": "07e6f1ce-0b85-473e-b4d6-12fe6b3ff066",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "f376b5b5-62ef-41b6-a8c1-bb00b998e490",
+          "originNodeId": "2881b0d5-e832-460d-98a6-0ea0b72bc40f",
+          "destinationNodeId": "57dd6fab-de0d-429d-a8ee-5c57398c47f6",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "0ad7d4ee-47ed-43eb-9927-35517fe48746",
+          "originNodeId": "57dd6fab-de0d-429d-a8ee-5c57398c47f6",
+          "destinationNodeId": "b48ced4d-4b77-4297-9fe3-59b52f4c522a",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2bcbc59d-5dc6-4606-b166-c16046e37364",
+          "originNodeId": "57dd6fab-de0d-429d-a8ee-5c57398c47f6",
+          "destinationNodeId": "19514a0a-395d-465d-99ae-a8a074f03290",
+          "condition": null,
+          "isErrorHandler": true,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "a414d6bb-367e-48a8-a12b-feb705a4715a",
+          "originNodeId": "d393115b-6aed-4f76-92a3-fe1cba48a22a",
+          "destinationNodeId": "36a10077-7d28-4e5a-9ef8-402494d8c718",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "FeedbackModule.SUB_Feedback_PostToAppInsights",
+          "sourceNodeId": "57dd6fab-de0d-429d-a8ee-5c57398c47f6"
+        },
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "FeedbackModule.SUB_Feedback_Sanitize",
+          "sourceNodeId": "d393115b-6aed-4f76-92a3-fe1cba48a22a"
+        }
+      ],
+      "startNodeIds": [
+        "b5449293-99e2-4643-8fe8-5de18e7d6c66"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "b5449293-99e2-4643-8fe8-5de18e7d6c66",
+        "d393115b-6aed-4f76-92a3-fe1cba48a22a",
+        "36a10077-7d28-4e5a-9ef8-402494d8c718",
+        "8b2138aa-35e3-43ab-96db-3266ede31d42",
+        "4c07e572-3226-4670-b05c-5cbf5760adc4",
+        "6edc722e-ab6f-4b31-b3cb-6399b676e5f5",
+        "2881b0d5-e832-460d-98a6-0ea0b72bc40f",
+        "57dd6fab-de0d-429d-a8ee-5c57398c47f6",
+        "b48ced4d-4b77-4297-9fe3-59b52f4c522a",
+        "19514a0a-395d-465d-99ae-a8a074f03290",
+        "f8326f74-b630-4324-ad3e-01ef51216d23",
+        "07e6f1ce-0b85-473e-b4d6-12fe6b3ff066",
+        "70a96116-8812-4729-ad3c-4a25ad8bde42",
+        "2b1f52ce-2523-4c24-8da9-774e623193ff"
+      ],
+      "pseudocode": "FLOW Microflow: FeedbackModule.SUB_Feedback_SendToServer\r\nNODES=15; EDGES=15\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow FeedbackModule.SUB_Feedback_Sanitize\r\n3. DECISION Has Screenshot? expression=$Feedback/ImageB64 != empty and $Feedback/ImageB64 != \u0027\u0027\r\n4. BRANCH when EnumerationCase=false\r\n  5. NODE ExclusiveMerge: ExclusiveMerge\r\n  6. NODE ExclusiveMerge: ExclusiveMerge\r\n  7. NODE ExclusiveMerge: ExclusiveMerge\r\n  8. DECISION AppId is not empty or 1? expression=$Feedback/AppID != \u00271\u0027 and $Feedback/AppID != empty and $Feedback/AppID != \u0027\u0027\r\n  9. BRANCH when EnumerationCase=true\r\n    10. ACTION MicroflowCallAction: call microflow FeedbackModule.SUB_Feedback_PostToAppInsights -\u003E Response\r\n    11. BRANCH\r\n      12. END\r\n    13. BRANCH on error\r\n      14. NODE ExclusiveMerge: ExclusiveMerge\r\n      15. END\r\n  16. BRANCH when EnumerationCase=false\r\n    17. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n    18. NODE ExclusiveMerge: ExclusiveMerge\r\n    19. REF ExclusiveMerge\r\n20. BRANCH when EnumerationCase=true\r\n  21. ACTION ChangeObjectAction: change Feedback (ScreenshotName=\u0027screenshot-\u0027 \u002B formatDateTime([%CurrentDateTime%],\u0027yyyy-MM-dd-HH-mm-ss\u0027)\u002B\u0027.\u0027\u002B toLowerCase(substring($Feedback/ImageB64,find($Feedback/ImageB64, \u0027data:image/\u0027) \u002B 11,3)); refreshInClient=false)\r\n  22. REF ExclusiveMerge"
+    },
+    {
+      "flowId": "3db96c8b-1465-4429-9915-562dbbc77d07",
+      "kind": "Microflow",
+      "qualifiedName": "FeedbackModule.VAL_Feedback",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+          "nodeType": "ActionActivity",
+          "label": "ChangeVariableAction: change variable ValidFeedback=false",
+          "detail": "change variable ValidFeedback=false",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "64da5dec-4aaf-46cf-9795-927273fa1103",
+          "nodeType": "ActionActivity",
+          "label": "ChangeVariableAction: change variable ValidFeedback=false",
+          "detail": "change variable ValidFeedback=false",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f635a638-7352-4463-82da-4bae298a1d30",
+          "nodeType": "ActionActivity",
+          "label": "ChangeVariableAction: change variable ValidFeedback=false",
+          "detail": "change variable ValidFeedback=false",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+          "nodeType": "ActionActivity",
+          "label": "CreateVariableAction: create variable ValidFeedback=true",
+          "detail": "create variable ValidFeedback=true",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+          "nodeType": "ActionActivity",
+          "label": "JavaActionCallAction: call java action FeedbackModule.ValidateEmail -\u003E IsValidEmail",
+          "detail": "call java action FeedbackModule.ValidateEmail -\u003E IsValidEmail",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+          "nodeType": "ActionActivity",
+          "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+          "nodeType": "ActionActivity",
+          "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+          "nodeType": "ActionActivity",
+          "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+          "nodeType": "ActionActivity",
+          "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+          "nodeType": "ActionActivity",
+          "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d6143193-7309-41ae-af5d-fdf8f731b778",
+          "nodeType": "Annotation",
+          "label": "The validations are identical to those used in the Mendix Feedback API v2",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "2f78bcb9-8b09-46d8-8e55-dfe02dbded38",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "73641780-88c6-404f-935a-b8aac9054d90",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "84066755-3c66-4710-9cc0-26449ee9e939",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "91d00bab-d622-4fff-bd26-86b7030fb15b",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "c886953d-6674-4961-852c-58ba04c48529",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+          "nodeType": "ExclusiveSplit",
+          "label": "Description \u003C 32000 characters? expression=length(trim($Feedback/Description)) \u003C= 32000",
+          "detail": "Description \u003C 32000 characters? expression=length(trim($Feedback/Description)) \u003C= 32000",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+          "nodeType": "ExclusiveSplit",
+          "label": "Email is Valid? expression=$IsValidEmail",
+          "detail": "Email is Valid? expression=$IsValidEmail",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "0ba96493-4316-4d3c-9203-d9928fb8069b",
+          "nodeType": "ExclusiveSplit",
+          "label": "Email not empty? expression=$Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027",
+          "detail": "Email not empty? expression=$Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+          "nodeType": "ExclusiveSplit",
+          "label": "Subject \u003C 200 characters expression=length(trim($Feedback/Subject)) \u003C= 200",
+          "detail": "Subject \u003C 200 characters expression=length(trim($Feedback/Subject)) \u003C= 200",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "e962ea51-7670-48be-9f8b-045016d57cf1",
+          "nodeType": "ExclusiveSplit",
+          "label": "Subject not empty? expression=trim($Feedback/Subject) != empty and trim($Feedback/Subject) != \u0027\u0027",
+          "detail": "Subject not empty? expression=trim($Feedback/Subject) != empty and trim($Feedback/Subject) != \u0027\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "07d54392-aa7a-4693-ba70-647d9a35fc23",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "bdce163e-1d83-494c-91e4-414dfd0926a5",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "7169231b-35ac-44b4-acf3-1b7d17dd18a8",
+          "originNodeId": "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+          "destinationNodeId": "e962ea51-7670-48be-9f8b-045016d57cf1",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "3366f025-e192-40c1-a608-e6619d78dd29",
+          "originNodeId": "e962ea51-7670-48be-9f8b-045016d57cf1",
+          "destinationNodeId": "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "faf91877-7931-4c3d-80aa-118e809634f6",
+          "originNodeId": "e962ea51-7670-48be-9f8b-045016d57cf1",
+          "destinationNodeId": "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "7d6000ec-2235-4703-836b-12ca42e61e01",
+          "originNodeId": "84066755-3c66-4710-9cc0-26449ee9e939",
+          "destinationNodeId": "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "f2974973-6459-428d-9bac-4d9674533dd8",
+          "originNodeId": "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+          "destinationNodeId": "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2582f120-877d-4760-b8a7-62af7ed90fc8",
+          "originNodeId": "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+          "destinationNodeId": "84066755-3c66-4710-9cc0-26449ee9e939",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 0,
+          "destinationConnectionIndex": 2
+        },
+        {
+          "edgeId": "3b4c6818-62a3-451e-97bb-7df0e69dbb61",
+          "originNodeId": "0ba96493-4316-4d3c-9203-d9928fb8069b",
+          "destinationNodeId": "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "32cc0712-19a5-40cf-9c23-4727352b6acf",
+          "originNodeId": "bdce163e-1d83-494c-91e4-414dfd0926a5",
+          "destinationNodeId": "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "27980f84-527e-4f81-91f4-bd982a41e53e",
+          "originNodeId": "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+          "destinationNodeId": "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2f56b65a-8e12-4b66-b918-081519ed89f2",
+          "originNodeId": "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+          "destinationNodeId": "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "e5487238-55b6-4c22-8b1d-b43d41660508",
+          "originNodeId": "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+          "destinationNodeId": "f635a638-7352-4463-82da-4bae298a1d30",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "b63210ef-fb58-4ec4-8180-7aa1be52688f",
+          "originNodeId": "f635a638-7352-4463-82da-4bae298a1d30",
+          "destinationNodeId": "91d00bab-d622-4fff-bd26-86b7030fb15b",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "c368996a-b44e-47f0-8d12-d2d32baf2d6b",
+          "originNodeId": "91d00bab-d622-4fff-bd26-86b7030fb15b",
+          "destinationNodeId": "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 0,
+          "destinationConnectionIndex": 2
+        },
+        {
+          "edgeId": "0e51b793-3b20-4966-ab34-fa4d1ac0c195",
+          "originNodeId": "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+          "destinationNodeId": "0ba96493-4316-4d3c-9203-d9928fb8069b",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "a472fc97-38c6-4bba-b975-9ac2e1230efb",
+          "originNodeId": "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+          "destinationNodeId": "c886953d-6674-4961-852c-58ba04c48529",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "76b7f3bf-e618-4677-9c87-9b7b328667bf",
+          "originNodeId": "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+          "destinationNodeId": "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "a341a96a-981e-4b96-886b-d8c6bb4bb7f5",
+          "originNodeId": "64da5dec-4aaf-46cf-9795-927273fa1103",
+          "destinationNodeId": "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "0a7b5470-7ed3-4c55-b6f8-34c2fd9163bf",
+          "originNodeId": "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+          "destinationNodeId": "c886953d-6674-4961-852c-58ba04c48529",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 0,
+          "destinationConnectionIndex": 2
+        },
+        {
+          "edgeId": "fb19e0d1-eedc-43f4-971b-870030604be1",
+          "originNodeId": "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+          "destinationNodeId": "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "7af72531-bee2-413d-87e0-5f0834210765",
+          "originNodeId": "0ba96493-4316-4d3c-9203-d9928fb8069b",
+          "destinationNodeId": "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "ba3fa0e6-d875-4723-923e-72c3e932052a",
+          "originNodeId": "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+          "destinationNodeId": "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "e84454e6-a324-465b-a3b2-0f7d471ac03b",
+          "originNodeId": "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+          "destinationNodeId": "73641780-88c6-404f-935a-b8aac9054d90",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "34564694-e857-49bf-ac46-807788695abb",
+          "originNodeId": "73641780-88c6-404f-935a-b8aac9054d90",
+          "destinationNodeId": "64da5dec-4aaf-46cf-9795-927273fa1103",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "3732fa62-bb7b-4e76-8573-e17b4d0e7f94",
+          "originNodeId": "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+          "destinationNodeId": "73641780-88c6-404f-935a-b8aac9054d90",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "89b4d25e-7f38-4486-9a28-12d7d62ed20d",
+          "originNodeId": "c886953d-6674-4961-852c-58ba04c48529",
+          "destinationNodeId": "2f78bcb9-8b09-46d8-8e55-dfe02dbded38",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2b1583cc-8042-4429-81e7-288b372db0fa",
+          "originNodeId": "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+          "destinationNodeId": "84066755-3c66-4710-9cc0-26449ee9e939",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "4f767424-bc84-4a8a-a9ca-4600d2fae40b",
+          "originNodeId": "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+          "destinationNodeId": "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "6fc75251-c1a4-4ee7-96ab-00984d0f1c8f",
+          "originNodeId": "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+          "destinationNodeId": "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "ac319372-7148-4945-9cd9-bbb6370f2141",
+          "originNodeId": "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+          "destinationNodeId": "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "5656c9fd-9008-4b67-bdf7-689911830800",
+          "originNodeId": "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+          "destinationNodeId": "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "fe37044c-5f23-4897-8385-0b203d329104",
+          "originNodeId": "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec",
+          "destinationNodeId": "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "bdce163e-1d83-494c-91e4-414dfd0926a5"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "bdce163e-1d83-494c-91e4-414dfd0926a5",
+        "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+        "e962ea51-7670-48be-9f8b-045016d57cf1",
+        "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+        "84066755-3c66-4710-9cc0-26449ee9e939",
+        "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+        "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+        "0ba96493-4316-4d3c-9203-d9928fb8069b",
+        "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+        "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+        "c886953d-6674-4961-852c-58ba04c48529",
+        "2f78bcb9-8b09-46d8-8e55-dfe02dbded38",
+        "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+        "73641780-88c6-404f-935a-b8aac9054d90",
+        "64da5dec-4aaf-46cf-9795-927273fa1103",
+        "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+        "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+        "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+        "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+        "f635a638-7352-4463-82da-4bae298a1d30",
+        "91d00bab-d622-4fff-bd26-86b7030fb15b",
+        "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+        "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+        "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+        "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+        "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+        "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec"
+      ],
+      "pseudocode": "FLOW Microflow: FeedbackModule.VAL_Feedback\r\nNODES=29; EDGES=31\r\n1. START\r\n2. ACTION CreateVariableAction: create variable ValidFeedback=true\r\n3. DECISION Subject not empty? expression=trim($Feedback/Subject) != empty and trim($Feedback/Subject) != \u0027\u0027\r\n4. BRANCH when EnumerationCase=true\r\n  5. DECISION Subject \u003C 200 characters expression=length(trim($Feedback/Subject)) \u003C= 200\r\n  6. BRANCH when EnumerationCase=true\r\n    7. NODE ExclusiveMerge: ExclusiveMerge\r\n    8. DECISION Description \u003C 32000 characters? expression=length(trim($Feedback/Description)) \u003C= 32000\r\n    9. BRANCH when EnumerationCase=true\r\n      10. NODE ExclusiveMerge: ExclusiveMerge\r\n      11. DECISION Email not empty? expression=$Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027\r\n      12. BRANCH when EnumerationCase=true\r\n        13. ACTION JavaActionCallAction: call java action FeedbackModule.ValidateEmail -\u003E IsValidEmail\r\n        14. DECISION Email is Valid? expression=$IsValidEmail\r\n        15. BRANCH when EnumerationCase=true\r\n          16. NODE ExclusiveMerge: ExclusiveMerge\r\n          17. END\r\n        18. BRANCH when EnumerationCase=false\r\n          19. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n          20. NODE ExclusiveMerge: ExclusiveMerge\r\n          21. ACTION ChangeVariableAction: change variable ValidFeedback=false\r\n          22. NODE ExclusiveMerge: ExclusiveMerge\r\n          23. REF ExclusiveMerge\r\n      24. BRANCH when EnumerationCase=false\r\n        25. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n        26. NODE ExclusiveMerge: ExclusiveMerge\r\n        27. REF ExclusiveMerge\r\n    28. BRANCH when EnumerationCase=false\r\n      29. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n      30. ACTION ChangeVariableAction: change variable ValidFeedback=false\r\n      31. NODE ExclusiveMerge: ExclusiveMerge\r\n      32. REF ExclusiveMerge\r\n  33. BRANCH when EnumerationCase=false\r\n    34. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n    35. NODE ExclusiveMerge: ExclusiveMerge\r\n    36. ACTION ChangeVariableAction: change variable ValidFeedback=false\r\n    37. NODE ExclusiveMerge: ExclusiveMerge\r\n    38. REF ExclusiveMerge\r\n39. BRANCH when EnumerationCase=false\r\n  40. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n  41. NODE ExclusiveMerge: ExclusiveMerge\r\n  42. REF ExclusiveMerge"
+    },
+    {
+      "flowId": "8c98f740-acad-4319-ac5f-8e4238e458dd",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.ACT_Feedback_ClearForm",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, ImageB64=empty; refreshInClient=true)",
+          "detail": "change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, ImageB64=empty; refreshInClient=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "detail": "call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "babefc4e-9f5b-4c68-8d17-f6200eb2de1c",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "b0ecd08e-c62c-4c6a-90cf-bb38ebe96609",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "0343e447-a850-4cff-8dd3-0308cad1326f",
+          "originNodeId": "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b",
+          "destinationNodeId": "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "c49e57ba-111c-46e2-a920-19af67578e7e",
+          "originNodeId": "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+          "destinationNodeId": "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "c96338ab-ff85-4266-9bd9-223a1a6aee48",
+          "originNodeId": "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+          "destinationNodeId": "babefc4e-9f5b-4c68-8d17-f6200eb2de1c",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b",
+        "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+        "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+        "babefc4e-9f5b-4c68-8d17-f6200eb2de1c"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.ACT_Feedback_ClearForm\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, ImageB64=empty; refreshInClient=true)\r\n3. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName\r\n4. END"
+    },
+    {
+      "flowId": "256146d3-5ad5-4419-847b-1df8d859297f",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.ACT_Feedback_ClearImage",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "86c6bd03-1d28-4e93-bfcf-07f19dda5b0c",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (ImageB64=empty; refreshInClient=true)",
+          "detail": "change Feedback (ImageB64=empty; refreshInClient=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "26cc0e49-e8e7-4103-a547-6936c04eded4",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "detail": "call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4d300ccd-06cb-4267-a3b5-d0a845a8b6a8",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "c0af1545-f83a-4774-a349-38c49e611720",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "a5584ace-29d0-4bc4-a800-7742d964e9b8",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "3edcca1f-53f2-4eb8-a42a-8d44e8be2252",
+          "originNodeId": "a5584ace-29d0-4bc4-a800-7742d964e9b8",
+          "destinationNodeId": "86c6bd03-1d28-4e93-bfcf-07f19dda5b0c",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "d49f721f-dcd5-4cad-9fc1-af145d81cb22",
+          "originNodeId": "86c6bd03-1d28-4e93-bfcf-07f19dda5b0c",
+          "destinationNodeId": "26cc0e49-e8e7-4103-a547-6936c04eded4",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "6e0e6aca-1efb-487a-af4f-767c57ce6cdd",
+          "originNodeId": "26cc0e49-e8e7-4103-a547-6936c04eded4",
+          "destinationNodeId": "4d300ccd-06cb-4267-a3b5-d0a845a8b6a8",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "a5584ace-29d0-4bc4-a800-7742d964e9b8"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "a5584ace-29d0-4bc4-a800-7742d964e9b8",
+        "86c6bd03-1d28-4e93-bfcf-07f19dda5b0c",
+        "26cc0e49-e8e7-4103-a547-6936c04eded4",
+        "4d300ccd-06cb-4267-a3b5-d0a845a8b6a8"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.ACT_Feedback_ClearImage\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION ChangeObjectAction: change Feedback (ImageB64=empty; refreshInClient=true)\r\n3. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName\r\n4. END"
+    },
+    {
+      "flowId": "538dc61b-b86a-4771-bd4e-ba598d0e0be1",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.ACT_Feedback_TriggerScreenshotMode",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (ImageB64=$base64FromWidget; refreshInClient=true)",
+          "detail": "change Feedback (ImageB64=$base64FromWidget; refreshInClient=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "1574ddd2-335c-4087-a79d-9a552708d667",
+          "nodeType": "ActionActivity",
+          "label": "CloseFormAction: close page",
+          "detail": "close page",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "0cae1687-1475-40ca-924b-f0b7bff419fc",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.JS_ToggleFeedbackScreenshotWidget -\u003E base64FromWidget",
+          "detail": "call javascript action FeedbackModule.JS_ToggleFeedbackScreenshotWidget -\u003E base64FromWidget",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "a04427ef-6919-44a4-b602-a28d6765ddf0",
+          "nodeType": "ActionActivity",
+          "label": "ShowPageAction: show page FeedbackModule.ShareFeedback",
+          "detail": "show page FeedbackModule.ShareFeedback",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "ecd59c78-ffed-418c-9296-956a6d113e2c",
+          "nodeType": "Annotation",
+          "label": "This JS Action triggers the Screenshot pop-up mode in the Feedback Widget. The widget will send back to the mendix client browser a base64 formatted image.",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "47e10b4d-0b09-46ce-a244-fe249732be6c",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "72195fda-4b0a-4e52-9803-424098ac7618",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4850c058-cefd-4f89-b6c4-6911437827db",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "02a922e5-5b66-4c33-8149-43453e9210c2",
+          "nodeType": "ExclusiveSplit",
+          "label": "is not Empty? expression=$base64FromWidget != empty",
+          "detail": "is not Empty? expression=$base64FromWidget != empty",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+          "nodeType": "ExclusiveSplit",
+          "label": "Upload Not Cancelled? expression=$base64FromWidget != \u0027uploadCancelled\u0027",
+          "detail": "Upload Not Cancelled? expression=$base64FromWidget != \u0027uploadCancelled\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d9736659-6f9e-4e35-99cd-0396bb6e5f86",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "579a017b-d131-4e98-92bb-bd903e7887dc",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "ac36ef24-e6c1-4b39-9041-0a72a397225c",
+          "originNodeId": "579a017b-d131-4e98-92bb-bd903e7887dc",
+          "destinationNodeId": "1574ddd2-335c-4087-a79d-9a552708d667",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "a9dfe3bc-bf75-4f69-9a77-770e982edada",
+          "originNodeId": "0cae1687-1475-40ca-924b-f0b7bff419fc",
+          "destinationNodeId": "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "2efae4c2-5854-44b9-a092-b55a34f9404e",
+          "originNodeId": "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+          "destinationNodeId": "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "a11e68e9-fb68-4102-9f93-9f64baf41156",
+          "originNodeId": "02a922e5-5b66-4c33-8149-43453e9210c2",
+          "destinationNodeId": "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "991cefa6-3d1f-46cc-bca7-0c203f0bb75c",
+          "originNodeId": "02a922e5-5b66-4c33-8149-43453e9210c2",
+          "destinationNodeId": "47e10b4d-0b09-46ce-a244-fe249732be6c",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "6e15ef3c-3763-448a-b4f0-71d704bc08bd",
+          "originNodeId": "a04427ef-6919-44a4-b602-a28d6765ddf0",
+          "destinationNodeId": "72195fda-4b0a-4e52-9803-424098ac7618",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "90c1eb35-cf3d-427e-88e8-9f888fa972a9",
+          "originNodeId": "1574ddd2-335c-4087-a79d-9a552708d667",
+          "destinationNodeId": "0cae1687-1475-40ca-924b-f0b7bff419fc",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "9c1494d7-a6c3-42cf-91aa-072538c96e4b",
+          "originNodeId": "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+          "destinationNodeId": "02a922e5-5b66-4c33-8149-43453e9210c2",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "d60b8218-ea39-45c3-bdb6-9bb03eb27d3e",
+          "originNodeId": "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+          "destinationNodeId": "4850c058-cefd-4f89-b6c4-6911437827db",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "95aeb102-befc-461f-bdae-e85c42828789",
+          "originNodeId": "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+          "destinationNodeId": "a04427ef-6919-44a4-b602-a28d6765ddf0",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "557e72fc-27b1-4ae8-8fa8-e60f2511119e",
+          "originNodeId": "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+          "destinationNodeId": "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 0,
+          "destinationConnectionIndex": 2
+        },
+        {
+          "edgeId": "195fac55-91ec-4317-ad0d-c856eeae40b9",
+          "originNodeId": "4850c058-cefd-4f89-b6c4-6911437827db",
+          "destinationNodeId": "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "579a017b-d131-4e98-92bb-bd903e7887dc"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "579a017b-d131-4e98-92bb-bd903e7887dc",
+        "1574ddd2-335c-4087-a79d-9a552708d667",
+        "0cae1687-1475-40ca-924b-f0b7bff419fc",
+        "26bc1bc9-ca58-423a-b729-6f3ef6e2eae7",
+        "26b7d4ce-33f4-4392-8826-9dfe4f6a34f3",
+        "4850c058-cefd-4f89-b6c4-6911437827db",
+        "f8ba416d-e6fd-4af6-8702-e1cd4996b25e",
+        "a04427ef-6919-44a4-b602-a28d6765ddf0",
+        "72195fda-4b0a-4e52-9803-424098ac7618",
+        "02a922e5-5b66-4c33-8149-43453e9210c2",
+        "2efffb57-4f3a-47a8-8c76-cebcc984876d",
+        "47e10b4d-0b09-46ce-a244-fe249732be6c"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.ACT_Feedback_TriggerScreenshotMode\r\nNODES=14; EDGES=12\r\n1. START\r\n2. ACTION CloseFormAction: close page\r\n3. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.JS_ToggleFeedbackScreenshotWidget -\u003E base64FromWidget\r\n4. DECISION Upload Not Cancelled? expression=$base64FromWidget != \u0027uploadCancelled\u0027\r\n5. BRANCH when EnumerationCase=false\r\n  6. NODE ExclusiveMerge: ExclusiveMerge\r\n  7. NODE ExclusiveMerge: ExclusiveMerge\r\n  8. NODE ExclusiveMerge: ExclusiveMerge\r\n  9. ACTION ShowPageAction: show page FeedbackModule.ShareFeedback\r\n  10. END\r\n11. BRANCH when EnumerationCase=true\r\n  12. DECISION is not Empty? expression=$base64FromWidget != empty\r\n  13. BRANCH when EnumerationCase=true\r\n    14. ACTION ChangeObjectAction: change Feedback (ImageB64=$base64FromWidget; refreshInClient=true)\r\n    15. REF ExclusiveMerge\r\n  16. BRANCH when EnumerationCase=false\r\n    17. END"
+    },
+    {
+      "flowId": "6b71382e-7bb9-4ea2-8d88-46322e09f187",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.ACT_Feedback_UploadImage",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "f4f90115-b1af-4526-9dbc-194c43a1ed93",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (ImageB64=$base64ImageFromWidget; refreshInClient=true)",
+          "detail": "change Feedback (ImageB64=$base64ImageFromWidget; refreshInClient=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "aa7b0184-74bc-447b-86c4-e4639ffbab2f",
+          "nodeType": "ActionActivity",
+          "label": "CloseFormAction: close page",
+          "detail": "close page",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "3a2e260a-4699-41af-aa27-6bfbc97d1ddc",
+          "nodeType": "ActionActivity",
+          "label": "CreateVariableAction: create variable fileUploadSize=5",
+          "detail": "create variable fileUploadSize=5",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "6490e63b-1c63-4376-af1d-826a23f94dc6",
+          "nodeType": "ActionActivity",
+          "label": "CreateVariableAction: create variable mimeTypes=\u0027.gif,.png,.jpg,.jpeg\u0027",
+          "detail": "create variable mimeTypes=\u0027.gif,.png,.jpg,.jpeg\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d37543d1-9e76-45e6-a2ea-a9513e13c3c7",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.JS_RevokeUploadedFileFromMemory -\u003E ReturnValueName",
+          "detail": "call javascript action FeedbackModule.JS_RevokeUploadedFileFromMemory -\u003E ReturnValueName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "9d3d4d4b-9c90-406f-9041-63c69dca29d3",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.JS_ToggleFeedbackAnnotateWidget -\u003E base64ImageFromWidget",
+          "detail": "call javascript action FeedbackModule.JS_ToggleFeedbackAnnotateWidget -\u003E base64ImageFromWidget",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "8df9c034-eb9b-418e-af51-03c6cfdd425b",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.JS_UploadAndConvertToFileBlobURL -\u003E fileBlobURL",
+          "detail": "call javascript action FeedbackModule.JS_UploadAndConvertToFileBlobURL -\u003E fileBlobURL",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "7d0646af-f869-4362-94bb-f0e0e11023d4",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "detail": "call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "a9ca608e-2ecd-44e3-bff2-20e225eb713b",
+          "nodeType": "ActionActivity",
+          "label": "ShowMessageAction: show message (text=Maximum image size allowed is 5MB., type=Error, blocking=true)",
+          "detail": "show message (text=Maximum image size allowed is 5MB., type=Error, blocking=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "052c25a1-6253-4ac3-a9ec-d03555b54463",
+          "nodeType": "ActionActivity",
+          "label": "ShowMessageAction: show message (text=Only images with format of .gif .jpg .jpeg .png are allowed, type=Error, blocking=true)",
+          "detail": "show message (text=Only images with format of .gif .jpg .jpeg .png are allowed, type=Error, blocking=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "6ef1ba82-c3f4-4ea1-b58d-958beab84966",
+          "nodeType": "ActionActivity",
+          "label": "ShowMessageAction: show message (text=Upload failed, please try again., type=Error, blocking=true)",
+          "detail": "show message (text=Upload failed, please try again., type=Error, blocking=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "106e5201-f15d-4ed7-b43b-453c7e1aa660",
+          "nodeType": "ActionActivity",
+          "label": "ShowPageAction: show page FeedbackModule.ShareFeedback",
+          "detail": "show page FeedbackModule.ShareFeedback",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "e8c630e0-777a-4fb7-a706-1f143676db86",
+          "nodeType": "Annotation",
+          "label": "Expand this annotation to read more... What does this JavaScript Action do? This is a custom build JavaScript Action that triggers the file upload dialog box to...",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "a71ecae1-fcee-4732-b06c-0a19541c1c64",
+          "nodeType": "Annotation",
+          "label": "Expand this annotation to read more.... What does this JavaScript action do? After you have uploaded an image it removes locally stored image from memory. This ...",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "13fce6c7-5a49-490e-a9b7-8d9af502189c",
+          "nodeType": "Annotation",
+          "label": "The widget will convert the annotated image to base64",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "0eae7726-7af8-4839-adae-373cb1b80291",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "3b8a704f-e2ed-4d2a-a3bd-65bb073d5393",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "5a366b15-bbcf-4a65-b9ed-3d13068dcebf",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "b8d800b2-3333-4a0e-b118-e6d1dfea5a51",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f5b892df-77d2-4851-8e5d-ba442ed05d49",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "644cc808-03b4-4bcb-be81-ea6c497bb8aa",
+          "nodeType": "ExclusiveSplit",
+          "label": "Correct File Type? expression=$fileBlobURL != \u0027fileTypeNotAccepted\u0027",
+          "detail": "Correct File Type? expression=$fileBlobURL != \u0027fileTypeNotAccepted\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "f8eee8be-d64b-4ae2-a6b7-3479726a50cf",
+          "nodeType": "ExclusiveSplit",
+          "label": "Correct Upload Size? expression=$fileBlobURL != \u0027fileSizeNotAccepted\u0027",
+          "detail": "Correct Upload Size? expression=$fileBlobURL != \u0027fileSizeNotAccepted\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "e210c13c-c388-47d2-a4c3-ac1492b65917",
+          "nodeType": "ExclusiveSplit",
+          "label": "Upload Not Cancelled? expression=$fileBlobURL != \u0027uploadCancelled\u0027",
+          "detail": "Upload Not Cancelled? expression=$fileBlobURL != \u0027uploadCancelled\u0027",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "2e0b5f9a-d57a-42ec-8898-5dd9e59cea4f",
+          "nodeType": "ExclusiveSplit",
+          "label": "Uploaded Image? expression=$fileBlobURL != empty",
+          "detail": "Uploaded Image? expression=$fileBlobURL != empty",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "ad5cb891-1313-4d62-92aa-2b451dae3482",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "9bf39338-3578-4b2c-a413-a6f35428a376",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "b18d4b7c-53d5-4627-a2ee-3f5b416a6c6b",
+          "originNodeId": "9bf39338-3578-4b2c-a413-a6f35428a376",
+          "destinationNodeId": "6490e63b-1c63-4376-af1d-826a23f94dc6",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "f33dbadd-27e2-444a-91f8-416b4e384cc7",
+          "originNodeId": "2e0b5f9a-d57a-42ec-8898-5dd9e59cea4f",
+          "destinationNodeId": "6ef1ba82-c3f4-4ea1-b58d-958beab84966",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "b99de2ab-7904-4c64-a6aa-26d8c60f077b",
+          "originNodeId": "2e0b5f9a-d57a-42ec-8898-5dd9e59cea4f",
+          "destinationNodeId": "f8eee8be-d64b-4ae2-a6b7-3479726a50cf",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "33738c71-e3c5-4a01-a07c-06a1b1a0b8f6",
+          "originNodeId": "9d3d4d4b-9c90-406f-9041-63c69dca29d3",
+          "destinationNodeId": "f4f90115-b1af-4526-9dbc-194c43a1ed93",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "24185e6d-8d03-484f-a8f9-48ca861b794a",
+          "originNodeId": "6490e63b-1c63-4376-af1d-826a23f94dc6",
+          "destinationNodeId": "3a2e260a-4699-41af-aa27-6bfbc97d1ddc",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "e2278ce9-bece-42ec-9e2a-860bee31e3fa",
+          "originNodeId": "3a2e260a-4699-41af-aa27-6bfbc97d1ddc",
+          "destinationNodeId": "8df9c034-eb9b-418e-af51-03c6cfdd425b",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "628c0cad-57b6-4109-8852-d566bd956137",
+          "originNodeId": "f8eee8be-d64b-4ae2-a6b7-3479726a50cf",
+          "destinationNodeId": "644cc808-03b4-4bcb-be81-ea6c497bb8aa",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "b5f397f2-fcab-44e4-b00c-1dec41e65b89",
+          "originNodeId": "f8eee8be-d64b-4ae2-a6b7-3479726a50cf",
+          "destinationNodeId": "a9ca608e-2ecd-44e3-bff2-20e225eb713b",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "d06b067f-fb05-4562-af4b-ca70a4102cb6",
+          "originNodeId": "a9ca608e-2ecd-44e3-bff2-20e225eb713b",
+          "destinationNodeId": "b8d800b2-3333-4a0e-b118-e6d1dfea5a51",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "64a26626-1b9b-446c-8ea5-85a4c9553a17",
+          "originNodeId": "644cc808-03b4-4bcb-be81-ea6c497bb8aa",
+          "destinationNodeId": "052c25a1-6253-4ac3-a9ec-d03555b54463",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "f9f83886-675f-45b9-b9d1-b62fb4525a82",
+          "originNodeId": "052c25a1-6253-4ac3-a9ec-d03555b54463",
+          "destinationNodeId": "5a366b15-bbcf-4a65-b9ed-3d13068dcebf",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "b73cdbcd-d094-4bbd-b6a9-c745e9aa2c5d",
+          "originNodeId": "644cc808-03b4-4bcb-be81-ea6c497bb8aa",
+          "destinationNodeId": "aa7b0184-74bc-447b-86c4-e4639ffbab2f",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "a5ca4994-55be-40a5-92d5-017f9f1ee786",
+          "originNodeId": "6ef1ba82-c3f4-4ea1-b58d-958beab84966",
+          "destinationNodeId": "f5b892df-77d2-4851-8e5d-ba442ed05d49",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "e37808ae-b366-4693-bb11-a5a8621ccdc6",
+          "originNodeId": "f4f90115-b1af-4526-9dbc-194c43a1ed93",
+          "destinationNodeId": "106e5201-f15d-4ed7-b43b-453c7e1aa660",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "d1aec7d5-b5bf-45f2-844a-af0a41bc9b20",
+          "originNodeId": "e210c13c-c388-47d2-a4c3-ac1492b65917",
+          "destinationNodeId": "2e0b5f9a-d57a-42ec-8898-5dd9e59cea4f",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "338dd346-aa79-4bd1-9781-85b092b93a94",
+          "originNodeId": "e210c13c-c388-47d2-a4c3-ac1492b65917",
+          "destinationNodeId": "0eae7726-7af8-4839-adae-373cb1b80291",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "805b58f5-a86b-40de-99c8-deeb4a607799",
+          "originNodeId": "d37543d1-9e76-45e6-a2ea-a9513e13c3c7",
+          "destinationNodeId": "3b8a704f-e2ed-4d2a-a3bd-65bb073d5393",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "c8e3f216-ae5c-45d1-9f90-b1c966b258e5",
+          "originNodeId": "aa7b0184-74bc-447b-86c4-e4639ffbab2f",
+          "destinationNodeId": "9d3d4d4b-9c90-406f-9041-63c69dca29d3",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "07ee543b-e482-48d8-9ecb-78c52f660092",
+          "originNodeId": "106e5201-f15d-4ed7-b43b-453c7e1aa660",
+          "destinationNodeId": "7d0646af-f869-4362-94bb-f0e0e11023d4",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "627db542-fd88-4e1c-9837-c8b17f9abd4f",
+          "originNodeId": "7d0646af-f869-4362-94bb-f0e0e11023d4",
+          "destinationNodeId": "d37543d1-9e76-45e6-a2ea-a9513e13c3c7",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "88dfbf25-8faf-43e3-a6fe-6dd2c5d9bda0",
+          "originNodeId": "8df9c034-eb9b-418e-af51-03c6cfdd425b",
+          "destinationNodeId": "e210c13c-c388-47d2-a4c3-ac1492b65917",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "9bf39338-3578-4b2c-a413-a6f35428a376"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "9bf39338-3578-4b2c-a413-a6f35428a376",
+        "6490e63b-1c63-4376-af1d-826a23f94dc6",
+        "3a2e260a-4699-41af-aa27-6bfbc97d1ddc",
+        "8df9c034-eb9b-418e-af51-03c6cfdd425b",
+        "e210c13c-c388-47d2-a4c3-ac1492b65917",
+        "2e0b5f9a-d57a-42ec-8898-5dd9e59cea4f",
+        "f8eee8be-d64b-4ae2-a6b7-3479726a50cf",
+        "644cc808-03b4-4bcb-be81-ea6c497bb8aa",
+        "aa7b0184-74bc-447b-86c4-e4639ffbab2f",
+        "9d3d4d4b-9c90-406f-9041-63c69dca29d3",
+        "f4f90115-b1af-4526-9dbc-194c43a1ed93",
+        "106e5201-f15d-4ed7-b43b-453c7e1aa660",
+        "7d0646af-f869-4362-94bb-f0e0e11023d4",
+        "d37543d1-9e76-45e6-a2ea-a9513e13c3c7",
+        "3b8a704f-e2ed-4d2a-a3bd-65bb073d5393",
+        "052c25a1-6253-4ac3-a9ec-d03555b54463",
+        "5a366b15-bbcf-4a65-b9ed-3d13068dcebf",
+        "a9ca608e-2ecd-44e3-bff2-20e225eb713b",
+        "b8d800b2-3333-4a0e-b118-e6d1dfea5a51",
+        "6ef1ba82-c3f4-4ea1-b58d-958beab84966",
+        "f5b892df-77d2-4851-8e5d-ba442ed05d49",
+        "0eae7726-7af8-4839-adae-373cb1b80291"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.ACT_Feedback_UploadImage\r\nNODES=26; EDGES=21\r\n1. START\r\n2. ACTION CreateVariableAction: create variable mimeTypes=\u0027.gif,.png,.jpg,.jpeg\u0027\r\n3. ACTION CreateVariableAction: create variable fileUploadSize=5\r\n4. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.JS_UploadAndConvertToFileBlobURL -\u003E fileBlobURL\r\n5. DECISION Upload Not Cancelled? expression=$fileBlobURL != \u0027uploadCancelled\u0027\r\n6. BRANCH when EnumerationCase=true\r\n  7. DECISION Uploaded Image? expression=$fileBlobURL != empty\r\n  8. BRANCH when EnumerationCase=true\r\n    9. DECISION Correct Upload Size? expression=$fileBlobURL != \u0027fileSizeNotAccepted\u0027\r\n    10. BRANCH when EnumerationCase=true\r\n      11. DECISION Correct File Type? expression=$fileBlobURL != \u0027fileTypeNotAccepted\u0027\r\n      12. BRANCH when EnumerationCase=true\r\n        13. ACTION CloseFormAction: close page\r\n        14. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.JS_ToggleFeedbackAnnotateWidget -\u003E base64ImageFromWidget\r\n        15. ACTION ChangeObjectAction: change Feedback (ImageB64=$base64ImageFromWidget; refreshInClient=true)\r\n        16. ACTION ShowPageAction: show page FeedbackModule.ShareFeedback\r\n        17. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName\r\n        18. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.JS_RevokeUploadedFileFromMemory -\u003E ReturnValueName\r\n        19. END\r\n      20. BRANCH when EnumerationCase=false\r\n        21. ACTION ShowMessageAction: show message (text=Only images with format of .gif .jpg .jpeg .png are allowed, type=Error, blocking=true)\r\n        22. END\r\n    23. BRANCH when EnumerationCase=false\r\n      24. ACTION ShowMessageAction: show message (text=Maximum image size allowed is 5MB., type=Error, blocking=true)\r\n      25. END\r\n  26. BRANCH when EnumerationCase=false\r\n    27. ACTION ShowMessageAction: show message (text=Upload failed, please try again., type=Error, blocking=true)\r\n    28. END\r\n29. BRANCH when EnumerationCase=false\r\n  30. END"
+    },
+    {
+      "flowId": "9aaafa68-970a-4863-8dd7-4007f681f7d2",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.ACT_SubmitFeedback",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "38c58bfe-68d9-4a20-a40e-e09904492f42",
+          "nodeType": "ActionActivity",
+          "label": "CloseFormAction: close page (pagesToClose=1)",
+          "detail": "close page (pagesToClose=1)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d06dde69-078b-46c7-afc9-c409a28d4e7c",
+          "nodeType": "ActionActivity",
+          "label": "MicroflowCallAction: call microflow FeedbackModule.SUB_Feedback_SendToServer -\u003E ResponseHelper",
+          "detail": "call microflow FeedbackModule.SUB_Feedback_SendToServer -\u003E ResponseHelper",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": [
+            {
+              "callKind": "Microflow",
+              "targetFlowName": "FeedbackModule.SUB_Feedback_SendToServer",
+              "sourceNodeId": "d06dde69-078b-46c7-afc9-c409a28d4e7c"
+            }
+          ]
+        },
+        {
+          "nodeId": "b3287aa2-db3b-4901-9689-f28765f87a1a",
+          "nodeType": "ActionActivity",
+          "label": "MicroflowCallAction: call microflow FeedbackModule.VAL_Feedback -\u003E isValid",
+          "detail": "call microflow FeedbackModule.VAL_Feedback -\u003E isValid",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": [
+            {
+              "callKind": "Microflow",
+              "targetFlowName": "FeedbackModule.VAL_Feedback",
+              "sourceNodeId": "b3287aa2-db3b-4901-9689-f28765f87a1a"
+            }
+          ]
+        },
+        {
+          "nodeId": "fc3f567d-5e05-444d-948b-e79ce6a647fd",
+          "nodeType": "ActionActivity",
+          "label": "NanoflowCallAction: call nanoflow FeedbackModule.SUB_Feedback_ResetLocalStorage",
+          "detail": "call nanoflow FeedbackModule.SUB_Feedback_ResetLocalStorage",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": [
+            {
+              "callKind": "Nanoflow",
+              "targetFlowName": "FeedbackModule.SUB_Feedback_ResetLocalStorage",
+              "sourceNodeId": "fc3f567d-5e05-444d-948b-e79ce6a647fd"
+            }
+          ]
+        },
+        {
+          "nodeId": "a4c219eb-7cf0-4046-b04f-e38b9766a181",
+          "nodeType": "ActionActivity",
+          "label": "ShowPageAction: show page FeedbackModule.PopupFailure",
+          "detail": "show page FeedbackModule.PopupFailure",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4aa86ac1-d212-464e-bf99-50f62d10afab",
+          "nodeType": "ActionActivity",
+          "label": "ShowPageAction: show page FeedbackModule.PopupSuccess",
+          "detail": "show page FeedbackModule.PopupSuccess",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "453f270a-4695-46de-9413-5f496eaf68e8",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4ba06d7b-f78f-4ea1-a60a-dcfef2810c6d",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4de3e8c0-10d2-4e92-b21e-81d2098242bd",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "c9d50e84-338f-456c-91b9-e0525c378bd0",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "749ae0f8-0b48-45ce-b140-e69c6643c931",
+          "nodeType": "ExclusiveSplit",
+          "label": "Feedback form Valid? expression=$isValid",
+          "detail": "Feedback form Valid? expression=$isValid",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "de6dcdde-952c-45e0-a103-d025d3510c8f",
+          "nodeType": "ExclusiveSplit",
+          "label": "is Success? expression=$ResponseHelper != empty",
+          "detail": "is Success? expression=$ResponseHelper != empty",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "ad4aa81c-116f-4c9b-a9d9-3316e6dd526c",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "6ca5e55b-1a37-4ede-8cd2-f4637ac38116",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "746e7ad0-7b77-47cd-a502-82eba0f1798b",
+          "originNodeId": "6ca5e55b-1a37-4ede-8cd2-f4637ac38116",
+          "destinationNodeId": "b3287aa2-db3b-4901-9689-f28765f87a1a",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "ab674782-8ca4-4894-a71d-2b69cc366021",
+          "originNodeId": "749ae0f8-0b48-45ce-b140-e69c6643c931",
+          "destinationNodeId": "d06dde69-078b-46c7-afc9-c409a28d4e7c",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "efe34547-62d5-46c2-9ce3-d74bce5303c1",
+          "originNodeId": "b3287aa2-db3b-4901-9689-f28765f87a1a",
+          "destinationNodeId": "749ae0f8-0b48-45ce-b140-e69c6643c931",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "c9990653-8f5d-4ca0-ab4e-647f53094c10",
+          "originNodeId": "749ae0f8-0b48-45ce-b140-e69c6643c931",
+          "destinationNodeId": "453f270a-4695-46de-9413-5f496eaf68e8",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "caa83899-86e8-475f-a27c-08203dba7469",
+          "originNodeId": "fc3f567d-5e05-444d-948b-e79ce6a647fd",
+          "destinationNodeId": "4de3e8c0-10d2-4e92-b21e-81d2098242bd",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "e14ce424-e39e-4ec3-aff1-8ba8652c77d3",
+          "originNodeId": "d06dde69-078b-46c7-afc9-c409a28d4e7c",
+          "destinationNodeId": "38c58bfe-68d9-4a20-a40e-e09904492f42",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "e2ce734f-4044-404f-895e-f4863ca09de5",
+          "originNodeId": "de6dcdde-952c-45e0-a103-d025d3510c8f",
+          "destinationNodeId": "4aa86ac1-d212-464e-bf99-50f62d10afab",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "aca7631b-22aa-4c04-9663-1b4fc1bf7dc6",
+          "originNodeId": "de6dcdde-952c-45e0-a103-d025d3510c8f",
+          "destinationNodeId": "c9d50e84-338f-456c-91b9-e0525c378bd0",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "937d14a8-b341-49fd-bb78-d99d1e8020d8",
+          "originNodeId": "c9d50e84-338f-456c-91b9-e0525c378bd0",
+          "destinationNodeId": "a4c219eb-7cf0-4046-b04f-e38b9766a181",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "06a0cff3-831e-4e93-a9c4-e5184e9858da",
+          "originNodeId": "4aa86ac1-d212-464e-bf99-50f62d10afab",
+          "destinationNodeId": "fc3f567d-5e05-444d-948b-e79ce6a647fd",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "eaf77c78-1f4f-4e57-9593-bb7300e1b1fc",
+          "originNodeId": "a4c219eb-7cf0-4046-b04f-e38b9766a181",
+          "destinationNodeId": "4ba06d7b-f78f-4ea1-a60a-dcfef2810c6d",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "37a24751-aa23-4432-ab84-dbafdaaf780f",
+          "originNodeId": "38c58bfe-68d9-4a20-a40e-e09904492f42",
+          "destinationNodeId": "de6dcdde-952c-45e0-a103-d025d3510c8f",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [
+        {
+          "callKind": "Nanoflow",
+          "targetFlowName": "FeedbackModule.SUB_Feedback_ResetLocalStorage",
+          "sourceNodeId": "fc3f567d-5e05-444d-948b-e79ce6a647fd"
+        },
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "FeedbackModule.SUB_Feedback_SendToServer",
+          "sourceNodeId": "d06dde69-078b-46c7-afc9-c409a28d4e7c"
+        },
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "FeedbackModule.VAL_Feedback",
+          "sourceNodeId": "b3287aa2-db3b-4901-9689-f28765f87a1a"
+        }
+      ],
+      "startNodeIds": [
+        "6ca5e55b-1a37-4ede-8cd2-f4637ac38116"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "6ca5e55b-1a37-4ede-8cd2-f4637ac38116",
+        "b3287aa2-db3b-4901-9689-f28765f87a1a",
+        "749ae0f8-0b48-45ce-b140-e69c6643c931",
+        "d06dde69-078b-46c7-afc9-c409a28d4e7c",
+        "38c58bfe-68d9-4a20-a40e-e09904492f42",
+        "de6dcdde-952c-45e0-a103-d025d3510c8f",
+        "4aa86ac1-d212-464e-bf99-50f62d10afab",
+        "fc3f567d-5e05-444d-948b-e79ce6a647fd",
+        "4de3e8c0-10d2-4e92-b21e-81d2098242bd",
+        "c9d50e84-338f-456c-91b9-e0525c378bd0",
+        "a4c219eb-7cf0-4046-b04f-e38b9766a181",
+        "4ba06d7b-f78f-4ea1-a60a-dcfef2810c6d",
+        "453f270a-4695-46de-9413-5f496eaf68e8"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.ACT_SubmitFeedback\r\nNODES=14; EDGES=12\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow FeedbackModule.VAL_Feedback -\u003E isValid\r\n3. DECISION Feedback form Valid? expression=$isValid\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION MicroflowCallAction: call microflow FeedbackModule.SUB_Feedback_SendToServer -\u003E ResponseHelper\r\n  6. ACTION CloseFormAction: close page (pagesToClose=1)\r\n  7. DECISION is Success? expression=$ResponseHelper != empty\r\n  8. BRANCH when EnumerationCase=true\r\n    9. ACTION ShowPageAction: show page FeedbackModule.PopupSuccess\r\n    10. ACTION NanoflowCallAction: call nanoflow FeedbackModule.SUB_Feedback_ResetLocalStorage\r\n    11. END\r\n  12. BRANCH when EnumerationCase=false\r\n    13. NODE ExclusiveMerge: ExclusiveMerge\r\n    14. ACTION ShowPageAction: show page FeedbackModule.PopupFailure\r\n    15. END\r\n16. BRANCH when EnumerationCase=false\r\n  17. END"
+    },
+    {
+      "flowId": "02fcf356-6d0f-4b56-b472-7f195eb0fd0d",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.DS_Feedback_Populate",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "e893f43c-fe63-44be-93c1-301a90645167",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (_showEmail=if $Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027 then false else true; refreshInClient=true)",
+          "detail": "change Feedback (_showEmail=if $Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027 then false else true; refreshInClient=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.JS_PopulateFeedbackMetadata -\u003E FeedbackWithMetaData",
+          "detail": "call javascript action FeedbackModule.JS_PopulateFeedbackMetadata -\u003E FeedbackWithMetaData",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "4ce024b7-9d4a-441d-8921-930f4e65c396",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "detail": "call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+          "nodeType": "ActionActivity",
+          "label": "MicroflowCallAction: call microflow FeedbackModule.PopulateUserAttributes",
+          "detail": "call microflow FeedbackModule.PopulateUserAttributes",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": [
+            {
+              "callKind": "Microflow",
+              "targetFlowName": "FeedbackModule.PopulateUserAttributes",
+              "sourceNodeId": "d2a83dc1-bc9e-4cab-a5f0-978714575428"
+            }
+          ]
+        },
+        {
+          "nodeId": "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+          "nodeType": "ActionActivity",
+          "label": "NanoflowCallAction: call nanoflow FeedbackModule.SUB_Feedback_GetOrCreate -\u003E Feedback",
+          "detail": "call nanoflow FeedbackModule.SUB_Feedback_GetOrCreate -\u003E Feedback",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": [
+            {
+              "callKind": "Nanoflow",
+              "targetFlowName": "FeedbackModule.SUB_Feedback_GetOrCreate",
+              "sourceNodeId": "129fe65c-9ad2-4cf1-a084-f1c77406d13f"
+            }
+          ]
+        },
+        {
+          "nodeId": "aa590c43-b543-4b24-a3d4-ad2b5f7c1ae8",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "dea17eb3-5c59-4d6e-b696-c763078e97c8",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "7570a243-8e51-4b35-b637-0eb7ff75c46e",
+          "originNodeId": "dea17eb3-5c59-4d6e-b696-c763078e97c8",
+          "destinationNodeId": "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "244efedf-17f7-437f-bad9-42ed56e9ead9",
+          "originNodeId": "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+          "destinationNodeId": "e893f43c-fe63-44be-93c1-301a90645167",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "cd70660d-250d-4424-8001-1e4359170847",
+          "originNodeId": "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+          "destinationNodeId": "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "08fb8362-dd71-4eb3-8c59-3b745c7a7749",
+          "originNodeId": "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+          "destinationNodeId": "4ce024b7-9d4a-441d-8921-930f4e65c396",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "7c8c97fa-135f-4ab6-b62b-718f9a8197c9",
+          "originNodeId": "4ce024b7-9d4a-441d-8921-930f4e65c396",
+          "destinationNodeId": "aa590c43-b543-4b24-a3d4-ad2b5f7c1ae8",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "63a3b194-eb24-4dfd-8b12-559ad71980ca",
+          "originNodeId": "e893f43c-fe63-44be-93c1-301a90645167",
+          "destinationNodeId": "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "FeedbackModule.PopulateUserAttributes",
+          "sourceNodeId": "d2a83dc1-bc9e-4cab-a5f0-978714575428"
+        },
+        {
+          "callKind": "Nanoflow",
+          "targetFlowName": "FeedbackModule.SUB_Feedback_GetOrCreate",
+          "sourceNodeId": "129fe65c-9ad2-4cf1-a084-f1c77406d13f"
+        }
+      ],
+      "startNodeIds": [
+        "dea17eb3-5c59-4d6e-b696-c763078e97c8"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "dea17eb3-5c59-4d6e-b696-c763078e97c8",
+        "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+        "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+        "e893f43c-fe63-44be-93c1-301a90645167",
+        "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+        "4ce024b7-9d4a-441d-8921-930f4e65c396",
+        "aa590c43-b543-4b24-a3d4-ad2b5f7c1ae8"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.DS_Feedback_Populate\r\nNODES=7; EDGES=6\r\n1. START\r\n2. ACTION NanoflowCallAction: call nanoflow FeedbackModule.SUB_Feedback_GetOrCreate -\u003E Feedback\r\n3. ACTION MicroflowCallAction: call microflow FeedbackModule.PopulateUserAttributes\r\n4. ACTION ChangeObjectAction: change Feedback (_showEmail=if $Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027 then false else true; refreshInClient=true)\r\n5. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.JS_PopulateFeedbackMetadata -\u003E FeedbackWithMetaData\r\n6. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName\r\n7. END"
+    },
+    {
+      "flowId": "5ceddc42-7e8d-4f79-8da0-9a80ef9329f0",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.OCH_Feedback_SaveToLocalStorage",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "6ba4eaf2-c454-4067-a18b-f94eec510727",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "detail": "call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "39e1af44-663a-4a89-b886-99d061388660",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "5bb1aa84-3a39-4ceb-a35d-cf6ec24bf0f4",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "591758ba-d8b1-4a77-94b4-2e53f3bcf613",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "f888778e-5b2a-4ecc-a5ca-e506a4b30ed0",
+          "originNodeId": "591758ba-d8b1-4a77-94b4-2e53f3bcf613",
+          "destinationNodeId": "6ba4eaf2-c454-4067-a18b-f94eec510727",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "3f5638f7-642b-411d-a4c1-13816e92a4f5",
+          "originNodeId": "6ba4eaf2-c454-4067-a18b-f94eec510727",
+          "destinationNodeId": "39e1af44-663a-4a89-b886-99d061388660",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "591758ba-d8b1-4a77-94b4-2e53f3bcf613"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "591758ba-d8b1-4a77-94b4-2e53f3bcf613",
+        "6ba4eaf2-c454-4067-a18b-f94eec510727",
+        "39e1af44-663a-4a89-b886-99d061388660"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.OCH_Feedback_SaveToLocalStorage\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName\r\n3. END"
+    },
+    {
+      "flowId": "1bf19498-5a51-4107-9d59-232e73b11075",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.SUB_Feedback_GetOrCreate",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+          "nodeType": "ActionActivity",
+          "label": "CreateObjectAction: create FeedbackModule.Feedback as NewFeedback",
+          "detail": "create FeedbackModule.Feedback as NewFeedback",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.GetStorageItemObject -\u003E LocalFeedback",
+          "detail": "call javascript action FeedbackModule.GetStorageItemObject -\u003E LocalFeedback",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "8302f3d1-9e3b-491e-a042-0981c9080e66",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "850c5b8f-5a3c-4dd7-8dd4-14d15bd4d969",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "cf62fdef-56f7-42bb-87d6-4e44742baa49",
+          "nodeType": "ExclusiveMerge",
+          "label": "ExclusiveMerge",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+          "nodeType": "ExclusiveSplit",
+          "label": "Found? expression=$LocalFeedback != empty",
+          "detail": "Found? expression=$LocalFeedback != empty",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "6e042ca6-a474-4544-9c55-745121cf33a3",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "ac32a3f9-95f2-40eb-8db3-09fbb5b29019",
+          "originNodeId": "6e042ca6-a474-4544-9c55-745121cf33a3",
+          "destinationNodeId": "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "f90f4de0-b5ee-4931-8868-b9449c19f2b2",
+          "originNodeId": "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+          "destinationNodeId": "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "eac043c7-15cc-4e02-91b6-a53feaec962c",
+          "originNodeId": "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+          "destinationNodeId": "cf62fdef-56f7-42bb-87d6-4e44742baa49",
+          "condition": null,
+          "isErrorHandler": true,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "c1d8d942-1db7-4a86-803a-3a466be4e99c",
+          "originNodeId": "cf62fdef-56f7-42bb-87d6-4e44742baa49",
+          "destinationNodeId": "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "4ce2319a-0ffa-468d-ae22-b855d90291e6",
+          "originNodeId": "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+          "destinationNodeId": "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "72621be3-113f-428e-aac6-968024557d29",
+          "originNodeId": "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+          "destinationNodeId": "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+          "condition": "EnumerationCase=false",
+          "isErrorHandler": false,
+          "originConnectionIndex": 2,
+          "destinationConnectionIndex": 0
+        },
+        {
+          "edgeId": "098348ea-65a8-4462-b929-e01f91b948e1",
+          "originNodeId": "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+          "destinationNodeId": "850c5b8f-5a3c-4dd7-8dd4-14d15bd4d969",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "5f5c337e-acdb-41c4-a6d4-7dabcf8b4660",
+          "originNodeId": "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+          "destinationNodeId": "8302f3d1-9e3b-491e-a042-0981c9080e66",
+          "condition": "EnumerationCase=true",
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "6e042ca6-a474-4544-9c55-745121cf33a3"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "6e042ca6-a474-4544-9c55-745121cf33a3",
+        "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+        "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+        "8302f3d1-9e3b-491e-a042-0981c9080e66",
+        "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+        "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+        "850c5b8f-5a3c-4dd7-8dd4-14d15bd4d969",
+        "cf62fdef-56f7-42bb-87d6-4e44742baa49"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.SUB_Feedback_GetOrCreate\r\nNODES=8; EDGES=8\r\n1. START\r\n2. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.GetStorageItemObject -\u003E LocalFeedback\r\n3. BRANCH\r\n  4. DECISION Found? expression=$LocalFeedback != empty\r\n  5. BRANCH when EnumerationCase=true\r\n    6. END\r\n  7. BRANCH when EnumerationCase=false\r\n    8. NODE ExclusiveMerge: ExclusiveMerge\r\n    9. ACTION CreateObjectAction: create FeedbackModule.Feedback as NewFeedback\r\n    10. END\r\n11. BRANCH on error\r\n  12. NODE ExclusiveMerge: ExclusiveMerge\r\n  13. REF ExclusiveMerge"
+    },
+    {
+      "flowId": "5246c8f4-cd42-4044-8377-915c8bb5a797",
+      "kind": "Nanoflow",
+      "qualifiedName": "FeedbackModule.SUB_Feedback_ResetLocalStorage",
+      "module": "FeedbackModule",
+      "nodes": [
+        {
+          "nodeId": "8ee44032-d82d-4c33-904d-6186989e51af",
+          "nodeType": "ActionActivity",
+          "label": "ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, SubmitterUUID=empty, SubmitterDisplayName=empty, ImageB64=empty, ActiveUserRoles=empty, PageName=empty, \u002B6 more; refreshInClient=true)",
+          "detail": "change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, SubmitterUUID=empty, SubmitterDisplayName=empty, ImageB64=empty, ActiveUserRoles=empty, PageName=empty, \u002B6 more; refreshInClient=true)",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+          "nodeType": "ActionActivity",
+          "label": "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "detail": "call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName",
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "e249a930-8e34-417a-8ced-56e2625611b6",
+          "nodeType": "Annotation",
+          "label": "Cleans up the feedback and stores it in local storage",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "b2bac0af-355d-4c62-b12c-698728547daa",
+          "nodeType": "EndEvent",
+          "label": "EndEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        },
+        {
+          "nodeId": "93375857-576b-4514-9b46-3801538fd3cc",
+          "nodeType": "MicroflowParameterObject",
+          "label": "MicroflowParameterObject",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": false,
+          "calls": []
+        },
+        {
+          "nodeId": "338123c5-dc0f-428b-a74a-169f68c954ab",
+          "nodeType": "StartEvent",
+          "label": "StartEvent",
+          "detail": null,
+          "loopOwnerId": null,
+          "isExecutable": true,
+          "calls": []
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "61759282-c4ee-49cb-85f2-f7c25642c807",
+          "originNodeId": "338123c5-dc0f-428b-a74a-169f68c954ab",
+          "destinationNodeId": "8ee44032-d82d-4c33-904d-6186989e51af",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "58bb971c-1e5a-4956-8b61-19078fe83966",
+          "originNodeId": "8ee44032-d82d-4c33-904d-6186989e51af",
+          "destinationNodeId": "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        },
+        {
+          "edgeId": "7af91780-6810-4d3e-b921-83506870da9c",
+          "originNodeId": "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+          "destinationNodeId": "b2bac0af-355d-4c62-b12c-698728547daa",
+          "condition": null,
+          "isErrorHandler": false,
+          "originConnectionIndex": 1,
+          "destinationConnectionIndex": 3
+        }
+      ],
+      "calls": [],
+      "startNodeIds": [
+        "338123c5-dc0f-428b-a74a-169f68c954ab"
+      ],
+      "primaryExecutionOrderNodeIds": [
+        "338123c5-dc0f-428b-a74a-169f68c954ab",
+        "8ee44032-d82d-4c33-904d-6186989e51af",
+        "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+        "b2bac0af-355d-4c62-b12c-698728547daa"
+      ],
+      "pseudocode": "FLOW Nanoflow: FeedbackModule.SUB_Feedback_ResetLocalStorage\r\nNODES=6; EDGES=3\r\n1. START\r\n2. ACTION ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, SubmitterUUID=empty, SubmitterDisplayName=empty, ImageB64=empty, ActiveUserRoles=empty, PageName=empty, \u002B6 more; refreshInClient=true)\r\n3. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003E ReturnValueName\r\n4. END"
+    }
+  ],
+  "callEdges": [
+    {
+      "callerModule": "FeedbackModule",
+      "callerFlow": "FeedbackModule.ACT_SubmitFeedback",
+      "callerKind": "Nanoflow",
+      "callKind": "Nanoflow",
+      "sourceNodeId": "fc3f567d-5e05-444d-948b-e79ce6a647fd",
+      "targetModule": "FeedbackModule",
+      "targetFlow": "FeedbackModule.SUB_Feedback_ResetLocalStorage",
+      "isInternal": true
+    },
+    {
+      "callerModule": "FeedbackModule",
+      "callerFlow": "FeedbackModule.ACT_SubmitFeedback",
+      "callerKind": "Nanoflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "d06dde69-078b-46c7-afc9-c409a28d4e7c",
+      "targetModule": "FeedbackModule",
+      "targetFlow": "FeedbackModule.SUB_Feedback_SendToServer",
+      "isInternal": true
+    },
+    {
+      "callerModule": "FeedbackModule",
+      "callerFlow": "FeedbackModule.ACT_SubmitFeedback",
+      "callerKind": "Nanoflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "b3287aa2-db3b-4901-9689-f28765f87a1a",
+      "targetModule": "FeedbackModule",
+      "targetFlow": "FeedbackModule.VAL_Feedback",
+      "isInternal": true
+    },
+    {
+      "callerModule": "FeedbackModule",
+      "callerFlow": "FeedbackModule.DS_Feedback_Populate",
+      "callerKind": "Nanoflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+      "targetModule": "FeedbackModule",
+      "targetFlow": "FeedbackModule.PopulateUserAttributes",
+      "isInternal": true
+    },
+    {
+      "callerModule": "FeedbackModule",
+      "callerFlow": "FeedbackModule.DS_Feedback_Populate",
+      "callerKind": "Nanoflow",
+      "callKind": "Nanoflow",
+      "sourceNodeId": "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+      "targetModule": "FeedbackModule",
+      "targetFlow": "FeedbackModule.SUB_Feedback_GetOrCreate",
+      "isInternal": true
+    },
+    {
+      "callerModule": "FeedbackModule",
+      "callerFlow": "FeedbackModule.SUB_Feedback_SendToServer",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "57dd6fab-de0d-429d-a8ee-5c57398c47f6",
+      "targetModule": "FeedbackModule",
+      "targetFlow": "FeedbackModule.SUB_Feedback_PostToAppInsights",
+      "isInternal": true
+    },
+    {
+      "callerModule": "FeedbackModule",
+      "callerFlow": "FeedbackModule.SUB_Feedback_SendToServer",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "d393115b-6aed-4f76-92a3-fe1cba48a22a",
+      "targetModule": "FeedbackModule",
+      "targetFlow": "FeedbackModule.SUB_Feedback_Sanitize",
+      "isInternal": true
+    }
+  ]
+}

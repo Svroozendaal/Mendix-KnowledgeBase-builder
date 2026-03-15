@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.TemplateStatusEnumToString",
+                  "stableId":  "d98bc379-a1e9-4fba-b9e9-6fcf4ff18150",
+                  "slug":  "excelimporter-templatestatusenumtostring",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-templatestatusenumtostring.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-templatestatusenumtostring.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-templatestatusenumtostring.json",
+                  "l2Logical":  "flow:ExcelImporter.TemplateStatusEnumToString",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "d98bc379-a1e9-4fba-b9e9-6fcf4ff18150",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.TemplateStatusEnumToString",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "07d751ea-42fc-42c4-b376-6ac80598389a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable StatusEnumString=getKey($Input)",
+                      "detail":  "create variable StatusEnumString=getKey($Input)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8eb8a9a8-536c-4bee-b86b-b69fe3291717",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse Enum Status to a String",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c9117bca-8332-416b-89a2-3e10c82cf4ae",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2dbc0f19-6050-4f8d-a243-c09eed3c8392",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d12b36f5-a04d-496a-a0f8-367f859aabc8",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "b42e199e-9171-45a0-9837-2228e1bb19e3",
+                      "originNodeId":  "d12b36f5-a04d-496a-a0f8-367f859aabc8",
+                      "destinationNodeId":  "07d751ea-42fc-42c4-b376-6ac80598389a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "70b3042d-463c-4128-87bb-ca362c697819",
+                      "originNodeId":  "07d751ea-42fc-42c4-b376-6ac80598389a",
+                      "destinationNodeId":  "c9117bca-8332-416b-89a2-3e10c82cf4ae",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "d12b36f5-a04d-496a-a0f8-367f859aabc8"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "d12b36f5-a04d-496a-a0f8-367f859aabc8",
+                                         "07d751ea-42fc-42c4-b376-6ac80598389a",
+                                         "c9117bca-8332-416b-89a2-3e10c82cf4ae"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.TemplateStatusEnumToString\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable StatusEnumString=getKey($Input)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

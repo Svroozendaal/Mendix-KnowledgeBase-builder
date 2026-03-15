@@ -1,0 +1,236 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowJumpToDetails_Apply",
+                  "stableId":  "ad1d41dc-e25d-45fe-b782-f44eab2aca25",
+                  "slug":  "workflowcommons-act-workflowjumptodetails-apply",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowjumptodetails-apply.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowjumptodetails-apply.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowjumptodetails-apply.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowJumpToDetails_Apply",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "ad1d41dc-e25d-45fe-b782-f44eab2aca25",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowJumpToDetails_Apply",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "e85a0d4c-f8a1-4d2e-8a83-7610403e2450",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ApplyJumpToOptionAction: ApplyJumpToOptionAction (errorHandlingType=Rollback)",
+                      "detail":  "ApplyJumpToOptionAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f9ec22d1-9604-414d-8643-c9681f037495",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowJumpToDetails_Validate -\u003e Valid",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowJumpToDetails_Validate -\u003e Valid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowJumpToDetails_Validate",
+                                        "sourceNodeId":  "f9ec22d1-9604-414d-8643-c9681f037495"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "704be36c-6428-4b7e-95a7-a7c5bf8ec03d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow over association WorkflowJumpToDetails_Workflow from WorkflowJumpToDetails",
+                      "detail":  "retrieve Workflow over association WorkflowJumpToDetails_Workflow from WorkflowJumpToDetails",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1d5fd36d-028f-4992-955a-cc001a4a8883",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page WorkflowCommons.Workflow_ActionConfirmation",
+                      "detail":  "show page WorkflowCommons.Workflow_ActionConfirmation",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "28d4d3c0-e166-46a6-8f63-6b74a994d006",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "642a384c-80c5-42e5-95f7-5906b2f58882",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3cbb7b6d-df16-4e45-bc67-0cf6230cd703",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Valid? expression=$Valid",
+                      "detail":  "Valid? expression=$Valid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "74309655-e01f-426b-a0f4-ae6631698e2e",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "11cff417-8849-491e-a76e-a9364b9b95c9",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "4ce139d4-4a65-4b76-a784-34eddf4dca8b",
+                      "originNodeId":  "e85a0d4c-f8a1-4d2e-8a83-7610403e2450",
+                      "destinationNodeId":  "704be36c-6428-4b7e-95a7-a7c5bf8ec03d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "38f29f17-6ce8-4fbd-8449-b54f34c6ad92",
+                      "originNodeId":  "f9ec22d1-9604-414d-8643-c9681f037495",
+                      "destinationNodeId":  "3cbb7b6d-df16-4e45-bc67-0cf6230cd703",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "51300366-a631-4a02-9925-c9b9cc22a525",
+                      "originNodeId":  "3cbb7b6d-df16-4e45-bc67-0cf6230cd703",
+                      "destinationNodeId":  "e85a0d4c-f8a1-4d2e-8a83-7610403e2450",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "90008cd6-c281-4bc3-90ac-b5e63019da07",
+                      "originNodeId":  "3cbb7b6d-df16-4e45-bc67-0cf6230cd703",
+                      "destinationNodeId":  "642a384c-80c5-42e5-95f7-5906b2f58882",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "7ec855c0-06c8-412c-93a8-cc305947ce2e",
+                      "originNodeId":  "1d5fd36d-028f-4992-955a-cc001a4a8883",
+                      "destinationNodeId":  "28d4d3c0-e166-46a6-8f63-6b74a994d006",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3d059614-0261-45c9-bc58-86c2c8bf3657",
+                      "originNodeId":  "704be36c-6428-4b7e-95a7-a7c5bf8ec03d",
+                      "destinationNodeId":  "1d5fd36d-028f-4992-955a-cc001a4a8883",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "88b7d4fa-d1a2-42ad-a45d-e6e256fc1c0b",
+                      "originNodeId":  "11cff417-8849-491e-a76e-a9364b9b95c9",
+                      "destinationNodeId":  "f9ec22d1-9604-414d-8643-c9681f037495",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowJumpToDetails_Validate",
+                      "sourceNodeId":  "f9ec22d1-9604-414d-8643-c9681f037495"
+                  }
+              ],
+    "startNodeIds":  [
+                         "11cff417-8849-491e-a76e-a9364b9b95c9"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "11cff417-8849-491e-a76e-a9364b9b95c9",
+                                         "f9ec22d1-9604-414d-8643-c9681f037495",
+                                         "3cbb7b6d-df16-4e45-bc67-0cf6230cd703",
+                                         "e85a0d4c-f8a1-4d2e-8a83-7610403e2450",
+                                         "704be36c-6428-4b7e-95a7-a7c5bf8ec03d",
+                                         "1d5fd36d-028f-4992-955a-cc001a4a8883",
+                                         "28d4d3c0-e166-46a6-8f63-6b74a994d006",
+                                         "642a384c-80c5-42e5-95f7-5906b2f58882"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowJumpToDetails_Apply\r\nNODES=9; EDGES=7\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowJumpToDetails_Validate -\u003e Valid\r\n3. DECISION Valid? expression=$Valid\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION ApplyJumpToOptionAction: ApplyJumpToOptionAction (errorHandlingType=Rollback)\r\n  6. ACTION RetrieveAction: retrieve Workflow over association WorkflowJumpToDetails_Workflow from WorkflowJumpToDetails\r\n  7. ACTION ShowPageAction: show page WorkflowCommons.Workflow_ActionConfirmation\r\n  8. END\r\n9. BRANCH when EnumerationCase=false\r\n  10. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowJumpToDetails_Apply",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "f9ec22d1-9604-414d-8643-c9681f037495",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowJumpToDetails_Validate",
+                          "isInternal":  true
+                      }
+                  ]
+}

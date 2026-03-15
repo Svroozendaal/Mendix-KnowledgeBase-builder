@@ -1,0 +1,167 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_UserTaskOutcomeView_AssignedToUser",
+                  "stableId":  "68255f32-97f8-4d7b-aaf6-40c48fff2f81",
+                  "slug":  "workflowcommons-sub-usertaskoutcomeview-assignedtouser",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertaskoutcomeview-assignedtouser.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertaskoutcomeview-assignedtouser.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-usertaskoutcomeview-assignedtouser.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_UserTaskOutcomeView_AssignedToUser",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "68255f32-97f8-4d7b-aaf6-40c48fff2f81",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_UserTaskOutcomeView_AssignedToUser",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "b6a061c1-0502-498e-a13d-79bf71e91239",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTaskOutcomeViewList from WorkflowCommons.UserTaskOutcomeView",
+                      "detail":  "retrieve UserTaskOutcomeViewList from WorkflowCommons.UserTaskOutcomeView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a9eaab4c-4f54-4042-b94b-6eb025340fdb",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "13da27f2-e419-475d-b479-007526c70562",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "601aec30-6902-4b78-acbd-0314a089b898",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "67f4df24-f752-4ea6-9849-b51b194f1186",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a0b23fc6-810d-426b-8cc4-262073190ed0",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a0cab8ea-4470-4342-b7b6-8661e90bdcff",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ea876d32-44c1-4950-aeeb-78f4aa09a9c4",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ed4a768c-11c8-4bf0-8005-e8568e833366",
+                      "originNodeId":  "b6a061c1-0502-498e-a13d-79bf71e91239",
+                      "destinationNodeId":  "a9eaab4c-4f54-4042-b94b-6eb025340fdb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "000aa55e-6d3f-4e91-88c1-080ab122e7da",
+                      "originNodeId":  "ea876d32-44c1-4950-aeeb-78f4aa09a9c4",
+                      "destinationNodeId":  "b6a061c1-0502-498e-a13d-79bf71e91239",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "ea876d32-44c1-4950-aeeb-78f4aa09a9c4"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "ea876d32-44c1-4950-aeeb-78f4aa09a9c4",
+                                         "b6a061c1-0502-498e-a13d-79bf71e91239",
+                                         "a9eaab4c-4f54-4042-b94b-6eb025340fdb"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_UserTaskOutcomeView_AssignedToUser\r\nNODES=8; EDGES=2\r\n1. START\r\n2. ACTION RetrieveAction: retrieve UserTaskOutcomeViewList from WorkflowCommons.UserTaskOutcomeView\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_WorkflowTask_AssignedToUser_Timeline",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "0e763f17-6988-49c1-bb61-b44953ba8fc4",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTaskOutcomeView_AssignedToUser",
+                          "isInternal":  true
+                      }
+                  ]
+}

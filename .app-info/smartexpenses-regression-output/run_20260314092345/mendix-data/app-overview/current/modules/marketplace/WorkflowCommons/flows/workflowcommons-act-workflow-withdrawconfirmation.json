@@ -1,0 +1,395 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_Workflow_WithdrawConfirmation",
+                  "stableId":  "4dbe7b48-9603-439e-87d2-8b70e6fb2cce",
+                  "slug":  "workflowcommons-act-workflow-withdrawconfirmation",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-withdrawconfirmation.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-withdrawconfirmation.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflow-withdrawconfirmation.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_Workflow_WithdrawConfirmation",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "4dbe7b48-9603-439e-87d2-8b70e6fb2cce",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_Workflow_WithdrawConfirmation",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "541d79aa-befe-4a00-a0ca-f990fbe3e34d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change WorkflowView (State=$Workflow/State, Reason=$Workflow/Reason, EndTime=$Workflow/EndTime; refreshInClient=true)",
+                      "detail":  "change WorkflowView (State=$Workflow/State, Reason=$Workflow/Reason, EndTime=$Workflow/EndTime; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2e5b63fd-d494-4a3a-935d-1f75bdbb574b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f0ec8a31-23af-4ca0-9ea4-b6863feb8061",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CommitAction: commit WorkflowComment (refreshInClient=false, withEvents=true)",
+                      "detail":  "commit WorkflowComment (refreshInClient=false, withEvents=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a47c2b49-ddbf-422b-82a5-190e9061d227",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ListOperationAction: ListOperationAction (output=WorkflowView, errorHandlingType=Rollback)",
+                      "detail":  "ListOperationAction (output=WorkflowView, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f022448b-f3ea-445c-9b6b-a82581c9cd06",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow over association WorkflowComment_Workflow from WorkflowComment",
+                      "detail":  "retrieve Workflow over association WorkflowComment_Workflow from WorkflowComment",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "081d17da-3bae-435e-97ca-fb1c44507dd4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowViewList over association WorkflowView_Workflow from Workflow",
+                      "detail":  "retrieve WorkflowViewList over association WorkflowView_Workflow from Workflow",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9c8f37d0-f749-4a1f-b5f1-6cce199da826",
+                      "nodeType":  "ActionActivity",
+                      "label":  "WorkflowOperationAction: WorkflowOperationAction (errorHandlingType=Rollback)",
+                      "detail":  "WorkflowOperationAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "57dcb30b-867a-44fb-9258-003efe94a487",
+                      "nodeType":  "Annotation",
+                      "label":  "Force a refresh of the new workflow state, since the state change event is executed asynchronously.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "653423f6-a888-4ef2-8314-4983d041c536",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fbf67168-d0c5-4d78-b773-e07920484999",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2bc52025-9189-4873-8323-ad529ac9473f",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "40be6094-aeb7-4004-a440-8c31c1da30db",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "568945a0-4212-4048-9511-a42d7ecf5364",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Comment filled? expression=$WorkflowComment/Content != empty and length(trim($WorkflowComment/Content)) \u003e 0",
+                      "detail":  "Comment filled? expression=$WorkflowComment/Content != empty and length(trim($WorkflowComment/Content)) \u003e 0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cc021a53-1eb6-4a18-988c-47fe1d86e56f",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Found? expression=$Workflow != empty",
+                      "detail":  "Found? expression=$Workflow != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ff42c042-7a2e-45dd-abef-7b20a264c4d6",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Found? expression=$WorkflowView != empty",
+                      "detail":  "Found? expression=$WorkflowView != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e6dfa849-937d-4d29-9188-c8fa4c5a2e34",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ce8ff9f-dd21-40ee-91e2-52969f269e24",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "f39a865c-0357-4ec9-9b3d-de7b03d74d7d",
+                      "originNodeId":  "1ce8ff9f-dd21-40ee-91e2-52969f269e24",
+                      "destinationNodeId":  "568945a0-4212-4048-9511-a42d7ecf5364",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "78cf907b-7664-4c44-9aa2-3fe1649de791",
+                      "originNodeId":  "f022448b-f3ea-445c-9b6b-a82581c9cd06",
+                      "destinationNodeId":  "cc021a53-1eb6-4a18-988c-47fe1d86e56f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "78bdf766-c827-4560-b128-70ad37624af7",
+                      "originNodeId":  "cc021a53-1eb6-4a18-988c-47fe1d86e56f",
+                      "destinationNodeId":  "9c8f37d0-f749-4a1f-b5f1-6cce199da826",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a66ac788-a2e1-4463-a9c5-413c3b8c3445",
+                      "originNodeId":  "cc021a53-1eb6-4a18-988c-47fe1d86e56f",
+                      "destinationNodeId":  "653423f6-a888-4ef2-8314-4983d041c536",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "e8e77fa5-3f55-4421-8c56-04757186b4a8",
+                      "originNodeId":  "568945a0-4212-4048-9511-a42d7ecf5364",
+                      "destinationNodeId":  "f0ec8a31-23af-4ca0-9ea4-b6863feb8061",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a2141716-d4a8-4c81-ac7c-9cff7c4d18ee",
+                      "originNodeId":  "f0ec8a31-23af-4ca0-9ea4-b6863feb8061",
+                      "destinationNodeId":  "40be6094-aeb7-4004-a440-8c31c1da30db",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "eb762339-c7dc-40f4-9dd7-bbc145aead63",
+                      "originNodeId":  "40be6094-aeb7-4004-a440-8c31c1da30db",
+                      "destinationNodeId":  "f022448b-f3ea-445c-9b6b-a82581c9cd06",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "04852a45-277d-4572-b89c-444641021755",
+                      "originNodeId":  "568945a0-4212-4048-9511-a42d7ecf5364",
+                      "destinationNodeId":  "40be6094-aeb7-4004-a440-8c31c1da30db",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "f3a38a3b-9395-47c5-a263-9f3ebc4d9754",
+                      "originNodeId":  "2e5b63fd-d494-4a3a-935d-1f75bdbb574b",
+                      "destinationNodeId":  "fbf67168-d0c5-4d78-b773-e07920484999",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f0d30096-c2ed-465e-b9b2-4b0a6bf63808",
+                      "originNodeId":  "9c8f37d0-f749-4a1f-b5f1-6cce199da826",
+                      "destinationNodeId":  "081d17da-3bae-435e-97ca-fb1c44507dd4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "41f3f859-197e-4120-9d0e-7f1967d2f813",
+                      "originNodeId":  "081d17da-3bae-435e-97ca-fb1c44507dd4",
+                      "destinationNodeId":  "a47c2b49-ddbf-422b-82a5-190e9061d227",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "957b3c58-b7e8-49bd-afc7-ca77e99400b6",
+                      "originNodeId":  "a47c2b49-ddbf-422b-82a5-190e9061d227",
+                      "destinationNodeId":  "ff42c042-7a2e-45dd-abef-7b20a264c4d6",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5d357a86-7bb8-4f6e-9b72-bec64147d142",
+                      "originNodeId":  "ff42c042-7a2e-45dd-abef-7b20a264c4d6",
+                      "destinationNodeId":  "541d79aa-befe-4a00-a0ca-f990fbe3e34d",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3a7ef1ce-8770-4f6a-99ee-1f6b09beb313",
+                      "originNodeId":  "541d79aa-befe-4a00-a0ca-f990fbe3e34d",
+                      "destinationNodeId":  "2bc52025-9189-4873-8323-ad529ac9473f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9416482e-072e-44d1-8174-cadefb306249",
+                      "originNodeId":  "2bc52025-9189-4873-8323-ad529ac9473f",
+                      "destinationNodeId":  "2e5b63fd-d494-4a3a-935d-1f75bdbb574b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4cf8d892-6096-45c8-89e6-4826170ea8a6",
+                      "originNodeId":  "ff42c042-7a2e-45dd-abef-7b20a264c4d6",
+                      "destinationNodeId":  "2bc52025-9189-4873-8323-ad529ac9473f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  2
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "1ce8ff9f-dd21-40ee-91e2-52969f269e24"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "1ce8ff9f-dd21-40ee-91e2-52969f269e24",
+                                         "568945a0-4212-4048-9511-a42d7ecf5364",
+                                         "f0ec8a31-23af-4ca0-9ea4-b6863feb8061",
+                                         "40be6094-aeb7-4004-a440-8c31c1da30db",
+                                         "f022448b-f3ea-445c-9b6b-a82581c9cd06",
+                                         "cc021a53-1eb6-4a18-988c-47fe1d86e56f",
+                                         "9c8f37d0-f749-4a1f-b5f1-6cce199da826",
+                                         "081d17da-3bae-435e-97ca-fb1c44507dd4",
+                                         "a47c2b49-ddbf-422b-82a5-190e9061d227",
+                                         "ff42c042-7a2e-45dd-abef-7b20a264c4d6",
+                                         "541d79aa-befe-4a00-a0ca-f990fbe3e34d",
+                                         "2bc52025-9189-4873-8323-ad529ac9473f",
+                                         "2e5b63fd-d494-4a3a-935d-1f75bdbb574b",
+                                         "fbf67168-d0c5-4d78-b773-e07920484999",
+                                         "653423f6-a888-4ef2-8314-4983d041c536"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_Workflow_WithdrawConfirmation\r\nNODES=17; EDGES=16\r\n1. START\r\n2. DECISION Comment filled? expression=$WorkflowComment/Content != empty and length(trim($WorkflowComment/Content)) \u003e 0\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION CommitAction: commit WorkflowComment (refreshInClient=false, withEvents=true)\r\n  5. NODE ExclusiveMerge: ExclusiveMerge\r\n  6. ACTION RetrieveAction: retrieve Workflow over association WorkflowComment_Workflow from WorkflowComment\r\n  7. DECISION Found? expression=$Workflow != empty\r\n  8. BRANCH when EnumerationCase=true\r\n    9. ACTION WorkflowOperationAction: WorkflowOperationAction (errorHandlingType=Rollback)\r\n    10. ACTION RetrieveAction: retrieve WorkflowViewList over association WorkflowView_Workflow from Workflow\r\n    11. ACTION ListOperationAction: ListOperationAction (output=WorkflowView, errorHandlingType=Rollback)\r\n    12. DECISION Found? expression=$WorkflowView != empty\r\n    13. BRANCH when EnumerationCase=true\r\n      14. ACTION ChangeObjectAction: change WorkflowView (State=$Workflow/State, Reason=$Workflow/Reason, EndTime=$Workflow/EndTime; refreshInClient=true)\r\n      15. NODE ExclusiveMerge: ExclusiveMerge\r\n      16. ACTION CloseFormAction: close page\r\n      17. END\r\n    18. BRANCH when EnumerationCase=false\r\n      19. REF ExclusiveMerge\r\n  20. BRANCH when EnumerationCase=false\r\n    21. END\r\n22. BRANCH when EnumerationCase=false\r\n  23. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

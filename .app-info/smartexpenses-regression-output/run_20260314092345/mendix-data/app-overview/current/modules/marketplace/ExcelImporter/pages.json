@@ -1,0 +1,260 @@
+{
+  "module": "ExcelImporter",
+  "pages": [
+    {
+      "qualifiedName": "ExcelImporter.Column_Hover",
+      "name": "Column_Hover",
+      "title": "New column mapping selection",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [
+        {
+          "name": "Column",
+          "entityType": "ExcelImporter.Column"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.Column_NewEdit",
+      "name": "Column_NewEdit",
+      "title": "Column details",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [
+        {
+          "name": "Column",
+          "entityType": "ExcelImporter.Column"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 900,
+      "popupHeight": 600,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.Credits",
+      "name": "Credits",
+      "title": "ExcelImporterTemplateExporter module",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.ExcelImportOverview",
+      "name": "ExcelImportOverview",
+      "title": "Excel Importer",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.ImportXML_Upload",
+      "name": "ImportXML_Upload",
+      "title": "Upload template",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [
+        {
+          "name": "XMLDocumentTemplate",
+          "entityType": "ExcelImporter.XMLDocumentTemplate"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.Import_Overview",
+      "name": "Import_Overview",
+      "title": "Import files overview",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.ReferenceHandling_NewEdit",
+      "name": "ReferenceHandling_NewEdit",
+      "title": "Edit the reference handling",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [
+        {
+          "name": "ReferenceHandling",
+          "entityType": "ExcelImporter.ReferenceHandling"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.TemplateDocument_NewEdit",
+      "name": "TemplateDocument_NewEdit",
+      "title": "Edit Template document",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [
+        {
+          "name": "TemplateDocument",
+          "entityType": "ExcelImporter.TemplateDocument"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.Templates_Overview",
+      "name": "Templates_Overview",
+      "title": "Import templates",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.Template_Edit",
+      "name": "Template_Edit",
+      "title": "Import template settings",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [
+        {
+          "name": "Template",
+          "entityType": "ExcelImporter.Template"
+        }
+      ],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.Template_New",
+      "name": "Template_New",
+      "title": "Import template settings",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [
+        {
+          "name": "Template",
+          "entityType": "ExcelImporter.Template"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.Template_New_FromDocument",
+      "name": "Template_New_FromDocument",
+      "title": "New template by Excel file",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [
+        {
+          "name": "TemplateDocument",
+          "entityType": "ExcelImporter.TemplateDocument"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "ExcelImporter.VerificationForm",
+      "name": "VerificationForm",
+      "title": "Verification form",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "ExcelImporter.Configurator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    }
+  ],
+  "snippets": [
+    {
+      "qualifiedName": "ExcelImporter.TemplateDetails",
+      "name": "TemplateDetails",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "Template",
+          "entityType": "ExcelImporter.Template"
+        }
+      ]
+    }
+  ]
+}

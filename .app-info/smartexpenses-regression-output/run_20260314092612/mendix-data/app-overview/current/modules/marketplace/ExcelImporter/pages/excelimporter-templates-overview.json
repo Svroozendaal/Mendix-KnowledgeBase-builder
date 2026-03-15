@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.Templates_Overview",
+                  "stableId":  "ExcelImporter.Templates_Overview",
+                  "slug":  "excelimporter-templates-overview",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-templates-overview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-templates-overview.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/pages/excelimporter-templates-overview.json",
+                  "l2Logical":  "page:ExcelImporter.Templates_Overview",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/pages/INDEX.json"
+              },
+    "qualifiedName":  "ExcelImporter.Templates_Overview",
+    "name":  "Templates_Overview",
+    "title":  "Import templates",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "ExcelImporter.Configurator"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

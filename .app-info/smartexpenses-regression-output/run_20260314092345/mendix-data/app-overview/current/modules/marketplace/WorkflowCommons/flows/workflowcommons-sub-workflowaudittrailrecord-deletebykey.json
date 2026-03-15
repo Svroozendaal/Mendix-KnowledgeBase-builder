@@ -1,0 +1,165 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey",
+                  "stableId":  "872f2688-f1bd-435a-9ffd-baf97e365b53",
+                  "slug":  "workflowcommons-sub-workflowaudittrailrecord-deletebykey",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowaudittrailrecord-deletebykey.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowaudittrailrecord-deletebykey.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflowaudittrailrecord-deletebykey.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "872f2688-f1bd-435a-9ffd-baf97e365b53",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "79a37827-c20b-4924-b7e7-803c48007a74",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=RecordCount, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=RecordCount, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cedd7d5a-37dc-402b-a1ef-b61c47208a84",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DeleteAction: delete WorkflowAuditTrailRecordList (refreshInClient=false)",
+                      "detail":  "delete WorkflowAuditTrailRecordList (refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f4e0ccdf-68d0-4695-81e7-a51ad62d48cb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowAuditTrailRecordList from WorkflowCommons.WorkflowAuditTrailRecord",
+                      "detail":  "retrieve WorkflowAuditTrailRecordList from WorkflowCommons.WorkflowAuditTrailRecord",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4fcb93a2-b085-4247-94ca-7374e3f3abe4",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "85676f35-61f6-43b7-86f1-e2217a43a96e",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2f268390-950a-4658-887f-bda55613c288",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "eae02f00-0cc0-4f04-a7f8-835654e6d733",
+                      "originNodeId":  "f4e0ccdf-68d0-4695-81e7-a51ad62d48cb",
+                      "destinationNodeId":  "79a37827-c20b-4924-b7e7-803c48007a74",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2afcd193-fa66-4f03-aa0a-ca8cfcac4377",
+                      "originNodeId":  "2f268390-950a-4658-887f-bda55613c288",
+                      "destinationNodeId":  "f4e0ccdf-68d0-4695-81e7-a51ad62d48cb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b078df7e-d2e1-410a-9c08-2b894b1ea44c",
+                      "originNodeId":  "cedd7d5a-37dc-402b-a1ef-b61c47208a84",
+                      "destinationNodeId":  "4fcb93a2-b085-4247-94ca-7374e3f3abe4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8320dca4-586d-4931-a566-976dd84b1655",
+                      "originNodeId":  "79a37827-c20b-4924-b7e7-803c48007a74",
+                      "destinationNodeId":  "cedd7d5a-37dc-402b-a1ef-b61c47208a84",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "2f268390-950a-4658-887f-bda55613c288"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "2f268390-950a-4658-887f-bda55613c288",
+                                         "f4e0ccdf-68d0-4695-81e7-a51ad62d48cb",
+                                         "79a37827-c20b-4924-b7e7-803c48007a74",
+                                         "cedd7d5a-37dc-402b-a1ef-b61c47208a84",
+                                         "4fcb93a2-b085-4247-94ca-7374e3f3abe4"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey\r\nNODES=6; EDGES=4\r\n1. START\r\n2. ACTION RetrieveAction: retrieve WorkflowAuditTrailRecordList from WorkflowCommons.WorkflowAuditTrailRecord\r\n3. ACTION AggregateListAction: AggregateListAction (output=RecordCount, errorHandlingType=Rollback)\r\n4. ACTION DeleteAction: delete WorkflowAuditTrailRecordList (refreshInClient=false)\r\n5. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "00241462-b56d-437e-9c0b-e428a05885c3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_DeleteByKey",
+                          "isInternal":  true
+                      }
+                  ]
+}

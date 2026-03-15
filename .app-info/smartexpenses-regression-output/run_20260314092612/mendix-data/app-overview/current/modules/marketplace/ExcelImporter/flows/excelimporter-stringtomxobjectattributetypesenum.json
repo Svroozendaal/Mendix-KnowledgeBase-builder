@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.StringToMxObjectAttributeTypesEnum",
+                  "stableId":  "6bfa582b-e7a1-4d6d-9731-b41dbc2d6477",
+                  "slug":  "excelimporter-stringtomxobjectattributetypesenum",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtomxobjectattributetypesenum.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtomxobjectattributetypesenum.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-stringtomxobjectattributetypesenum.json",
+                  "l2Logical":  "flow:ExcelImporter.StringToMxObjectAttributeTypesEnum",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "6bfa582b-e7a1-4d6d-9731-b41dbc2d6477",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.StringToMxObjectAttributeTypesEnum",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "31a576f1-1b98-412c-be93-344bad074e2b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable Enum=if $Input = \u0027AutoNumber\u0027 then MxModelReflection.PrimitiveTypes.AutoNumber else if $Input = \u0027BooleanType\u0027 then MxModelReflection.PrimitiveTypes.BooleanType else if $Input = \u0027DateTime\u0027 then MxModelReflection.PrimitiveTypes...",
+                      "detail":  "create variable Enum=if $Input = \u0027AutoNumber\u0027 then MxModelReflection.PrimitiveTypes.AutoNumber else if $Input = \u0027BooleanType\u0027 then MxModelReflection.PrimitiveTypes.BooleanType else if $Input = \u0027DateTime\u0027 then MxModelReflection.PrimitiveTypes...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9611aaf7-09d3-4889-b23d-6e59e03cc06e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d71acd78-8f77-420a-9f58-a7a94237420b",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "76cf62ac-1453-4f62-9f57-4f54ce4eb4f5",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "8f2656f5-946f-455f-bd86-fede208b9ea5",
+                      "originNodeId":  "76cf62ac-1453-4f62-9f57-4f54ce4eb4f5",
+                      "destinationNodeId":  "31a576f1-1b98-412c-be93-344bad074e2b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b5592823-d92d-4d5e-9279-63c64e051fbf",
+                      "originNodeId":  "31a576f1-1b98-412c-be93-344bad074e2b",
+                      "destinationNodeId":  "9611aaf7-09d3-4889-b23d-6e59e03cc06e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "76cf62ac-1453-4f62-9f57-4f54ce4eb4f5"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "76cf62ac-1453-4f62-9f57-4f54ce4eb4f5",
+                                         "31a576f1-1b98-412c-be93-344bad074e2b",
+                                         "9611aaf7-09d3-4889-b23d-6e59e03cc06e"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.StringToMxObjectAttributeTypesEnum\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable Enum=if $Input = \u0027AutoNumber\u0027 then MxModelReflection.PrimitiveTypes.AutoNumber else if $Input = \u0027BooleanType\u0027 then MxModelReflection.PrimitiveTypes.BooleanType else if $Input = \u0027DateTime\u0027 then MxModelReflection.PrimitiveTypes...\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

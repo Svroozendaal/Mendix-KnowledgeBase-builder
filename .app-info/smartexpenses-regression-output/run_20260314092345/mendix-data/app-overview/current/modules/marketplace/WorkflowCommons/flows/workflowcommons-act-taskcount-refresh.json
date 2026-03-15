@@ -1,0 +1,236 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_TaskCount_Refresh",
+                  "stableId":  "c4ecee06-6d1f-420c-863c-a678f08f7932",
+                  "slug":  "workflowcommons-act-taskcount-refresh",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskcount-refresh.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskcount-refresh.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-taskcount-refresh.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_TaskCount_Refresh",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "c4ecee06-6d1f-420c-863c-a678f08f7932",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.ACT_TaskCount_Refresh",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "a45dadfa-3ffe-42f4-9cda-8ee4876165ce",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change TaskCount (refreshInClient=true)",
+                      "detail":  "change TaskCount (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "71d70993-4f33-481b-903a-3d8b5f06cd59",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action NanoflowCommons.RefreshEntity -\u003e ReturnValueName",
+                      "detail":  "call javascript action NanoflowCommons.RefreshEntity -\u003e ReturnValueName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "903ee9d6-5f49-4599-bdce-45e7308ca141",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Abort)",
+                      "detail":  "LogMessageAction (errorHandlingType=Abort)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f4b29ea4-fa86-46e6-bd2f-aeeaf262f419",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Abort)",
+                      "detail":  "LogMessageAction (errorHandlingType=Abort)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3fcf3cae-a491-43c5-9e39-6f5487e691cb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.ACT_TaskCount_Update",
+                      "detail":  "call microflow WorkflowCommons.ACT_TaskCount_Update",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.ACT_TaskCount_Update",
+                                        "sourceNodeId":  "3fcf3cae-a491-43c5-9e39-6f5487e691cb"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "d58b496d-6533-455d-bef3-fedcd96be213",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ec1d8eca-1e7e-4500-bddf-4b60c7744fb0",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ab0da02f-fce9-4303-8fdd-017caa3f99a9",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8d04a2f3-51e1-46aa-b501-9066aa4172a4",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "c68fd343-dc42-418c-a3b8-7133ba490a80",
+                      "originNodeId":  "8d04a2f3-51e1-46aa-b501-9066aa4172a4",
+                      "destinationNodeId":  "f4b29ea4-fa86-46e6-bd2f-aeeaf262f419",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8c378a05-6e73-480e-af3f-defa178b2cd0",
+                      "originNodeId":  "f4b29ea4-fa86-46e6-bd2f-aeeaf262f419",
+                      "destinationNodeId":  "71d70993-4f33-481b-903a-3d8b5f06cd59",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "208e9018-8ac7-4654-afb8-91f9d8b9b553",
+                      "originNodeId":  "71d70993-4f33-481b-903a-3d8b5f06cd59",
+                      "destinationNodeId":  "3fcf3cae-a491-43c5-9e39-6f5487e691cb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2524b160-92c4-440e-bc4b-db6f4173b9c1",
+                      "originNodeId":  "3fcf3cae-a491-43c5-9e39-6f5487e691cb",
+                      "destinationNodeId":  "a45dadfa-3ffe-42f4-9cda-8ee4876165ce",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2d156c8b-faef-4cfc-b6d2-532885a642b6",
+                      "originNodeId":  "a45dadfa-3ffe-42f4-9cda-8ee4876165ce",
+                      "destinationNodeId":  "d58b496d-6533-455d-bef3-fedcd96be213",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5c87ce39-c076-48b5-bade-3b4f3304a2c3",
+                      "originNodeId":  "3fcf3cae-a491-43c5-9e39-6f5487e691cb",
+                      "destinationNodeId":  "903ee9d6-5f49-4599-bdce-45e7308ca141",
+                      "condition":  null,
+                      "isErrorHandler":  true,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "10786ed8-e9d7-4329-be29-c87097e3b801",
+                      "originNodeId":  "903ee9d6-5f49-4599-bdce-45e7308ca141",
+                      "destinationNodeId":  "ec1d8eca-1e7e-4500-bddf-4b60c7744fb0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.ACT_TaskCount_Update",
+                      "sourceNodeId":  "3fcf3cae-a491-43c5-9e39-6f5487e691cb"
+                  }
+              ],
+    "startNodeIds":  [
+                         "8d04a2f3-51e1-46aa-b501-9066aa4172a4"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "8d04a2f3-51e1-46aa-b501-9066aa4172a4",
+                                         "f4b29ea4-fa86-46e6-bd2f-aeeaf262f419",
+                                         "71d70993-4f33-481b-903a-3d8b5f06cd59",
+                                         "3fcf3cae-a491-43c5-9e39-6f5487e691cb",
+                                         "a45dadfa-3ffe-42f4-9cda-8ee4876165ce",
+                                         "d58b496d-6533-455d-bef3-fedcd96be213",
+                                         "903ee9d6-5f49-4599-bdce-45e7308ca141",
+                                         "ec1d8eca-1e7e-4500-bddf-4b60c7744fb0"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.ACT_TaskCount_Refresh\r\nNODES=9; EDGES=7\r\n1. START\r\n2. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Abort)\r\n3. ACTION JavaScriptActionCallAction: call javascript action NanoflowCommons.RefreshEntity -\u003e ReturnValueName\r\n4. ACTION MicroflowCallAction: call microflow WorkflowCommons.ACT_TaskCount_Update\r\n5. BRANCH\r\n  6. ACTION ChangeObjectAction: change TaskCount (refreshInClient=true)\r\n  7. END\r\n8. BRANCH on error\r\n  9. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Abort)\r\n  10. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_TaskCount_Refresh",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3fcf3cae-a491-43c5-9e39-6f5487e691cb",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.ACT_TaskCount_Update",
+                          "isInternal":  true
+                      }
+                  ]
+}

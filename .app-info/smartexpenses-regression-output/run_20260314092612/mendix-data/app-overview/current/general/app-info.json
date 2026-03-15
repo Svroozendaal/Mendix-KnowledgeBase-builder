@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "2.0",
+  "generatedAtUtc": "2026-03-14T09:26:24.3092096+00:00",
+  "sourceMprPath": "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\dumps\\2026-03-14T09-26-12.835Z_SmartExpenses\\working-dump.json",
+  "sourceDumpPath": "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\dumps\\2026-03-14T09-26-12.835Z_SmartExpenses\\working-dump.json",
+  "summary": {
+    "moduleCount": 18,
+    "entityCount": 109,
+    "associationCount": 97,
+    "enumerationCount": 53,
+    "flowCount": 376,
+    "microflowCount": 332,
+    "nanoflowCount": 41,
+    "ruleCount": 3,
+    "workflowCount": 0,
+    "flowNodeCount": 3465,
+    "flowEdgeCount": 2588,
+    "flowCallEdgeCount": 214
+  }
+}

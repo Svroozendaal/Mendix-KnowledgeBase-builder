@@ -1,0 +1,49 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.TaskAssignmentHelper_UserTask_Reassign_TargetUserOptions",
+                  "stableId":  "WorkflowCommons.TaskAssignmentHelper_UserTask_Reassign_TargetUserOptions",
+                  "slug":  "workflowcommons-taskassignmenthelper-usertask-reassign-targetuseroptions",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-taskassignmenthelper-usertask-reassign-targetuseroptions.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-taskassignmenthelper-usertask-reassign-targetuseroptions.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/workflowcommons-taskassignmenthelper-usertask-reassign-targetuseroptions.json",
+                  "l2Logical":  "page:WorkflowCommons.TaskAssignmentHelper_UserTask_Reassign_TargetUserOptions",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/INDEX.json"
+              },
+    "qualifiedName":  "WorkflowCommons.TaskAssignmentHelper_UserTask_Reassign_TargetUserOptions",
+    "name":  "TaskAssignmentHelper_UserTask_Reassign_TargetUserOptions",
+    "title":  "Reassign task(s)",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "WorkflowCommons.Administrator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "TaskManagementHelper",
+                           "entityType":  "WorkflowCommons.TaskAssignmentHelper"
+                       },
+                       {
+                           "name":  "NewAssignee",
+                           "entityType":  "Administration.Account"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

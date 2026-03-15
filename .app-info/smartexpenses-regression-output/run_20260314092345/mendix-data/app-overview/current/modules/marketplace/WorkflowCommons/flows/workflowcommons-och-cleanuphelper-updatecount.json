@@ -1,0 +1,372 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.OCh_CleanupHelper_UpdateCount",
+                  "stableId":  "b2495b39-86e4-4d25-90f6-d818d90f6644",
+                  "slug":  "workflowcommons-och-cleanuphelper-updatecount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-cleanuphelper-updatecount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-cleanuphelper-updatecount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-och-cleanuphelper-updatecount.json",
+                  "l2Logical":  "flow:WorkflowCommons.OCh_CleanupHelper_UpdateCount",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "b2495b39-86e4-4d25-90f6-d818d90f6644",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.OCh_CleanupHelper_UpdateCount",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "b0ea1c1c-c80f-4f9d-859a-6560eee059e0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=TotalCount, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=TotalCount, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "29a81707-b20f-4d53-adcd-c45f11f1c4bf",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change CleanupHelper (TotalCount=$TotalCount; refreshInClient=true)",
+                      "detail":  "change CleanupHelper (TotalCount=$TotalCount; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "76f1063c-4f7d-4dee-ba5e-ca2fec7e7b06",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change CleanupHelper (TotalCount=0; refreshInClient=true)",
+                      "detail":  "change CleanupHelper (TotalCount=0; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "449ca50d-449c-497a-aada-5b09650f4ddf",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreEndDateEnd=$CleanupHelper/EndDateEnd = empty",
+                      "detail":  "create variable IgnoreEndDateEnd=$CleanupHelper/EndDateEnd = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6e3df3d1-3afc-4583-958a-00e8949a4b8c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreEndDateStart=$CleanupHelper/EndDateStart = empty",
+                      "detail":  "create variable IgnoreEndDateStart=$CleanupHelper/EndDateStart = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ba2cca1d-3e94-4949-bbe1-fd9f6daa88a7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreStartDateEnd=$CleanupHelper/StartDateEnd = empty",
+                      "detail":  "create variable IgnoreStartDateEnd=$CleanupHelper/StartDateEnd = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1e466a85-587e-4f11-8538-03975c6aa03a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IgnoreStartDateStart=$CleanupHelper/StartDateStart = empty",
+                      "detail":  "create variable IgnoreStartDateStart=$CleanupHelper/StartDateStart = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "33ca467f-7432-4d0e-a505-a3423755bb37",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_CleanupHelper_Validate -\u003e IsValid",
+                      "detail":  "call microflow WorkflowCommons.SUB_CleanupHelper_Validate -\u003e IsValid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_CleanupHelper_Validate",
+                                        "sourceNodeId":  "33ca467f-7432-4d0e-a505-a3423755bb37"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "d6714ac8-3384-4cb0-b151-31741207f33c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowDefinition over association CleanupHelper_WorkflowDefinition from CleanupHelper",
+                      "detail":  "retrieve WorkflowDefinition over association CleanupHelper_WorkflowDefinition from CleanupHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0b681e2a-7e56-4bfc-ac61-0fd16ba9ad5d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowViewList from WorkflowCommons.WorkflowView",
+                      "detail":  "retrieve WorkflowViewList from WorkflowCommons.WorkflowView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9910ce8a-afb7-4d20-b2a5-a391e8296fd7",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ef1279e5-bae6-4a91-a356-07b3b758b16e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2bdc10a4-9f05-4aa7-b842-c948abb9153e",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Valid expression=$IsValid",
+                      "detail":  "Valid expression=$IsValid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d084fcab-3ab2-4f51-b413-53f380b5e9e9",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "26685fb1-e7fc-4b18-8880-91a01b0bbae1",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "a44e6825-1922-488e-a7be-21ccfe8641e6",
+                      "originNodeId":  "26685fb1-e7fc-4b18-8880-91a01b0bbae1",
+                      "destinationNodeId":  "33ca467f-7432-4d0e-a505-a3423755bb37",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e6e066fa-404b-4210-b9ff-e6fa38dda43d",
+                      "originNodeId":  "0b681e2a-7e56-4bfc-ac61-0fd16ba9ad5d",
+                      "destinationNodeId":  "b0ea1c1c-c80f-4f9d-859a-6560eee059e0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4e31c938-f9e9-48f1-b41e-757cbffc0c44",
+                      "originNodeId":  "29a81707-b20f-4d53-adcd-c45f11f1c4bf",
+                      "destinationNodeId":  "9910ce8a-afb7-4d20-b2a5-a391e8296fd7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3e11c005-f9d8-428e-9759-b0b8a51172bb",
+                      "originNodeId":  "b0ea1c1c-c80f-4f9d-859a-6560eee059e0",
+                      "destinationNodeId":  "29a81707-b20f-4d53-adcd-c45f11f1c4bf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "38b9bbc5-4959-40b3-965f-6866870f1468",
+                      "originNodeId":  "d6714ac8-3384-4cb0-b151-31741207f33c",
+                      "destinationNodeId":  "0b681e2a-7e56-4bfc-ac61-0fd16ba9ad5d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "06528f03-1ae5-4c97-93c0-06eaaf12e2c0",
+                      "originNodeId":  "33ca467f-7432-4d0e-a505-a3423755bb37",
+                      "destinationNodeId":  "2bdc10a4-9f05-4aa7-b842-c948abb9153e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "64e5035a-6871-42b1-9781-733b1570c60a",
+                      "originNodeId":  "2bdc10a4-9f05-4aa7-b842-c948abb9153e",
+                      "destinationNodeId":  "1e466a85-587e-4f11-8538-03975c6aa03a",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "200e7d41-cd6b-402f-afec-add802e33e48",
+                      "originNodeId":  "2bdc10a4-9f05-4aa7-b842-c948abb9153e",
+                      "destinationNodeId":  "76f1063c-4f7d-4dee-ba5e-ca2fec7e7b06",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "de0a24a0-c329-4132-b605-cb1dcd6ced5e",
+                      "originNodeId":  "76f1063c-4f7d-4dee-ba5e-ca2fec7e7b06",
+                      "destinationNodeId":  "ef1279e5-bae6-4a91-a356-07b3b758b16e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "1c7d5355-2fb9-4db1-89a4-21536cdcc332",
+                      "originNodeId":  "1e466a85-587e-4f11-8538-03975c6aa03a",
+                      "destinationNodeId":  "ba2cca1d-3e94-4949-bbe1-fd9f6daa88a7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7d7cd6c2-d3de-4ccf-9a8f-a4233459ae8d",
+                      "originNodeId":  "ba2cca1d-3e94-4949-bbe1-fd9f6daa88a7",
+                      "destinationNodeId":  "6e3df3d1-3afc-4583-958a-00e8949a4b8c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "04c104eb-071e-4365-8701-5d56ce472a98",
+                      "originNodeId":  "6e3df3d1-3afc-4583-958a-00e8949a4b8c",
+                      "destinationNodeId":  "449ca50d-449c-497a-aada-5b09650f4ddf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bbadbeb6-02a7-4293-8d99-2eddef3e18b6",
+                      "originNodeId":  "449ca50d-449c-497a-aada-5b09650f4ddf",
+                      "destinationNodeId":  "d6714ac8-3384-4cb0-b151-31741207f33c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_CleanupHelper_Validate",
+                      "sourceNodeId":  "33ca467f-7432-4d0e-a505-a3423755bb37"
+                  }
+              ],
+    "startNodeIds":  [
+                         "26685fb1-e7fc-4b18-8880-91a01b0bbae1"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "26685fb1-e7fc-4b18-8880-91a01b0bbae1",
+                                         "33ca467f-7432-4d0e-a505-a3423755bb37",
+                                         "2bdc10a4-9f05-4aa7-b842-c948abb9153e",
+                                         "1e466a85-587e-4f11-8538-03975c6aa03a",
+                                         "ba2cca1d-3e94-4949-bbe1-fd9f6daa88a7",
+                                         "6e3df3d1-3afc-4583-958a-00e8949a4b8c",
+                                         "449ca50d-449c-497a-aada-5b09650f4ddf",
+                                         "d6714ac8-3384-4cb0-b151-31741207f33c",
+                                         "0b681e2a-7e56-4bfc-ac61-0fd16ba9ad5d",
+                                         "b0ea1c1c-c80f-4f9d-859a-6560eee059e0",
+                                         "29a81707-b20f-4d53-adcd-c45f11f1c4bf",
+                                         "9910ce8a-afb7-4d20-b2a5-a391e8296fd7",
+                                         "76f1063c-4f7d-4dee-ba5e-ca2fec7e7b06",
+                                         "ef1279e5-bae6-4a91-a356-07b3b758b16e"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.OCh_CleanupHelper_UpdateCount\r\nNODES=15; EDGES=13\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_CleanupHelper_Validate -\u003e IsValid\r\n3. DECISION Valid expression=$IsValid\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION CreateVariableAction: create variable IgnoreStartDateStart=$CleanupHelper/StartDateStart = empty\r\n  6. ACTION CreateVariableAction: create variable IgnoreStartDateEnd=$CleanupHelper/StartDateEnd = empty\r\n  7. ACTION CreateVariableAction: create variable IgnoreEndDateStart=$CleanupHelper/EndDateStart = empty\r\n  8. ACTION CreateVariableAction: create variable IgnoreEndDateEnd=$CleanupHelper/EndDateEnd = empty\r\n  9. ACTION RetrieveAction: retrieve WorkflowDefinition over association CleanupHelper_WorkflowDefinition from CleanupHelper\r\n  10. ACTION RetrieveAction: retrieve WorkflowViewList from WorkflowCommons.WorkflowView\r\n  11. ACTION AggregateListAction: AggregateListAction (output=TotalCount, errorHandlingType=Rollback)\r\n  12. ACTION ChangeObjectAction: change CleanupHelper (TotalCount=$TotalCount; refreshInClient=true)\r\n  13. END\r\n14. BRANCH when EnumerationCase=false\r\n  15. ACTION ChangeObjectAction: change CleanupHelper (TotalCount=0; refreshInClient=true)\r\n  16. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowDefinition_CleanUp_Open",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "b2695b51-08ed-4ee0-9e91-c93151b2827c",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.OCh_CleanupHelper_UpdateCount",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.OCh_CleanupHelper_UpdateCount",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "33ca467f-7432-4d0e-a505-a3423755bb37",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_CleanupHelper_Validate",
+                          "isInternal":  true
+                      }
+                  ]
+}

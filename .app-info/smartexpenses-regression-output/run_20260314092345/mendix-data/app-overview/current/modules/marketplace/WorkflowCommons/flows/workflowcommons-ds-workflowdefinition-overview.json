@@ -1,0 +1,195 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowDefinition_Overview",
+                  "stableId":  "fa98109f-7173-42ec-a012-6c84851321ad",
+                  "slug":  "workflowcommons-ds-workflowdefinition-overview",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowdefinition-overview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowdefinition-overview.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowdefinition-overview.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowDefinition_Overview",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "fa98109f-7173-42ec-a012-6c84851321ad",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowDefinition_Overview",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "6bc9ceff-d13d-47fb-a46a-1ce1b773b192",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeListAction: change WorkflowSummaryList (type=Add, value=$WorkflowSummary)",
+                      "detail":  "change WorkflowSummaryList (type=Add, value=$WorkflowSummary)",
+                      "loopOwnerId":  "f1103f71-1202-4a06-88fa-4246b1b98f1d",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "07113fdf-830d-4d7b-8e09-f998a3e9673c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateListAction: CreateListAction (output=WorkflowSummaryList, entity=WorkflowCommons.WorkflowSummary, errorHandlingType=Rollback)",
+                      "detail":  "CreateListAction (output=WorkflowSummaryList, entity=WorkflowCommons.WorkflowSummary, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3a368f16-74ac-4c01-8a5d-83dba1d90279",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate -\u003e WorkflowSummary",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate -\u003e WorkflowSummary",
+                      "loopOwnerId":  "f1103f71-1202-4a06-88fa-4246b1b98f1d",
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate",
+                                        "sourceNodeId":  "3a368f16-74ac-4c01-8a5d-83dba1d90279"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "f7fc79b4-a469-45f4-94da-13b146c06ced",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowDefinitionList from System.WorkflowDefinition",
+                      "detail":  "retrieve WorkflowDefinitionList from System.WorkflowDefinition",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "eb71f655-c67a-4a7f-952e-ee2f3da6e812",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f1103f71-1202-4a06-88fa-4246b1b98f1d",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate WorkflowDefinitionList as IteratorWorkflowDefinition",
+                      "detail":  "iterate WorkflowDefinitionList as IteratorWorkflowDefinition",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "37877be0-0d22-4a17-98b8-4f2a09249b4a",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "98e24316-e10c-46f5-8a9e-f9181c08d228",
+                      "originNodeId":  "37877be0-0d22-4a17-98b8-4f2a09249b4a",
+                      "destinationNodeId":  "f7fc79b4-a469-45f4-94da-13b146c06ced",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "eb19bca4-89f1-4629-bfe5-9eff37e03313",
+                      "originNodeId":  "f7fc79b4-a469-45f4-94da-13b146c06ced",
+                      "destinationNodeId":  "07113fdf-830d-4d7b-8e09-f998a3e9673c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1245acb8-99af-4b4d-9880-52b6512fcf90",
+                      "originNodeId":  "07113fdf-830d-4d7b-8e09-f998a3e9673c",
+                      "destinationNodeId":  "f1103f71-1202-4a06-88fa-4246b1b98f1d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4e9380e5-9c1f-47f1-adc9-06ff94824c2b",
+                      "originNodeId":  "f1103f71-1202-4a06-88fa-4246b1b98f1d",
+                      "destinationNodeId":  "eb71f655-c67a-4a7f-952e-ee2f3da6e812",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bdb6560a-d0f7-448a-b496-bf9323102723",
+                      "originNodeId":  "3a368f16-74ac-4c01-8a5d-83dba1d90279",
+                      "destinationNodeId":  "6bc9ceff-d13d-47fb-a46a-1ce1b773b192",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate",
+                      "sourceNodeId":  "3a368f16-74ac-4c01-8a5d-83dba1d90279"
+                  }
+              ],
+    "startNodeIds":  [
+                         "37877be0-0d22-4a17-98b8-4f2a09249b4a"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "37877be0-0d22-4a17-98b8-4f2a09249b4a",
+                                         "f7fc79b4-a469-45f4-94da-13b146c06ced",
+                                         "07113fdf-830d-4d7b-8e09-f998a3e9673c",
+                                         "f1103f71-1202-4a06-88fa-4246b1b98f1d",
+                                         "3a368f16-74ac-4c01-8a5d-83dba1d90279",
+                                         "6bc9ceff-d13d-47fb-a46a-1ce1b773b192",
+                                         "eb71f655-c67a-4a7f-952e-ee2f3da6e812"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_WorkflowDefinition_Overview\r\nNODES=5; EDGES=4\r\n1. START\r\n2. ACTION RetrieveAction: retrieve WorkflowDefinitionList from System.WorkflowDefinition\r\n3. ACTION CreateListAction: CreateListAction (output=WorkflowSummaryList, entity=WorkflowCommons.WorkflowSummary, errorHandlingType=Rollback)\r\n4. LOOP iterate WorkflowDefinitionList as IteratorWorkflowDefinition\r\n  5. LOOP BODY\r\n    6. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate -\u003e WorkflowSummary\r\n    7. ACTION ChangeListAction: change WorkflowSummaryList (type=Add, value=$WorkflowSummary)\r\n8. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_WorkflowDefinition_Overview",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3a368f16-74ac-4c01-8a5d-83dba1d90279",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowSummary_CreateOrUpdate",
+                          "isInternal":  true
+                      }
+                  ]
+}

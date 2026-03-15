@@ -1,0 +1,262 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_UserTask_CountOverdue",
+                  "stableId":  "9a43c5f3-c04c-412d-9a75-1972eab19c3b",
+                  "slug":  "workflowcommons-sub-usertask-countoverdue",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-countoverdue.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-countoverdue.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-usertask-countoverdue.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_UserTask_CountOverdue",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "9a43c5f3-c04c-412d-9a75-1972eab19c3b",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_UserTask_CountOverdue",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "3ea55e61-6e3e-4d35-9282-2984d4999ee4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=CountInProgressOverdue, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=CountInProgressOverdue, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "07c5a9c3-706b-48cd-90a2-356cec2c3008",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=CountOverdue, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=CountOverdue, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "10976107-06bd-4e3f-98bd-680b7ddebef6",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable CountOverdueTotal=$CountOverdue + $CountInProgressOverdue",
+                      "detail":  "create variable CountOverdueTotal=$CountOverdue + $CountInProgressOverdue",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2292f884-e497-49d8-8f54-ae29c809782b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTaskView_Overdue from WorkflowCommons.UserTaskView",
+                      "detail":  "retrieve UserTaskView_Overdue from WorkflowCommons.UserTaskView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "75a6902a-ae2d-4289-be45-b64cb42bd85a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTask_InProgress_Overdue from System.WorkflowUserTask",
+                      "detail":  "retrieve UserTask_InProgress_Overdue from System.WorkflowUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "202e2268-4c36-4bbc-b4f4-f819db7f4ebd",
+                      "nodeType":  "Annotation",
+                      "label":  "Count using the system entity for in progress tasks, since the due date might not be up to date on the UserTaskView object.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3b9bfab8-ee8e-45ef-b0da-089d4b1fe029",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1a6a7e19-4c49-4fff-960e-80f7eb100156",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "63bdfd92-72cf-4926-9cca-7efafdc9e73a",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "77abd1ef-9c81-4ed5-a171-2a48b27f0424",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "84382c10-6b10-462c-a431-80b4e867cff1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a5772e01-2a68-41b7-96cd-131ea7fb0a65",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "25a2d4a5-279e-484a-b092-e547977786e4",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "e4b04381-ce45-4bbb-8de3-857906045bb4",
+                      "originNodeId":  "2292f884-e497-49d8-8f54-ae29c809782b",
+                      "destinationNodeId":  "07c5a9c3-706b-48cd-90a2-356cec2c3008",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "08ce8435-12ec-455c-afcf-f2ad2a061769",
+                      "originNodeId":  "25a2d4a5-279e-484a-b092-e547977786e4",
+                      "destinationNodeId":  "2292f884-e497-49d8-8f54-ae29c809782b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0b616c1c-89e9-4d5f-953a-7ab0f0c6d3c1",
+                      "originNodeId":  "75a6902a-ae2d-4289-be45-b64cb42bd85a",
+                      "destinationNodeId":  "3ea55e61-6e3e-4d35-9282-2984d4999ee4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b6363a23-f9b1-47cf-826c-f572ac74c4ba",
+                      "originNodeId":  "07c5a9c3-706b-48cd-90a2-356cec2c3008",
+                      "destinationNodeId":  "75a6902a-ae2d-4289-be45-b64cb42bd85a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "eabdf314-27f4-401b-a1e9-30f5f123a360",
+                      "originNodeId":  "3ea55e61-6e3e-4d35-9282-2984d4999ee4",
+                      "destinationNodeId":  "10976107-06bd-4e3f-98bd-680b7ddebef6",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "58333bb1-c50e-4d27-8f16-23ca97f23dc9",
+                      "originNodeId":  "10976107-06bd-4e3f-98bd-680b7ddebef6",
+                      "destinationNodeId":  "3b9bfab8-ee8e-45ef-b0da-089d4b1fe029",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "25a2d4a5-279e-484a-b092-e547977786e4"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "25a2d4a5-279e-484a-b092-e547977786e4",
+                                         "2292f884-e497-49d8-8f54-ae29c809782b",
+                                         "07c5a9c3-706b-48cd-90a2-356cec2c3008",
+                                         "75a6902a-ae2d-4289-be45-b64cb42bd85a",
+                                         "3ea55e61-6e3e-4d35-9282-2984d4999ee4",
+                                         "10976107-06bd-4e3f-98bd-680b7ddebef6",
+                                         "3b9bfab8-ee8e-45ef-b0da-089d4b1fe029"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_UserTask_CountOverdue\r\nNODES=13; EDGES=6\r\n1. START\r\n2. ACTION RetrieveAction: retrieve UserTaskView_Overdue from WorkflowCommons.UserTaskView\r\n3. ACTION AggregateListAction: AggregateListAction (output=CountOverdue, errorHandlingType=Rollback)\r\n4. ACTION RetrieveAction: retrieve UserTask_InProgress_Overdue from System.WorkflowUserTask\r\n5. ACTION AggregateListAction: AggregateListAction (output=CountInProgressOverdue, errorHandlingType=Rollback)\r\n6. ACTION CreateVariableAction: create variable CountOverdueTotal=$CountOverdue + $CountInProgressOverdue\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskSummary_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "6709a775-c705-4e16-bf11-f1876ca87dda",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_CountOverdue",
+                          "isInternal":  true
+                      }
+                  ]
+}

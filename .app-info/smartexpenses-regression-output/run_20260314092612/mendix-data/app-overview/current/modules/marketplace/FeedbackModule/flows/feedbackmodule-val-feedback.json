@@ -1,0 +1,683 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.VAL_Feedback",
+                  "stableId":  "3db96c8b-1465-4429-9915-562dbbc77d07",
+                  "slug":  "feedbackmodule-val-feedback",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-val-feedback.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-val-feedback.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-val-feedback.json",
+                  "l2Logical":  "flow:FeedbackModule.VAL_Feedback",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "3db96c8b-1465-4429-9915-562dbbc77d07",
+    "kind":  "Microflow",
+    "qualifiedName":  "FeedbackModule.VAL_Feedback",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable ValidFeedback=false",
+                      "detail":  "change variable ValidFeedback=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "64da5dec-4aaf-46cf-9795-927273fa1103",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable ValidFeedback=false",
+                      "detail":  "change variable ValidFeedback=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f635a638-7352-4463-82da-4bae298a1d30",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable ValidFeedback=false",
+                      "detail":  "change variable ValidFeedback=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable ValidFeedback=true",
+                      "detail":  "create variable ValidFeedback=true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action FeedbackModule.ValidateEmail -\u003e IsValidEmail",
+                      "detail":  "call java action FeedbackModule.ValidateEmail -\u003e IsValidEmail",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d6143193-7309-41ae-af5d-fdf8f731b778",
+                      "nodeType":  "Annotation",
+                      "label":  "The validations are identical to those used in the Mendix Feedback API v2",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2f78bcb9-8b09-46d8-8e55-dfe02dbded38",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "73641780-88c6-404f-935a-b8aac9054d90",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "84066755-3c66-4710-9cc0-26449ee9e939",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "91d00bab-d622-4fff-bd26-86b7030fb15b",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c886953d-6674-4961-852c-58ba04c48529",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Description \u003c 32000 characters? expression=length(trim($Feedback/Description)) \u003c= 32000",
+                      "detail":  "Description \u003c 32000 characters? expression=length(trim($Feedback/Description)) \u003c= 32000",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Email is Valid? expression=$IsValidEmail",
+                      "detail":  "Email is Valid? expression=$IsValidEmail",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0ba96493-4316-4d3c-9203-d9928fb8069b",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Email not empty? expression=$Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027",
+                      "detail":  "Email not empty? expression=$Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Subject \u003c 200 characters expression=length(trim($Feedback/Subject)) \u003c= 200",
+                      "detail":  "Subject \u003c 200 characters expression=length(trim($Feedback/Subject)) \u003c= 200",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e962ea51-7670-48be-9f8b-045016d57cf1",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Subject not empty? expression=trim($Feedback/Subject) != empty and trim($Feedback/Subject) != \u0027\u0027",
+                      "detail":  "Subject not empty? expression=trim($Feedback/Subject) != empty and trim($Feedback/Subject) != \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "07d54392-aa7a-4693-ba70-647d9a35fc23",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bdce163e-1d83-494c-91e4-414dfd0926a5",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "7169231b-35ac-44b4-acf3-1b7d17dd18a8",
+                      "originNodeId":  "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+                      "destinationNodeId":  "e962ea51-7670-48be-9f8b-045016d57cf1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3366f025-e192-40c1-a608-e6619d78dd29",
+                      "originNodeId":  "e962ea51-7670-48be-9f8b-045016d57cf1",
+                      "destinationNodeId":  "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "faf91877-7931-4c3d-80aa-118e809634f6",
+                      "originNodeId":  "e962ea51-7670-48be-9f8b-045016d57cf1",
+                      "destinationNodeId":  "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "7d6000ec-2235-4703-836b-12ca42e61e01",
+                      "originNodeId":  "84066755-3c66-4710-9cc0-26449ee9e939",
+                      "destinationNodeId":  "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f2974973-6459-428d-9bac-4d9674533dd8",
+                      "originNodeId":  "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+                      "destinationNodeId":  "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2582f120-877d-4760-b8a7-62af7ed90fc8",
+                      "originNodeId":  "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+                      "destinationNodeId":  "84066755-3c66-4710-9cc0-26449ee9e939",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "3b4c6818-62a3-451e-97bb-7df0e69dbb61",
+                      "originNodeId":  "0ba96493-4316-4d3c-9203-d9928fb8069b",
+                      "destinationNodeId":  "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "32cc0712-19a5-40cf-9c23-4727352b6acf",
+                      "originNodeId":  "bdce163e-1d83-494c-91e4-414dfd0926a5",
+                      "destinationNodeId":  "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "27980f84-527e-4f81-91f4-bd982a41e53e",
+                      "originNodeId":  "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+                      "destinationNodeId":  "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2f56b65a-8e12-4b66-b918-081519ed89f2",
+                      "originNodeId":  "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+                      "destinationNodeId":  "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "e5487238-55b6-4c22-8b1d-b43d41660508",
+                      "originNodeId":  "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+                      "destinationNodeId":  "f635a638-7352-4463-82da-4bae298a1d30",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "b63210ef-fb58-4ec4-8180-7aa1be52688f",
+                      "originNodeId":  "f635a638-7352-4463-82da-4bae298a1d30",
+                      "destinationNodeId":  "91d00bab-d622-4fff-bd26-86b7030fb15b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c368996a-b44e-47f0-8d12-d2d32baf2d6b",
+                      "originNodeId":  "91d00bab-d622-4fff-bd26-86b7030fb15b",
+                      "destinationNodeId":  "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "0e51b793-3b20-4966-ab34-fa4d1ac0c195",
+                      "originNodeId":  "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+                      "destinationNodeId":  "0ba96493-4316-4d3c-9203-d9928fb8069b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a472fc97-38c6-4bba-b975-9ac2e1230efb",
+                      "originNodeId":  "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+                      "destinationNodeId":  "c886953d-6674-4961-852c-58ba04c48529",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "76b7f3bf-e618-4677-9c87-9b7b328667bf",
+                      "originNodeId":  "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+                      "destinationNodeId":  "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "a341a96a-981e-4b96-886b-d8c6bb4bb7f5",
+                      "originNodeId":  "64da5dec-4aaf-46cf-9795-927273fa1103",
+                      "destinationNodeId":  "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0a7b5470-7ed3-4c55-b6f8-34c2fd9163bf",
+                      "originNodeId":  "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+                      "destinationNodeId":  "c886953d-6674-4961-852c-58ba04c48529",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "fb19e0d1-eedc-43f4-971b-870030604be1",
+                      "originNodeId":  "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+                      "destinationNodeId":  "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7af72531-bee2-413d-87e0-5f0834210765",
+                      "originNodeId":  "0ba96493-4316-4d3c-9203-d9928fb8069b",
+                      "destinationNodeId":  "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ba3fa0e6-d875-4723-923e-72c3e932052a",
+                      "originNodeId":  "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+                      "destinationNodeId":  "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "e84454e6-a324-465b-a3b2-0f7d471ac03b",
+                      "originNodeId":  "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+                      "destinationNodeId":  "73641780-88c6-404f-935a-b8aac9054d90",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "34564694-e857-49bf-ac46-807788695abb",
+                      "originNodeId":  "73641780-88c6-404f-935a-b8aac9054d90",
+                      "destinationNodeId":  "64da5dec-4aaf-46cf-9795-927273fa1103",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3732fa62-bb7b-4e76-8573-e17b4d0e7f94",
+                      "originNodeId":  "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+                      "destinationNodeId":  "73641780-88c6-404f-935a-b8aac9054d90",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "89b4d25e-7f38-4486-9a28-12d7d62ed20d",
+                      "originNodeId":  "c886953d-6674-4961-852c-58ba04c48529",
+                      "destinationNodeId":  "2f78bcb9-8b09-46d8-8e55-dfe02dbded38",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2b1583cc-8042-4429-81e7-288b372db0fa",
+                      "originNodeId":  "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+                      "destinationNodeId":  "84066755-3c66-4710-9cc0-26449ee9e939",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4f767424-bc84-4a8a-a9ca-4600d2fae40b",
+                      "originNodeId":  "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+                      "destinationNodeId":  "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "6fc75251-c1a4-4ee7-96ab-00984d0f1c8f",
+                      "originNodeId":  "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+                      "destinationNodeId":  "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ac319372-7148-4945-9cd9-bbb6370f2141",
+                      "originNodeId":  "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+                      "destinationNodeId":  "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "5656c9fd-9008-4b67-bdf7-689911830800",
+                      "originNodeId":  "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+                      "destinationNodeId":  "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "fe37044c-5f23-4897-8385-0b203d329104",
+                      "originNodeId":  "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec",
+                      "destinationNodeId":  "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "bdce163e-1d83-494c-91e4-414dfd0926a5"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "bdce163e-1d83-494c-91e4-414dfd0926a5",
+                                         "d55d9a8c-616f-4a5a-b69e-01f752a0cfe4",
+                                         "e962ea51-7670-48be-9f8b-045016d57cf1",
+                                         "aefd707c-d13c-4946-ab1c-1bd27836fed3",
+                                         "84066755-3c66-4710-9cc0-26449ee9e939",
+                                         "9164b3aa-fe60-48d9-b2bc-3dd1fe609290",
+                                         "6649a4b7-31dc-46e2-8acd-64dc46a49197",
+                                         "0ba96493-4316-4d3c-9203-d9928fb8069b",
+                                         "2e73af32-e5cc-4059-8a2f-652e47ba14f6",
+                                         "5abe08fe-bbf0-4eaa-ac0b-63597b683233",
+                                         "c886953d-6674-4961-852c-58ba04c48529",
+                                         "2f78bcb9-8b09-46d8-8e55-dfe02dbded38",
+                                         "9b99d112-6bc8-47a6-8967-1bcb34aae853",
+                                         "73641780-88c6-404f-935a-b8aac9054d90",
+                                         "64da5dec-4aaf-46cf-9795-927273fa1103",
+                                         "217ecc56-288b-4eec-b4b8-49ad2873f1b0",
+                                         "72c6f5a4-895f-42de-8f24-43ca0c6d677e",
+                                         "2bfde16d-7bbd-4fba-8d39-27671c1f5146",
+                                         "f76de6e5-6620-4ab2-b4be-b9c93bc8ea1b",
+                                         "f635a638-7352-4463-82da-4bae298a1d30",
+                                         "91d00bab-d622-4fff-bd26-86b7030fb15b",
+                                         "b094f661-b1a0-4e8d-a156-7ee1bd90801b",
+                                         "755354eb-66cf-471c-8e7c-225a8ccf8f2e",
+                                         "4bd7b389-2fd1-4f7b-9c30-fb87acbd1a81",
+                                         "90c5d6a0-fa3d-469a-a7f7-56f5edf0f708",
+                                         "eb54bcc1-727c-403f-a96e-978eafdd37f0",
+                                         "f7cfc0c9-c9b3-4315-a5a0-c6a8d0a3ffec"
+                                     ],
+    "pseudocode":  "FLOW Microflow: FeedbackModule.VAL_Feedback\r\nNODES=29; EDGES=31\r\n1. START\r\n2. ACTION CreateVariableAction: create variable ValidFeedback=true\r\n3. DECISION Subject not empty? expression=trim($Feedback/Subject) != empty and trim($Feedback/Subject) != \u0027\u0027\r\n4. BRANCH when EnumerationCase=true\r\n  5. DECISION Subject \u003c 200 characters expression=length(trim($Feedback/Subject)) \u003c= 200\r\n  6. BRANCH when EnumerationCase=true\r\n    7. NODE ExclusiveMerge: ExclusiveMerge\r\n    8. DECISION Description \u003c 32000 characters? expression=length(trim($Feedback/Description)) \u003c= 32000\r\n    9. BRANCH when EnumerationCase=true\r\n      10. NODE ExclusiveMerge: ExclusiveMerge\r\n      11. DECISION Email not empty? expression=$Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027\r\n      12. BRANCH when EnumerationCase=true\r\n        13. ACTION JavaActionCallAction: call java action FeedbackModule.ValidateEmail -\u003e IsValidEmail\r\n        14. DECISION Email is Valid? expression=$IsValidEmail\r\n        15. BRANCH when EnumerationCase=true\r\n          16. NODE ExclusiveMerge: ExclusiveMerge\r\n          17. END\r\n        18. BRANCH when EnumerationCase=false\r\n          19. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n          20. NODE ExclusiveMerge: ExclusiveMerge\r\n          21. ACTION ChangeVariableAction: change variable ValidFeedback=false\r\n          22. NODE ExclusiveMerge: ExclusiveMerge\r\n          23. REF ExclusiveMerge\r\n      24. BRANCH when EnumerationCase=false\r\n        25. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n        26. NODE ExclusiveMerge: ExclusiveMerge\r\n        27. REF ExclusiveMerge\r\n    28. BRANCH when EnumerationCase=false\r\n      29. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n      30. ACTION ChangeVariableAction: change variable ValidFeedback=false\r\n      31. NODE ExclusiveMerge: ExclusiveMerge\r\n      32. REF ExclusiveMerge\r\n  33. BRANCH when EnumerationCase=false\r\n    34. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n    35. NODE ExclusiveMerge: ExclusiveMerge\r\n    36. ACTION ChangeVariableAction: change variable ValidFeedback=false\r\n    37. NODE ExclusiveMerge: ExclusiveMerge\r\n    38. REF ExclusiveMerge\r\n39. BRANCH when EnumerationCase=false\r\n  40. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n  41. NODE ExclusiveMerge: ExclusiveMerge\r\n  42. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "FeedbackModule",
+                          "callerFlow":  "FeedbackModule.ACT_SubmitFeedback",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "b3287aa2-db3b-4901-9689-f28765f87a1a",
+                          "targetModule":  "FeedbackModule",
+                          "targetFlow":  "FeedbackModule.VAL_Feedback",
+                          "isInternal":  true
+                      }
+                  ]
+}

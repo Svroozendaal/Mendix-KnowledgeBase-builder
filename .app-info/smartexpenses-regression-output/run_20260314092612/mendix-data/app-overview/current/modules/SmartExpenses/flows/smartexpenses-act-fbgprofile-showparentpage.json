@@ -1,0 +1,124 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_FBGProfile_showParentPage",
+                  "stableId":  "973df348-d6eb-460e-a73d-a8622deede0b",
+                  "slug":  "smartexpenses-act-fbgprofile-showparentpage",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-fbgprofile-showparentpage.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-fbgprofile-showparentpage.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-fbgprofile-showparentpage.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_FBGProfile_showParentPage",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "973df348-d6eb-460e-a73d-a8622deede0b",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_FBGProfile_showParentPage",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "c6094a9f-4c93-48cf-bc47-f514936c012b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve FBGProfile from SmartExpenses.FBGProfile",
+                      "detail":  "retrieve FBGProfile from SmartExpenses.FBGProfile",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ba2078c-a080-48b4-88d7-7c4571a68b5a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page SmartExpenses.Home_Parent",
+                      "detail":  "show page SmartExpenses.Home_Parent",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d5ee1558-3ec5-4f00-ad58-ea30358d3948",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "adb9e250-cb1f-454a-a1b3-523fa1d8eda6",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "04e71380-74fc-4c2b-8679-61d1069968e5",
+                      "originNodeId":  "adb9e250-cb1f-454a-a1b3-523fa1d8eda6",
+                      "destinationNodeId":  "c6094a9f-4c93-48cf-bc47-f514936c012b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c990dcea-7a72-4491-a57c-0d304868f965",
+                      "originNodeId":  "c6094a9f-4c93-48cf-bc47-f514936c012b",
+                      "destinationNodeId":  "1ba2078c-a080-48b4-88d7-7c4571a68b5a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "389417a8-f76c-4d44-aadd-9645793418be",
+                      "originNodeId":  "1ba2078c-a080-48b4-88d7-7c4571a68b5a",
+                      "destinationNodeId":  "d5ee1558-3ec5-4f00-ad58-ea30358d3948",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "adb9e250-cb1f-454a-a1b3-523fa1d8eda6"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "adb9e250-cb1f-454a-a1b3-523fa1d8eda6",
+                                         "c6094a9f-4c93-48cf-bc47-f514936c012b",
+                                         "1ba2078c-a080-48b4-88d7-7c4571a68b5a",
+                                         "d5ee1558-3ec5-4f00-ad58-ea30358d3948"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_FBGProfile_showParentPage\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve FBGProfile from SmartExpenses.FBGProfile\r\n3. ACTION ShowPageAction: show page SmartExpenses.Home_Parent\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "ImporterHelper",
+                  "qualifiedName":  "ImporterHelper.ImportTransaction_Edit",
+                  "stableId":  "ImporterHelper.ImportTransaction_Edit",
+                  "slug":  "importerhelper-importtransaction-edit",
+                  "l0Path":  "knowledge-base/modules/ImporterHelper/pages/importerhelper-importtransaction-edit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/ImporterHelper/pages/importerhelper-importtransaction-edit.overview.md",
+                  "l2Path":  "app-overview/current/modules/ImporterHelper/pages/importerhelper-importtransaction-edit.json",
+                  "l2Logical":  "page:ImporterHelper.ImportTransaction_Edit",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/ImporterHelper/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/ImporterHelper/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/ImporterHelper/pages/INDEX.json"
+              },
+    "qualifiedName":  "ImporterHelper.ImportTransaction_Edit",
+    "name":  "ImportTransaction_Edit",
+    "title":  "Pas transactie aan",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "ImporterHelper.ExcelImporter"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "Transaction",
+                           "entityType":  "ImporterHelper.ImportTransaction"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

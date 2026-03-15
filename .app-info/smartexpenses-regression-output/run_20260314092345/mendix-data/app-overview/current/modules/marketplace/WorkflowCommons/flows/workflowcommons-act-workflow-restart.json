@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_Workflow_Restart",
+                  "stableId":  "00ce7769-f3f2-461c-bc94-933e04114226",
+                  "slug":  "workflowcommons-act-workflow-restart",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-restart.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-restart.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflow-restart.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_Workflow_Restart",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "00ce7769-f3f2-461c-bc94-933e04114226",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_Workflow_Restart",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "bec2a89c-5c46-47bd-900d-aeee57ee2350",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page WorkflowCommons.Workflow_ActionConfirmation",
+                      "detail":  "show page WorkflowCommons.Workflow_ActionConfirmation",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "382fc693-6123-4e61-850e-088ebe677372",
+                      "nodeType":  "ActionActivity",
+                      "label":  "WorkflowOperationAction: WorkflowOperationAction (errorHandlingType=Rollback)",
+                      "detail":  "WorkflowOperationAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "18438dad-fee4-4418-b1fb-389cf13cca72",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2585b5a1-1ddc-44ff-bb18-2d9b2f0d8467",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3ea1836e-cc9d-4c65-af54-80ce4679fa09",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "8e96a631-5412-43de-a405-d97efe6fde3b",
+                      "originNodeId":  "3ea1836e-cc9d-4c65-af54-80ce4679fa09",
+                      "destinationNodeId":  "382fc693-6123-4e61-850e-088ebe677372",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e119ef28-3543-4322-976a-6faf8744e9fb",
+                      "originNodeId":  "382fc693-6123-4e61-850e-088ebe677372",
+                      "destinationNodeId":  "bec2a89c-5c46-47bd-900d-aeee57ee2350",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "dae057ad-782a-4b42-97e2-f0bcc9c3440e",
+                      "originNodeId":  "bec2a89c-5c46-47bd-900d-aeee57ee2350",
+                      "destinationNodeId":  "18438dad-fee4-4418-b1fb-389cf13cca72",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "3ea1836e-cc9d-4c65-af54-80ce4679fa09"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "3ea1836e-cc9d-4c65-af54-80ce4679fa09",
+                                         "382fc693-6123-4e61-850e-088ebe677372",
+                                         "bec2a89c-5c46-47bd-900d-aeee57ee2350",
+                                         "18438dad-fee4-4418-b1fb-389cf13cca72"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_Workflow_Restart\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION WorkflowOperationAction: WorkflowOperationAction (errorHandlingType=Rollback)\r\n3. ACTION ShowPageAction: show page WorkflowCommons.Workflow_ActionConfirmation\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

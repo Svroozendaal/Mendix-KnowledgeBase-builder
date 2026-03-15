@@ -1,0 +1,104 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.ConvertUUIDToURL",
+                  "stableId":  "706d7213-b370-4e76-b2e0-78abc88c8324",
+                  "slug":  "feedbackmodule-convertuuidtourl",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-convertuuidtourl.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-convertuuidtourl.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-convertuuidtourl.json",
+                  "l2Logical":  "flow:FeedbackModule.ConvertUUIDToURL",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "706d7213-b370-4e76-b2e0-78abc88c8324",
+    "kind":  "Microflow",
+    "qualifiedName":  "FeedbackModule.ConvertUUIDToURL",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "be3d3b3b-3ac5-43bb-9306-bac36aaa554d",
+                      "nodeType":  "Annotation",
+                      "label":  "The URL for the submitted feedback is generated here.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6943ad45-a8e8-48c2-9930-e7a80e9c099c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a3447b98-d5e2-49fc-bc21-124bb3cc005c",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e226a6eb-738a-43a4-84e9-6d99680d233f",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ea1045b8-c96c-4989-a03b-6bf9b9158e60",
+                      "originNodeId":  "e226a6eb-738a-43a4-84e9-6d99680d233f",
+                      "destinationNodeId":  "6943ad45-a8e8-48c2-9930-e7a80e9c099c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "e226a6eb-738a-43a4-84e9-6d99680d233f"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "e226a6eb-738a-43a4-84e9-6d99680d233f",
+                                         "6943ad45-a8e8-48c2-9930-e7a80e9c099c"
+                                     ],
+    "pseudocode":  "FLOW Microflow: FeedbackModule.ConvertUUIDToURL\r\nNODES=4; EDGES=1\r\n1. START\r\n2. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

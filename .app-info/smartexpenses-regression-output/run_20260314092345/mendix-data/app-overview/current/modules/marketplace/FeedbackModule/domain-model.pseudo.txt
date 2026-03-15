@@ -1,0 +1,46 @@
+# Domain Model: FeedbackModule
+Entities: 2, Associations: 0, Enumerations: 2
+
+## Entities
+- ENTITY FeedbackModule.Feedback (non-persistent)
+  - ATTR ActiveUserRoles: StringAttributeType
+  - ATTR AppID: StringAttributeType
+  - ATTR Browser: StringAttributeType
+  - ATTR Description: StringAttributeType
+  - ATTR EnvironmentURL: StringAttributeType
+  - ATTR ImageB64: StringAttributeType
+  - ATTR PageName: StringAttributeType
+  - ATTR Priority: StringAttributeType
+  - ATTR ScreenHeight: IntegerAttributeType
+  - ATTR ScreenshotName: StringAttributeType
+  - ATTR ScreenWidth: IntegerAttributeType
+  - ATTR Subject: StringAttributeType
+  - ATTR SubmitterDisplayName: StringAttributeType
+  - ATTR SubmitterEmail: StringAttributeType
+  - ATTR SubmitterUUID: StringAttributeType
+  - ATTR _showEmail: BooleanAttributeType
+  - ACCESS_RULE [FeedbackModule.User] Create=yes, Delete=yes, Default=ReadWrite
+    - MEMBER FeedbackModule.Feedback.Subject: ReadWrite
+    - MEMBER FeedbackModule.Feedback.Description: ReadWrite
+    - MEMBER FeedbackModule.Feedback.SubmitterUUID: ReadWrite
+    - MEMBER FeedbackModule.Feedback.SubmitterEmail: ReadWrite
+    - MEMBER FeedbackModule.Feedback.SubmitterDisplayName: ReadWrite
+    - MEMBER FeedbackModule.Feedback.ImageB64: ReadWrite
+    - MEMBER FeedbackModule.Feedback.ActiveUserRoles: ReadWrite
+    - MEMBER FeedbackModule.Feedback.PageName: ReadWrite
+    - MEMBER FeedbackModule.Feedback.Browser: ReadWrite
+    - MEMBER FeedbackModule.Feedback.EnvironmentURL: ReadWrite
+    - MEMBER FeedbackModule.Feedback.ScreenshotName: ReadWrite
+    - MEMBER FeedbackModule.Feedback.AppID: ReadWrite
+    - MEMBER FeedbackModule.Feedback.Priority: ReadWrite
+    - MEMBER FeedbackModule.Feedback.ScreenWidth: ReadWrite
+    - MEMBER FeedbackModule.Feedback.ScreenHeight: ReadWrite
+    - MEMBER FeedbackModule.Feedback._showEmail: ReadWrite
+- ENTITY FeedbackModule.ResponseHelper (non-persistent)
+  - ATTR URL: StringAttributeType
+  - ACCESS_RULE [FeedbackModule.User] Create=no, Delete=no, Default=None
+    - MEMBER FeedbackModule.ResponseHelper.URL: ReadOnly
+
+## Enumerations
+- ENUM FeedbackModule.LogNodes: FeedbackModule
+- ENUM FeedbackModule.TranslationLanguages: Dutch, English, French, German, Hindi, Portuguese, Spanish, Turkish

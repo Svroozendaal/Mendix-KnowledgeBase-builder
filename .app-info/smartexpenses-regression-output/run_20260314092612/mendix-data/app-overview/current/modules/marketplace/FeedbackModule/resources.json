@@ -1,0 +1,15 @@
+{
+  "module": "FeedbackModule",
+  "constants": [
+    {
+      "qualifiedName": "FeedbackModule.LocalStorageKey",
+      "name": "LocalStorageKey",
+      "type": "StringType",
+      "defaultValue": "mxfeedback-form-data",
+      "documentation": null,
+      "exposedToClient": true
+    }
+  ],
+  "scheduledEvents": [],
+  "otherResources": []
+}

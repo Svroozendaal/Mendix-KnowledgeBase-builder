@@ -1,0 +1,2 @@
+# Domain Model: mIcons
+Entities: 0, Associations: 0, Enumerations: 0

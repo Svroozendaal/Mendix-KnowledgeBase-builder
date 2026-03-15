@@ -1,0 +1,214 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+                  "stableId":  "14b13c80-96cf-444e-a28c-4f180b3c3a13",
+                  "slug":  "workflowcommons-sub-usertask-targetuser-remove",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-targetuser-remove.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-targetuser-remove.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-usertask-targetuser-remove.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "14b13c80-96cf-444e-a28c-4f180b3c3a13",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "3020ef8d-237b-4ce4-a6f1-c9521898d1ea",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeListAction: change UserList (type=Add, value=$User)",
+                      "detail":  "change UserList (type=Add, value=$User)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b21f582d-0a33-4ce8-abf3-3fecb943a384",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateListAction: CreateListAction (output=UserList, entity=System.User, errorHandlingType=Rollback)",
+                      "detail":  "CreateListAction (output=UserList, entity=System.User, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "42fec640-a36b-4319-b821-8843ad85ecf3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                      "detail":  "call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                                        "sourceNodeId":  "42fec640-a36b-4319-b821-8843ad85ecf3"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "49030507-9324-4749-9918-0786c18368f0",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "786e751b-13c1-48b8-9f55-4b13dd4e2656",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7f5dbebc-190a-46ef-9227-b6d8fc86bab2",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fe1b2fbd-db94-4d0e-8d86-37b75816bb02",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "6ef923e1-d8c7-495d-9942-ed37461f1142",
+                      "originNodeId":  "fe1b2fbd-db94-4d0e-8d86-37b75816bb02",
+                      "destinationNodeId":  "b21f582d-0a33-4ce8-abf3-3fecb943a384",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1fba4100-40a7-413a-8329-afb05262ac6f",
+                      "originNodeId":  "b21f582d-0a33-4ce8-abf3-3fecb943a384",
+                      "destinationNodeId":  "3020ef8d-237b-4ce4-a6f1-c9521898d1ea",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fcb2ee30-6c24-4f6f-a8ba-c54b65c84ff7",
+                      "originNodeId":  "3020ef8d-237b-4ce4-a6f1-c9521898d1ea",
+                      "destinationNodeId":  "42fec640-a36b-4319-b821-8843ad85ecf3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "84ee5fd2-535a-47ce-a0b0-89c3e0e8bda3",
+                      "originNodeId":  "42fec640-a36b-4319-b821-8843ad85ecf3",
+                      "destinationNodeId":  "49030507-9324-4749-9918-0786c18368f0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                      "sourceNodeId":  "42fec640-a36b-4319-b821-8843ad85ecf3"
+                  }
+              ],
+    "startNodeIds":  [
+                         "fe1b2fbd-db94-4d0e-8d86-37b75816bb02"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "fe1b2fbd-db94-4d0e-8d86-37b75816bb02",
+                                         "b21f582d-0a33-4ce8-abf3-3fecb943a384",
+                                         "3020ef8d-237b-4ce4-a6f1-c9521898d1ea",
+                                         "42fec640-a36b-4319-b821-8843ad85ecf3",
+                                         "49030507-9324-4749-9918-0786c18368f0"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_UserTask_TargetUser_Remove\r\nNODES=7; EDGES=4\r\n1. START\r\n2. ACTION CreateListAction: CreateListAction (output=UserList, entity=System.User, errorHandlingType=Rollback)\r\n3. ACTION ChangeListAction: change UserList (type=Add, value=$User)\r\n4. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_TargetUsers_Remove\r\n5. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskAssignmentHelper_Reassign",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "6d1163f5-3d81-4b99-a07f-6ae118e04ce7",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskAssignmentHelper_Retarget",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "7537291a-ecfe-4e81-b8d7-872d2018980f",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskAssignmentHelper_Unassign",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "81cc9ced-8b05-48dc-8a23-79c2be000067",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "42fec640-a36b-4319-b821-8843ad85ecf3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                          "isInternal":  true
+                      }
+                  ]
+}

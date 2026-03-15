@@ -1,0 +1,19 @@
+{
+  "module": "WebActions",
+  "domainModel": {
+    "entities": [],
+    "associations": [],
+    "enumerations": [
+      {
+        "name": "WebActions.PictureQuality",
+        "values": [
+          "custom",
+          "high",
+          "low",
+          "medium",
+          "original"
+        ]
+      }
+    ]
+  }
+}

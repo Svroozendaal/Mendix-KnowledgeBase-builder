@@ -1,0 +1,156 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowView_WithdrawWorkflow",
+                  "stableId":  "80eb94c9-3704-4c93-bbe7-4bd6e0fca3c5",
+                  "slug":  "workflowcommons-act-workflowview-withdrawworkflow",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowview-withdrawworkflow.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowview-withdrawworkflow.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowview-withdrawworkflow.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowView_WithdrawWorkflow",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "80eb94c9-3704-4c93-bbe7-4bd6e0fca3c5",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowView_WithdrawWorkflow",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "eeb37718-bb4b-4747-82bb-f04ecc03f62c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.WorkflowComment as NewWorkflowComment (WorkflowComment_Workflow=$Workflow, WorkflowComment_WorkflowView=$WorkflowView)",
+                      "detail":  "create WorkflowCommons.WorkflowComment as NewWorkflowComment (WorkflowComment_Workflow=$Workflow, WorkflowComment_WorkflowView=$WorkflowView)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f563fb41-7aa5-4997-9343-7f8ee5fc7cee",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow over association WorkflowView_Workflow from WorkflowView",
+                      "detail":  "retrieve Workflow over association WorkflowView_Workflow from WorkflowView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2efb8b93-a0d2-4bc8-a493-be0e6d93a07a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page WorkflowCommons.Workflow_WithdrawConfirmation",
+                      "detail":  "show page WorkflowCommons.Workflow_WithdrawConfirmation",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "426bd752-f52d-4200-8eb7-b80f48ab7723",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "55ef5ae3-88e1-44b7-a275-e28cf9c8c813",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a08290b3-eb9f-4d79-bd32-db01fb0a4a3a",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "98ed8ab1-4e3c-4e40-ade6-ed604f7f00fe",
+                      "originNodeId":  "a08290b3-eb9f-4d79-bd32-db01fb0a4a3a",
+                      "destinationNodeId":  "f563fb41-7aa5-4997-9343-7f8ee5fc7cee",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "826b08b0-95bf-490a-848c-2002340ab6f6",
+                      "originNodeId":  "eeb37718-bb4b-4747-82bb-f04ecc03f62c",
+                      "destinationNodeId":  "2efb8b93-a0d2-4bc8-a493-be0e6d93a07a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3ea4dcf7-166b-44e8-9d2b-6d42d5ed7ff7",
+                      "originNodeId":  "2efb8b93-a0d2-4bc8-a493-be0e6d93a07a",
+                      "destinationNodeId":  "426bd752-f52d-4200-8eb7-b80f48ab7723",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "19ab4be8-598c-42a7-8a95-2450ebe55a31",
+                      "originNodeId":  "f563fb41-7aa5-4997-9343-7f8ee5fc7cee",
+                      "destinationNodeId":  "eeb37718-bb4b-4747-82bb-f04ecc03f62c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "a08290b3-eb9f-4d79-bd32-db01fb0a4a3a"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "a08290b3-eb9f-4d79-bd32-db01fb0a4a3a",
+                                         "f563fb41-7aa5-4997-9343-7f8ee5fc7cee",
+                                         "eeb37718-bb4b-4747-82bb-f04ecc03f62c",
+                                         "2efb8b93-a0d2-4bc8-a493-be0e6d93a07a",
+                                         "426bd752-f52d-4200-8eb7-b80f48ab7723"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowView_WithdrawWorkflow\r\nNODES=6; EDGES=4\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Workflow over association WorkflowView_Workflow from WorkflowView\r\n3. ACTION CreateObjectAction: create WorkflowCommons.WorkflowComment as NewWorkflowComment (WorkflowComment_Workflow=$Workflow, WorkflowComment_WorkflowView=$WorkflowView)\r\n4. ACTION ShowPageAction: show page WorkflowCommons.Workflow_WithdrawConfirmation\r\n5. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

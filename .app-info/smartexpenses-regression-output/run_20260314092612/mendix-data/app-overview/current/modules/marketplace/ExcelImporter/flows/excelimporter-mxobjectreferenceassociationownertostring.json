@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.MxObjectReferenceAssociationOwnerToString",
+                  "stableId":  "4475025f-98e2-475d-98cd-0c24d7e7c2e8",
+                  "slug":  "excelimporter-mxobjectreferenceassociationownertostring",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-mxobjectreferenceassociationownertostring.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-mxobjectreferenceassociationownertostring.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-mxobjectreferenceassociationownertostring.json",
+                  "l2Logical":  "flow:ExcelImporter.MxObjectReferenceAssociationOwnerToString",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "4475025f-98e2-475d-98cd-0c24d7e7c2e8",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.MxObjectReferenceAssociationOwnerToString",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "d8a7fbab-bc24-420e-b9d4-6f98caa73cdd",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable AssociationOwnerString=getKey($AssociationOwnerEnum)",
+                      "detail":  "create variable AssociationOwnerString=getKey($AssociationOwnerEnum)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fc614c93-c16f-4bda-8c11-b1a2346bf6af",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse Enum AssociateionOwner to a String",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7c57fd0b-292f-4d96-be9a-831ee3da6fea",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2b375743-c18c-421a-b1e6-59abf30783fc",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ab2a32ea-f1f2-4c4e-bc64-1347655b353e",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "9ed0d848-8cff-4dd1-8122-054314094b44",
+                      "originNodeId":  "ab2a32ea-f1f2-4c4e-bc64-1347655b353e",
+                      "destinationNodeId":  "d8a7fbab-bc24-420e-b9d4-6f98caa73cdd",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4ea37c6c-8810-4f1b-ac69-b050277aba9d",
+                      "originNodeId":  "d8a7fbab-bc24-420e-b9d4-6f98caa73cdd",
+                      "destinationNodeId":  "7c57fd0b-292f-4d96-be9a-831ee3da6fea",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "ab2a32ea-f1f2-4c4e-bc64-1347655b353e"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "ab2a32ea-f1f2-4c4e-bc64-1347655b353e",
+                                         "d8a7fbab-bc24-420e-b9d4-6f98caa73cdd",
+                                         "7c57fd0b-292f-4d96-be9a-831ee3da6fea"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.MxObjectReferenceAssociationOwnerToString\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable AssociationOwnerString=getKey($AssociationOwnerEnum)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.OCH_BulkEditHelper_setBalance",
+                  "stableId":  "10434bf5-d62f-420a-a396-ea70d2631294",
+                  "slug":  "smartexpenses-och-bulkedithelper-setbalance",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbalance.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbalance.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbalance.json",
+                  "l2Logical":  "flow:SmartExpenses.OCH_BulkEditHelper_setBalance",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "10434bf5-d62f-420a-a396-ea70d2631294",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "SmartExpenses.OCH_BulkEditHelper_setBalance",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "4769e6f9-9b2f-42cb-97f2-51dd8c98891d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change BulkEditHelper (BulkEditHelper_Balance=$Balance; refreshInClient=true)",
+                      "detail":  "change BulkEditHelper (BulkEditHelper_Balance=$Balance; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "21a2efdb-70ee-4ebc-a410-c493123f941b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "90baa6da-7818-47dc-896d-d40eed37fa28",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fc749506-8afb-4f77-9b79-f0388bc0f8d1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "83096552-cc9a-41b9-9de4-24ff5b3e3b2d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "0f991a8e-6a9c-4481-aab2-799948051173",
+                      "originNodeId":  "83096552-cc9a-41b9-9de4-24ff5b3e3b2d",
+                      "destinationNodeId":  "4769e6f9-9b2f-42cb-97f2-51dd8c98891d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0cf95eea-1ceb-4396-aab9-fae509323efb",
+                      "originNodeId":  "4769e6f9-9b2f-42cb-97f2-51dd8c98891d",
+                      "destinationNodeId":  "21a2efdb-70ee-4ebc-a410-c493123f941b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "83096552-cc9a-41b9-9de4-24ff5b3e3b2d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "83096552-cc9a-41b9-9de4-24ff5b3e3b2d",
+                                         "4769e6f9-9b2f-42cb-97f2-51dd8c98891d",
+                                         "21a2efdb-70ee-4ebc-a410-c493123f941b"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: SmartExpenses.OCH_BulkEditHelper_setBalance\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION ChangeObjectAction: change BulkEditHelper (BulkEditHelper_Balance=$Balance; refreshInClient=true)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

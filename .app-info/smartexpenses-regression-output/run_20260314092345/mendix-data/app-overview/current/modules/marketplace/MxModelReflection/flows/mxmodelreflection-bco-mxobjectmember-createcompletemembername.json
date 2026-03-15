@@ -1,0 +1,198 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.BCo_MxObjectMember_CreateCompleteMemberName",
+                  "stableId":  "aa91774a-b3d9-4077-bd9f-634e695b0859",
+                  "slug":  "mxmodelreflection-bco-mxobjectmember-createcompletemembername",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bco-mxobjectmember-createcompletemembername.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bco-mxobjectmember-createcompletemembername.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-bco-mxobjectmember-createcompletemembername.json",
+                  "l2Logical":  "flow:MxModelReflection.BCo_MxObjectMember_CreateCompleteMemberName",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "aa91774a-b3d9-4077-bd9f-634e695b0859",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.BCo_MxObjectMember_CreateCompleteMemberName",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "0a008828-5694-49f7-9999-9ea9d727f0c8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change MxObjectMember (CompleteName=$MxObjectType/CompleteName + \u0027 / \u0027 + $MxObjectMember/AttributeName; refreshInClient=false)",
+                      "detail":  "change MxObjectMember (CompleteName=$MxObjectType/CompleteName + \u0027 / \u0027 + $MxObjectMember/AttributeName; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "112b39c4-0d2c-4a8e-a716-2b69080eee42",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change MxObjectMember (CompleteName=\u0027 / \u0027 + $MxObjectMember/AttributeName; refreshInClient=false)",
+                      "detail":  "change MxObjectMember (CompleteName=\u0027 / \u0027 + $MxObjectMember/AttributeName; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "99454515-d73f-4898-a22f-0e735027c234",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectType over association MxObjectMember_MxObjectType from MxObjectMember",
+                      "detail":  "retrieve MxObjectType over association MxObjectMember_MxObjectType from MxObjectMember",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "062ad27a-170a-407e-b432-fc79ed71f308",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e41e1423-fb66-4971-a2f2-6d89295c2f27",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c7a86e99-43a5-43db-936d-8b83f3a53966",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=$MxObjectType != empty",
+                      "detail":  "expression=$MxObjectType != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c64eb1ad-07a1-4ef2-9768-43b07f415efe",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "77bd1480-8885-4ec0-974c-fc82dc90c5a8",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "6191f039-104b-4781-99f6-2ee65b26a95f",
+                      "originNodeId":  "77bd1480-8885-4ec0-974c-fc82dc90c5a8",
+                      "destinationNodeId":  "99454515-d73f-4898-a22f-0e735027c234",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "de0f30c9-27d9-41e0-b366-5ebd71ecb2e4",
+                      "originNodeId":  "99454515-d73f-4898-a22f-0e735027c234",
+                      "destinationNodeId":  "c7a86e99-43a5-43db-936d-8b83f3a53966",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "08201947-71c6-41c8-90e5-f1fdf1f102c8",
+                      "originNodeId":  "c7a86e99-43a5-43db-936d-8b83f3a53966",
+                      "destinationNodeId":  "0a008828-5694-49f7-9999-9ea9d727f0c8",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4487a9c7-0e05-4be6-a5b0-2eb660b7bcc3",
+                      "originNodeId":  "0a008828-5694-49f7-9999-9ea9d727f0c8",
+                      "destinationNodeId":  "062ad27a-170a-407e-b432-fc79ed71f308",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8e7b0b5d-d8f7-4df0-8c28-773f19ecd76a",
+                      "originNodeId":  "c7a86e99-43a5-43db-936d-8b83f3a53966",
+                      "destinationNodeId":  "112b39c4-0d2c-4a8e-a716-2b69080eee42",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "753d7e84-5722-4cac-b334-a45b1b4d58f8",
+                      "originNodeId":  "112b39c4-0d2c-4a8e-a716-2b69080eee42",
+                      "destinationNodeId":  "e41e1423-fb66-4971-a2f2-6d89295c2f27",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "77bd1480-8885-4ec0-974c-fc82dc90c5a8"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "77bd1480-8885-4ec0-974c-fc82dc90c5a8",
+                                         "99454515-d73f-4898-a22f-0e735027c234",
+                                         "c7a86e99-43a5-43db-936d-8b83f3a53966",
+                                         "0a008828-5694-49f7-9999-9ea9d727f0c8",
+                                         "062ad27a-170a-407e-b432-fc79ed71f308",
+                                         "112b39c4-0d2c-4a8e-a716-2b69080eee42",
+                                         "e41e1423-fb66-4971-a2f2-6d89295c2f27"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.BCo_MxObjectMember_CreateCompleteMemberName\r\nNODES=8; EDGES=6\r\n1. START\r\n2. ACTION RetrieveAction: retrieve MxObjectType over association MxObjectMember_MxObjectType from MxObjectMember\r\n3. DECISION expression=$MxObjectType != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION ChangeObjectAction: change MxObjectMember (CompleteName=$MxObjectType/CompleteName + \u0027 / \u0027 + $MxObjectMember/AttributeName; refreshInClient=false)\r\n  6. END\r\n7. BRANCH when EnumerationCase=false\r\n  8. ACTION ChangeObjectAction: change MxObjectMember (CompleteName=\u0027 / \u0027 + $MxObjectMember/AttributeName; refreshInClient=false)\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

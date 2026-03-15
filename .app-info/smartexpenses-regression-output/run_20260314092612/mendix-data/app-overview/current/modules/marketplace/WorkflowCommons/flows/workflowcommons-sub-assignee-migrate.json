@@ -1,0 +1,343 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_Assignee_Migrate",
+                  "stableId":  "ef82c723-bcc7-4988-a41c-e6ea0b510820",
+                  "slug":  "workflowcommons-sub-assignee-migrate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-assignee-migrate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-assignee-migrate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-assignee-migrate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_Assignee_Migrate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "ef82c723-bcc7-4988-a41c-e6ea0b510820",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_Assignee_Migrate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "3ee11609-95e3-47ee-998b-a1ddd150464d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=Count, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d421f3ae-30a8-4888-b94a-bf32d0db15a0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Configuration (VerifiedAssigneeMigration=true, ShowAssigneeMigration=false; refreshInClient=true)",
+                      "detail":  "change Configuration (VerifiedAssigneeMigration=true, ShowAssigneeMigration=false; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d3e37277-0f46-492d-be5c-b78558173416",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change IteratorUserTaskView (UserTaskView_Assignees=$IteratorUserTaskView/WorkflowCommons.UserTaskView_Assignee, UserTaskView_Assignee=empty; refreshInClient=false)",
+                      "detail":  "change IteratorUserTaskView (UserTaskView_Assignees=$IteratorUserTaskView/WorkflowCommons.UserTaskView_Assignee, UserTaskView_Assignee=empty; refreshInClient=false)",
+                      "loopOwnerId":  "df28f435-faa2-41c0-a7c5-5f3be271221c",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7c1c3e70-05ed-4d3f-9799-45cebb6b6a60",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable TotalCount=$TotalCount + $Count",
+                      "detail":  "change variable TotalCount=$TotalCount + $Count",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ab522ab5-159d-4466-9acb-ec3fee3818ed",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CommitAction: commit UserTaskViewList (refreshInClient=false, withEvents=true)",
+                      "detail":  "commit UserTaskViewList (refreshInClient=false, withEvents=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b3ee43cf-d75f-469e-ad25-90b8ec4c0a6c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable TotalCount=0",
+                      "detail":  "create variable TotalCount=0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4a86e6e8-437d-4479-96a1-598ec5a73057",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "16276134-0e30-4f0d-acfe-bff08bf06fc5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTaskViewList from WorkflowCommons.UserTaskView",
+                      "detail":  "retrieve UserTaskViewList from WorkflowCommons.UserTaskView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1a9050dd-3329-4676-8b67-4366c494158d",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c82b5a85-1292-4ed0-befe-98c20362875d",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "43c929a1-30ef-45c1-b28a-35e2bdfdc4aa",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Found? expression=$UserTaskViewList != empty",
+                      "detail":  "Found? expression=$UserTaskViewList != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "df28f435-faa2-41c0-a7c5-5f3be271221c",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate UserTaskViewList as IteratorUserTaskView",
+                      "detail":  "iterate UserTaskViewList as IteratorUserTaskView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f2f9178b-057b-47b1-bca7-5679ee8f2302",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "41dfb048-1fea-4479-907c-7805d0b70e35",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "99382737-82dc-4348-824b-244cff1e46f1",
+                      "originNodeId":  "16276134-0e30-4f0d-acfe-bff08bf06fc5",
+                      "destinationNodeId":  "43c929a1-30ef-45c1-b28a-35e2bdfdc4aa",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bfd407c1-ea8d-4269-8f90-8e1fa5216eaa",
+                      "originNodeId":  "43c929a1-30ef-45c1-b28a-35e2bdfdc4aa",
+                      "destinationNodeId":  "df28f435-faa2-41c0-a7c5-5f3be271221c",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f6fb65ca-c609-4b44-a8ac-bf6640d100a5",
+                      "originNodeId":  "df28f435-faa2-41c0-a7c5-5f3be271221c",
+                      "destinationNodeId":  "3ee11609-95e3-47ee-998b-a1ddd150464d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d9bd69c8-b168-4f89-84b4-d8339752815e",
+                      "originNodeId":  "ab522ab5-159d-4466-9acb-ec3fee3818ed",
+                      "destinationNodeId":  "c82b5a85-1292-4ed0-befe-98c20362875d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "74145e9d-7f13-4fbb-80d4-4aa385f12a28",
+                      "originNodeId":  "c82b5a85-1292-4ed0-befe-98c20362875d",
+                      "destinationNodeId":  "16276134-0e30-4f0d-acfe-bff08bf06fc5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6c96e4a5-7c8c-4b7b-8e99-5fe3592296d4",
+                      "originNodeId":  "43c929a1-30ef-45c1-b28a-35e2bdfdc4aa",
+                      "destinationNodeId":  "d421f3ae-30a8-4888-b94a-bf32d0db15a0",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "c40c6775-92d7-44b5-827b-771408a9f615",
+                      "originNodeId":  "b3ee43cf-d75f-469e-ad25-90b8ec4c0a6c",
+                      "destinationNodeId":  "c82b5a85-1292-4ed0-befe-98c20362875d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "86bbe8d8-8efa-436b-ab7a-1e14e07499cc",
+                      "originNodeId":  "3ee11609-95e3-47ee-998b-a1ddd150464d",
+                      "destinationNodeId":  "7c1c3e70-05ed-4d3f-9799-45cebb6b6a60",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f75982c7-2e32-4a6b-bb8d-5fe9431cb192",
+                      "originNodeId":  "7c1c3e70-05ed-4d3f-9799-45cebb6b6a60",
+                      "destinationNodeId":  "ab522ab5-159d-4466-9acb-ec3fee3818ed",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0b0b1f54-3c68-434b-aacd-fa69ff783d45",
+                      "originNodeId":  "41dfb048-1fea-4479-907c-7805d0b70e35",
+                      "destinationNodeId":  "b3ee43cf-d75f-469e-ad25-90b8ec4c0a6c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "835a6389-a69f-498d-ac60-ec8af2c6e0eb",
+                      "originNodeId":  "4a86e6e8-437d-4479-96a1-598ec5a73057",
+                      "destinationNodeId":  "1a9050dd-3329-4676-8b67-4366c494158d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "35a86a3b-5447-4e5a-aefd-0cac9733d639",
+                      "originNodeId":  "d421f3ae-30a8-4888-b94a-bf32d0db15a0",
+                      "destinationNodeId":  "4a86e6e8-437d-4479-96a1-598ec5a73057",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "41dfb048-1fea-4479-907c-7805d0b70e35"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "41dfb048-1fea-4479-907c-7805d0b70e35",
+                                         "b3ee43cf-d75f-469e-ad25-90b8ec4c0a6c",
+                                         "c82b5a85-1292-4ed0-befe-98c20362875d",
+                                         "16276134-0e30-4f0d-acfe-bff08bf06fc5",
+                                         "43c929a1-30ef-45c1-b28a-35e2bdfdc4aa",
+                                         "df28f435-faa2-41c0-a7c5-5f3be271221c",
+                                         "d3e37277-0f46-492d-be5c-b78558173416",
+                                         "3ee11609-95e3-47ee-998b-a1ddd150464d",
+                                         "7c1c3e70-05ed-4d3f-9799-45cebb6b6a60",
+                                         "ab522ab5-159d-4466-9acb-ec3fee3818ed",
+                                         "d421f3ae-30a8-4888-b94a-bf32d0db15a0",
+                                         "4a86e6e8-437d-4479-96a1-598ec5a73057",
+                                         "1a9050dd-3329-4676-8b67-4366c494158d"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_Assignee_Migrate\r\nNODES=13; EDGES=12\r\n1. START\r\n2. ACTION CreateVariableAction: create variable TotalCount=0\r\n3. NODE ExclusiveMerge: ExclusiveMerge\r\n4. ACTION RetrieveAction: retrieve UserTaskViewList from WorkflowCommons.UserTaskView\r\n5. DECISION Found? expression=$UserTaskViewList != empty\r\n6. BRANCH when EnumerationCase=true\r\n  7. LOOP iterate UserTaskViewList as IteratorUserTaskView\r\n    8. LOOP BODY\r\n      9. ACTION ChangeObjectAction: change IteratorUserTaskView (UserTaskView_Assignees=$IteratorUserTaskView/WorkflowCommons.UserTaskView_Assignee, UserTaskView_Assignee=empty; refreshInClient=false)\r\n  10. ACTION AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)\r\n  11. ACTION ChangeVariableAction: change variable TotalCount=$TotalCount + $Count\r\n  12. ACTION CommitAction: commit UserTaskViewList (refreshInClient=false, withEvents=true)\r\n  13. GOTO ExclusiveMerge // cycle\r\n14. BRANCH when EnumerationCase=false\r\n  15. ACTION ChangeObjectAction: change Configuration (VerifiedAssigneeMigration=true, ShowAssigneeMigration=false; refreshInClient=true)\r\n  16. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  17. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_Assignee_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "c6ae44ec-5f12-4ce0-a383-2f4cef3950b9",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Assignee_Migrate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Assignee_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "63e9922d-8194-428c-8bbc-f17eed8c2e56",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Assignee_Migrate",
+                          "isInternal":  true
+                      }
+                  ]
+}

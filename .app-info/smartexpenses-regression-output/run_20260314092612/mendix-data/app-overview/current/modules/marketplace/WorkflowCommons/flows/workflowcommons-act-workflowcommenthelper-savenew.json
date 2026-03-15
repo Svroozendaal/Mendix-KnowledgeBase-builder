@@ -1,0 +1,268 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowCommentHelper_SaveNew",
+                  "stableId":  "9ef58118-d00f-4358-ab6f-d8fd859126bd",
+                  "slug":  "workflowcommons-act-workflowcommenthelper-savenew",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowcommenthelper-savenew.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowcommenthelper-savenew.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowcommenthelper-savenew.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowCommentHelper_SaveNew",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "9ef58118-d00f-4358-ab6f-d8fd859126bd",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowCommentHelper_SaveNew",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "7b0d6a1b-596f-4c82-8044-52bc4418e8f5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change WorkflowCommentHelper (Content=empty; refreshInClient=false)",
+                      "detail":  "change WorkflowCommentHelper (Content=empty; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2480f892-f523-46db-a305-a87e93eac96e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.WorkflowComment as NewWorkflowComment (Content=$WorkflowCommentHelper/Content, WorkflowComment_WorkflowView=$WorkflowView, WorkflowComment_Workflow=$WorkflowView/WorkflowCommons.WorkflowView_Workflow)",
+                      "detail":  "create WorkflowCommons.WorkflowComment as NewWorkflowComment (Content=$WorkflowCommentHelper/Content, WorkflowComment_WorkflowView=$WorkflowView, WorkflowComment_Workflow=$WorkflowView/WorkflowCommons.WorkflowView_Workflow)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1e8cd520-8c89-4b41-8814-90db3b291281",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate -\u003e Valid",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate -\u003e Valid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                                        "sourceNodeId":  "1e8cd520-8c89-4b41-8814-90db3b291281"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "683a5487-b818-4cff-828e-7c5922a20a6b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "740d7cea-ee79-46dd-b74b-3a3ddce07961",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "790739e5-f024-468d-8845-8b874160b90c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1b6555b8-10f1-41a8-9b59-13bd1fe368a2",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Has content? expression=$WorkflowCommentHelper/Content != empty and trim($WorkflowCommentHelper/Content) != \u0027\u0027",
+                      "detail":  "Has content? expression=$WorkflowCommentHelper/Content != empty and trim($WorkflowCommentHelper/Content) != \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "df4ab71f-e7af-4234-821e-c9b680555d6d",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Valid? expression=$Valid",
+                      "detail":  "Valid? expression=$Valid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "065df623-b223-4e62-becb-52cdf9fbbaac",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ceed25e-95f3-453a-9e48-14b4208ba7c4",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dff1ca0e-033e-4a0d-9687-c0d9669be550",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "80e48742-098d-4ea6-94a2-c77269937062",
+                      "originNodeId":  "2480f892-f523-46db-a305-a87e93eac96e",
+                      "destinationNodeId":  "7b0d6a1b-596f-4c82-8044-52bc4418e8f5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e1aadece-04d3-4fe6-9053-238dc1e7855e",
+                      "originNodeId":  "dff1ca0e-033e-4a0d-9687-c0d9669be550",
+                      "destinationNodeId":  "1b6555b8-10f1-41a8-9b59-13bd1fe368a2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7f554a4c-6481-4d02-bedf-69fb5889d818",
+                      "originNodeId":  "7b0d6a1b-596f-4c82-8044-52bc4418e8f5",
+                      "destinationNodeId":  "790739e5-f024-468d-8845-8b874160b90c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3f0d321f-5402-4d15-bcbb-f757138b1b87",
+                      "originNodeId":  "1b6555b8-10f1-41a8-9b59-13bd1fe368a2",
+                      "destinationNodeId":  "740d7cea-ee79-46dd-b74b-3a3ddce07961",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "433f4451-c0b8-436f-b9eb-4ec05b7eda9a",
+                      "originNodeId":  "df4ab71f-e7af-4234-821e-c9b680555d6d",
+                      "destinationNodeId":  "683a5487-b818-4cff-828e-7c5922a20a6b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "350440db-28a3-4a8a-b975-cabe99e4111f",
+                      "originNodeId":  "1e8cd520-8c89-4b41-8814-90db3b291281",
+                      "destinationNodeId":  "df4ab71f-e7af-4234-821e-c9b680555d6d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c69f4903-7f9f-4570-99f9-374567da5850",
+                      "originNodeId":  "1b6555b8-10f1-41a8-9b59-13bd1fe368a2",
+                      "destinationNodeId":  "1e8cd520-8c89-4b41-8814-90db3b291281",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2a1cb2e6-bf5b-45a7-a8d0-4003702fa286",
+                      "originNodeId":  "df4ab71f-e7af-4234-821e-c9b680555d6d",
+                      "destinationNodeId":  "2480f892-f523-46db-a305-a87e93eac96e",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                      "sourceNodeId":  "1e8cd520-8c89-4b41-8814-90db3b291281"
+                  }
+              ],
+    "startNodeIds":  [
+                         "dff1ca0e-033e-4a0d-9687-c0d9669be550"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "dff1ca0e-033e-4a0d-9687-c0d9669be550",
+                                         "1b6555b8-10f1-41a8-9b59-13bd1fe368a2",
+                                         "1e8cd520-8c89-4b41-8814-90db3b291281",
+                                         "df4ab71f-e7af-4234-821e-c9b680555d6d",
+                                         "2480f892-f523-46db-a305-a87e93eac96e",
+                                         "7b0d6a1b-596f-4c82-8044-52bc4418e8f5",
+                                         "790739e5-f024-468d-8845-8b874160b90c",
+                                         "683a5487-b818-4cff-828e-7c5922a20a6b",
+                                         "740d7cea-ee79-46dd-b74b-3a3ddce07961"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_WorkflowCommentHelper_SaveNew\r\nNODES=11; EDGES=8\r\n1. START\r\n2. DECISION Has content? expression=$WorkflowCommentHelper/Content != empty and trim($WorkflowCommentHelper/Content) != \u0027\u0027\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate -\u003e Valid\r\n  5. DECISION Valid? expression=$Valid\r\n  6. BRANCH when EnumerationCase=true\r\n    7. ACTION CreateObjectAction: create WorkflowCommons.WorkflowComment as NewWorkflowComment (Content=$WorkflowCommentHelper/Content, WorkflowComment_WorkflowView=$WorkflowView, WorkflowComment_Workflow=$WorkflowView/WorkflowCommons.WorkflowView_Workflow)\r\n    8. ACTION ChangeObjectAction: change WorkflowCommentHelper (Content=empty; refreshInClient=false)\r\n    9. END\r\n  10. BRANCH when EnumerationCase=false\r\n    11. END\r\n12. BRANCH when EnumerationCase=false\r\n  13. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowCommentHelper_SaveNew",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1e8cd520-8c89-4b41-8814-90db3b291281",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                          "isInternal":  true
+                      }
+                  ]
+}

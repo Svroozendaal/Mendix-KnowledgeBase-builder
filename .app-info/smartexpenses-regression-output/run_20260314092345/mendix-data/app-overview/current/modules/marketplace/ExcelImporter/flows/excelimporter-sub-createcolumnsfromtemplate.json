@@ -1,0 +1,417 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.Sub_CreateColumnsFromTemplate",
+                  "stableId":  "a6ae33cc-553c-4c24-9775-3764c39b4b7e",
+                  "slug":  "excelimporter-sub-createcolumnsfromtemplate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-sub-createcolumnsfromtemplate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-sub-createcolumnsfromtemplate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-sub-createcolumnsfromtemplate.json",
+                  "l2Logical":  "flow:ExcelImporter.Sub_CreateColumnsFromTemplate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "a6ae33cc-553c-4c24-9775-3764c39b4b7e",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.Sub_CreateColumnsFromTemplate",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "7f121544-68e8-41ca-8886-a07a9f027aaa",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=NextColNumber, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=NextColNumber, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6efea842-cebd-4055-916b-82655bfb36c6",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeListAction: change ColumnList (type=Add, value=$NewColumn)",
+                      "detail":  "change ColumnList (type=Add, value=$NewColumn)",
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "282e5e94-7b0d-4aa2-a64d-3621e101a356",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Column (MappingType=ExcelImporter.MappingType.Attribute, FindAttribute=$Member/AttributeName, Column_MxObjectMember=$Member, Column_MxObjectType=$MxObjectType; refreshInClient=false)",
+                      "detail":  "change Column (MappingType=ExcelImporter.MappingType.Attribute, FindAttribute=$Member/AttributeName, Column_MxObjectMember=$Member, Column_MxObjectType=$MxObjectType; refreshInClient=false)",
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e8a5f547-c177-4287-85d9-cd68cae0ddd8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable NextColNumber=if $NextColNumber = empty then 0 else $NextColNumber + 1",
+                      "detail":  "change variable NextColNumber=if $NextColNumber = empty then 0 else $NextColNumber + 1",
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b6072fbd-904c-49e6-9745-ef27afcbb280",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CommitAction: commit ColumnList (refreshInClient=true, withEvents=true)",
+                      "detail":  "commit ColumnList (refreshInClient=true, withEvents=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4330f8a2-a5c3-418a-96cd-cd383e797d81",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.Column as NewColumn (ColNumber=$NextColNumber, Text=$ColumnTitle, Column_Template=$Template)",
+                      "detail":  "create ExcelImporter.Column as NewColumn (ColNumber=$NextColNumber, Text=$ColumnTitle, Column_Template=$Template)",
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7f00ae81-d142-4bee-96f9-5ac73f14708c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable AutoNumberToBeIgnored=MxModelReflection.PrimitiveTypes.AutoNumber",
+                      "detail":  "create variable AutoNumberToBeIgnored=MxModelReflection.PrimitiveTypes.AutoNumber",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "756751ed-3a03-4bb4-9e98-417b9130e872",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable ColumnTitle=$Member/AttributeName",
+                      "detail":  "create variable ColumnTitle=$Member/AttributeName",
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ac43c6d-d9fc-4763-8baa-14dd92a65149",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ListOperationAction: ListOperationAction (output=Column, errorHandlingType=Rollback)",
+                      "detail":  "ListOperationAction (output=Column, errorHandlingType=Rollback)",
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b48700e8-0391-4a1d-bea8-87db0e17754d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve ColumnList over association Column_Template from Template",
+                      "detail":  "retrieve ColumnList over association Column_Template from Template",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a5e8fbf3-18b2-4c6e-af84-cd0c2e35abeb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MemberList from MxModelReflection.MxObjectMember",
+                      "detail":  "retrieve MemberList from MxModelReflection.MxObjectMember",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e39904a8-a535-452f-a21b-dbeca2b43670",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectType over association Template_MxObjectType from Template",
+                      "detail":  "retrieve MxObjectType over association Template_MxObjectType from Template",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "06e66d1f-28a0-4ca9-9d44-a4b239f13e04",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cc9badf5-e4c6-42ed-81ce-57372c1dfb2a",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bd872bc9-9881-451a-ba8c-d6edac23c65f",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "found? expression=$Column != empty",
+                      "detail":  "found? expression=$Column != empty",
+                      "loopOwnerId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate MemberList as Member",
+                      "detail":  "iterate MemberList as Member",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9623fc7b-a9b2-42a7-a254-ebe9f23d567b",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ecbf34d7-5968-4101-a103-3a210f8b57b6",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "666c73bd-a410-4dcf-a539-ed95f8af21ef",
+                      "originNodeId":  "e39904a8-a535-452f-a21b-dbeca2b43670",
+                      "destinationNodeId":  "7f00ae81-d142-4bee-96f9-5ac73f14708c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3f63d274-c986-4b10-b79c-d7248b24f4ee",
+                      "originNodeId":  "a5e8fbf3-18b2-4c6e-af84-cd0c2e35abeb",
+                      "destinationNodeId":  "b48700e8-0391-4a1d-bea8-87db0e17754d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "250c2743-cb2b-497a-b4e9-8e619b0d4479",
+                      "originNodeId":  "1ac43c6d-d9fc-4763-8baa-14dd92a65149",
+                      "destinationNodeId":  "bd872bc9-9881-451a-ba8c-d6edac23c65f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2deb908f-4d5c-44bf-a658-cd83751d0b61",
+                      "originNodeId":  "b48700e8-0391-4a1d-bea8-87db0e17754d",
+                      "destinationNodeId":  "7f121544-68e8-41ca-8886-a07a9f027aaa",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ad5a4f16-0643-467c-8e0f-53cac3df261c",
+                      "originNodeId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "destinationNodeId":  "b6072fbd-904c-49e6-9745-ef27afcbb280",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9333bf6f-1aca-4f52-95c8-fa9a46212c5a",
+                      "originNodeId":  "bd872bc9-9881-451a-ba8c-d6edac23c65f",
+                      "destinationNodeId":  "282e5e94-7b0d-4aa2-a64d-3621e101a356",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e0f757ad-d778-4098-a47b-3639fc11a423",
+                      "originNodeId":  "756751ed-3a03-4bb4-9e98-417b9130e872",
+                      "destinationNodeId":  "cc9badf5-e4c6-42ed-81ce-57372c1dfb2a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "9ceb845a-0ed5-4ec7-acc2-8d9ca2570a1f",
+                      "originNodeId":  "cc9badf5-e4c6-42ed-81ce-57372c1dfb2a",
+                      "destinationNodeId":  "1ac43c6d-d9fc-4763-8baa-14dd92a65149",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1bac114d-4ad0-42f4-8dc3-6d49b9e84547",
+                      "originNodeId":  "bd872bc9-9881-451a-ba8c-d6edac23c65f",
+                      "destinationNodeId":  "e8a5f547-c177-4287-85d9-cd68cae0ddd8",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "bc1dd44f-87eb-4054-8212-272da34ed9f3",
+                      "originNodeId":  "7f121544-68e8-41ca-8886-a07a9f027aaa",
+                      "destinationNodeId":  "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "83f2bbfb-390c-4b88-bea9-86b59a2081aa",
+                      "originNodeId":  "e8a5f547-c177-4287-85d9-cd68cae0ddd8",
+                      "destinationNodeId":  "4330f8a2-a5c3-418a-96cd-cd383e797d81",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "096b81a9-fb0e-474e-ace9-d75c4ee0342f",
+                      "originNodeId":  "4330f8a2-a5c3-418a-96cd-cd383e797d81",
+                      "destinationNodeId":  "6efea842-cebd-4055-916b-82655bfb36c6",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  3,
+                      "destinationConnectionIndex":  1
+                  },
+                  {
+                      "edgeId":  "54ab11f8-b63f-4ad7-909d-d47d311ba953",
+                      "originNodeId":  "6efea842-cebd-4055-916b-82655bfb36c6",
+                      "destinationNodeId":  "cc9badf5-e4c6-42ed-81ce-57372c1dfb2a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "3af29bdc-04b4-4e7d-b8f2-5699e8bcdc40",
+                      "originNodeId":  "7f00ae81-d142-4bee-96f9-5ac73f14708c",
+                      "destinationNodeId":  "a5e8fbf3-18b2-4c6e-af84-cd0c2e35abeb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "39075e5a-c8c4-496b-843b-68bddc1a44a4",
+                      "originNodeId":  "ecbf34d7-5968-4101-a103-3a210f8b57b6",
+                      "destinationNodeId":  "e39904a8-a535-452f-a21b-dbeca2b43670",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cac92184-f430-4b2e-b327-f27be7de41ec",
+                      "originNodeId":  "b6072fbd-904c-49e6-9745-ef27afcbb280",
+                      "destinationNodeId":  "06e66d1f-28a0-4ca9-9d44-a4b239f13e04",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "ecbf34d7-5968-4101-a103-3a210f8b57b6"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "ecbf34d7-5968-4101-a103-3a210f8b57b6",
+                                         "e39904a8-a535-452f-a21b-dbeca2b43670",
+                                         "7f00ae81-d142-4bee-96f9-5ac73f14708c",
+                                         "a5e8fbf3-18b2-4c6e-af84-cd0c2e35abeb",
+                                         "b48700e8-0391-4a1d-bea8-87db0e17754d",
+                                         "7f121544-68e8-41ca-8886-a07a9f027aaa",
+                                         "117cba9d-72d3-4a2a-8c37-0636fb1a7d99",
+                                         "1ac43c6d-d9fc-4763-8baa-14dd92a65149",
+                                         "282e5e94-7b0d-4aa2-a64d-3621e101a356",
+                                         "4330f8a2-a5c3-418a-96cd-cd383e797d81",
+                                         "6efea842-cebd-4055-916b-82655bfb36c6",
+                                         "756751ed-3a03-4bb4-9e98-417b9130e872",
+                                         "bd872bc9-9881-451a-ba8c-d6edac23c65f",
+                                         "cc9badf5-e4c6-42ed-81ce-57372c1dfb2a",
+                                         "e8a5f547-c177-4287-85d9-cd68cae0ddd8",
+                                         "b6072fbd-904c-49e6-9745-ef27afcbb280",
+                                         "06e66d1f-28a0-4ca9-9d44-a4b239f13e04"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.Sub_CreateColumnsFromTemplate\r\nNODES=10; EDGES=8\r\n1. START\r\n2. ACTION RetrieveAction: retrieve MxObjectType over association Template_MxObjectType from Template\r\n3. ACTION CreateVariableAction: create variable AutoNumberToBeIgnored=MxModelReflection.PrimitiveTypes.AutoNumber\r\n4. ACTION RetrieveAction: retrieve MemberList from MxModelReflection.MxObjectMember\r\n5. ACTION RetrieveAction: retrieve ColumnList over association Column_Template from Template\r\n6. ACTION AggregateListAction: AggregateListAction (output=NextColNumber, errorHandlingType=Rollback)\r\n7. LOOP iterate MemberList as Member\r\n  8. LOOP BODY\r\n    9. ACTION ListOperationAction: ListOperationAction (output=Column, errorHandlingType=Rollback)\r\n    10. ACTION ChangeObjectAction: change Column (MappingType=ExcelImporter.MappingType.Attribute, FindAttribute=$Member/AttributeName, Column_MxObjectMember=$Member, Column_MxObjectType=$MxObjectType; refreshInClient=false)\r\n    11. ACTION CreateObjectAction: create ExcelImporter.Column as NewColumn (ColNumber=$NextColNumber, Text=$ColumnTitle, Column_Template=$Template)\r\n    12. ACTION ChangeListAction: change ColumnList (type=Add, value=$NewColumn)\r\n    13. ACTION CreateVariableAction: create variable ColumnTitle=$Member/AttributeName\r\n    14. DECISION found? expression=$Column != empty\r\n    15. NODE ExclusiveMerge: ExclusiveMerge\r\n    16. ACTION ChangeVariableAction: change variable NextColNumber=if $NextColNumber = empty then 0 else $NextColNumber + 1\r\n17. ACTION CommitAction: commit ColumnList (refreshInClient=true, withEvents=true)\r\n18. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.IVK_SaveNewTemplate_CreateColumns",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3583ec4b-6fcc-4907-b08c-52b09cbb9916",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.Sub_CreateColumnsFromTemplate",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,298 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                  "stableId":  "cb31dba3-d4c4-45a2-9fb3-0ba2028eb5ec",
+                  "slug":  "workflowcommons-sub-workflowview-commentattachment-validate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowview-commentattachment-validate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowview-commentattachment-validate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflowview-commentattachment-validate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "cb31dba3-d4c4-45a2-9fb3-0ba2028eb5ec",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "0bc1c17f-e4f1-4287-9b43-a6340bd5958f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowView_CurrentUserIsTargeted -\u003e CurrentUserIsTargeted",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowView_CurrentUserIsTargeted -\u003e CurrentUserIsTargeted",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowView_CurrentUserIsTargeted",
+                                        "sourceNodeId":  "0bc1c17f-e4f1-4287-9b43-a6340bd5958f"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "820f9681-0625-405a-b3d3-b0ff24d94196",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=The current Workflow state is \u0027{1}\u0027. You can only {2} comments and/or attachments if the W..., type=Information, blocking=true)",
+                      "detail":  "show message (text=The current Workflow state is \u0027{1}\u0027. You can only {2} comments and/or attachments if the W..., type=Information, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e259fa1e-5709-44a9-a8d5-b409eb54ec60",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=You can only {1} comments and/or attachments for Workflows in which you are in the target ..., type=Information, blocking=true)",
+                      "detail":  "show message (text=You can only {1} comments and/or attachments for Workflows in which you are in the target ..., type=Information, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "02f431a1-5a3f-4b19-8fae-f10408e63ae8",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "44c66f6c-de50-4c8e-a8a0-d350e18f9008",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b9512b5d-d25c-4b7d-aca8-c93848955032",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9f9257f6-c1a5-4806-8b90-137d95451301",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "In progress? expression=$WorkflowView/State = System.WorkflowState.InProgress",
+                      "detail":  "In progress? expression=$WorkflowView/State = System.WorkflowState.InProgress",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "23a4e87c-5409-4761-ac85-6a12518ae882",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Target user? expression=$CurrentUserIsTargeted",
+                      "detail":  "Target user? expression=$CurrentUserIsTargeted",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4fc40797-c49a-4750-ab57-5a13b8432f20",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f8ea05be-ce6d-48da-b444-1af05e9463cd",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "61a53fa6-2121-42e1-a264-4215aed096fd",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "771c47d8-6ab1-47cb-a256-e6d3a3822afe",
+                      "originNodeId":  "0bc1c17f-e4f1-4287-9b43-a6340bd5958f",
+                      "destinationNodeId":  "23a4e87c-5409-4761-ac85-6a12518ae882",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "58861acf-72bb-4505-a0d7-2836e2956bb6",
+                      "originNodeId":  "23a4e87c-5409-4761-ac85-6a12518ae882",
+                      "destinationNodeId":  "e259fa1e-5709-44a9-a8d5-b409eb54ec60",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "34529b0c-707c-4f33-9cae-9504acb63e51",
+                      "originNodeId":  "e259fa1e-5709-44a9-a8d5-b409eb54ec60",
+                      "destinationNodeId":  "44c66f6c-de50-4c8e-a8a0-d350e18f9008",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f2280389-189f-486c-8243-754d82a0702e",
+                      "originNodeId":  "23a4e87c-5409-4761-ac85-6a12518ae882",
+                      "destinationNodeId":  "9f9257f6-c1a5-4806-8b90-137d95451301",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9f80ad4d-ef10-4dc8-b40c-842f7e1b6be1",
+                      "originNodeId":  "61a53fa6-2121-42e1-a264-4215aed096fd",
+                      "destinationNodeId":  "0bc1c17f-e4f1-4287-9b43-a6340bd5958f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a745df0f-ead5-46ee-859c-c4e1cf3b579f",
+                      "originNodeId":  "9f9257f6-c1a5-4806-8b90-137d95451301",
+                      "destinationNodeId":  "820f9681-0625-405a-b3d3-b0ff24d94196",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "37b373e0-ad8b-4bea-84f2-32c53bb7e5fd",
+                      "originNodeId":  "820f9681-0625-405a-b3d3-b0ff24d94196",
+                      "destinationNodeId":  "b9512b5d-d25c-4b7d-aca8-c93848955032",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "ada790b8-ebcf-4e77-ad9f-5e25018ed8ff",
+                      "originNodeId":  "9f9257f6-c1a5-4806-8b90-137d95451301",
+                      "destinationNodeId":  "02f431a1-5a3f-4b19-8fae-f10408e63ae8",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowView_CurrentUserIsTargeted",
+                      "sourceNodeId":  "0bc1c17f-e4f1-4287-9b43-a6340bd5958f"
+                  }
+              ],
+    "startNodeIds":  [
+                         "61a53fa6-2121-42e1-a264-4215aed096fd"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "61a53fa6-2121-42e1-a264-4215aed096fd",
+                                         "0bc1c17f-e4f1-4287-9b43-a6340bd5958f",
+                                         "23a4e87c-5409-4761-ac85-6a12518ae882",
+                                         "9f9257f6-c1a5-4806-8b90-137d95451301",
+                                         "02f431a1-5a3f-4b19-8fae-f10408e63ae8",
+                                         "820f9681-0625-405a-b3d3-b0ff24d94196",
+                                         "b9512b5d-d25c-4b7d-aca8-c93848955032",
+                                         "e259fa1e-5709-44a9-a8d5-b409eb54ec60",
+                                         "44c66f6c-de50-4c8e-a8a0-d350e18f9008"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate\r\nNODES=11; EDGES=8\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowView_CurrentUserIsTargeted -\u003e CurrentUserIsTargeted\r\n3. DECISION Target user? expression=$CurrentUserIsTargeted\r\n4. BRANCH when EnumerationCase=true\r\n  5. DECISION In progress? expression=$WorkflowView/State = System.WorkflowState.InProgress\r\n  6. BRANCH when EnumerationCase=true\r\n    7. END\r\n  8. BRANCH when EnumerationCase=false\r\n    9. ACTION ShowMessageAction: show message (text=The current Workflow state is \u0027{1}\u0027. You can only {2} comments and/or attachments if the W..., type=Information, blocking=true)\r\n    10. END\r\n11. BRANCH when EnumerationCase=false\r\n  12. ACTION ShowMessageAction: show message (text=You can only {1} comments and/or attachments for Workflows in which you are in the target ..., type=Information, blocking=true)\r\n  13. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_Attachment_Save",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "9dacedda-2127-454f-b892-55cc05640c9c",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowCommentHelper_Edit_Save",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "0607d676-7952-4115-8b66-6cee144c9e2d",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowCommentHelper_SaveNew",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1e8cd520-8c89-4b41-8814-90db3b291281",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowView_CommentAttachment_Validate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "0bc1c17f-e4f1-4287-9b43-a6340bd5958f",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_CurrentUserIsTargeted",
+                          "isInternal":  true
+                      }
+                  ]
+}

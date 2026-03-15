@@ -1,0 +1,8 @@
+# Flows: Toast
+Flows: 1
+
+FLOW Nanoflow: Toast.ACT_ShowToast
+NODES=3; EDGES=2
+1. START
+2. ACTION JavaScriptActionCallAction: call javascript action Toast.showToast -> ReturnValueName
+3. END

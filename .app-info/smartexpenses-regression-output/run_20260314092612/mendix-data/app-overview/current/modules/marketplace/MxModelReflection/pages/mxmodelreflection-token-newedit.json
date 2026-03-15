@@ -1,0 +1,46 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.Token_NewEdit",
+                  "stableId":  "MxModelReflection.Token_NewEdit",
+                  "slug":  "mxmodelreflection-token-newedit",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-token-newedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-token-newedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/pages/mxmodelreflection-token-newedit.json",
+                  "l2Logical":  "page:MxModelReflection.Token_NewEdit",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/pages/INDEX.json"
+              },
+    "qualifiedName":  "MxModelReflection.Token_NewEdit",
+    "name":  "Token_NewEdit",
+    "title":  "Token details",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "MxModelReflection.ModelAdministrator",
+                         "MxModelReflection.TokenUser"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "Token",
+                           "entityType":  "MxModelReflection.Token"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

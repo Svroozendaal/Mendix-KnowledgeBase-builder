@@ -1,0 +1,428 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+                  "stableId":  "d9c5d54c-2337-4cae-99f2-d91badb293f7",
+                  "slug":  "workflowcommons-sub-workflowseries-createorupdate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowseries-createorupdate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowseries-createorupdate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflowseries-createorupdate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "d9c5d54c-2337-4cae-99f2-d91badb293f7",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "76eab299-80d8-40bb-ad4b-681cfae37645",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable BeginOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then addDays($BeginOfStep_InTimeFrame,-1) else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then...",
+                      "detail":  "change variable BeginOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then addDays($BeginOfStep_InTimeFrame,-1) else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ac593f72-6dcd-455b-969f-c520550f583f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable EndOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then addDays($EndOfStep_InTimeFrame,-1) else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then a...",
+                      "detail":  "change variable EndOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then addDays($EndOfStep_InTimeFrame,-1) else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then a...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9ee7235a-f636-4d9a-a861-ee1311dd3cea",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.WorkflowSeries as NewWorkflowSeries (DateDisplay=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then if $BeginOfStep_InTimeFrame = [%BeginOfCurrentDay%] then \u0027Today\u0027 else formatDateTime($Begin..., NumberofWorkflowsCompleted=$Workflow_CountCompletedOnTime + $Workflow_CountCompletedOverDue, AverageWorkflowHandlingTime=$Workflow_AverageHandlingTime, NumberofWorkflowsCompletedOverdue=$Workflow_CountCompletedOverDue, Date=$BeginOfStep_InTimeFrame, WorkflowSeries_DashboardContext=$DashboardContext)",
+                      "detail":  "create WorkflowCommons.WorkflowSeries as NewWorkflowSeries (DateDisplay=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then if $BeginOfStep_InTimeFrame = [%BeginOfCurrentDay%] then \u0027Today\u0027 else formatDateTime($Begin..., NumberofWorkflowsCompleted=$Workflow_CountCompletedOnTime + $Workflow_CountCompletedOverDue, AverageWorkflowHandlingTime=$Workflow_AverageHandlingTime, NumberofWorkflowsCompletedOverdue=$Workflow_CountCompletedOverDue, Date=$BeginOfStep_InTimeFrame, WorkflowSeries_DashboardContext=$DashboardContext)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "302eb8f0-8d30-4c2e-b861-3a33ab731b5d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable BeginOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then [%BeginOfCurrentDay%] else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then [%BeginOfCurre...",
+                      "detail":  "create variable BeginOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then [%BeginOfCurrentDay%] else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then [%BeginOfCurre...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f5dec38d-b49a-4d98-96eb-3537d5181a55",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable EndOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then [%EndOfCurrentDay%] else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then [%EndOfCurrentWe...",
+                      "detail":  "create variable EndOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then [%EndOfCurrentDay%] else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then [%EndOfCurrentWe...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "821e58aa-b1fd-4f30-b37a-1c07009bd1f5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowSeriesList_Delete",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowSeriesList_Delete",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowSeriesList_Delete",
+                                        "sourceNodeId":  "821e58aa-b1fd-4f30-b37a-1c07009bd1f5"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "5e1f1980-f8b5-48fd-96f2-33a1e8211eb5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_AverageHandlingTime -\u003e Workflow_AverageHandlingTime",
+                      "detail":  "call microflow WorkflowCommons.SUB_Workflow_AverageHandlingTime -\u003e Workflow_AverageHandlingTime",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Workflow_AverageHandlingTime",
+                                        "sourceNodeId":  "5e1f1980-f8b5-48fd-96f2-33a1e8211eb5"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "e13e33bb-d557-4474-8349-f648f243fd54",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_CountCompletedOnTime -\u003e Workflow_CountCompletedOnTime",
+                      "detail":  "call microflow WorkflowCommons.SUB_Workflow_CountCompletedOnTime -\u003e Workflow_CountCompletedOnTime",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Workflow_CountCompletedOnTime",
+                                        "sourceNodeId":  "e13e33bb-d557-4474-8349-f648f243fd54"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "3cc96dfb-5291-4c7f-a9cf-227aff13462b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_CountCompletedOverdue -\u003e Workflow_CountCompletedOverDue",
+                      "detail":  "call microflow WorkflowCommons.SUB_Workflow_CountCompletedOverdue -\u003e Workflow_CountCompletedOverDue",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Workflow_CountCompletedOverdue",
+                                        "sourceNodeId":  "3cc96dfb-5291-4c7f-a9cf-227aff13462b"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "13d06a21-8dad-4016-a91f-3c1eda15776f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9306bd90-bc0a-40f1-9c9c-5f4550590527",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "12c0b7c7-99bc-4a98-b0f9-93c818889b99",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "First day of time frame reached? expression=$BeginOfStep_InTimeFrame \u003c= $DashboardContext/TimeFrameStart",
+                      "detail":  "First day of time frame reached? expression=$BeginOfStep_InTimeFrame \u003c= $DashboardContext/TimeFrameStart",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "57b098eb-f661-4c57-9054-5b8c369c4772",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "aed2c792-83f3-4baa-9d52-fb69a94e5dc6",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dcdd78e5-fd50-4bc0-9e93-2a4c449d8e8c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "b673596c-a30b-431a-b269-eadca0367dc7",
+                      "originNodeId":  "302eb8f0-8d30-4c2e-b861-3a33ab731b5d",
+                      "destinationNodeId":  "f5dec38d-b49a-4d98-96eb-3537d5181a55",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b910ad14-bd78-44d9-af1a-c280bab4992f",
+                      "originNodeId":  "f5dec38d-b49a-4d98-96eb-3537d5181a55",
+                      "destinationNodeId":  "9306bd90-bc0a-40f1-9c9c-5f4550590527",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4e14b426-fb9d-4bb1-8152-025c51ad8ddf",
+                      "originNodeId":  "12c0b7c7-99bc-4a98-b0f9-93c818889b99",
+                      "destinationNodeId":  "13d06a21-8dad-4016-a91f-3c1eda15776f",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e0e80322-2949-49be-9b63-1a538137461d",
+                      "originNodeId":  "12c0b7c7-99bc-4a98-b0f9-93c818889b99",
+                      "destinationNodeId":  "76eab299-80d8-40bb-ad4b-681cfae37645",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "6243198e-14f5-4d8b-a435-35b698db65f4",
+                      "originNodeId":  "76eab299-80d8-40bb-ad4b-681cfae37645",
+                      "destinationNodeId":  "ac593f72-6dcd-455b-969f-c520550f583f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  3,
+                      "destinationConnectionIndex":  1
+                  },
+                  {
+                      "edgeId":  "c953fcd9-d3ea-42cf-b6cb-92034023e558",
+                      "originNodeId":  "ac593f72-6dcd-455b-969f-c520550f583f",
+                      "destinationNodeId":  "9306bd90-bc0a-40f1-9c9c-5f4550590527",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  3,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "d66314d1-77a8-4f46-838e-173c2bc0289b",
+                      "originNodeId":  "9ee7235a-f636-4d9a-a861-ee1311dd3cea",
+                      "destinationNodeId":  "12c0b7c7-99bc-4a98-b0f9-93c818889b99",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f0446bd0-6ed7-46c8-9774-286b48fb1cf2",
+                      "originNodeId":  "9306bd90-bc0a-40f1-9c9c-5f4550590527",
+                      "destinationNodeId":  "e13e33bb-d557-4474-8349-f648f243fd54",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ff20cf31-91cf-499d-968e-64a88072cac1",
+                      "originNodeId":  "e13e33bb-d557-4474-8349-f648f243fd54",
+                      "destinationNodeId":  "3cc96dfb-5291-4c7f-a9cf-227aff13462b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7e812f01-6fb1-43a4-81da-b7642880549b",
+                      "originNodeId":  "5e1f1980-f8b5-48fd-96f2-33a1e8211eb5",
+                      "destinationNodeId":  "9ee7235a-f636-4d9a-a861-ee1311dd3cea",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "477ad43a-52b4-4d3d-92e4-ea41c4993edd",
+                      "originNodeId":  "dcdd78e5-fd50-4bc0-9e93-2a4c449d8e8c",
+                      "destinationNodeId":  "821e58aa-b1fd-4f30-b37a-1c07009bd1f5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "602e8201-1ca0-4d52-829f-c27d67f87fdc",
+                      "originNodeId":  "821e58aa-b1fd-4f30-b37a-1c07009bd1f5",
+                      "destinationNodeId":  "302eb8f0-8d30-4c2e-b861-3a33ab731b5d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7d64c254-364e-4030-a73c-19b33b6a54c1",
+                      "originNodeId":  "3cc96dfb-5291-4c7f-a9cf-227aff13462b",
+                      "destinationNodeId":  "5e1f1980-f8b5-48fd-96f2-33a1e8211eb5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowSeriesList_Delete",
+                      "sourceNodeId":  "821e58aa-b1fd-4f30-b37a-1c07009bd1f5"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Workflow_AverageHandlingTime",
+                      "sourceNodeId":  "5e1f1980-f8b5-48fd-96f2-33a1e8211eb5"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Workflow_CountCompletedOnTime",
+                      "sourceNodeId":  "e13e33bb-d557-4474-8349-f648f243fd54"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Workflow_CountCompletedOverdue",
+                      "sourceNodeId":  "3cc96dfb-5291-4c7f-a9cf-227aff13462b"
+                  }
+              ],
+    "startNodeIds":  [
+                         "dcdd78e5-fd50-4bc0-9e93-2a4c449d8e8c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "dcdd78e5-fd50-4bc0-9e93-2a4c449d8e8c",
+                                         "821e58aa-b1fd-4f30-b37a-1c07009bd1f5",
+                                         "302eb8f0-8d30-4c2e-b861-3a33ab731b5d",
+                                         "f5dec38d-b49a-4d98-96eb-3537d5181a55",
+                                         "9306bd90-bc0a-40f1-9c9c-5f4550590527",
+                                         "e13e33bb-d557-4474-8349-f648f243fd54",
+                                         "3cc96dfb-5291-4c7f-a9cf-227aff13462b",
+                                         "5e1f1980-f8b5-48fd-96f2-33a1e8211eb5",
+                                         "9ee7235a-f636-4d9a-a861-ee1311dd3cea",
+                                         "12c0b7c7-99bc-4a98-b0f9-93c818889b99",
+                                         "13d06a21-8dad-4016-a91f-3c1eda15776f",
+                                         "76eab299-80d8-40bb-ad4b-681cfae37645",
+                                         "ac593f72-6dcd-455b-969f-c520550f583f"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate\r\nNODES=15; EDGES=13\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowSeriesList_Delete\r\n3. ACTION CreateVariableAction: create variable BeginOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then [%BeginOfCurrentDay%] else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then [%BeginOfCurre...\r\n4. ACTION CreateVariableAction: create variable EndOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then [%EndOfCurrentDay%] else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then [%EndOfCurrentWe...\r\n5. NODE ExclusiveMerge: ExclusiveMerge\r\n6. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_CountCompletedOnTime -\u003e Workflow_CountCompletedOnTime\r\n7. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_CountCompletedOverdue -\u003e Workflow_CountCompletedOverDue\r\n8. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_AverageHandlingTime -\u003e Workflow_AverageHandlingTime\r\n9. ACTION CreateObjectAction: create WorkflowCommons.WorkflowSeries as NewWorkflowSeries (DateDisplay=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then if $BeginOfStep_InTimeFrame = [%BeginOfCurrentDay%] then \u0027Today\u0027 else formatDateTime($Begin..., NumberofWorkflowsCompleted=$Workflow_CountCompletedOnTime + $Workflow_CountCompletedOverDue, AverageWorkflowHandlingTime=$Workflow_AverageHandlingTime, NumberofWorkflowsCompletedOverdue=$Workflow_CountCompletedOverDue, Date=$BeginOfStep_InTimeFrame, WorkflowSeries_DashboardContext=$DashboardContext)\r\n10. DECISION First day of time frame reached? expression=$BeginOfStep_InTimeFrame \u003c= $DashboardContext/TimeFrameStart\r\n11. BRANCH when EnumerationCase=true\r\n  12. END\r\n13. BRANCH when EnumerationCase=false\r\n  14. ACTION ChangeVariableAction: change variable BeginOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then addDays($BeginOfStep_InTimeFrame,-1) else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then...\r\n  15. ACTION ChangeVariableAction: change variable EndOfStep_InTimeFrame=if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Day then addDays($EndOfStep_InTimeFrame,-1) else if $DashboardContext/TimeFrameStepUnit = WorkflowCommons.Enum_TimeFrameStepUnit.Week then a...\r\n  16. GOTO ExclusiveMerge // cycle",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowDashboard_Update",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "21dcab45-c28c-4e99-a4c4-709f7dfaf9ce",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "821e58aa-b1fd-4f30-b37a-1c07009bd1f5",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowSeriesList_Delete",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "5e1f1980-f8b5-48fd-96f2-33a1e8211eb5",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Workflow_AverageHandlingTime",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "e13e33bb-d557-4474-8349-f648f243fd54",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Workflow_CountCompletedOnTime",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowSeries_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3cc96dfb-5291-4c7f-a9cf-227aff13462b",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Workflow_CountCompletedOverdue",
+                          "isInternal":  true
+                      }
+                  ]
+}

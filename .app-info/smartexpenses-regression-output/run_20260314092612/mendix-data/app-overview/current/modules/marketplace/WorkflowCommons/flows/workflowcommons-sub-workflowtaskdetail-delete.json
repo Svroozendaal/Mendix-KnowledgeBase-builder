@@ -1,0 +1,144 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_WorkflowTaskDetail_Delete",
+                  "stableId":  "4fb01146-5c8d-4728-9928-badaccd0ba01",
+                  "slug":  "workflowcommons-sub-workflowtaskdetail-delete",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowtaskdetail-delete.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowtaskdetail-delete.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflowtaskdetail-delete.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_WorkflowTaskDetail_Delete",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "4fb01146-5c8d-4728-9928-badaccd0ba01",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_WorkflowTaskDetail_Delete",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "2aaaa5e3-dbef-4dc5-8422-834fcdfe087e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DeleteAction: delete WorkflowTaskDetailList (refreshInClient=false)",
+                      "detail":  "delete WorkflowTaskDetailList (refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "98b71cf8-4930-4137-b339-9229f59cd1b4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowTaskDetailList over association WorkflowTaskDetail_DashboardContext from DashboardContext",
+                      "detail":  "retrieve WorkflowTaskDetailList over association WorkflowTaskDetail_DashboardContext from DashboardContext",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5f516264-60a0-4180-8ae8-6be4c9e86d54",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "73e9997c-2cb9-4899-baae-13fda7e6d514",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "207bccdd-fe39-4ce4-82f2-abd12c4dc697",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "8218ff9c-d725-4ef1-9483-6328523ab297",
+                      "originNodeId":  "98b71cf8-4930-4137-b339-9229f59cd1b4",
+                      "destinationNodeId":  "2aaaa5e3-dbef-4dc5-8422-834fcdfe087e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9ff22605-f34d-46e6-b324-3f8277e56808",
+                      "originNodeId":  "207bccdd-fe39-4ce4-82f2-abd12c4dc697",
+                      "destinationNodeId":  "98b71cf8-4930-4137-b339-9229f59cd1b4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "244cc3f1-f45b-46d2-9867-d5c8511b6690",
+                      "originNodeId":  "2aaaa5e3-dbef-4dc5-8422-834fcdfe087e",
+                      "destinationNodeId":  "5f516264-60a0-4180-8ae8-6be4c9e86d54",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "207bccdd-fe39-4ce4-82f2-abd12c4dc697"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "207bccdd-fe39-4ce4-82f2-abd12c4dc697",
+                                         "98b71cf8-4930-4137-b339-9229f59cd1b4",
+                                         "2aaaa5e3-dbef-4dc5-8422-834fcdfe087e",
+                                         "5f516264-60a0-4180-8ae8-6be4c9e86d54"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_WorkflowTaskDetail_Delete\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve WorkflowTaskDetailList over association WorkflowTaskDetail_DashboardContext from DashboardContext\r\n3. ACTION DeleteAction: delete WorkflowTaskDetailList (refreshInClient=false)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_WorkflowTaskDetail_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "84298fd6-d7b5-46ea-b505-0abc919c0fe6",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowTaskDetail_Delete",
+                          "isInternal":  true
+                      }
+                  ]
+}

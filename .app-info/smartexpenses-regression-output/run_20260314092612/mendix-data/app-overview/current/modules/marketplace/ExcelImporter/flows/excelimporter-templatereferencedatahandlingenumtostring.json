@@ -1,0 +1,93 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.TemplateReferenceDataHandlingEnumToString",
+                  "stableId":  "0e15897b-d8c4-4067-8a55-b3f9c8715796",
+                  "slug":  "excelimporter-templatereferencedatahandlingenumtostring",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-templatereferencedatahandlingenumtostring.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-templatereferencedatahandlingenumtostring.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-templatereferencedatahandlingenumtostring.json",
+                  "l2Logical":  "flow:ExcelImporter.TemplateReferenceDataHandlingEnumToString",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "0e15897b-d8c4-4067-8a55-b3f9c8715796",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.TemplateReferenceDataHandlingEnumToString",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "9cec4632-34d5-45cd-a8fc-7d747dced759",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9ee9df05-6a7f-4706-9983-fdddb92af345",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cff61dfe-3a20-4f6c-b3dc-8bcffc733bdc",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "2858c9f0-dee9-4652-910e-268f4e58fc71",
+                      "originNodeId":  "cff61dfe-3a20-4f6c-b3dc-8bcffc733bdc",
+                      "destinationNodeId":  "9cec4632-34d5-45cd-a8fc-7d747dced759",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "cff61dfe-3a20-4f6c-b3dc-8bcffc733bdc"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "cff61dfe-3a20-4f6c-b3dc-8bcffc733bdc",
+                                         "9cec4632-34d5-45cd-a8fc-7d747dced759"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.TemplateReferenceDataHandlingEnumToString\r\nNODES=3; EDGES=1\r\n1. START\r\n2. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

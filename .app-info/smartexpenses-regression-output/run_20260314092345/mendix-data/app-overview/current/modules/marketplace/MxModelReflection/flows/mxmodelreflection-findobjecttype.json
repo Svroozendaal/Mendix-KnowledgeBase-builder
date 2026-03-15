@@ -1,0 +1,427 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.FindObjectType",
+                  "stableId":  "89f4862e-e779-45f5-962e-9ed898bd972b",
+                  "slug":  "mxmodelreflection-findobjecttype",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-findobjecttype.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-findobjecttype.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-findobjecttype.json",
+                  "l2Logical":  "flow:MxModelReflection.FindObjectType",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "89f4862e-e779-45f5-962e-9ed898bd972b",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.FindObjectType",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "300d8363-e22c-42bc-8611-74547ae016c2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedObjectType from MxModelReflection.MxObjectType",
+                      "detail":  "retrieve RetrievedObjectType from MxModelReflection.MxObjectType",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2c9d1a10-6aab-4547-b8ce-5c74b6c68ec7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedObjectType_1 from MxModelReflection.MxObjectType",
+                      "detail":  "retrieve RetrievedObjectType_1 from MxModelReflection.MxObjectType",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4d6b4810-17e8-4b55-8792-1fc547090b89",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedObjectType_ByReference from MxModelReflection.MxObjectType",
+                      "detail":  "retrieve RetrievedObjectType_ByReference from MxModelReflection.MxObjectType",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "869292e4-82b0-46f2-a909-58ac183e6a21",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedObjectType_ByReference_1 from MxModelReflection.MxObjectType",
+                      "detail":  "retrieve RetrievedObjectType_ByReference_1 from MxModelReflection.MxObjectType",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "23b8f4ab-f5d6-401e-9b1e-28c2ca95e44a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5b2d19a5-d92b-4af5-9dd4-90c983508c2e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6a5e8afe-fc5b-4f0a-aa60-918bfd0661b6",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c51ba81f-c774-410f-82c9-539252d1d984",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e49985ac-7680-4187-af14-52fe5c6ca63d",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f8fddd2a-86fa-4e65-a53b-ccc1a96603b4",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ed6065c-1386-4f16-915e-122938530d1b",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "has reference? expression=$MxObjectReference_optional != empty",
+                      "detail":  "has reference? expression=$MxObjectReference_optional != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "148ac00c-b203-4d26-814c-a8d5498194fe",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "is RetrieveObjectType? expression=$RetrievedObjectType_ByReference != empty",
+                      "detail":  "is RetrieveObjectType? expression=$RetrievedObjectType_ByReference != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fef8cc89-a9c5-4a2c-8bc8-03e2e9f67a3e",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "is RetrivedObjectType? expression=$RetrievedObjectType != empty",
+                      "detail":  "is RetrivedObjectType? expression=$RetrievedObjectType != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0a21dd53-aff1-49ff-92bf-ab0482f751dd",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "search str != empty expression=$ObjectTypeSearchString != empty",
+                      "detail":  "search str != empty expression=$ObjectTypeSearchString != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "60ac13ea-748b-41bd-af0c-4779368b50a2",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "search str != empty expression=$ObjectTypeSearchString != empty",
+                      "detail":  "search str != empty expression=$ObjectTypeSearchString != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "584fef75-676d-4812-8f41-d68808a17a88",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b7851801-815f-403b-8c8e-d46816167d9f",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cd7a6d98-6128-459a-89d5-8fd449a4c81b",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "dc7c1141-24a0-4e77-8325-866320e6e913",
+                      "originNodeId":  "cd7a6d98-6128-459a-89d5-8fd449a4c81b",
+                      "destinationNodeId":  "1ed6065c-1386-4f16-915e-122938530d1b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "02607a7c-0f75-4002-ab0d-c67fba4e615a",
+                      "originNodeId":  "300d8363-e22c-42bc-8611-74547ae016c2",
+                      "destinationNodeId":  "fef8cc89-a9c5-4a2c-8bc8-03e2e9f67a3e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "dabd6164-d561-4282-aacb-fc3e39cbabc6",
+                      "originNodeId":  "0a21dd53-aff1-49ff-92bf-ab0482f751dd",
+                      "destinationNodeId":  "300d8363-e22c-42bc-8611-74547ae016c2",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "592dbb2c-b438-4794-a730-618ec2d1dd6b",
+                      "originNodeId":  "0a21dd53-aff1-49ff-92bf-ab0482f751dd",
+                      "destinationNodeId":  "e49985ac-7680-4187-af14-52fe5c6ca63d",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "db5a1fa3-9f79-488d-9779-c1dc8c822544",
+                      "originNodeId":  "1ed6065c-1386-4f16-915e-122938530d1b",
+                      "destinationNodeId":  "0a21dd53-aff1-49ff-92bf-ab0482f751dd",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "28e1c5fa-07f1-4dc1-b41a-fa27d9f8497f",
+                      "originNodeId":  "4d6b4810-17e8-4b55-8792-1fc547090b89",
+                      "destinationNodeId":  "148ac00c-b203-4d26-814c-a8d5498194fe",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3185385f-3116-46a1-b4a5-7f2b929378aa",
+                      "originNodeId":  "60ac13ea-748b-41bd-af0c-4779368b50a2",
+                      "destinationNodeId":  "4d6b4810-17e8-4b55-8792-1fc547090b89",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "62d146bc-c76d-4cbf-9423-c1d92c6229a8",
+                      "originNodeId":  "60ac13ea-748b-41bd-af0c-4779368b50a2",
+                      "destinationNodeId":  "c51ba81f-c774-410f-82c9-539252d1d984",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "2339c745-f302-4b08-bcc7-ac68f76ad7df",
+                      "originNodeId":  "1ed6065c-1386-4f16-915e-122938530d1b",
+                      "destinationNodeId":  "60ac13ea-748b-41bd-af0c-4779368b50a2",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "2cbc4faf-e7a1-4c5b-ad16-de8199c19fa3",
+                      "originNodeId":  "2c9d1a10-6aab-4547-b8ce-5c74b6c68ec7",
+                      "destinationNodeId":  "5b2d19a5-d92b-4af5-9dd4-90c983508c2e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c07eff0a-dc86-4d02-8c58-86de153545a2",
+                      "originNodeId":  "fef8cc89-a9c5-4a2c-8bc8-03e2e9f67a3e",
+                      "destinationNodeId":  "2c9d1a10-6aab-4547-b8ce-5c74b6c68ec7",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "35754637-a5eb-46d0-8d97-c828814a3fac",
+                      "originNodeId":  "fef8cc89-a9c5-4a2c-8bc8-03e2e9f67a3e",
+                      "destinationNodeId":  "6a5e8afe-fc5b-4f0a-aa60-918bfd0661b6",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "00141167-d6a6-4c56-ad3c-d96fdb44298d",
+                      "originNodeId":  "869292e4-82b0-46f2-a909-58ac183e6a21",
+                      "destinationNodeId":  "23b8f4ab-f5d6-401e-9b1e-28c2ca95e44a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4b4db022-69c3-418d-8c71-17f95b78292a",
+                      "originNodeId":  "148ac00c-b203-4d26-814c-a8d5498194fe",
+                      "destinationNodeId":  "869292e4-82b0-46f2-a909-58ac183e6a21",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "17e28235-c580-4d95-aa8e-276bcc831e56",
+                      "originNodeId":  "148ac00c-b203-4d26-814c-a8d5498194fe",
+                      "destinationNodeId":  "f8fddd2a-86fa-4e65-a53b-ccc1a96603b4",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "cd7a6d98-6128-459a-89d5-8fd449a4c81b"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "cd7a6d98-6128-459a-89d5-8fd449a4c81b",
+                                         "1ed6065c-1386-4f16-915e-122938530d1b",
+                                         "0a21dd53-aff1-49ff-92bf-ab0482f751dd",
+                                         "300d8363-e22c-42bc-8611-74547ae016c2",
+                                         "fef8cc89-a9c5-4a2c-8bc8-03e2e9f67a3e",
+                                         "2c9d1a10-6aab-4547-b8ce-5c74b6c68ec7",
+                                         "5b2d19a5-d92b-4af5-9dd4-90c983508c2e",
+                                         "6a5e8afe-fc5b-4f0a-aa60-918bfd0661b6",
+                                         "e49985ac-7680-4187-af14-52fe5c6ca63d",
+                                         "60ac13ea-748b-41bd-af0c-4779368b50a2",
+                                         "4d6b4810-17e8-4b55-8792-1fc547090b89",
+                                         "148ac00c-b203-4d26-814c-a8d5498194fe",
+                                         "869292e4-82b0-46f2-a909-58ac183e6a21",
+                                         "23b8f4ab-f5d6-401e-9b1e-28c2ca95e44a",
+                                         "f8fddd2a-86fa-4e65-a53b-ccc1a96603b4",
+                                         "c51ba81f-c774-410f-82c9-539252d1d984"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.FindObjectType\r\nNODES=18; EDGES=15\r\n1. START\r\n2. DECISION has reference? expression=$MxObjectReference_optional != empty\r\n3. BRANCH when EnumerationCase=false\r\n  4. DECISION search str != empty expression=$ObjectTypeSearchString != empty\r\n  5. BRANCH when EnumerationCase=true\r\n    6. ACTION RetrieveAction: retrieve RetrievedObjectType from MxModelReflection.MxObjectType\r\n    7. DECISION is RetrivedObjectType? expression=$RetrievedObjectType != empty\r\n    8. BRANCH when EnumerationCase=false\r\n      9. ACTION RetrieveAction: retrieve RetrievedObjectType_1 from MxModelReflection.MxObjectType\r\n      10. END\r\n    11. BRANCH when EnumerationCase=true\r\n      12. END\r\n  13. BRANCH when EnumerationCase=false\r\n    14. END\r\n15. BRANCH when EnumerationCase=true\r\n  16. DECISION search str != empty expression=$ObjectTypeSearchString != empty\r\n  17. BRANCH when EnumerationCase=true\r\n    18. ACTION RetrieveAction: retrieve RetrievedObjectType_ByReference from MxModelReflection.MxObjectType\r\n    19. DECISION is RetrieveObjectType? expression=$RetrievedObjectType_ByReference != empty\r\n    20. BRANCH when EnumerationCase=false\r\n      21. ACTION RetrieveAction: retrieve RetrievedObjectType_ByReference_1 from MxModelReflection.MxObjectType\r\n      22. END\r\n    23. BRANCH when EnumerationCase=true\r\n      24. END\r\n  25. BRANCH when EnumerationCase=false\r\n    26. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.Ch_FindObjectType_Reference",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "9e66346f-d580-4f4d-8d6e-91fdf825b756",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindObjectType",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.SetupTemplate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "60906ac5-d357-4d9d-83e3-4d7031af487b",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindObjectType",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "MxModelReflection",
+                          "callerFlow":  "MxModelReflection.OC_FindObjectType",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "68ec661e-383f-4e0e-9cfc-370b1f58df49",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindObjectType",
+                          "isInternal":  true
+                      }
+                  ]
+}

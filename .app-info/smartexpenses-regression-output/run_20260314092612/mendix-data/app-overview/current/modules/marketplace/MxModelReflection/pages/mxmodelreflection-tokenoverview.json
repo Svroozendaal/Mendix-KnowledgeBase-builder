@@ -1,0 +1,43 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.TokenOverview",
+                  "stableId":  "MxModelReflection.TokenOverview",
+                  "slug":  "mxmodelreflection-tokenoverview",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-tokenoverview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-tokenoverview.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/pages/mxmodelreflection-tokenoverview.json",
+                  "l2Logical":  "page:MxModelReflection.TokenOverview",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/pages/INDEX.json"
+              },
+    "qualifiedName":  "MxModelReflection.TokenOverview",
+    "name":  "TokenOverview",
+    "title":  "Tokens",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "MxModelReflection.ModelAdministrator",
+                         "MxModelReflection.Readonly"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

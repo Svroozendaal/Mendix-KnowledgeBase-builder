@@ -1,0 +1,206 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+                  "stableId":  "d8f1d624-3153-48a1-8241-7daae61c3ce8",
+                  "slug":  "workflowcommons-sub-dashboardcontext-retrieveorcreate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-dashboardcontext-retrieveorcreate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-dashboardcontext-retrieveorcreate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-dashboardcontext-retrieveorcreate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "d8f1d624-3153-48a1-8241-7daae61c3ce8",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "535e3b9d-bd53-4b00-a46f-a7a125c249a6",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.DashboardContext as NewDashboardContext (DashboardContext_Session=$currentSession)",
+                      "detail":  "create WorkflowCommons.DashboardContext as NewDashboardContext (DashboardContext_Session=$currentSession)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "28da384a-e7ec-4ff9-b14e-dca32970eb5b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ListOperationAction: ListOperationAction (output=DashboardContext, errorHandlingType=Rollback)",
+                      "detail":  "ListOperationAction (output=DashboardContext, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f44f94a5-bba1-4dfe-aad1-aaa57b4deb1f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve DashboardContextList over association DashboardContext_Session from currentSession",
+                      "detail":  "retrieve DashboardContextList over association DashboardContext_Session from currentSession",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "64f6998a-9602-4308-ab70-1dd2d060d813",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cf0a11e3-2e33-4cab-b74a-8c02d7119e0c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4216d55f-9bc3-4005-a910-8e392fa70a07",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "!= empty expression=$DashboardContextList != empty",
+                      "detail":  "!= empty expression=$DashboardContextList != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2ba6670f-d622-4188-946d-6f40c133b8d3",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "6d550609-15bf-429b-838c-198ab70e44ac",
+                      "originNodeId":  "2ba6670f-d622-4188-946d-6f40c133b8d3",
+                      "destinationNodeId":  "f44f94a5-bba1-4dfe-aad1-aaa57b4deb1f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "166d4050-3d7e-462e-b68d-fcc9f0d82216",
+                      "originNodeId":  "f44f94a5-bba1-4dfe-aad1-aaa57b4deb1f",
+                      "destinationNodeId":  "4216d55f-9bc3-4005-a910-8e392fa70a07",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "29e7cde8-3ba6-4933-9ce6-3d3753700cad",
+                      "originNodeId":  "4216d55f-9bc3-4005-a910-8e392fa70a07",
+                      "destinationNodeId":  "28da384a-e7ec-4ff9-b14e-dca32970eb5b",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "47f4caa6-52a7-430c-967b-52eb1aa265a4",
+                      "originNodeId":  "4216d55f-9bc3-4005-a910-8e392fa70a07",
+                      "destinationNodeId":  "535e3b9d-bd53-4b00-a46f-a7a125c249a6",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "ffbd8a6b-205b-47de-ae04-3aba2bd212ab",
+                      "originNodeId":  "28da384a-e7ec-4ff9-b14e-dca32970eb5b",
+                      "destinationNodeId":  "cf0a11e3-2e33-4cab-b74a-8c02d7119e0c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3709490b-e54c-4300-8328-567b523c77c1",
+                      "originNodeId":  "535e3b9d-bd53-4b00-a46f-a7a125c249a6",
+                      "destinationNodeId":  "64f6998a-9602-4308-ab70-1dd2d060d813",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "2ba6670f-d622-4188-946d-6f40c133b8d3"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "2ba6670f-d622-4188-946d-6f40c133b8d3",
+                                         "f44f94a5-bba1-4dfe-aad1-aaa57b4deb1f",
+                                         "4216d55f-9bc3-4005-a910-8e392fa70a07",
+                                         "28da384a-e7ec-4ff9-b14e-dca32970eb5b",
+                                         "cf0a11e3-2e33-4cab-b74a-8c02d7119e0c",
+                                         "535e3b9d-bd53-4b00-a46f-a7a125c249a6",
+                                         "64f6998a-9602-4308-ab70-1dd2d060d813"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate\r\nNODES=7; EDGES=6\r\n1. START\r\n2. ACTION RetrieveAction: retrieve DashboardContextList over association DashboardContext_Session from currentSession\r\n3. DECISION != empty expression=$DashboardContextList != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION ListOperationAction: ListOperationAction (output=DashboardContext, errorHandlingType=Rollback)\r\n  6. END\r\n7. BRANCH when EnumerationCase=false\r\n  8. ACTION CreateObjectAction: create WorkflowCommons.DashboardContext as NewDashboardContext (DashboardContext_Session=$currentSession)\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_TaskDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1a8e86a9-dd33-4656-b2a3-57de8933a3a3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_WorkflowDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3e94504c-9883-4fff-b026-d4257712c476",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_DashboardContext_RetrieveOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

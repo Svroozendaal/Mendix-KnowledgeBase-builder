@@ -1,0 +1,256 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_TaskAssignmentHelper_Retarget",
+                  "stableId":  "6f947cb8-c0ba-4ff8-ba45-bc8f3a396dc3",
+                  "slug":  "workflowcommons-act-taskassignmenthelper-retarget",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskassignmenthelper-retarget.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskassignmenthelper-retarget.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-taskassignmenthelper-retarget.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_TaskAssignmentHelper_Retarget",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "6f947cb8-c0ba-4ff8-ba45-bc8f3a396dc3",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_TaskAssignmentHelper_Retarget",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "703b92d5-9dcf-4db5-b67f-09c06925687b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewTargetUser (refreshInClient=true)",
+                      "detail":  "change NewTargetUser (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "70de20df-59b4-436f-b696-9178636c48c7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page (pagesToClose=2)",
+                      "detail":  "close page (pagesToClose=2)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ce947c28-b02a-44ec-af6d-23c7d9594abf",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskAssignmentHelper_Retarget -\u003e Variable",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskAssignmentHelper_Retarget -\u003e Variable",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskAssignmentHelper_Retarget",
+                                        "sourceNodeId":  "ce947c28-b02a-44ec-af6d-23c7d9594abf"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "4b522469-0f29-4458-94a8-bb07466d789b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskAssignmentHelper_TaskCount -\u003e TaskCount",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskAssignmentHelper_TaskCount -\u003e TaskCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskAssignmentHelper_TaskCount",
+                                        "sourceNodeId":  "4b522469-0f29-4458-94a8-bb07466d789b"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "22efeaa3-8c81-4e63-b7f6-287f8ed73b03",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=Successfully re-targeted {1} task(s)., type=Information, blocking=true)",
+                      "detail":  "show message (text=Successfully re-targeted {1} task(s)., type=Information, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dd8416d3-0917-4118-8bd9-507e420ae33b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "588a3ae8-eaf8-42af-af10-e6b29f7b124e",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "97a90f50-567b-4d4b-9860-72bfdd6789b1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b2e82b02-19a0-4f53-821f-32e38b15bc71",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f1bb3d1c-8a7d-4ec3-8531-c7abb50cdf8f",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "979ed842-ced5-4534-ab6b-d99260898758",
+                      "originNodeId":  "f1bb3d1c-8a7d-4ec3-8531-c7abb50cdf8f",
+                      "destinationNodeId":  "ce947c28-b02a-44ec-af6d-23c7d9594abf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5157eb7a-6136-40fc-9888-91686b419e32",
+                      "originNodeId":  "70de20df-59b4-436f-b696-9178636c48c7",
+                      "destinationNodeId":  "4b522469-0f29-4458-94a8-bb07466d789b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "075dbbdb-061d-44dd-8eaa-610014eeed9e",
+                      "originNodeId":  "4b522469-0f29-4458-94a8-bb07466d789b",
+                      "destinationNodeId":  "22efeaa3-8c81-4e63-b7f6-287f8ed73b03",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9aeb51e8-8739-4064-bce6-2b1278e02e7b",
+                      "originNodeId":  "22efeaa3-8c81-4e63-b7f6-287f8ed73b03",
+                      "destinationNodeId":  "dd8416d3-0917-4118-8bd9-507e420ae33b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6efed197-10a8-4458-903b-38be15b64218",
+                      "originNodeId":  "ce947c28-b02a-44ec-af6d-23c7d9594abf",
+                      "destinationNodeId":  "703b92d5-9dcf-4db5-b67f-09c06925687b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f742e563-ec3b-42b7-9170-b9beb2feb00a",
+                      "originNodeId":  "703b92d5-9dcf-4db5-b67f-09c06925687b",
+                      "destinationNodeId":  "70de20df-59b4-436f-b696-9178636c48c7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskAssignmentHelper_Retarget",
+                      "sourceNodeId":  "ce947c28-b02a-44ec-af6d-23c7d9594abf"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskAssignmentHelper_TaskCount",
+                      "sourceNodeId":  "4b522469-0f29-4458-94a8-bb07466d789b"
+                  }
+              ],
+    "startNodeIds":  [
+                         "f1bb3d1c-8a7d-4ec3-8531-c7abb50cdf8f"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "f1bb3d1c-8a7d-4ec3-8531-c7abb50cdf8f",
+                                         "ce947c28-b02a-44ec-af6d-23c7d9594abf",
+                                         "703b92d5-9dcf-4db5-b67f-09c06925687b",
+                                         "70de20df-59b4-436f-b696-9178636c48c7",
+                                         "4b522469-0f29-4458-94a8-bb07466d789b",
+                                         "22efeaa3-8c81-4e63-b7f6-287f8ed73b03",
+                                         "dd8416d3-0917-4118-8bd9-507e420ae33b"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_TaskAssignmentHelper_Retarget\r\nNODES=10; EDGES=6\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskAssignmentHelper_Retarget -\u003e Variable\r\n3. ACTION ChangeObjectAction: change NewTargetUser (refreshInClient=true)\r\n4. ACTION CloseFormAction: close page (pagesToClose=2)\r\n5. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskAssignmentHelper_TaskCount -\u003e TaskCount\r\n6. ACTION ShowMessageAction: show message (text=Successfully re-targeted {1} task(s)., type=Information, blocking=true)\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_TaskAssignmentHelper_Retarget",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "ce947c28-b02a-44ec-af6d-23c7d9594abf",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskAssignmentHelper_Retarget",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_TaskAssignmentHelper_Retarget",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "4b522469-0f29-4458-94a8-bb07466d789b",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskAssignmentHelper_TaskCount",
+                          "isInternal":  true
+                      }
+                  ]
+}

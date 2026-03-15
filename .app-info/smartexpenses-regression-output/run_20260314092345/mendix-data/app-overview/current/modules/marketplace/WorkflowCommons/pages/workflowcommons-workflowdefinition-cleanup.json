@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.WorkflowDefinition_CleanUp",
+                  "stableId":  "WorkflowCommons.WorkflowDefinition_CleanUp",
+                  "slug":  "workflowcommons-workflowdefinition-cleanup",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowdefinition-cleanup.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowdefinition-cleanup.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/workflowcommons-workflowdefinition-cleanup.json",
+                  "l2Logical":  "page:WorkflowCommons.WorkflowDefinition_CleanUp",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/INDEX.json"
+              },
+    "qualifiedName":  "WorkflowCommons.WorkflowDefinition_CleanUp",
+    "name":  "WorkflowDefinition_CleanUp",
+    "title":  "Clean-up workflow instances",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "WorkflowCommons.Administrator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "CleanupHelper",
+                           "entityType":  "WorkflowCommons.CleanupHelper"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  1000,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

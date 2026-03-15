@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ParseEnumToString_StatisticLevel",
+                  "stableId":  "a2dcdeff-cff4-40e0-a4a1-5e73c4ed95fb",
+                  "slug":  "excelimporter-parseenumtostring-statisticlevel",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-parseenumtostring-statisticlevel.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-parseenumtostring-statisticlevel.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-parseenumtostring-statisticlevel.json",
+                  "l2Logical":  "flow:ExcelImporter.ParseEnumToString_StatisticLevel",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "a2dcdeff-cff4-40e0-a4a1-5e73c4ed95fb",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.ParseEnumToString_StatisticLevel",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "31c6a444-91a3-41a8-8683-b9f66551fc8d",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "adf20385-e1d0-465b-b7e4-a314a57321e6",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a5ce4f15-e373-49ec-b5f3-3e396d50f500",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "empty? expression=$PrintStatisticsMessages = empty",
+                      "detail":  "empty? expression=$PrintStatisticsMessages = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b8cc6dd2-63c2-4979-afc1-3634a71c75a1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a5640295-f371-4540-a0d8-15de5b7e1be1",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ebac5bb3-c699-4eba-b8a4-59bc88ad8f57",
+                      "originNodeId":  "a5640295-f371-4540-a0d8-15de5b7e1be1",
+                      "destinationNodeId":  "a5ce4f15-e373-49ec-b5f3-3e396d50f500",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7ef7a7e0-80ce-4dd3-8642-ee078a1bd5eb",
+                      "originNodeId":  "a5ce4f15-e373-49ec-b5f3-3e396d50f500",
+                      "destinationNodeId":  "31c6a444-91a3-41a8-8683-b9f66551fc8d",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "59fcd395-78cb-4b3a-86ab-1aa3254b12ea",
+                      "originNodeId":  "a5ce4f15-e373-49ec-b5f3-3e396d50f500",
+                      "destinationNodeId":  "adf20385-e1d0-465b-b7e4-a314a57321e6",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "a5640295-f371-4540-a0d8-15de5b7e1be1"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "a5640295-f371-4540-a0d8-15de5b7e1be1",
+                                         "a5ce4f15-e373-49ec-b5f3-3e396d50f500",
+                                         "31c6a444-91a3-41a8-8683-b9f66551fc8d",
+                                         "adf20385-e1d0-465b-b7e4-a314a57321e6"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.ParseEnumToString_StatisticLevel\r\nNODES=5; EDGES=3\r\n1. START\r\n2. DECISION empty? expression=$PrintStatisticsMessages = empty\r\n3. BRANCH when EnumerationCase=false\r\n  4. END\r\n5. BRANCH when EnumerationCase=true\r\n  6. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

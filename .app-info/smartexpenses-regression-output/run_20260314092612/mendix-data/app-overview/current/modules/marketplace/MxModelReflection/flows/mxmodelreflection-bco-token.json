@@ -1,0 +1,471 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.BCo_Token",
+                  "stableId":  "1b6dd2a1-477c-4d75-a347-55bb286da399",
+                  "slug":  "mxmodelreflection-bco-token",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bco-token.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-bco-token.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-bco-token.json",
+                  "l2Logical":  "flow:MxModelReflection.BCo_Token",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "1b6dd2a1-477c-4d75-a347-55bb286da399",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.BCo_Token",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "81423956-ef8c-4b1f-8c58-4d8b762302b4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Token (CombinedToken=$Token/Prefix + $Token/Token + $Token/Suffix, Description=if $Token/Description = empty or $Token/Description = \u0027\u0027 then $Token/Token else $Token/Description; refreshInClient=false)",
+                      "detail":  "change Token (CombinedToken=$Token/Prefix + $Token/Token + $Token/Suffix, Description=if $Token/Description = empty or $Token/Description = \u0027\u0027 then $Token/Token else $Token/Description; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "35121b20-6a53-4a5c-928b-a56dd3cd62b9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)",
+                      "detail":  "change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6df3636b-5bc9-4f01-ad54-34daa748ae5b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)",
+                      "detail":  "change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b6c26ab6-78ed-4b02-8e5b-d734cfc869e6",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)",
+                      "detail":  "change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d2718039-afeb-4f49-adaa-5dc1de77e60b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Token (Status=MxModelReflection.Status.Valid, MetaModelPath=$MxObjectTypeStart/CompleteName + \u0027/\u0027 + $Member/AttributeName; refreshInClient=false)",
+                      "detail":  "change Token (Status=MxModelReflection.Status.Valid, MetaModelPath=$MxObjectTypeStart/CompleteName + \u0027/\u0027 + $Member/AttributeName; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a3b06a31-653c-44e8-a249-44ffef462352",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Token (Status=MxModelReflection.Status.Valid, MetaModelPath=$MxObjectTypeStart/CompleteName + \u0027/\u0027 + $MxObjectReference/CompleteName + \u0027/\u0027 + $MxObjectTypeReference/CompleteName + \u0027/\u0027 + $MemberReference/AttributeName; refreshInClient=false)",
+                      "detail":  "change Token (Status=MxModelReflection.Status.Valid, MetaModelPath=$MxObjectTypeStart/CompleteName + \u0027/\u0027 + $MxObjectReference/CompleteName + \u0027/\u0027 + $MxObjectTypeReference/CompleteName + \u0027/\u0027 + $MemberReference/AttributeName; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ee757778-2846-4999-9d73-941625998060",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Member over association Token_MxObjectMember from Token",
+                      "detail":  "retrieve Member over association Token_MxObjectMember from Token",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d9fa4cb5-25cd-4365-b450-776da99c1f78",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MemberReference over association Token_MxObjectMember from Token",
+                      "detail":  "retrieve MemberReference over association Token_MxObjectMember from Token",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "81e5a077-5884-44f7-bf09-44d0cbaaa9a7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectReference over association Token_MxObjectReference from Token",
+                      "detail":  "retrieve MxObjectReference over association Token_MxObjectReference from Token",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "66b082a3-c639-4ef6-a6c5-5f3a8c2346ff",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectTypeReference over association Token_MxObjectType_Referenced from Token",
+                      "detail":  "retrieve MxObjectTypeReference over association Token_MxObjectType_Referenced from Token",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e6bcf02a-e319-4b3d-aff2-e258b7d55969",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectTypeStart over association Token_MxObjectType_Start from Token",
+                      "detail":  "retrieve MxObjectTypeStart over association Token_MxObjectType_Start from Token",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "442cbc6a-103f-45b3-90f6-217adff49169",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "72a778ea-5f1d-443e-8557-9a9a114300e1",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7e969f64-23b7-465f-99e0-a6c1f69887fb",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "acc186ab-b9e6-4167-bd92-66d016287148",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cf447fd4-7a90-4c75-8863-8f3760c4b5a6",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c27c0abf-0558-4607-a493-41225007bffa",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "has all associations expression=$Member != empty and $MxObjectTypeStart != empty",
+                      "detail":  "has all associations expression=$Member != empty and $MxObjectTypeStart != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bfcc3a3e-4e67-41b4-ba0f-492239a38eaf",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "has all associations expression=$MemberReference != empty and $MxObjectReference != empty and $MxObjectTypeStart != empty and $MxObjectTypeReference != ...",
+                      "detail":  "has all associations expression=$MemberReference != empty and $MxObjectReference != empty and $MxObjectTypeStart != empty and $MxObjectTypeReference != ...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1108bcf4-e954-4aa7-837f-515848359a21",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Token type expression=$Token/TokenType",
+                      "detail":  "Token type expression=$Token/TokenType",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f771ef82-97dd-4cc3-a4be-3fcc4c85cd97",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "def7021a-fa71-47c2-8797-648d04490d31",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "93386bbf-7260-4c46-91e8-2461726f0bcc",
+                      "originNodeId":  "def7021a-fa71-47c2-8797-648d04490d31",
+                      "destinationNodeId":  "81423956-ef8c-4b1f-8c58-4d8b762302b4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f3406b16-610d-49d3-8b9b-c59c7b5cae83",
+                      "originNodeId":  "1108bcf4-e954-4aa7-837f-515848359a21",
+                      "destinationNodeId":  "ee757778-2846-4999-9d73-941625998060",
+                      "condition":  "EnumerationCase=Attribute",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a60f81af-5460-4e8a-afc0-8da094df2cf3",
+                      "originNodeId":  "1108bcf4-e954-4aa7-837f-515848359a21",
+                      "destinationNodeId":  "b6c26ab6-78ed-4b02-8e5b-d734cfc869e6",
+                      "condition":  "EnumerationCase=(empty)",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0c7d82c6-18d2-465c-8540-154694b9f3b7",
+                      "originNodeId":  "b6c26ab6-78ed-4b02-8e5b-d734cfc869e6",
+                      "destinationNodeId":  "acc186ab-b9e6-4167-bd92-66d016287148",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "d134fa4b-fdc5-45bc-b2d1-946ea04ba7b7",
+                      "originNodeId":  "1108bcf4-e954-4aa7-837f-515848359a21",
+                      "destinationNodeId":  "81e5a077-5884-44f7-bf09-44d0cbaaa9a7",
+                      "condition":  "EnumerationCase=Reference",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "923e111d-4137-4cf0-8cb4-8cfb095682e7",
+                      "originNodeId":  "81e5a077-5884-44f7-bf09-44d0cbaaa9a7",
+                      "destinationNodeId":  "66b082a3-c639-4ef6-a6c5-5f3a8c2346ff",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2f5cb7cf-3947-47b5-a36d-b16135e32634",
+                      "originNodeId":  "e6bcf02a-e319-4b3d-aff2-e258b7d55969",
+                      "destinationNodeId":  "1108bcf4-e954-4aa7-837f-515848359a21",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "556523a1-57cc-4015-a294-29e9a525c9b3",
+                      "originNodeId":  "ee757778-2846-4999-9d73-941625998060",
+                      "destinationNodeId":  "c27c0abf-0558-4607-a493-41225007bffa",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d37158fd-d36f-4646-95fb-cbb58fca1145",
+                      "originNodeId":  "c27c0abf-0558-4607-a493-41225007bffa",
+                      "destinationNodeId":  "d2718039-afeb-4f49-adaa-5dc1de77e60b",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a0228bc0-22ad-40c1-a457-0792f6c01607",
+                      "originNodeId":  "d2718039-afeb-4f49-adaa-5dc1de77e60b",
+                      "destinationNodeId":  "cf447fd4-7a90-4c75-8863-8f3760c4b5a6",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fa6d6388-809f-468a-b21f-1814684e8ba7",
+                      "originNodeId":  "6df3636b-5bc9-4f01-ad54-34daa748ae5b",
+                      "destinationNodeId":  "442cbc6a-103f-45b3-90f6-217adff49169",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "21ca3a02-2ef7-4178-ad44-dfc65a2eec11",
+                      "originNodeId":  "c27c0abf-0558-4607-a493-41225007bffa",
+                      "destinationNodeId":  "6df3636b-5bc9-4f01-ad54-34daa748ae5b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "13538fbf-134c-4c72-8aa6-a7055fcd77ce",
+                      "originNodeId":  "66b082a3-c639-4ef6-a6c5-5f3a8c2346ff",
+                      "destinationNodeId":  "d9fa4cb5-25cd-4365-b450-776da99c1f78",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "16e07f0e-314a-4309-88a6-642af4f0b5ab",
+                      "originNodeId":  "d9fa4cb5-25cd-4365-b450-776da99c1f78",
+                      "destinationNodeId":  "bfcc3a3e-4e67-41b4-ba0f-492239a38eaf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8911e1f4-b276-495d-8875-af9b8397f4c8",
+                      "originNodeId":  "35121b20-6a53-4a5c-928b-a56dd3cd62b9",
+                      "destinationNodeId":  "72a778ea-5f1d-443e-8557-9a9a114300e1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "384059d4-19fb-4c4c-81aa-1ff4cd907a13",
+                      "originNodeId":  "bfcc3a3e-4e67-41b4-ba0f-492239a38eaf",
+                      "destinationNodeId":  "35121b20-6a53-4a5c-928b-a56dd3cd62b9",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "0e591965-4e22-4b1e-9b2f-63c74e2d52fa",
+                      "originNodeId":  "bfcc3a3e-4e67-41b4-ba0f-492239a38eaf",
+                      "destinationNodeId":  "a3b06a31-653c-44e8-a249-44ffef462352",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "dc92a6e0-0c3a-498a-b9b2-08552e0a210a",
+                      "originNodeId":  "a3b06a31-653c-44e8-a249-44ffef462352",
+                      "destinationNodeId":  "7e969f64-23b7-465f-99e0-a6c1f69887fb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4ae03237-c39a-4e20-9533-72b7fe6812bd",
+                      "originNodeId":  "81423956-ef8c-4b1f-8c58-4d8b762302b4",
+                      "destinationNodeId":  "e6bcf02a-e319-4b3d-aff2-e258b7d55969",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "def7021a-fa71-47c2-8797-648d04490d31"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "def7021a-fa71-47c2-8797-648d04490d31",
+                                         "81423956-ef8c-4b1f-8c58-4d8b762302b4",
+                                         "e6bcf02a-e319-4b3d-aff2-e258b7d55969",
+                                         "1108bcf4-e954-4aa7-837f-515848359a21",
+                                         "81e5a077-5884-44f7-bf09-44d0cbaaa9a7",
+                                         "66b082a3-c639-4ef6-a6c5-5f3a8c2346ff",
+                                         "d9fa4cb5-25cd-4365-b450-776da99c1f78",
+                                         "bfcc3a3e-4e67-41b4-ba0f-492239a38eaf",
+                                         "35121b20-6a53-4a5c-928b-a56dd3cd62b9",
+                                         "72a778ea-5f1d-443e-8557-9a9a114300e1",
+                                         "a3b06a31-653c-44e8-a249-44ffef462352",
+                                         "7e969f64-23b7-465f-99e0-a6c1f69887fb",
+                                         "ee757778-2846-4999-9d73-941625998060",
+                                         "c27c0abf-0558-4607-a493-41225007bffa",
+                                         "d2718039-afeb-4f49-adaa-5dc1de77e60b",
+                                         "cf447fd4-7a90-4c75-8863-8f3760c4b5a6",
+                                         "6df3636b-5bc9-4f01-ad54-34daa748ae5b",
+                                         "442cbc6a-103f-45b3-90f6-217adff49169",
+                                         "b6c26ab6-78ed-4b02-8e5b-d734cfc869e6",
+                                         "acc186ab-b9e6-4167-bd92-66d016287148"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.BCo_Token\r\nNODES=21; EDGES=19\r\n1. START\r\n2. ACTION ChangeObjectAction: change Token (CombinedToken=$Token/Prefix + $Token/Token + $Token/Suffix, Description=if $Token/Description = empty or $Token/Description = \u0027\u0027 then $Token/Token else $Token/Description; refreshInClient=false)\r\n3. ACTION RetrieveAction: retrieve MxObjectTypeStart over association Token_MxObjectType_Start from Token\r\n4. DECISION Token type expression=$Token/TokenType\r\n5. BRANCH when EnumerationCase=Reference\r\n  6. ACTION RetrieveAction: retrieve MxObjectReference over association Token_MxObjectReference from Token\r\n  7. ACTION RetrieveAction: retrieve MxObjectTypeReference over association Token_MxObjectType_Referenced from Token\r\n  8. ACTION RetrieveAction: retrieve MemberReference over association Token_MxObjectMember from Token\r\n  9. DECISION has all associations expression=$MemberReference != empty and $MxObjectReference != empty and $MxObjectTypeStart != empty and $MxObjectTypeReference != ...\r\n  10. BRANCH when EnumerationCase=false\r\n    11. ACTION ChangeObjectAction: change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)\r\n    12. END\r\n  13. BRANCH when EnumerationCase=true\r\n    14. ACTION ChangeObjectAction: change Token (Status=MxModelReflection.Status.Valid, MetaModelPath=$MxObjectTypeStart/CompleteName + \u0027/\u0027 + $MxObjectReference/CompleteName + \u0027/\u0027 + $MxObjectTypeReference/CompleteName + \u0027/\u0027 + $MemberReference/AttributeName; refreshInClient=false)\r\n    15. END\r\n16. BRANCH when EnumerationCase=Attribute\r\n  17. ACTION RetrieveAction: retrieve Member over association Token_MxObjectMember from Token\r\n  18. DECISION has all associations expression=$Member != empty and $MxObjectTypeStart != empty\r\n  19. BRANCH when EnumerationCase=true\r\n    20. ACTION ChangeObjectAction: change Token (Status=MxModelReflection.Status.Valid, MetaModelPath=$MxObjectTypeStart/CompleteName + \u0027/\u0027 + $Member/AttributeName; refreshInClient=false)\r\n    21. END\r\n  22. BRANCH when EnumerationCase=false\r\n    23. ACTION ChangeObjectAction: change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)\r\n    24. END\r\n25. BRANCH when EnumerationCase=(empty)\r\n  26. ACTION ChangeObjectAction: change Token (Status=MxModelReflection.Status.Invalid; refreshInClient=false)\r\n  27. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

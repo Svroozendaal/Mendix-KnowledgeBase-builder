@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ReferenceHandlingEnumToString",
+                  "stableId":  "74299b46-024a-45fe-b000-2c57e63ac89d",
+                  "slug":  "excelimporter-referencehandlingenumtostring",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-referencehandlingenumtostring.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-referencehandlingenumtostring.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-referencehandlingenumtostring.json",
+                  "l2Logical":  "flow:ExcelImporter.ReferenceHandlingEnumToString",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "74299b46-024a-45fe-b000-2c57e63ac89d",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.ReferenceHandlingEnumToString",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "918f3f0b-5cdf-49b5-9b93-8a43b0a61d19",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable ReferenceHandlingEnumString=getKey($ReferenceHandlingEnum)",
+                      "detail":  "create variable ReferenceHandlingEnumString=getKey($ReferenceHandlingEnum)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "91a3f04e-c718-4d3a-b6de-35762dfc928b",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse Enum ReferenceHandingEnum to a String",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "65eeb0d0-b13b-4eca-bdff-1713db340ab5",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6bb5670e-0d9f-4a0e-a4eb-e4309c28df87",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "33d8fec7-6961-4214-88d2-6412351f114b",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "d337dc78-92cb-4af2-90c5-4b247df48115",
+                      "originNodeId":  "33d8fec7-6961-4214-88d2-6412351f114b",
+                      "destinationNodeId":  "918f3f0b-5cdf-49b5-9b93-8a43b0a61d19",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1521e0fa-1dba-4d96-8cdd-88a9f522ed1d",
+                      "originNodeId":  "918f3f0b-5cdf-49b5-9b93-8a43b0a61d19",
+                      "destinationNodeId":  "65eeb0d0-b13b-4eca-bdff-1713db340ab5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "33d8fec7-6961-4214-88d2-6412351f114b"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "33d8fec7-6961-4214-88d2-6412351f114b",
+                                         "918f3f0b-5cdf-49b5-9b93-8a43b0a61d19",
+                                         "65eeb0d0-b13b-4eca-bdff-1713db340ab5"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.ReferenceHandlingEnumToString\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable ReferenceHandlingEnumString=getKey($ReferenceHandlingEnum)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

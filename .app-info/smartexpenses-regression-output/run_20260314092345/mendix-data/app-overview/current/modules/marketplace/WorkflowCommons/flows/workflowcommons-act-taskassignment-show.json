@@ -1,0 +1,124 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_TaskAssignment_Show",
+                  "stableId":  "4c539bf1-0865-4359-8521-4c6a66c53be3",
+                  "slug":  "workflowcommons-act-taskassignment-show",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskassignment-show.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-taskassignment-show.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-taskassignment-show.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_TaskAssignment_Show",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "4c539bf1-0865-4359-8521-4c6a66c53be3",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_TaskAssignment_Show",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "1daad260-327b-40b7-9b3c-ae8184275efe",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.TaskAssignmentHelper as NewTaskAssignmentHelper",
+                      "detail":  "create WorkflowCommons.TaskAssignmentHelper as NewTaskAssignmentHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4ab02125-df62-48fd-9aa7-480412d71dc4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page WorkflowCommons.ManageTaskAssignments",
+                      "detail":  "show page WorkflowCommons.ManageTaskAssignments",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "902e7528-c7c8-4c3d-91ae-3e369ce5c42f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5640c8e8-42ac-446e-96cd-0ec9ebf2fb36",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "392f0234-07d3-4b3d-b6ed-caf835b7b0fa",
+                      "originNodeId":  "5640c8e8-42ac-446e-96cd-0ec9ebf2fb36",
+                      "destinationNodeId":  "1daad260-327b-40b7-9b3c-ae8184275efe",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "24d6db6c-fd52-4343-aee7-976a4b74fb14",
+                      "originNodeId":  "1daad260-327b-40b7-9b3c-ae8184275efe",
+                      "destinationNodeId":  "4ab02125-df62-48fd-9aa7-480412d71dc4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a001232f-7150-4dae-9666-055f6cf08ea6",
+                      "originNodeId":  "4ab02125-df62-48fd-9aa7-480412d71dc4",
+                      "destinationNodeId":  "902e7528-c7c8-4c3d-91ae-3e369ce5c42f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "5640c8e8-42ac-446e-96cd-0ec9ebf2fb36"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "5640c8e8-42ac-446e-96cd-0ec9ebf2fb36",
+                                         "1daad260-327b-40b7-9b3c-ae8184275efe",
+                                         "4ab02125-df62-48fd-9aa7-480412d71dc4",
+                                         "902e7528-c7c8-4c3d-91ae-3e369ce5c42f"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_TaskAssignment_Show\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create WorkflowCommons.TaskAssignmentHelper as NewTaskAssignmentHelper\r\n3. ACTION ShowPageAction: show page WorkflowCommons.ManageTaskAssignments\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

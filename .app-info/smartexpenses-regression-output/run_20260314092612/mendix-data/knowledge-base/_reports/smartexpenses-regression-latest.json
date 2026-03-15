@@ -1,0 +1,89 @@
+{
+    "appName":  "SmartExpenses",
+    "generatedAtUtc":  "2026-03-14T09:33:40.5197424Z",
+    "kbRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base",
+    "dataRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data",
+    "runFolder":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\app-overview\\cli_2026-03-14T09-26-12.835Z",
+    "overallPass":  false,
+    "checkCount":  6,
+    "checks":  [
+                   {
+                       "name":  "Layered L2 links",
+                       "status":  "PASS",
+                       "detail":  "Checked 1010 *.abstract.md/*.overview.md files for a resolvable front-matter l2Path."
+                   },
+                   {
+                       "name":  "Route links",
+                       "status":  "PASS",
+                       "detail":  "Checked markdown links in routes/by-flow.md and routes/by-page.md."
+                   },
+                   {
+                       "name":  "Control characters",
+                       "status":  "PASS",
+                       "detail":  "Scanned all generated markdown for control characters outside CR/LF/TAB."
+                   },
+                   {
+                       "name":  "README placeholders",
+                       "status":  "PASS",
+                       "detail":  "Scanned generated README.md files for known placeholder phrases."
+                   },
+                   {
+                       "name":  "Count parity",
+                       "status":  "PASS",
+                       "detail":  "Flows: expected 39, abstracts 39, overviews 39. Pages: expected 29, abstracts 29, overviews 29."
+                   },
+                   {
+                       "name":  "L1 usefulness",
+                       "status":  "FAIL",
+                       "detail":  "Checked SmartExpenses page and flow overview summaries plus provenance-related sections for explanatory wording."
+                   }
+               ],
+    "issueCount":  9,
+    "issues":  [
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-balance-masteroverview.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-budgetterm-masteroverview.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-budgettype-overview-2.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-fbgprofile-overview-2.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-fbgprofile-overview.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-home-web.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-homepage-admin.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-standardbudget-overview.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   },
+                   {
+                       "check":  "l1-usefulness",
+                       "file":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base\\modules\\SmartExpenses\\pages\\smartexpenses-transaction-overview-2.overview.md",
+                       "message":  "Page summary is too weak to guide navigation."
+                   }
+               ]
+}

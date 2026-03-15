@@ -1,0 +1,169 @@
+# Pages: SmartExpenses
+Pages: 29, Snippets: 1
+
+## Pages
+
+PAGE SmartExpenses.BalanceType_Overview
+  Title: "Overzicht van alle saldo's"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.User, SmartExpenses.Admin
+  Parameters: FBGProfile (SmartExpenses.FBGProfile)
+
+PAGE SmartExpenses.Balance_MasterNewEdit
+  Title: "Edit Balance"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin
+  Parameters: Balance (SmartExpenses.Balance)
+
+PAGE SmartExpenses.Balance_MasterOverview
+  Title: "Balance Overview"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.Parent
+
+PAGE SmartExpenses.Balance_NewEdit
+  Title: "Saldo"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User
+  Parameters: Balance (SmartExpenses.Balance)
+
+PAGE SmartExpenses.BudgetTerm_EditQuick
+  Title: "Edit Budget Type"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User
+  Parameters: BudgetTerm (SmartExpenses.BudgetTerm)
+
+PAGE SmartExpenses.BudgetTerm_MasterNewEdit
+  Title: "Edit Budget Term"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin
+  Parameters: BudgetTerm (SmartExpenses.BudgetTerm)
+
+PAGE SmartExpenses.BudgetTerm_MasterOverview
+  Title: "Budget Term Overview"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: SmartExpenses.Admin
+
+PAGE SmartExpenses.BudgetTerm_NewEdit
+  Title: "Budget"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User
+  Parameters: BudgetType (SmartExpenses.BudgetType), BudgetTerm (SmartExpenses.BudgetTerm)
+
+PAGE SmartExpenses.BudgetTerm_Overview
+  Title: "Budget Term Overview"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User, SmartExpenses.Parent
+  Parameters: BudgetType (SmartExpenses.BudgetType)
+
+PAGE SmartExpenses.BudgetType_NewEdit_Master
+  Title: "Edit Budget Type"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin
+  Parameters: BudgetType (SmartExpenses.BudgetType)
+
+PAGE SmartExpenses.BudgetType_Overview
+  Title: "Budget Type Overview"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.User, SmartExpenses.Admin, SmartExpenses.Parent
+  Parameters: FBGProfile (SmartExpenses.FBGProfile), DateHelper (SmartExpenses.DateHelper)
+
+PAGE SmartExpenses.BudgetType_Overview_2
+  Title: "Budget Type Overview"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: SmartExpenses.Admin
+
+PAGE SmartExpenses.datagid
+  Title: "datagid"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+
+PAGE SmartExpenses.FBGProfile_NewEdit
+  Title: "Edit FBG Profile"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin
+  Parameters: FBGProfile (SmartExpenses.FBGProfile)
+
+PAGE SmartExpenses.FBGProfile_Overview
+  Title: "FBG Environment Overview"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.Admin
+
+PAGE SmartExpenses.FBGProfile_Overview_2
+  Title: "FBG Profile Overview"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: SmartExpenses.Admin
+
+PAGE SmartExpenses.Homepage_Admin
+  Title: "Homepage Admin"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.Admin
+
+PAGE SmartExpenses.Home_Parent
+  Title: "Homepage"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.Parent, SmartExpenses.User
+  Parameters: FBGProfile (SmartExpenses.FBGProfile)
+
+PAGE SmartExpenses.Home_Web
+  Title: "Homepage"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.User, SmartExpenses.Admin, SmartExpenses.Parent
+
+PAGE SmartExpenses.Login_Overview
+  Title: "Login Overview"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Anonymous, SmartExpenses.Admin
+
+PAGE SmartExpenses.StandardBudget_NewEdit
+  Title: "Edit Standard Budget"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin
+  Parameters: StandardBudget (SmartExpenses.StandardBudget)
+
+PAGE SmartExpenses.StandardBudget_Overview
+  Title: "Standard Budget Overview"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.Admin
+
+PAGE SmartExpenses.Transaction_BulkEdit
+  Title: "Transaction Bulk edit"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User
+  Parameters: BulkEditHelper (SmartExpenses.BulkEditHelper), FBGProfile (SmartExpenses.FBGProfile)
+
+PAGE SmartExpenses.Transaction_Edit
+  Title: "Pas transactie aan"
+  Layout: Atlas_Core.PopupLayout (popup 800x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User
+  Parameters: Transaction (SmartExpenses.Transaction)
+
+PAGE SmartExpenses.Transaction_EditQuick
+  Title: "Snel verwerken"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User
+  Parameters: Transaction (SmartExpenses.Transaction)
+
+PAGE SmartExpenses.Transaction_New
+  Title: "Nieuwe transactie"
+  Layout: Atlas_Core.PopupLayout (popup 800x600, resizable=yes)
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User
+  Parameters: Transaction (SmartExpenses.Transaction)
+
+PAGE SmartExpenses.Transaction_NewEdit
+  Title: "Edit Transaction"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: SmartExpenses.Admin
+  Parameters: Transaction (SmartExpenses.Transaction)
+
+PAGE SmartExpenses.Transaction_Overview
+  Title: "Transaction Overview"
+  Layout: Atlas_Core.Atlas_TopBar
+  Allowed roles: SmartExpenses.Admin, SmartExpenses.User, SmartExpenses.Parent
+  Parameters: FBGProfile (SmartExpenses.FBGProfile)
+
+PAGE SmartExpenses.Transaction_Overview_2
+  Title: "Transaction Overview"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: SmartExpenses.Admin
+
+## Snippets
+- SNIPPET SmartExpenses.Entity_Menu (Web)

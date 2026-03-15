@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.OCH_Feedback_SaveToLocalStorage",
+                  "stableId":  "5ceddc42-7e8d-4f79-8da0-9a80ef9329f0",
+                  "slug":  "feedbackmodule-och-feedback-savetolocalstorage",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-och-feedback-savetolocalstorage.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-och-feedback-savetolocalstorage.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-och-feedback-savetolocalstorage.json",
+                  "l2Logical":  "flow:FeedbackModule.OCH_Feedback_SaveToLocalStorage",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "5ceddc42-7e8d-4f79-8da0-9a80ef9329f0",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "FeedbackModule.OCH_Feedback_SaveToLocalStorage",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "6ba4eaf2-c454-4067-a18b-f94eec510727",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "detail":  "call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "39e1af44-663a-4a89-b886-99d061388660",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5bb1aa84-3a39-4ceb-a35d-cf6ec24bf0f4",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "591758ba-d8b1-4a77-94b4-2e53f3bcf613",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "f888778e-5b2a-4ecc-a5ca-e506a4b30ed0",
+                      "originNodeId":  "591758ba-d8b1-4a77-94b4-2e53f3bcf613",
+                      "destinationNodeId":  "6ba4eaf2-c454-4067-a18b-f94eec510727",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3f5638f7-642b-411d-a4c1-13816e92a4f5",
+                      "originNodeId":  "6ba4eaf2-c454-4067-a18b-f94eec510727",
+                      "destinationNodeId":  "39e1af44-663a-4a89-b886-99d061388660",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "591758ba-d8b1-4a77-94b4-2e53f3bcf613"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "591758ba-d8b1-4a77-94b4-2e53f3bcf613",
+                                         "6ba4eaf2-c454-4067-a18b-f94eec510727",
+                                         "39e1af44-663a-4a89-b886-99d061388660"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: FeedbackModule.OCH_Feedback_SaveToLocalStorage\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

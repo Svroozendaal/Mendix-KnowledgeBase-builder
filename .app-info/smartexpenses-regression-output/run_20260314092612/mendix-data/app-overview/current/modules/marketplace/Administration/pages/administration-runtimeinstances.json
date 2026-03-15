@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.RuntimeInstances",
+                  "stableId":  "Administration.RuntimeInstances",
+                  "slug":  "administration-runtimeinstances",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-runtimeinstances.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-runtimeinstances.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/pages/administration-runtimeinstances.json",
+                  "l2Logical":  "page:Administration.RuntimeInstances",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Administration/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Administration/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/pages/INDEX.json"
+              },
+    "qualifiedName":  "Administration.RuntimeInstances",
+    "name":  "RuntimeInstances",
+    "title":  "Runtime Instances",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "Administration.Administrator"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

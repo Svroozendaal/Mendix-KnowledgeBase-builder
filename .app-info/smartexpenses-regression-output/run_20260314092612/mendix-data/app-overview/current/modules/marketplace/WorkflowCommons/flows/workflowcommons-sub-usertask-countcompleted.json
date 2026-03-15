@@ -1,0 +1,188 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_UserTask_CountCompleted",
+                  "stableId":  "6fd2345f-df64-470d-957d-e45ce6541a2a",
+                  "slug":  "workflowcommons-sub-usertask-countcompleted",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-countcompleted.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-countcompleted.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-usertask-countcompleted.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_UserTask_CountCompleted",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "6fd2345f-df64-470d-957d-e45ce6541a2a",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_UserTask_CountCompleted",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "25425592-be39-4099-a0df-d967e29047f1",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=CountCompleted, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=CountCompleted, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2d7dcaa3-5b75-42bf-8a35-58c14dc0eced",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTaskView_Completed from WorkflowCommons.UserTaskView",
+                      "detail":  "retrieve UserTaskView_Completed from WorkflowCommons.UserTaskView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ed4451c1-c721-44ba-8d08-77da7740e041",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "031cf3d0-7ac3-4762-a5e1-c41953a72f2d",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "14317f2b-fa77-4fc1-8691-481ff43b8dd7",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2a145ccf-ca18-42b7-a409-6d1a482b61b1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "61675a31-e2b4-44a9-a448-e855608cc535",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a8df8687-fa9d-4aa8-86fd-6937f6ab8b3e",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1605bf83-2ff7-4cb1-b69f-070b229446bf",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "8e093af4-ee85-4532-be79-b15c01528123",
+                      "originNodeId":  "1605bf83-2ff7-4cb1-b69f-070b229446bf",
+                      "destinationNodeId":  "2d7dcaa3-5b75-42bf-8a35-58c14dc0eced",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e7ba169c-c37f-4db1-bd55-01282741880c",
+                      "originNodeId":  "25425592-be39-4099-a0df-d967e29047f1",
+                      "destinationNodeId":  "ed4451c1-c721-44ba-8d08-77da7740e041",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a894446c-12e0-4a5c-81ff-1604fd374302",
+                      "originNodeId":  "2d7dcaa3-5b75-42bf-8a35-58c14dc0eced",
+                      "destinationNodeId":  "25425592-be39-4099-a0df-d967e29047f1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "1605bf83-2ff7-4cb1-b69f-070b229446bf"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "1605bf83-2ff7-4cb1-b69f-070b229446bf",
+                                         "2d7dcaa3-5b75-42bf-8a35-58c14dc0eced",
+                                         "25425592-be39-4099-a0df-d967e29047f1",
+                                         "ed4451c1-c721-44ba-8d08-77da7740e041"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_UserTask_CountCompleted\r\nNODES=9; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve UserTaskView_Completed from WorkflowCommons.UserTaskView\r\n3. ACTION AggregateListAction: AggregateListAction (output=CountCompleted, errorHandlingType=Rollback)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskSummary_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "365407d7-7936-4634-a7ec-f0b0324d9d78",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_CountCompleted",
+                          "isInternal":  true
+                      }
+                  ]
+}

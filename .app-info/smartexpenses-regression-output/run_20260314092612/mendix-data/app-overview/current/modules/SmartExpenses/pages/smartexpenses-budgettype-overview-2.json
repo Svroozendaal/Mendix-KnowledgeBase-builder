@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.BudgetType_Overview_2",
+                  "stableId":  "SmartExpenses.BudgetType_Overview_2",
+                  "slug":  "smartexpenses-budgettype-overview-2",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-budgettype-overview-2.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-budgettype-overview-2.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/pages/smartexpenses-budgettype-overview-2.json",
+                  "l2Logical":  "page:SmartExpenses.BudgetType_Overview_2",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/pages/INDEX.json"
+              },
+    "qualifiedName":  "SmartExpenses.BudgetType_Overview_2",
+    "name":  "BudgetType_Overview_2",
+    "title":  "Budget Type Overview",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "SmartExpenses.Admin"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

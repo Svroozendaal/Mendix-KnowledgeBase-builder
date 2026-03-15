@@ -1,0 +1,353 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                  "stableId":  "1e7a9ef7-7910-48df-b3fc-9230b272c5bb",
+                  "slug":  "workflowcommons-sub-usertask-targetusers-remove",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-targetusers-remove.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-targetusers-remove.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-usertask-targetusers-remove.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "1e7a9ef7-7910-48df-b3fc-9230b272c5bb",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "48632d63-6d9d-45e6-a020-1a8e6dbba248",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change UserTaskView (UserTaskView_TargetUsers=$UserList; refreshInClient=true)",
+                      "detail":  "change UserTaskView (UserTaskView_TargetUsers=$UserList; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f1448940-d91d-4866-973f-499ae8fc7300",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Workflow (refreshInClient=true)",
+                      "detail":  "change Workflow (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d5d30ee1-825b-4338-bd52-cfe56907a0fc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change WorkflowUserTask (WorkflowUserTask_TargetUsers=$UserList; refreshInClient=true)",
+                      "detail":  "change WorkflowUserTask (WorkflowUserTask_TargetUsers=$UserList; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "114cff89-142a-45c5-af4b-432ba078cec4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ListOperationAction: ListOperationAction (output=UserTaskView, errorHandlingType=Rollback)",
+                      "detail":  "ListOperationAction (output=UserTaskView, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ecb46f2a-ff2a-492d-a428-612c9aecb694",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "88893d8c-db2c-4d57-90ad-ce3dd77a8d35",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTaskViewList over association UserTaskView_WorkflowUserTask from WorkflowUserTask",
+                      "detail":  "retrieve UserTaskViewList over association UserTaskView_WorkflowUserTask from WorkflowUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "822a8073-2ff9-4599-8ed2-c143d90794cf",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow over association WorkflowUserTask_Workflow from WorkflowUserTask",
+                      "detail":  "retrieve Workflow over association WorkflowUserTask_Workflow from WorkflowUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9f7f12aa-a641-458c-8358-ce8829455cb1",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=An error occured during user targeting. Please contact your system administrator., type=Error, blocking=true)",
+                      "detail":  "show message (text=An error occured during user targeting. Please contact your system administrator., type=Error, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b1491719-9781-42a7-a040-bfea14b78446",
+                      "nodeType":  "Annotation",
+                      "label":  "Refresh to ensure timeline update",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0412ea25-50d8-4e94-8785-47188074c157",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d0c6fad8-3f47-4e24-883e-465fcde4462b",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c8a799fd-50d0-411f-986e-da57f407375c",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Available? expression=$UserTaskView != empty",
+                      "detail":  "Available? expression=$UserTaskView != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5b5ad4db-6ad6-4348-99b3-fa1f2f844abd",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "78666e3e-d482-409a-bacf-c5c63253d36e",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0c02c66d-712d-44e1-ae46-174e58e0c6ff",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "bf168628-902d-4bda-a925-3f19c3f79830",
+                      "originNodeId":  "0c02c66d-712d-44e1-ae46-174e58e0c6ff",
+                      "destinationNodeId":  "d5d30ee1-825b-4338-bd52-cfe56907a0fc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bd2019bf-c261-4ddd-901d-46216304e800",
+                      "originNodeId":  "822a8073-2ff9-4599-8ed2-c143d90794cf",
+                      "destinationNodeId":  "f1448940-d91d-4866-973f-499ae8fc7300",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "89d26a0d-1d2b-4594-970e-2a1f3e852f1c",
+                      "originNodeId":  "f1448940-d91d-4866-973f-499ae8fc7300",
+                      "destinationNodeId":  "0412ea25-50d8-4e94-8785-47188074c157",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "023a5bdb-e7d0-40ee-9bbe-a461f0dd15c1",
+                      "originNodeId":  "48632d63-6d9d-45e6-a020-1a8e6dbba248",
+                      "destinationNodeId":  "d0c6fad8-3f47-4e24-883e-465fcde4462b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bf35eb68-973f-4f67-98b3-89dfaf1c03e8",
+                      "originNodeId":  "88893d8c-db2c-4d57-90ad-ce3dd77a8d35",
+                      "destinationNodeId":  "114cff89-142a-45c5-af4b-432ba078cec4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9264e104-6906-426d-a850-f2c1f085920e",
+                      "originNodeId":  "114cff89-142a-45c5-af4b-432ba078cec4",
+                      "destinationNodeId":  "c8a799fd-50d0-411f-986e-da57f407375c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "48e8d481-666f-4944-96c7-3707079fc1d4",
+                      "originNodeId":  "d5d30ee1-825b-4338-bd52-cfe56907a0fc",
+                      "destinationNodeId":  "88893d8c-db2c-4d57-90ad-ce3dd77a8d35",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "09c6f41d-b40d-4772-aba1-18d30742ffd9",
+                      "originNodeId":  "c8a799fd-50d0-411f-986e-da57f407375c",
+                      "destinationNodeId":  "48632d63-6d9d-45e6-a020-1a8e6dbba248",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "176e9a71-2edc-47ae-8283-e7d66d0e4a6b",
+                      "originNodeId":  "c8a799fd-50d0-411f-986e-da57f407375c",
+                      "destinationNodeId":  "ecb46f2a-ff2a-492d-a428-612c9aecb694",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "e630a792-3dea-4e40-84c5-99710925f19e",
+                      "originNodeId":  "d0c6fad8-3f47-4e24-883e-465fcde4462b",
+                      "destinationNodeId":  "822a8073-2ff9-4599-8ed2-c143d90794cf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "57863df2-22b3-4d46-98ae-bae36cfb91d7",
+                      "originNodeId":  "9f7f12aa-a641-458c-8358-ce8829455cb1",
+                      "destinationNodeId":  "d0c6fad8-3f47-4e24-883e-465fcde4462b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "e473267b-e842-43db-8d9f-083bf1bea13c",
+                      "originNodeId":  "ecb46f2a-ff2a-492d-a428-612c9aecb694",
+                      "destinationNodeId":  "9f7f12aa-a641-458c-8358-ce8829455cb1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "0c02c66d-712d-44e1-ae46-174e58e0c6ff"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "0c02c66d-712d-44e1-ae46-174e58e0c6ff",
+                                         "d5d30ee1-825b-4338-bd52-cfe56907a0fc",
+                                         "88893d8c-db2c-4d57-90ad-ce3dd77a8d35",
+                                         "114cff89-142a-45c5-af4b-432ba078cec4",
+                                         "c8a799fd-50d0-411f-986e-da57f407375c",
+                                         "48632d63-6d9d-45e6-a020-1a8e6dbba248",
+                                         "d0c6fad8-3f47-4e24-883e-465fcde4462b",
+                                         "822a8073-2ff9-4599-8ed2-c143d90794cf",
+                                         "f1448940-d91d-4866-973f-499ae8fc7300",
+                                         "0412ea25-50d8-4e94-8785-47188074c157",
+                                         "ecb46f2a-ff2a-492d-a428-612c9aecb694",
+                                         "9f7f12aa-a641-458c-8358-ce8829455cb1"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_UserTask_TargetUsers_Remove\r\nNODES=15; EDGES=12\r\n1. START\r\n2. ACTION ChangeObjectAction: change WorkflowUserTask (WorkflowUserTask_TargetUsers=$UserList; refreshInClient=true)\r\n3. ACTION RetrieveAction: retrieve UserTaskViewList over association UserTaskView_WorkflowUserTask from WorkflowUserTask\r\n4. ACTION ListOperationAction: ListOperationAction (output=UserTaskView, errorHandlingType=Rollback)\r\n5. DECISION Available? expression=$UserTaskView != empty\r\n6. BRANCH when EnumerationCase=true\r\n  7. ACTION ChangeObjectAction: change UserTaskView (UserTaskView_TargetUsers=$UserList; refreshInClient=true)\r\n  8. NODE ExclusiveMerge: ExclusiveMerge\r\n  9. ACTION RetrieveAction: retrieve Workflow over association WorkflowUserTask_Workflow from WorkflowUserTask\r\n  10. ACTION ChangeObjectAction: change Workflow (refreshInClient=true)\r\n  11. END\r\n12. BRANCH when EnumerationCase=false\r\n  13. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  14. ACTION ShowMessageAction: show message (text=An error occured during user targeting. Please contact your system administrator., type=Error, blocking=true)\r\n  15. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_WorkflowUserTask_TargetUsers_Remove",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "4fa96ad3-b85f-46c2-a952-58109762e855",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_UserTask_TargetUser_Remove",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "42fec640-a36b-4319-b821-8843ad85ecf3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_TargetUsers_Remove",
+                          "isInternal":  true
+                      }
+                  ]
+}

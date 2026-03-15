@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.DeleteDbSizeEstimate",
+                  "stableId":  "628e887d-8ec9-4c14-9fe9-c3e2b13d79be",
+                  "slug":  "mxmodelreflection-deletedbsizeestimate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-deletedbsizeestimate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-deletedbsizeestimate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-deletedbsizeestimate.json",
+                  "l2Logical":  "flow:MxModelReflection.DeleteDbSizeEstimate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "628e887d-8ec9-4c14-9fe9-c3e2b13d79be",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.DeleteDbSizeEstimate",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "261358ff-0313-4a69-b411-d4ceaabde566",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DeleteAction: delete DbSizeEstimate (refreshInClient=true)",
+                      "detail":  "delete DbSizeEstimate (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d2dfbb70-37fc-497f-962b-c0d1a2d9c7fc",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "df169cc0-a23f-4b88-81a1-bf827dd8d140",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7861d904-9d7c-431d-bcc8-0b1acc70c7bd",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "48855e0a-c5d0-4db3-8e65-f8e14b35b7ec",
+                      "originNodeId":  "7861d904-9d7c-431d-bcc8-0b1acc70c7bd",
+                      "destinationNodeId":  "261358ff-0313-4a69-b411-d4ceaabde566",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "390d2354-8cc9-417a-857e-6dfb5d133c65",
+                      "originNodeId":  "261358ff-0313-4a69-b411-d4ceaabde566",
+                      "destinationNodeId":  "d2dfbb70-37fc-497f-962b-c0d1a2d9c7fc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "7861d904-9d7c-431d-bcc8-0b1acc70c7bd"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7861d904-9d7c-431d-bcc8-0b1acc70c7bd",
+                                         "261358ff-0313-4a69-b411-d4ceaabde566",
+                                         "d2dfbb70-37fc-497f-962b-c0d1a2d9c7fc"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.DeleteDbSizeEstimate\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION DeleteAction: delete DbSizeEstimate (refreshInClient=true)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,242 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_UserTask_AverageHandlingTime",
+                  "stableId":  "7c50b7f7-cd22-4fad-9133-6237635c4dda",
+                  "slug":  "workflowcommons-sub-usertask-averagehandlingtime",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-averagehandlingtime.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertask-averagehandlingtime.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-usertask-averagehandlingtime.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_UserTask_AverageHandlingTime",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "7c50b7f7-cd22-4fad-9133-6237635c4dda",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_UserTask_AverageHandlingTime",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "b6879873-339e-4624-ab0f-f7a55ff1f225",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable TotalHandlingTimeInDays=$TotalHandlingTimeInDays + daysBetween($IteratorUserTask/StartTime, $IteratorUserTask/EndTime)",
+                      "detail":  "change variable TotalHandlingTimeInDays=$TotalHandlingTimeInDays + daysBetween($IteratorUserTask/StartTime, $IteratorUserTask/EndTime)",
+                      "loopOwnerId":  "83941ce5-2d92-48c3-beb2-6bed96ec0a4d",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "50c778e5-6afb-4752-9091-00740cc1bd50",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable TotalHandlingTimeInDays=0",
+                      "detail":  "create variable TotalHandlingTimeInDays=0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a45481a3-099c-4149-aa64-c4b1f3ab65c2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTaskView_Completed from WorkflowCommons.UserTaskView",
+                      "detail":  "retrieve UserTaskView_Completed from WorkflowCommons.UserTaskView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cbbc770c-d9c8-41a1-a80a-59e77f94a60e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "83941ce5-2d92-48c3-beb2-6bed96ec0a4d",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate UserTaskView_Completed as IteratorUserTask",
+                      "detail":  "iterate UserTaskView_Completed as IteratorUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "01bddee3-b4cf-446e-9dda-382d48b986f0",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "39a73800-853a-4c8c-a3c9-24b542f77ba2",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4440b151-dd66-419f-aacf-37bf06b626f1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "842954bf-87a6-4f0a-a58e-35cfa6456e5f",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a5fdcc61-4bc5-4917-92aa-7ddbeae45917",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d92cee84-597c-4314-91c8-225a2ca59559",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "aab6549e-e8a6-4166-92f6-4b7fe23183aa",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "16a1575b-686a-4c2b-ab36-d04b9b525d2e",
+                      "originNodeId":  "50c778e5-6afb-4752-9091-00740cc1bd50",
+                      "destinationNodeId":  "83941ce5-2d92-48c3-beb2-6bed96ec0a4d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a5168c73-c507-412a-85ff-e72f59cc30b9",
+                      "originNodeId":  "aab6549e-e8a6-4166-92f6-4b7fe23183aa",
+                      "destinationNodeId":  "a45481a3-099c-4149-aa64-c4b1f3ab65c2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5c463491-5caf-4b77-9a5d-b32301b0692f",
+                      "originNodeId":  "83941ce5-2d92-48c3-beb2-6bed96ec0a4d",
+                      "destinationNodeId":  "cbbc770c-d9c8-41a1-a80a-59e77f94a60e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1b7c4840-2d77-46dc-9314-4f3773129e38",
+                      "originNodeId":  "a45481a3-099c-4149-aa64-c4b1f3ab65c2",
+                      "destinationNodeId":  "50c778e5-6afb-4752-9091-00740cc1bd50",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "aab6549e-e8a6-4166-92f6-4b7fe23183aa"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "aab6549e-e8a6-4166-92f6-4b7fe23183aa",
+                                         "a45481a3-099c-4149-aa64-c4b1f3ab65c2",
+                                         "50c778e5-6afb-4752-9091-00740cc1bd50",
+                                         "83941ce5-2d92-48c3-beb2-6bed96ec0a4d",
+                                         "b6879873-339e-4624-ab0f-f7a55ff1f225",
+                                         "cbbc770c-d9c8-41a1-a80a-59e77f94a60e"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_UserTask_AverageHandlingTime\r\nNODES=11; EDGES=4\r\n1. START\r\n2. ACTION RetrieveAction: retrieve UserTaskView_Completed from WorkflowCommons.UserTaskView\r\n3. ACTION CreateVariableAction: create variable TotalHandlingTimeInDays=0\r\n4. LOOP iterate UserTaskView_Completed as IteratorUserTask\r\n  5. LOOP BODY\r\n    6. ACTION ChangeVariableAction: change variable TotalHandlingTimeInDays=$TotalHandlingTimeInDays + daysBetween($IteratorUserTask/StartTime, $IteratorUserTask/EndTime)\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskSeries_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "d6db2c05-c1a9-4242-89a9-4a19c892a9da",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_AverageHandlingTime",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SUB_TaskSummary_CreateOrUpdate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "c5b243c6-7165-4579-af33-4ebb6fea36f9",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_AverageHandlingTime",
+                          "isInternal":  true
+                      }
+                  ]
+}

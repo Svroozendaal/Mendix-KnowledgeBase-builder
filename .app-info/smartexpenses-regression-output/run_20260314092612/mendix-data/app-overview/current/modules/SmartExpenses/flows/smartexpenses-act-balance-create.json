@@ -1,0 +1,209 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_Balance_Create",
+                  "stableId":  "da4b416d-3998-463a-a951-448fc5064f4e",
+                  "slug":  "smartexpenses-act-balance-create",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-balance-create.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-balance-create.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-balance-create.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_Balance_Create",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "da4b416d-3998-463a-a951-448fc5064f4e",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_Balance_Create",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "e022fd46-6fe9-4a52-9b31-fc8c26232094",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change currentSession (SessionId=\u0027test\u0027; refreshInClient=false)",
+                      "detail":  "change currentSession (SessionId=\u0027test\u0027; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e74c8102-b8dd-4466-a540-fe57614b24b7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CommitAction: commit currentSession (refreshInClient=false, withEvents=true)",
+                      "detail":  "commit currentSession (refreshInClient=false, withEvents=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "37421bf1-d425-4c0b-bbfe-0740635c9325",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.Balance as NewBalance (Balance_FBGProfile=$FBGProfile)",
+                      "detail":  "create SmartExpenses.Balance as NewBalance (Balance_FBGProfile=$FBGProfile)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2929a54d-ac54-4c0a-83ad-9a6cb2ae155c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve User over association Session_User from currentSession",
+                      "detail":  "retrieve User over association Session_User from currentSession",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "da99955e-d69d-4296-9b64-2fd5468ec0f5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page SmartExpenses.Balance_NewEdit",
+                      "detail":  "show page SmartExpenses.Balance_NewEdit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a492b26c-bcdc-494e-a97c-c7fd2514bbc3",
+                      "nodeType":  "Annotation",
+                      "label":  "Simple microflow to create a Balance, connect it to the FBGProfile and open the NewEdit page.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "83c5331e-7480-4980-9995-4ba118344d77",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fce0744a-375b-4f73-b376-064fa6bc6552",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d13e0e41-7358-4700-97c3-dd84f749e5d9",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "a9a3577d-6b78-4054-8528-f0703197382d",
+                      "originNodeId":  "da99955e-d69d-4296-9b64-2fd5468ec0f5",
+                      "destinationNodeId":  "2929a54d-ac54-4c0a-83ad-9a6cb2ae155c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "69d0f328-f866-4b7e-b1b9-ccd4d86f7cb2",
+                      "originNodeId":  "37421bf1-d425-4c0b-bbfe-0740635c9325",
+                      "destinationNodeId":  "da99955e-d69d-4296-9b64-2fd5468ec0f5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "12e21bdc-53c9-4157-ab64-8400fdec4fc4",
+                      "originNodeId":  "d13e0e41-7358-4700-97c3-dd84f749e5d9",
+                      "destinationNodeId":  "37421bf1-d425-4c0b-bbfe-0740635c9325",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cb654cbb-d440-4225-8eb4-59e77bf4fa66",
+                      "originNodeId":  "2929a54d-ac54-4c0a-83ad-9a6cb2ae155c",
+                      "destinationNodeId":  "e022fd46-6fe9-4a52-9b31-fc8c26232094",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c911711f-66d2-410a-8e62-dfdc93d899b4",
+                      "originNodeId":  "e022fd46-6fe9-4a52-9b31-fc8c26232094",
+                      "destinationNodeId":  "e74c8102-b8dd-4466-a540-fe57614b24b7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "28610c3f-f789-4dca-8111-a8cfbd02ab8e",
+                      "originNodeId":  "e74c8102-b8dd-4466-a540-fe57614b24b7",
+                      "destinationNodeId":  "83c5331e-7480-4980-9995-4ba118344d77",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "d13e0e41-7358-4700-97c3-dd84f749e5d9"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "d13e0e41-7358-4700-97c3-dd84f749e5d9",
+                                         "37421bf1-d425-4c0b-bbfe-0740635c9325",
+                                         "da99955e-d69d-4296-9b64-2fd5468ec0f5",
+                                         "2929a54d-ac54-4c0a-83ad-9a6cb2ae155c",
+                                         "e022fd46-6fe9-4a52-9b31-fc8c26232094",
+                                         "e74c8102-b8dd-4466-a540-fe57614b24b7",
+                                         "83c5331e-7480-4980-9995-4ba118344d77"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_Balance_Create\r\nNODES=9; EDGES=6\r\n1. START\r\n2. ACTION CreateObjectAction: create SmartExpenses.Balance as NewBalance (Balance_FBGProfile=$FBGProfile)\r\n3. ACTION ShowPageAction: show page SmartExpenses.Balance_NewEdit\r\n4. ACTION RetrieveAction: retrieve User over association Session_User from currentSession\r\n5. ACTION ChangeObjectAction: change currentSession (SessionId=\u0027test\u0027; refreshInClient=false)\r\n6. ACTION CommitAction: commit currentSession (refreshInClient=false, withEvents=true)\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

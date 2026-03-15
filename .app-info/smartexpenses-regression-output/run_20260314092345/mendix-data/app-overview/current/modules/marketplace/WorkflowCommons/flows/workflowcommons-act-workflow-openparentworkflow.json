@@ -1,0 +1,152 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_Workflow_OpenParentWorkflow",
+                  "stableId":  "b3a14c27-72e6-4a60-adba-7a81328c8d1a",
+                  "slug":  "workflowcommons-act-workflow-openparentworkflow",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-openparentworkflow.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflow-openparentworkflow.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflow-openparentworkflow.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_Workflow_OpenParentWorkflow",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "b3a14c27-72e6-4a60-adba-7a81328c8d1a",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_Workflow_OpenParentWorkflow",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "9bd1d000-5923-453e-b13d-95107c957d8e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_ShowWorkflowAdminPage",
+                      "detail":  "call microflow WorkflowCommons.SUB_Workflow_ShowWorkflowAdminPage",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Workflow_ShowWorkflowAdminPage",
+                                        "sourceNodeId":  "9bd1d000-5923-453e-b13d-95107c957d8e"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "9a9b0e29-563f-406a-bca8-f371b3266f3e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve ParentWorkflow over association Workflow_ParentWorkflow from Workflow",
+                      "detail":  "retrieve ParentWorkflow over association Workflow_ParentWorkflow from Workflow",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "103a47f9-caf8-4738-9864-03091ce10567",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ff626515-a269-426b-9ead-4bc3e11e9c35",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ef6cc7f8-d39d-4117-86e5-23de212b625c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "984099d4-1b84-419b-9288-1bb29763abf6",
+                      "originNodeId":  "ef6cc7f8-d39d-4117-86e5-23de212b625c",
+                      "destinationNodeId":  "9a9b0e29-563f-406a-bca8-f371b3266f3e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "11d583a8-1c60-42e1-9aa2-f3d337549697",
+                      "originNodeId":  "9a9b0e29-563f-406a-bca8-f371b3266f3e",
+                      "destinationNodeId":  "9bd1d000-5923-453e-b13d-95107c957d8e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "60dbdfe5-2a85-4211-895f-96dcd5d2ec33",
+                      "originNodeId":  "9bd1d000-5923-453e-b13d-95107c957d8e",
+                      "destinationNodeId":  "103a47f9-caf8-4738-9864-03091ce10567",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Workflow_ShowWorkflowAdminPage",
+                      "sourceNodeId":  "9bd1d000-5923-453e-b13d-95107c957d8e"
+                  }
+              ],
+    "startNodeIds":  [
+                         "ef6cc7f8-d39d-4117-86e5-23de212b625c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "ef6cc7f8-d39d-4117-86e5-23de212b625c",
+                                         "9a9b0e29-563f-406a-bca8-f371b3266f3e",
+                                         "9bd1d000-5923-453e-b13d-95107c957d8e",
+                                         "103a47f9-caf8-4738-9864-03091ce10567"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_Workflow_OpenParentWorkflow\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve ParentWorkflow over association Workflow_ParentWorkflow from Workflow\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Workflow_ShowWorkflowAdminPage\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_Workflow_OpenParentWorkflow",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "9bd1d000-5923-453e-b13d-95107c957d8e",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Workflow_ShowWorkflowAdminPage",
+                          "isInternal":  true
+                      }
+                  ]
+}

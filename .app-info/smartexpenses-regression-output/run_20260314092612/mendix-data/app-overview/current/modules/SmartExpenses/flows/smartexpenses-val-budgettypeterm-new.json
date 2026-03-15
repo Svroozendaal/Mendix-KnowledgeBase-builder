@@ -1,0 +1,496 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.VAL_BudgetTypeTerm_New",
+                  "stableId":  "1a167812-c42e-4ba1-bcf8-ce98381e0012",
+                  "slug":  "smartexpenses-val-budgettypeterm-new",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-val-budgettypeterm-new.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-val-budgettypeterm-new.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-val-budgettypeterm-new.json",
+                  "l2Logical":  "flow:SmartExpenses.VAL_BudgetTypeTerm_New",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "1a167812-c42e-4ba1-bcf8-ce98381e0012",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.VAL_BudgetTypeTerm_New",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "161cdca1-0a87-4f28-bf21-c5546801127c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable BudgetTerm_BudgetAmountValidationFeedback=$BudgetTerm_BudgetAmountValidationFeedback + \u0027Vul een hoeveelheid in\u0027",
+                      "detail":  "change variable BudgetTerm_BudgetAmountValidationFeedback=$BudgetTerm_BudgetAmountValidationFeedback + \u0027Vul een hoeveelheid in\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3983df1b-a794-43aa-a6ba-183d0f699303",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable BudgetTerm_BudgetAmountValidationFeedback=if trim($BudgetTerm_BudgetAmountValidationFeedback) = \u0027\u0027 then \u0027Hoeveelheid mag niet lager zijn dan 0\u0027 else $BudgetTerm_BudgetAmountValidationFeedback + \u0027 \u0027 + \u0027Hoeveelheid mag niet lager zijn dan 0\u0027",
+                      "detail":  "change variable BudgetTerm_BudgetAmountValidationFeedback=if trim($BudgetTerm_BudgetAmountValidationFeedback) = \u0027\u0027 then \u0027Hoeveelheid mag niet lager zijn dan 0\u0027 else $BudgetTerm_BudgetAmountValidationFeedback + \u0027 \u0027 + \u0027Hoeveelheid mag niet lager zijn dan 0\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "01d92e84-f1d3-4514-acd9-a0a2583397b7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "68e17b9d-de71-4cca-b161-8103483319d7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d8645f13-f02d-4359-81d1-c9f4feef87ce",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ae244534-e6e6-430e-ab9c-42bb03e0678a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable BudgetTerm_BudgetAmountValidationFeedback=\u0027\u0027",
+                      "detail":  "create variable BudgetTerm_BudgetAmountValidationFeedback=\u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "09464102-a420-47de-899d-533b40aced4a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IsValid=true",
+                      "detail":  "create variable IsValid=true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3efdf8b7-2113-4b01-a0f4-6fe8ad978324",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "40166f67-c118-47b4-8ee9-f687d7586569",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2830c3ff-5021-4036-bb57-155aae9fd682",
+                      "nodeType":  "Annotation",
+                      "label":  "Add your annotation here.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "316d5493-3734-46cc-9cb9-70e4c38b987f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "069794b1-bcbf-43a8-bbfe-d159ac315613",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a4873fb8-826d-4966-9266-b06a43616325",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f8ee6c8c-ca5b-44d2-9efd-6251ac4eec44",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5992c531-584b-4962-a4cd-a35ac1820ffd",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=trim($BudgetTerm_BudgetAmountValidationFeedback) = \u0027\u0027",
+                      "detail":  "expression=trim($BudgetTerm_BudgetAmountValidationFeedback) = \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bb2ea2f0-21b0-43e2-bfce-c7b5dda3f30e",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Is Hoeveelheid greater than 0? expression=$BudgetTerm/BudgetAmount \u003e -0.01",
+                      "detail":  "Is Hoeveelheid greater than 0? expression=$BudgetTerm/BudgetAmount \u003e -0.01",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "020eeb22-3a55-48f9-8ace-05379cbe3669",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Is Hoeveelheid not empty? expression=$BudgetTerm/BudgetAmount != empty",
+                      "detail":  "Is Hoeveelheid not empty? expression=$BudgetTerm/BudgetAmount != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c7552589-a963-474a-a979-38d754a950d7",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Is Naam not empty? expression=trim($BudgetType/Name) != \u0027\u0027",
+                      "detail":  "Is Naam not empty? expression=trim($BudgetType/Name) != \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "141089f1-68e8-4bbc-b5fa-1ef2a6ebb631",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b9ad9843-5eb7-482f-8621-c4b4133e4c34",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4427d4a4-5e58-4a31-b1e5-9e1c71844665",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ff8e94c9-94be-461c-b609-53fb43bf4268",
+                      "originNodeId":  "4427d4a4-5e58-4a31-b1e5-9e1c71844665",
+                      "destinationNodeId":  "09464102-a420-47de-899d-533b40aced4a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "074981f4-2f74-4c38-9cf6-c1885b97b8e7",
+                      "originNodeId":  "09464102-a420-47de-899d-533b40aced4a",
+                      "destinationNodeId":  "c7552589-a963-474a-a979-38d754a950d7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b8376ece-fc2c-461e-a328-c5bd03f27c84",
+                      "originNodeId":  "c7552589-a963-474a-a979-38d754a950d7",
+                      "destinationNodeId":  "a4873fb8-826d-4966-9266-b06a43616325",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d7037747-6156-4757-9857-8e7210601641",
+                      "originNodeId":  "a4873fb8-826d-4966-9266-b06a43616325",
+                      "destinationNodeId":  "ae244534-e6e6-430e-ab9c-42bb03e0678a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a5206afa-56d9-4e1b-b56d-e23a95610a3e",
+                      "originNodeId":  "c7552589-a963-474a-a979-38d754a950d7",
+                      "destinationNodeId":  "d8645f13-f02d-4359-81d1-c9f4feef87ce",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "da7805fa-9747-45bd-96cd-ee2fa63f98e0",
+                      "originNodeId":  "d8645f13-f02d-4359-81d1-c9f4feef87ce",
+                      "destinationNodeId":  "40166f67-c118-47b4-8ee9-f687d7586569",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "9ea72be3-d5a3-408a-9af6-cfc3061b63a6",
+                      "originNodeId":  "40166f67-c118-47b4-8ee9-f687d7586569",
+                      "destinationNodeId":  "a4873fb8-826d-4966-9266-b06a43616325",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "db938c4e-c18f-49c5-a2ff-96e1abda3a3e",
+                      "originNodeId":  "ae244534-e6e6-430e-ab9c-42bb03e0678a",
+                      "destinationNodeId":  "020eeb22-3a55-48f9-8ace-05379cbe3669",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4e955955-4744-433d-a726-72dbf02d608a",
+                      "originNodeId":  "020eeb22-3a55-48f9-8ace-05379cbe3669",
+                      "destinationNodeId":  "bb2ea2f0-21b0-43e2-bfce-c7b5dda3f30e",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2befe71e-b98e-47be-9d97-c0a3b30efe37",
+                      "originNodeId":  "bb2ea2f0-21b0-43e2-bfce-c7b5dda3f30e",
+                      "destinationNodeId":  "f8ee6c8c-ca5b-44d2-9efd-6251ac4eec44",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f1bdd29c-4f20-41e0-8b1c-044eed390ae2",
+                      "originNodeId":  "f8ee6c8c-ca5b-44d2-9efd-6251ac4eec44",
+                      "destinationNodeId":  "5992c531-584b-4962-a4cd-a35ac1820ffd",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e1a9096a-9cb7-4053-97fe-dd52c768031d",
+                      "originNodeId":  "bb2ea2f0-21b0-43e2-bfce-c7b5dda3f30e",
+                      "destinationNodeId":  "68e17b9d-de71-4cca-b161-8103483319d7",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0b9cc8f3-f6da-4c15-8752-e846f4758099",
+                      "originNodeId":  "68e17b9d-de71-4cca-b161-8103483319d7",
+                      "destinationNodeId":  "3983df1b-a794-43aa-a6ba-183d0f699303",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "a96f507a-4680-458c-ab35-3e94cba3d5ea",
+                      "originNodeId":  "3983df1b-a794-43aa-a6ba-183d0f699303",
+                      "destinationNodeId":  "f8ee6c8c-ca5b-44d2-9efd-6251ac4eec44",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "a2e19646-53aa-45b4-be32-d751d89530f5",
+                      "originNodeId":  "020eeb22-3a55-48f9-8ace-05379cbe3669",
+                      "destinationNodeId":  "01d92e84-f1d3-4514-acd9-a0a2583397b7",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "2216cafd-de4a-477a-a37f-3e29d5d701a6",
+                      "originNodeId":  "01d92e84-f1d3-4514-acd9-a0a2583397b7",
+                      "destinationNodeId":  "161cdca1-0a87-4f28-bf21-c5546801127c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "64a97ce0-db32-4119-b8a8-05ce6c957412",
+                      "originNodeId":  "161cdca1-0a87-4f28-bf21-c5546801127c",
+                      "destinationNodeId":  "f8ee6c8c-ca5b-44d2-9efd-6251ac4eec44",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "2e04f3e3-b038-4c7e-ad9d-55506a1dacda",
+                      "originNodeId":  "5992c531-584b-4962-a4cd-a35ac1820ffd",
+                      "destinationNodeId":  "069794b1-bcbf-43a8-bbfe-d159ac315613",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0a18bfc3-b4d3-40ab-9ec1-72124e0a739f",
+                      "originNodeId":  "069794b1-bcbf-43a8-bbfe-d159ac315613",
+                      "destinationNodeId":  "316d5493-3734-46cc-9cb9-70e4c38b987f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b2d80a22-3988-45f9-b4a4-b2a50d56041f",
+                      "originNodeId":  "5992c531-584b-4962-a4cd-a35ac1820ffd",
+                      "destinationNodeId":  "3efdf8b7-2113-4b01-a0f4-6fe8ad978324",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "363698d7-4fba-4ac1-bd6a-4d1151bc1a6c",
+                      "originNodeId":  "3efdf8b7-2113-4b01-a0f4-6fe8ad978324",
+                      "destinationNodeId":  "069794b1-bcbf-43a8-bbfe-d159ac315613",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "4427d4a4-5e58-4a31-b1e5-9e1c71844665"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "4427d4a4-5e58-4a31-b1e5-9e1c71844665",
+                                         "09464102-a420-47de-899d-533b40aced4a",
+                                         "c7552589-a963-474a-a979-38d754a950d7",
+                                         "a4873fb8-826d-4966-9266-b06a43616325",
+                                         "ae244534-e6e6-430e-ab9c-42bb03e0678a",
+                                         "020eeb22-3a55-48f9-8ace-05379cbe3669",
+                                         "bb2ea2f0-21b0-43e2-bfce-c7b5dda3f30e",
+                                         "f8ee6c8c-ca5b-44d2-9efd-6251ac4eec44",
+                                         "5992c531-584b-4962-a4cd-a35ac1820ffd",
+                                         "069794b1-bcbf-43a8-bbfe-d159ac315613",
+                                         "316d5493-3734-46cc-9cb9-70e4c38b987f",
+                                         "3efdf8b7-2113-4b01-a0f4-6fe8ad978324",
+                                         "68e17b9d-de71-4cca-b161-8103483319d7",
+                                         "3983df1b-a794-43aa-a6ba-183d0f699303",
+                                         "01d92e84-f1d3-4514-acd9-a0a2583397b7",
+                                         "161cdca1-0a87-4f28-bf21-c5546801127c",
+                                         "d8645f13-f02d-4359-81d1-c9f4feef87ce",
+                                         "40166f67-c118-47b4-8ee9-f687d7586569"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.VAL_BudgetTypeTerm_New\r\nNODES=21; EDGES=21\r\n1. START\r\n2. ACTION CreateVariableAction: create variable IsValid=true\r\n3. DECISION Is Naam not empty? expression=trim($BudgetType/Name) != \u0027\u0027\r\n4. BRANCH when EnumerationCase=true\r\n  5. NODE ExclusiveMerge: ExclusiveMerge\r\n  6. ACTION CreateVariableAction: create variable BudgetTerm_BudgetAmountValidationFeedback=\u0027\u0027\r\n  7. DECISION Is Hoeveelheid not empty? expression=$BudgetTerm/BudgetAmount != empty\r\n  8. BRANCH when EnumerationCase=true\r\n    9. DECISION Is Hoeveelheid greater than 0? expression=$BudgetTerm/BudgetAmount \u003e -0.01\r\n    10. BRANCH when EnumerationCase=true\r\n      11. NODE ExclusiveMerge: ExclusiveMerge\r\n      12. DECISION expression=trim($BudgetTerm_BudgetAmountValidationFeedback) = \u0027\u0027\r\n      13. BRANCH when EnumerationCase=true\r\n        14. NODE ExclusiveMerge: ExclusiveMerge\r\n        15. END\r\n      16. BRANCH when EnumerationCase=false\r\n        17. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n        18. REF ExclusiveMerge\r\n    19. BRANCH when EnumerationCase=false\r\n      20. ACTION ChangeVariableAction: change variable IsValid=false\r\n      21. ACTION ChangeVariableAction: change variable BudgetTerm_BudgetAmountValidationFeedback=if trim($BudgetTerm_BudgetAmountValidationFeedback) = \u0027\u0027 then \u0027Hoeveelheid mag niet lager zijn dan 0\u0027 else $BudgetTerm_BudgetAmountValidationFeedback + \u0027 \u0027 + \u0027Hoeveelheid mag niet lager zijn dan 0\u0027\r\n      22. REF ExclusiveMerge\r\n  23. BRANCH when EnumerationCase=false\r\n    24. ACTION ChangeVariableAction: change variable IsValid=false\r\n    25. ACTION ChangeVariableAction: change variable BudgetTerm_BudgetAmountValidationFeedback=$BudgetTerm_BudgetAmountValidationFeedback + \u0027Vul een hoeveelheid in\u0027\r\n    26. REF ExclusiveMerge\r\n27. BRANCH when EnumerationCase=false\r\n  28. ACTION ChangeVariableAction: change variable IsValid=false\r\n  29. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n  30. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.ACT_BudgetType_Save",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "161601ca-b912-4a10-8135-a69b79dc2710",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.VAL_BudgetTypeTerm_New",
+                          "isInternal":  true
+                      }
+                  ]
+}

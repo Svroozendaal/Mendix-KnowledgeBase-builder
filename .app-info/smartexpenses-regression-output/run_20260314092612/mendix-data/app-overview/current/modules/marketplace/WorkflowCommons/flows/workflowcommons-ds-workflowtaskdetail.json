@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowTaskDetail",
+                  "stableId":  "7af956a3-f247-4de8-859f-a7b9147b2cb1",
+                  "slug":  "workflowcommons-ds-workflowtaskdetail",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowtaskdetail.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowtaskdetail.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowtaskdetail.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowTaskDetail",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "7af956a3-f247-4de8-859f-a7b9147b2cb1",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowTaskDetail",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "de582de6-621d-4f03-8257-2e46487a922a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowTaskDetail over association WorkflowTaskDetail_DashboardContext from DashboardContext",
+                      "detail":  "retrieve WorkflowTaskDetail over association WorkflowTaskDetail_DashboardContext from DashboardContext",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ba6e38a3-5d6f-4009-a3a3-45ebe876b64e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fc8603d3-2920-4239-a196-3789b364d029",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "506fbd9c-cff3-4101-8138-31261fcaf250",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "17fbbf2e-a2e3-4a6c-a4fc-6eaa29f82df3",
+                      "originNodeId":  "506fbd9c-cff3-4101-8138-31261fcaf250",
+                      "destinationNodeId":  "de582de6-621d-4f03-8257-2e46487a922a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "44c497f6-73ce-45d5-94c8-6e27ccd1741b",
+                      "originNodeId":  "de582de6-621d-4f03-8257-2e46487a922a",
+                      "destinationNodeId":  "ba6e38a3-5d6f-4009-a3a3-45ebe876b64e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "506fbd9c-cff3-4101-8138-31261fcaf250"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "506fbd9c-cff3-4101-8138-31261fcaf250",
+                                         "de582de6-621d-4f03-8257-2e46487a922a",
+                                         "ba6e38a3-5d6f-4009-a3a3-45ebe876b64e"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_WorkflowTaskDetail\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION RetrieveAction: retrieve WorkflowTaskDetail over association WorkflowTaskDetail_DashboardContext from DashboardContext\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,261 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowView_LoadNotificationArea",
+                  "stableId":  "6eb2d9f8-6927-42fc-bb00-5ee1fd2c03b5",
+                  "slug":  "workflowcommons-ds-workflowview-loadnotificationarea",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowview-loadnotificationarea.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowview-loadnotificationarea.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowview-loadnotificationarea.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowView_LoadNotificationArea",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "6eb2d9f8-6927-42fc-bb00-5ee1fd2c03b5",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowView_LoadNotificationArea",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "c8bd7a41-1d44-4b4d-92c6-5563bc05d68a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaBlocked (AlertTitle=\u0027Workflow is blocked\u0027, AlertMessage=\u0027See state information for more details. Please contact the development team to fix this or as an admin abort/initiator withdraw this workflow.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Error)",
+                      "detail":  "create WorkflowCommons.NotificationArea as NewNotificationAreaBlocked (AlertTitle=\u0027Workflow is blocked\u0027, AlertMessage=\u0027See state information for more details. Please contact the development team to fix this or as an admin abort/initiator withdraw this workflow.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Error)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "75ab93ce-2021-45ba-9ae4-bc0858efc369",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaPaused (AlertTitle=\u0027Workflow is paused\u0027, AlertMessage=\u0027This workflow was paused an administrator is able to unpause and allow further execution.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Warning)",
+                      "detail":  "create WorkflowCommons.NotificationArea as NewNotificationAreaPaused (AlertTitle=\u0027Workflow is paused\u0027, AlertMessage=\u0027This workflow was paused an administrator is able to unpause and allow further execution.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Warning)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6d3d3243-3af9-4153-a9b1-1e09cd547287",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "98d6d636-3d83-45d0-b53f-fc1bb8c96b12",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b4d151ca-18d9-4ea1-bddf-3e7e57b076ad",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bb470579-7d73-4a0b-8daa-d3e96fe5710c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "90b45e40-54f9-4f51-9cb1-fa042462d535",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Incompatible? expression=$WorkflowView/State = System.WorkflowState.Incompatible",
+                      "detail":  "Incompatible? expression=$WorkflowView/State = System.WorkflowState.Incompatible",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d9111fdd-fb38-41fb-a0be-642308b30adf",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Paused? expression=$WorkflowView/State = System.WorkflowState.Paused",
+                      "detail":  "Paused? expression=$WorkflowView/State = System.WorkflowState.Paused",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "822740ca-8621-4145-a395-4909c05b4c2c",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Workflow passed? expression=$WorkflowView != empty",
+                      "detail":  "Workflow passed? expression=$WorkflowView != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9cb4ca81-ce06-4c19-82f4-4be909fe9473",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "90605401-8557-43e4-abd1-69b253bbb5ce",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "7ae32ace-103f-4151-a874-adad9a63099b",
+                      "originNodeId":  "90605401-8557-43e4-abd1-69b253bbb5ce",
+                      "destinationNodeId":  "822740ca-8621-4145-a395-4909c05b4c2c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6caa331f-e33c-4818-99e5-9be350816634",
+                      "originNodeId":  "c8bd7a41-1d44-4b4d-92c6-5563bc05d68a",
+                      "destinationNodeId":  "6d3d3243-3af9-4153-a9b1-1e09cd547287",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4c851175-6c17-4748-9cb8-a07f5278ee41",
+                      "originNodeId":  "90b45e40-54f9-4f51-9cb1-fa042462d535",
+                      "destinationNodeId":  "c8bd7a41-1d44-4b4d-92c6-5563bc05d68a",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "896b3bec-84f0-4983-bfe9-1faf822b16c0",
+                      "originNodeId":  "d9111fdd-fb38-41fb-a0be-642308b30adf",
+                      "destinationNodeId":  "bb470579-7d73-4a0b-8daa-d3e96fe5710c",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "2206f9a6-5e2c-4ffa-998b-22c40f97e818",
+                      "originNodeId":  "75ab93ce-2021-45ba-9ae4-bc0858efc369",
+                      "destinationNodeId":  "b4d151ca-18d9-4ea1-bddf-3e7e57b076ad",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a6ccb5b6-b3c5-4ff5-91f0-bd5e8743b9eb",
+                      "originNodeId":  "d9111fdd-fb38-41fb-a0be-642308b30adf",
+                      "destinationNodeId":  "75ab93ce-2021-45ba-9ae4-bc0858efc369",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "91bcfa01-ee5c-4a8b-adaa-cc9e70428db1",
+                      "originNodeId":  "90b45e40-54f9-4f51-9cb1-fa042462d535",
+                      "destinationNodeId":  "d9111fdd-fb38-41fb-a0be-642308b30adf",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "7004bb8a-4e09-4553-8144-5b72fd8bd27e",
+                      "originNodeId":  "822740ca-8621-4145-a395-4909c05b4c2c",
+                      "destinationNodeId":  "90b45e40-54f9-4f51-9cb1-fa042462d535",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "34829fc2-6f9a-4de3-94a5-7059255dd896",
+                      "originNodeId":  "822740ca-8621-4145-a395-4909c05b4c2c",
+                      "destinationNodeId":  "98d6d636-3d83-45d0-b53f-fc1bb8c96b12",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "90605401-8557-43e4-abd1-69b253bbb5ce"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "90605401-8557-43e4-abd1-69b253bbb5ce",
+                                         "822740ca-8621-4145-a395-4909c05b4c2c",
+                                         "90b45e40-54f9-4f51-9cb1-fa042462d535",
+                                         "c8bd7a41-1d44-4b4d-92c6-5563bc05d68a",
+                                         "6d3d3243-3af9-4153-a9b1-1e09cd547287",
+                                         "d9111fdd-fb38-41fb-a0be-642308b30adf",
+                                         "75ab93ce-2021-45ba-9ae4-bc0858efc369",
+                                         "b4d151ca-18d9-4ea1-bddf-3e7e57b076ad",
+                                         "bb470579-7d73-4a0b-8daa-d3e96fe5710c",
+                                         "98d6d636-3d83-45d0-b53f-fc1bb8c96b12"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.DS_WorkflowView_LoadNotificationArea\r\nNODES=11; EDGES=9\r\n1. START\r\n2. DECISION Workflow passed? expression=$WorkflowView != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. DECISION Incompatible? expression=$WorkflowView/State = System.WorkflowState.Incompatible\r\n  5. BRANCH when EnumerationCase=true\r\n    6. ACTION CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaBlocked (AlertTitle=\u0027Workflow is blocked\u0027, AlertMessage=\u0027See state information for more details. Please contact the development team to fix this or as an admin abort/initiator withdraw this workflow.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Error)\r\n    7. END\r\n  8. BRANCH when EnumerationCase=false\r\n    9. DECISION Paused? expression=$WorkflowView/State = System.WorkflowState.Paused\r\n    10. BRANCH when EnumerationCase=true\r\n      11. ACTION CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaPaused (AlertTitle=\u0027Workflow is paused\u0027, AlertMessage=\u0027This workflow was paused an administrator is able to unpause and allow further execution.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Warning)\r\n      12. END\r\n    13. BRANCH when EnumerationCase=false\r\n      14. END\r\n15. BRANCH when EnumerationCase=false\r\n  16. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

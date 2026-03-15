@@ -1,0 +1,19 @@
+---
+objectType: flow
+module: SmartExpenses
+qualifiedName: SmartExpenses.OCH_BulkEditHelper_setBudgetTerm
+stableId: 2953c3a8-6441-4fff-a89b-97d4bdbcb935
+slug: smartexpenses-och-bulkedithelper-setbudgetterm
+layer: L0
+l1: smartexpenses-och-bulkedithelper-setbudgetterm.overview.md
+l2Path: ../../../../app-overview/current/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbudgetterm.json
+l2Logical: flow:SmartExpenses.OCH_BulkEditHelper_setBudgetTerm
+sourceRun: cli_2026-03-14T09-23-46.259Z
+collectionL0: INDEX.abstract.md
+collectionL1: ../FLOWS.md
+---
+# Flow Abstract: SmartExpenses.OCH_BulkEditHelper_setBudgetTerm
+- Summary: Likely acts as a save, process, or background step because it mutates data without showing a page.
+- L1: [overview](smartexpenses-och-bulkedithelper-setbudgetterm.overview.md)
+- L2: [json](../../../../app-overview/current/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbudgetterm.json)
+- Collections: [collection L0](INDEX.abstract.md), [collection L1](../FLOWS.md)

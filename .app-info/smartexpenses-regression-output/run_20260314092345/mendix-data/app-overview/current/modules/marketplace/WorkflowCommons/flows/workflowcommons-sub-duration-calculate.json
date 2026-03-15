@@ -1,0 +1,459 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_Duration_Calculate",
+                  "stableId":  "d68f6e03-4c06-4ee7-8cf4-63760497f915",
+                  "slug":  "workflowcommons-sub-duration-calculate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-duration-calculate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-duration-calculate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-duration-calculate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_Duration_Calculate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "d68f6e03-4c06-4ee7-8cf4-63760497f915",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.SUB_Duration_Calculate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "e63a3fad-ff48-49ce-b327-fb6640f61fad",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewDurationHelper (Duration=$DurationInSeconds + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Seconds); refreshInClient=true)",
+                      "detail":  "change NewDurationHelper (Duration=$DurationInSeconds + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Seconds); refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cadef8a5-0264-4fa8-960c-4e9b1323150e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewDurationHelper (Duration=ceil($DurationInSeconds div (60 * 60 * 24)) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Days); refreshInClient=true)",
+                      "detail":  "change NewDurationHelper (Duration=ceil($DurationInSeconds div (60 * 60 * 24)) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Days); refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3594c373-7894-427a-9704-df889a859277",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewDurationHelper (Duration=ceil($DurationInSeconds div (60 * 60)) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Hours); refreshInClient=true)",
+                      "detail":  "change NewDurationHelper (Duration=ceil($DurationInSeconds div (60 * 60)) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Hours); refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0370715d-4bfe-43af-9ed8-34ab7dd2fcca",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewDurationHelper (Duration=ceil($DurationInSeconds div 60) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Minutes); refreshInClient=true)",
+                      "detail":  "change NewDurationHelper (Duration=ceil($DurationInSeconds div 60) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Minutes); refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b4e3a4bd-dd94-4e63-8e8c-c8aec8ea107e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.DurationHelper as NewDurationHelper (Duration=empty)",
+                      "detail":  "create WorkflowCommons.DurationHelper as NewDurationHelper (Duration=empty)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "474e9848-c34d-4317-815f-b4753f2c7344",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable DurationInSeconds=ceil(secondsBetween($StartTime, $EndTime))",
+                      "detail":  "create variable DurationInSeconds=ceil(secondsBetween($StartTime, $EndTime))",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1b774900-c472-465b-a9d8-5a73405f202a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "28fc941d-e74c-4560-9436-a90eef1c2f72",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7a7f6ae3-67ac-4d77-b0f7-a0efaac3c82c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "93c99513-77ce-4222-925e-a7c1b05b08c1",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cb7614af-43ce-4c42-b67a-455b9c40b3f0",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ce4b9eb7-e4a5-443d-aa82-0d0fa048efad",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3549e0c6-8f3a-427f-b170-2ae93a71c1b7",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Days? expression=$DurationInSeconds \u003e (60 * 60 * 24)",
+                      "detail":  "Days? expression=$DurationInSeconds \u003e (60 * 60 * 24)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6c26c1fa-0b65-4757-8016-4dc1270c385c",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "End? expression=$EndTime != empty",
+                      "detail":  "End? expression=$EndTime != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b65e8c6f-fc0d-4922-a5d8-d6d49d756ff6",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Hours? expression=$DurationInSeconds \u003e (60 * 60)",
+                      "detail":  "Hours? expression=$DurationInSeconds \u003e (60 * 60)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "738a8cb0-1a33-47b6-9beb-8b414f369f3b",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Minutes? expression=$DurationInSeconds \u003e 60",
+                      "detail":  "Minutes? expression=$DurationInSeconds \u003e 60",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "75a5d7f3-8630-4ce3-b47e-e71e7c11ca32",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Start? expression=$StartTime != empty",
+                      "detail":  "Start? expression=$StartTime != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1cb1659d-639b-4d29-a12b-6143ef4f3bce",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2d2ab41f-b95a-4eee-bf3a-0e9a9d7abb58",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0cfdaa0d-90e6-4703-b8b7-503b0b03b532",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "dcda87d2-d0fc-4188-9364-39fb9f7451c2",
+                      "originNodeId":  "0cfdaa0d-90e6-4703-b8b7-503b0b03b532",
+                      "destinationNodeId":  "b4e3a4bd-dd94-4e63-8e8c-c8aec8ea107e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "80f72ac8-af70-4191-a777-812e45071a93",
+                      "originNodeId":  "75a5d7f3-8630-4ce3-b47e-e71e7c11ca32",
+                      "destinationNodeId":  "6c26c1fa-0b65-4757-8016-4dc1270c385c",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3e253bfc-0674-4b38-a566-7633b027311f",
+                      "originNodeId":  "75a5d7f3-8630-4ce3-b47e-e71e7c11ca32",
+                      "destinationNodeId":  "cb7614af-43ce-4c42-b67a-455b9c40b3f0",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "65db5492-1e30-4479-9c4e-a6538e5a7530",
+                      "originNodeId":  "b4e3a4bd-dd94-4e63-8e8c-c8aec8ea107e",
+                      "destinationNodeId":  "75a5d7f3-8630-4ce3-b47e-e71e7c11ca32",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7054c724-dea7-4474-ba42-2832d9408217",
+                      "originNodeId":  "6c26c1fa-0b65-4757-8016-4dc1270c385c",
+                      "destinationNodeId":  "1b774900-c472-465b-a9d8-5a73405f202a",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f18c3abc-5662-4ecc-b6c0-4edee8d1440d",
+                      "originNodeId":  "6c26c1fa-0b65-4757-8016-4dc1270c385c",
+                      "destinationNodeId":  "474e9848-c34d-4317-815f-b4753f2c7344",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "946763ed-d5df-4558-86ca-fe5a2d5a7629",
+                      "originNodeId":  "738a8cb0-1a33-47b6-9beb-8b414f369f3b",
+                      "destinationNodeId":  "b65e8c6f-fc0d-4922-a5d8-d6d49d756ff6",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1e471302-d440-424b-a663-f0e8f9695dce",
+                      "originNodeId":  "474e9848-c34d-4317-815f-b4753f2c7344",
+                      "destinationNodeId":  "738a8cb0-1a33-47b6-9beb-8b414f369f3b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fb5cc7b6-c114-4c70-a546-0d5f0abbbfaa",
+                      "originNodeId":  "738a8cb0-1a33-47b6-9beb-8b414f369f3b",
+                      "destinationNodeId":  "e63a3fad-ff48-49ce-b327-fb6640f61fad",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f5af180f-26ec-4654-91ad-f43988b9a57e",
+                      "originNodeId":  "e63a3fad-ff48-49ce-b327-fb6640f61fad",
+                      "destinationNodeId":  "93c99513-77ce-4222-925e-a7c1b05b08c1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0b27f7e3-d663-4519-8635-e6ea3232c49f",
+                      "originNodeId":  "b65e8c6f-fc0d-4922-a5d8-d6d49d756ff6",
+                      "destinationNodeId":  "0370715d-4bfe-43af-9ed8-34ab7dd2fcca",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "8d47ca30-871d-448d-a03f-ae2536e648dd",
+                      "originNodeId":  "0370715d-4bfe-43af-9ed8-34ab7dd2fcca",
+                      "destinationNodeId":  "28fc941d-e74c-4560-9436-a90eef1c2f72",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "ccce401f-3d7d-4b36-a115-87582b57d3a3",
+                      "originNodeId":  "3549e0c6-8f3a-427f-b170-2ae93a71c1b7",
+                      "destinationNodeId":  "3594c373-7894-427a-9704-df889a859277",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f9bfe527-c33a-4ff7-8170-bf473afb2760",
+                      "originNodeId":  "3594c373-7894-427a-9704-df889a859277",
+                      "destinationNodeId":  "7a7f6ae3-67ac-4d77-b0f7-a0efaac3c82c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "2999daf6-b666-4fe0-a5d0-542f53aee125",
+                      "originNodeId":  "b65e8c6f-fc0d-4922-a5d8-d6d49d756ff6",
+                      "destinationNodeId":  "3549e0c6-8f3a-427f-b170-2ae93a71c1b7",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f5e4b87d-c695-4e73-9367-835dfebad4ed",
+                      "originNodeId":  "3549e0c6-8f3a-427f-b170-2ae93a71c1b7",
+                      "destinationNodeId":  "cadef8a5-0264-4fa8-960c-4e9b1323150e",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1679c60f-5f34-4670-ae61-6b9dafb31009",
+                      "originNodeId":  "cadef8a5-0264-4fa8-960c-4e9b1323150e",
+                      "destinationNodeId":  "ce4b9eb7-e4a5-443d-aa82-0d0fa048efad",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "0cfdaa0d-90e6-4703-b8b7-503b0b03b532"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "0cfdaa0d-90e6-4703-b8b7-503b0b03b532",
+                                         "b4e3a4bd-dd94-4e63-8e8c-c8aec8ea107e",
+                                         "75a5d7f3-8630-4ce3-b47e-e71e7c11ca32",
+                                         "6c26c1fa-0b65-4757-8016-4dc1270c385c",
+                                         "474e9848-c34d-4317-815f-b4753f2c7344",
+                                         "738a8cb0-1a33-47b6-9beb-8b414f369f3b",
+                                         "b65e8c6f-fc0d-4922-a5d8-d6d49d756ff6",
+                                         "3549e0c6-8f3a-427f-b170-2ae93a71c1b7",
+                                         "cadef8a5-0264-4fa8-960c-4e9b1323150e",
+                                         "ce4b9eb7-e4a5-443d-aa82-0d0fa048efad",
+                                         "3594c373-7894-427a-9704-df889a859277",
+                                         "7a7f6ae3-67ac-4d77-b0f7-a0efaac3c82c",
+                                         "0370715d-4bfe-43af-9ed8-34ab7dd2fcca",
+                                         "28fc941d-e74c-4560-9436-a90eef1c2f72",
+                                         "e63a3fad-ff48-49ce-b327-fb6640f61fad",
+                                         "93c99513-77ce-4222-925e-a7c1b05b08c1",
+                                         "1b774900-c472-465b-a9d8-5a73405f202a",
+                                         "cb7614af-43ce-4c42-b67a-455b9c40b3f0"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.SUB_Duration_Calculate\r\nNODES=20; EDGES=17\r\n1. START\r\n2. ACTION CreateObjectAction: create WorkflowCommons.DurationHelper as NewDurationHelper (Duration=empty)\r\n3. DECISION Start? expression=$StartTime != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. DECISION End? expression=$EndTime != empty\r\n  6. BRANCH when EnumerationCase=true\r\n    7. ACTION CreateVariableAction: create variable DurationInSeconds=ceil(secondsBetween($StartTime, $EndTime))\r\n    8. DECISION Minutes? expression=$DurationInSeconds \u003e 60\r\n    9. BRANCH when EnumerationCase=true\r\n      10. DECISION Hours? expression=$DurationInSeconds \u003e (60 * 60)\r\n      11. BRANCH when EnumerationCase=true\r\n        12. DECISION Days? expression=$DurationInSeconds \u003e (60 * 60 * 24)\r\n        13. BRANCH when EnumerationCase=true\r\n          14. ACTION ChangeObjectAction: change NewDurationHelper (Duration=ceil($DurationInSeconds div (60 * 60 * 24)) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Days); refreshInClient=true)\r\n          15. END\r\n        16. BRANCH when EnumerationCase=false\r\n          17. ACTION ChangeObjectAction: change NewDurationHelper (Duration=ceil($DurationInSeconds div (60 * 60)) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Hours); refreshInClient=true)\r\n          18. END\r\n      19. BRANCH when EnumerationCase=false\r\n        20. ACTION ChangeObjectAction: change NewDurationHelper (Duration=ceil($DurationInSeconds div 60) + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Minutes); refreshInClient=true)\r\n        21. END\r\n    22. BRANCH when EnumerationCase=false\r\n      23. ACTION ChangeObjectAction: change NewDurationHelper (Duration=$DurationInSeconds + \u0027 \u0027 + getCaption(WorkflowCommons.Enum_DurationUnit.Seconds); refreshInClient=true)\r\n      24. END\r\n  25. BRANCH when EnumerationCase=false\r\n    26. END\r\n27. BRANCH when EnumerationCase=false\r\n  28. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_WorkflowActivityRecord_ActivityDuration",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Nanoflow",
+                          "sourceNodeId":  "19201e1d-6dc6-4040-99b5-d72b4a041dc4",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Duration_Calculate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_WorkflowActivityRecord_OverdueTime",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Nanoflow",
+                          "sourceNodeId":  "e434183a-4926-437f-b994-3f73a35c7a98",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Duration_Calculate",
+                          "isInternal":  true
+                      }
+                  ]
+}

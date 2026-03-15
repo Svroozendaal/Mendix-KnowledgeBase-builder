@@ -1,0 +1,557 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.prepareReferenceHandling",
+                  "stableId":  "7fc6b071-b6d7-48cb-8b1c-755fbd68ab25",
+                  "slug":  "excelimporter-preparereferencehandling",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-preparereferencehandling.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-preparereferencehandling.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-preparereferencehandling.json",
+                  "l2Logical":  "flow:ExcelImporter.prepareReferenceHandling",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "7fc6b071-b6d7-48cb-8b1c-755fbd68ab25",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.prepareReferenceHandling",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "2ddcad92-b7d1-40e9-9d27-6407c75a0948",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=Count, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "36017b04-53a7-4ca6-87cf-a0502bf0537f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change vNewReferenceHandling (ReferenceHandling_Template=$pColumn/ExcelImporter.Column_Template, ReferenceHandling_MxObjectReference=$vMxReference; refreshInClient=true)",
+                      "detail":  "change vNewReferenceHandling (ReferenceHandling_Template=$pColumn/ExcelImporter.Column_Template, ReferenceHandling_MxObjectReference=$vMxReference; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a277efad-ee8b-436b-9571-5227f6bd561b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.ReferenceHandling as vNewReferenceHandling",
+                      "detail":  "create ExcelImporter.ReferenceHandling as vNewReferenceHandling",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3ded9c6f-6df0-4305-9f43-c535cf0a2997",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DeleteAction: delete vReferenceHandlingToRemove (refreshInClient=true)",
+                      "detail":  "delete vReferenceHandlingToRemove (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "43496cbe-b9e3-40af-9aa2-b4a7d81e5a92",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve vMxReference over association Column_MxObjectReference from pColumn",
+                      "detail":  "retrieve vMxReference over association Column_MxObjectReference from pColumn",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "afd86f46-88ac-4527-ba2c-445cd6e5479d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve vOriColumn from ExcelImporter.Column",
+                      "detail":  "retrieve vOriColumn from ExcelImporter.Column",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d168ec99-50af-4491-a2eb-d86f5cc614fa",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve vOtherColumnWithThisRef from ExcelImporter.Column",
+                      "detail":  "retrieve vOtherColumnWithThisRef from ExcelImporter.Column",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fa482da1-56c5-4065-b4dd-f9653943c0cd",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve vReferenceHandling from ExcelImporter.ReferenceHandling",
+                      "detail":  "retrieve vReferenceHandling from ExcelImporter.ReferenceHandling",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cd888d8b-fdec-43de-b79b-094207c862a3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve vReferenceHandlingToRemove from ExcelImporter.ReferenceHandling",
+                      "detail":  "retrieve vReferenceHandlingToRemove from ExcelImporter.ReferenceHandling",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "43c1323c-3fce-490f-8655-5d63557f2c7c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "55d7eb60-5375-43c3-bcf9-3946b27c2e89",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a9aaf84f-9142-4f1e-926b-8887666ac84d",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "75791822-7cbd-41b9-bbcb-7158db4b59d3",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "baf3c6cd-687e-4fd0-bb18-588415b6ee3a",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c835aa02-5961-49e3-9288-5a41be3af8ec",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "\u003e 0 expression=$Count \u003e 0",
+                      "detail":  "\u003e 0 expression=$Count \u003e 0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4d7277dd-10f5-4e89-8412-6215ba9a631f",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "found? expression=$vReferenceHandling != empty",
+                      "detail":  "found? expression=$vReferenceHandling != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1f55663c-fa34-447a-ba3a-5d2d5c042544",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "found? expression=$vReferenceHandlingToRemove != empty",
+                      "detail":  "found? expression=$vReferenceHandlingToRemove != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "66e51a7b-91ed-44a1-bde1-0c6ba2b033f4",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "is new expression=$vOriColumn = empty",
+                      "detail":  "is new expression=$vOriColumn = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7f9b962a-2afd-450a-a966-10431cad5338",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "is reference mapping expression=$pColumn/MappingType = ExcelImporter.MappingType.Reference and $pColumn/ExcelImporter.Column_MxObjectReference != empty",
+                      "detail":  "is reference mapping expression=$pColumn/MappingType = ExcelImporter.MappingType.Reference and $pColumn/ExcelImporter.Column_MxObjectReference != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d350a58f-bc2e-4565-b3fc-44e01ee89276",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "mxreference has changed? expression=$vOriColumn/ExcelImporter.Column_MxObjectReference != $pColumn/ExcelImporter.Column_MxObjectReference and $vOriColumn/Ma...",
+                      "detail":  "mxreference has changed? expression=$vOriColumn/ExcelImporter.Column_MxObjectReference != $pColumn/ExcelImporter.Column_MxObjectReference and $vOriColumn/Ma...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7fedfd9e-494b-4ef0-863f-449736271885",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "26560bd8-a6c5-4040-a011-ce11efc1a969",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "6148293b-7c39-49bf-901a-78a45a6638a5",
+                      "originNodeId":  "26560bd8-a6c5-4040-a011-ce11efc1a969",
+                      "destinationNodeId":  "afd86f46-88ac-4527-ba2c-445cd6e5479d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "189672de-9f22-4d42-b583-45cd899951ec",
+                      "originNodeId":  "43496cbe-b9e3-40af-9aa2-b4a7d81e5a92",
+                      "destinationNodeId":  "fa482da1-56c5-4065-b4dd-f9653943c0cd",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c08db918-dd64-479e-8dca-3967cf03759e",
+                      "originNodeId":  "fa482da1-56c5-4065-b4dd-f9653943c0cd",
+                      "destinationNodeId":  "4d7277dd-10f5-4e89-8412-6215ba9a631f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "04ddd2ad-781e-4507-8cb4-84491b674a8d",
+                      "originNodeId":  "4d7277dd-10f5-4e89-8412-6215ba9a631f",
+                      "destinationNodeId":  "55d7eb60-5375-43c3-bcf9-3946b27c2e89",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "042bf69b-01c0-4cb9-8a97-06b804b2f48c",
+                      "originNodeId":  "4d7277dd-10f5-4e89-8412-6215ba9a631f",
+                      "destinationNodeId":  "a277efad-ee8b-436b-9571-5227f6bd561b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f2f6d3f5-5174-4ed4-8da9-7ad3095e6efc",
+                      "originNodeId":  "a277efad-ee8b-436b-9571-5227f6bd561b",
+                      "destinationNodeId":  "36017b04-53a7-4ca6-87cf-a0502bf0537f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "3df11801-b2d7-4d2c-bc53-25c5a39ca0f0",
+                      "originNodeId":  "36017b04-53a7-4ca6-87cf-a0502bf0537f",
+                      "destinationNodeId":  "43c1323c-3fce-490f-8655-5d63557f2c7c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "65af222b-2c6c-4d18-ac2f-f3a2ea5d0527",
+                      "originNodeId":  "afd86f46-88ac-4527-ba2c-445cd6e5479d",
+                      "destinationNodeId":  "66e51a7b-91ed-44a1-bde1-0c6ba2b033f4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "45d1238d-24a6-481a-af32-79310dc8e8d9",
+                      "originNodeId":  "66e51a7b-91ed-44a1-bde1-0c6ba2b033f4",
+                      "destinationNodeId":  "75791822-7cbd-41b9-bbcb-7158db4b59d3",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "44f912bf-3ad9-4c19-9ee0-af317f48adb5",
+                      "originNodeId":  "66e51a7b-91ed-44a1-bde1-0c6ba2b033f4",
+                      "destinationNodeId":  "d350a58f-bc2e-4565-b3fc-44e01ee89276",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "cbbe73d7-6b01-4b6c-9f3d-2dcbf09b7e96",
+                      "originNodeId":  "75791822-7cbd-41b9-bbcb-7158db4b59d3",
+                      "destinationNodeId":  "7f9b962a-2afd-450a-a966-10431cad5338",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "935e57fd-fedd-43fb-9714-be0938dd692d",
+                      "originNodeId":  "d350a58f-bc2e-4565-b3fc-44e01ee89276",
+                      "destinationNodeId":  "75791822-7cbd-41b9-bbcb-7158db4b59d3",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "3f0e2369-50d0-4def-951f-b4de8b962a80",
+                      "originNodeId":  "d350a58f-bc2e-4565-b3fc-44e01ee89276",
+                      "destinationNodeId":  "d168ec99-50af-4491-a2eb-d86f5cc614fa",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0c0458a2-ad2a-4e4e-8630-cb754fbd3e77",
+                      "originNodeId":  "7f9b962a-2afd-450a-a966-10431cad5338",
+                      "destinationNodeId":  "43496cbe-b9e3-40af-9aa2-b4a7d81e5a92",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7eaeaf11-c415-4c6d-99ad-96e195b5f2af",
+                      "originNodeId":  "7f9b962a-2afd-450a-a966-10431cad5338",
+                      "destinationNodeId":  "a9aaf84f-9142-4f1e-926b-8887666ac84d",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "14b31806-2f73-44e0-9f11-1348348c101c",
+                      "originNodeId":  "d168ec99-50af-4491-a2eb-d86f5cc614fa",
+                      "destinationNodeId":  "2ddcad92-b7d1-40e9-9d27-6407c75a0948",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "abb98d43-de2d-490e-b8b2-bff72d176ad9",
+                      "originNodeId":  "2ddcad92-b7d1-40e9-9d27-6407c75a0948",
+                      "destinationNodeId":  "c835aa02-5961-49e3-9288-5a41be3af8ec",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "d326386f-2e1b-447d-a607-6dcc62a05a27",
+                      "originNodeId":  "c835aa02-5961-49e3-9288-5a41be3af8ec",
+                      "destinationNodeId":  "75791822-7cbd-41b9-bbcb-7158db4b59d3",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "cb0a67b6-73aa-4ac8-95e7-818727ea0f91",
+                      "originNodeId":  "c835aa02-5961-49e3-9288-5a41be3af8ec",
+                      "destinationNodeId":  "cd888d8b-fdec-43de-b79b-094207c862a3",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "ce221716-128f-4022-b915-ab4ff439912f",
+                      "originNodeId":  "cd888d8b-fdec-43de-b79b-094207c862a3",
+                      "destinationNodeId":  "1f55663c-fa34-447a-ba3a-5d2d5c042544",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0bd571f3-23e6-407f-9bea-69b7d992c2a9",
+                      "originNodeId":  "1f55663c-fa34-447a-ba3a-5d2d5c042544",
+                      "destinationNodeId":  "3ded9c6f-6df0-4305-9f43-c535cf0a2997",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f16c7ddd-2753-45d3-aec2-81a679dd5908",
+                      "originNodeId":  "1f55663c-fa34-447a-ba3a-5d2d5c042544",
+                      "destinationNodeId":  "baf3c6cd-687e-4fd0-bb18-588415b6ee3a",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d49c6504-436a-4c0f-9b39-24380d55d9b6",
+                      "originNodeId":  "3ded9c6f-6df0-4305-9f43-c535cf0a2997",
+                      "destinationNodeId":  "baf3c6cd-687e-4fd0-bb18-588415b6ee3a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "06be3829-837a-4fb8-adbc-76de4979bb85",
+                      "originNodeId":  "baf3c6cd-687e-4fd0-bb18-588415b6ee3a",
+                      "destinationNodeId":  "75791822-7cbd-41b9-bbcb-7158db4b59d3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "26560bd8-a6c5-4040-a011-ce11efc1a969"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "26560bd8-a6c5-4040-a011-ce11efc1a969",
+                                         "afd86f46-88ac-4527-ba2c-445cd6e5479d",
+                                         "66e51a7b-91ed-44a1-bde1-0c6ba2b033f4",
+                                         "75791822-7cbd-41b9-bbcb-7158db4b59d3",
+                                         "7f9b962a-2afd-450a-a966-10431cad5338",
+                                         "a9aaf84f-9142-4f1e-926b-8887666ac84d",
+                                         "43496cbe-b9e3-40af-9aa2-b4a7d81e5a92",
+                                         "fa482da1-56c5-4065-b4dd-f9653943c0cd",
+                                         "4d7277dd-10f5-4e89-8412-6215ba9a631f",
+                                         "55d7eb60-5375-43c3-bcf9-3946b27c2e89",
+                                         "a277efad-ee8b-436b-9571-5227f6bd561b",
+                                         "36017b04-53a7-4ca6-87cf-a0502bf0537f",
+                                         "43c1323c-3fce-490f-8655-5d63557f2c7c",
+                                         "d350a58f-bc2e-4565-b3fc-44e01ee89276",
+                                         "d168ec99-50af-4491-a2eb-d86f5cc614fa",
+                                         "2ddcad92-b7d1-40e9-9d27-6407c75a0948",
+                                         "c835aa02-5961-49e3-9288-5a41be3af8ec",
+                                         "cd888d8b-fdec-43de-b79b-094207c862a3",
+                                         "1f55663c-fa34-447a-ba3a-5d2d5c042544",
+                                         "baf3c6cd-687e-4fd0-bb18-588415b6ee3a",
+                                         "3ded9c6f-6df0-4305-9f43-c535cf0a2997"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.prepareReferenceHandling\r\nNODES=22; EDGES=24\r\n1. START\r\n2. ACTION RetrieveAction: retrieve vOriColumn from ExcelImporter.Column\r\n3. DECISION is new expression=$vOriColumn = empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. NODE ExclusiveMerge: ExclusiveMerge\r\n  6. DECISION is reference mapping expression=$pColumn/MappingType = ExcelImporter.MappingType.Reference and $pColumn/ExcelImporter.Column_MxObjectReference != empty\r\n  7. BRANCH when EnumerationCase=false\r\n    8. END\r\n  9. BRANCH when EnumerationCase=true\r\n    10. ACTION RetrieveAction: retrieve vMxReference over association Column_MxObjectReference from pColumn\r\n    11. ACTION RetrieveAction: retrieve vReferenceHandling from ExcelImporter.ReferenceHandling\r\n    12. DECISION found? expression=$vReferenceHandling != empty\r\n    13. BRANCH when EnumerationCase=true\r\n      14. END\r\n    15. BRANCH when EnumerationCase=false\r\n      16. ACTION CreateObjectAction: create ExcelImporter.ReferenceHandling as vNewReferenceHandling\r\n      17. ACTION ChangeObjectAction: change vNewReferenceHandling (ReferenceHandling_Template=$pColumn/ExcelImporter.Column_Template, ReferenceHandling_MxObjectReference=$vMxReference; refreshInClient=true)\r\n      18. END\r\n19. BRANCH when EnumerationCase=false\r\n  20. DECISION mxreference has changed? expression=$vOriColumn/ExcelImporter.Column_MxObjectReference != $pColumn/ExcelImporter.Column_MxObjectReference and $vOriColumn/Ma...\r\n  21. BRANCH when EnumerationCase=false\r\n    22. REF ExclusiveMerge\r\n  23. BRANCH when EnumerationCase=true\r\n    24. ACTION RetrieveAction: retrieve vOtherColumnWithThisRef from ExcelImporter.Column\r\n    25. ACTION AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)\r\n    26. DECISION \u003e 0 expression=$Count \u003e 0\r\n    27. BRANCH when EnumerationCase=true\r\n      28. REF ExclusiveMerge\r\n    29. BRANCH when EnumerationCase=false\r\n      30. ACTION RetrieveAction: retrieve vReferenceHandlingToRemove from ExcelImporter.ReferenceHandling\r\n      31. DECISION found? expression=$vReferenceHandlingToRemove != empty\r\n      32. BRANCH when EnumerationCase=false\r\n        33. NODE ExclusiveMerge: ExclusiveMerge\r\n        34. REF ExclusiveMerge\r\n      35. BRANCH when EnumerationCase=true\r\n        36. ACTION DeleteAction: delete vReferenceHandlingToRemove (refreshInClient=true)\r\n        37. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.BCo_Column",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "917a5c97-125a-4a37-ba39-93fc14b1e4b8",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.prepareReferenceHandling",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.BCo_Column",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "cf737982-46fe-4673-9fe6-3959362be67f",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.prepareReferenceHandling",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.BDe_Column",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "a1d6d257-12b8-4b71-aca6-6354bcb378e4",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.prepareReferenceHandling",
+                          "isInternal":  true
+                      }
+                  ]
+}

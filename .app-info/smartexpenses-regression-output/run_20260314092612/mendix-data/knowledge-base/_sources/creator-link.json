@@ -1,0 +1,12 @@
+﻿{
+    "schemaVersion":  "1.0",
+    "creatorRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator",
+    "creatorInitkbRunner":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator\\wizard\\run-initkb.ps1",
+    "appName":  "SmartExpenses",
+    "mprPath":  "C:\\Workspaces\\Mendix\\Smart Expenses app-main\\App.mpr",
+    "dataRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data",
+    "knowledgeBaseRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\knowledge-base",
+    "lastRunFolder":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\app-overview\\cli_2026-03-14T09-26-12.835Z",
+    "currentAliasPath":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092612\\mendix-data\\app-overview\\current",
+    "updatedAtUtc":  "2026-03-14T09:26:54Z"
+}

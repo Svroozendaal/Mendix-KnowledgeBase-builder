@@ -1,0 +1,155 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.SUB_Feedback_ResetLocalStorage",
+                  "stableId":  "5246c8f4-cd42-4044-8377-915c8bb5a797",
+                  "slug":  "feedbackmodule-sub-feedback-resetlocalstorage",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-sub-feedback-resetlocalstorage.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-sub-feedback-resetlocalstorage.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-sub-feedback-resetlocalstorage.json",
+                  "l2Logical":  "flow:FeedbackModule.SUB_Feedback_ResetLocalStorage",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "5246c8f4-cd42-4044-8377-915c8bb5a797",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "FeedbackModule.SUB_Feedback_ResetLocalStorage",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "8ee44032-d82d-4c33-904d-6186989e51af",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, SubmitterUUID=empty, SubmitterDisplayName=empty, ImageB64=empty, ActiveUserRoles=empty, PageName=empty, +6 more; refreshInClient=true)",
+                      "detail":  "change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, SubmitterUUID=empty, SubmitterDisplayName=empty, ImageB64=empty, ActiveUserRoles=empty, PageName=empty, +6 more; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "detail":  "call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e249a930-8e34-417a-8ced-56e2625611b6",
+                      "nodeType":  "Annotation",
+                      "label":  "Cleans up the feedback and stores it in local storage",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b2bac0af-355d-4c62-b12c-698728547daa",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "93375857-576b-4514-9b46-3801538fd3cc",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "338123c5-dc0f-428b-a74a-169f68c954ab",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "61759282-c4ee-49cb-85f2-f7c25642c807",
+                      "originNodeId":  "338123c5-dc0f-428b-a74a-169f68c954ab",
+                      "destinationNodeId":  "8ee44032-d82d-4c33-904d-6186989e51af",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "58bb971c-1e5a-4956-8b61-19078fe83966",
+                      "originNodeId":  "8ee44032-d82d-4c33-904d-6186989e51af",
+                      "destinationNodeId":  "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7af91780-6810-4d3e-b921-83506870da9c",
+                      "originNodeId":  "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+                      "destinationNodeId":  "b2bac0af-355d-4c62-b12c-698728547daa",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "338123c5-dc0f-428b-a74a-169f68c954ab"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "338123c5-dc0f-428b-a74a-169f68c954ab",
+                                         "8ee44032-d82d-4c33-904d-6186989e51af",
+                                         "e739b6cf-96b7-49eb-95a6-d73b2c19ca24",
+                                         "b2bac0af-355d-4c62-b12c-698728547daa"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: FeedbackModule.SUB_Feedback_ResetLocalStorage\r\nNODES=6; EDGES=3\r\n1. START\r\n2. ACTION ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, SubmitterUUID=empty, SubmitterDisplayName=empty, ImageB64=empty, ActiveUserRoles=empty, PageName=empty, +6 more; refreshInClient=true)\r\n3. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "FeedbackModule",
+                          "callerFlow":  "FeedbackModule.ACT_SubmitFeedback",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Nanoflow",
+                          "sourceNodeId":  "fc3f567d-5e05-444d-948b-e79ce6a647fd",
+                          "targetModule":  "FeedbackModule",
+                          "targetFlow":  "FeedbackModule.SUB_Feedback_ResetLocalStorage",
+                          "isInternal":  true
+                      }
+                  ]
+}

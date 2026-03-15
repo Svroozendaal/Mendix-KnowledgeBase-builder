@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.MemberEnum_View",
+                  "stableId":  "MxModelReflection.MemberEnum_View",
+                  "slug":  "mxmodelreflection-memberenum-view",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-memberenum-view.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/pages/mxmodelreflection-memberenum-view.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/pages/mxmodelreflection-memberenum-view.json",
+                  "l2Logical":  "page:MxModelReflection.MemberEnum_View",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/pages/INDEX.json"
+              },
+    "qualifiedName":  "MxModelReflection.MemberEnum_View",
+    "name":  "MemberEnum_View",
+    "title":  "View enum member",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "MxModelReflection.ModelAdministrator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "MxObjectEnum",
+                           "entityType":  "MxModelReflection.MxObjectEnum"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

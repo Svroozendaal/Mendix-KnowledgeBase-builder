@@ -1,0 +1,197 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_UserTaskOutcomeView_FindOrCreate",
+                  "stableId":  "986d6d70-e6cf-447f-9605-170fb51f2d4d",
+                  "slug":  "workflowcommons-sub-usertaskoutcomeview-findorcreate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertaskoutcomeview-findorcreate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-usertaskoutcomeview-findorcreate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-usertaskoutcomeview-findorcreate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_UserTaskOutcomeView_FindOrCreate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "986d6d70-e6cf-447f-9605-170fb51f2d4d",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_UserTaskOutcomeView_FindOrCreate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "9b07fa49-5ad7-41c3-8901-3c9bf8496401",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.UserTaskOutcomeView as NewUserTaskOutcomeView (UserTaskOutcomeView_UserTaskView=$UserTaskView, UserTaskOutcomeView_WorkflowUserTaskOutcome=$WorkflowUserTaskOutcome, UserTaskOutcomeView_User=$WorkflowUserTaskOutcome/System.WorkflowUserTaskOutcome_User, Outcome=$WorkflowUserTaskOutcome/Outcome, Time=$WorkflowUserTaskOutcome/Time)",
+                      "detail":  "create WorkflowCommons.UserTaskOutcomeView as NewUserTaskOutcomeView (UserTaskOutcomeView_UserTaskView=$UserTaskView, UserTaskOutcomeView_WorkflowUserTaskOutcome=$WorkflowUserTaskOutcome, UserTaskOutcomeView_User=$WorkflowUserTaskOutcome/System.WorkflowUserTaskOutcome_User, Outcome=$WorkflowUserTaskOutcome/Outcome, Time=$WorkflowUserTaskOutcome/Time)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "28d49cac-d766-4b13-a197-6c64a13df9e0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve UserTaskOutcomeView from WorkflowCommons.UserTaskOutcomeView",
+                      "detail":  "retrieve UserTaskOutcomeView from WorkflowCommons.UserTaskOutcomeView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ac19535-e629-46d4-bb85-d44ebd184097",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "63136f68-005c-4215-b02d-2d5cf7c5b818",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "83eb2934-468d-4ce2-a011-8ed00bfef5b0",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Exists? expression=$UserTaskOutcomeView != empty",
+                      "detail":  "Exists? expression=$UserTaskOutcomeView != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3704eeda-7fa3-46fa-b0e7-83455bdaad95",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bbd93e5c-9af1-4726-9cb2-68f72589407e",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "03a0f194-69d8-4c58-b354-c655f3ab7eb6",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "04b171be-129b-4ffc-acd4-3d13e7305b2b",
+                      "originNodeId":  "03a0f194-69d8-4c58-b354-c655f3ab7eb6",
+                      "destinationNodeId":  "28d49cac-d766-4b13-a197-6c64a13df9e0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "169281cd-2f22-4660-b7a7-6663c9d2b118",
+                      "originNodeId":  "28d49cac-d766-4b13-a197-6c64a13df9e0",
+                      "destinationNodeId":  "83eb2934-468d-4ce2-a011-8ed00bfef5b0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "11e61465-2558-4d00-9b43-a17d92134c7d",
+                      "originNodeId":  "83eb2934-468d-4ce2-a011-8ed00bfef5b0",
+                      "destinationNodeId":  "63136f68-005c-4215-b02d-2d5cf7c5b818",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b93c2296-9a4c-4822-83f5-1e8c69a04995",
+                      "originNodeId":  "9b07fa49-5ad7-41c3-8901-3c9bf8496401",
+                      "destinationNodeId":  "1ac19535-e629-46d4-bb85-d44ebd184097",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c2ba2467-abd4-4ebc-8e0d-a7c2a134389b",
+                      "originNodeId":  "83eb2934-468d-4ce2-a011-8ed00bfef5b0",
+                      "destinationNodeId":  "9b07fa49-5ad7-41c3-8901-3c9bf8496401",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "03a0f194-69d8-4c58-b354-c655f3ab7eb6"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "03a0f194-69d8-4c58-b354-c655f3ab7eb6",
+                                         "28d49cac-d766-4b13-a197-6c64a13df9e0",
+                                         "83eb2934-468d-4ce2-a011-8ed00bfef5b0",
+                                         "63136f68-005c-4215-b02d-2d5cf7c5b818",
+                                         "9b07fa49-5ad7-41c3-8901-3c9bf8496401",
+                                         "1ac19535-e629-46d4-bb85-d44ebd184097"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_UserTaskOutcomeView_FindOrCreate\r\nNODES=8; EDGES=5\r\n1. START\r\n2. ACTION RetrieveAction: retrieve UserTaskOutcomeView from WorkflowCommons.UserTaskOutcomeView\r\n3. DECISION Exists? expression=$UserTaskOutcomeView != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. END\r\n6. BRANCH when EnumerationCase=false\r\n  7. ACTION CreateObjectAction: create WorkflowCommons.UserTaskOutcomeView as NewUserTaskOutcomeView (UserTaskOutcomeView_UserTaskView=$UserTaskView, UserTaskOutcomeView_WorkflowUserTaskOutcome=$WorkflowUserTaskOutcome, UserTaskOutcomeView_User=$WorkflowUserTaskOutcome/System.WorkflowUserTaskOutcome_User, Outcome=$WorkflowUserTaskOutcome/Outcome, Time=$WorkflowUserTaskOutcome/Time)\r\n  8. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.OCh_WorkflowUserTask_State",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "db4a90fe-8a5d-439d-84fd-41dd7d9ac620",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTaskOutcomeView_FindOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

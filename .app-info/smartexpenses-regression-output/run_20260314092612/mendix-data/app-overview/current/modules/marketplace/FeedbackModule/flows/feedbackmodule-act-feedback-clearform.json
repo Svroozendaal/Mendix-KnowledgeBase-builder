@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.ACT_Feedback_ClearForm",
+                  "stableId":  "8c98f740-acad-4319-ac5f-8e4238e458dd",
+                  "slug":  "feedbackmodule-act-feedback-clearform",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-act-feedback-clearform.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-act-feedback-clearform.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-act-feedback-clearform.json",
+                  "l2Logical":  "flow:FeedbackModule.ACT_Feedback_ClearForm",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "8c98f740-acad-4319-ac5f-8e4238e458dd",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "FeedbackModule.ACT_Feedback_ClearForm",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, ImageB64=empty; refreshInClient=true)",
+                      "detail":  "change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, ImageB64=empty; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "detail":  "call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "babefc4e-9f5b-4c68-8d17-f6200eb2de1c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b0ecd08e-c62c-4c6a-90cf-bb38ebe96609",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "0343e447-a850-4cff-8dd3-0308cad1326f",
+                      "originNodeId":  "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b",
+                      "destinationNodeId":  "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c49e57ba-111c-46e2-a920-19af67578e7e",
+                      "originNodeId":  "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+                      "destinationNodeId":  "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c96338ab-ff85-4266-9bd9-223a1a6aee48",
+                      "originNodeId":  "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+                      "destinationNodeId":  "babefc4e-9f5b-4c68-8d17-f6200eb2de1c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "3cfb8dc9-21d9-46e7-acb7-dbbd8ce40b3b",
+                                         "cb0c2660-4035-4e9c-91fd-0a100a791e54",
+                                         "23570b79-1c0d-47f7-b340-01ecf9a44e58",
+                                         "babefc4e-9f5b-4c68-8d17-f6200eb2de1c"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: FeedbackModule.ACT_Feedback_ClearForm\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION ChangeObjectAction: change Feedback (Subject=empty, Description=empty, SubmitterEmail=empty, ImageB64=empty; refreshInClient=true)\r\n3. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

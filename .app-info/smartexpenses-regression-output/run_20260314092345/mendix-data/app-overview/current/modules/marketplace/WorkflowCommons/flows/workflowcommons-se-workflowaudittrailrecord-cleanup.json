@@ -1,0 +1,120 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SE_WorkflowAuditTrailRecord_CleanUp",
+                  "stableId":  "d368a327-6b16-4a89-990b-4101d199ef01",
+                  "slug":  "workflowcommons-se-workflowaudittrailrecord-cleanup",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-se-workflowaudittrailrecord-cleanup.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-se-workflowaudittrailrecord-cleanup.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-se-workflowaudittrailrecord-cleanup.json",
+                  "l2Logical":  "flow:WorkflowCommons.SE_WorkflowAuditTrailRecord_CleanUp",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "d368a327-6b16-4a89-990b-4101d199ef01",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SE_WorkflowAuditTrailRecord_CleanUp",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "fa5552f3-4466-475e-be4f-1975347f5220",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                      "detail":  "call microflow WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                                        "sourceNodeId":  "fa5552f3-4466-475e-be4f-1975347f5220"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "2528d22a-d6b4-42b3-85e9-954f21544c21",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8dc32eb5-2807-4ac4-b77b-156163311675",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "209f09db-3808-414c-87a3-4e9cf343a72a",
+                      "originNodeId":  "8dc32eb5-2807-4ac4-b77b-156163311675",
+                      "destinationNodeId":  "fa5552f3-4466-475e-be4f-1975347f5220",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "21c49627-4239-45aa-a1e9-28e5b504152d",
+                      "originNodeId":  "fa5552f3-4466-475e-be4f-1975347f5220",
+                      "destinationNodeId":  "2528d22a-d6b4-42b3-85e9-954f21544c21",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                      "sourceNodeId":  "fa5552f3-4466-475e-be4f-1975347f5220"
+                  }
+              ],
+    "startNodeIds":  [
+                         "8dc32eb5-2807-4ac4-b77b-156163311675"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "8dc32eb5-2807-4ac4-b77b-156163311675",
+                                         "fa5552f3-4466-475e-be4f-1975347f5220",
+                                         "2528d22a-d6b4-42b3-85e9-954f21544c21"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SE_WorkflowAuditTrailRecord_CleanUp\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.SE_WorkflowAuditTrailRecord_CleanUp",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "fa5552f3-4466-475e-be4f-1975347f5220",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowAuditTrailRecord_CleanUp",
+                          "isInternal":  true
+                      }
+                  ]
+}

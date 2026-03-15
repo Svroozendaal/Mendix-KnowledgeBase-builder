@@ -1,0 +1,282 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowTask_LoadNotificationArea",
+                  "stableId":  "2cafb75e-2ca1-471f-92dd-24a43ef7921f",
+                  "slug":  "workflowcommons-ds-workflowtask-loadnotificationarea",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowtask-loadnotificationarea.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowtask-loadnotificationarea.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowtask-loadnotificationarea.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowTask_LoadNotificationArea",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "2cafb75e-2ca1-471f-92dd-24a43ef7921f",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowTask_LoadNotificationArea",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "8e5eb56f-76bb-4221-9f28-859fa5270669",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaBlockedTask (AlertTitle=\u0027Task is blocked\u0027, AlertMessage=\u0027This task cannot be completed as a result of changes in the workflow. Please contact your workflow administrator.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Error)",
+                      "detail":  "create WorkflowCommons.NotificationArea as NewNotificationAreaBlockedTask (AlertTitle=\u0027Task is blocked\u0027, AlertMessage=\u0027This task cannot be completed as a result of changes in the workflow. Please contact your workflow administrator.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Error)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1c9477c0-6943-4023-8ea7-b0de318966e9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaPaused (AlertTitle=\u0027Task is paused\u0027, AlertMessage=\u0027This workflow was paused by an administrator. Please contact your workflow administrator.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Warning)",
+                      "detail":  "create WorkflowCommons.NotificationArea as NewNotificationAreaPaused (AlertTitle=\u0027Task is paused\u0027, AlertMessage=\u0027This workflow was paused by an administrator. Please contact your workflow administrator.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Warning)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1c447ef8-94ee-4b3a-b8b0-fc8b8395cbfc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow over association WorkflowUserTask_Workflow from WorkflowUserTask",
+                      "detail":  "retrieve Workflow over association WorkflowUserTask_Workflow from WorkflowUserTask",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "032ecd7e-1ce2-4b16-9d10-e23bd9a9d822",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5954cce0-e4c2-451c-ba6a-0f7e7da385f3",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f43149d5-3ef7-4b21-8e5f-38f744eb8b39",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fd0d2613-069c-4383-9a2b-636330c6924c",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "53542488-fcd2-430e-b2d7-e7bd41846b4f",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Incompatible? expression=$Workflow/State = System.WorkflowState.Incompatible",
+                      "detail":  "Incompatible? expression=$Workflow/State = System.WorkflowState.Incompatible",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "763fd4b0-1200-4455-9a37-8ba13d044671",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Paused? expression=$Workflow/State = System.WorkflowState.Paused",
+                      "detail":  "Paused? expression=$Workflow/State = System.WorkflowState.Paused",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3be384ec-b515-48c0-be04-69161fe32cf8",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Workflow available? expression=$Workflow != empty",
+                      "detail":  "Workflow available? expression=$Workflow != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c41460d7-c75a-49a6-ada3-fc3ad754d867",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1a53afb6-795c-4e63-9af8-e7564b7ef0ba",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "53466612-9a5e-4f7d-b80c-80e4724192d6",
+                      "originNodeId":  "1a53afb6-795c-4e63-9af8-e7564b7ef0ba",
+                      "destinationNodeId":  "1c447ef8-94ee-4b3a-b8b0-fc8b8395cbfc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "373c1e42-97e4-4167-a34d-1a5ff8020e7a",
+                      "originNodeId":  "1c447ef8-94ee-4b3a-b8b0-fc8b8395cbfc",
+                      "destinationNodeId":  "3be384ec-b515-48c0-be04-69161fe32cf8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "090adc39-cb35-4ef6-842b-3a6c93dc53a9",
+                      "originNodeId":  "53542488-fcd2-430e-b2d7-e7bd41846b4f",
+                      "destinationNodeId":  "8e5eb56f-76bb-4221-9f28-859fa5270669",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "84ef7343-1503-413a-bf56-73570f4a406a",
+                      "originNodeId":  "8e5eb56f-76bb-4221-9f28-859fa5270669",
+                      "destinationNodeId":  "5954cce0-e4c2-451c-ba6a-0f7e7da385f3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "010035d3-a5f6-4f74-95f2-f6d59464464b",
+                      "originNodeId":  "763fd4b0-1200-4455-9a37-8ba13d044671",
+                      "destinationNodeId":  "032ecd7e-1ce2-4b16-9d10-e23bd9a9d822",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "6a45affd-5149-45c3-8df9-035e34d39d4a",
+                      "originNodeId":  "1c9477c0-6943-4023-8ea7-b0de318966e9",
+                      "destinationNodeId":  "f43149d5-3ef7-4b21-8e5f-38f744eb8b39",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "52dcf27b-716f-4541-ba70-df1774362a1a",
+                      "originNodeId":  "763fd4b0-1200-4455-9a37-8ba13d044671",
+                      "destinationNodeId":  "1c9477c0-6943-4023-8ea7-b0de318966e9",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cf2055bf-425e-4afb-8db0-e47026fd7151",
+                      "originNodeId":  "53542488-fcd2-430e-b2d7-e7bd41846b4f",
+                      "destinationNodeId":  "763fd4b0-1200-4455-9a37-8ba13d044671",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "a0122cb7-0864-4c39-9d84-bf7537fccc4b",
+                      "originNodeId":  "3be384ec-b515-48c0-be04-69161fe32cf8",
+                      "destinationNodeId":  "53542488-fcd2-430e-b2d7-e7bd41846b4f",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1b6b6990-33cc-4613-bd57-300e7acded53",
+                      "originNodeId":  "3be384ec-b515-48c0-be04-69161fe32cf8",
+                      "destinationNodeId":  "fd0d2613-069c-4383-9a2b-636330c6924c",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "1a53afb6-795c-4e63-9af8-e7564b7ef0ba"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "1a53afb6-795c-4e63-9af8-e7564b7ef0ba",
+                                         "1c447ef8-94ee-4b3a-b8b0-fc8b8395cbfc",
+                                         "3be384ec-b515-48c0-be04-69161fe32cf8",
+                                         "53542488-fcd2-430e-b2d7-e7bd41846b4f",
+                                         "8e5eb56f-76bb-4221-9f28-859fa5270669",
+                                         "5954cce0-e4c2-451c-ba6a-0f7e7da385f3",
+                                         "763fd4b0-1200-4455-9a37-8ba13d044671",
+                                         "1c9477c0-6943-4023-8ea7-b0de318966e9",
+                                         "f43149d5-3ef7-4b21-8e5f-38f744eb8b39",
+                                         "032ecd7e-1ce2-4b16-9d10-e23bd9a9d822",
+                                         "fd0d2613-069c-4383-9a2b-636330c6924c"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.DS_WorkflowTask_LoadNotificationArea\r\nNODES=12; EDGES=10\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Workflow over association WorkflowUserTask_Workflow from WorkflowUserTask\r\n3. DECISION Workflow available? expression=$Workflow != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. DECISION Incompatible? expression=$Workflow/State = System.WorkflowState.Incompatible\r\n  6. BRANCH when EnumerationCase=true\r\n    7. ACTION CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaBlockedTask (AlertTitle=\u0027Task is blocked\u0027, AlertMessage=\u0027This task cannot be completed as a result of changes in the workflow. Please contact your workflow administrator.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Error)\r\n    8. END\r\n  9. BRANCH when EnumerationCase=false\r\n    10. DECISION Paused? expression=$Workflow/State = System.WorkflowState.Paused\r\n    11. BRANCH when EnumerationCase=true\r\n      12. ACTION CreateObjectAction: create WorkflowCommons.NotificationArea as NewNotificationAreaPaused (AlertTitle=\u0027Task is paused\u0027, AlertMessage=\u0027This workflow was paused by an administrator. Please contact your workflow administrator.\u0027, RenderAs=WorkflowCommons.Enum_NotificationArea_RenderAs.Warning)\r\n      13. END\r\n    14. BRANCH when EnumerationCase=false\r\n      15. END\r\n16. BRANCH when EnumerationCase=false\r\n  17. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

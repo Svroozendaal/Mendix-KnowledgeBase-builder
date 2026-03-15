@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ImportXML_Upload",
+                  "stableId":  "ExcelImporter.ImportXML_Upload",
+                  "slug":  "excelimporter-importxml-upload",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-importxml-upload.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/pages/excelimporter-importxml-upload.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/pages/excelimporter-importxml-upload.json",
+                  "l2Logical":  "page:ExcelImporter.ImportXML_Upload",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/pages/INDEX.json"
+              },
+    "qualifiedName":  "ExcelImporter.ImportXML_Upload",
+    "name":  "ImportXML_Upload",
+    "title":  "Upload template",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "ExcelImporter.Configurator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "XMLDocumentTemplate",
+                           "entityType":  "ExcelImporter.XMLDocumentTemplate"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

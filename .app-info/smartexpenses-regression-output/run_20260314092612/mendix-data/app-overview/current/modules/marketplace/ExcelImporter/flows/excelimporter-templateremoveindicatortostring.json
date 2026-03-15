@@ -1,0 +1,93 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.TemplateRemoveIndicatorToString",
+                  "stableId":  "ad4d52c8-1749-4e29-98b0-ff5b2495a2ad",
+                  "slug":  "excelimporter-templateremoveindicatortostring",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-templateremoveindicatortostring.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-templateremoveindicatortostring.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-templateremoveindicatortostring.json",
+                  "l2Logical":  "flow:ExcelImporter.TemplateRemoveIndicatorToString",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "ad4d52c8-1749-4e29-98b0-ff5b2495a2ad",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.TemplateRemoveIndicatorToString",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "6e498fce-d7e2-42a2-a47a-e6e4494940f1",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4e39875d-7a19-4687-aaa1-33e59b56aba5",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "34e89905-f5b4-419a-a9f9-353e9fdda6d5",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "457c523b-2146-4fa3-91a0-c4f74c1475ce",
+                      "originNodeId":  "34e89905-f5b4-419a-a9f9-353e9fdda6d5",
+                      "destinationNodeId":  "6e498fce-d7e2-42a2-a47a-e6e4494940f1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "34e89905-f5b4-419a-a9f9-353e9fdda6d5"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "34e89905-f5b4-419a-a9f9-353e9fdda6d5",
+                                         "6e498fce-d7e2-42a2-a47a-e6e4494940f1"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.TemplateRemoveIndicatorToString\r\nNODES=3; EDGES=1\r\n1. START\r\n2. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

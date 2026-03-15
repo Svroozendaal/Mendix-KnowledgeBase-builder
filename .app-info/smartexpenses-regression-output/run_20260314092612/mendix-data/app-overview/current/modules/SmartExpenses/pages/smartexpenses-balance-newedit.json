@@ -1,0 +1,46 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.Balance_NewEdit",
+                  "stableId":  "SmartExpenses.Balance_NewEdit",
+                  "slug":  "smartexpenses-balance-newedit",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-balance-newedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-balance-newedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/pages/smartexpenses-balance-newedit.json",
+                  "l2Logical":  "page:SmartExpenses.Balance_NewEdit",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/pages/INDEX.json"
+              },
+    "qualifiedName":  "SmartExpenses.Balance_NewEdit",
+    "name":  "Balance_NewEdit",
+    "title":  "Saldo",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "SmartExpenses.Admin",
+                         "SmartExpenses.User"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "Balance",
+                           "entityType":  "SmartExpenses.Balance"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

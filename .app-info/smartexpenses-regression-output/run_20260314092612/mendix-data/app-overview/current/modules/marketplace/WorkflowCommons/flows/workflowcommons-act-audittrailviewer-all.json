@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_AuditTrailViewer_All",
+                  "stableId":  "e686d700-4e44-4821-b952-52c6931a5986",
+                  "slug":  "workflowcommons-act-audittrailviewer-all",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-audittrailviewer-all.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-audittrailviewer-all.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-audittrailviewer-all.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_AuditTrailViewer_All",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "e686d700-4e44-4821-b952-52c6931a5986",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.ACT_AuditTrailViewer_All",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "8daaf41b-8f01-49a4-b025-ac200311e530",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change AuditTrailViewer (Configuration=\u0027{ \"name\": \"dataGrid2_auditTrail\", \"schemaVersion\": 2, \"settingsHash\": \"4081041333\", \"columns\": [ { \"columnId\": \"0\", \"hidden\": false }, { \"columnId\": \"1\", \"hidden\": false }, { \"col..., ActiveView=WorkflowCommons.Enum_AuditTrail_View.All; refreshInClient=true)",
+                      "detail":  "change AuditTrailViewer (Configuration=\u0027{ \"name\": \"dataGrid2_auditTrail\", \"schemaVersion\": 2, \"settingsHash\": \"4081041333\", \"columns\": [ { \"columnId\": \"0\", \"hidden\": false }, { \"columnId\": \"1\", \"hidden\": false }, { \"col..., ActiveView=WorkflowCommons.Enum_AuditTrail_View.All; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3ce04fc8-a196-4ab9-8d45-7c1126bd7337",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bfad88f8-5703-477e-91a5-e10ef53928a7",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "db9cf427-159f-4521-9ef2-e43621955387",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "c1371bdb-0bdd-4008-bd8a-033911910f8e",
+                      "originNodeId":  "db9cf427-159f-4521-9ef2-e43621955387",
+                      "destinationNodeId":  "8daaf41b-8f01-49a4-b025-ac200311e530",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "628e2cd5-6a32-49f6-8880-33bc4e9eeffe",
+                      "originNodeId":  "8daaf41b-8f01-49a4-b025-ac200311e530",
+                      "destinationNodeId":  "3ce04fc8-a196-4ab9-8d45-7c1126bd7337",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "db9cf427-159f-4521-9ef2-e43621955387"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "db9cf427-159f-4521-9ef2-e43621955387",
+                                         "8daaf41b-8f01-49a4-b025-ac200311e530",
+                                         "3ce04fc8-a196-4ab9-8d45-7c1126bd7337"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.ACT_AuditTrailViewer_All\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION ChangeObjectAction: change AuditTrailViewer (Configuration=\u0027{ \"name\": \"dataGrid2_auditTrail\", \"schemaVersion\": 2, \"settingsHash\": \"4081041333\", \"columns\": [ { \"columnId\": \"0\", \"hidden\": false }, { \"columnId\": \"1\", \"hidden\": false }, { \"col..., ActiveView=WorkflowCommons.Enum_AuditTrail_View.All; refreshInClient=true)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

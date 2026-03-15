@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowView_TimelineViewer",
+                  "stableId":  "770e7e9c-a035-4667-92c7-6a69c5345815",
+                  "slug":  "workflowcommons-ds-workflowview-timelineviewer",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowview-timelineviewer.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowview-timelineviewer.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowview-timelineviewer.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowView_TimelineViewer",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "770e7e9c-a035-4667-92c7-6a69c5345815",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowView_TimelineViewer",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "e3b38c79-f7d2-4e6c-b38d-1b20930dfc3d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.TimelineViewer as NewTimelineViewer (TimelineViewer_Workflow=$Workflow)",
+                      "detail":  "create WorkflowCommons.TimelineViewer as NewTimelineViewer (TimelineViewer_Workflow=$Workflow)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1fbb2b34-0cea-4b10-818d-e6b6ed89c7a8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Workflow over association WorkflowView_Workflow from WorkflowView",
+                      "detail":  "retrieve Workflow over association WorkflowView_Workflow from WorkflowView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ad19c6e1-db7a-4e2e-a8d8-7e9922860880",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5ea55453-0eb1-4528-aa1c-275535d66990",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "84ecf8b5-9506-4cbb-a7b1-4b0828d4f3cf",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "912b341b-58a9-4354-98d1-00a7df5ed2df",
+                      "originNodeId":  "84ecf8b5-9506-4cbb-a7b1-4b0828d4f3cf",
+                      "destinationNodeId":  "1fbb2b34-0cea-4b10-818d-e6b6ed89c7a8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d23724db-2634-4c95-b21e-086c1ee87d3d",
+                      "originNodeId":  "e3b38c79-f7d2-4e6c-b38d-1b20930dfc3d",
+                      "destinationNodeId":  "ad19c6e1-db7a-4e2e-a8d8-7e9922860880",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "846d0caf-5e4d-4800-8f7c-4d272551b28e",
+                      "originNodeId":  "1fbb2b34-0cea-4b10-818d-e6b6ed89c7a8",
+                      "destinationNodeId":  "e3b38c79-f7d2-4e6c-b38d-1b20930dfc3d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "84ecf8b5-9506-4cbb-a7b1-4b0828d4f3cf"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "84ecf8b5-9506-4cbb-a7b1-4b0828d4f3cf",
+                                         "1fbb2b34-0cea-4b10-818d-e6b6ed89c7a8",
+                                         "e3b38c79-f7d2-4e6c-b38d-1b20930dfc3d",
+                                         "ad19c6e1-db7a-4e2e-a8d8-7e9922860880"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.DS_WorkflowView_TimelineViewer\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Workflow over association WorkflowView_Workflow from WorkflowView\r\n3. ACTION CreateObjectAction: create WorkflowCommons.TimelineViewer as NewTimelineViewer (TimelineViewer_Workflow=$Workflow)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

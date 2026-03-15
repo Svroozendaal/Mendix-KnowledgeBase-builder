@@ -1,0 +1,114 @@
+# Pages: MxModelReflection
+Pages: 17, Snippets: 12
+
+## Pages
+
+PAGE MxModelReflection.DbSizeEstimate_NewEdit
+  Title: "Edit Db Size Estimate"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator
+  Parameters: DbSizeEstimate (MxModelReflection.DbSizeEstimate)
+
+PAGE MxModelReflection.EnumValue_Select
+  Title: "Select an enumeration value"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+
+PAGE MxModelReflection.MemberEnum_View
+  Title: "View enum member"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator
+  Parameters: MxObjectEnum (MxModelReflection.MxObjectEnum)
+
+PAGE MxModelReflection.Member_Select
+  Title: "Select an object member"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+
+PAGE MxModelReflection.Member_View
+  Title: "View member"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator
+  Parameters: MxObjectMember (MxModelReflection.MxObjectMember)
+
+PAGE MxModelReflection.Microflow_Select
+  Title: "Select a microflow"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+
+PAGE MxModelReflection.Microflow_View
+  Title: "Microflow details"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator
+  Parameters: Microflows (MxModelReflection.Microflows)
+
+PAGE MxModelReflection.MxObjectReference_Select
+  Title: "Select an object reference"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+
+PAGE MxModelReflection.MxObjectReference_View
+  Title: "Referentie details"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator
+  Parameters: MxObjectReference (MxModelReflection.MxObjectReference)
+
+PAGE MxModelReflection.MxObjects_Overview
+  Title: "Domain model reflection"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: MxModelReflection.ModelAdministrator
+
+PAGE MxModelReflection.MxObjectType_Select
+  Title: "Select an objecttype"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+
+PAGE MxModelReflection.MxObject_Details
+  Title: "Object details"
+  Layout: Atlas_Core.PopupLayout (popup 1000x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator
+  Parameters: MxObjectType (MxModelReflection.MxObjectType)
+
+PAGE MxModelReflection.SizeEstimate_Overview
+  Title: "Size estimate"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: MxModelReflection.ModelAdministrator
+
+PAGE MxModelReflection.TestPattern_Edit
+  Title: "Test a Pattern"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Parameters: TestPattern (MxModelReflection.TestPattern)
+
+PAGE MxModelReflection.TokenOverview
+  Title: "Tokens"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: MxModelReflection.ModelAdministrator, MxModelReflection.Readonly
+
+PAGE MxModelReflection.Token_NewEdit
+  Title: "Token details"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator, MxModelReflection.TokenUser
+  Parameters: Token (MxModelReflection.Token)
+
+PAGE MxModelReflection.ValueType_View
+  Title: "Type details"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: MxModelReflection.ModelAdministrator
+  Parameters: ValueType (MxModelReflection.ValueType)
+
+## Snippets
+- SNIPPET MxModelReflection.DbSizeEstimate (Web)
+  Parameters: DbSizeEstimate (MxModelReflection.DbSizeEstimate)
+- SNIPPET MxModelReflection.Member (Web)
+  Parameters: MxObjectMember (MxModelReflection.MxObjectMember)
+- SNIPPET MxModelReflection.MemberEnum (Web)
+  Parameters: MxObjectEnum (MxModelReflection.MxObjectEnum)
+- SNIPPET MxModelReflection.Microflow (Web)
+  Parameters: Microflows (MxModelReflection.Microflows)
+- SNIPPET MxModelReflection.MxObject (Web)
+  Parameters: MxObjectType (MxModelReflection.MxObjectType)
+- SNIPPET MxModelReflection.MxObjectReference (Web)
+  Parameters: MxObjectReference (MxModelReflection.MxObjectReference)
+- SNIPPET MxModelReflection.MxObjects (Web)
+- SNIPPET MxModelReflection.Readme (Web)
+- SNIPPET MxModelReflection.SizeEstimate (Web)
+- SNIPPET MxModelReflection.Token (Web)
+  Parameters: Token (MxModelReflection.Token)
+- SNIPPET MxModelReflection.Tokens (Web)
+- SNIPPET MxModelReflection.ValueType (Web)
+  Parameters: ValueType (MxModelReflection.ValueType)

@@ -1,0 +1,272 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ExcelTemplate_ImportFromXml",
+                  "stableId":  "a08fa6b9-d979-4b42-afb5-835bbc72edac",
+                  "slug":  "excelimporter-exceltemplate-importfromxml",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-exceltemplate-importfromxml.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-exceltemplate-importfromxml.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-exceltemplate-importfromxml.json",
+                  "l2Logical":  "flow:ExcelImporter.ExcelTemplate_ImportFromXml",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "a08fa6b9-d979-4b42-afb5-835bbc72edac",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.ExcelTemplate_ImportFromXml",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "0ce4f5c4-4603-44b9-be3f-3f6e1c0f7d6b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewLogXMLToDom (Log_XMLDocumentTemplate=$XMLDocumentTemplate, Logline=\u0027The mapping from XML to Domain throwed an error. Be sure the MxModelReflection and selected DB is synchronized. \u0027 + \u0027LastErrorMessage: \u0027 + $latestError/Message + \u0027. \u0027 + \u0027\u0027 + \u0027Last...; refreshInClient=false)",
+                      "detail":  "change NewLogXMLToDom (Log_XMLDocumentTemplate=$XMLDocumentTemplate, Logline=\u0027The mapping from XML to Domain throwed an error. Be sure the MxModelReflection and selected DB is synchronized. \u0027 + \u0027LastErrorMessage: \u0027 + $latestError/Message + \u0027. \u0027 + \u0027\u0027 + \u0027Last...; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "17d34880-234a-4093-b4d8-c4c72a4777e2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e8a818fe-64d3-4a9e-a62d-37556e2ad126",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.Log as NewLogXMLToDom",
+                      "detail":  "create ExcelImporter.Log as NewLogXMLToDom",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5eb093c9-eaa9-45c3-80cc-30498866b943",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ImportXmlAction: ImportXmlAction (errorHandlingType=Custom)",
+                      "detail":  "ImportXmlAction (errorHandlingType=Custom)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8cab8927-1aa8-4113-9f45-da32b8c5968f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action ExcelImporter.RefreshClass -\u003e Result",
+                      "detail":  "call java action ExcelImporter.RefreshClass -\u003e Result",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7f64b2c8-6ca8-41a8-960c-41d6059a8304",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ef6cfb34-aea5-4d39-b4b6-75f9416c3519",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=An error occurred, please contact your system administrator., type=Error, blocking=true)",
+                      "detail":  "show message (text=An error occurred, please contact your system administrator., type=Error, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7fe3d67e-11e0-4079-988e-6ffe469d53fc",
+                      "nodeType":  "Annotation",
+                      "label":  "Based on the MB_ImportXMLFile microflow in the DatabaseReplication module. Import the XML containing the ExcelTemplate.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ae9ac3b0-6ca6-40ed-9a88-6671fe9b5585",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e0a1734f-2469-4f4c-86ce-2286cd87c27f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4b892afa-082c-43bb-b64e-34e152a45a66",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cbbce864-694c-4b2c-80f0-93ad5c9faffe",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "1cd18029-1b49-4c5b-b2e2-83da6949e77c",
+                      "originNodeId":  "cbbce864-694c-4b2c-80f0-93ad5c9faffe",
+                      "destinationNodeId":  "17d34880-234a-4093-b4d8-c4c72a4777e2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "80c88162-1a94-434d-8cbd-0b249acdfe99",
+                      "originNodeId":  "17d34880-234a-4093-b4d8-c4c72a4777e2",
+                      "destinationNodeId":  "5eb093c9-eaa9-45c3-80cc-30498866b943",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "381194ea-ea93-4f4b-8500-b4517519897a",
+                      "originNodeId":  "5eb093c9-eaa9-45c3-80cc-30498866b943",
+                      "destinationNodeId":  "7f64b2c8-6ca8-41a8-960c-41d6059a8304",
+                      "condition":  null,
+                      "isErrorHandler":  true,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f7aaa6c3-c481-4bc6-b8fb-864339bfc99d",
+                      "originNodeId":  "e8a818fe-64d3-4a9e-a62d-37556e2ad126",
+                      "destinationNodeId":  "0ce4f5c4-4603-44b9-be3f-3f6e1c0f7d6b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f3cce9ba-e2a2-4ea6-8018-42626fa1765b",
+                      "originNodeId":  "0ce4f5c4-4603-44b9-be3f-3f6e1c0f7d6b",
+                      "destinationNodeId":  "ef6cfb34-aea5-4d39-b4b6-75f9416c3519",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7c1b4b83-3bc7-42a6-a054-b7e7cbc6d9fd",
+                      "originNodeId":  "ef6cfb34-aea5-4d39-b4b6-75f9416c3519",
+                      "destinationNodeId":  "ae9ac3b0-6ca6-40ed-9a88-6671fe9b5585",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "586c1971-c7e6-4515-acad-20e2dfe83688",
+                      "originNodeId":  "7f64b2c8-6ca8-41a8-960c-41d6059a8304",
+                      "destinationNodeId":  "e8a818fe-64d3-4a9e-a62d-37556e2ad126",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3607a830-58f9-4120-8c6d-05ec090a6ac4",
+                      "originNodeId":  "5eb093c9-eaa9-45c3-80cc-30498866b943",
+                      "destinationNodeId":  "8cab8927-1aa8-4113-9f45-da32b8c5968f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1c8c1508-8b11-415a-b606-38206ff2c84b",
+                      "originNodeId":  "8cab8927-1aa8-4113-9f45-da32b8c5968f",
+                      "destinationNodeId":  "e0a1734f-2469-4f4c-86ce-2286cd87c27f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "cbbce864-694c-4b2c-80f0-93ad5c9faffe"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "cbbce864-694c-4b2c-80f0-93ad5c9faffe",
+                                         "17d34880-234a-4093-b4d8-c4c72a4777e2",
+                                         "5eb093c9-eaa9-45c3-80cc-30498866b943",
+                                         "8cab8927-1aa8-4113-9f45-da32b8c5968f",
+                                         "e0a1734f-2469-4f4c-86ce-2286cd87c27f",
+                                         "7f64b2c8-6ca8-41a8-960c-41d6059a8304",
+                                         "e8a818fe-64d3-4a9e-a62d-37556e2ad126",
+                                         "0ce4f5c4-4603-44b9-be3f-3f6e1c0f7d6b",
+                                         "ef6cfb34-aea5-4d39-b4b6-75f9416c3519",
+                                         "ae9ac3b0-6ca6-40ed-9a88-6671fe9b5585"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.ExcelTemplate_ImportFromXml\r\nNODES=12; EDGES=9\r\n1. START\r\n2. ACTION CloseFormAction: close page\r\n3. ACTION ImportXmlAction: ImportXmlAction (errorHandlingType=Custom)\r\n4. BRANCH\r\n  5. ACTION JavaActionCallAction: call java action ExcelImporter.RefreshClass -\u003e Result\r\n  6. END\r\n7. BRANCH on error\r\n  8. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  9. ACTION CreateObjectAction: create ExcelImporter.Log as NewLogXMLToDom\r\n  10. ACTION ChangeObjectAction: change NewLogXMLToDom (Log_XMLDocumentTemplate=$XMLDocumentTemplate, Logline=\u0027The mapping from XML to Domain throwed an error. Be sure the MxModelReflection and selected DB is synchronized. \u0027 + \u0027LastErrorMessage: \u0027 + $latestError/Message + \u0027. \u0027 + \u0027\u0027 + \u0027Last...; refreshInClient=false)\r\n  11. ACTION ShowMessageAction: show message (text=An error occurred, please contact your system administrator., type=Error, blocking=true)\r\n  12. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

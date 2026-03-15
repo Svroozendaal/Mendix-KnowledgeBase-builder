@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ImporterHelper",
+                  "qualifiedName":  "ImporterHelper.ACT_ImportTransaction_ShowPage",
+                  "stableId":  "1a6d88d3-4d88-4eca-bcd3-51282f06e67c",
+                  "slug":  "importerhelper-act-importtransaction-showpage",
+                  "l0Path":  "knowledge-base/modules/ImporterHelper/flows/importerhelper-act-importtransaction-showpage.abstract.md",
+                  "l1Path":  "knowledge-base/modules/ImporterHelper/flows/importerhelper-act-importtransaction-showpage.overview.md",
+                  "l2Path":  "app-overview/current/modules/ImporterHelper/flows/importerhelper-act-importtransaction-showpage.json",
+                  "l2Logical":  "flow:ImporterHelper.ACT_ImportTransaction_ShowPage",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/ImporterHelper/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/ImporterHelper/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/ImporterHelper/flows/INDEX.json"
+              },
+    "flowId":  "1a6d88d3-4d88-4eca-bcd3-51282f06e67c",
+    "kind":  "Microflow",
+    "qualifiedName":  "ImporterHelper.ACT_ImportTransaction_ShowPage",
+    "module":  "ImporterHelper",
+    "nodes":  [
+                  {
+                      "nodeId":  "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ImporterHelper.ImportTransactionHelper as NewImportTransactionHelper",
+                      "detail":  "create ImporterHelper.ImportTransactionHelper as NewImportTransactionHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page ImporterHelper.ImportTransaction_Overview",
+                      "detail":  "show page ImporterHelper.ImportTransaction_Overview",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dc6a7852-34ac-4db5-91fd-bfe74b2b504f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6b81afe7-18f3-49cd-bd71-dbdeb3143d4f",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fb6e8c5a-8147-489b-9e0a-184d449cddf4",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "693e7d26-c92a-486b-9e32-07a4dfddbb00",
+                      "originNodeId":  "fb6e8c5a-8147-489b-9e0a-184d449cddf4",
+                      "destinationNodeId":  "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e172c8d1-d072-4b0c-aa50-2839895a1f7e",
+                      "originNodeId":  "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+                      "destinationNodeId":  "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cc3f88c5-cbe4-44d7-95ab-4584f5627675",
+                      "originNodeId":  "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+                      "destinationNodeId":  "dc6a7852-34ac-4db5-91fd-bfe74b2b504f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "fb6e8c5a-8147-489b-9e0a-184d449cddf4"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "fb6e8c5a-8147-489b-9e0a-184d449cddf4",
+                                         "5db7a28a-f7aa-43fe-9bf0-cc0903d860be",
+                                         "4fc9e16f-0f8e-48f2-8e8e-ac6b97917137",
+                                         "dc6a7852-34ac-4db5-91fd-bfe74b2b504f"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ImporterHelper.ACT_ImportTransaction_ShowPage\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create ImporterHelper.ImportTransactionHelper as NewImportTransactionHelper\r\n3. ACTION ShowPageAction: show page ImporterHelper.ImportTransaction_Overview\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,275 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.OCh_DashboardContext_UpdateTaskDashboard",
+                  "stableId":  "65012e04-2e3b-4119-bb9d-c51b5ebab51d",
+                  "slug":  "workflowcommons-och-dashboardcontext-updatetaskdashboard",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-dashboardcontext-updatetaskdashboard.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-dashboardcontext-updatetaskdashboard.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-och-dashboardcontext-updatetaskdashboard.json",
+                  "l2Logical":  "flow:WorkflowCommons.OCh_DashboardContext_UpdateTaskDashboard",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "65012e04-2e3b-4119-bb9d-c51b5ebab51d",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.OCh_DashboardContext_UpdateTaskDashboard",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "a843edd9-fd24-468a-969d-7c118ee26bea",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change DashboardContext (DashboardContext_DefinitionHelperTask=empty; refreshInClient=false)",
+                      "detail":  "change DashboardContext (DashboardContext_DefinitionHelperTask=empty; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3bb2d86f-100a-421f-bf8c-c0085e1ef78a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change DashboardContext (refreshInClient=true)",
+                      "detail":  "change DashboardContext (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskDashboard_Update",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskDashboard_Update",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                                        "sourceNodeId":  "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "ad5c2065-9efd-46ee-9229-42d476b414a8",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8b1a82d0-68b8-4e73-abb3-f225bc561260",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ef73ec71-f71c-4879-ab22-11ac57d7d023",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4d91394f-f980-4161-81b5-c1701bc7cfb2",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Definition from other Workflow? expression=$DashboardContext/WorkflowCommons.DashboardContext_DefinitionHelperTask != empty and $DashboardContext/WorkflowCommons.D...",
+                      "detail":  "Definition from other Workflow? expression=$DashboardContext/WorkflowCommons.DashboardContext_DefinitionHelperTask != empty and $DashboardContext/WorkflowCommons.D...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "efe933fd-c99b-47f7-b468-3d10308b753a",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Not Selected? expression=$DashboardContext/WorkflowCommons.DashboardContext_DefinitionHelperWorkflow = empty",
+                      "detail":  "Not Selected? expression=$DashboardContext/WorkflowCommons.DashboardContext_DefinitionHelperWorkflow = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d4d4d863-4701-4c80-bd43-456444113b31",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bd67f65e-61b9-434b-b3b5-39cbcb6ea46a",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "796e0bfc-8ec7-47bd-953d-88c61009f281",
+                      "originNodeId":  "bd67f65e-61b9-434b-b3b5-39cbcb6ea46a",
+                      "destinationNodeId":  "efe933fd-c99b-47f7-b468-3d10308b753a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "749be4c7-193e-431c-a2ed-570e0df7d0f2",
+                      "originNodeId":  "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0",
+                      "destinationNodeId":  "3bb2d86f-100a-421f-bf8c-c0085e1ef78a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "02683434-9812-4efb-b775-0ab79dc335b2",
+                      "originNodeId":  "3bb2d86f-100a-421f-bf8c-c0085e1ef78a",
+                      "destinationNodeId":  "ad5c2065-9efd-46ee-9229-42d476b414a8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f39b3e17-e60b-4a98-986d-ddae437d1df9",
+                      "originNodeId":  "efe933fd-c99b-47f7-b468-3d10308b753a",
+                      "destinationNodeId":  "8b1a82d0-68b8-4e73-abb3-f225bc561260",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "df4b3726-c8a5-4d97-8083-df08597ed079",
+                      "originNodeId":  "a843edd9-fd24-468a-969d-7c118ee26bea",
+                      "destinationNodeId":  "ef73ec71-f71c-4879-ab22-11ac57d7d023",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c81af658-c2f8-42e5-ac4e-e87ccc897e22",
+                      "originNodeId":  "ef73ec71-f71c-4879-ab22-11ac57d7d023",
+                      "destinationNodeId":  "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c8a16c26-2f28-40f4-acb5-8b750e871a2b",
+                      "originNodeId":  "efe933fd-c99b-47f7-b468-3d10308b753a",
+                      "destinationNodeId":  "4d91394f-f980-4161-81b5-c1701bc7cfb2",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "7b471d99-376f-42b6-9529-7ac3b791ff17",
+                      "originNodeId":  "4d91394f-f980-4161-81b5-c1701bc7cfb2",
+                      "destinationNodeId":  "8b1a82d0-68b8-4e73-abb3-f225bc561260",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "59663536-d450-44e4-957e-f9a7fcac2ec9",
+                      "originNodeId":  "4d91394f-f980-4161-81b5-c1701bc7cfb2",
+                      "destinationNodeId":  "ef73ec71-f71c-4879-ab22-11ac57d7d023",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "900a994c-03a8-4e8d-bab6-afe6b8955df7",
+                      "originNodeId":  "8b1a82d0-68b8-4e73-abb3-f225bc561260",
+                      "destinationNodeId":  "a843edd9-fd24-468a-969d-7c118ee26bea",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                      "sourceNodeId":  "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0"
+                  }
+              ],
+    "startNodeIds":  [
+                         "bd67f65e-61b9-434b-b3b5-39cbcb6ea46a"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "bd67f65e-61b9-434b-b3b5-39cbcb6ea46a",
+                                         "efe933fd-c99b-47f7-b468-3d10308b753a",
+                                         "8b1a82d0-68b8-4e73-abb3-f225bc561260",
+                                         "a843edd9-fd24-468a-969d-7c118ee26bea",
+                                         "ef73ec71-f71c-4879-ab22-11ac57d7d023",
+                                         "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0",
+                                         "3bb2d86f-100a-421f-bf8c-c0085e1ef78a",
+                                         "ad5c2065-9efd-46ee-9229-42d476b414a8",
+                                         "4d91394f-f980-4161-81b5-c1701bc7cfb2"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.OCh_DashboardContext_UpdateTaskDashboard\r\nNODES=10; EDGES=10\r\n1. START\r\n2. DECISION Not Selected? expression=$DashboardContext/WorkflowCommons.DashboardContext_DefinitionHelperWorkflow = empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. NODE ExclusiveMerge: ExclusiveMerge\r\n  5. ACTION ChangeObjectAction: change DashboardContext (DashboardContext_DefinitionHelperTask=empty; refreshInClient=false)\r\n  6. NODE ExclusiveMerge: ExclusiveMerge\r\n  7. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskDashboard_Update\r\n  8. ACTION ChangeObjectAction: change DashboardContext (refreshInClient=true)\r\n  9. END\r\n10. BRANCH when EnumerationCase=false\r\n  11. DECISION Definition from other Workflow? expression=$DashboardContext/WorkflowCommons.DashboardContext_DefinitionHelperTask != empty and $DashboardContext/WorkflowCommons.D...\r\n  12. BRANCH when EnumerationCase=true\r\n    13. REF ExclusiveMerge\r\n  14. BRANCH when EnumerationCase=false\r\n    15. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.OCh_DashboardContext_UpdateTaskDashboard",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "02cb1c3e-6fc3-4b54-828a-7d92ba28cdb0",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskDashboard_Update",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,223 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.DS_Feedback_Populate",
+                  "stableId":  "02fcf356-6d0f-4b56-b472-7f195eb0fd0d",
+                  "slug":  "feedbackmodule-ds-feedback-populate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-ds-feedback-populate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-ds-feedback-populate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-ds-feedback-populate.json",
+                  "l2Logical":  "flow:FeedbackModule.DS_Feedback_Populate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "02fcf356-6d0f-4b56-b472-7f195eb0fd0d",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "FeedbackModule.DS_Feedback_Populate",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "e893f43c-fe63-44be-93c1-301a90645167",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Feedback (_showEmail=if $Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027 then false else true; refreshInClient=true)",
+                      "detail":  "change Feedback (_showEmail=if $Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027 then false else true; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action FeedbackModule.JS_PopulateFeedbackMetadata -\u003e FeedbackWithMetaData",
+                      "detail":  "call javascript action FeedbackModule.JS_PopulateFeedbackMetadata -\u003e FeedbackWithMetaData",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4ce024b7-9d4a-441d-8921-930f4e65c396",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "detail":  "call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow FeedbackModule.PopulateUserAttributes",
+                      "detail":  "call microflow FeedbackModule.PopulateUserAttributes",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "FeedbackModule.PopulateUserAttributes",
+                                        "sourceNodeId":  "d2a83dc1-bc9e-4cab-a5f0-978714575428"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "NanoflowCallAction: call nanoflow FeedbackModule.SUB_Feedback_GetOrCreate -\u003e Feedback",
+                      "detail":  "call nanoflow FeedbackModule.SUB_Feedback_GetOrCreate -\u003e Feedback",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Nanoflow",
+                                        "targetFlowName":  "FeedbackModule.SUB_Feedback_GetOrCreate",
+                                        "sourceNodeId":  "129fe65c-9ad2-4cf1-a084-f1c77406d13f"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "aa590c43-b543-4b24-a3d4-ad2b5f7c1ae8",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dea17eb3-5c59-4d6e-b696-c763078e97c8",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "7570a243-8e51-4b35-b637-0eb7ff75c46e",
+                      "originNodeId":  "dea17eb3-5c59-4d6e-b696-c763078e97c8",
+                      "destinationNodeId":  "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "244efedf-17f7-437f-bad9-42ed56e9ead9",
+                      "originNodeId":  "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+                      "destinationNodeId":  "e893f43c-fe63-44be-93c1-301a90645167",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cd70660d-250d-4424-8001-1e4359170847",
+                      "originNodeId":  "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+                      "destinationNodeId":  "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "08fb8362-dd71-4eb3-8c59-3b745c7a7749",
+                      "originNodeId":  "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+                      "destinationNodeId":  "4ce024b7-9d4a-441d-8921-930f4e65c396",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7c8c97fa-135f-4ab6-b62b-718f9a8197c9",
+                      "originNodeId":  "4ce024b7-9d4a-441d-8921-930f4e65c396",
+                      "destinationNodeId":  "aa590c43-b543-4b24-a3d4-ad2b5f7c1ae8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "63a3b194-eb24-4dfd-8b12-559ad71980ca",
+                      "originNodeId":  "e893f43c-fe63-44be-93c1-301a90645167",
+                      "destinationNodeId":  "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "FeedbackModule.PopulateUserAttributes",
+                      "sourceNodeId":  "d2a83dc1-bc9e-4cab-a5f0-978714575428"
+                  },
+                  {
+                      "callKind":  "Nanoflow",
+                      "targetFlowName":  "FeedbackModule.SUB_Feedback_GetOrCreate",
+                      "sourceNodeId":  "129fe65c-9ad2-4cf1-a084-f1c77406d13f"
+                  }
+              ],
+    "startNodeIds":  [
+                         "dea17eb3-5c59-4d6e-b696-c763078e97c8"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "dea17eb3-5c59-4d6e-b696-c763078e97c8",
+                                         "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+                                         "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+                                         "e893f43c-fe63-44be-93c1-301a90645167",
+                                         "534f1c14-daa3-47fe-b9e9-31d14de96f5d",
+                                         "4ce024b7-9d4a-441d-8921-930f4e65c396",
+                                         "aa590c43-b543-4b24-a3d4-ad2b5f7c1ae8"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: FeedbackModule.DS_Feedback_Populate\r\nNODES=7; EDGES=6\r\n1. START\r\n2. ACTION NanoflowCallAction: call nanoflow FeedbackModule.SUB_Feedback_GetOrCreate -\u003e Feedback\r\n3. ACTION MicroflowCallAction: call microflow FeedbackModule.PopulateUserAttributes\r\n4. ACTION ChangeObjectAction: change Feedback (_showEmail=if $Feedback/SubmitterEmail != empty and $Feedback/SubmitterEmail != \u0027\u0027 then false else true; refreshInClient=true)\r\n5. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.JS_PopulateFeedbackMetadata -\u003e FeedbackWithMetaData\r\n6. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.SetStorageItemObject -\u003e ReturnValueName\r\n7. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "FeedbackModule",
+                          "callerFlow":  "FeedbackModule.DS_Feedback_Populate",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "d2a83dc1-bc9e-4cab-a5f0-978714575428",
+                          "targetModule":  "FeedbackModule",
+                          "targetFlow":  "FeedbackModule.PopulateUserAttributes",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "FeedbackModule",
+                          "callerFlow":  "FeedbackModule.DS_Feedback_Populate",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Nanoflow",
+                          "sourceNodeId":  "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+                          "targetModule":  "FeedbackModule",
+                          "targetFlow":  "FeedbackModule.SUB_Feedback_GetOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,295 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ASu_Assignee_Migrate",
+                  "stableId":  "627cf351-d370-4343-ad59-ea5d4b280e94",
+                  "slug":  "workflowcommons-asu-assignee-migrate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-asu-assignee-migrate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-asu-assignee-migrate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-asu-assignee-migrate.json",
+                  "l2Logical":  "flow:WorkflowCommons.ASu_Assignee_Migrate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "627cf351-d370-4343-ad59-ea5d4b280e94",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ASu_Assignee_Migrate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "63234ee8-352d-4a12-8aca-2fcd540815a6",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f92d5235-46ef-4b6d-a193-bc551347e7b5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "LogMessageAction: LogMessageAction (errorHandlingType=Rollback)",
+                      "detail":  "LogMessageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "48f23cc3-5a58-4696-ad07-d1891d166305",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_AssigneeMigration_Verify -\u003e MigrationRequired",
+                      "detail":  "call microflow WorkflowCommons.SUB_AssigneeMigration_Verify -\u003e MigrationRequired",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_AssigneeMigration_Verify",
+                                        "sourceNodeId":  "48f23cc3-5a58-4696-ad07-d1891d166305"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "63e9922d-8194-428c-8bbc-f17eed8c2e56",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Assignee_Migrate -\u003e MigratedAssigneeCount",
+                      "detail":  "call microflow WorkflowCommons.SUB_Assignee_Migrate -\u003e MigratedAssigneeCount",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Assignee_Migrate",
+                                        "sourceNodeId":  "63e9922d-8194-428c-8bbc-f17eed8c2e56"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "31d18348-a6fb-4ac7-a506-a07d61385c64",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_Configuration_FindOrCreate -\u003e Configuration",
+                      "detail":  "call microflow WorkflowCommons.SUB_Configuration_FindOrCreate -\u003e Configuration",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                                        "sourceNodeId":  "31d18348-a6fb-4ac7-a506-a07d61385c64"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "75adba04-353b-4e29-b430-a76bd955cde4",
+                      "nodeType":  "Annotation",
+                      "label":  "Assignees are now a reference set. If you have already used the \"UserTaskView_Assignee\" association, then please use the migration microflow \"ACT_Assignee_Migra...",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "23d5d2cc-c63b-4fcd-9766-a24d275ec971",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8289f353-1016-48da-a8b2-c70e148e7005",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0cf76524-9c34-45ff-8612-ad711656df36",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Migration required? expression=$MigrationRequired",
+                      "detail":  "Migration required? expression=$MigrationRequired",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e6f28014-007b-42e5-a9cf-27896263a515",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "9289734e-9888-489b-93db-5c33c4b52be3",
+                      "originNodeId":  "e6f28014-007b-42e5-a9cf-27896263a515",
+                      "destinationNodeId":  "31d18348-a6fb-4ac7-a506-a07d61385c64",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "beba5220-471d-4620-b8ea-00bb6870a2b7",
+                      "originNodeId":  "48f23cc3-5a58-4696-ad07-d1891d166305",
+                      "destinationNodeId":  "0cf76524-9c34-45ff-8612-ad711656df36",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "95ddcdfd-65c9-4073-8edc-0c390c7fa054",
+                      "originNodeId":  "31d18348-a6fb-4ac7-a506-a07d61385c64",
+                      "destinationNodeId":  "48f23cc3-5a58-4696-ad07-d1891d166305",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b998c65c-9eb2-47cf-9daf-bcf8c1535a8c",
+                      "originNodeId":  "63e9922d-8194-428c-8bbc-f17eed8c2e56",
+                      "destinationNodeId":  "f92d5235-46ef-4b6d-a193-bc551347e7b5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "92123f23-5667-4252-9a4e-61cb7b76433e",
+                      "originNodeId":  "0cf76524-9c34-45ff-8612-ad711656df36",
+                      "destinationNodeId":  "63e9922d-8194-428c-8bbc-f17eed8c2e56",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "bdd4e136-157e-461e-ae2b-e923af41ef3d",
+                      "originNodeId":  "0cf76524-9c34-45ff-8612-ad711656df36",
+                      "destinationNodeId":  "63234ee8-352d-4a12-8aca-2fcd540815a6",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "1aedd1c3-4ae9-487f-a7a8-27d591746e78",
+                      "originNodeId":  "f92d5235-46ef-4b6d-a193-bc551347e7b5",
+                      "destinationNodeId":  "8289f353-1016-48da-a8b2-c70e148e7005",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4c6deb0f-b1ec-433b-9b5c-c4cc2336b3aa",
+                      "originNodeId":  "63234ee8-352d-4a12-8aca-2fcd540815a6",
+                      "destinationNodeId":  "23d5d2cc-c63b-4fcd-9766-a24d275ec971",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_AssigneeMigration_Verify",
+                      "sourceNodeId":  "48f23cc3-5a58-4696-ad07-d1891d166305"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Assignee_Migrate",
+                      "sourceNodeId":  "63e9922d-8194-428c-8bbc-f17eed8c2e56"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                      "sourceNodeId":  "31d18348-a6fb-4ac7-a506-a07d61385c64"
+                  }
+              ],
+    "startNodeIds":  [
+                         "e6f28014-007b-42e5-a9cf-27896263a515"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "e6f28014-007b-42e5-a9cf-27896263a515",
+                                         "31d18348-a6fb-4ac7-a506-a07d61385c64",
+                                         "48f23cc3-5a58-4696-ad07-d1891d166305",
+                                         "0cf76524-9c34-45ff-8612-ad711656df36",
+                                         "63e9922d-8194-428c-8bbc-f17eed8c2e56",
+                                         "f92d5235-46ef-4b6d-a193-bc551347e7b5",
+                                         "8289f353-1016-48da-a8b2-c70e148e7005",
+                                         "63234ee8-352d-4a12-8aca-2fcd540815a6",
+                                         "23d5d2cc-c63b-4fcd-9766-a24d275ec971"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ASu_Assignee_Migrate\r\nNODES=10; EDGES=8\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Configuration_FindOrCreate -\u003e Configuration\r\n3. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_AssigneeMigration_Verify -\u003e MigrationRequired\r\n4. DECISION Migration required? expression=$MigrationRequired\r\n5. BRANCH when EnumerationCase=true\r\n  6. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_Assignee_Migrate -\u003e MigratedAssigneeCount\r\n  7. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  8. END\r\n9. BRANCH when EnumerationCase=false\r\n  10. ACTION LogMessageAction: LogMessageAction (errorHandlingType=Rollback)\r\n  11. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Assignee_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "48f23cc3-5a58-4696-ad07-d1891d166305",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_AssigneeMigration_Verify",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Assignee_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "63e9922d-8194-428c-8bbc-f17eed8c2e56",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Assignee_Migrate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Assignee_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "31d18348-a6fb-4ac7-a506-a07d61385c64",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

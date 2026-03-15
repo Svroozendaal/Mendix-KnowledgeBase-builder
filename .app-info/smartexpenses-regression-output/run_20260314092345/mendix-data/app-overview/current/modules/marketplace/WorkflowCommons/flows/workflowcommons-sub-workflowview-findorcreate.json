@@ -1,0 +1,227 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                  "stableId":  "ac3ca60e-f5d2-4f1a-84a2-cd4d7f7f0e5f",
+                  "slug":  "workflowcommons-sub-workflowview-findorcreate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowview-findorcreate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-workflowview-findorcreate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-workflowview-findorcreate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "ac3ca60e-f5d2-4f1a-84a2-cd4d7f7f0e5f",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "1d58c2a5-da29-4ee3-924c-8d0cf1200f47",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.WorkflowView as NewWorkflowView (WorkflowView_Workflow=$Workflow, WorkflowView_WorkflowDefinition=$Workflow/System.Workflow_WorkflowDefinition, WorkflowView_Initiator=$Workflow/System.owner, WorkflowKey=$WorkflowKey, Name=$Workflow/Name, Description=$Workflow/Description, StartTime=$Workflow/StartTime, EndTime=$Workflow/EndTime, +3 more)",
+                      "detail":  "create WorkflowCommons.WorkflowView as NewWorkflowView (WorkflowView_Workflow=$Workflow, WorkflowView_WorkflowDefinition=$Workflow/System.Workflow_WorkflowDefinition, WorkflowView_Initiator=$Workflow/System.owner, WorkflowKey=$WorkflowKey, Name=$Workflow/Name, Description=$Workflow/Description, StartTime=$Workflow/StartTime, EndTime=$Workflow/EndTime, +3 more)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0316356f-8d82-46c4-8676-c5258fd38839",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaActionCallAction: call java action WorkflowCommons.JA_Workflow_GetKey -\u003e WorkflowKey",
+                      "detail":  "call java action WorkflowCommons.JA_Workflow_GetKey -\u003e WorkflowKey",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0902e85d-3657-4e23-addd-716a8bde4172",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve WorkflowView from WorkflowCommons.WorkflowView",
+                      "detail":  "retrieve WorkflowView from WorkflowCommons.WorkflowView",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0da59fe0-52d8-4ea1-a8a3-13c4a48165d5",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e1cea163-84ba-4eab-8964-478cacfd7273",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2be73e8b-9f82-44df-b742-297c640fdab9",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Exists? expression=$WorkflowView != empty",
+                      "detail":  "Exists? expression=$WorkflowView != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9da09de1-d258-4328-ac35-fd40ff8667f5",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "13a908d9-4d26-49be-9e42-dc6de6620386",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "6107f3c7-8ad1-4cf1-aea0-879481e93cab",
+                      "originNodeId":  "13a908d9-4d26-49be-9e42-dc6de6620386",
+                      "destinationNodeId":  "0902e85d-3657-4e23-addd-716a8bde4172",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "caad6f13-0103-491e-9002-160cffdd57d0",
+                      "originNodeId":  "0902e85d-3657-4e23-addd-716a8bde4172",
+                      "destinationNodeId":  "2be73e8b-9f82-44df-b742-297c640fdab9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "faac9c00-e8c3-4865-befa-85f4120de4a5",
+                      "originNodeId":  "2be73e8b-9f82-44df-b742-297c640fdab9",
+                      "destinationNodeId":  "e1cea163-84ba-4eab-8964-478cacfd7273",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2084836d-84db-4af8-85b3-6a568e9a98c6",
+                      "originNodeId":  "2be73e8b-9f82-44df-b742-297c640fdab9",
+                      "destinationNodeId":  "0316356f-8d82-46c4-8676-c5258fd38839",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "653b7d21-0b5f-46d8-906a-71e2c3f18070",
+                      "originNodeId":  "1d58c2a5-da29-4ee3-924c-8d0cf1200f47",
+                      "destinationNodeId":  "0da59fe0-52d8-4ea1-a8a3-13c4a48165d5",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "17e9cb79-0c35-4374-acec-2755cbaa4701",
+                      "originNodeId":  "0316356f-8d82-46c4-8676-c5258fd38839",
+                      "destinationNodeId":  "1d58c2a5-da29-4ee3-924c-8d0cf1200f47",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "13a908d9-4d26-49be-9e42-dc6de6620386"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "13a908d9-4d26-49be-9e42-dc6de6620386",
+                                         "0902e85d-3657-4e23-addd-716a8bde4172",
+                                         "2be73e8b-9f82-44df-b742-297c640fdab9",
+                                         "e1cea163-84ba-4eab-8964-478cacfd7273",
+                                         "0316356f-8d82-46c4-8676-c5258fd38839",
+                                         "1d58c2a5-da29-4ee3-924c-8d0cf1200f47",
+                                         "0da59fe0-52d8-4ea1-a8a3-13c4a48165d5"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_WorkflowView_FindOrCreate\r\nNODES=8; EDGES=6\r\n1. START\r\n2. ACTION RetrieveAction: retrieve WorkflowView from WorkflowCommons.WorkflowView\r\n3. DECISION Exists? expression=$WorkflowView != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. END\r\n6. BRANCH when EnumerationCase=false\r\n  7. ACTION JavaActionCallAction: call java action WorkflowCommons.JA_Workflow_GetKey -\u003e WorkflowKey\r\n  8. ACTION CreateObjectAction: create WorkflowCommons.WorkflowView as NewWorkflowView (WorkflowView_Workflow=$Workflow, WorkflowView_WorkflowDefinition=$Workflow/System.Workflow_WorkflowDefinition, WorkflowView_Initiator=$Workflow/System.owner, WorkflowKey=$WorkflowKey, Name=$Workflow/Name, Description=$Workflow/Description, StartTime=$Workflow/StartTime, EndTime=$Workflow/EndTime, +3 more)\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_WorkflowUserTask_WorkflowView",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1419aa6c-b90b-4d81-8836-64118b77b8c3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_Workflow_WorkflowView",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "5257e418-4524-4cd1-b6f4-7bbc29879d04",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.OCh_Workflow_State",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1ee47f12-b897-43fc-abfb-7ccac5d8b8d3",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_WorkflowView_FindOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

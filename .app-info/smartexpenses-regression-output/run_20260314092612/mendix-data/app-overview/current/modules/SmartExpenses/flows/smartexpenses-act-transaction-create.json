@@ -1,0 +1,157 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_Transaction_Create",
+                  "stableId":  "742012e9-f6e5-4025-9e8c-93479de74d7a",
+                  "slug":  "smartexpenses-act-transaction-create",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-transaction-create.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-transaction-create.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-transaction-create.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_Transaction_Create",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "742012e9-f6e5-4025-9e8c-93479de74d7a",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_Transaction_Create",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "e4b9bfec-f39a-443c-8ef5-64dc25960ddb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.Transaction as NewTransaction (EntryDate=[%BeginOfCurrentDay%], TransactionDate=[%BeginOfCurrentDay%], Status=SmartExpenses.ENUM_TransactionStatus.Pending, Transaction_FBGProfile=$FBGProfile, TransactionCode=formatDateTime([%CurrentDateTime%], \u0027dmmyyyyHHmmss\u0027), InOut=$TransactionSort)",
+                      "detail":  "create SmartExpenses.Transaction as NewTransaction (EntryDate=[%BeginOfCurrentDay%], TransactionDate=[%BeginOfCurrentDay%], Status=SmartExpenses.ENUM_TransactionStatus.Pending, Transaction_FBGProfile=$FBGProfile, TransactionCode=formatDateTime([%CurrentDateTime%], \u0027dmmyyyyHHmmss\u0027), InOut=$TransactionSort)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ed34bdd4-2d79-49fd-8b13-263950a68bbc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page SmartExpenses.Transaction_New",
+                      "detail":  "show page SmartExpenses.Transaction_New",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c1a3a398-6659-44dc-bdf2-dda12b01ae40",
+                      "nodeType":  "Annotation",
+                      "label":  "Creates new Transactions, fills in standard attributes and shows newEdit page",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "14aa40f0-1f65-42c2-9d38-1078f7428394",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "941a358f-d7a0-4151-85e4-253fd36442a1",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ea52b037-0ee9-49e0-85eb-cc0df06a386b",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7371df69-9b3a-4459-bc4a-32eef700fa1c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "8b6d7d77-4d4b-453d-9151-dcb78b152d34",
+                      "originNodeId":  "7371df69-9b3a-4459-bc4a-32eef700fa1c",
+                      "destinationNodeId":  "e4b9bfec-f39a-443c-8ef5-64dc25960ddb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "db917a16-fc8e-49d5-9e86-a6405132b9a5",
+                      "originNodeId":  "ed34bdd4-2d79-49fd-8b13-263950a68bbc",
+                      "destinationNodeId":  "14aa40f0-1f65-42c2-9d38-1078f7428394",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d31fc69e-0bb9-4473-a4a9-2d30c5d5f6f7",
+                      "originNodeId":  "e4b9bfec-f39a-443c-8ef5-64dc25960ddb",
+                      "destinationNodeId":  "ed34bdd4-2d79-49fd-8b13-263950a68bbc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "7371df69-9b3a-4459-bc4a-32eef700fa1c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7371df69-9b3a-4459-bc4a-32eef700fa1c",
+                                         "e4b9bfec-f39a-443c-8ef5-64dc25960ddb",
+                                         "ed34bdd4-2d79-49fd-8b13-263950a68bbc",
+                                         "14aa40f0-1f65-42c2-9d38-1078f7428394"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_Transaction_Create\r\nNODES=7; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create SmartExpenses.Transaction as NewTransaction (EntryDate=[%BeginOfCurrentDay%], TransactionDate=[%BeginOfCurrentDay%], Status=SmartExpenses.ENUM_TransactionStatus.Pending, Transaction_FBGProfile=$FBGProfile, TransactionCode=formatDateTime([%CurrentDateTime%], \u0027dmmyyyyHHmmss\u0027), InOut=$TransactionSort)\r\n3. ACTION ShowPageAction: show page SmartExpenses.Transaction_New\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

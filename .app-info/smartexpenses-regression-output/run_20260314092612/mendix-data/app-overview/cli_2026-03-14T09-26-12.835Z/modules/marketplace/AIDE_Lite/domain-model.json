@@ -1,0 +1,8 @@
+{
+  "module": "AIDE_Lite",
+  "domainModel": {
+    "entities": [],
+    "associations": [],
+    "enumerations": []
+  }
+}

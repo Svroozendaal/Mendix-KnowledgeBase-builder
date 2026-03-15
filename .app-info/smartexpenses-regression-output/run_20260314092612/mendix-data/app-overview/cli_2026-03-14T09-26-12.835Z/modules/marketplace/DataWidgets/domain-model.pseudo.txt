@@ -1,0 +1,5 @@
+# Domain Model: DataWidgets
+Entities: 0, Associations: 0, Enumerations: 1
+
+## Enumerations
+- ENUM DataWidgets.Filter_Operators: between, contains, empty, endsWith, equal, greater, greaterEqual, notEmpty, notEqual, smaller, smallerEqual, startsWith

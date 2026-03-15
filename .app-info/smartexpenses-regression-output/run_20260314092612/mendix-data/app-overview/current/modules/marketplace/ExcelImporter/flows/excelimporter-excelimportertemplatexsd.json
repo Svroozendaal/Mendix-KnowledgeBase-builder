@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ExcelImporterTemplateXSD",
+                  "stableId":  "ffefedfd-9916-4b81-85c2-1d6a68ae35c2",
+                  "slug":  "excelimporter-excelimportertemplatexsd",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-excelimportertemplatexsd.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-excelimportertemplatexsd.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-excelimportertemplatexsd.json",
+                  "l2Logical":  "flow:ExcelImporter.ExcelImporterTemplateXSD",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "ffefedfd-9916-4b81-85c2-1d6a68ae35c2",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.ExcelImporterTemplateXSD",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "357496f2-8faf-44a2-bdb8-e24c9e365ab9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Template from ExcelImporter.Template",
+                      "detail":  "retrieve Template from ExcelImporter.Template",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "187f148d-43a5-4958-ba7c-1b55e86fca7f",
+                      "nodeType":  "Annotation",
+                      "label":  "This microflow is only used by the ExcelImporterTemplateXSD web service. We use this to generate the XSD to export and import Excel Templates",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "14b4c90f-59e3-4e28-a469-c2b1d28fc2dc",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3ca923d6-a158-4923-a2a1-1f4b31765806",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "a1f47e84-50a4-45f0-8a37-d5f81a7d2a1e",
+                      "originNodeId":  "3ca923d6-a158-4923-a2a1-1f4b31765806",
+                      "destinationNodeId":  "357496f2-8faf-44a2-bdb8-e24c9e365ab9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "032ed343-845e-41bb-aca9-7715ec986727",
+                      "originNodeId":  "357496f2-8faf-44a2-bdb8-e24c9e365ab9",
+                      "destinationNodeId":  "14b4c90f-59e3-4e28-a469-c2b1d28fc2dc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "3ca923d6-a158-4923-a2a1-1f4b31765806"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "3ca923d6-a158-4923-a2a1-1f4b31765806",
+                                         "357496f2-8faf-44a2-bdb8-e24c9e365ab9",
+                                         "14b4c90f-59e3-4e28-a469-c2b1d28fc2dc"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.ExcelImporterTemplateXSD\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Template from ExcelImporter.Template\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

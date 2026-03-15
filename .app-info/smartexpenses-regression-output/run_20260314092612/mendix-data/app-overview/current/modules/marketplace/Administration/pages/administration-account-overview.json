@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.Account_Overview",
+                  "stableId":  "Administration.Account_Overview",
+                  "slug":  "administration-account-overview",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-account-overview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-account-overview.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/pages/administration-account-overview.json",
+                  "l2Logical":  "page:Administration.Account_Overview",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Administration/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Administration/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/pages/INDEX.json"
+              },
+    "qualifiedName":  "Administration.Account_Overview",
+    "name":  "Account_Overview",
+    "title":  "Accounts",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "Administration.Administrator"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

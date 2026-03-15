@@ -1,0 +1,245 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_UserTask_AssignToMe_UpdateTaskCount",
+                  "stableId":  "0b1c515e-22a7-4ae2-a525-4d2dde062c8d",
+                  "slug":  "workflowcommons-act-usertask-assigntome-updatetaskcount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-usertask-assigntome-updatetaskcount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-usertask-assigntome-updatetaskcount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-usertask-assigntome-updatetaskcount.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_UserTask_AssignToMe_UpdateTaskCount",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "0b1c515e-22a7-4ae2-a525-4d2dde062c8d",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.ACT_UserTask_AssignToMe_UpdateTaskCount",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "c033084b-883d-45b3-94ac-0b3932bfa244",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change TaskCount (refreshInClient=true)",
+                      "detail":  "change TaskCount (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b1b5a4ea-7150-4ff4-8cfa-7ed7a8b34dbc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskCount_Update",
+                      "detail":  "call microflow WorkflowCommons.SUB_TaskCount_Update",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_TaskCount_Update",
+                                        "sourceNodeId":  "b1b5a4ea-7150-4ff4-8cfa-7ed7a8b34dbc"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "f89d5d3a-b92f-45b3-ad4a-dc1651c05daf",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_Assign -\u003e IsAssigned",
+                      "detail":  "call microflow WorkflowCommons.SUB_UserTask_Assign -\u003e IsAssigned",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_UserTask_Assign",
+                                        "sourceNodeId":  "f89d5d3a-b92f-45b3-ad4a-dc1651c05daf"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "6b5d0a16-80c3-4d85-9fd4-e268b83fce71",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f101326b-9f90-42fe-b015-a6538715b6b7",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ac4a044d-12da-4de6-8dc5-6002c1968346",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Is Assigned? expression=$IsAssigned",
+                      "detail":  "Is Assigned? expression=$IsAssigned",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0da0ed0e-73e2-4d69-aad7-13d9fa55d084",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d0f03e03-aac2-4992-b43d-e8e630b7b85f",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6fae146a-19ae-418c-b056-394bcf198b21",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "1edf8f39-e029-48f4-a6cd-fde72809b786",
+                      "originNodeId":  "6fae146a-19ae-418c-b056-394bcf198b21",
+                      "destinationNodeId":  "f89d5d3a-b92f-45b3-ad4a-dc1651c05daf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a362d6d7-7df3-412a-b238-f6651a275543",
+                      "originNodeId":  "b1b5a4ea-7150-4ff4-8cfa-7ed7a8b34dbc",
+                      "destinationNodeId":  "c033084b-883d-45b3-94ac-0b3932bfa244",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ff2cdfec-357b-4264-bea6-eedaf721e05a",
+                      "originNodeId":  "c033084b-883d-45b3-94ac-0b3932bfa244",
+                      "destinationNodeId":  "f101326b-9f90-42fe-b015-a6538715b6b7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "2d251b8d-41ab-4591-83e1-bf2ec89e9390",
+                      "originNodeId":  "f89d5d3a-b92f-45b3-ad4a-dc1651c05daf",
+                      "destinationNodeId":  "ac4a044d-12da-4de6-8dc5-6002c1968346",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5da4f7f7-e1c2-4566-8161-5cd6a6c0e16d",
+                      "originNodeId":  "ac4a044d-12da-4de6-8dc5-6002c1968346",
+                      "destinationNodeId":  "b1b5a4ea-7150-4ff4-8cfa-7ed7a8b34dbc",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fd101221-1016-4dbe-a338-dcf23b546213",
+                      "originNodeId":  "ac4a044d-12da-4de6-8dc5-6002c1968346",
+                      "destinationNodeId":  "6b5d0a16-80c3-4d85-9fd4-e268b83fce71",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_TaskCount_Update",
+                      "sourceNodeId":  "b1b5a4ea-7150-4ff4-8cfa-7ed7a8b34dbc"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_UserTask_Assign",
+                      "sourceNodeId":  "f89d5d3a-b92f-45b3-ad4a-dc1651c05daf"
+                  }
+              ],
+    "startNodeIds":  [
+                         "6fae146a-19ae-418c-b056-394bcf198b21"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "6fae146a-19ae-418c-b056-394bcf198b21",
+                                         "f89d5d3a-b92f-45b3-ad4a-dc1651c05daf",
+                                         "ac4a044d-12da-4de6-8dc5-6002c1968346",
+                                         "b1b5a4ea-7150-4ff4-8cfa-7ed7a8b34dbc",
+                                         "c033084b-883d-45b3-94ac-0b3932bfa244",
+                                         "f101326b-9f90-42fe-b015-a6538715b6b7",
+                                         "6b5d0a16-80c3-4d85-9fd4-e268b83fce71"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.ACT_UserTask_AssignToMe_UpdateTaskCount\r\nNODES=9; EDGES=6\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_UserTask_Assign -\u003e IsAssigned\r\n3. DECISION Is Assigned? expression=$IsAssigned\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION MicroflowCallAction: call microflow WorkflowCommons.SUB_TaskCount_Update\r\n  6. ACTION ChangeObjectAction: change TaskCount (refreshInClient=true)\r\n  7. END\r\n8. BRANCH when EnumerationCase=false\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_UserTask_AssignToMe_UpdateTaskCount",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "b1b5a4ea-7150-4ff4-8cfa-7ed7a8b34dbc",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_TaskCount_Update",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_UserTask_AssignToMe_UpdateTaskCount",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "f89d5d3a-b92f-45b3-ad4a-dc1651c05daf",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_UserTask_Assign",
+                          "isInternal":  true
+                      }
+                  ]
+}

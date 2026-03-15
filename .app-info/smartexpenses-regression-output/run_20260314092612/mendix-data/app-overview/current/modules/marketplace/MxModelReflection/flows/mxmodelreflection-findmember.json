@@ -1,0 +1,280 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.FindMember",
+                  "stableId":  "88e85cff-7413-47ec-9433-ae859be3f40d",
+                  "slug":  "mxmodelreflection-findmember",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-findmember.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-findmember.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-findmember.json",
+                  "l2Logical":  "flow:MxModelReflection.FindMember",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "88e85cff-7413-47ec-9433-ae859be3f40d",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.FindMember",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "59e8ae36-f548-43b4-b426-c1bf2ca29413",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable MemberSearch=replaceAll(trim( $MemberSearchString), \u0027 \u0027, \u0027\u0027)",
+                      "detail":  "create variable MemberSearch=replaceAll(trim( $MemberSearchString), \u0027 \u0027, \u0027\u0027)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "56a5e393-9604-4618-9821-87e64d2c18ae",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedMember from MxModelReflection.MxObjectMember",
+                      "detail":  "retrieve RetrievedMember from MxModelReflection.MxObjectMember",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0449efac-588e-424f-b01f-a96d84033c9f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve RetrievedMember_1 from MxModelReflection.MxObjectMember",
+                      "detail":  "retrieve RetrievedMember_1 from MxModelReflection.MxObjectMember",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a317c1cf-be54-47f9-af23-68ca49f02718",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e3ec9503-07d9-408d-b4ec-3743b8e4d457",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f724ba21-acc2-43ac-866d-b5d4b4a68ce2",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5902cef2-1ccb-4b8d-85f0-a49722590261",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "is RetrievedMember? expression=$RetrievedMember != empty",
+                      "detail":  "is RetrievedMember? expression=$RetrievedMember != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ffd372f3-9c93-439f-a589-f2680802d3cd",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "member str != empty expression=$MemberSearchString != empty",
+                      "detail":  "member str != empty expression=$MemberSearchString != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0301a9c8-7457-4227-9733-e936ca36cbba",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b507493b-64fb-4040-afdc-aa27aa32189a",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c29b115c-1a4e-40d0-9b0c-47d97fe0e185",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "a1e42cd5-da2f-4d3d-8c86-8820aaa32a12",
+                      "originNodeId":  "c29b115c-1a4e-40d0-9b0c-47d97fe0e185",
+                      "destinationNodeId":  "ffd372f3-9c93-439f-a589-f2680802d3cd",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "58e34050-32cc-4d6a-9c73-e3865b8aa6c4",
+                      "originNodeId":  "56a5e393-9604-4618-9821-87e64d2c18ae",
+                      "destinationNodeId":  "5902cef2-1ccb-4b8d-85f0-a49722590261",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "63e464f1-9d4a-4278-8fe8-5240e55e2ea2",
+                      "originNodeId":  "ffd372f3-9c93-439f-a589-f2680802d3cd",
+                      "destinationNodeId":  "59e8ae36-f548-43b4-b426-c1bf2ca29413",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5527312a-575a-4a40-98d4-66b6d5513b96",
+                      "originNodeId":  "ffd372f3-9c93-439f-a589-f2680802d3cd",
+                      "destinationNodeId":  "e3ec9503-07d9-408d-b4ec-3743b8e4d457",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "80bb892b-c897-4c45-878b-d06ec5af5dba",
+                      "originNodeId":  "59e8ae36-f548-43b4-b426-c1bf2ca29413",
+                      "destinationNodeId":  "56a5e393-9604-4618-9821-87e64d2c18ae",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "94ff60e6-956e-48e0-923a-1a57944defdc",
+                      "originNodeId":  "0449efac-588e-424f-b01f-a96d84033c9f",
+                      "destinationNodeId":  "f724ba21-acc2-43ac-866d-b5d4b4a68ce2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "33abbde5-da05-44cc-bb19-9667fd039ddb",
+                      "originNodeId":  "5902cef2-1ccb-4b8d-85f0-a49722590261",
+                      "destinationNodeId":  "0449efac-588e-424f-b01f-a96d84033c9f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "451e2b83-89ca-4725-87f5-eb8512e24b1a",
+                      "originNodeId":  "5902cef2-1ccb-4b8d-85f0-a49722590261",
+                      "destinationNodeId":  "a317c1cf-be54-47f9-af23-68ca49f02718",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "c29b115c-1a4e-40d0-9b0c-47d97fe0e185"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "c29b115c-1a4e-40d0-9b0c-47d97fe0e185",
+                                         "ffd372f3-9c93-439f-a589-f2680802d3cd",
+                                         "59e8ae36-f548-43b4-b426-c1bf2ca29413",
+                                         "56a5e393-9604-4618-9821-87e64d2c18ae",
+                                         "5902cef2-1ccb-4b8d-85f0-a49722590261",
+                                         "0449efac-588e-424f-b01f-a96d84033c9f",
+                                         "f724ba21-acc2-43ac-866d-b5d4b4a68ce2",
+                                         "a317c1cf-be54-47f9-af23-68ca49f02718",
+                                         "e3ec9503-07d9-408d-b4ec-3743b8e4d457"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.FindMember\r\nNODES=11; EDGES=8\r\n1. START\r\n2. DECISION member str != empty expression=$MemberSearchString != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION CreateVariableAction: create variable MemberSearch=replaceAll(trim( $MemberSearchString), \u0027 \u0027, \u0027\u0027)\r\n  5. ACTION RetrieveAction: retrieve RetrievedMember from MxModelReflection.MxObjectMember\r\n  6. DECISION is RetrievedMember? expression=$RetrievedMember != empty\r\n  7. BRANCH when EnumerationCase=false\r\n    8. ACTION RetrieveAction: retrieve RetrievedMember_1 from MxModelReflection.MxObjectMember\r\n    9. END\r\n  10. BRANCH when EnumerationCase=true\r\n    11. END\r\n12. BRANCH when EnumerationCase=false\r\n  13. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.Ch_FindAttribute",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "511c88c3-97f0-4a03-a027-b7e9a590921c",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindMember",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.Ch_FindAttribute_Reference",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "9acc00d8-2d92-4a98-a9fe-456ba9e51038",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindMember",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.SetupColumn",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "6b15479e-d4a4-46e3-a85b-8c1d16656481",
+                          "targetModule":  "MxModelReflection",
+                          "targetFlow":  "MxModelReflection.FindMember",
+                          "isInternal":  true
+                      }
+                  ]
+}

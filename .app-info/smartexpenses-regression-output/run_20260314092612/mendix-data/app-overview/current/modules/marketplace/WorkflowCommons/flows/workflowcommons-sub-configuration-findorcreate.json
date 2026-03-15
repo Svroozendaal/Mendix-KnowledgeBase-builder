@@ -1,0 +1,215 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                  "stableId":  "ba2d3cf5-26c4-4cf8-bcfa-6d3fa9a18c39",
+                  "slug":  "workflowcommons-sub-configuration-findorcreate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-configuration-findorcreate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-configuration-findorcreate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-configuration-findorcreate.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_Configuration_FindOrCreate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "ba2d3cf5-26c4-4cf8-bcfa-6d3fa9a18c39",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "26afa49e-b585-45c9-924b-e1408cfc48eb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create WorkflowCommons.Configuration as NewConfiguration",
+                      "detail":  "create WorkflowCommons.Configuration as NewConfiguration",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d9e61a93-88cf-4a42-a12e-6030f29ee533",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Configuration from WorkflowCommons.Configuration",
+                      "detail":  "retrieve Configuration from WorkflowCommons.Configuration",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "01d0e84e-5c5c-45ee-955b-c47ad5fcb00d",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "22ab3252-28f6-405b-87ac-df58d5c90796",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0913292d-0fe4-4f3e-a9cf-5c35e33e2c21",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Found? expression=$Configuration != empty",
+                      "detail":  "Found? expression=$Configuration != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "77442a24-d761-482e-b00a-e5126384d766",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "06e48a8b-d858-4574-8735-dd26e3ef4604",
+                      "originNodeId":  "77442a24-d761-482e-b00a-e5126384d766",
+                      "destinationNodeId":  "d9e61a93-88cf-4a42-a12e-6030f29ee533",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "85dbbe34-a2aa-4eb6-8271-266df163f683",
+                      "originNodeId":  "d9e61a93-88cf-4a42-a12e-6030f29ee533",
+                      "destinationNodeId":  "0913292d-0fe4-4f3e-a9cf-5c35e33e2c21",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5c87d19d-0c64-4d69-9a7c-b9f353c7a00c",
+                      "originNodeId":  "0913292d-0fe4-4f3e-a9cf-5c35e33e2c21",
+                      "destinationNodeId":  "01d0e84e-5c5c-45ee-955b-c47ad5fcb00d",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "0ae72c51-f7e2-4f4e-8434-7e08438326e1",
+                      "originNodeId":  "0913292d-0fe4-4f3e-a9cf-5c35e33e2c21",
+                      "destinationNodeId":  "26afa49e-b585-45c9-924b-e1408cfc48eb",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "3a70dc4b-b5aa-4f77-ad00-26b6b7c3f53d",
+                      "originNodeId":  "26afa49e-b585-45c9-924b-e1408cfc48eb",
+                      "destinationNodeId":  "22ab3252-28f6-405b-87ac-df58d5c90796",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "77442a24-d761-482e-b00a-e5126384d766"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "77442a24-d761-482e-b00a-e5126384d766",
+                                         "d9e61a93-88cf-4a42-a12e-6030f29ee533",
+                                         "0913292d-0fe4-4f3e-a9cf-5c35e33e2c21",
+                                         "01d0e84e-5c5c-45ee-955b-c47ad5fcb00d",
+                                         "26afa49e-b585-45c9-924b-e1408cfc48eb",
+                                         "22ab3252-28f6-405b-87ac-df58d5c90796"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_Configuration_FindOrCreate\r\nNODES=6; EDGES=5\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Configuration from WorkflowCommons.Configuration\r\n3. DECISION Found? expression=$Configuration != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. END\r\n6. BRANCH when EnumerationCase=false\r\n  7. ACTION CreateObjectAction: create WorkflowCommons.Configuration as NewConfiguration\r\n  8. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_Assignee_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "b291f374-f300-40be-99b7-f0318cd2f2a4",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ACT_Key_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "5320506d-e339-4464-9ed8-81daacf8e71a",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Assignee_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "31d18348-a6fb-4ac7-a506-a07d61385c64",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.ASu_Key_Migrate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "87d2c5c9-517c-4bb4-bcf5-91d8d9c2158a",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_Configuration",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "5dfb0cdf-fb5e-4228-ba4d-a3cc33de6c99",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Configuration_FindOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

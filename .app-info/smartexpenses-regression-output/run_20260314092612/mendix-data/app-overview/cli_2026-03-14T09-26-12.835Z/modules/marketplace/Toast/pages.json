@@ -1,0 +1,29 @@
+{
+  "module": "Toast",
+  "pages": [
+    {
+      "qualifiedName": "Toast.Toast_Example",
+      "name": "Toast_Example",
+      "title": "Homepage",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "Toast.User"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    }
+  ],
+  "snippets": [
+    {
+      "qualifiedName": "Toast.SNP_Toast_Example",
+      "name": "SNP_Toast_Example",
+      "type": "Web",
+      "parameters": []
+    }
+  ]
+}

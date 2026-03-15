@@ -1,0 +1,177 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.OCh_WorkflowCurrentActivity_Target",
+                  "stableId":  "7065b674-ae63-4245-98f1-c2dbb2aa810c",
+                  "slug":  "workflowcommons-och-workflowcurrentactivity-target",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-workflowcurrentactivity-target.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-och-workflowcurrentactivity-target.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-och-workflowcurrentactivity-target.json",
+                  "l2Logical":  "flow:WorkflowCommons.OCh_WorkflowCurrentActivity_Target",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "7065b674-ae63-4245-98f1-c2dbb2aa810c",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.OCh_WorkflowCurrentActivity_Target",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "cee3659c-9cff-4431-a934-2116f9238ea8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change WorkflowCurrentActivity (Action=System.WorkflowCurrentActivityAction.DoNothing; refreshInClient=true)",
+                      "detail":  "change WorkflowCurrentActivity (Action=System.WorkflowCurrentActivityAction.DoNothing; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b9a9965f-84e9-4e48-a75d-71a615079c7b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change WorkflowCurrentActivity (Action=System.WorkflowCurrentActivityAction.JumpTo; refreshInClient=true)",
+                      "detail":  "change WorkflowCurrentActivity (Action=System.WorkflowCurrentActivityAction.JumpTo; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "24e35f11-bfaa-4197-a1df-29f4bf4695b1",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "293ac523-d4e2-422a-882c-93a631645260",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dd8a616f-e9f4-4237-b180-c925b40a5e81",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Target? expression=$WorkflowCurrentActivity/System.WorkflowCurrentActivity_JumpToTarget != empty",
+                      "detail":  "Target? expression=$WorkflowCurrentActivity/System.WorkflowCurrentActivity_JumpToTarget != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0fca02cd-ceac-43bd-9437-e39e239b34fb",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9f1e263a-8a3b-4460-baaa-0d659584fa08",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "422814a5-99e4-4cfe-a01d-75f127a8c355",
+                      "originNodeId":  "9f1e263a-8a3b-4460-baaa-0d659584fa08",
+                      "destinationNodeId":  "dd8a616f-e9f4-4237-b180-c925b40a5e81",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ad858449-ffb3-461e-90fb-056b6ec69039",
+                      "originNodeId":  "dd8a616f-e9f4-4237-b180-c925b40a5e81",
+                      "destinationNodeId":  "b9a9965f-84e9-4e48-a75d-71a615079c7b",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6b09a9e5-12e7-40fd-a0f1-84162f438fef",
+                      "originNodeId":  "b9a9965f-84e9-4e48-a75d-71a615079c7b",
+                      "destinationNodeId":  "293ac523-d4e2-422a-882c-93a631645260",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "130d34c2-58d8-440d-81c1-a7addbdc8950",
+                      "originNodeId":  "dd8a616f-e9f4-4237-b180-c925b40a5e81",
+                      "destinationNodeId":  "cee3659c-9cff-4431-a934-2116f9238ea8",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "64d11dcf-792d-4444-beff-36d6fde7ca8f",
+                      "originNodeId":  "cee3659c-9cff-4431-a934-2116f9238ea8",
+                      "destinationNodeId":  "24e35f11-bfaa-4197-a1df-29f4bf4695b1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "9f1e263a-8a3b-4460-baaa-0d659584fa08"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "9f1e263a-8a3b-4460-baaa-0d659584fa08",
+                                         "dd8a616f-e9f4-4237-b180-c925b40a5e81",
+                                         "b9a9965f-84e9-4e48-a75d-71a615079c7b",
+                                         "293ac523-d4e2-422a-882c-93a631645260",
+                                         "cee3659c-9cff-4431-a934-2116f9238ea8",
+                                         "24e35f11-bfaa-4197-a1df-29f4bf4695b1"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.OCh_WorkflowCurrentActivity_Target\r\nNODES=7; EDGES=5\r\n1. START\r\n2. DECISION Target? expression=$WorkflowCurrentActivity/System.WorkflowCurrentActivity_JumpToTarget != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION ChangeObjectAction: change WorkflowCurrentActivity (Action=System.WorkflowCurrentActivityAction.JumpTo; refreshInClient=true)\r\n  5. END\r\n6. BRANCH when EnumerationCase=false\r\n  7. ACTION ChangeObjectAction: change WorkflowCurrentActivity (Action=System.WorkflowCurrentActivityAction.DoNothing; refreshInClient=true)\r\n  8. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

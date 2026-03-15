@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.StringToReferenceHandlingEnum",
+                  "stableId":  "e8e0b9e2-8654-41e2-a4bf-a65741cdf670",
+                  "slug":  "excelimporter-stringtoreferencehandlingenum",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtoreferencehandlingenum.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtoreferencehandlingenum.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-stringtoreferencehandlingenum.json",
+                  "l2Logical":  "flow:ExcelImporter.StringToReferenceHandlingEnum",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "e8e0b9e2-8654-41e2-a4bf-a65741cdf670",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.StringToReferenceHandlingEnum",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "fa636486-36a3-4217-8e6b-52071043a2ef",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable Enum=if $Input = \u0027CreateEverything\u0027 then ExcelImporter.ReferenceHandlingEnum.CreateEverything else if $Input = \u0027FindCreate\u0027 then ExcelImporter.ReferenceHandlingEnum.FindCreate else if $Input = \u0027FindIgnore\u0027 then ExcelImporter....",
+                      "detail":  "create variable Enum=if $Input = \u0027CreateEverything\u0027 then ExcelImporter.ReferenceHandlingEnum.CreateEverything else if $Input = \u0027FindCreate\u0027 then ExcelImporter.ReferenceHandlingEnum.FindCreate else if $Input = \u0027FindIgnore\u0027 then ExcelImporter....",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8c274048-e679-4868-89c9-dc0017beb2ea",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse String value to ReferenceHandlingEnum Enumeration.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f28f0a5c-5f99-4775-b556-e92d76e83b76",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6ad6ddf1-86d5-477a-96c0-7e7728dcf445",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ef157dd7-cfb0-4d15-a8e1-482563efff4b",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "3cf5300e-e3d4-4d7f-8775-8e78d9778921",
+                      "originNodeId":  "ef157dd7-cfb0-4d15-a8e1-482563efff4b",
+                      "destinationNodeId":  "fa636486-36a3-4217-8e6b-52071043a2ef",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "08df7e5e-6d2b-4163-98e1-1adcb31e488c",
+                      "originNodeId":  "fa636486-36a3-4217-8e6b-52071043a2ef",
+                      "destinationNodeId":  "f28f0a5c-5f99-4775-b556-e92d76e83b76",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "ef157dd7-cfb0-4d15-a8e1-482563efff4b"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "ef157dd7-cfb0-4d15-a8e1-482563efff4b",
+                                         "fa636486-36a3-4217-8e6b-52071043a2ef",
+                                         "f28f0a5c-5f99-4775-b556-e92d76e83b76"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.StringToReferenceHandlingEnum\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable Enum=if $Input = \u0027CreateEverything\u0027 then ExcelImporter.ReferenceHandlingEnum.CreateEverything else if $Input = \u0027FindCreate\u0027 then ExcelImporter.ReferenceHandlingEnum.FindCreate else if $Input = \u0027FindIgnore\u0027 then ExcelImporter....\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

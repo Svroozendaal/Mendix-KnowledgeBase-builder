@@ -1,0 +1,171 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.IVK_SaveNewTemplate_CreateColumns",
+                  "stableId":  "2251abb1-b8df-45e2-b46e-fa1a0cda5222",
+                  "slug":  "excelimporter-ivk-savenewtemplate-createcolumns",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ivk-savenewtemplate-createcolumns.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ivk-savenewtemplate-createcolumns.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-ivk-savenewtemplate-createcolumns.json",
+                  "l2Logical":  "flow:ExcelImporter.IVK_SaveNewTemplate_CreateColumns",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "2251abb1-b8df-45e2-b46e-fa1a0cda5222",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.IVK_SaveNewTemplate_CreateColumns",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "7e34e3cd-69cb-4a6c-b2a6-2c0af8ab0ab2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow ExcelImporter.IVK_SaveNewTemplate",
+                      "detail":  "call microflow ExcelImporter.IVK_SaveNewTemplate",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "ExcelImporter.IVK_SaveNewTemplate",
+                                        "sourceNodeId":  "7e34e3cd-69cb-4a6c-b2a6-2c0af8ab0ab2"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "3583ec4b-6fcc-4907-b08c-52b09cbb9916",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow ExcelImporter.Sub_CreateColumnsFromTemplate",
+                      "detail":  "call microflow ExcelImporter.Sub_CreateColumnsFromTemplate",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "ExcelImporter.Sub_CreateColumnsFromTemplate",
+                                        "sourceNodeId":  "3583ec4b-6fcc-4907-b08c-52b09cbb9916"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "c6948e1e-cf29-4949-b686-cab2163a0ee9",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "433b693d-822a-4dc0-b81b-1071f5a1bf12",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bb0acc09-4856-4ffb-86a1-d44ad80ea021",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "0ba176a8-ad6e-4d9b-adba-8f451c065b93",
+                      "originNodeId":  "bb0acc09-4856-4ffb-86a1-d44ad80ea021",
+                      "destinationNodeId":  "7e34e3cd-69cb-4a6c-b2a6-2c0af8ab0ab2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a631ffc3-3228-4710-b6c8-2e8133b81431",
+                      "originNodeId":  "7e34e3cd-69cb-4a6c-b2a6-2c0af8ab0ab2",
+                      "destinationNodeId":  "3583ec4b-6fcc-4907-b08c-52b09cbb9916",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "eb0ab882-ba2b-47b0-a28b-c2312ad049cc",
+                      "originNodeId":  "3583ec4b-6fcc-4907-b08c-52b09cbb9916",
+                      "destinationNodeId":  "c6948e1e-cf29-4949-b686-cab2163a0ee9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "ExcelImporter.IVK_SaveNewTemplate",
+                      "sourceNodeId":  "7e34e3cd-69cb-4a6c-b2a6-2c0af8ab0ab2"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "ExcelImporter.Sub_CreateColumnsFromTemplate",
+                      "sourceNodeId":  "3583ec4b-6fcc-4907-b08c-52b09cbb9916"
+                  }
+              ],
+    "startNodeIds":  [
+                         "bb0acc09-4856-4ffb-86a1-d44ad80ea021"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "bb0acc09-4856-4ffb-86a1-d44ad80ea021",
+                                         "7e34e3cd-69cb-4a6c-b2a6-2c0af8ab0ab2",
+                                         "3583ec4b-6fcc-4907-b08c-52b09cbb9916",
+                                         "c6948e1e-cf29-4949-b686-cab2163a0ee9"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.IVK_SaveNewTemplate_CreateColumns\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow ExcelImporter.IVK_SaveNewTemplate\r\n3. ACTION MicroflowCallAction: call microflow ExcelImporter.Sub_CreateColumnsFromTemplate\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.IVK_SaveNewTemplate_CreateColumns",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "7e34e3cd-69cb-4a6c-b2a6-2c0af8ab0ab2",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.IVK_SaveNewTemplate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.IVK_SaveNewTemplate_CreateColumns",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3583ec4b-6fcc-4907-b08c-52b09cbb9916",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.Sub_CreateColumnsFromTemplate",
+                          "isInternal":  true
+                      }
+                  ]
+}

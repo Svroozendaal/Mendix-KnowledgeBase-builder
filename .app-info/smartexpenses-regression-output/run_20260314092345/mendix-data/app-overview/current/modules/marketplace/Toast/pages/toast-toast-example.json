@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Toast",
+                  "qualifiedName":  "Toast.Toast_Example",
+                  "stableId":  "Toast.Toast_Example",
+                  "slug":  "toast-toast-example",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Toast/pages/toast-toast-example.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Toast/pages/toast-toast-example.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Toast/pages/toast-toast-example.json",
+                  "l2Logical":  "page:Toast.Toast_Example",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/Toast/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/Toast/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Toast/pages/INDEX.json"
+              },
+    "qualifiedName":  "Toast.Toast_Example",
+    "name":  "Toast_Example",
+    "title":  "Homepage",
+    "layout":  "Atlas_Core.Atlas_Default",
+    "allowedRoles":  [
+                         "Toast.User"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

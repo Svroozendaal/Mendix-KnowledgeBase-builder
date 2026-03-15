@@ -1,0 +1,3029 @@
+{
+  "module": "System",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "System.ConsumedODataConfiguration",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ProxyConfiguration",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ProxyHost",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ProxyPassword",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ProxyPort",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "ProxyUsername",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ServiceUrl",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.ConsumedODataConfiguration.ServiceUrl",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.ConsumedODataConfiguration.ProxyConfiguration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.ConsumedODataConfiguration.ProxyHost",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.ConsumedODataConfiguration.ProxyPort",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.ConsumedODataConfiguration.ProxyUsername",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.ConsumedODataConfiguration.ProxyPassword",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.Error",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ErrorType",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Message",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Stacktrace",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": []
+      },
+      {
+        "name": "System.FileDocument",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Contents",
+            "type": "BinaryAttributeType"
+          },
+          {
+            "name": "DeleteAfterDownload",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "FileID",
+            "type": "AutoNumberAttributeType"
+          },
+          {
+            "name": "HasContents",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Size",
+            "type": "LongAttributeType"
+          }
+        ],
+        "accessRules": []
+      },
+      {
+        "name": "System.HttpHeader",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Key",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Value",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.HttpHeader.Key",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpHeader.Value",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpHeaders",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpHeader_ConsumedODataConfiguration",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.HttpMessage",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Content",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "HttpVersion",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.HttpMessage.HttpVersion",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpMessage.Content",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.HttpRequest",
+        "isPersistable": true,
+        "generalization": "System.HttpMessage",
+        "attributes": [
+          {
+            "name": "Uri",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.HttpRequest.Uri",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpMessage.HttpVersion",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpMessage.Content",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.HttpResponse",
+        "isPersistable": true,
+        "generalization": "System.HttpMessage",
+        "attributes": [
+          {
+            "name": "ReasonPhrase",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StatusCode",
+            "type": "IntegerAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.HttpResponse.StatusCode",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpResponse.ReasonPhrase",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpMessage.HttpVersion",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.HttpMessage.Content",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.Image",
+        "isPersistable": true,
+        "generalization": "System.FileDocument",
+        "attributes": [
+          {
+            "name": "EnableCaching",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "PublicThumbnailPath",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": []
+      },
+      {
+        "name": "System.Language",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Code",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.Language.Code",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Language.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.ODataResponse",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Count",
+            "type": "LongAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.ODataResponse.Count",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.Paging",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "HasMoreData",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "IsSortable",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "PageNumber",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "SortAscending",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "SortAttribute",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.Paging.PageNumber",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.Paging.IsSortable",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.Paging.SortAttribute",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.Paging.SortAscending",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.Paging.HasMoreData",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.ProcessedQueueTask",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Arguments",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ContextData",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ContextType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Created",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Duration",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "ErrorMessage",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Finished",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "MicroflowName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "QueueId",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "QueueName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Retried",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "ScheduledEventName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Sequence",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "StartAt",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Started",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Status",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ThreadId",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "UserActionName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "XASId",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.ProcessedQueueTask.Sequence",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.QueueId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.QueueName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.ContextType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.ContextData",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.MicroflowName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.UserActionName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.Arguments",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.XASId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.ThreadId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.Created",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.StartAt",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.Started",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.Finished",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.Duration",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.Retried",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.ErrorMessage",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ProcessedQueueTask.ScheduledEventName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.QueuedTask",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Arguments",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ContextData",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ContextType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Created",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "MicroflowName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "QueueId",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "QueueName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Retried",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "Retry",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ScheduledEventName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Sequence",
+            "type": "AutoNumberAttributeType"
+          },
+          {
+            "name": "StartAt",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Started",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Status",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ThreadId",
+            "type": "LongAttributeType"
+          },
+          {
+            "name": "UserActionName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "XASId",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.QueuedTask.Sequence",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.QueueId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.QueueName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.ContextType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.ContextData",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.MicroflowName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.UserActionName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.Arguments",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.XASId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.ThreadId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.Created",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.StartAt",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.Started",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.Retried",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.Retry",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.QueuedTask.ScheduledEventName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.ScheduledEventInformation",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "EndTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Status",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.ScheduledEventInformation.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ScheduledEventInformation.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ScheduledEventInformation.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ScheduledEventInformation.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ScheduledEventInformation.Status",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.ScheduledEventInformation_XASInstance",
+                "memberKind": "Association",
+                "accessRights": "None"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.Session",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CSRFToken",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "LastActive",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "SessionId",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.Session.SessionId",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.Session.CSRFToken",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.Session.LastActive",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Session_User",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.SoapFault",
+        "isPersistable": true,
+        "generalization": "System.Error",
+        "attributes": [
+          {
+            "name": "Code",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Detail",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Node",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Reason",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Role",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": []
+      },
+      {
+        "name": "System.SynchronizationError",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ObjectContent",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ObjectId",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ObjectType",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Reason",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.SynchronizationError.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.SynchronizationError.ObjectId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.SynchronizationError.ObjectType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.SynchronizationError.ObjectContent",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.SynchronizationErrorFile",
+        "isPersistable": true,
+        "generalization": "System.FileDocument",
+        "attributes": [],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.FileDocument.FileID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.DeleteAfterDownload",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Contents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.HasContents",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.FileDocument.Size",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.SynchronizationErrorFile_SynchronizationError",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.TaskQueueToken",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "QueueName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ValidUntil",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "XASId",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.TaskQueueToken.QueueName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.TaskQueueToken.XASId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.TaskQueueToken.ValidUntil",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.TimeZone",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Code",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "RawOffset",
+            "type": "IntegerAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.TimeZone.Code",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.TimeZone.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.TimeZone.RawOffset",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.TokenInformation",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ExpiryDate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Token",
+            "type": "HashedStringAttributeType"
+          },
+          {
+            "name": "UserAgent",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.TokenInformation.Token",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.TokenInformation.ExpiryDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.TokenInformation.UserAgent",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.TokenInformation_User",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.User",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Active",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "Blocked",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "BlockedSince",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "FailedLogins",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "IsAnonymous",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "LastLogin",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Password",
+            "type": "HashedStringAttributeType"
+          },
+          {
+            "name": "WebServiceUser",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[id = \u0027[%CurrentUser%]\u0027]",
+            "memberAccesses": [
+              {
+                "memberName": "System.User.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.User.Password",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.User.LastLogin",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.User.Blocked",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.User.BlockedSince",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.User.Active",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.User.FailedLogins",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.User.WebServiceUser",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.User.IsAnonymous",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.UserRoles",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.User_Language",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.User_TimeZone",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.UserReportInfo",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Hash",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "UserType",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": []
+      },
+      {
+        "name": "System.UserRole",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ModelGUID",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[System.UserRoles = \u0027[%CurrentUser%]\u0027 or System.grantableRoles[reversed()]/System.UserRole/System.UserRoles = \u0027[%CurrentUser%]\u0027]",
+            "memberAccesses": [
+              {
+                "memberName": "System.UserRole.ModelGUID",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "System.UserRole.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.UserRole.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.grantableRoles",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.Workflow",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CanApplyJumpTo",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "CanBeContinued",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "CanBeRestarted",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "DueDate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EndTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Reason",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "State",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.Workflow.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.CanBeRestarted",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.CanBeContinued",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.CanApplyJumpTo",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow_ParentWorkflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[System.WorkflowUserTask_Workflow/System.WorkflowUserTask[State = \u0027InProgress\u0027 and (System.WorkflowUserTask_TargetUsers = \u0027[%CurrentUser%]\u0027 or System.WorkflowUserTask_Assignees = \u0027[%CurrentUser%]\u0027)]]",
+            "memberAccesses": [
+              {
+                "memberName": "System.Workflow.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.CanBeRestarted",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.CanBeContinued",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.CanApplyJumpTo",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.Workflow_ParentWorkflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowActivityDetails",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ActivityCaption",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ActivityId",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ActivityType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "ExistsInCurrentVersion",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowActivityDetails.ActivityId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityDetails.ActivityCaption",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityDetails.ActivityType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityDetails.ExistsInCurrentVersion",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowActivityRecord",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ActivityKey",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ActivityType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Caption",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "EndTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "MicroflowName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "ModelGUID",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Outcome",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "PreviousActivityKey",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Reason",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "State",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "TaskCompletionType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "TaskDescription",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "TaskDueDate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "TaskKey",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "TaskName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "TaskRequiredUsers",
+            "type": "IntegerAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowActivityRecord.ModelGUID",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.ActivityKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.PreviousActivityKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.ActivityType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.Caption",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.MicroflowName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.TaskName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.TaskDescription",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.TaskDueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.TaskCompletionType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.TaskRequiredUsers",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.TaskKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord_PreviousActivity",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord_Actor",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord_SubWorkflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord_UserTask",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord_WorkflowUserTaskDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord_TaskTargetedUsers",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowActivityRecord_TaskAssignedUsers",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowCurrentActivity",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Action",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowCurrentActivity.Action",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "System.WorkflowCurrentActivity_ActivityDetails",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowCurrentActivity_ApplicableTargets",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowCurrentActivity_JumpToTarget",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowDefinition",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "IsLocked",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "IsObsolete",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Title",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowDefinition.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowDefinition.Title",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowDefinition.IsObsolete",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowDefinition.IsLocked",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowEvent",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "EventTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EventType",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowEvent.EventTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowEvent.EventType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowEvent_Initiator",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowJumpToDetails",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Error",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowJumpToDetails.Error",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowJumpToDetails_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowJumpToDetails_CurrentActivities",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowRecord",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "DueDate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EndTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Reason",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "State",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "WorkflowKey",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator",
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowRecord.WorkflowKey",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord.Reason",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord_Owner",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowRecord_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowUserTask",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "CompletionType",
+            "type": "EnumerationAttributeType"
+          },
+          {
+            "name": "Description",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "DueDate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "EndTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Outcome",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "StartTime",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "State",
+            "type": "EnumerationAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowUserTask.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.CompletionType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_TargetUsers",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_Assignees",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_WorkflowUserTaskDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[State = \u0027InProgress\u0027 and (System.WorkflowUserTask_TargetUsers = \u0027[%CurrentUser%]\u0027 or System.WorkflowUserTask_Assignees = \u0027[%CurrentUser%]\u0027) and System.WorkflowUserTask_Workflow/System.Workflow[State != \u0027Incompatible\u0027 and State != \u0027Failed\u0027]]",
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowUserTask.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.Description",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.StartTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.DueDate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.EndTime",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.State",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask.CompletionType",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_TargetUsers",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_Assignees",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_Workflow",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTask_WorkflowUserTaskDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowUserTaskDefinition",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "IsObsolete",
+            "type": "BooleanAttributeType"
+          },
+          {
+            "name": "Name",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowUserTaskDefinition.Name",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskDefinition.IsObsolete",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskDefinition_WorkflowDefinition",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.WorkflowUserTaskOutcome",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Outcome",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "Time",
+            "type": "DateTimeAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowUserTaskOutcome.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskOutcome.Time",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskOutcome_WorkflowUserTask",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskOutcome_User",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "System.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[System.WorkflowUserTaskOutcome_WorkflowUserTask/System.WorkflowUserTask/State = \u0027InProgress\u0027 and (System.WorkflowUserTaskOutcome_WorkflowUserTask/System.WorkflowUserTask/System.WorkflowUserTask_TargetUsers = \u0027[%CurrentUser%]\u0027 or System.WorkflowUserTaskOutcome_WorkflowUserTask/System.WorkflowUserTask/System.WorkflowUserTask_Assignees = \u0027[%CurrentUser%]\u0027) and System.WorkflowUserTaskOutcome_WorkflowUserTask/System.WorkflowUserTask/System.WorkflowUserTask_Workflow/System.Workflow[State != \u0027Incompatible\u0027 and State != \u0027Failed\u0027]]",
+            "memberAccesses": [
+              {
+                "memberName": "System.WorkflowUserTaskOutcome.Outcome",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskOutcome.Time",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskOutcome_WorkflowUserTask",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.WorkflowUserTaskOutcome_User",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "System.XASInstance",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "AllowedNumberOfConcurrentUsers",
+            "type": "IntegerAttributeType"
+          },
+          {
+            "name": "CustomerName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "LastUpdate",
+            "type": "DateTimeAttributeType"
+          },
+          {
+            "name": "PartnerName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "XASId",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "System.Administrator"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "System.XASInstance.XASId",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.XASInstance.LastUpdate",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.XASInstance.AllowedNumberOfConcurrentUsers",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.XASInstance.PartnerName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "System.XASInstance.CustomerName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "associations": [
+      {
+        "name": "System.grantableRoles",
+        "parentEntity": "System.UserRole",
+        "childEntity": "System.UserRole",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.HttpHeaders",
+        "parentEntity": "System.HttpHeader",
+        "childEntity": "System.HttpMessage",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.HttpHeader_ConsumedODataConfiguration",
+        "parentEntity": "System.HttpHeader",
+        "childEntity": "System.ConsumedODataConfiguration",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.ScheduledEventInformation_XASInstance",
+        "parentEntity": "System.ScheduledEventInformation",
+        "childEntity": "System.XASInstance",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.Session_User",
+        "parentEntity": "System.Session",
+        "childEntity": "System.User",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.SynchronizationErrorFile_SynchronizationError",
+        "parentEntity": "System.SynchronizationErrorFile",
+        "childEntity": "System.SynchronizationError",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.TokenInformation_User",
+        "parentEntity": "System.TokenInformation",
+        "childEntity": "System.User",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.UserReportInfo_User",
+        "parentEntity": "System.UserReportInfo",
+        "childEntity": "System.User",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.UserRoles",
+        "parentEntity": "System.User",
+        "childEntity": "System.UserRole",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.User_Language",
+        "parentEntity": "System.User",
+        "childEntity": "System.Language",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.User_TimeZone",
+        "parentEntity": "System.User",
+        "childEntity": "System.TimeZone",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowActivityRecord_Actor",
+        "parentEntity": "System.WorkflowActivityRecord",
+        "childEntity": "System.User",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowActivityRecord_PreviousActivity",
+        "parentEntity": "System.WorkflowActivityRecord",
+        "childEntity": "System.WorkflowActivityRecord",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowActivityRecord_SubWorkflow",
+        "parentEntity": "System.WorkflowActivityRecord",
+        "childEntity": "System.WorkflowRecord",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowActivityRecord_TaskAssignedUsers",
+        "parentEntity": "System.WorkflowActivityRecord",
+        "childEntity": "System.User",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowActivityRecord_TaskTargetedUsers",
+        "parentEntity": "System.WorkflowActivityRecord",
+        "childEntity": "System.User",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowActivityRecord_UserTask",
+        "parentEntity": "System.WorkflowActivityRecord",
+        "childEntity": "System.WorkflowUserTask",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowActivityRecord_WorkflowUserTaskDefinition",
+        "parentEntity": "System.WorkflowActivityRecord",
+        "childEntity": "System.WorkflowUserTaskDefinition",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowCurrentActivity_ActivityDetails",
+        "parentEntity": "System.WorkflowCurrentActivity",
+        "childEntity": "System.WorkflowActivityDetails",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowCurrentActivity_ApplicableTargets",
+        "parentEntity": "System.WorkflowCurrentActivity",
+        "childEntity": "System.WorkflowActivityDetails",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowCurrentActivity_JumpToTarget",
+        "parentEntity": "System.WorkflowCurrentActivity",
+        "childEntity": "System.WorkflowActivityDetails",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowEvent_Initiator",
+        "parentEntity": "System.WorkflowEvent",
+        "childEntity": "System.User",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowJumpToDetails_CurrentActivities",
+        "parentEntity": "System.WorkflowJumpToDetails",
+        "childEntity": "System.WorkflowCurrentActivity",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowJumpToDetails_Workflow",
+        "parentEntity": "System.WorkflowJumpToDetails",
+        "childEntity": "System.Workflow",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowRecord_Owner",
+        "parentEntity": "System.WorkflowRecord",
+        "childEntity": "System.User",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowRecord_Workflow",
+        "parentEntity": "System.WorkflowRecord",
+        "childEntity": "System.Workflow",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowRecord_WorkflowDefinition",
+        "parentEntity": "System.WorkflowRecord",
+        "childEntity": "System.WorkflowDefinition",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowUserTaskDefinition_WorkflowDefinition",
+        "parentEntity": "System.WorkflowUserTaskDefinition",
+        "childEntity": "System.WorkflowDefinition",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowUserTaskOutcome_User",
+        "parentEntity": "System.WorkflowUserTaskOutcome",
+        "childEntity": "System.User",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowUserTaskOutcome_WorkflowUserTask",
+        "parentEntity": "System.WorkflowUserTaskOutcome",
+        "childEntity": "System.WorkflowUserTask",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowUserTask_Assignees",
+        "parentEntity": "System.WorkflowUserTask",
+        "childEntity": "System.User",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowUserTask_TargetUsers",
+        "parentEntity": "System.WorkflowUserTask",
+        "childEntity": "System.User",
+        "cardinality": "*-*",
+        "type": "ReferenceSet",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowUserTask_Workflow",
+        "parentEntity": "System.WorkflowUserTask",
+        "childEntity": "System.Workflow",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.WorkflowUserTask_WorkflowUserTaskDefinition",
+        "parentEntity": "System.WorkflowUserTask",
+        "childEntity": "System.WorkflowUserTaskDefinition",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.Workflow_ParentWorkflow",
+        "parentEntity": "System.Workflow",
+        "childEntity": "System.Workflow",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      },
+      {
+        "name": "System.Workflow_WorkflowDefinition",
+        "parentEntity": "System.Workflow",
+        "childEntity": "System.WorkflowDefinition",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      }
+    ],
+    "enumerations": [
+      {
+        "name": "System.ContextType",
+        "values": [
+          "Anonymous",
+          "ScheduledEvent",
+          "System",
+          "User"
+        ]
+      },
+      {
+        "name": "System.DeviceType",
+        "values": [
+          "Desktop",
+          "Phone",
+          "Tablet"
+        ]
+      },
+      {
+        "name": "System.EventStatus",
+        "values": [
+          "Completed",
+          "Error",
+          "Running",
+          "Stopped"
+        ]
+      },
+      {
+        "name": "System.ProxyConfiguration",
+        "values": [
+          "NoProxy",
+          "Override",
+          "UseAppSettings"
+        ]
+      },
+      {
+        "name": "System.QueueTaskStatus",
+        "values": [
+          "Aborted",
+          "Completed",
+          "Failed",
+          "Idle",
+          "Incompatible",
+          "Retrying",
+          "Running"
+        ]
+      },
+      {
+        "name": "System.UserType",
+        "values": [
+          "External",
+          "Internal"
+        ]
+      },
+      {
+        "name": "System.WorkflowActivityExecutionState",
+        "values": [
+          "Aborted",
+          "Completed",
+          "Created",
+          "Failed",
+          "InProgress",
+          "Paused"
+        ]
+      },
+      {
+        "name": "System.WorkflowActivityType",
+        "values": [
+          "CallMicroflow",
+          "CallWorkflow",
+          "End",
+          "EndOfBoundaryEventPath",
+          "ExclusiveSplit",
+          "InterruptingTimerEvent",
+          "JumpTo",
+          "MultiInputUserTask",
+          "NonInterruptingTimerEvent",
+          "ParallelSplit",
+          "ParallelSplitBranchStopper",
+          "ParallelSplitMerge",
+          "Start",
+          "UserTask",
+          "WaitForNotification",
+          "WaitForTimer"
+        ]
+      },
+      {
+        "name": "System.WorkflowCurrentActivityAction",
+        "values": [
+          "DoNothing",
+          "JumpTo"
+        ]
+      },
+      {
+        "name": "System.WorkflowEventType",
+        "values": [
+          "CallMicroflowEnded",
+          "CallMicroflowStarted",
+          "CallWorkflowEnded",
+          "CallWorkflowStarted",
+          "DecisionExecuted",
+          "EndEventExecuted",
+          "InterruptingTimerEventExecuted",
+          "JumpExecuted",
+          "MultiUserTaskOutcomeSelected",
+          "NonInterruptingTimerEventExecuted",
+          "ParallelMergeExecuted",
+          "ParallelSplitExecuted",
+          "StartEventExecuted",
+          "UserTaskEnded",
+          "UserTaskStarted",
+          "WaitForNotificationEnded",
+          "WaitForNotificationStarted",
+          "WaitForTimerEnded",
+          "WaitForTimerStarted",
+          "WorkflowAborted",
+          "WorkflowCompleted",
+          "WorkflowConflicted",
+          "WorkflowFailed",
+          "WorkflowInitiated",
+          "WorkflowJumpToOptionApplied",
+          "WorkflowPaused",
+          "WorkflowResolved",
+          "WorkflowRestarted",
+          "WorkflowRetried",
+          "WorkflowUnpaused",
+          "WorkflowUpdated",
+          "WorkflowUpgraded"
+        ]
+      },
+      {
+        "name": "System.WorkflowState",
+        "values": [
+          "Aborted",
+          "Completed",
+          "Failed",
+          "Incompatible",
+          "InProgress",
+          "Paused"
+        ]
+      },
+      {
+        "name": "System.WorkflowUserTaskCompletionType",
+        "values": [
+          "Consensus",
+          "Majority",
+          "Microflow",
+          "Single",
+          "Threshold",
+          "Veto"
+        ]
+      },
+      {
+        "name": "System.WorkflowUserTaskState",
+        "values": [
+          "Aborted",
+          "Completed",
+          "Created",
+          "Failed",
+          "InProgress",
+          "Paused"
+        ]
+      }
+    ]
+  }
+}

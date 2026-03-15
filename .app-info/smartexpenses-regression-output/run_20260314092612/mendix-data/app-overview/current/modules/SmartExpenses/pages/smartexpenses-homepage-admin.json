@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.Homepage_Admin",
+                  "stableId":  "SmartExpenses.Homepage_Admin",
+                  "slug":  "smartexpenses-homepage-admin",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-homepage-admin.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-homepage-admin.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/pages/smartexpenses-homepage-admin.json",
+                  "l2Logical":  "page:SmartExpenses.Homepage_Admin",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/SmartExpenses/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/pages/INDEX.json"
+              },
+    "qualifiedName":  "SmartExpenses.Homepage_Admin",
+    "name":  "Homepage_Admin",
+    "title":  "Homepage Admin",
+    "layout":  "Atlas_Core.Atlas_TopBar",
+    "allowedRoles":  [
+                         "SmartExpenses.Admin"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

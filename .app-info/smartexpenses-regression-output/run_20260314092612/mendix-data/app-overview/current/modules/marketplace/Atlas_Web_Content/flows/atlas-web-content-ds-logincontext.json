@@ -1,0 +1,103 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Atlas_Web_Content",
+                  "qualifiedName":  "Atlas_Web_Content.DS_LoginContext",
+                  "stableId":  "bdc6bd07-d246-48ad-b886-a94adba7b6b4",
+                  "slug":  "atlas-web-content-ds-logincontext",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/flows/atlas-web-content-ds-logincontext.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/flows/atlas-web-content-ds-logincontext.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Atlas_Web_Content/flows/atlas-web-content-ds-logincontext.json",
+                  "l2Logical":  "flow:Atlas_Web_Content.DS_LoginContext",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Atlas_Web_Content/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/Atlas_Web_Content/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Atlas_Web_Content/flows/INDEX.json"
+              },
+    "flowId":  "bdc6bd07-d246-48ad-b886-a94adba7b6b4",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "Atlas_Web_Content.DS_LoginContext",
+    "module":  "Atlas_Web_Content",
+    "nodes":  [
+                  {
+                      "nodeId":  "c161c8c3-047d-4c88-8452-b1255d57c5b2",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create Atlas_Web_Content.LoginContext as NewLoginContext",
+                      "detail":  "create Atlas_Web_Content.LoginContext as NewLoginContext",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7d982881-eafc-480d-937e-bc60104d77e4",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4df033e8-e7c5-4742-8e9c-853bf3773e08",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "acbba7e3-0d73-4737-87d4-0e0f859c54ca",
+                      "originNodeId":  "4df033e8-e7c5-4742-8e9c-853bf3773e08",
+                      "destinationNodeId":  "c161c8c3-047d-4c88-8452-b1255d57c5b2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1b3109cd-2095-4222-a5cf-51d302308d83",
+                      "originNodeId":  "c161c8c3-047d-4c88-8452-b1255d57c5b2",
+                      "destinationNodeId":  "7d982881-eafc-480d-937e-bc60104d77e4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "4df033e8-e7c5-4742-8e9c-853bf3773e08"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "4df033e8-e7c5-4742-8e9c-853bf3773e08",
+                                         "c161c8c3-047d-4c88-8452-b1255d57c5b2",
+                                         "7d982881-eafc-480d-937e-bc60104d77e4"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: Atlas_Web_Content.DS_LoginContext\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION CreateObjectAction: create Atlas_Web_Content.LoginContext as NewLoginContext\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

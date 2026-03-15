@@ -1,0 +1,103 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.ACT_WorkflowAuditTrailRecord_ExportToExcel",
+                  "stableId":  "8c8348ea-a556-4ced-9ebf-99ecbab721b6",
+                  "slug":  "workflowcommons-act-workflowaudittrailrecord-exporttoexcel",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowaudittrailrecord-exporttoexcel.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-act-workflowaudittrailrecord-exporttoexcel.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-act-workflowaudittrailrecord-exporttoexcel.json",
+                  "l2Logical":  "flow:WorkflowCommons.ACT_WorkflowAuditTrailRecord_ExportToExcel",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "8c8348ea-a556-4ced-9ebf-99ecbab721b6",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.ACT_WorkflowAuditTrailRecord_ExportToExcel",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "614b575c-4344-4276-9cf7-c19bdd5a974f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action DataWidgets.Export_To_Excel -\u003e ExportSuccess",
+                      "detail":  "call javascript action DataWidgets.Export_To_Excel -\u003e ExportSuccess",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2d7db31a-9023-42d5-9c0c-1e0d1d418d2d",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "12b1a7b0-2150-4ac7-8740-d8ae684cd7b1",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "07c9c65a-9a76-4e74-b291-e40c2b7a9834",
+                      "originNodeId":  "12b1a7b0-2150-4ac7-8740-d8ae684cd7b1",
+                      "destinationNodeId":  "614b575c-4344-4276-9cf7-c19bdd5a974f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "481fe50c-6ecc-4617-b884-53e9a17d4aed",
+                      "originNodeId":  "614b575c-4344-4276-9cf7-c19bdd5a974f",
+                      "destinationNodeId":  "2d7db31a-9023-42d5-9c0c-1e0d1d418d2d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "12b1a7b0-2150-4ac7-8740-d8ae684cd7b1"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "12b1a7b0-2150-4ac7-8740-d8ae684cd7b1",
+                                         "614b575c-4344-4276-9cf7-c19bdd5a974f",
+                                         "2d7db31a-9023-42d5-9c0c-1e0d1d418d2d"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.ACT_WorkflowAuditTrailRecord_ExportToExcel\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION JavaScriptActionCallAction: call javascript action DataWidgets.Export_To_Excel -\u003e ExportSuccess\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

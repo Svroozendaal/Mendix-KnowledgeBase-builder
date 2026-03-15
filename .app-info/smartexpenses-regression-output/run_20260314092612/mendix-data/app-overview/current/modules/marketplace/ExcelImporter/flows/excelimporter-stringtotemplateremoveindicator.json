@@ -1,0 +1,219 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.StringToTemplateRemoveIndicator",
+                  "stableId":  "69004dbf-2c2d-4cf7-a556-bc776aa8cf6f",
+                  "slug":  "excelimporter-stringtotemplateremoveindicator",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtotemplateremoveindicator.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtotemplateremoveindicator.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-stringtotemplateremoveindicator.json",
+                  "l2Logical":  "flow:ExcelImporter.StringToTemplateRemoveIndicator",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "69004dbf-2c2d-4cf7-a556-bc776aa8cf6f",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.StringToTemplateRemoveIndicator",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "28cc11dd-93b7-4402-89f7-538f373921a6",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5af69b91-2903-4a97-8957-d96a6b81cc54",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bb501a26-0eca-4c5f-a0ba-2abb411754bd",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ecda610d-a38d-4529-b783-b1565d0a69df",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0cf817d7-cb1c-4e13-823a-a3d3939654c8",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=$RemoveUnsyncedObjects = empty or toString( ExcelImporter.RemoveIndicator.Nothing ) = $RemoveUnsyncedObjects",
+                      "detail":  "expression=$RemoveUnsyncedObjects = empty or toString( ExcelImporter.RemoveIndicator.Nothing ) = $RemoveUnsyncedObjects",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "58dd0db9-0e6b-4fe6-a64a-f1e7694d308e",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=toString( ExcelImporter.RemoveIndicator.RemoveUnchangedObjects ) = $RemoveUnsyncedObjects",
+                      "detail":  "expression=toString( ExcelImporter.RemoveIndicator.RemoveUnchangedObjects ) = $RemoveUnsyncedObjects",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bdb68574-df70-4980-b1b0-514e8d002aaf",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=toString( ExcelImporter.RemoveIndicator.TrackChanges ) = $RemoveUnsyncedObjects",
+                      "detail":  "expression=toString( ExcelImporter.RemoveIndicator.TrackChanges ) = $RemoveUnsyncedObjects",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0ea8e58b-3197-4250-88da-4e9f5cd1ec09",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "29eb2690-ae73-4f2c-8221-690f0c674b7b",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "2970cbfd-a260-473e-8ff3-f936b989ea20",
+                      "originNodeId":  "29eb2690-ae73-4f2c-8221-690f0c674b7b",
+                      "destinationNodeId":  "0cf817d7-cb1c-4e13-823a-a3d3939654c8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5d81ec90-419e-4786-b774-09131c761571",
+                      "originNodeId":  "0cf817d7-cb1c-4e13-823a-a3d3939654c8",
+                      "destinationNodeId":  "28cc11dd-93b7-4402-89f7-538f373921a6",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1e413d6c-f54f-49bc-b94a-576080ff667d",
+                      "originNodeId":  "0cf817d7-cb1c-4e13-823a-a3d3939654c8",
+                      "destinationNodeId":  "58dd0db9-0e6b-4fe6-a64a-f1e7694d308e",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "f869f2bc-2215-4e41-a782-e03b588e54e7",
+                      "originNodeId":  "58dd0db9-0e6b-4fe6-a64a-f1e7694d308e",
+                      "destinationNodeId":  "5af69b91-2903-4a97-8957-d96a6b81cc54",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ac4bca0d-7be6-47d5-af88-6c07562a0f63",
+                      "originNodeId":  "58dd0db9-0e6b-4fe6-a64a-f1e7694d308e",
+                      "destinationNodeId":  "bdb68574-df70-4980-b1b0-514e8d002aaf",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0dc4c997-4d09-41dc-bf91-09c07b3a83bc",
+                      "originNodeId":  "bdb68574-df70-4980-b1b0-514e8d002aaf",
+                      "destinationNodeId":  "ecda610d-a38d-4529-b783-b1565d0a69df",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "842ef634-aedb-4031-aed0-d7af3f700a0b",
+                      "originNodeId":  "bdb68574-df70-4980-b1b0-514e8d002aaf",
+                      "destinationNodeId":  "bb501a26-0eca-4c5f-a0ba-2abb411754bd",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "29eb2690-ae73-4f2c-8221-690f0c674b7b"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "29eb2690-ae73-4f2c-8221-690f0c674b7b",
+                                         "0cf817d7-cb1c-4e13-823a-a3d3939654c8",
+                                         "28cc11dd-93b7-4402-89f7-538f373921a6",
+                                         "58dd0db9-0e6b-4fe6-a64a-f1e7694d308e",
+                                         "5af69b91-2903-4a97-8957-d96a6b81cc54",
+                                         "bdb68574-df70-4980-b1b0-514e8d002aaf",
+                                         "ecda610d-a38d-4529-b783-b1565d0a69df",
+                                         "bb501a26-0eca-4c5f-a0ba-2abb411754bd"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.StringToTemplateRemoveIndicator\r\nNODES=9; EDGES=7\r\n1. START\r\n2. DECISION expression=$RemoveUnsyncedObjects = empty or toString( ExcelImporter.RemoveIndicator.Nothing ) = $RemoveUnsyncedObjects\r\n3. BRANCH when EnumerationCase=true\r\n  4. END\r\n5. BRANCH when EnumerationCase=false\r\n  6. DECISION expression=toString( ExcelImporter.RemoveIndicator.RemoveUnchangedObjects ) = $RemoveUnsyncedObjects\r\n  7. BRANCH when EnumerationCase=true\r\n    8. END\r\n  9. BRANCH when EnumerationCase=false\r\n    10. DECISION expression=toString( ExcelImporter.RemoveIndicator.TrackChanges ) = $RemoveUnsyncedObjects\r\n    11. BRANCH when EnumerationCase=true\r\n      12. END\r\n    13. BRANCH when EnumerationCase=false\r\n      14. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

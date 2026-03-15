@@ -1,0 +1,78 @@
+# Pages: ExcelImporter
+Pages: 13, Snippets: 1
+
+## Pages
+
+PAGE ExcelImporter.Column_Hover
+  Title: "New column mapping selection"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Parameters: Column (ExcelImporter.Column)
+
+PAGE ExcelImporter.Column_NewEdit
+  Title: "Column details"
+  Layout: Atlas_Core.PopupLayout (popup 900x600, resizable=yes)
+  Parameters: Column (ExcelImporter.Column)
+
+PAGE ExcelImporter.Credits
+  Title: "ExcelImporterTemplateExporter module"
+  Layout: Atlas_Core.Atlas_Default
+
+PAGE ExcelImporter.ExcelImportOverview
+  Title: "Excel Importer"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: ExcelImporter.Configurator
+
+PAGE ExcelImporter.ImportXML_Upload
+  Title: "Upload template"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: ExcelImporter.Configurator
+  Parameters: XMLDocumentTemplate (ExcelImporter.XMLDocumentTemplate)
+
+PAGE ExcelImporter.Import_Overview
+  Title: "Import files overview"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: ExcelImporter.Configurator
+
+PAGE ExcelImporter.ReferenceHandling_NewEdit
+  Title: "Edit the reference handling"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: ExcelImporter.Configurator
+  Parameters: ReferenceHandling (ExcelImporter.ReferenceHandling)
+
+PAGE ExcelImporter.TemplateDocument_NewEdit
+  Title: "Edit Template document"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: ExcelImporter.Configurator
+  Parameters: TemplateDocument (ExcelImporter.TemplateDocument)
+
+PAGE ExcelImporter.Templates_Overview
+  Title: "Import templates"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: ExcelImporter.Configurator
+
+PAGE ExcelImporter.Template_Edit
+  Title: "Import template settings"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: ExcelImporter.Configurator
+  Parameters: Template (ExcelImporter.Template)
+
+PAGE ExcelImporter.Template_New
+  Title: "Import template settings"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: ExcelImporter.Configurator
+  Parameters: Template (ExcelImporter.Template)
+
+PAGE ExcelImporter.Template_New_FromDocument
+  Title: "New template by Excel file"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: ExcelImporter.Configurator
+  Parameters: TemplateDocument (ExcelImporter.TemplateDocument)
+
+PAGE ExcelImporter.VerificationForm
+  Title: "Verification form"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: ExcelImporter.Configurator
+
+## Snippets
+- SNIPPET ExcelImporter.TemplateDetails (Web)
+  Parameters: Template (ExcelImporter.Template)

@@ -1,0 +1,13 @@
+# Resources: ExcelImporter
+Constants: 2, Scheduled Events: 0
+
+## Constants
+CONSTANT ExcelImporter.EnableExternalEntities: BooleanType = False
+  Documentation: "Enables the parsing of external entities from the DTD. This is turned off by default."
+  Exposed to client: no
+CONSTANT ExcelImporter.ParseEmptyCells: BooleanType = False
+  Documentation: "Set this constant to True to allow parsing empty cells with microflow when importing Excel files.
+
+If True, "parse with" microflow will be called for empty cells.
+If False (default), the microflow will be called only for cells with data."
+  Exposed to client: no

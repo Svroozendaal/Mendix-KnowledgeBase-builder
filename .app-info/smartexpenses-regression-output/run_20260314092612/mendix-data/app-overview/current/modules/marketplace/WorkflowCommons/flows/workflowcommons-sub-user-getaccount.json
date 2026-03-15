@@ -1,0 +1,177 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.SUB_User_GetAccount",
+                  "stableId":  "ddc96302-1aca-435c-9645-d114b6d0629e",
+                  "slug":  "workflowcommons-sub-user-getaccount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-user-getaccount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-sub-user-getaccount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-sub-user-getaccount.json",
+                  "l2Logical":  "flow:WorkflowCommons.SUB_User_GetAccount",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "ddc96302-1aca-435c-9645-d114b6d0629e",
+    "kind":  "Microflow",
+    "qualifiedName":  "WorkflowCommons.SUB_User_GetAccount",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "847f21a8-e28a-46e8-bd16-7bc4797e79c0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CastAction: CastAction (output=Account, errorHandlingType=Rollback)",
+                      "detail":  "CastAction (output=Account, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2334de96-885e-4727-aec7-8d256ef700be",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d9d7c0c7-d829-4867-8a57-271e53d8fc80",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dda340a8-8296-4c20-a0a9-7e21489c299e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8b35bc96-7a93-4d4a-b03c-48078c0358e8",
+                      "nodeType":  "InheritanceSplit",
+                      "label":  "split User",
+                      "detail":  "split User",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "78e894c5-82ee-42ca-9292-20d9d7175c68",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "baa31dfb-5a9c-486c-b496-92e850429f9c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "33880f74-ffde-4aad-a585-4c2474afd482",
+                      "originNodeId":  "baa31dfb-5a9c-486c-b496-92e850429f9c",
+                      "destinationNodeId":  "8b35bc96-7a93-4d4a-b03c-48078c0358e8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fac33891-0971-4ee9-9faf-968fc29c3bd3",
+                      "originNodeId":  "8b35bc96-7a93-4d4a-b03c-48078c0358e8",
+                      "destinationNodeId":  "847f21a8-e28a-46e8-bd16-7bc4797e79c0",
+                      "condition":  "InheritanceCase=Administration.Account",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "dddf99f8-659b-4505-b9c9-2283729a2bf0",
+                      "originNodeId":  "847f21a8-e28a-46e8-bd16-7bc4797e79c0",
+                      "destinationNodeId":  "2334de96-885e-4727-aec7-8d256ef700be",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "15518eb5-3dc5-43b2-83a2-4709e39009f8",
+                      "originNodeId":  "8b35bc96-7a93-4d4a-b03c-48078c0358e8",
+                      "destinationNodeId":  "d9d7c0c7-d829-4867-8a57-271e53d8fc80",
+                      "condition":  "InheritanceCase=System.User",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "549d26d3-fdb6-49d7-a184-51fa6b622a4b",
+                      "originNodeId":  "8b35bc96-7a93-4d4a-b03c-48078c0358e8",
+                      "destinationNodeId":  "dda340a8-8296-4c20-a0a9-7e21489c299e",
+                      "condition":  "InheritanceCase",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "baa31dfb-5a9c-486c-b496-92e850429f9c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "baa31dfb-5a9c-486c-b496-92e850429f9c",
+                                         "8b35bc96-7a93-4d4a-b03c-48078c0358e8",
+                                         "847f21a8-e28a-46e8-bd16-7bc4797e79c0",
+                                         "2334de96-885e-4727-aec7-8d256ef700be",
+                                         "dda340a8-8296-4c20-a0a9-7e21489c299e",
+                                         "d9d7c0c7-d829-4867-8a57-271e53d8fc80"
+                                     ],
+    "pseudocode":  "FLOW Microflow: WorkflowCommons.SUB_User_GetAccount\r\nNODES=7; EDGES=5\r\n1. START\r\n2. DECISION split User\r\n3. BRANCH when InheritanceCase=Administration.Account\r\n  4. ACTION CastAction: CastAction (output=Account, errorHandlingType=Rollback)\r\n  5. END\r\n6. BRANCH when InheritanceCase\r\n  7. END\r\n8. BRANCH when InheritanceCase=System.User\r\n  9. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

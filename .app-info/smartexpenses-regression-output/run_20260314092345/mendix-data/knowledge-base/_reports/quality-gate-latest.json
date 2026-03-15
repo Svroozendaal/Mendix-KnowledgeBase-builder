@@ -1,0 +1,144 @@
+﻿{
+    "appName":  "SmartExpenses",
+    "kbRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base",
+    "generatedAtUtc":  "2026-03-14T09:24:45.7195441Z",
+    "overallPass":  false,
+    "filesChecked":  1161,
+    "issueCount":  24,
+    "issues":  [
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\modules\\README.md",
+                       "Message":  "Broken link target: flows/INDEX.abstract.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\modules\\README.md",
+                       "Message":  "Broken link target: pages/INDEX.abstract.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\modules\\README.md",
+                       "Message":  "Broken link target: INTERPRETATION.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/_marktplace/Administration/flows/smartexpenses-ds-fbgprofile-retreive-current.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/_marktplace/MxModelReflection/flows/excelimporter-ivk-template-connectmatchingattributes.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/_marktplace/MxModelReflection/flows/excelimporter-ivk-template-connectmatchingattributes.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/_marktplace/MxModelReflection/flows/excelimporter-validatecolumn.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/_marktplace/MxModelReflection/flows/excelimporter-column-setcorrectrefobjecttype.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/_marktplace/MxModelReflection/flows/excelimporter-column-setcorrectrefobjecttype.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/SmartExpenses/flows/administration-savenewaccount.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/SmartExpenses/flows/administration-savenewaccount.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/SmartExpenses/flows/importerhelper-act-importtransaction-accepttransactions.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/SmartExpenses/flows/importerhelper-act-importtransaction-accepttransactions.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/feedbackmodule-populateuserattributes.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/feedbackmodule-populateuserattributes.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-act-workflowdefinition-delete.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-act-workflowdefinition-delete.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-dashboardcontext-getselectedworkflowdefinition.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-ds-workflowdefinition-overview.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-act-workflow-retry.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-act-workflow-retry-rerunusertargeting.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-dashboardcontext-getselectedworkflowtaskdefinition.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-ds-workflowtaskdefinition-selectable-userimplementation.overview.md"
+                   },
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder\\.app-info\\smartexpenses-regression-output\\run_20260314092345\\mendix-data\\knowledge-base\\routes\\by-entity.md",
+                       "Message":  "Broken link target: ../modules/System/flows/workflowcommons-sub-usertaskoutcome-assignedtouser.overview.md"
+                   }
+               ],
+    "semanticMetrics":  {
+                            "ExpectedCustomPages":  9,
+                            "EntityThreshold":  90,
+                            "PageCoveragePercent":  100,
+                            "ExpectedCustomEntities":  11,
+                            "ExpectedCustomFlows":  24,
+                            "EntityPass":  true,
+                            "FlowThreshold":  90,
+                            "EntityCoveragePercent":  100,
+                            "PageThreshold":  95,
+                            "FlowPass":  true,
+                            "PagePass":  true,
+                            "FlowCoveragePercent":  100
+                        }
+}

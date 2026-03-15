@@ -1,0 +1,135 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "MxModelReflection",
+                  "qualifiedName":  "MxModelReflection.Ch_ObjectTypeStart",
+                  "stableId":  "e19a780f-0f75-4023-934e-5c593f2b1376",
+                  "slug":  "mxmodelreflection-ch-objecttypestart",
+                  "l0Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-ch-objecttypestart.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/MxModelReflection/flows/mxmodelreflection-ch-objecttypestart.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/MxModelReflection/flows/mxmodelreflection-ch-objecttypestart.json",
+                  "l2Logical":  "flow:MxModelReflection.Ch_ObjectTypeStart",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/MxModelReflection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/MxModelReflection/flows/INDEX.json"
+              },
+    "flowId":  "e19a780f-0f75-4023-934e-5c593f2b1376",
+    "kind":  "Microflow",
+    "qualifiedName":  "MxModelReflection.Ch_ObjectTypeStart",
+    "module":  "MxModelReflection",
+    "nodes":  [
+                  {
+                      "nodeId":  "478eaf04-e2ba-4989-ace2-e680c7aa9826",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Token (FindObjectStart=$MxObjectType/CompleteName; refreshInClient=true)",
+                      "detail":  "change Token (FindObjectStart=$MxObjectType/CompleteName; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "764c7051-e4e9-473e-a063-f2f41c3787ad",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectType over association Token_MxObjectType_Start from Token",
+                      "detail":  "retrieve MxObjectType over association Token_MxObjectType_Start from Token",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0cb1210e-19b0-4be7-8ddf-75ebca4aee01",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3c4da71a-a4bf-46d0-9c40-d4fc8545928f",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ed160f9b-ae54-405a-88e8-23fda74d1b93",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "7c54da42-92ed-4384-85bc-30963cb9f32f",
+                      "originNodeId":  "ed160f9b-ae54-405a-88e8-23fda74d1b93",
+                      "destinationNodeId":  "764c7051-e4e9-473e-a063-f2f41c3787ad",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4b118ec0-b215-40cc-896a-896bfcfa4ee6",
+                      "originNodeId":  "764c7051-e4e9-473e-a063-f2f41c3787ad",
+                      "destinationNodeId":  "478eaf04-e2ba-4989-ace2-e680c7aa9826",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "17d13363-c070-43e1-8f6d-6532e75c37b7",
+                      "originNodeId":  "478eaf04-e2ba-4989-ace2-e680c7aa9826",
+                      "destinationNodeId":  "0cb1210e-19b0-4be7-8ddf-75ebca4aee01",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "ed160f9b-ae54-405a-88e8-23fda74d1b93"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "ed160f9b-ae54-405a-88e8-23fda74d1b93",
+                                         "764c7051-e4e9-473e-a063-f2f41c3787ad",
+                                         "478eaf04-e2ba-4989-ace2-e680c7aa9826",
+                                         "0cb1210e-19b0-4be7-8ddf-75ebca4aee01"
+                                     ],
+    "pseudocode":  "FLOW Microflow: MxModelReflection.Ch_ObjectTypeStart\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve MxObjectType over association Token_MxObjectType_Start from Token\r\n3. ACTION ChangeObjectAction: change Token (FindObjectStart=$MxObjectType/CompleteName; refreshInClient=true)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

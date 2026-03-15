@@ -1,0 +1,226 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "FeedbackModule",
+                  "qualifiedName":  "FeedbackModule.SUB_Feedback_GetOrCreate",
+                  "stableId":  "1bf19498-5a51-4107-9d59-232e73b11075",
+                  "slug":  "feedbackmodule-sub-feedback-getorcreate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-sub-feedback-getorcreate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/FeedbackModule/flows/feedbackmodule-sub-feedback-getorcreate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/FeedbackModule/flows/feedbackmodule-sub-feedback-getorcreate.json",
+                  "l2Logical":  "flow:FeedbackModule.SUB_Feedback_GetOrCreate",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/FeedbackModule/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/FeedbackModule/flows/INDEX.json"
+              },
+    "flowId":  "1bf19498-5a51-4107-9d59-232e73b11075",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "FeedbackModule.SUB_Feedback_GetOrCreate",
+    "module":  "FeedbackModule",
+    "nodes":  [
+                  {
+                      "nodeId":  "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create FeedbackModule.Feedback as NewFeedback",
+                      "detail":  "create FeedbackModule.Feedback as NewFeedback",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "JavaScriptActionCallAction: call javascript action FeedbackModule.GetStorageItemObject -\u003e LocalFeedback",
+                      "detail":  "call javascript action FeedbackModule.GetStorageItemObject -\u003e LocalFeedback",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8302f3d1-9e3b-491e-a042-0981c9080e66",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "850c5b8f-5a3c-4dd7-8dd4-14d15bd4d969",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cf62fdef-56f7-42bb-87d6-4e44742baa49",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Found? expression=$LocalFeedback != empty",
+                      "detail":  "Found? expression=$LocalFeedback != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6e042ca6-a474-4544-9c55-745121cf33a3",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ac32a3f9-95f2-40eb-8db3-09fbb5b29019",
+                      "originNodeId":  "6e042ca6-a474-4544-9c55-745121cf33a3",
+                      "destinationNodeId":  "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f90f4de0-b5ee-4931-8868-b9449c19f2b2",
+                      "originNodeId":  "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+                      "destinationNodeId":  "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "eac043c7-15cc-4e02-91b6-a53feaec962c",
+                      "originNodeId":  "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+                      "destinationNodeId":  "cf62fdef-56f7-42bb-87d6-4e44742baa49",
+                      "condition":  null,
+                      "isErrorHandler":  true,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "c1d8d942-1db7-4a86-803a-3a466be4e99c",
+                      "originNodeId":  "cf62fdef-56f7-42bb-87d6-4e44742baa49",
+                      "destinationNodeId":  "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4ce2319a-0ffa-468d-ae22-b855d90291e6",
+                      "originNodeId":  "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+                      "destinationNodeId":  "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "72621be3-113f-428e-aac6-968024557d29",
+                      "originNodeId":  "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+                      "destinationNodeId":  "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "098348ea-65a8-4462-b929-e01f91b948e1",
+                      "originNodeId":  "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+                      "destinationNodeId":  "850c5b8f-5a3c-4dd7-8dd4-14d15bd4d969",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5f5c337e-acdb-41c4-a6d4-7dabcf8b4660",
+                      "originNodeId":  "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+                      "destinationNodeId":  "8302f3d1-9e3b-491e-a042-0981c9080e66",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "6e042ca6-a474-4544-9c55-745121cf33a3"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "6e042ca6-a474-4544-9c55-745121cf33a3",
+                                         "17d76bc4-7ad1-4ee0-94f1-b5caa0ef0ccc",
+                                         "2d91a601-0ba8-4ab0-ac63-1e4576d38880",
+                                         "8302f3d1-9e3b-491e-a042-0981c9080e66",
+                                         "1115f63a-99ec-46fb-8d37-1f7ce26d8a41",
+                                         "3490df38-1cc0-4f41-b750-9a2f0bca0dcf",
+                                         "850c5b8f-5a3c-4dd7-8dd4-14d15bd4d969",
+                                         "cf62fdef-56f7-42bb-87d6-4e44742baa49"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: FeedbackModule.SUB_Feedback_GetOrCreate\r\nNODES=8; EDGES=8\r\n1. START\r\n2. ACTION JavaScriptActionCallAction: call javascript action FeedbackModule.GetStorageItemObject -\u003e LocalFeedback\r\n3. BRANCH\r\n  4. DECISION Found? expression=$LocalFeedback != empty\r\n  5. BRANCH when EnumerationCase=true\r\n    6. END\r\n  7. BRANCH when EnumerationCase=false\r\n    8. NODE ExclusiveMerge: ExclusiveMerge\r\n    9. ACTION CreateObjectAction: create FeedbackModule.Feedback as NewFeedback\r\n    10. END\r\n11. BRANCH on error\r\n  12. NODE ExclusiveMerge: ExclusiveMerge\r\n  13. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "FeedbackModule",
+                          "callerFlow":  "FeedbackModule.DS_Feedback_Populate",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Nanoflow",
+                          "sourceNodeId":  "129fe65c-9ad2-4cf1-a084-f1c77406d13f",
+                          "targetModule":  "FeedbackModule",
+                          "targetFlow":  "FeedbackModule.SUB_Feedback_GetOrCreate",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,131 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.DS_WorkflowActivityRecord_ActivityDuration",
+                  "stableId":  "f89838c5-0345-44bb-bf60-91fbcce4411b",
+                  "slug":  "workflowcommons-ds-workflowactivityrecord-activityduration",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowactivityrecord-activityduration.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/flows/workflowcommons-ds-workflowactivityrecord-activityduration.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/workflowcommons-ds-workflowactivityrecord-activityduration.json",
+                  "l2Logical":  "flow:WorkflowCommons.DS_WorkflowActivityRecord_ActivityDuration",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/flows/INDEX.json"
+              },
+    "flowId":  "f89838c5-0345-44bb-bf60-91fbcce4411b",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "WorkflowCommons.DS_WorkflowActivityRecord_ActivityDuration",
+    "module":  "WorkflowCommons",
+    "nodes":  [
+                  {
+                      "nodeId":  "19201e1d-6dc6-4040-99b5-d72b4a041dc4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "NanoflowCallAction: call nanoflow WorkflowCommons.SUB_Duration_Calculate -\u003e DurationHelper",
+                      "detail":  "call nanoflow WorkflowCommons.SUB_Duration_Calculate -\u003e DurationHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Nanoflow",
+                                        "targetFlowName":  "WorkflowCommons.SUB_Duration_Calculate",
+                                        "sourceNodeId":  "19201e1d-6dc6-4040-99b5-d72b4a041dc4"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "b5efec00-3262-4646-8dfc-24391bbd3f98",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dc200ddc-48a9-44db-b1a2-a017f17385b6",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d365ac6d-bfdb-4e27-969c-f9f9ea79b4e4",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "feb2d26f-3f40-4f6d-bf6e-8978906b47d0",
+                      "originNodeId":  "d365ac6d-bfdb-4e27-969c-f9f9ea79b4e4",
+                      "destinationNodeId":  "19201e1d-6dc6-4040-99b5-d72b4a041dc4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8b95e358-9e81-41ee-8853-2251b9366a64",
+                      "originNodeId":  "19201e1d-6dc6-4040-99b5-d72b4a041dc4",
+                      "destinationNodeId":  "b5efec00-3262-4646-8dfc-24391bbd3f98",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Nanoflow",
+                      "targetFlowName":  "WorkflowCommons.SUB_Duration_Calculate",
+                      "sourceNodeId":  "19201e1d-6dc6-4040-99b5-d72b4a041dc4"
+                  }
+              ],
+    "startNodeIds":  [
+                         "d365ac6d-bfdb-4e27-969c-f9f9ea79b4e4"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "d365ac6d-bfdb-4e27-969c-f9f9ea79b4e4",
+                                         "19201e1d-6dc6-4040-99b5-d72b4a041dc4",
+                                         "b5efec00-3262-4646-8dfc-24391bbd3f98"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: WorkflowCommons.DS_WorkflowActivityRecord_ActivityDuration\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION NanoflowCallAction: call nanoflow WorkflowCommons.SUB_Duration_Calculate -\u003e DurationHelper\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "WorkflowCommons",
+                          "callerFlow":  "WorkflowCommons.DS_WorkflowActivityRecord_ActivityDuration",
+                          "callerKind":  "Nanoflow",
+                          "callKind":  "Nanoflow",
+                          "sourceNodeId":  "19201e1d-6dc6-4040-99b5-d72b4a041dc4",
+                          "targetModule":  "WorkflowCommons",
+                          "targetFlow":  "WorkflowCommons.SUB_Duration_Calculate",
+                          "isInternal":  true
+                      }
+                  ]
+}

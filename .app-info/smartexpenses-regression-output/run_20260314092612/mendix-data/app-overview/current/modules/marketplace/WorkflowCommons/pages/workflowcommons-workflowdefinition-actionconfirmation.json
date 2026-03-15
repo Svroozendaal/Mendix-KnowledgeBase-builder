@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "WorkflowCommons",
+                  "qualifiedName":  "WorkflowCommons.WorkflowDefinition_ActionConfirmation",
+                  "stableId":  "WorkflowCommons.WorkflowDefinition_ActionConfirmation",
+                  "slug":  "workflowcommons-workflowdefinition-actionconfirmation",
+                  "l0Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowdefinition-actionconfirmation.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/WorkflowCommons/pages/workflowcommons-workflowdefinition-actionconfirmation.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/workflowcommons-workflowdefinition-actionconfirmation.json",
+                  "l2Logical":  "page:WorkflowCommons.WorkflowDefinition_ActionConfirmation",
+                  "sourceRun":  "cli_2026-03-14T09-26-12.835Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-26-12.835Z/modules/marketplace/WorkflowCommons/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/WorkflowCommons/pages/INDEX.json"
+              },
+    "qualifiedName":  "WorkflowCommons.WorkflowDefinition_ActionConfirmation",
+    "name":  "WorkflowDefinition_ActionConfirmation",
+    "title":  "Confirmation",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "WorkflowDefinition",
+                           "entityType":  "System.WorkflowDefinition"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}
