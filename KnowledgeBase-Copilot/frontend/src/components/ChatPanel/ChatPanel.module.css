@@ -1,0 +1,37 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: var(--chat-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.appName {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.status {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.connected {
+  color: var(--color-success);
+  background: #dcfce7;
+}
+
+.disconnected {
+  color: var(--color-error);
+  background: #fef2f2;
+}

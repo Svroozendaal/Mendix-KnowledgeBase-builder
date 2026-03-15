@@ -1,0 +1,87 @@
+.shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.menuBtn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: var(--color-text);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.topActions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.topBtn {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.topBtn:hover {
+  background: var(--color-surface-alt);
+}
+
+.chatArea {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+}
+
+@media (max-width: 600px) {
+  .shell {
+    flex-direction: column;
+  }
+}

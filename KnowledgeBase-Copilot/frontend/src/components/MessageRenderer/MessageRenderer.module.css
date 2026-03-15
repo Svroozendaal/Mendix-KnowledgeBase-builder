@@ -1,0 +1,78 @@
+.userBubble {
+  background: var(--color-user-bubble);
+  color: var(--color-user-text);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-sm);
+  max-width: 80%;
+  margin-left: auto;
+  font-size: 0.875rem;
+  word-wrap: break-word;
+}
+
+.userBubble p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.assistantBubble {
+  background: var(--color-assistant-bg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-sm);
+  max-width: 90%;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.assistantBubble p {
+  margin: 0.25rem 0;
+}
+
+.assistantBubble h1,
+.assistantBubble h2,
+.assistantBubble h3 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1rem;
+}
+
+.assistantBubble ul,
+.assistantBubble ol {
+  padding-left: 1.25rem;
+  margin: 0.25rem 0;
+}
+
+.assistantBubble table {
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+  font-size: 0.8125rem;
+}
+
+.assistantBubble th,
+.assistantBubble td {
+  border: 1px solid var(--color-border);
+  padding: 0.25rem 0.5rem;
+}
+
+.assistantBubble th {
+  background: var(--color-surface-alt);
+}
+
+.codeBlock {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  margin: 0.5rem 0;
+}
+
+.inlineCode {
+  background: var(--color-surface-alt);
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "kb-copilot",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm run build -w shared && npm run build -w backend && npm run build -w frontend",
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

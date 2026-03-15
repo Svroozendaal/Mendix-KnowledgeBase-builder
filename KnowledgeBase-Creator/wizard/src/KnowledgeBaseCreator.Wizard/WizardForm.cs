@@ -80,6 +80,7 @@ internal sealed class WizardForm : Form
         autoDetectMxButton.Click += (_, _) => AutoDetectMx();
 
         _mprPathBox.TextChanged += (_, _) => OnMprPathChanged();
+        _dataRootBox.TextChanged += (_, _) => RefreshEnrichReady();
 
         AddRow(settings, 0, "MPR file", _mprPathBox, browseMprButton, EmptyControl());
         AddRow(settings, 1, "App name", _appNameBox, EmptyControl(), EmptyControl());
@@ -160,6 +161,32 @@ internal sealed class WizardForm : Form
             _suggestedDataRoot = null;
             _appFolderBox.Text = "<select a valid .mpr file>";
         }
+
+        RefreshEnrichReady();
+    }
+
+    private void RefreshEnrichReady()
+    {
+        var dataRoot = _dataRootBox.Text.Trim();
+        if (string.IsNullOrWhiteSpace(dataRoot))
+        {
+            _enrichReady = false;
+        }
+        else
+        {
+            try
+            {
+                var normalized = WizardRuntime.NormalizeDataRootInput(dataRoot);
+                var creatorLink = Path.Combine(normalized, "knowledge-base", "_sources", "creator-link.json");
+                _enrichReady = File.Exists(creatorLink);
+            }
+            catch
+            {
+                _enrichReady = false;
+            }
+        }
+
+        _enrichButton.Enabled = _enrichReady;
     }
 
     private void BrowseMpr()

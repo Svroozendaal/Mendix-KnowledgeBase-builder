@@ -77,7 +77,15 @@
       "Bash(cp \"$SRC/skills/mendix-security-model/SKILL.md\" \"$DST/skills/mendix-security-model/SKILL.md\")",
       "Bash(cp \"$SRC/agents/MENDIX_SYNTAX.md\" \"$DST/agents/MENDIX_SYNTAX.md\")",
       "Bash(cp \"$SRC/agents/DEVELOPMENT_TEAM.md\" \"$DST/agents/DEVELOPMENT_TEAM.md\")",
-      "Bash(cp \"$SRC/AGENTS.md\" \"$DST/AGENTS.md\")"
+      "Bash(cp \"$SRC/AGENTS.md\" \"$DST/AGENTS.md\")",
+      "Bash(find c:WorkspacesMendix-KnowledgeBase-builder -type d -name *knowledge* -o -type d -name *kb*)",
+      "Bash(grep -r \"provider\\\\|api\\\\|anthropic\\\\|openai\\\\|claude\" /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/*.ps1 --include=*.ps1)",
+      "Bash(grep -r \"GetEnvironmentVariable\\\\|Environment\\\\]::\" /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/*.ps1)",
+      "Bash(grep -r \"claude\\\\|anthropic\\\\|codex\\\\|openai\\\\|api\" /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/src/KnowledgeBaseCreator.Wizard/*.cs --ignore-case)",
+      "Bash(grep -i \"tech\\\\|stack\\\\|framework\" /c/Workspaces/Mendix-KnowledgeBase-builder/.app-info/product-plan/*.md)",
+      "Bash(npm --version)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)"
     ]
   }
 }

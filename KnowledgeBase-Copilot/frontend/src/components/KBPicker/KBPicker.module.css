@@ -1,0 +1,114 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.validateBtn {
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: white;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.validateBtn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.validateBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.info {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+}
+
+.info p {
+  margin: 0.125rem 0;
+}
+
+.valid {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.invalid {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.hint {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.closeBtn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
