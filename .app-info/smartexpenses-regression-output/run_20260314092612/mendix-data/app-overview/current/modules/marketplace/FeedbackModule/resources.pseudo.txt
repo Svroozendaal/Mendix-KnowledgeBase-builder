@@ -1,6 +1,0 @@
-# Resources: FeedbackModule
-Constants: 1, Scheduled Events: 0
-
-## Constants
-CONSTANT FeedbackModule.LocalStorageKey: StringType = mxfeedback-form-data
-  Exposed to client: yes

@@ -22,6 +22,7 @@ This knowledge base is a structured, AI-navigable representation of a Mendix app
 | `_sources/` | Raw source metadata | `manifest.json`, `SOURCE_REF.md` |
 | `_artifacts/` | Generation templates (traceability) | Template copies |
 | `_reports/` | Quality and benchmark results | `UNKNOWN_TODO.md`, `semantic-benchmark.md` |
+| `_plans/` | Saved implementation plans | `STORY_<slug>.md` per user story |
 | `.agents/` | AI interpretation framework | This folder |
 
 Marketplace modules are stored under `modules/_marktplace/<Name>/`. App and system modules remain under `modules/<Name>/`.

@@ -1,5 +1,0 @@
-# Domain Model: Toast
-Entities: 0, Associations: 0, Enumerations: 1
-
-## Enumerations
-- ENUM Toast.Enum_ToastType: Failed, Information, Success, Warning

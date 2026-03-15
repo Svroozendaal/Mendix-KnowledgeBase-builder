@@ -23,6 +23,7 @@ When a task arrives, classify it and route to the correct agent.
 
 Routing rules, evaluate in order:
 
+0. User story, feature request, or `/develop` command? -> Development Team
 1. Question about a specific module, entity, or flow lookup? -> KB Navigator
 2. Question about a business feature or capability ("How does X work?", "What features does this app have?")? -> KB Feature Interpreter
 3. Question asking to trace, follow, or understand a specific flow's execution chain? -> KB Flow Tracer
@@ -39,6 +40,7 @@ Routing rules, evaluate in order:
 
 Multi-agent tasks:
 
+- Full Development Workflow: Development Team -> User Story Interpreter -> KB Feature Interpreter -> KB Analyst -> Mendix Developer -> Planner -> KB Security Reviewer -> Todo Maker
 - Understand and Plan: KB Navigator -> KB Analyst -> Planner -> Todo Maker
 - User Story: User Story Interpreter -> Mendix Developer -> Planner -> Todo Maker
 - Review: Best Practice Recommender -> KB Security Reviewer -> KB Analyst
@@ -106,6 +108,12 @@ If a user asks to rebuild or regenerate from source, use `/initkb` only to hand 
 
 ## Agent Roster
 
+### Orchestrator Agents
+
+| Agent | File | Responsibility |
+|---|---|---|
+| Development Team | `.agents/agents/DEVELOPMENT_TEAM.md` | Orchestrate the full journey from user story to implementation plan |
+
 ### KB Interpretation Agents
 
 | Agent | File | Responsibility |
@@ -146,6 +154,7 @@ If a user asks to rebuild or regenerate from source, use `/initkb` only to hand 
 - `.agents/skills/enrichkb/SKILL.md` - Add the AI enrichment layer to this KB in place using the linked run folder
 - `.agents/skills/initkb/SKILL.md` - Compatibility entry point: enrich in place when possible, otherwise hand off rebuild to the creator package
 - `.agents/skills/mendix-conventions/SKILL.md` - Mendix naming conventions, structural patterns, and best practices
+- `.agents/skills/develop/SKILL.md` - Guided development workflow from user story to implementation plan (`/develop`)
 
 ## Memory Model
 
@@ -162,3 +171,4 @@ If a user asks to rebuild or regenerate from source, use `/initkb` only to hand 
 6. Best Practice Recommender always classifies findings by severity.
 7. All agents must cite KB file paths when providing answers.
 8. No agent should fabricate information not present in the knowledge base.
+9. Development Team is the entry point for all user story and feature implementation requests. It orchestrates sub-agents and does not answer questions directly.

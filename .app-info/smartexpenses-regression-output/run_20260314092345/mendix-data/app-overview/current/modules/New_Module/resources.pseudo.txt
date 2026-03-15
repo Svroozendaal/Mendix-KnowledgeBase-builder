@@ -1,2 +1,0 @@
-# Resources: New_Module
-Constants: 0, Scheduled Events: 0

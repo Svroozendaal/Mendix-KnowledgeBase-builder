@@ -1,2 +1,0 @@
-# Domain Model: AIDE_Lite
-Entities: 0, Associations: 0, Enumerations: 0

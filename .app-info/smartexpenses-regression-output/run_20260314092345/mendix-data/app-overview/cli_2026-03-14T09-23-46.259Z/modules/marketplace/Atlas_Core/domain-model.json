@@ -1,8 +1,0 @@
-{
-  "module": "Atlas_Core",
-  "domainModel": {
-    "entities": [],
-    "associations": [],
-    "enumerations": []
-  }
-}

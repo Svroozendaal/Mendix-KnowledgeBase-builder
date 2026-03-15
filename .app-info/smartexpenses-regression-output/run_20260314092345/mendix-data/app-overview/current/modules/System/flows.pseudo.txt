@@ -1,8 +1,0 @@
-# Flows: System
-Flows: 1
-
-FLOW Microflow: System.ShowHomePage
-NODES=3; EDGES=2
-1. START
-2. ACTION ShowHomePageAction: ShowHomePageAction (errorHandlingType=Rollback)
-3. END

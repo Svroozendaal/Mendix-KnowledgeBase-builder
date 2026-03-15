@@ -7,6 +7,8 @@ Use this file with `.agents/AGENTS.md`.
 
 This workflow is for reading and interpreting a pre-built knowledge base. The one controlled exception is `/enrichkb`, which may enrich this KB in place by reading the linked app-overview run folder from `_sources/creator-link.json`. `/initkb` remains a compatibility entry point and should behave the same when no rebuild is needed. Neither command may rerun pipelines or access Mendix tooling.
 
+`/develop` is another controlled exception: it may create implementation plan files in the `_plans/` folder at KB root. It does not modify any existing KB content.
+
 ## Workflow
 
 1. Read `.agents/AGENTS.md`.
@@ -48,6 +50,7 @@ Before answering any question about the application:
 | "Trace flow X" / "What happens when X runs?" | `routes/by-flow.md` (locate flow) | L1 overview → `flow-chain-tracing` skill → KB Flow Tracer |
 | "What is affected if I change X?" | `routes/by-flow.md` or `routes/by-entity.md` | `impact-analysis` skill → KB Analyst |
 | "Explain the X process" | `routes/by-flow.md` (keyword search) | L0/L1 overviews, `INTERPRETATION.md` → KB Feature Interpreter |
+| "Implement this user story" / `/develop` | `.agents/agents/DEVELOPMENT_TEAM.md` | Full 7-phase orchestrated workflow |
 
 ## Feature-Level Query Workflow
 
@@ -82,6 +85,21 @@ When a user asks about the blast radius of a change:
 3. It invokes the `impact-analysis` skill with the appropriate procedure.
 4. It cross-references `routes/cross-module.md` and `app/SECURITY.md`.
 5. It rates the blast radius (Small / Medium / Large) and synthesises recommendations.
+
+## Development Workflow (`/develop`)
+
+When a developer provides a user story or feature request:
+
+1. Route to **Development Team**.
+2. Phase 1 — **Intake**: Development Team delegates to **User Story Interpreter** to parse and map the story. Asks clarifying questions about where to develop.
+3. Phase 2 — **Investigation**: Delegates to **KB Feature Interpreter** (with `feature-search`) and optionally **KB Flow Tracer** (with `flow-chain-tracing`) and **KB Analyst** to find related elements.
+4. Phase 3 — **High-Level Solution**: Delegates to **Mendix Developer** for a conceptual, functional solution. Flags high-impact flows. Iterates with developer.
+5. Phase 4 — **Detailed Solution**: Delegates to **Mendix Developer** and **Planner** for a structured conceptual design. Optionally consults **Best Practice Recommender**.
+6. Phase 5 — **Impact Analysis**: Delegates to **KB Analyst** (with `impact-analysis`) for full blast radius assessment.
+7. Phase 6 — **Security Review**: Delegates to **KB Security Reviewer** for access rules, role assignments, and XPath constraints.
+8. Phase 7 — **Implementation Plan**: Delegates to **Todo Maker** for single-artifact task breakdown. Saves to `_plans/STORY_<slug>.md`.
+
+Each phase has an approval gate. The developer must confirm before the next phase begins. For small-scope stories, phases 3+4 and 5+6 may be bundled.
 
 ## Out-of-Scope Requests
 

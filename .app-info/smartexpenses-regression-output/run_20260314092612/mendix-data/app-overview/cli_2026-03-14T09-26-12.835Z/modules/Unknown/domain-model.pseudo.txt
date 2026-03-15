@@ -1,2 +1,0 @@
-# Domain Model: Unknown
-Entities: 0, Associations: 0, Enumerations: 0
