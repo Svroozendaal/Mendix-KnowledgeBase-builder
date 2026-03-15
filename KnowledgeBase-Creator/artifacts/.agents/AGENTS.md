@@ -32,6 +32,7 @@ Routing rules, evaluate in order:
 6. Question about page structure or UI flows? -> KB UX Interpreter
 7. Question about data model or domain relationships? -> KB Domain Expert
 8. "How do I build X?" or implementation guidance? -> Mendix Developer
+8b. "What is the exact Mendix syntax for X?" or precise configuration detail? -> Mendix Syntax
 9. User story mapping or requirement analysis? -> User Story Interpreter
 10. Planning, sequencing, or scoping work? -> Planner
 11. Breaking plans into actionable tasks? -> Todo Maker
@@ -40,9 +41,9 @@ Routing rules, evaluate in order:
 
 Multi-agent tasks:
 
-- Full Development Workflow: Development Team -> User Story Interpreter -> KB Feature Interpreter -> KB Analyst -> Mendix Developer -> Planner -> KB Security Reviewer -> Todo Maker
+- Full Development Workflow: Development Team -> User Story Interpreter -> KB Feature Interpreter -> KB Analyst -> Mendix Developer -> Planner -> KB Security Reviewer -> Todo Maker -> Mendix Syntax
 - Understand and Plan: KB Navigator -> KB Analyst -> Planner -> Todo Maker
-- User Story: User Story Interpreter -> Mendix Developer -> Planner -> Todo Maker
+- User Story: User Story Interpreter -> Mendix Developer -> Planner -> Todo Maker -> Mendix Syntax
 - Review: Best Practice Recommender -> KB Security Reviewer -> KB Analyst
 - Impact Analysis: KB Navigator -> KB Analyst (with `impact-analysis` skill) -> KB Domain Expert
 - Feature Discovery: KB Navigator -> KB Feature Interpreter (with `feature-search` skill) -> KB Flow Tracer (if chain needed) -> KB Analyst (if cross-module)
@@ -131,6 +132,7 @@ If a user asks to rebuild or regenerate from source, use `/initkb` only to hand 
 | Agent | File | Responsibility |
 |---|---|---|
 | Mendix Developer | `.agents/agents/MENDIX_DEVELOPER.md` | Mendix implementation guidance grounded in KB context |
+| Mendix Syntax | `.agents/agents/MENDIX_SYNTAX.md` | Translate conceptual plans into precise, Studio Pro-ready Mendix syntax |
 | User Story Interpreter | `.agents/agents/USER_STORY_INTERPRETER.md` | Map user stories to existing modules, flows, entities |
 | Planner | `.agents/agents/PLANNER.md` | Plan implementation work, sequence tasks, identify dependencies |
 | Todo Maker | `.agents/agents/TODO_MAKER.md` | Break plans into concrete, actionable task lists |
@@ -155,6 +157,15 @@ If a user asks to rebuild or regenerate from source, use `/initkb` only to hand 
 - `.agents/skills/initkb/SKILL.md` - Compatibility entry point: enrich in place when possible, otherwise hand off rebuild to the creator package
 - `.agents/skills/mendix-conventions/SKILL.md` - Mendix naming conventions, structural patterns, and best practices
 - `.agents/skills/develop/SKILL.md` - Guided development workflow from user story to implementation plan (`/develop`)
+
+### Mendix Platform Skills
+
+- `.agents/skills/mendix-xpath/SKILL.md` - XPath syntax, operators, tokens, association traversal, and constraint patterns
+- `.agents/skills/mendix-microflows/SKILL.md` - Microflow activities, configuration, error handling, and transaction behaviour
+- `.agents/skills/mendix-nanoflows/SKILL.md` - Nanoflow capabilities, limitations, and client-side patterns
+- `.agents/skills/mendix-domain-modeling/SKILL.md` - Entity setup, attribute types, associations, validation rules, events, and indexes
+- `.agents/skills/mendix-pages-widgets/SKILL.md` - Page layout, core widgets, data sources, and UI configuration patterns
+- `.agents/skills/mendix-security-model/SKILL.md` - Project security, user/module roles, entity access rules, and XPath row-level security
 
 ## Memory Model
 

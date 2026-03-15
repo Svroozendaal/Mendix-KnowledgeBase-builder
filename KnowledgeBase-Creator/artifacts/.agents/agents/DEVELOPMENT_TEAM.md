@@ -26,6 +26,7 @@ Your job is to be the single point of contact. The developer talks to you; you t
 | Mendix Developer | `MENDIX_DEVELOPER.md` | Phase 3: High-Level Solution, Phase 4: Detailed Solution | Propose Mendix implementation approaches |
 | Planner | `PLANNER.md` | Phase 4: Detailed Solution | Sequence and structure the work |
 | Todo Maker | `TODO_MAKER.md` | Phase 7: Implementation Plan | Break the plan into actionable tasks |
+| Mendix Syntax | `MENDIX_SYNTAX.md` | Phase 7: Implementation Plan | Enrich tasks with precise Mendix syntax |
 | KB Flow Tracer | `KB_FLOW_TRACER.md` | Phase 2: Investigation (when needed) | Trace flow chains touched by the story |
 | Best Practice Recommender | `BEST_PRACTICE_RECOMMENDER.md` | Phase 4: Detailed Solution (when needed) | Check proposed solution against conventions |
 
@@ -34,6 +35,12 @@ Your job is to be the single point of contact. The developer talks to you; you t
 - **`feature-search`** (`.agents/skills/feature-search/SKILL.md`) — locate candidate KB files from story keywords.
 - **`flow-chain-tracing`** (`.agents/skills/flow-chain-tracing/SKILL.md`) — trace complete execution chains for central flows.
 - **`impact-analysis`** (`.agents/skills/impact-analysis/SKILL.md`) — assess blast radius of proposed changes.
+- **`mendix-xpath`** (`.agents/skills/mendix-xpath/SKILL.md`) — XPath syntax reference (used by Mendix Syntax agent in Phase 7).
+- **`mendix-microflows`** (`.agents/skills/mendix-microflows/SKILL.md`) — microflow activity reference (used by Mendix Syntax agent in Phase 7).
+- **`mendix-nanoflows`** (`.agents/skills/mendix-nanoflows/SKILL.md`) — nanoflow reference (used by Mendix Syntax agent in Phase 7).
+- **`mendix-domain-modeling`** (`.agents/skills/mendix-domain-modeling/SKILL.md`) — domain model reference (used by Mendix Syntax agent in Phase 7).
+- **`mendix-pages-widgets`** (`.agents/skills/mendix-pages-widgets/SKILL.md`) — page and widget reference (used by Mendix Syntax agent in Phase 7).
+- **`mendix-security-model`** (`.agents/skills/mendix-security-model/SKILL.md`) — security configuration reference (used by Mendix Syntax agent in Phase 7).
 
 ## Workflow Phases
 
@@ -155,6 +162,8 @@ The workflow has 7 phases with approval gates. Each phase follows a strict patte
 
 ### Phase 7: Implementation Plan
 
+**Step A — Task Breakdown**
+
 1. Delegate to **Todo Maker** (follow the procedure in `TODO_MAKER.md`): take the approved detailed solution (Phase 4), impact analysis (Phase 5), and security plan (Phase 6), and produce a complete, step-by-step implementation plan.
 2. The plan must be at **single-artifact granularity** — one task per entity, flow, page, access rule, navigation entry, etc.
 3. Every task must include:
@@ -167,10 +176,24 @@ The workflow has 7 phases with approval gates. Each phase follows a strict patte
 4. Include security tasks: entity access rules, page role visibility, flow allowed roles.
 5. Include navigation tasks: adding pages to menus, wiring buttons to flows.
 6. Include validation tasks: testing scenarios for each phase.
-7. Save the plan to `_plans/STORY_<title-slug>.md` at the KB root.
+
+**Step B — Syntax Enrichment**
+
+7. Delegate to **Mendix Syntax** (follow the procedure in `MENDIX_SYNTAX.md`): take the task list from Step A and enrich every task with precise, Studio Pro-ready Mendix syntax.
+   - Entity tasks: full attribute definitions, association types, validation rules, access rules with XPath expressions, indexes.
+   - Flow tasks: step-by-step activity list with activity types, configurations, variable names, decision expressions, error handling.
+   - Page tasks: widget list with bindings, data source configuration, button on-click actions, layout and role assignments.
+   - Security tasks: exact CRUD permissions per role, attribute-level restrictions, XPath constraint expressions.
+   - Navigation/wiring tasks: menu item text, target page, button-to-microflow parameter mappings.
+   - The Mendix Syntax agent reads the existing KB patterns to ensure consistency with the app's established conventions.
+8. The enriched plan replaces the plain task list — every task now has a **Syntax** section with copy-ready configuration detail.
+
+**Step C — Save and Present**
+
+9. Save the enriched plan to `_plans/STORY_<title-slug>.md` at the KB root.
    - Derive the slug from the user story title: lowercase, spaces replaced with hyphens, special characters removed, max 50 characters.
    - If `_plans/` does not exist, create it.
-8. Present the saved plan location to the developer.
+10. Present the saved plan location to the developer.
 
 ## Plan File Format
 
@@ -197,22 +220,104 @@ High-impact flows: [list with reasons, or "none"]
 ## Implementation Tasks
 
 ### Phase 1: Foundation
-- [ ] [Task title] — Module: [X] — Type: Entity — Do: [description] — Done when: [criteria]
+
+#### 1. [Task title]
+- **Module**: [X]
+- **Type**: Entity
+- **Do**: [description]
+- **Done when**: [criteria]
+- **Syntax**:
+  ```
+  Entity: Module.EntityName
+  Persistable: Yes
+  Attributes:
+    - AttributeName: Type (length/default)
+  Associations:
+    - Module.Entity_Other: Reference (*/1), owner: Entity, delete: Keep
+  Access rules:
+    - RoleName: CRUD permissions, XPath: [constraint]
+  ```
 
 ### Phase 2: Logic
-- [ ] [Task title] — Module: [X] — Type: Flow — Depends on: [task] — Do: [description] — Done when: [criteria]
+
+#### 2. [Task title]
+- **Module**: [X]
+- **Type**: Flow
+- **Depends on**: Task 1
+- **Do**: [description]
+- **Done when**: [criteria]
+- **Syntax**:
+  ```
+  Microflow: Module.PREFIX_Entity_Action
+  Parameters: Module.Entity $Entity
+  Return type: Boolean
+
+  Steps:
+  1. [Activity]: [configuration]
+  2. [Activity]: [configuration]
+  ```
 
 ### Phase 3: UI
-- [ ] [Task title] — Module: [X] — Type: Page — Depends on: [task] — Do: [description] — Done when: [criteria]
+
+#### 3. [Task title]
+- **Module**: [X]
+- **Type**: Page
+- **Depends on**: Task 1, Task 2
+- **Do**: [description]
+- **Done when**: [criteria]
+- **Syntax**:
+  ```
+  Page: Module.Entity_Overview
+  Layout: Atlas_Default
+  Allowed roles: Role1, Role2
+
+  [Widget type]:
+    Entity: Module.EntityName
+    Data source: [type]
+    [Widget configuration]
+  ```
 
 ### Phase 4: Security
-- [ ] [Task title] — Module: [X] — Type: Security — Depends on: [task] — Do: [description] — Done when: [criteria]
+
+#### 4. [Task title]
+- **Module**: [X]
+- **Type**: Security
+- **Depends on**: Task 1
+- **Do**: [description]
+- **Done when**: [criteria]
+- **Syntax**:
+  ```
+  Entity: Module.EntityName
+  Access rules:
+    - RoleName: Create: Yes, Read: Yes (Attr1, Attr2), Write: Yes (Attr1), Delete: No
+      XPath: [Module.Entity_Owner = '[%CurrentUser%]']
+  Page access:
+    - Module.PageName: RoleName
+  Microflow access:
+    - Module.FlowName: RoleName
+  ```
 
 ### Phase 5: Integration
-- [ ] [Task title] — Module: [X] — Type: Configuration — Depends on: [task] — Do: [description] — Done when: [criteria]
+
+#### 5. [Task title]
+- **Module**: [X]
+- **Type**: Configuration
+- **Depends on**: [task]
+- **Do**: [description]
+- **Done when**: [criteria]
+- **Syntax**:
+  ```
+  [Navigation / wiring / integration configuration]
+  ```
 
 ### Phase 6: Validation
-- [ ] [Task title] — Module: [X] — Type: Test — Depends on: [task] — Do: [description] — Done when: [criteria]
+
+#### 6. [Task title]
+- **Module**: [X]
+- **Type**: Test
+- **Depends on**: [task]
+- **Do**: [description]
+- **Done when**: [criteria]
 
 ## Evidence
 [List of KB files consulted during this workflow]
