@@ -60,10 +60,11 @@ function Resolve-ClaudeCli {
     $onPath = Get-Command claude -ErrorAction SilentlyContinue
     if ($null -ne $onPath) {
         $src = $onPath.Source
-        # Prefer the .cmd shim on Windows — the extensionless npm shim is a
-        # bash script that Process.Start cannot execute.
-        if ($src -and -not ($src -match '\.(exe|cmd|bat|ps1)$')) {
-            $cmdVariant = "$src.cmd"
+        # Always prefer the .cmd shim on Windows — .ps1 shims cannot be
+        # launched via cmd.exe, and extensionless shims are bash scripts.
+        if ($src) {
+            $basePath = $src -replace '\.(exe|cmd|bat|ps1)$', ''
+            $cmdVariant = "$basePath.cmd"
             if (Test-Path $cmdVariant -PathType Leaf) { return $cmdVariant }
         }
         return $src
@@ -92,19 +93,19 @@ Write-Host ""
 Write-Host "=== enrichkb ===" -ForegroundColor Cyan
 
 # --- Resolve knowledge base root ---
+# Priority: 1) -KnowledgeBaseRoot param  2) KNOWLEDGE_BASE_ROOT env var  3) default fallback
 $resolvedKbRoot = Normalize-AbsolutePath -Path $KnowledgeBaseRoot
-if ([string]::IsNullOrWhiteSpace($resolvedKbRoot)) {
-    # Try default location relative to package root
-    $defaultKbRoot = Join-Path (Split-Path -Parent $packageRoot) "mendix-data\knowledge-base"
-    if (Test-Path $defaultKbRoot -PathType Container) {
-        $resolvedKbRoot = $defaultKbRoot
-    }
-}
-# Also accept via environment variable
 if ([string]::IsNullOrWhiteSpace($resolvedKbRoot)) {
     $envKbRoot = [Environment]::GetEnvironmentVariable("KNOWLEDGE_BASE_ROOT")
     if (-not [string]::IsNullOrWhiteSpace($envKbRoot)) {
         $resolvedKbRoot = Normalize-AbsolutePath -Path $envKbRoot
+    }
+}
+if ([string]::IsNullOrWhiteSpace($resolvedKbRoot)) {
+    # Fallback: default location relative to package root
+    $defaultKbRoot = Join-Path (Split-Path -Parent $packageRoot) "mendix-data\knowledge-base"
+    if (Test-Path $defaultKbRoot -PathType Container) {
+        $resolvedKbRoot = $defaultKbRoot
     }
 }
 if ([string]::IsNullOrWhiteSpace($resolvedKbRoot) -or -not (Test-Path $resolvedKbRoot -PathType Container)) {
@@ -140,6 +141,24 @@ $resolvedRunFolder = $null
 if (-not [string]::IsNullOrWhiteSpace($creatorLink.lastRunFolder)) {
     $resolvedRunFolder = Normalize-AbsolutePath -Path $creatorLink.lastRunFolder
 }
+# If the recorded path doesn't exist, try the "current" alias next to the KB
+if ([string]::IsNullOrWhiteSpace($resolvedRunFolder) -or -not (Test-Path $resolvedRunFolder -PathType Container)) {
+    # currentAliasPath from creator-link (newer format)
+    if (-not [string]::IsNullOrWhiteSpace($creatorLink.currentAliasPath)) {
+        $candidate = Normalize-AbsolutePath -Path $creatorLink.currentAliasPath
+        if (Test-Path $candidate -PathType Container) { $resolvedRunFolder = $candidate }
+    }
+    # Fall back: derive from KB root — KB sits at <dataRoot>/knowledge-base,
+    # so <dataRoot>/app-overview/current is the sibling.
+    if ([string]::IsNullOrWhiteSpace($resolvedRunFolder) -or -not (Test-Path $resolvedRunFolder -PathType Container)) {
+        $localDataRoot = Split-Path -Parent $resolvedKbRoot
+        $localCurrent  = Join-Path $localDataRoot "app-overview\current"
+        if (Test-Path $localCurrent -PathType Container) {
+            $resolvedRunFolder = $localCurrent
+            Write-Host "Using local run folder: $resolvedRunFolder" -ForegroundColor Yellow
+        }
+    }
+}
 if ([string]::IsNullOrWhiteSpace($resolvedRunFolder) -or -not (Test-Path $resolvedRunFolder -PathType Container)) {
     Write-Error "Source run folder not found: $resolvedRunFolder. The pipeline output is missing. Run the pipeline first."
     exit 1
@@ -156,7 +175,47 @@ if (-not (Test-Path $generalFolder -PathType Container)) {
     exit 1
 }
 
-# --- Resolve claude CLI ---
+# --- Resolve AI provider ---
+# Primary source: environment variables (set by the wizard C# code).
+# Fallback: read directly from config.last.json (handles old wizard exe that
+# doesn't pass env vars, or manual script invocations).
+$aiProvider       = [Environment]::GetEnvironmentVariable("AI_PROVIDER")
+$anthropicKeyEnv  = [Environment]::GetEnvironmentVariable("ANTHROPIC_API_KEY")
+$apiModel         = [Environment]::GetEnvironmentVariable("CLAUDE_API_MODEL")
+
+$configJsonPath = Join-Path $wizardRoot "config.last.json"
+if (Test-Path $configJsonPath -PathType Leaf) {
+    try {
+        $configJson = Get-Content $configJsonPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $savedAi = $configJson.aiSettings
+        if ($null -ne $savedAi) {
+            if ([string]::IsNullOrWhiteSpace($aiProvider)) {
+                # Map numeric enum values or string names
+                $providerRaw = $savedAi.provider
+                if ($providerRaw -is [int] -or $providerRaw -match '^\d+$') {
+                    $aiProvider = @("ClaudeCli","CodexCli","ClaudeApi")[[int]$providerRaw]
+                } elseif (-not [string]::IsNullOrWhiteSpace($providerRaw)) {
+                    $aiProvider = [string]$providerRaw
+                }
+            }
+            if ([string]::IsNullOrWhiteSpace($anthropicKeyEnv) -and
+                -not [string]::IsNullOrWhiteSpace($savedAi.claudeApiKey)) {
+                $anthropicKeyEnv = $savedAi.claudeApiKey
+            }
+            if ([string]::IsNullOrWhiteSpace($apiModel) -and
+                -not [string]::IsNullOrWhiteSpace($savedAi.claudeApiModel)) {
+                $apiModel = $savedAi.claudeApiModel
+            }
+        }
+    } catch {
+        Write-Host "WARNING: Could not read config.last.json: $_" -ForegroundColor Yellow
+    }
+}
+
+if ([string]::IsNullOrWhiteSpace($aiProvider)) { $aiProvider = "ClaudeCli" }
+Write-Host "AI provider:         $aiProvider" -ForegroundColor Cyan
+
+# --- Resolve claude CLI (needed for all providers as execution engine) ---
 $envClaudePath = [Environment]::GetEnvironmentVariable("CLAUDE_CLI_PATH")
 $claudeCliResolved = Resolve-ClaudeCli -ExplicitPath $(
     if (-not [string]::IsNullOrWhiteSpace($ClaudeCliPath)) { $ClaudeCliPath }
@@ -169,13 +228,16 @@ if ([string]::IsNullOrWhiteSpace($claudeCliResolved)) {
     Write-Host "ERROR: Claude CLI not found." -ForegroundColor Red
     Write-Host ""
     Write-Host "The enrichKB step requires the Claude CLI to generate AI narratives."
+    Write-Host "This applies to all AI providers (the CLI is the execution engine)."
     Write-Host ""
-    Write-Host "Install options:"
+    Write-Host "Install with:"
     Write-Host "  npm install -g @anthropic-ai/claude-code"
     Write-Host ""
-    Write-Host "After installing, authenticate with:"
-    Write-Host "  claude login"
-    Write-Host ""
+    if ($aiProvider -ne "ClaudeApi") {
+        Write-Host "Then authenticate with:"
+        Write-Host "  claude login"
+        Write-Host ""
+    }
     Write-Host "Or provide the path explicitly:"
     Write-Host "  -ClaudeCliPath ""C:\path\to\claude.exe"""
     Write-Host ""
@@ -230,6 +292,9 @@ try {
     Set-Content -Path $promptFile -Value $enrichPrompt -Encoding UTF8
 
     $claudeArgs = "-p --verbose --max-turns 50 --allowedTools Read,Edit,Write,Glob,Grep --output-format stream-json"
+    if (-not [string]::IsNullOrWhiteSpace($apiModel)) {
+        $claudeArgs += " --model $apiModel"
+    }
 
     $claudeProcess = New-Object System.Diagnostics.ProcessStartInfo
     $claudeProcess.UseShellExecute = $false
@@ -239,11 +304,29 @@ try {
     $claudeProcess.CreateNoWindow = $true
     $claudeProcess.WorkingDirectory = $packageRoot
 
-    # .cmd / .ps1 npm shims cannot be started directly by Process.Start;
-    # route them through cmd.exe so Windows resolves the script host.
-    if ($claudeCliResolved -match '\.(cmd|bat|ps1)$') {
+    # When using Claude API provider, explicitly set the API key on the child
+    # process and remove any cached OAuth config dir so the CLI is forced to
+    # use the key instead of stored login credentials.
+    if ($aiProvider -eq "ClaudeApi" -and -not [string]::IsNullOrWhiteSpace($anthropicKeyEnv)) {
+        # Access .Environment to get a mutable copy, then set the key explicitly
+        $claudeProcess.Environment["ANTHROPIC_API_KEY"] = $anthropicKeyEnv
+        # Point config dir to a clean temp folder so stored OAuth is not found
+        $tempConfigDir = Join-Path ([IO.Path]::GetTempPath()) "claude-api-session-$([guid]::NewGuid().ToString('N').Substring(0,8))"
+        New-Item -ItemType Directory -Path $tempConfigDir -Force | Out-Null
+        $claudeProcess.Environment["CLAUDE_CONFIG_DIR"] = $tempConfigDir
+        Write-Host "Auth method:         API key (ANTHROPIC_API_KEY)" -ForegroundColor Green
+    } else {
+        Write-Host "Auth method:         CLI credentials (claude login)" -ForegroundColor Green
+    }
+
+    # .cmd/.bat shims need cmd.exe; .ps1 shims need powershell.exe.
+    # Extensionless npm shims are bash scripts and cannot be used here.
+    if ($claudeCliResolved -match '\.(cmd|bat)$') {
         $claudeProcess.FileName = "cmd.exe"
         $claudeProcess.Arguments = "/c `"`"$claudeCliResolved`" $claudeArgs`""
+    } elseif ($claudeCliResolved -match '\.ps1$') {
+        $claudeProcess.FileName = "powershell.exe"
+        $claudeProcess.Arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$claudeCliResolved`" $claudeArgs"
     } else {
         $claudeProcess.FileName = $claudeCliResolved
         $claudeProcess.Arguments = $claudeArgs
@@ -299,6 +382,9 @@ try {
 }
 finally {
     Remove-Item $promptFile -ErrorAction SilentlyContinue
+    if (-not [string]::IsNullOrWhiteSpace($tempConfigDir) -and (Test-Path $tempConfigDir)) {
+        Remove-Item $tempConfigDir -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }
 
 if ($claudeExitCode -ne 0) {

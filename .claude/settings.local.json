@@ -62,7 +62,22 @@
       "Bash(xargs grep:*)",
       "Bash(grep -E \"\\\\.md$\")",
       "Bash(find C:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator -path */.agents/* -type f)",
-      "Bash(find C:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator -path */knowledge-base/* -type f)"
+      "Bash(find C:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator -path */knowledge-base/* -type f)",
+      "Bash(LC_ALL=en_US.UTF-8 grep -Pn '[^\\\\x00-\\\\x7F]' \"c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/run-dump-parser.ps1\")",
+      "Bash(\"c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/.agents/skills/flow-chain-tracing/SKILL.md\":*)",
+      "Bash(\"c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/.agents/agents/KB_FEATURE_INTERPRETER.md\":*)",
+      "Bash(wc -l c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/*.md c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/routes/*.md c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/app/*.md)",
+      "Bash(SRC=\"c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/artifacts/.agents\")",
+      "Bash(DST=\"c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/.agents\")",
+      "Bash(cp \"$SRC/skills/mendix-xpath/SKILL.md\" \"$DST/skills/mendix-xpath/SKILL.md\")",
+      "Bash(cp \"$SRC/skills/mendix-microflows/SKILL.md\" \"$DST/skills/mendix-microflows/SKILL.md\")",
+      "Bash(cp \"$SRC/skills/mendix-nanoflows/SKILL.md\" \"$DST/skills/mendix-nanoflows/SKILL.md\")",
+      "Bash(cp \"$SRC/skills/mendix-domain-modeling/SKILL.md\" \"$DST/skills/mendix-domain-modeling/SKILL.md\")",
+      "Bash(cp \"$SRC/skills/mendix-pages-widgets/SKILL.md\" \"$DST/skills/mendix-pages-widgets/SKILL.md\")",
+      "Bash(cp \"$SRC/skills/mendix-security-model/SKILL.md\" \"$DST/skills/mendix-security-model/SKILL.md\")",
+      "Bash(cp \"$SRC/agents/MENDIX_SYNTAX.md\" \"$DST/agents/MENDIX_SYNTAX.md\")",
+      "Bash(cp \"$SRC/agents/DEVELOPMENT_TEAM.md\" \"$DST/agents/DEVELOPMENT_TEAM.md\")",
+      "Bash(cp \"$SRC/AGENTS.md\" \"$DST/AGENTS.md\")"
     ]
   }
 }

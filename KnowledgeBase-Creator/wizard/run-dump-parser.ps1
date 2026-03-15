@@ -641,7 +641,7 @@ $appOverviewRoot = Join-Path $dataRoot "app-overview"
 $knowledgeBaseRoot = Join-Path $dataRoot "knowledge-base"
 
 if (-not $SkipParser -and (Test-DirectoryHasEntries -Path $dataRoot)) {
-    throw "mendix-data already exists and is not empty: $dataRoot. Remove or move the existing mendix-data folder before running the parser again."
+    Write-Host "mendix-data already exists at $dataRoot - re-running pipeline (new timestamped run folder will be created)." -ForegroundColor Yellow
 }
 
 New-Item -ItemType Directory -Path $dumpsRoot -Force | Out-Null
