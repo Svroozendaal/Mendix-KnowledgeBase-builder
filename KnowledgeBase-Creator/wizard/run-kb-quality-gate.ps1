@@ -18,13 +18,17 @@
 
 param(
     [string]$OutputRoot = "mendix-data/knowledge-base",
-    [string]$AppName
+    [string]$AppName,
+    [switch]$ShowAllIssues,
+    [string]$GeneratedAtUtc,
+    [string]$KbRootDisplay
 )
 
 $ErrorActionPreference = "Stop"
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $packageRoot = Split-Path -Parent $scriptRoot
 $artifactsRoot = Join-Path $packageRoot "artifacts/templates"
+. (Join-Path $scriptRoot "lib/app-overview-resolver.ps1")
 
 $thresholdPageCoverage = 95.0
 $thresholdFlowCoverage = 90.0
@@ -192,6 +196,141 @@ function Assert-SectionIsPopulated {
     }
 }
 
+function Assert-NoFencedCodeBlocks {
+    param(
+        [string]$FilePath,
+        [string]$Reason
+    )
+
+    if (-not (Test-Path $FilePath -PathType Leaf)) { return }
+
+    $text = Get-Content -Raw $FilePath
+    if ($text -match '(?ms)```.*?```') {
+        Add-Issue -Severity "error" -File $FilePath -Message $Reason
+    }
+}
+
+function Get-FrontMatterMap {
+    param([string]$FilePath)
+
+    if (-not (Test-Path $FilePath -PathType Leaf)) { return @{} }
+    $text = Get-Content -Raw $FilePath
+    $match = [regex]::Match($text, '(?ms)\A---\s*(?<body>.*?)\s*---')
+    if (-not $match.Success) { return @{} }
+
+    $map = @{}
+    foreach ($line in ($match.Groups['body'].Value -split "`r?`n")) {
+        if ($line -notmatch '^\s*([^:]+):\s*(.*)$') { continue }
+        $map[$matches[1].Trim()] = $matches[2].Trim()
+    }
+    return $map
+}
+
+function Assert-LayeredPointers {
+    param([string]$FilePath)
+
+    $frontMatter = Get-FrontMatterMap -FilePath $FilePath
+    if ($frontMatter.Count -eq 0) {
+        Add-Issue -Severity "error" -File $FilePath -Message "Missing front matter."
+        return
+    }
+
+    foreach ($key in @('layer', 'slug', 'sourceRun', 'l2Path', 'l2Logical')) {
+        if (-not $frontMatter.ContainsKey($key) -or [string]::IsNullOrWhiteSpace([string]$frontMatter[$key])) {
+            Add-Issue -Severity "error" -File $FilePath -Message "Missing front matter field: $key"
+        }
+    }
+
+    foreach ($pointer in @('l0', 'l1', 'l2Path', 'collectionL0', 'collectionL1')) {
+        if (-not $frontMatter.ContainsKey($pointer)) { continue }
+        $value = [string]$frontMatter[$pointer]
+        if ([string]::IsNullOrWhiteSpace($value) -or $value -eq '.') { continue }
+        $resolved = Join-Path (Split-Path -Parent $FilePath) $value
+        if (-not (Test-Path $resolved)) {
+            Add-Issue -Severity "error" -File $FilePath -Message "Front matter pointer does not resolve: $pointer -> $value"
+        }
+    }
+
+    if ($script:expectedSourceRunName -and $frontMatter.ContainsKey('sourceRun')) {
+        $actualSourceRun = [string]$frontMatter['sourceRun']
+        if (-not [string]::IsNullOrWhiteSpace($actualSourceRun) -and $actualSourceRun -ne $script:expectedSourceRunName) {
+            Add-Issue -Severity "error" -File $FilePath -Message "sourceRun does not match resolved run folder: $actualSourceRun != $($script:expectedSourceRunName)"
+        }
+    }
+}
+
+function Write-QualityReports {
+    param(
+        [string]$KbRootPath,
+        [string]$ApplicationName,
+        [System.Collections.Generic.List[object]]$IssueList,
+        [hashtable]$SemanticMetrics,
+        [bool]$OverallPass,
+        [int]$FilesChecked,
+        [string]$GeneratedAtUtc,
+        [string]$KbRootDisplay
+    )
+
+    $reportsDir = Join-Path $KbRootPath "_reports"
+    if (-not (Test-Path $reportsDir -PathType Container)) {
+        New-Item -ItemType Directory -Path $reportsDir -Force | Out-Null
+    }
+
+    $jsonPath = Join-Path $reportsDir "quality-gate-latest.json"
+    $mdPath = Join-Path $reportsDir "quality-gate-latest.md"
+    $generatedAtUtc = if ([string]::IsNullOrWhiteSpace($GeneratedAtUtc)) { [DateTime]::UtcNow.ToString("o") } else { $GeneratedAtUtc }
+    $kbRootForReport = if ([string]::IsNullOrWhiteSpace($KbRootDisplay)) { [System.IO.Path]::GetFullPath($KbRootPath) } else { $KbRootDisplay }
+    $issueArray = @($IssueList)
+
+    $jsonPayload = [ordered]@{
+        appName = $ApplicationName
+        kbRoot = $kbRootForReport
+        generatedAtUtc = $generatedAtUtc
+        overallPass = $OverallPass
+        filesChecked = $FilesChecked
+        issueCount = $issueArray.Count
+        issues = $issueArray
+        semanticMetrics = $SemanticMetrics
+    }
+    $jsonPayload | ConvertTo-Json -Depth 8 | Set-Content -Path $jsonPath -Encoding UTF8
+
+    $mdLines = New-Object System.Collections.Generic.List[string]
+    $mdLines.Add("# KB Quality Gate Report") | Out-Null
+    $mdLines.Add("") | Out-Null
+    $mdLines.Add("- App: $ApplicationName") | Out-Null
+    $mdLines.Add("- KB root: $kbRootForReport") | Out-Null
+    $mdLines.Add("- Generated at (UTC): $generatedAtUtc") | Out-Null
+    $mdLines.Add("- Files checked: $FilesChecked") | Out-Null
+    $mdLines.Add("- Issue count: $($issueArray.Count)") | Out-Null
+    $mdLines.Add("- Final verdict: $(if ($OverallPass) { 'PASS' } else { 'FAIL' })") | Out-Null
+    $mdLines.Add("") | Out-Null
+    $mdLines.Add("## Semantic Metrics") | Out-Null
+    $mdLines.Add("") | Out-Null
+    $mdLines.Add("| Metric | Value | Threshold | Status |") | Out-Null
+    $mdLines.Add("|---|---:|---:|---|") | Out-Null
+    $mdLines.Add("| Page-flow linkage | $($SemanticMetrics['PageCoveragePercent']) | $($SemanticMetrics['PageThreshold']) | $(if ($SemanticMetrics['PagePass']) { 'PASS' } else { 'FAIL' }) |") | Out-Null
+    $mdLines.Add("| Flow entity coverage | $($SemanticMetrics['FlowCoveragePercent']) | $($SemanticMetrics['FlowThreshold']) | $(if ($SemanticMetrics['FlowPass']) { 'PASS' } else { 'FAIL' }) |") | Out-Null
+    $mdLines.Add("| Entity lifecycle mapping | $($SemanticMetrics['EntityCoveragePercent']) | $($SemanticMetrics['EntityThreshold']) | $(if ($SemanticMetrics['EntityPass']) { 'PASS' } else { 'FAIL' }) |") | Out-Null
+    $mdLines.Add("") | Out-Null
+    $mdLines.Add("## Issues") | Out-Null
+    $mdLines.Add("") | Out-Null
+    if ($issueArray.Count -eq 0) {
+        $mdLines.Add("No issues.") | Out-Null
+    }
+    else {
+        foreach ($issue in $issueArray) {
+            $mdLines.Add("- [$($issue.Severity)] $($issue.File) :: $($issue.Message)") | Out-Null
+        }
+    }
+
+    Set-Content -Path $mdPath -Value ($mdLines -join "`r`n") -Encoding UTF8
+
+    return @{
+        Json = $jsonPath
+        Markdown = $mdPath
+    }
+}
+
 function Resolve-SourceArtifactPath {
     param(
         [string]$KbRootPath,
@@ -215,38 +354,7 @@ function Resolve-SourceArtifactPath {
 function Resolve-RunFolderFromSources {
     param([string]$KbRootPath)
 
-    $sourcesManifest = Join-Path $KbRootPath "_sources/manifest.json"
-    if (-not (Test-Path $sourcesManifest -PathType Leaf)) { return $null }
-
-    $manifest = Get-Content -Raw $sourcesManifest | ConvertFrom-Json
-    $artifactPath = $null
-    $preferred = @($manifest.artifacts | Where-Object { $_.type -eq "general-all-modules-json" } | Select-Object -First 1)
-    if ($preferred.Count -gt 0) {
-        $artifactPath = [string]$preferred[0].path
-    } else {
-        $first = @($manifest.artifacts | Select-Object -First 1)
-        if ($first.Count -gt 0) {
-            $artifactPath = [string]$first[0].path
-        }
-    }
-
-    if ([string]::IsNullOrWhiteSpace($artifactPath)) { return $null }
-    $resolvedArtifactPath = Resolve-SourceArtifactPath -KbRootPath $KbRootPath -ArtifactPath $artifactPath
-    if (-not (Test-Path $resolvedArtifactPath -PathType Leaf)) { return $null }
-
-    $artifactParent = Split-Path -Parent $resolvedArtifactPath
-    $folderName = Split-Path -Leaf $artifactParent
-    if ($folderName -eq "general") {
-        return (Split-Path -Parent $artifactParent)
-    }
-    if ($folderName -eq "modules") {
-        return (Split-Path -Parent $artifactParent)
-    }
-    $parentName = Split-Path -Leaf (Split-Path -Parent $artifactParent)
-    if ($parentName -eq "modules") {
-        return (Split-Path -Parent (Split-Path -Parent $artifactParent))
-    }
-    return $null
+    return Resolve-OverviewRunFolderFromKnowledgeBase -KbRootPath $KbRootPath
 }
 
 function Get-MarkdownTableRows {
@@ -402,15 +510,31 @@ else {
         $readme = Join-Path $mod.FullName "README.md"
         $domain = Join-Path $mod.FullName "DOMAIN.md"
         $flows = Join-Path $mod.FullName "FLOWS.md"
+        $flowsDir = Join-Path $mod.FullName "flows"
+        $flowsIndex = Join-Path $flowsDir "INDEX.abstract.md"
         $pages = Join-Path $mod.FullName "PAGES.md"
+        $pagesDir = Join-Path $mod.FullName "pages"
+        $pagesIndex = Join-Path $pagesDir "INDEX.abstract.md"
+        $interpretation = Join-Path $mod.FullName "INTERPRETATION.md"
         $resources = Join-Path $mod.FullName "RESOURCES.md"
+        $flowsEvidence = Join-Path $mod.FullName "FLOWS_EVIDENCE.md"
+        $pagesEvidence = Join-Path $mod.FullName "PAGES_EVIDENCE.md"
+
+        if (Test-Path $flowsEvidence -PathType Leaf) {
+            Add-Issue -Severity "error" -File $flowsEvidence -Message "Legacy evidence file is stale-contract output; use flows/*.abstract.md and flows/*.overview.md instead."
+        }
+        if (Test-Path $pagesEvidence -PathType Leaf) {
+            Add-Issue -Severity "error" -File $pagesEvidence -Message "Legacy evidence file is stale-contract output; use pages/*.abstract.md and pages/*.overview.md instead."
+        }
 
         Assert-Headings -File $readme -Headings @(
             "## Summary",
             "## Purpose",
+            "## Capability Map",
+            "## Primary User Journeys",
+            "## Top risks/unknowns in model understanding",
             "## Navigation",
             "## Source Pointers",
-            "## Interpretation",
             "## Cross-Module Dependencies",
             "## Source"
         )
@@ -427,10 +551,12 @@ else {
 
         Assert-Headings -File $domain -Headings @(
             "## Entities",
+            "## Entity Lifecycle Matrix",
+            "## Role impacts per sensitive entity",
             "## Associations",
             "## Enumerations",
-            "## Entity Evidence",
-            "## Domain Interpretation"
+            "## Entity Index",
+            "## Source"
         )
 
         Assert-Headings -File $flows -Headings @(
@@ -440,17 +566,25 @@ else {
             "### Validation Flows (VAL_*)",
             "### Other Flows",
             "## Cross-Module Calls",
-            "## Flow Details",
-            "## Flow Evidence",
-            "## Flow Interpretation"
+            "## Tier 1 Shortlist",
+            "## Flow Links"
         )
 
         Assert-Headings -File $pages -Headings @(
             "## Page Inventory",
             "## Page-Flow Links",
-            "## Snippets",
-            "## Page Evidence",
-            "## Page Interpretation"
+            "## Journey Groups",
+            "## Page Links"
+        )
+
+        Assert-Headings -File $flowsIndex -Headings @("# Flow Collection Abstract")
+        Assert-Headings -File $pagesIndex -Headings @("# Page Collection Abstract")
+
+        Assert-Headings -File $interpretation -Headings @(
+            "## Module Purpose",
+            "## Domain Narrative",
+            "## Flow Narrative",
+            "## Page Narrative"
         )
 
         Assert-Headings -File $resources -Headings @(
@@ -458,6 +592,26 @@ else {
             "## Scheduled Events",
             "## Other Resources"
         )
+
+        foreach ($summaryFile in @($readme, $domain, $flows, $pages)) {
+            Assert-NoFencedCodeBlocks -FilePath $summaryFile -Reason "Summary file contains fenced code blocks; keep layered summaries compact."
+        }
+
+        foreach ($collectionFile in @($flowsIndex, $pagesIndex)) {
+            Assert-NoFencedCodeBlocks -FilePath $collectionFile -Reason "Collection abstract contains fenced code blocks; keep routing files compact."
+            Assert-LayeredPointers -FilePath $collectionFile
+        }
+
+        foreach ($pattern in @('*.abstract.md', '*.overview.md')) {
+            foreach ($file in @(Get-ChildItem -Path $flowsDir -Filter $pattern -File -ErrorAction SilentlyContinue)) {
+                Assert-NoFencedCodeBlocks -FilePath $file.FullName -Reason "Layered object markdown contains fenced code blocks; keep object files compact."
+                Assert-LayeredPointers -FilePath $file.FullName
+            }
+            foreach ($file in @(Get-ChildItem -Path $pagesDir -Filter $pattern -File -ErrorAction SilentlyContinue)) {
+                Assert-NoFencedCodeBlocks -FilePath $file.FullName -Reason "Layered object markdown contains fenced code blocks; keep object files compact."
+                Assert-LayeredPointers -FilePath $file.FullName
+            }
+        }
     }
 }
 
@@ -484,8 +638,7 @@ if (Test-Path $modulesDir -PathType Container) {
     foreach ($mod in @(Get-KbModuleDirectories -KbRootPath $kbRoot)) {
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "README.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_README_TEMPLATE.md")
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "DOMAIN.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_DOMAIN_TEMPLATE.md")
-        Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "FLOWS.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_FLOWS_TEMPLATE.md")
-        Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "PAGES.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_PAGES_TEMPLATE.md")
+        Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "INTERPRETATION.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_INTERPRETATION_TEMPLATE.md")
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "RESOURCES.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_RESOURCES_TEMPLATE.md")
     }
 }
@@ -528,11 +681,57 @@ $semanticMetrics = [ordered]@{
     EntityPass = $true
 }
 
+$script:expectedSourceRunName = $null
 $runFolder = Resolve-RunFolderFromSources -KbRootPath $kbRoot
 if (-not $runFolder) {
     Add-Issue -Severity "error" -File $kbRoot -Message "Semantic checks failed: could not resolve source run folder from _sources/manifest.json."
 }
 else {
+    $runFolder = (Resolve-Path $runFolder).Path
+    $script:expectedSourceRunName = Split-Path $runFolder -Leaf
+    $runManifest = Load-OverviewManifest -RunFolder $runFolder
+    $moduleCatalog = @(Get-OverviewModuleCatalog -RunFolder $runFolder -Manifest $runManifest)
+    $moduleCatalogByName = Get-OverviewModuleCatalogMap -ModuleCatalog $moduleCatalog
+    $currentAliasInfo = Sync-AppOverviewCurrentAlias -RunFolder $runFolder -ModuleCatalogByName $moduleCatalogByName
+    $currentAliasPath = [string]$currentAliasInfo.CurrentAliasPath
+
+    $creatorLinkPath = Join-Path $kbRoot "_sources/creator-link.json"
+    if (Test-Path $creatorLinkPath -PathType Leaf) {
+        $creatorLink = Get-Content -Raw $creatorLinkPath | ConvertFrom-Json
+        if ([string]::IsNullOrWhiteSpace([string]$creatorLink.lastRunFolder)) {
+            Add-Issue -Severity "error" -File $creatorLinkPath -Message "creator-link.json is missing lastRunFolder."
+        } elseif (-not (Test-Path ([string]$creatorLink.lastRunFolder) -PathType Container)) {
+            Add-Issue -Severity "error" -File $creatorLinkPath -Message "creator-link.json lastRunFolder does not exist: $([string]$creatorLink.lastRunFolder)"
+        } elseif ((Resolve-Path ([string]$creatorLink.lastRunFolder)).Path -ne $runFolder) {
+            Add-Issue -Severity "error" -File $creatorLinkPath -Message "creator-link.json lastRunFolder does not match the resolved immutable run folder."
+        }
+
+        if ($creatorLink.PSObject.Properties.Name -notcontains "currentAliasPath") {
+            Add-Issue -Severity "error" -File $creatorLinkPath -Message "creator-link.json is missing currentAliasPath."
+        } elseif ([string]::IsNullOrWhiteSpace([string]$creatorLink.currentAliasPath)) {
+            Add-Issue -Severity "error" -File $creatorLinkPath -Message "creator-link.json currentAliasPath is empty."
+        } elseif (-not (Test-Path ([string]$creatorLink.currentAliasPath) -PathType Container)) {
+            Add-Issue -Severity "error" -File $creatorLinkPath -Message "creator-link.json currentAliasPath does not exist: $([string]$creatorLink.currentAliasPath)"
+        } elseif ((Resolve-Path ([string]$creatorLink.currentAliasPath)).Path -ne $currentAliasPath) {
+            Add-Issue -Severity "error" -File $creatorLinkPath -Message "creator-link.json currentAliasPath does not match the rebuilt app-overview/current alias."
+        }
+    }
+
+    $currentManifestPath = Join-Path $currentAliasPath "manifest.json"
+    if (-not (Test-Path $currentManifestPath -PathType Leaf)) {
+        Add-Issue -Severity "error" -File $currentAliasPath -Message "app-overview/current is missing manifest.json."
+    } else {
+        $currentManifest = Get-Content -Raw $currentManifestPath | ConvertFrom-Json
+        if ([string]$currentManifest.schemaVersion -ne [string]$runManifest.schemaVersion) {
+            Add-Issue -Severity "error" -File $currentManifestPath -Message "app-overview/current manifest schemaVersion does not match the immutable run manifest."
+        }
+        $currentSelectedModules = @($currentManifest.selectedModules | ForEach-Object { [string]$_ } | Sort-Object)
+        $runSelectedModules = @($runManifest.selectedModules | ForEach-Object { [string]$_ } | Sort-Object)
+        if (($currentSelectedModules -join "|") -ne ($runSelectedModules -join "|")) {
+            Add-Issue -Severity "error" -File $currentManifestPath -Message "app-overview/current manifest selectedModules does not match the immutable run manifest."
+        }
+    }
+
     $allModulesPath = Join-Path $runFolder "general/all-modules.json"
     if (-not (Test-Path $allModulesPath -PathType Leaf)) {
         Add-Issue -Severity "error" -File $allModulesPath -Message "Semantic checks failed: missing general/all-modules.json."
@@ -545,41 +744,40 @@ else {
         }
         $customModules = @($allModules.modules | Where-Object { $_.category -eq "Custom" } | ForEach-Object { $_.module } | Sort-Object -Unique)
         foreach ($moduleName in @($moduleCategoryByName.Keys | Sort-Object)) {
-            $relativeModuleDir = if ($moduleCategoryByName[$moduleName] -eq "Marketplace") {
-                "modules/_marktplace/$moduleName"
-            } else {
-                "modules/$moduleName"
-            }
+            $relativeModuleDir = Get-OverviewKbModuleRelativeDir -ModuleName $moduleName -ModuleCatalogByName $moduleCatalogByName
             $moduleDir = Join-Path $kbRoot $relativeModuleDir
             if (-not (Test-Path $moduleDir -PathType Container)) { continue }
 
-            $domainJsonPath = Join-Path $runFolder "modules/$moduleName/domain-model.json"
+            $domainJsonPath = Get-OverviewModuleFilePath -RootPath $runFolder -ModuleName $moduleName -FileName "domain-model.json" -ModuleCatalogByName $moduleCatalogByName
             if (Test-Path $domainJsonPath -PathType Leaf) {
                 $domainJson = Get-Content -Raw $domainJsonPath | ConvertFrom-Json
                 if (@($domainJson.domainModel.entities).Count -gt 0) {
-                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "DOMAIN.md") -Heading "## Entity Evidence" -PlaceholderPatterns @(
-                        "No entity evidence sections"
+                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "DOMAIN.md") -Heading "## Entity Index" -PlaceholderPatterns @(
+                        "No entity index entries",
+                        "No entity index documented yet"
                     )
                 }
             }
 
-            $flowsJsonPath = Join-Path $runFolder "modules/$moduleName/flows.json"
+            $flowsJsonPath = Get-OverviewModuleFilePath -RootPath $runFolder -ModuleName $moduleName -FileName "flows.json" -ModuleCatalogByName $moduleCatalogByName
             if (Test-Path $flowsJsonPath -PathType Leaf) {
                 $flowsJson = Get-Content -Raw $flowsJsonPath | ConvertFrom-Json
                 if (@($flowsJson.flows).Count -gt 0) {
-                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "FLOWS.md") -Heading "## Flow Evidence" -PlaceholderPatterns @(
-                        "No flow evidence sections"
+                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "FLOWS.md") -Heading "## Flow Links" -PlaceholderPatterns @(
+                        "\| none \| none \| 3 \| none \| none \| none \|"
                     )
+                    Assert-Headings -File (Join-Path $moduleDir "flows/INDEX.abstract.md") -Headings @("# Flow Collection Abstract")
                 }
             }
 
-            $pagesJsonPath = Join-Path $runFolder "modules/$moduleName/pages.json"
+            $pagesJsonPath = Get-OverviewModuleFilePath -RootPath $runFolder -ModuleName $moduleName -FileName "pages.json" -ModuleCatalogByName $moduleCatalogByName
             if (Test-Path $pagesJsonPath -PathType Leaf) {
                 $pagesJson = Get-Content -Raw $pagesJsonPath | ConvertFrom-Json
                 if (@($pagesJson.pages).Count -gt 0) {
-                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "PAGES.md") -Heading "## Page Evidence" -PlaceholderPatterns @(
-                        "No page evidence sections"
+                    Assert-SectionIsPopulated -FilePath (Join-Path $moduleDir "PAGES.md") -Heading "## Page Links" -PlaceholderPatterns @(
+                        "\| none \| none \| none \| none \| none \|"
                     )
+                    Assert-Headings -File (Join-Path $moduleDir "pages/INDEX.abstract.md") -Headings @("# Page Collection Abstract")
                 }
             }
         }
@@ -587,7 +785,7 @@ else {
         $customEntities = @{}
         $customPages = @{}
         foreach ($module in $customModules) {
-            $domainPath = Join-Path $runFolder "modules/$module/domain-model.json"
+            $domainPath = Get-OverviewModuleFilePath -RootPath $runFolder -ModuleName $module -FileName "domain-model.json" -ModuleCatalogByName $moduleCatalogByName
             if (Test-Path $domainPath -PathType Leaf) {
                 $domain = Get-Content -Raw $domainPath | ConvertFrom-Json
                 foreach ($entity in @($domain.domainModel.entities)) {
@@ -595,7 +793,7 @@ else {
                 }
             }
 
-            $pagesPath = Join-Path $runFolder "modules/$module/pages.json"
+            $pagesPath = Get-OverviewModuleFilePath -RootPath $runFolder -ModuleName $module -FileName "pages.json" -ModuleCatalogByName $moduleCatalogByName
             if (Test-Path $pagesPath -PathType Leaf) {
                 $pages = Get-Content -Raw $pagesPath | ConvertFrom-Json
                 foreach ($page in @($pages.pages)) {
@@ -609,7 +807,7 @@ else {
         $expectedEntitiesReferenced = New-Object "System.Collections.Generic.HashSet[string]"
 
         foreach ($module in $customModules) {
-            $flowsPath = Join-Path $runFolder "modules/$module/flows.json"
+            $flowsPath = Get-OverviewModuleFilePath -RootPath $runFolder -ModuleName $module -FileName "flows.json" -ModuleCatalogByName $moduleCatalogByName
             if (-not (Test-Path $flowsPath -PathType Leaf)) { continue }
             $flows = Get-Content -Raw $flowsPath | ConvertFrom-Json
 
@@ -737,6 +935,15 @@ Write-Host "Files checked: $($allMd.Count)"
 Write-Host "Issues: $($issues.Count)"
 $structuralIssueCount = @($issues | Where-Object { $_.Severity -eq "error" }).Count
 $overallPass = ($issues.Count -eq 0)
+$reportPaths = Write-QualityReports `
+    -KbRootPath $kbRoot `
+    -ApplicationName $AppName `
+    -IssueList $issues `
+    -SemanticMetrics $semanticMetrics `
+    -OverallPass $overallPass `
+    -FilesChecked $allMd.Count `
+    -GeneratedAtUtc $GeneratedAtUtc `
+    -KbRootDisplay $KbRootDisplay
 Write-Host "Structural issue count: $structuralIssueCount"
 Write-Host ("Metric A (Page-flow linkage): {0}% (threshold >= {1}%, n={2}) -> {3}" -f `
     $semanticMetrics["PageCoveragePercent"], $semanticMetrics["PageThreshold"], $semanticMetrics["ExpectedCustomPages"], `
@@ -748,12 +955,20 @@ Write-Host ("Metric C (Entity lifecycle mapping): {0}% (threshold >= {1}%, n={2}
     $semanticMetrics["EntityCoveragePercent"], $semanticMetrics["EntityThreshold"], $semanticMetrics["ExpectedCustomEntities"], `
     $(if ($semanticMetrics["EntityPass"]) { "PASS" } else { "FAIL" }))
 Write-Host "Final verdict: $(if ($overallPass) { "PASS" } else { "FAIL" })"
+Write-Host "Detailed report (JSON): $($reportPaths.Json)"
+Write-Host "Detailed report (MD):   $($reportPaths.Markdown)"
 
 if ($issues.Count -gt 0) {
-    Write-Host ""
-    Write-Host "QUALITY ISSUES:" -ForegroundColor Red
-    foreach ($i in $issues) {
-        Write-Host "[$($i.Severity)] $($i.File) :: $($i.Message)" -ForegroundColor Red
+    if ($ShowAllIssues) {
+        Write-Host ""
+        Write-Host "QUALITY ISSUES:" -ForegroundColor Red
+        foreach ($i in $issues) {
+            Write-Host "[$($i.Severity)] $($i.File) :: $($i.Message)" -ForegroundColor Red
+        }
+    }
+    else {
+        Write-Host ""
+        Write-Host "Detailed issues were written to the report files above. Re-run with -ShowAllIssues to print them here." -ForegroundColor Yellow
     }
     exit 1
 }

@@ -1,0 +1,17 @@
+# Resources: WorkflowCommons
+Constants: 2, Scheduled Events: 1
+
+## Constants
+CONSTANT WorkflowCommons.AuditTrailRetentionInDays: IntegerType = 365
+  Documentation: "Number of days after which audit trail records will be deleted for 'Completed' and 'Aborted' workflows. 
+
+Default: 365 days."
+  Exposed to client: no
+CONSTANT WorkflowCommons.DueDateExpirationInDays: IntegerType = 2
+  Documentation: "Remaining number of days until the 'Due Date' of a workflow or user task before a visual indicator appears. 
+
+Default: 2 days."
+  Exposed to client: yes
+
+## Scheduled Events
+SCHEDULED_EVENT WorkflowCommons.SE_WorkflowAuditTrailRecord_CleanUp

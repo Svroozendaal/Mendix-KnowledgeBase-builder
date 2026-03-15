@@ -34,6 +34,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 $runFolderDisplay = $RunFolder
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+. (Join-Path $scriptRoot "lib/app-overview-resolver.ps1")
 
 # --- Resolve paths ---
 if (-not $Validate -and -not $RunFolder) {
@@ -67,27 +69,24 @@ if (-not $AppName) {
 $kbRoot = $OutputRoot
 
 # --- Discover modules from manifest ---
-function Get-ModulesFromManifest($manifest) {
+function Get-ModulesFromManifest {
+    param(
+        [object]$ManifestObject,
+        [string]$RunFolderPath
+    )
+
+    if (-not [string]::IsNullOrWhiteSpace($RunFolderPath) -and (Test-Path $RunFolderPath -PathType Container)) {
+        return @(Get-OverviewModuleCatalog -RunFolder $RunFolderPath -Manifest $ManifestObject)
+    }
+
     $modulesByName = @{}
-    foreach ($artifact in $manifest.artifacts) {
-        if ($artifact.type -ne "module-domain-model-json") { continue }
-
-        $artifactPath = [string]$artifact.path
-        if ([string]::IsNullOrWhiteSpace($artifactPath)) { continue }
-
-        if ($artifactPath -match "[\\/]modules[\\/]marketplace[\\/]([^\\/]+)[\\/]domain-model\.json$") {
-            $modulesByName[$matches[1]] = [pscustomobject]@{
-                Name = $matches[1]
-                Category = "Marketplace"
-            }
-            continue
-        }
-
-        if ($artifactPath -match "[\\/]modules[\\/]([^\\/]+)[\\/]domain-model\.json$") {
-            $modulesByName[$matches[1]] = [pscustomobject]@{
-                Name = $matches[1]
-                Category = "Unknown"
-            }
+    foreach ($artifact in @($ManifestObject.artifacts)) {
+        if ([string]$artifact.type -ne "module-domain-model-json") { continue }
+        $info = Get-OverviewModuleInfoFromArtifactPath -ArtifactPath ([string]$artifact.path)
+        if ($null -eq $info) { continue }
+        $modulesByName[$info.ModuleName] = [pscustomobject]@{
+            Name = $info.ModuleName
+            Category = $info.PathCategory
         }
     }
 
@@ -189,10 +188,51 @@ function Get-ExpectedFiles($modules) {
         $files += Get-ModuleRelativePath -Module $mod -FileName "README.md"
         $files += Get-ModuleRelativePath -Module $mod -FileName "DOMAIN.md"
         $files += Get-ModuleRelativePath -Module $mod -FileName "FLOWS.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "flows/INDEX.abstract.md"
         $files += Get-ModuleRelativePath -Module $mod -FileName "PAGES.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "pages/INDEX.abstract.md"
         $files += Get-ModuleRelativePath -Module $mod -FileName "RESOURCES.md"
+        $files += Get-ModuleRelativePath -Module $mod -FileName "INTERPRETATION.md"
     }
     return $files
+}
+
+function Resolve-RunFolderFromSources {
+    param([string]$KbRootPath)
+
+    return Resolve-OverviewRunFolderFromKnowledgeBase -KbRootPath $KbRootPath
+}
+
+function Get-ObjectExpectedFiles {
+    param(
+        [string]$RunFolderPath,
+        [object[]]$Modules
+    )
+
+    $files = New-Object System.Collections.Generic.List[string]
+    if (-not (Test-Path $RunFolderPath -PathType Container)) {
+        return @()
+    }
+
+    $moduleCatalogByName = Get-OverviewModuleCatalogMap -ModuleCatalog @($Modules)
+    foreach ($mod in @($Modules)) {
+        $moduleRunPath = Get-OverviewModuleFilePath -RootPath $RunFolderPath -ModuleName $mod.Name -FileName "" -ModuleCatalogByName $moduleCatalogByName
+
+        foreach ($kind in @("flows", "pages")) {
+            $indexPath = Join-Path $moduleRunPath "$kind/INDEX.json"
+            if (-not (Test-Path $indexPath -PathType Leaf)) { continue }
+
+            $index = Get-Content -Raw $indexPath | ConvertFrom-Json
+            foreach ($item in @($index.items)) {
+                $slug = [string]$item.slug
+                if ([string]::IsNullOrWhiteSpace($slug)) { continue }
+                $files.Add((Get-ModuleRelativePath -Module $mod -FileName "$kind/$slug.abstract.md")) | Out-Null
+                $files.Add((Get-ModuleRelativePath -Module $mod -FileName "$kind/$slug.overview.md")) | Out-Null
+            }
+        }
+    }
+
+    return $files.ToArray()
 }
 
 # ====================
@@ -208,14 +248,18 @@ if ($Validate) {
     $sourcesManifest = Join-Path $kbRoot "_sources/manifest.json"
     if (Test-Path $sourcesManifest) {
         $manifest = Get-Content $sourcesManifest -Raw | ConvertFrom-Json
-        $modules = Get-ModulesFromManifest $manifest
+        $modules = Get-ModulesFromManifest -ManifestObject $manifest -RunFolderPath (Resolve-RunFolderFromSources -KbRootPath $kbRoot)
     } elseif ($manifest) {
-        $modules = Get-ModulesFromManifest $manifest
+        $modules = Get-ModulesFromManifest -ManifestObject $manifest -RunFolderPath $RunFolder
     } else {
         $modules = Get-ModulesFromKbRoot -KbRootPath $kbRoot
     }
 
-    $expected = Get-ExpectedFiles $modules
+    $expected = @(Get-ExpectedFiles $modules)
+    $runFolderFromSources = Resolve-RunFolderFromSources -KbRootPath $kbRoot
+    if ($runFolderFromSources) {
+        $expected += @(Get-ObjectExpectedFiles -RunFolderPath $runFolderFromSources -Modules $modules)
+    }
     $missing = @()
     $present = @()
 
@@ -253,7 +297,7 @@ if ($Validate) {
 # ====================
 # SCAFFOLD MODE
 # ====================
-$modules = Get-ModulesFromManifest $manifest
+$modules = Get-ModulesFromManifest -ManifestObject $manifest -RunFolderPath $RunFolder
 
 Write-Host ""
 Write-Host "=== KB Scaffold ==="
@@ -287,6 +331,8 @@ $folders = @(
 )
 foreach ($mod in $modules) {
     $folders += Join-Path $kbRoot (Get-ModuleRelativePath -Module $mod)
+    $folders += Join-Path $kbRoot (Get-ModuleRelativePath -Module $mod -FileName "flows")
+    $folders += Join-Path $kbRoot (Get-ModuleRelativePath -Module $mod -FileName "pages")
 }
 
 foreach ($folder in $folders) {
@@ -303,7 +349,7 @@ Write-Host "  Copied: manifest.json -> _sources/manifest.json"
 
 # Write source-reference file
 $dataRoot = Split-Path -Parent $kbRoot
-$runFolderForDisplay = Get-DisplayPath -BasePath $dataRoot -TargetPath $RunFolder
+$runFolderForDisplay = Get-DisplayPath -BasePath $dataRoot -TargetPath $runFolderDisplay
 $sourceRef = @"
 # Source Reference
 

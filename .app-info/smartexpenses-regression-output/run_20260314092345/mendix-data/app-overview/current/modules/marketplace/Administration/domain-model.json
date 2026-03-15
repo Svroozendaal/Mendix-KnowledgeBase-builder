@@ -1,0 +1,201 @@
+{
+  "module": "Administration",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "Administration.Account",
+        "isPersistable": true,
+        "generalization": "System.User",
+        "attributes": [
+          {
+            "name": "Email",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "FullName",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "IsLocalUser",
+            "type": "BooleanAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "Administration.Administrator"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "Administration.Account.FullName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "Administration.Account.Email",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "Administration.Account.IsLocalUser",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "SmartExpenses.FBGProfile_Account",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "SmartExpenses.FBGProfile_Account_Parent",
+                "memberKind": "Association",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "Administration.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadOnly",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "Administration.Account.FullName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "Administration.Account.Email",
+                "memberKind": "Attribute",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "Administration.Account.IsLocalUser",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "SmartExpenses.FBGProfile_Account",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              },
+              {
+                "memberName": "SmartExpenses.FBGProfile_Account_Parent",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          },
+          {
+            "moduleRoles": [
+              "Administration.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "None",
+            "xPathConstraint": "[id=\u0027[%CurrentUser%]\u0027]",
+            "memberAccesses": [
+              {
+                "memberName": "Administration.Account.FullName",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "Administration.Account.Email",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "Administration.Account.IsLocalUser",
+                "memberKind": "Attribute",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "SmartExpenses.FBGProfile_Account",
+                "memberKind": "Association",
+                "accessRights": "None"
+              },
+              {
+                "memberName": "SmartExpenses.FBGProfile_Account_Parent",
+                "memberKind": "Association",
+                "accessRights": "None"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Administration.AccountPasswordData",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "ConfirmPassword",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "NewPassword",
+            "type": "StringAttributeType"
+          },
+          {
+            "name": "OldPassword",
+            "type": "StringAttributeType"
+          }
+        ],
+        "accessRules": [
+          {
+            "moduleRoles": [
+              "Administration.Administrator",
+              "Administration.User"
+            ],
+            "allowCreate": false,
+            "allowDelete": false,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "memberAccesses": [
+              {
+                "memberName": "Administration.AccountPasswordData.OldPassword",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "Administration.AccountPasswordData.NewPassword",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "Administration.AccountPasswordData.ConfirmPassword",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "Administration.AccountPasswordData_Account",
+                "memberKind": "Association",
+                "accessRights": "ReadOnly"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "associations": [
+      {
+        "name": "Administration.AccountPasswordData_Account",
+        "parentEntity": "Administration.AccountPasswordData",
+        "childEntity": "Administration.Account",
+        "cardinality": "*-1",
+        "type": "Reference",
+        "owner": "Default",
+        "storageFormat": "Table"
+      }
+    ],
+    "enumerations": []
+  }
+}

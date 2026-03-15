@@ -1,0 +1,182 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.BCO_Transaction",
+                  "stableId":  "0784800a-a0ce-4e38-aa86-be81bc189c11",
+                  "slug":  "smartexpenses-bco-transaction",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-bco-transaction.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-bco-transaction.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-bco-transaction.json",
+                  "l2Logical":  "flow:SmartExpenses.BCO_Transaction",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "0784800a-a0ce-4e38-aa86-be81bc189c11",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.BCO_Transaction",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "f7da75da-abd2-4e22-a7c4-dad60c4717b9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_CalculateBalance",
+                      "detail":  "call microflow SmartExpenses.SUB_Transaction_CalculateBalance",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+                                        "sourceNodeId":  "f7da75da-abd2-4e22-a7c4-dad60c4717b9"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "5356ba9d-5769-4dfc-9515-e2edca8aca12",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_CalculateBudgetTerm",
+                      "detail":  "call microflow SmartExpenses.SUB_Transaction_CalculateBudgetTerm",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "SmartExpenses.SUB_Transaction_CalculateBudgetTerm",
+                                        "sourceNodeId":  "5356ba9d-5769-4dfc-9515-e2edca8aca12"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "6449a1c4-5fb3-4958-801c-9d041203f811",
+                      "nodeType":  "Annotation",
+                      "label":  "Workflow to calculate new balance and budgets values when transaction is connected",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e7d2d6e7-3112-4368-99ae-cb9a1a06c400",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "44d0043e-51db-4314-9217-91afac25acf8",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "acb0c5cf-0304-4ba0-90e1-95b73f0ce248",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "78805aa7-aef9-4c9b-9015-947972802c81",
+                      "originNodeId":  "f7da75da-abd2-4e22-a7c4-dad60c4717b9",
+                      "destinationNodeId":  "e7d2d6e7-3112-4368-99ae-cb9a1a06c400",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e036685d-98cc-4a2d-8024-586b00282ac8",
+                      "originNodeId":  "acb0c5cf-0304-4ba0-90e1-95b73f0ce248",
+                      "destinationNodeId":  "5356ba9d-5769-4dfc-9515-e2edca8aca12",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "884e0f3b-725e-4074-a759-cec0bc0eccee",
+                      "originNodeId":  "5356ba9d-5769-4dfc-9515-e2edca8aca12",
+                      "destinationNodeId":  "f7da75da-abd2-4e22-a7c4-dad60c4717b9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+                      "sourceNodeId":  "f7da75da-abd2-4e22-a7c4-dad60c4717b9"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "SmartExpenses.SUB_Transaction_CalculateBudgetTerm",
+                      "sourceNodeId":  "5356ba9d-5769-4dfc-9515-e2edca8aca12"
+                  }
+              ],
+    "startNodeIds":  [
+                         "acb0c5cf-0304-4ba0-90e1-95b73f0ce248"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "acb0c5cf-0304-4ba0-90e1-95b73f0ce248",
+                                         "5356ba9d-5769-4dfc-9515-e2edca8aca12",
+                                         "f7da75da-abd2-4e22-a7c4-dad60c4717b9",
+                                         "e7d2d6e7-3112-4368-99ae-cb9a1a06c400"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.BCO_Transaction\r\nNODES=6; EDGES=3\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_CalculateBudgetTerm\r\n3. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_CalculateBalance\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.BCO_Transaction",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "f7da75da-abd2-4e22-a7c4-dad60c4717b9",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.BCO_Transaction",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "5356ba9d-5769-4dfc-9515-e2edca8aca12",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_Transaction_CalculateBudgetTerm",
+                          "isInternal":  true
+                      }
+                  ]
+}

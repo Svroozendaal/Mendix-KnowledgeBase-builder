@@ -4,6 +4,14 @@
 
 No entities documented yet.
 
+## Entity Lifecycle Matrix
+
+No entity lifecycle documented yet.
+
+## Role impacts per sensitive entity
+
+No role impacts documented yet.
+
 ## Associations
 
 | Association | Parent | Child | Type |
@@ -14,10 +22,10 @@ No entities documented yet.
 
 No enumerations documented yet.
 
-## Entity Evidence
+## Entity Index
 
-No entity evidence documented yet.
+No entity index documented yet.
 
-## Domain Interpretation
+## Source
 
-Reserved for `/enrichkb`. Add AI narrative only in this section.
+- Domain export pseudo: none

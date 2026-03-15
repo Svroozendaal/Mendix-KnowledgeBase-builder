@@ -1,0 +1,5 @@
+# Domain Model: WebActions
+Entities: 0, Associations: 0, Enumerations: 1
+
+## Enumerations
+- ENUM WebActions.PictureQuality: custom, high, low, medium, original

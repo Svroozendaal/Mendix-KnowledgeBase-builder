@@ -29,8 +29,24 @@ Model Overview Export (v2.0)
   ↓
 general-interpretation  →  app/APP_OVERVIEW.md, MODULE_LANDSCAPE.md, SECURITY.md, CALL_GRAPH.md
 module-interpretation   →  modules/<Module>/README.md, DOMAIN.md, FLOWS.md, PAGES.md, RESOURCES.md
+                            modules/<Module>/INTERPRETATION.md (enrichment target)
+                            modules/<Module>/flows/INDEX.abstract.md, <slug>.abstract.md, <slug>.overview.md
+                            modules/<Module>/pages/INDEX.abstract.md, <slug>.abstract.md, <slug>.overview.md
 routing-synthesis       →  ROUTING.md, routes/by-entity.md, by-page.md, by-flow.md, cross-module.md
+                            (all route tables include L0/L1/L2 links per object)
 ```
+
+## Layered Navigation Model
+
+The pipeline produces a three-layer progressive disclosure model for flows and pages:
+
+| Layer | File pattern | Content | Purpose |
+|---|---|---|---|
+| L0 (Abstract) | `<slug>.abstract.md` | 3-5 line summary | Triage |
+| L1 (Overview) | `<slug>.overview.md` | Structured detail | Answer most questions |
+| L2 (JSON) | `app-overview/current/.../<slug>.json` | Raw export | Exact verification |
+
+Collection abstracts (`INDEX.abstract.md`) list all objects in a module at L0 with tier ranking. The generated KB also ships two reader skills (`kb-file-structure`, `layered-navigation`) that document the structure and navigation model for consuming AI agents.
 
 ## Adding a New App-Specific Skill
 

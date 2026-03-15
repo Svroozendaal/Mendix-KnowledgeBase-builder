@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.FBGProfile_Overview",
+                  "stableId":  "SmartExpenses.FBGProfile_Overview",
+                  "slug":  "smartexpenses-fbgprofile-overview",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-fbgprofile-overview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-fbgprofile-overview.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/pages/smartexpenses-fbgprofile-overview.json",
+                  "l2Logical":  "page:SmartExpenses.FBGProfile_Overview",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/pages/INDEX.json"
+              },
+    "qualifiedName":  "SmartExpenses.FBGProfile_Overview",
+    "name":  "FBGProfile_Overview",
+    "title":  "FBG Environment Overview",
+    "layout":  "Atlas_Core.Atlas_TopBar",
+    "allowedRoles":  [
+                         "SmartExpenses.Admin"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

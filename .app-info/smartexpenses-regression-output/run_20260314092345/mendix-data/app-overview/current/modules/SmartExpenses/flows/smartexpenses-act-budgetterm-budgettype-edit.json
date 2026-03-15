@@ -1,0 +1,291 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_BudgetTerm_BudgetType_Edit",
+                  "stableId":  "9f1ed935-2a42-4f4d-b600-a4b12d7c3fb0",
+                  "slug":  "smartexpenses-act-budgetterm-budgettype-edit",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-budgetterm-budgettype-edit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-budgetterm-budgettype-edit.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-budgetterm-budgettype-edit.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_BudgetTerm_BudgetType_Edit",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "9f1ed935-2a42-4f4d-b600-a4b12d7c3fb0",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_BudgetTerm_BudgetType_Edit",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "e9e2d682-ff1a-444c-bd0e-c64e56872b52",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change BudgetType (Logo_BudgetType=$NewLogo; refreshInClient=false)",
+                      "detail":  "change BudgetType (Logo_BudgetType=$NewLogo; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a47ee51c-422a-407c-9268-153a4e5bae6e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.Logo as NewLogo",
+                      "detail":  "create SmartExpenses.Logo as NewLogo",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3fef9ee6-1603-4a67-9bdb-27d62bce58d4",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve BudgetType over association BudgetTerm_BudgetType from BudgetTerm",
+                      "detail":  "retrieve BudgetType over association BudgetTerm_BudgetType from BudgetTerm",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9d322168-70f9-42b3-a8d0-8022f1edaf9b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=Er is iets misgegaan! Neem contact op met de admin., type=Error, blocking=true)",
+                      "detail":  "show message (text=Er is iets misgegaan! Neem contact op met de admin., type=Error, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "94b07b5d-c82d-49d5-bfde-1d81cdd8e38a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page SmartExpenses.BudgetTerm_NewEdit",
+                      "detail":  "show page SmartExpenses.BudgetTerm_NewEdit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0bedc992-a7d4-482e-b8ff-3d29cf9031e2",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "abfecaea-f982-4f31-b684-7e2c031f667e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "724353ce-a405-4024-abff-9df1e391d6d1",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0eb8b835-ce4a-4124-be51-d99956fda575",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "BudgetType exists? expression=$BudgetType != empty",
+                      "detail":  "BudgetType exists? expression=$BudgetType != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c8f80b11-8a10-42d8-bb18-c74ddd4fab81",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "logo object excist? expression=$BudgetType/SmartExpenses.Logo_BudgetType/SmartExpenses.Logo != empty",
+                      "detail":  "logo object excist? expression=$BudgetType/SmartExpenses.Logo_BudgetType/SmartExpenses.Logo != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4aa7d41f-9971-45cf-b602-c57cd85a3d70",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "493181a4-793f-41e5-9896-0d5074b0f2de",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "c0f24b31-d38e-41ac-82af-c7da78d4f24d",
+                      "originNodeId":  "493181a4-793f-41e5-9896-0d5074b0f2de",
+                      "destinationNodeId":  "3fef9ee6-1603-4a67-9bdb-27d62bce58d4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b445d641-96ea-4370-85c5-59770541b0b6",
+                      "originNodeId":  "0eb8b835-ce4a-4124-be51-d99956fda575",
+                      "destinationNodeId":  "c8f80b11-8a10-42d8-bb18-c74ddd4fab81",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "39ffe41b-3c15-4313-8f94-60e2033ff388",
+                      "originNodeId":  "c8f80b11-8a10-42d8-bb18-c74ddd4fab81",
+                      "destinationNodeId":  "724353ce-a405-4024-abff-9df1e391d6d1",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "78a547d7-4f39-4df3-8940-abb37c7df37d",
+                      "originNodeId":  "94b07b5d-c82d-49d5-bfde-1d81cdd8e38a",
+                      "destinationNodeId":  "0bedc992-a7d4-482e-b8ff-3d29cf9031e2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6db95bc8-44c5-47b4-aabf-86207e503c52",
+                      "originNodeId":  "724353ce-a405-4024-abff-9df1e391d6d1",
+                      "destinationNodeId":  "94b07b5d-c82d-49d5-bfde-1d81cdd8e38a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7f14bf77-ab8a-43fb-84dc-c4dabc5f8ed0",
+                      "originNodeId":  "c8f80b11-8a10-42d8-bb18-c74ddd4fab81",
+                      "destinationNodeId":  "a47ee51c-422a-407c-9268-153a4e5bae6e",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "a70a3f77-95c7-400a-a8e7-0441a8d46cca",
+                      "originNodeId":  "a47ee51c-422a-407c-9268-153a4e5bae6e",
+                      "destinationNodeId":  "e9e2d682-ff1a-444c-bd0e-c64e56872b52",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fe2e7a94-8548-447e-b0ac-c48584aca8d8",
+                      "originNodeId":  "e9e2d682-ff1a-444c-bd0e-c64e56872b52",
+                      "destinationNodeId":  "724353ce-a405-4024-abff-9df1e391d6d1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "176431e5-69ab-4ff1-8fbc-56f342101ce7",
+                      "originNodeId":  "3fef9ee6-1603-4a67-9bdb-27d62bce58d4",
+                      "destinationNodeId":  "0eb8b835-ce4a-4124-be51-d99956fda575",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "27420652-8004-4170-8772-626909e0c180",
+                      "originNodeId":  "0eb8b835-ce4a-4124-be51-d99956fda575",
+                      "destinationNodeId":  "9d322168-70f9-42b3-a8d0-8022f1edaf9b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0c4ed4dd-6d2a-403c-9869-5d8bcf9e035e",
+                      "originNodeId":  "9d322168-70f9-42b3-a8d0-8022f1edaf9b",
+                      "destinationNodeId":  "abfecaea-f982-4f31-b684-7e2c031f667e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "493181a4-793f-41e5-9896-0d5074b0f2de"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "493181a4-793f-41e5-9896-0d5074b0f2de",
+                                         "3fef9ee6-1603-4a67-9bdb-27d62bce58d4",
+                                         "0eb8b835-ce4a-4124-be51-d99956fda575",
+                                         "c8f80b11-8a10-42d8-bb18-c74ddd4fab81",
+                                         "724353ce-a405-4024-abff-9df1e391d6d1",
+                                         "94b07b5d-c82d-49d5-bfde-1d81cdd8e38a",
+                                         "0bedc992-a7d4-482e-b8ff-3d29cf9031e2",
+                                         "a47ee51c-422a-407c-9268-153a4e5bae6e",
+                                         "e9e2d682-ff1a-444c-bd0e-c64e56872b52",
+                                         "9d322168-70f9-42b3-a8d0-8022f1edaf9b",
+                                         "abfecaea-f982-4f31-b684-7e2c031f667e"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_BudgetTerm_BudgetType_Edit\r\nNODES=12; EDGES=11\r\n1. START\r\n2. ACTION RetrieveAction: retrieve BudgetType over association BudgetTerm_BudgetType from BudgetTerm\r\n3. DECISION BudgetType exists? expression=$BudgetType != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. DECISION logo object excist? expression=$BudgetType/SmartExpenses.Logo_BudgetType/SmartExpenses.Logo != empty\r\n  6. BRANCH when EnumerationCase=true\r\n    7. NODE ExclusiveMerge: ExclusiveMerge\r\n    8. ACTION ShowPageAction: show page SmartExpenses.BudgetTerm_NewEdit\r\n    9. END\r\n  10. BRANCH when EnumerationCase=false\r\n    11. ACTION CreateObjectAction: create SmartExpenses.Logo as NewLogo\r\n    12. ACTION ChangeObjectAction: change BudgetType (Logo_BudgetType=$NewLogo; refreshInClient=false)\r\n    13. REF ExclusiveMerge\r\n14. BRANCH when EnumerationCase=false\r\n  15. ACTION ShowMessageAction: show message (text=Er is iets misgegaan! Neem contact op met de admin., type=Error, blocking=true)\r\n  16. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

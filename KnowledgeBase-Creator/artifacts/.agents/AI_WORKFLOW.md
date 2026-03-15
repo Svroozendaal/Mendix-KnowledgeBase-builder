@@ -43,6 +43,45 @@ Before answering any question about the application:
 | "What scheduled events exist?" | `modules/<module>/RESOURCES.md` or `modules/_marktplace/<module>/RESOURCES.md` | Iterate all modules |
 | "How should I build X?" | Relevant `modules/*/FLOWS.md` and `modules/_marktplace/*/FLOWS.md` | Existing patterns, then recommend |
 | "Interpret this user story" | `app/SECURITY.md` | `routes/by-entity.md`, `routes/by-flow.md` |
+| "How does feature X work?" | `routes/by-flow.md`, `routes/by-entity.md` (keyword search) | `modules/<module>/README.md`, `INTERPRETATION.md` → KB Feature Interpreter |
+| "What features does this app have?" | `app/APP_OVERVIEW.md`, `app/MODULE_LANDSCAPE.md` | `modules/*/README.md` Capability Maps → KB Feature Interpreter |
+| "Trace flow X" / "What happens when X runs?" | `routes/by-flow.md` (locate flow) | L1 overview → `flow-chain-tracing` skill → KB Flow Tracer |
+| "What is affected if I change X?" | `routes/by-flow.md` or `routes/by-entity.md` | `impact-analysis` skill → KB Analyst |
+| "Explain the X process" | `routes/by-flow.md` (keyword search) | L0/L1 overviews, `INTERPRETATION.md` → KB Feature Interpreter |
+
+## Feature-Level Query Workflow
+
+When a user asks about a business feature or capability:
+
+1. Route to **KB Feature Interpreter**.
+2. The interpreter invokes the `feature-search` skill to locate candidate KB files from keywords.
+3. It reads app-level context (`APP_OVERVIEW.md`, `MODULE_LANDSCAPE.md`).
+4. It reads module-level context (`README.md` Capability Maps, `INTERPRETATION.md` narratives).
+5. It reads flow-level detail (L0 abstracts for triage, L1 overviews for top matches).
+6. If the feature involves a multi-step process, it invokes `flow-chain-tracing` to build the chain.
+7. It synthesises a Feature Report with modules, entities, flows, pages, and gaps.
+
+## Flow Tracing Query Workflow
+
+When a user asks to trace or follow a specific flow:
+
+1. Route to **KB Flow Tracer**.
+2. The tracer locates the flow in `routes/by-flow.md`.
+3. It invokes the `flow-chain-tracing` skill to build the complete call tree.
+4. It adds entry context (who calls this flow?).
+5. It cross-references entities (`routes/by-entity.md`) and pages (`routes/by-page.md`).
+6. It annotates module boundaries, security implications, and data flow patterns.
+7. If the user also asks "what if I change this?", it invokes the `impact-analysis` skill.
+
+## Impact Analysis Query Workflow
+
+When a user asks about the blast radius of a change:
+
+1. Route to **KB Analyst**.
+2. The analyst identifies the target artefact type (flow, entity, or page).
+3. It invokes the `impact-analysis` skill with the appropriate procedure.
+4. It cross-references `routes/cross-module.md` and `app/SECURITY.md`.
+5. It rates the blast radius (Small / Medium / Large) and synthesises recommendations.
 
 ## Out-of-Scope Requests
 

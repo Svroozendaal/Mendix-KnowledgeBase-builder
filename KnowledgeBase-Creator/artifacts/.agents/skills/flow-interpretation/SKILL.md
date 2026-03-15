@@ -6,7 +6,7 @@ Interpret the purpose, structure, and behaviour of microflows, nanoflows, and ru
 
 ## Used By
 
-KB Navigator, KB Analyst, Mendix Developer, User Story Interpreter
+KB Navigator, KB Analyst, KB Flow Tracer, Mendix Developer, User Story Interpreter
 
 ## Procedure
 
@@ -22,6 +22,7 @@ KB Navigator, KB Analyst, Mendix Developer, User Story Interpreter
 4. Identify entities used (created, retrieved, changed, deleted).
 5. Identify cross-module calls (calls to flows in other modules).
 6. Cross-reference `routes/by-flow.md` for callers and callees.
+7. For a complete call chain trace (all downstream sub-calls, entity aggregation, page aggregation), invoke the `flow-chain-tracing` skill (`.agents/skills/flow-chain-tracing/SKILL.md`).
 
 ## Output
 

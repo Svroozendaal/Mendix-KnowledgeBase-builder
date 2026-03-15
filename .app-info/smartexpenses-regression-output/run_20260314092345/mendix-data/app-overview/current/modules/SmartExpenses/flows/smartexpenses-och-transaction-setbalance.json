@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.OCH_Transaction_setBalance",
+                  "stableId":  "7b8d0c35-9125-48f6-b67d-97a14eb17920",
+                  "slug":  "smartexpenses-och-transaction-setbalance",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-och-transaction-setbalance.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-och-transaction-setbalance.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-och-transaction-setbalance.json",
+                  "l2Logical":  "flow:SmartExpenses.OCH_Transaction_setBalance",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "7b8d0c35-9125-48f6-b67d-97a14eb17920",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "SmartExpenses.OCH_Transaction_setBalance",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "1ccf0821-9ccd-42a5-94d2-e9b459e51246",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Transaction (Transaction_Balance=$Balance; refreshInClient=false)",
+                      "detail":  "change Transaction (Transaction_Balance=$Balance; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e51437d7-cfb4-4202-9da6-aba99313bba0",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8dcbb0b8-f8b3-4d07-af8f-180d62442e05",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e2e1a123-baa1-4b2d-a093-6505997be353",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "12e92b92-bb50-41a8-b28e-0ef58f1b751d",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "cbe58f0f-7420-4ba1-b5f9-0dea86ef3873",
+                      "originNodeId":  "12e92b92-bb50-41a8-b28e-0ef58f1b751d",
+                      "destinationNodeId":  "1ccf0821-9ccd-42a5-94d2-e9b459e51246",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e6d71619-c40f-4415-85d3-a04d6943d9db",
+                      "originNodeId":  "1ccf0821-9ccd-42a5-94d2-e9b459e51246",
+                      "destinationNodeId":  "e51437d7-cfb4-4202-9da6-aba99313bba0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "12e92b92-bb50-41a8-b28e-0ef58f1b751d"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "12e92b92-bb50-41a8-b28e-0ef58f1b751d",
+                                         "1ccf0821-9ccd-42a5-94d2-e9b459e51246",
+                                         "e51437d7-cfb4-4202-9da6-aba99313bba0"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: SmartExpenses.OCH_Transaction_setBalance\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION ChangeObjectAction: change Transaction (Transaction_Balance=$Balance; refreshInClient=false)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

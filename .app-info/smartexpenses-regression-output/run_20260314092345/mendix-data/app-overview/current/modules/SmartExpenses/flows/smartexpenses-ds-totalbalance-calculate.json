@@ -1,0 +1,155 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.DS_TotalBalance_Calculate",
+                  "stableId":  "6f12428b-8afd-49e9-a855-cee6ba15f805",
+                  "slug":  "smartexpenses-ds-totalbalance-calculate",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-ds-totalbalance-calculate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-ds-totalbalance-calculate.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-ds-totalbalance-calculate.json",
+                  "l2Logical":  "flow:SmartExpenses.DS_TotalBalance_Calculate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "6f12428b-8afd-49e9-a855-cee6ba15f805",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.DS_TotalBalance_Calculate",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "e92a0cea-24b5-4a9a-8f37-73612781f33f",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=SumCurrentAmount, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=SumCurrentAmount, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b181957b-d9e6-43d9-9ac4-344894efcd91",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve BalanceList from SmartExpenses.Balance",
+                      "detail":  "retrieve BalanceList from SmartExpenses.Balance",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "219e68e6-f632-407a-ad77-c62559d191e5",
+                      "nodeType":  "Annotation",
+                      "label":  "Calculates the \u0027totalBalance\u0027 attritube of a FBGProfile.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9950422a-d2fb-40af-985c-b71d40cc95a9",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9a98f521-b072-4c75-995a-0a24d69ad9ac",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8447a0ab-323d-4aac-9e6e-e1b9120c26b1",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "63a212d1-835f-49b4-abb5-15b144d9bbc3",
+                      "originNodeId":  "8447a0ab-323d-4aac-9e6e-e1b9120c26b1",
+                      "destinationNodeId":  "b181957b-d9e6-43d9-9ac4-344894efcd91",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4d5a7c5e-fc07-4edc-876c-6c797257afe4",
+                      "originNodeId":  "b181957b-d9e6-43d9-9ac4-344894efcd91",
+                      "destinationNodeId":  "e92a0cea-24b5-4a9a-8f37-73612781f33f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "09e45014-c80b-4526-ab7c-9ccbe853a64b",
+                      "originNodeId":  "e92a0cea-24b5-4a9a-8f37-73612781f33f",
+                      "destinationNodeId":  "9950422a-d2fb-40af-985c-b71d40cc95a9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "8447a0ab-323d-4aac-9e6e-e1b9120c26b1"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "8447a0ab-323d-4aac-9e6e-e1b9120c26b1",
+                                         "b181957b-d9e6-43d9-9ac4-344894efcd91",
+                                         "e92a0cea-24b5-4a9a-8f37-73612781f33f",
+                                         "9950422a-d2fb-40af-985c-b71d40cc95a9"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.DS_TotalBalance_Calculate\r\nNODES=6; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve BalanceList from SmartExpenses.Balance\r\n3. ACTION AggregateListAction: AggregateListAction (output=SumCurrentAmount, errorHandlingType=Rollback)\r\n4. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.ACT_Transaction_Recalculate_all",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "d7181b64-0742-4d46-bf9f-f34f2e08fb96",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.DS_TotalBalance_Calculate",
+                          "isInternal":  true
+                      }
+                  ]
+}

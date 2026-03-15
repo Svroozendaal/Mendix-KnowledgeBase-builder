@@ -1,0 +1,219 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.IVK_ColumnNew",
+                  "stableId":  "f7975ba6-f871-43e7-b01d-234e29c13fe0",
+                  "slug":  "excelimporter-ivk-columnnew",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ivk-columnnew.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ivk-columnnew.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-ivk-columnnew.json",
+                  "l2Logical":  "flow:ExcelImporter.IVK_ColumnNew",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "f7975ba6-f871-43e7-b01d-234e29c13fe0",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.IVK_ColumnNew",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "82c70fc0-f913-4ceb-804a-2ee3b0804bf3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewColAttributeRelation (Column_MxObjectType=$EnclosingContext/ExcelImporter.Template_MxObjectType, Column_Template=$EnclosingContext; refreshInClient=false)",
+                      "detail":  "change NewColAttributeRelation (Column_MxObjectType=$EnclosingContext/ExcelImporter.Template_MxObjectType, Column_Template=$EnclosingContext; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "16612b9b-8171-4689-99bd-e3bb33bd87c8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.Column as NewColAttributeRelation",
+                      "detail":  "create ExcelImporter.Column as NewColAttributeRelation",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fe386be0-29d3-43cf-b388-218ccd701ac3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=A MetaObject must be selected before a column can be created or changed., type=Error, blocking=true)",
+                      "detail":  "show message (text=A MetaObject must be selected before a column can be created or changed., type=Error, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1deffa4a-cdea-4bc0-a370-324feeebbc9b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page ExcelImporter.Column_NewEdit",
+                      "detail":  "show page ExcelImporter.Column_NewEdit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6df6e32e-755a-4640-bb67-be87cbdaefee",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "89545f70-504f-45d7-8d9c-d01f91e35609",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "573e5bb7-f148-498d-86c1-7ec7e5b4b043",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Has object type? expression=$EnclosingContext/ExcelImporter.Template_MxObjectType != empty",
+                      "detail":  "Has object type? expression=$EnclosingContext/ExcelImporter.Template_MxObjectType != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c7d341d4-aedc-423b-a8f8-02ec1f7c1bf7",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "406eb64d-bf3b-4cb3-9b68-9861a6e67202",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "1771d1b6-0eb9-46b4-989e-71abd52abfad",
+                      "originNodeId":  "406eb64d-bf3b-4cb3-9b68-9861a6e67202",
+                      "destinationNodeId":  "573e5bb7-f148-498d-86c1-7ec7e5b4b043",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e20c33e3-b01f-4a74-9e1c-b2e2c5b4edad",
+                      "originNodeId":  "16612b9b-8171-4689-99bd-e3bb33bd87c8",
+                      "destinationNodeId":  "82c70fc0-f913-4ceb-804a-2ee3b0804bf3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4d48c4f2-e340-42fa-87d3-4edaf1a82693",
+                      "originNodeId":  "82c70fc0-f913-4ceb-804a-2ee3b0804bf3",
+                      "destinationNodeId":  "1deffa4a-cdea-4bc0-a370-324feeebbc9b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b0492575-b5fb-4eb4-b525-73ee4c195cd0",
+                      "originNodeId":  "1deffa4a-cdea-4bc0-a370-324feeebbc9b",
+                      "destinationNodeId":  "6df6e32e-755a-4640-bb67-be87cbdaefee",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8e2ace56-e45f-4e8a-8a33-2f37609cd5ad",
+                      "originNodeId":  "573e5bb7-f148-498d-86c1-7ec7e5b4b043",
+                      "destinationNodeId":  "16612b9b-8171-4689-99bd-e3bb33bd87c8",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "cbd26b21-357e-4bf8-bb4f-6cc122a5a653",
+                      "originNodeId":  "573e5bb7-f148-498d-86c1-7ec7e5b4b043",
+                      "destinationNodeId":  "fe386be0-29d3-43cf-b388-218ccd701ac3",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "79348b86-1e07-4498-b8e2-98a18660adcf",
+                      "originNodeId":  "fe386be0-29d3-43cf-b388-218ccd701ac3",
+                      "destinationNodeId":  "89545f70-504f-45d7-8d9c-d01f91e35609",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "406eb64d-bf3b-4cb3-9b68-9861a6e67202"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "406eb64d-bf3b-4cb3-9b68-9861a6e67202",
+                                         "573e5bb7-f148-498d-86c1-7ec7e5b4b043",
+                                         "16612b9b-8171-4689-99bd-e3bb33bd87c8",
+                                         "82c70fc0-f913-4ceb-804a-2ee3b0804bf3",
+                                         "1deffa4a-cdea-4bc0-a370-324feeebbc9b",
+                                         "6df6e32e-755a-4640-bb67-be87cbdaefee",
+                                         "fe386be0-29d3-43cf-b388-218ccd701ac3",
+                                         "89545f70-504f-45d7-8d9c-d01f91e35609"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.IVK_ColumnNew\r\nNODES=9; EDGES=7\r\n1. START\r\n2. DECISION Has object type? expression=$EnclosingContext/ExcelImporter.Template_MxObjectType != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION CreateObjectAction: create ExcelImporter.Column as NewColAttributeRelation\r\n  5. ACTION ChangeObjectAction: change NewColAttributeRelation (Column_MxObjectType=$EnclosingContext/ExcelImporter.Template_MxObjectType, Column_Template=$EnclosingContext; refreshInClient=false)\r\n  6. ACTION ShowPageAction: show page ExcelImporter.Column_NewEdit\r\n  7. END\r\n8. BRANCH when EnumerationCase=false\r\n  9. ACTION ShowMessageAction: show message (text=A MetaObject must be selected before a column can be created or changed., type=Error, blocking=true)\r\n  10. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

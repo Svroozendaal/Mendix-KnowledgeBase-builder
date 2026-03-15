@@ -1,0 +1,462 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_Transaction_BulkEditSave",
+                  "stableId":  "dbb0e0a6-970f-4504-8de1-af5510ac7702",
+                  "slug":  "smartexpenses-act-transaction-bulkeditsave",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-transaction-bulkeditsave.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-transaction-bulkeditsave.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-transaction-bulkeditsave.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_Transaction_BulkEditSave",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "dbb0e0a6-970f-4504-8de1-af5510ac7702",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_Transaction_BulkEditSave",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "e45a8dba-04d8-425a-bc03-68f8988dcdea",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change IteratorTransaction (Transaction_Balance=if $BulkEditHelper/SmartExpenses.BulkEditHelper_Balance != empty then $BulkEditHelper/SmartExpenses.BulkEditHelper_Balance else $IteratorTransaction/SmartExpenses.Transaction_Balan..., Transaction_BudgetTerm=if $BulkEditHelper/SmartExpenses.BulkEditHelper_BudgetTerm != empty then $BulkEditHelper/SmartExpenses.BulkEditHelper_BudgetTerm else $IteratorTransaction/SmartExpenses.Transaction..., InOut=if $BulkEditHelper/InOut != empty then $BulkEditHelper/InOut else $IteratorTransaction/InOut; refreshInClient=false)",
+                      "detail":  "change IteratorTransaction (Transaction_Balance=if $BulkEditHelper/SmartExpenses.BulkEditHelper_Balance != empty then $BulkEditHelper/SmartExpenses.BulkEditHelper_Balance else $IteratorTransaction/SmartExpenses.Transaction_Balan..., Transaction_BudgetTerm=if $BulkEditHelper/SmartExpenses.BulkEditHelper_BudgetTerm != empty then $BulkEditHelper/SmartExpenses.BulkEditHelper_BudgetTerm else $IteratorTransaction/SmartExpenses.Transaction..., InOut=if $BulkEditHelper/InOut != empty then $BulkEditHelper/InOut else $IteratorTransaction/InOut; refreshInClient=false)",
+                      "loopOwnerId":  "20d74eea-16b8-4a40-9a75-1531a747987b",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8b4dbf12-cc99-4e0e-a694-5254b3b65fde",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CloseFormAction: close page",
+                      "detail":  "close page",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "00e6ba3a-80cc-4b84-b133-b0fc13630ed9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CommitAction: commit TransactionList (refreshInClient=true, withEvents=false)",
+                      "detail":  "commit TransactionList (refreshInClient=true, withEvents=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2e8d11e2-f5d7-4b40-b7cc-32627cb85f4b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow SmartExpenses.SUB_Balance_Recalculate",
+                      "detail":  "call microflow SmartExpenses.SUB_Balance_Recalculate",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "SmartExpenses.SUB_Balance_Recalculate",
+                                        "sourceNodeId":  "2e8d11e2-f5d7-4b40-b7cc-32627cb85f4b"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "87124ca5-a080-4e64-bf64-71a620f0a1c8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow SmartExpenses.SUB_BudgetTerm_Recalculate",
+                      "detail":  "call microflow SmartExpenses.SUB_BudgetTerm_Recalculate",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "SmartExpenses.SUB_BudgetTerm_Recalculate",
+                                        "sourceNodeId":  "87124ca5-a080-4e64-bf64-71a620f0a1c8"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "ea9de77d-21ed-4dba-93e2-951d65a94161",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_setStatus",
+                      "detail":  "call microflow SmartExpenses.SUB_Transaction_setStatus",
+                      "loopOwnerId":  "20d74eea-16b8-4a40-9a75-1531a747987b",
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "SmartExpenses.SUB_Transaction_setStatus",
+                                        "sourceNodeId":  "ea9de77d-21ed-4dba-93e2-951d65a94161"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "0cc27fd8-c421-41c4-8aef-a8ba10dfd5a7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Balance over association BulkEditHelper_Balance from BulkEditHelper",
+                      "detail":  "retrieve Balance over association BulkEditHelper_Balance from BulkEditHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9ff3bfdc-0bc8-40c8-a899-7183f35fa799",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve BudgetTerm over association BulkEditHelper_BudgetTerm from BulkEditHelper",
+                      "detail":  "retrieve BudgetTerm over association BulkEditHelper_BudgetTerm from BulkEditHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a46689fe-5c30-4d28-a20e-b1b25232c449",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve TransactionList over association BulkEditHelper_Transaction from BulkEditHelper",
+                      "detail":  "retrieve TransactionList over association BulkEditHelper_Transaction from BulkEditHelper",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e96b64ae-ac66-4647-9215-9df6f7e5519d",
+                      "nodeType":  "Annotation",
+                      "label":  "Retreives a list of transactions and changes Budget and Balance, based on the settings of the bulkedithelper popup. Afterwards recalculateds the total amounts o...",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b7973b1a-9044-423f-8e60-83deee550d17",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "29106ca6-53b2-44c6-a2da-af847925fe3d",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c318c546-d0d8-4103-8cc8-c34b3b76b38f",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2754a5a7-bedc-41b0-8912-fed12c3a3bd9",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "BudgetTerm found? expression=$BudgetTerm != empty",
+                      "detail":  "BudgetTerm found? expression=$BudgetTerm != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "785d2ae8-740a-4ad7-a206-0bc85cb821e1",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Found? expression=$Balance != empty",
+                      "detail":  "Found? expression=$Balance != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "20d74eea-16b8-4a40-9a75-1531a747987b",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate TransactionList as IteratorTransaction",
+                      "detail":  "iterate TransactionList as IteratorTransaction",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bb5bd290-05d5-49c7-a745-bbfa43200994",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7559040c-27b6-41ab-919a-cba80f9e8577",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "f655c978-0efa-4943-a06a-802f7ac8e3ec",
+                      "originNodeId":  "7559040c-27b6-41ab-919a-cba80f9e8577",
+                      "destinationNodeId":  "a46689fe-5c30-4d28-a20e-b1b25232c449",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ec623801-1cf7-47c2-8bba-3f67ed82c6dc",
+                      "originNodeId":  "a46689fe-5c30-4d28-a20e-b1b25232c449",
+                      "destinationNodeId":  "20d74eea-16b8-4a40-9a75-1531a747987b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fcf8abb7-9f9f-4927-ba2f-11d7dff98977",
+                      "originNodeId":  "20d74eea-16b8-4a40-9a75-1531a747987b",
+                      "destinationNodeId":  "00e6ba3a-80cc-4b84-b133-b0fc13630ed9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "85e92699-8ec5-4f29-9f33-196e10bbdbb3",
+                      "originNodeId":  "00e6ba3a-80cc-4b84-b133-b0fc13630ed9",
+                      "destinationNodeId":  "0cc27fd8-c421-41c4-8aef-a8ba10dfd5a7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b36862df-f27a-48ab-9d89-d8feb3b6fd10",
+                      "originNodeId":  "8b4dbf12-cc99-4e0e-a694-5254b3b65fde",
+                      "destinationNodeId":  "b7973b1a-9044-423f-8e60-83deee550d17",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "7a9ffc90-f86d-4967-ba8c-79e662c90614",
+                      "originNodeId":  "0cc27fd8-c421-41c4-8aef-a8ba10dfd5a7",
+                      "destinationNodeId":  "785d2ae8-740a-4ad7-a206-0bc85cb821e1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "91f2d969-464b-4d38-abc4-51f647f490d1",
+                      "originNodeId":  "2e8d11e2-f5d7-4b40-b7cc-32627cb85f4b",
+                      "destinationNodeId":  "c318c546-d0d8-4103-8cc8-c34b3b76b38f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e6649dfa-49ea-481f-a695-3f22596a4026",
+                      "originNodeId":  "9ff3bfdc-0bc8-40c8-a899-7183f35fa799",
+                      "destinationNodeId":  "2754a5a7-bedc-41b0-8912-fed12c3a3bd9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "892e0fcd-9375-49df-b924-17d2d0420ed3",
+                      "originNodeId":  "785d2ae8-740a-4ad7-a206-0bc85cb821e1",
+                      "destinationNodeId":  "2e8d11e2-f5d7-4b40-b7cc-32627cb85f4b",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "27669494-3408-4f27-b9f5-6de5fd89ccc2",
+                      "originNodeId":  "c318c546-d0d8-4103-8cc8-c34b3b76b38f",
+                      "destinationNodeId":  "9ff3bfdc-0bc8-40c8-a899-7183f35fa799",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6451aa86-4de2-4201-b3ce-31389e89e0f3",
+                      "originNodeId":  "785d2ae8-740a-4ad7-a206-0bc85cb821e1",
+                      "destinationNodeId":  "c318c546-d0d8-4103-8cc8-c34b3b76b38f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "83b04b20-d7ec-4af2-b8e9-63cda1ffe0d0",
+                      "originNodeId":  "2754a5a7-bedc-41b0-8912-fed12c3a3bd9",
+                      "destinationNodeId":  "87124ca5-a080-4e64-bf64-71a620f0a1c8",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "37074594-6d27-48de-b337-5d18ce63a393",
+                      "originNodeId":  "87124ca5-a080-4e64-bf64-71a620f0a1c8",
+                      "destinationNodeId":  "29106ca6-53b2-44c6-a2da-af847925fe3d",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "eb7a108c-65ec-4418-9264-56e45b231f39",
+                      "originNodeId":  "29106ca6-53b2-44c6-a2da-af847925fe3d",
+                      "destinationNodeId":  "8b4dbf12-cc99-4e0e-a694-5254b3b65fde",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "d33c9027-46aa-4163-893e-b124489f514c",
+                      "originNodeId":  "2754a5a7-bedc-41b0-8912-fed12c3a3bd9",
+                      "destinationNodeId":  "29106ca6-53b2-44c6-a2da-af847925fe3d",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "dd16ce4c-1c2c-4b4b-ae5b-1c488970dacb",
+                      "originNodeId":  "e45a8dba-04d8-425a-bc03-68f8988dcdea",
+                      "destinationNodeId":  "ea9de77d-21ed-4dba-93e2-951d65a94161",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "SmartExpenses.SUB_Balance_Recalculate",
+                      "sourceNodeId":  "2e8d11e2-f5d7-4b40-b7cc-32627cb85f4b"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "SmartExpenses.SUB_BudgetTerm_Recalculate",
+                      "sourceNodeId":  "87124ca5-a080-4e64-bf64-71a620f0a1c8"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "SmartExpenses.SUB_Transaction_setStatus",
+                      "sourceNodeId":  "ea9de77d-21ed-4dba-93e2-951d65a94161"
+                  }
+              ],
+    "startNodeIds":  [
+                         "7559040c-27b6-41ab-919a-cba80f9e8577"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7559040c-27b6-41ab-919a-cba80f9e8577",
+                                         "a46689fe-5c30-4d28-a20e-b1b25232c449",
+                                         "20d74eea-16b8-4a40-9a75-1531a747987b",
+                                         "e45a8dba-04d8-425a-bc03-68f8988dcdea",
+                                         "ea9de77d-21ed-4dba-93e2-951d65a94161",
+                                         "00e6ba3a-80cc-4b84-b133-b0fc13630ed9",
+                                         "0cc27fd8-c421-41c4-8aef-a8ba10dfd5a7",
+                                         "785d2ae8-740a-4ad7-a206-0bc85cb821e1",
+                                         "2e8d11e2-f5d7-4b40-b7cc-32627cb85f4b",
+                                         "c318c546-d0d8-4103-8cc8-c34b3b76b38f",
+                                         "9ff3bfdc-0bc8-40c8-a899-7183f35fa799",
+                                         "2754a5a7-bedc-41b0-8912-fed12c3a3bd9",
+                                         "87124ca5-a080-4e64-bf64-71a620f0a1c8",
+                                         "29106ca6-53b2-44c6-a2da-af847925fe3d",
+                                         "8b4dbf12-cc99-4e0e-a694-5254b3b65fde",
+                                         "b7973b1a-9044-423f-8e60-83deee550d17"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_Transaction_BulkEditSave\r\nNODES=16; EDGES=15\r\n1. START\r\n2. ACTION RetrieveAction: retrieve TransactionList over association BulkEditHelper_Transaction from BulkEditHelper\r\n3. LOOP iterate TransactionList as IteratorTransaction\r\n  4. LOOP BODY\r\n    5. ACTION ChangeObjectAction: change IteratorTransaction (Transaction_Balance=if $BulkEditHelper/SmartExpenses.BulkEditHelper_Balance != empty then $BulkEditHelper/SmartExpenses.BulkEditHelper_Balance else $IteratorTransaction/SmartExpenses.Transaction_Balan..., Transaction_BudgetTerm=if $BulkEditHelper/SmartExpenses.BulkEditHelper_BudgetTerm != empty then $BulkEditHelper/SmartExpenses.BulkEditHelper_BudgetTerm else $IteratorTransaction/SmartExpenses.Transaction..., InOut=if $BulkEditHelper/InOut != empty then $BulkEditHelper/InOut else $IteratorTransaction/InOut; refreshInClient=false)\r\n    6. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_Transaction_setStatus\r\n7. ACTION CommitAction: commit TransactionList (refreshInClient=true, withEvents=false)\r\n8. ACTION RetrieveAction: retrieve Balance over association BulkEditHelper_Balance from BulkEditHelper\r\n9. DECISION Found? expression=$Balance != empty\r\n10. BRANCH when EnumerationCase=true\r\n  11. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_Balance_Recalculate\r\n  12. NODE ExclusiveMerge: ExclusiveMerge\r\n  13. ACTION RetrieveAction: retrieve BudgetTerm over association BulkEditHelper_BudgetTerm from BulkEditHelper\r\n  14. DECISION BudgetTerm found? expression=$BudgetTerm != empty\r\n  15. BRANCH when EnumerationCase=true\r\n    16. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_BudgetTerm_Recalculate\r\n    17. NODE ExclusiveMerge: ExclusiveMerge\r\n    18. ACTION CloseFormAction: close page\r\n    19. END\r\n  20. BRANCH when EnumerationCase=false\r\n    21. REF ExclusiveMerge\r\n22. BRANCH when EnumerationCase=false\r\n  23. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.ACT_Transaction_BulkEditSave",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "2e8d11e2-f5d7-4b40-b7cc-32627cb85f4b",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_Balance_Recalculate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.ACT_Transaction_BulkEditSave",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "87124ca5-a080-4e64-bf64-71a620f0a1c8",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_BudgetTerm_Recalculate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.ACT_Transaction_BulkEditSave",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "ea9de77d-21ed-4dba-93e2-951d65a94161",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_Transaction_setStatus",
+                          "isInternal":  true
+                      }
+                  ]
+}

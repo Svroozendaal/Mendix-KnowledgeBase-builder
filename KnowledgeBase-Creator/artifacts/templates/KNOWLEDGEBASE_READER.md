@@ -9,14 +9,16 @@ This knowledge base describes the Mendix application `{{APP_NAME}}`.
 1. Start at [ROUTING.md](ROUTING.md).
 2. Use [app/APP_OVERVIEW.md](app/APP_OVERVIEW.md) for app-level context.
 3. Use `modules/<Module>/` for app and system modules, and `modules/_marktplace/<Module>/` for marketplace modules.
-4. Use `routes/` for cross-module lookup.
+4. Open collection abstracts first, object overview files second, and object JSON only for exact verification.
+5. Use `routes/` for cross-module lookup.
 
 ## How to answer questions
 
 1. Identify whether the question is app, module, entity, flow, or page scoped.
 2. Use ROUTING.md to choose the source file.
-3. Cross-reference routes when a question spans modules.
-4. Mark uncertainty explicitly.
+3. Trust L2 (`app-overview/current/...`) over L1 if they differ.
+4. Cross-reference routes when a question spans modules.
+5. Mark uncertainty explicitly.
 
 ## KB Commands
 

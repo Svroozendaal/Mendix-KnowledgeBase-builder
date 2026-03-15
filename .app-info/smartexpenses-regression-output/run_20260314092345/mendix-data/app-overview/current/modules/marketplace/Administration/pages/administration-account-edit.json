@@ -1,0 +1,46 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.Account_Edit",
+                  "stableId":  "Administration.Account_Edit",
+                  "slug":  "administration-account-edit",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-account-edit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-account-edit.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/pages/administration-account-edit.json",
+                  "l2Logical":  "page:Administration.Account_Edit",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/Administration/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/Administration/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/pages/INDEX.json"
+              },
+    "qualifiedName":  "Administration.Account_Edit",
+    "name":  "Account_Edit",
+    "title":  "Edit Account",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "Administration.Administrator",
+                         "Administration.User"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "Account",
+                           "entityType":  "Administration.Account"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

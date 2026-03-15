@@ -48,7 +48,9 @@ For marketplace modules, swap `modules/<Name>/...` for `modules/_marktplace/<Nam
 ## Escalation
 
 Hand off to:
-- **KB Analyst** when the question requires cross-module dependency reasoning.
+- **KB Feature Interpreter** when the question asks about a business feature or capability (e.g., "How does X work?", "What features does this app have?", "Explain the X functionality").
+- **KB Flow Tracer** when the question asks to trace or follow a specific flow's execution (e.g., "Trace flow X", "What happens when X runs?", "Follow the chain from X").
+- **KB Analyst** when the question requires cross-module dependency reasoning, architectural impact, or blast radius assessment (e.g., "What is affected if I change X?").
 - **KB Domain Expert** when the question requires entity relationship or lifecycle analysis.
 - **KB Security Reviewer** when the question involves access rules or role permissions.
 - **KB UX Interpreter** when the question involves page layout or user journeys.

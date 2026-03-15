@@ -38,7 +38,7 @@ Read the source pseudo.txt files from `mendix-data/app-overview/<run-folder>/`:
 - `general/app-info.pseudo.txt` - app metadata and summary counts
 - `general/user-roles.pseudo.txt` - security roles
 - `general/all-modules.pseudo.txt` - module inventory
-- Per-module: `modules/<Name>/domain-model.pseudo.txt`, `flows.pseudo.txt`, `pages.pseudo.txt`
+- Per-module only when needed: `modules/<Name>/domain-model.pseudo.txt`, `flows.pseudo.txt`, `pages.pseudo.txt`
 
 ### Step 2: Read the composed KB
 
@@ -46,6 +46,8 @@ Read the key composed files to understand what the pipeline already generated:
 - `mendix-data/knowledge-base/ROUTING.md` - module index and completeness stats
 - `mendix-data/knowledge-base/app/APP_OVERVIEW.md` - app-level summary
 - `mendix-data/knowledge-base/_reports/UNKNOWN_TODO.md` - unresolved items
+
+Treat these bootstrap reads as session initialisation. Do not reread them for every module unless the task scope changes.
 
 ### Step 3: Enrich app-level docs
 
@@ -58,10 +60,13 @@ Use skill `mendix-overview-general-interpretation`. Focus on:
 ### Step 4: Enrich per-module docs (custom modules only)
 
 Use skill `mendix-overview-module-interpretation`. For each custom module:
-- `modules/<Name>/README.md`: add module purpose interpretation under `## Interpretation`.
-- `modules/<Name>/DOMAIN.md`: add entity relationship narrative under `## Domain Interpretation`.
-- `modules/<Name>/FLOWS.md`: add business logic explanations under `## Flow Interpretation`.
-- `modules/<Name>/PAGES.md`: add user journey context under `## Page Interpretation`.
+- read `modules/<Name>/README.md`, `DOMAIN.md`, `FLOWS.md`, `PAGES.md`
+- read collection abstracts: `flows/INDEX.abstract.md`, `pages/INDEX.abstract.md` (L0 triage)
+- read individual L1 overviews (`flows/<slug>.overview.md`, `pages/<slug>.overview.md`) for Tier 1 items
+- read that module's source pseudo exports
+- write only to `modules/<Name>/INTERPRETATION.md`
+
+All L0 abstract and L1 overview files are pipeline-owned and read-only. Never edit them.
 
 Skip marketplace and system modules unless they have significant custom behaviour.
 
@@ -84,10 +89,12 @@ Use skill `mendix-overview-routing-synthesis`. Verify all links resolve. Add com
 
 1. **Never remove export-backed data.** Only add to it.
 2. **Never change module pointer/evidence blocks, table structures, required headings, anchors, or links.** The quality gate checks these.
-3. **Mark AI-added content as `Confidence: Inferred`** to distinguish it from export-backed data.
-4. **Keep all relative links valid.** Do not break existing navigation.
-5. **Be specific, not generic.** "This module manages training course registrations" is better than "This module handles business logic."
-6. **Cite source data.** When inferring purpose from entity names or flow patterns, say so.
+3. **Write module narrative only to `INTERPRETATION.md`.** Summary files, L0 abstracts, and L1 overviews stay pipeline-owned.
+4. **Mark AI-added content as `Confidence: Inferred`** to distinguish it from export-backed data.
+5. **Keep all relative links valid.** Do not break existing navigation.
+6. **Be specific, not generic.** "This module manages training course registrations" is better than "This module handles business logic."
+7. **Cite source data.** When inferring purpose from entity names or flow patterns, say so.
+8. **Prefer targeted reads.** Search for the exact heading or element before opening a large file wholesale.
 
 ## Completion Report
 

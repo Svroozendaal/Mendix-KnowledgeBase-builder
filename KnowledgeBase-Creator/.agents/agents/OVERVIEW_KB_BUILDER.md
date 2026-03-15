@@ -7,7 +7,7 @@ Enrich the composed knowledge base with semantic narratives, business logic expl
 
 By the time this agent runs, the pipeline has already filled all KB markdown files with export-backed data: entity tables, flow catalogues, page inventories, security matrices, and cross-reference indexes. This agent adds the **human-readable layer** that makes the KB genuinely useful.
 
-For module documents, the pipeline now also writes deterministic pointer/evidence blocks. Treat those blocks as read-only. Add AI interpretation only in the reserved interpretation sections.
+For module documents, the pipeline now writes compact summary files plus read-only evidence files. Treat those files as read-only. Add AI interpretation only in `modules/<Name>/INTERPRETATION.md`.
 
 ## Required Skills
 
@@ -25,10 +25,10 @@ For module documents, the pipeline now also writes deterministic pointer/evidenc
 
 ### Step 1: Build understanding
 
-Read the source pseudo.txt files to understand what the app actually does:
+Read the source pseudo.txt files to understand what the app actually does. Treat bootstrap docs as session initialisation, not a per-module reread:
 - `general/app-info.pseudo.txt` - app metadata
 - `general/user-roles.pseudo.txt` - who uses this app
-- For each custom module: `modules/<Name>/domain-model.pseudo.txt`, `flows.pseudo.txt`, `pages.pseudo.txt`
+- For each custom module, load only when enriching that module: `modules/<Name>/domain-model.pseudo.txt`, `flows.pseudo.txt`, `pages.pseudo.txt`
 
 From entity names, flow names, page names, and their relationships, infer:
 - What business domain does this app serve?
@@ -57,22 +57,21 @@ Read and enhance these files (use skill `mendix-overview-general-interpretation`
 
 For each **custom** module (skip marketplace/system modules), use skill `mendix-overview-module-interpretation`:
 
-**`modules/<Name>/README.md`**
-- Replace "Unknown: product-owner intent text is not included in export" with a clear purpose statement inferred from the module's entities, flows, and pages.
-- Add a "What this module does" paragraph under `## Interpretation`.
+**Read the layered files first (all read-only):**
+- `modules/<Name>/README.md` — module hub and navigation
+- `modules/<Name>/DOMAIN.md` — entity shape, lifecycle, access rules
+- `modules/<Name>/FLOWS.md` — flow catalogue with L0/L1/L2 links (Flow Links table)
+- `modules/<Name>/flows/INDEX.abstract.md` — collection L0 for flow triage
+- Individual L1 flow overviews (`flows/<slug>.overview.md`) for Tier 1 flows
+- `modules/<Name>/PAGES.md` — page inventory with L0/L1/L2 links (Page Links table)
+- `modules/<Name>/pages/INDEX.abstract.md` — collection L0 for page triage
+- Individual L1 page overviews (`pages/<slug>.overview.md`) as needed
 
-**`modules/<Name>/DOMAIN.md`**
-- Add an "Entity Relationships" narrative section under `## Domain Interpretation` explaining what the domain model represents in business terms.
-- Example: "Course is the central entity representing a training offering. Each Course can have multiple TrainingEvents (scheduled sessions). Trainees register via the Registration entity, which links a Trainee to a specific TrainingEvent."
-
-**`modules/<Name>/FLOWS.md`**
-- Under `## Flow Interpretation`, enhance Tier 1 flow narratives with:
-  - Business intent (why does this flow exist?)
-  - What triggers it (user action, scheduled event, another flow?)
-  - What business rule does it enforce?
-
-**`modules/<Name>/PAGES.md`**
-- Under `## Page Interpretation`, add user journey context: what is the user trying to accomplish on each page?
+**Write only to `modules/<Name>/INTERPRETATION.md`:**
+- Under `## Module Purpose`, add the module purpose and key capabilities inferred from the module's entities, flows, and pages.
+- Under `## Domain Narrative`, explain what the domain model represents in business terms.
+- Under `## Flow Narrative`, explain Tier 1 flow intent, triggers, and business rules. Use L1 overview detail as evidence.
+- Under `## Page Narrative`, add user journey context: what is the user trying to accomplish on each page?
 
 ### Step 4: Resolve unknowns
 
@@ -90,9 +89,10 @@ Use skill `mendix-overview-routing-synthesis`:
 ## Guardrails
 
 1. **Never remove export-backed data.** Only add narrative around it.
-2. **Never change deterministic pointer/evidence blocks, table structures, headings, anchors, or link targets.** The quality gate checks these.
+2. **Never change deterministic summary/evidence files, table structures, headings, anchors, or link targets.** The quality gate checks these.
 3. **Mark AI-added content as `Confidence: Inferred`.** Keep this distinct from `Export-backed`.
 4. **Keep all relative links valid.**
 5. **Be specific.** Infer business meaning from naming patterns (e.g., `ACT_Course_Create` means "user action to create a course").
 6. **Cite your reasoning.** When inferring purpose, say "Inferred from entity names and flow patterns" rather than stating it as fact.
 7. **Prioritise custom modules.** Marketplace modules rarely need enrichment.
+8. **Work one module at a time.** Do not preload unrelated module pseudo exports.

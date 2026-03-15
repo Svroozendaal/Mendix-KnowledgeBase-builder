@@ -1,0 +1,47 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.Transaction_Overview",
+                  "stableId":  "SmartExpenses.Transaction_Overview",
+                  "slug":  "smartexpenses-transaction-overview",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-transaction-overview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-transaction-overview.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/pages/smartexpenses-transaction-overview.json",
+                  "l2Logical":  "page:SmartExpenses.Transaction_Overview",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/pages/INDEX.json"
+              },
+    "qualifiedName":  "SmartExpenses.Transaction_Overview",
+    "name":  "Transaction_Overview",
+    "title":  "Transaction Overview",
+    "layout":  "Atlas_Core.Atlas_TopBar",
+    "allowedRoles":  [
+                         "SmartExpenses.Admin",
+                         "SmartExpenses.User",
+                         "SmartExpenses.Parent"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "FBGProfile",
+                           "entityType":  "SmartExpenses.FBGProfile"
+                       }
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

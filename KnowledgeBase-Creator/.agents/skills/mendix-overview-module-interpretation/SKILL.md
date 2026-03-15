@@ -21,33 +21,43 @@ For each custom module, from `mendix-data/app-overview/<run-folder>/modules/<Nam
 - `pages.pseudo.txt` - page layouts, widgets, data sources
 - `resources.pseudo.txt` - constants, scheduled events
 
+Read the KB module files in this order:
+- `README.md` - compact summary, navigation hub, and source pointers
+- `DOMAIN.md` - entity shape, lifecycle matrix, and access rules
+- `FLOWS.md` - flow catalogue with L0/L1/L2 links in the Flow Links table
+- `flows/INDEX.abstract.md` - collection L0 abstract listing all flows with tier ranking
+- Individual L1 flow overviews (`flows/<slug>.overview.md`) - for Tier 1 flows only
+- `PAGES.md` - page inventory with L0/L1/L2 links in the Page Links table
+- `pages/INDEX.abstract.md` - collection L0 abstract listing all pages
+- Individual L1 page overviews (`pages/<slug>.overview.md`) - as needed
+- `INTERPRETATION.md` - the only writable file for module narratives
+
 ## Files to enrich
 
-### `modules/<Name>/README.md`
+### `modules/<Name>/INTERPRETATION.md`
 
-The compose script writes "Unknown: product-owner intent text is not included in export" under Purpose. Replace this with:
+Add or refine narrative in these sections only:
 
-1. **Purpose statement**: One paragraph describing what this module does in business terms. Infer from entity names (e.g., Course, Registration, TrainingEvent = training management), flow prefixes (ACT_ = user actions, VAL_ = validations), and page names.
+#### `## Module Purpose`
 
-2. **What this module does**: 2-3 bullet points summarising the key capabilities. Example:
-   - Allows administrators to create and manage training courses
-   - Enables trainees to register for scheduled training events
-   - Tracks registration counts and validates capacity
+Add:
+1. **Purpose statement**: One paragraph describing what this module does in business terms. Infer from entity names, flow prefixes, and page names.
+2. **What this module does**: 2-3 concise bullets summarising the key capabilities.
 
-Write only in `## Interpretation`.
+Read `README.md` first for compact navigation and source pointers.
 
-### `modules/<Name>/DOMAIN.md`
+#### `## Domain Narrative`
 
-Add an **Entity Relationship Narrative** section after the entity tables:
+Add an entity relationship narrative:
 - Describe what the domain model represents in business terms
 - Explain how entities relate to each other (use association data)
 - Note any interesting patterns (e.g., "Registration acts as a many-to-many join between Trainee and TrainingEvent")
 
-Write only in `## Domain Interpretation`. Read `## Entity Evidence` first and link back to entity names already present there.
+Read `DOMAIN.md` first and link back to entity names already present there.
 
-### `modules/<Name>/FLOWS.md`
+#### `## Flow Narrative`
 
-For each **Tier 1** flow in the Deep Narratives section:
+For each **Tier 1** flow in the summary/evidence set:
 - Add a **Business intent** line: why does this flow exist? What user need does it serve?
 - Add a **Business rule** line if the flow enforces validation or constraints
 - Infer from flow name prefixes:
@@ -58,22 +68,24 @@ For each **Tier 1** flow in the Deep Narratives section:
   - `ACO_` = after-commit handler
   - `BCO_` = before-commit handler
 
-Write only in `## Flow Interpretation`. Read `## Flow Evidence` first; do not rewrite flow evidence bullets, source links, IDs, anchors, or pseudocode.
+Read `FLOWS.md` for the Flow Links table, then use collection L0 (`flows/INDEX.abstract.md`) for triage, and L1 overviews (`flows/<slug>.overview.md`) for Tier 1 flow detail. Do not rewrite L0/L1 files, source links, IDs, or anchors.
 
-### `modules/<Name>/PAGES.md`
+#### `## Page Narrative`
 
 Add a **User Journey Context** section:
 - Group pages by user intent (what is the user trying to do?)
 - Note which pages are entry points vs detail views vs popups
 
-Write only in `## Page Interpretation`. Read `## Page Evidence` first; do not rewrite source links, navigation provenance, or page anchors.
+Read `PAGES.md` for inventory, then use collection L0 (`pages/INDEX.abstract.md`) and L1 overviews (`pages/<slug>.overview.md`) for datasource/navigation detail. Do not rewrite L0/L1 files, source links, navigation provenance, or page anchors.
 
 ## Rules
 
 - Never remove existing export-backed content (tables, counts, markers)
 - Never change required headings (quality gate checks these)
-- Never edit `## Source Pointers`, `## Entity Evidence`, `## Flow Evidence`, or `## Page Evidence`
-- Never rewrite anchors, IDs, pseudocode, or source artefact links
+- Never edit `README.md`, `DOMAIN.md`, `FLOWS.md`, `PAGES.md`, or `RESOURCES.md`
+- Never edit L0 abstract or L1 overview files (`flows/*.abstract.md`, `flows/*.overview.md`, `pages/*.abstract.md`, `pages/*.overview.md`)
+- Never rewrite anchors, IDs, or source artefact links
 - Always mark AI-added content with `Confidence: Inferred`
 - Use explicit `none` markers when data is empty
 - Cite entity/flow names as evidence for inferences
+- Work module-by-module; do not preload unrelated module pseudo exports

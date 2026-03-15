@@ -25,6 +25,13 @@
 - Modules documented: {{MODULE_COUNT}}
 - Known gaps: Unknown
 
+## Deep lookup
+
+- Open a route index or module collection abstract first.
+- Open the object overview second.
+- Open `app-overview/current/...` only when exact verification is required.
+- Trust L2 over L1 if they differ.
+
 ## Source
 
 - Generated at: {{GENERATED_AT_UTC}}

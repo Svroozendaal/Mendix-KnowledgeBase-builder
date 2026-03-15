@@ -1,0 +1,103 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "System",
+                  "qualifiedName":  "System.ShowHomePage",
+                  "stableId":  "a8bf0599-c6c1-4de7-8eb5-95e6671c1607",
+                  "slug":  "system-showhomepage",
+                  "l0Path":  "knowledge-base/modules/System/flows/system-showhomepage.abstract.md",
+                  "l1Path":  "knowledge-base/modules/System/flows/system-showhomepage.overview.md",
+                  "l2Path":  "app-overview/current/modules/System/flows/system-showhomepage.json",
+                  "l2Logical":  "flow:System.ShowHomePage",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/System/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/System/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/System/flows/INDEX.json"
+              },
+    "flowId":  "a8bf0599-c6c1-4de7-8eb5-95e6671c1607",
+    "kind":  "Microflow",
+    "qualifiedName":  "System.ShowHomePage",
+    "module":  "System",
+    "nodes":  [
+                  {
+                      "nodeId":  "f76e16b6-5f3c-4115-a36e-c9226eecd2f7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowHomePageAction: ShowHomePageAction (errorHandlingType=Rollback)",
+                      "detail":  "ShowHomePageAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4b769468-cd84-4794-8041-b15add268f5a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "844285a2-7b5c-4a73-a6d2-c9b92ae70755",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "e82416f1-4312-4163-b223-cc682286bba1",
+                      "originNodeId":  "844285a2-7b5c-4a73-a6d2-c9b92ae70755",
+                      "destinationNodeId":  "f76e16b6-5f3c-4115-a36e-c9226eecd2f7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "eff6b5b9-1411-405e-a5d0-e04ec31d7a5f",
+                      "originNodeId":  "f76e16b6-5f3c-4115-a36e-c9226eecd2f7",
+                      "destinationNodeId":  "4b769468-cd84-4794-8041-b15add268f5a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "844285a2-7b5c-4a73-a6d2-c9b92ae70755"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "844285a2-7b5c-4a73-a6d2-c9b92ae70755",
+                                         "f76e16b6-5f3c-4115-a36e-c9226eecd2f7",
+                                         "4b769468-cd84-4794-8041-b15add268f5a"
+                                     ],
+    "pseudocode":  "FLOW Microflow: System.ShowHomePage\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION ShowHomePageAction: ShowHomePageAction (errorHandlingType=Rollback)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

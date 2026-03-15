@@ -4,6 +4,28 @@ using System.Text.RegularExpressions;
 
 namespace KnowledgeBaseCreator.Wizard;
 
+internal enum AiProvider
+{
+    ClaudeCli,
+    CodexCli,
+    ClaudeApi,
+}
+
+internal sealed class AiSettings
+{
+    public AiProvider Provider { get; set; } = AiProvider.ClaudeCli;
+
+    // Claude CLI
+    public string? ClaudeCliPath { get; set; }
+
+    // Codex CLI
+    public string? CodexCliPath { get; set; }
+
+    // Claude API
+    public string? ClaudeApiKey { get; set; }
+    public string? ClaudeApiModel { get; set; } = "claude-sonnet-4-20250514";
+}
+
 internal sealed class WizardConfig
 {
     public string? LastMprPath { get; set; }
@@ -13,6 +35,7 @@ internal sealed class WizardConfig
     public string? LastDataRoot { get; set; }
     public string? LastClaudePath { get; set; }
     public bool? AutoEnrichAfterPipeline { get; set; }
+    public AiSettings? AiSettings { get; set; }
 }
 
 internal sealed class DetectionResult
@@ -294,6 +317,7 @@ internal static class WizardRuntime
         string kbRoot,
         string appName,
         string? claudePath,
+        AiSettings? aiSettings = null,
         Action<string>? log = null)
     {
         var runScript = Path.Combine(wizardRoot, "run-enrichkb.ps1");
@@ -321,7 +345,25 @@ internal static class WizardRuntime
         psi.Environment["APP_NAME"] = appName;
         psi.Environment["CREATOR_ROOT"] = packageRoot;
 
-        if (!string.IsNullOrWhiteSpace(claudePath))
+        // Pass AI provider settings via environment variables
+        // These are picked up by wizard/lib/ai-provider.ps1
+        if (aiSettings is not null)
+        {
+            psi.Environment["AI_PROVIDER"] = aiSettings.Provider.ToString();
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.ClaudeCliPath))
+                psi.Environment["CLAUDE_CLI_PATH"] = aiSettings.ClaudeCliPath;
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.CodexCliPath))
+                psi.Environment["CODEX_CLI_PATH"] = aiSettings.CodexCliPath;
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.ClaudeApiKey))
+                psi.Environment["ANTHROPIC_API_KEY"] = aiSettings.ClaudeApiKey;
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.ClaudeApiModel))
+                psi.Environment["CLAUDE_API_MODEL"] = aiSettings.ClaudeApiModel;
+        }
+        else if (!string.IsNullOrWhiteSpace(claudePath))
         {
             psi.Environment["CLAUDE_CLI_PATH"] = claudePath;
         }
@@ -375,6 +417,7 @@ internal static class WizardRuntime
             ["dataRoot"] = dataRoot,
             ["knowledgeBaseRoot"] = kbRoot,
             ["lastRunFolder"] = runFolder,
+            ["currentAliasPath"] = Path.Combine(Path.GetDirectoryName(runFolder) ?? string.Empty, "current"),
             ["updatedAtUtc"] = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"),
         };
 
@@ -391,7 +434,7 @@ internal static class WizardRuntime
             var fullPath = Path.GetFullPath(userPath.Trim().Trim('"'));
             if (File.Exists(fullPath))
             {
-                return (true, fullPath);
+                return (true, PreferCmdShim(fullPath));
             }
         }
 
@@ -416,7 +459,10 @@ internal static class WizardRuntime
                     var firstLine = output.Split('\n', StringSplitOptions.RemoveEmptyEntries)[0].Trim();
                     if (File.Exists(firstLine))
                     {
-                        return (true, firstLine);
+                        // Prefer .cmd shim — extensionless npm shims are bash
+                        // scripts that Process.Start cannot execute on Windows.
+                        var resolved = PreferCmdShim(firstLine);
+                        return (true, resolved);
                     }
                 }
             }
@@ -445,6 +491,86 @@ internal static class WizardRuntime
         }
 
         return (false, null);
+    }
+
+    public static (bool Found, string? Path) DetectCodexCli(string? userPath = null)
+    {
+        if (!string.IsNullOrWhiteSpace(userPath))
+        {
+            var fullPath = Path.GetFullPath(userPath.Trim().Trim('"'));
+            if (File.Exists(fullPath))
+            {
+                return (true, fullPath);
+            }
+        }
+
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "where",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            psi.ArgumentList.Add("codex");
+
+            using var process = Process.Start(psi);
+            if (process is not null)
+            {
+                var output = process.StandardOutput.ReadToEnd().Trim();
+                process.WaitForExit();
+                if (process.ExitCode == 0 && !string.IsNullOrWhiteSpace(output))
+                {
+                    var firstLine = output.Split('\n', StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+                    if (File.Exists(firstLine))
+                    {
+                        return (true, firstLine);
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // where command failed
+        }
+
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        string?[] candidates =
+        [
+            string.IsNullOrWhiteSpace(appData) ? null : Path.Combine(appData, "npm", "codex.cmd"),
+        ];
+
+        foreach (var candidate in candidates)
+        {
+            if (!string.IsNullOrWhiteSpace(candidate) && File.Exists(candidate))
+            {
+                return (true, candidate);
+            }
+        }
+
+        return (false, null);
+    }
+
+    public static bool ValidateClaudeApiKey(string? apiKey)
+    {
+        return !string.IsNullOrWhiteSpace(apiKey) && apiKey.Trim().StartsWith("sk-ant-");
+    }
+
+    /// <summary>
+    /// On Windows, extensionless npm shims are bash scripts that Process.Start
+    /// cannot execute. If a .cmd variant exists alongside, prefer it.
+    /// </summary>
+    private static string PreferCmdShim(string path)
+    {
+        var ext = Path.GetExtension(path);
+        if (string.IsNullOrEmpty(ext))
+        {
+            var cmdVariant = path + ".cmd";
+            if (File.Exists(cmdVariant))
+                return cmdVariant;
+        }
+        return path;
     }
 
     private static IEnumerable<string> GetCandidateMxPaths(string installRoot)

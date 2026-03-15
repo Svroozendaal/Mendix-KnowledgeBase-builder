@@ -1,0 +1,211 @@
+# Domain Model: ExcelImporter
+Entities: 7, Associations: 8, Enumerations: 13
+
+## Entities
+- ENTITY ExcelImporter.AdditionalProperties (persistent)
+  - ATTR CommitUnchangedObjects_MainObject: BooleanAttributeType
+  - ATTR IgnoreEmptyKeys: BooleanAttributeType
+  - ATTR PrintNotFoundMessages_MainObject: BooleanAttributeType
+  - ATTR PrintStatisticsMessages: EnumerationAttributeType
+  - ATTR RemoveUnsyncedObjects: EnumerationAttributeType
+  - ATTR ResetEmptyAssociations: BooleanAttributeType
+  - ACCESS_RULE [ExcelImporter.Configurator] Create=yes, Delete=yes, Default=ReadWrite
+    - MEMBER ExcelImporter.AdditionalProperties.PrintStatisticsMessages: ReadWrite
+    - MEMBER ExcelImporter.AdditionalProperties.PrintNotFoundMessages_MainObject: ReadWrite
+    - MEMBER ExcelImporter.AdditionalProperties.IgnoreEmptyKeys: ReadWrite
+    - MEMBER ExcelImporter.AdditionalProperties.CommitUnchangedObjects_MainObject: ReadWrite
+    - MEMBER ExcelImporter.AdditionalProperties.RemoveUnsyncedObjects: ReadWrite
+    - MEMBER ExcelImporter.AdditionalProperties.ResetEmptyAssociations: ReadWrite
+    - MEMBER ExcelImporter.Template_AdditionalProperties: ReadWrite
+    - MEMBER ExcelImporter.AdditionalProperties_MxObjectMember_RemoveIndicator: ReadWrite
+  - ACCESS_RULE [ExcelImporter.Readonly] Create=no, Delete=no, Default=None
+    - MEMBER ExcelImporter.AdditionalProperties.PrintStatisticsMessages: ReadOnly
+    - MEMBER ExcelImporter.AdditionalProperties.PrintNotFoundMessages_MainObject: ReadOnly
+    - MEMBER ExcelImporter.AdditionalProperties.IgnoreEmptyKeys: ReadOnly
+    - MEMBER ExcelImporter.AdditionalProperties.CommitUnchangedObjects_MainObject: ReadOnly
+    - MEMBER ExcelImporter.AdditionalProperties.RemoveUnsyncedObjects: ReadOnly
+    - MEMBER ExcelImporter.AdditionalProperties.ResetEmptyAssociations: ReadOnly
+    - MEMBER ExcelImporter.Template_AdditionalProperties: ReadOnly
+    - MEMBER ExcelImporter.AdditionalProperties_MxObjectMember_RemoveIndicator: ReadOnly
+- ENTITY ExcelImporter.Column (persistent)
+  - ATTR AttributeTypeEnum: EnumerationAttributeType
+  - ATTR CaseSensitive: EnumerationAttributeType
+  - ATTR ColNumber: IntegerAttributeType
+  - ATTR DataSource: EnumerationAttributeType
+  - ATTR Details: StringAttributeType
+  - ATTR FindAttribute: StringAttributeType
+  - ATTR FindMicroflow: StringAttributeType
+  - ATTR FindObjectType: StringAttributeType
+  - ATTR FindReference: StringAttributeType
+  - ATTR InputMask: StringAttributeType
+  - ATTR IsKey: EnumerationAttributeType
+  - ATTR IsReferenceKey: EnumerationAttributeType
+  - ATTR MappingType: EnumerationAttributeType
+  - ATTR Status: EnumerationAttributeType
+  - ATTR Text: StringAttributeType
+  - ACCESS_RULE [ExcelImporter.Readonly] Create=no, Delete=no, Default=ReadOnly
+    - MEMBER ExcelImporter.Column.ColNumber: ReadOnly
+    - MEMBER ExcelImporter.Column.Text: ReadOnly
+    - MEMBER ExcelImporter.Column.MappingType: ReadOnly
+    - MEMBER ExcelImporter.Column.IsKey: ReadOnly
+    - MEMBER ExcelImporter.Column.IsReferenceKey: ReadOnly
+    - MEMBER ExcelImporter.Column.Status: ReadOnly
+    - MEMBER ExcelImporter.Column.Details: ReadOnly
+    - MEMBER ExcelImporter.Column.CaseSensitive: ReadOnly
+    - MEMBER ExcelImporter.Column.FindAttribute: ReadOnly
+    - MEMBER ExcelImporter.Column.FindReference: ReadOnly
+    - MEMBER ExcelImporter.Column.FindObjectType: ReadOnly
+    - MEMBER ExcelImporter.Column.FindMicroflow: ReadOnly
+    - MEMBER ExcelImporter.Column.DataSource: ReadOnly
+    - MEMBER ExcelImporter.Column.AttributeTypeEnum: ReadOnly
+    - MEMBER ExcelImporter.Column.InputMask: ReadOnly
+    - MEMBER ExcelImporter.Column_Template: ReadOnly
+    - MEMBER ExcelImporter.Column_MasterColumn: ReadOnly
+    - MEMBER ExcelImporter.Column_MxObjectType_Reference: ReadOnly
+    - MEMBER ExcelImporter.Column_MxObjectType: ReadOnly
+    - MEMBER ExcelImporter.Column_MxObjectMember: ReadOnly
+    - MEMBER ExcelImporter.Column_MxObjectMember_Reference: ReadOnly
+    - MEMBER ExcelImporter.Column_MxObjectReference: ReadOnly
+    - MEMBER ExcelImporter.Column_Microflows: ReadOnly
+    - MEMBER ExcelImporter.Column_ValueType: ReadOnly
+  - ACCESS_RULE [ExcelImporter.Configurator] Create=yes, Delete=yes, Default=ReadWrite
+    - MEMBER ExcelImporter.Column.ColNumber: ReadWrite
+    - MEMBER ExcelImporter.Column.Text: ReadWrite
+    - MEMBER ExcelImporter.Column.MappingType: ReadWrite
+    - MEMBER ExcelImporter.Column.IsKey: ReadWrite
+    - MEMBER ExcelImporter.Column.IsReferenceKey: ReadWrite
+    - MEMBER ExcelImporter.Column.Status: ReadWrite
+    - MEMBER ExcelImporter.Column.Details: ReadWrite
+    - MEMBER ExcelImporter.Column.CaseSensitive: ReadWrite
+    - MEMBER ExcelImporter.Column.FindAttribute: ReadWrite
+    - MEMBER ExcelImporter.Column.FindReference: ReadWrite
+    - MEMBER ExcelImporter.Column.FindObjectType: ReadWrite
+    - MEMBER ExcelImporter.Column.FindMicroflow: ReadWrite
+    - MEMBER ExcelImporter.Column.DataSource: ReadWrite
+    - MEMBER ExcelImporter.Column.AttributeTypeEnum: ReadWrite
+    - MEMBER ExcelImporter.Column.InputMask: ReadWrite
+    - MEMBER ExcelImporter.Column_Template: ReadWrite
+    - MEMBER ExcelImporter.Column_MasterColumn: ReadWrite
+    - MEMBER ExcelImporter.Column_MxObjectType_Reference: ReadWrite
+    - MEMBER ExcelImporter.Column_MxObjectType: ReadWrite
+    - MEMBER ExcelImporter.Column_MxObjectMember: ReadWrite
+    - MEMBER ExcelImporter.Column_MxObjectMember_Reference: ReadWrite
+    - MEMBER ExcelImporter.Column_MxObjectReference: ReadWrite
+    - MEMBER ExcelImporter.Column_Microflows: ReadWrite
+    - MEMBER ExcelImporter.Column_ValueType: ReadWrite
+- ENTITY ExcelImporter.Log (persistent)
+  - ATTR Logline: StringAttributeType
+  - ACCESS_RULE [ExcelImporter.Configurator] Create=yes, Delete=yes, Default=ReadWrite
+    - MEMBER ExcelImporter.Log.Logline: ReadWrite
+    - MEMBER ExcelImporter.Log_XMLDocumentTemplate: ReadWrite
+- ENTITY ExcelImporter.ReferenceHandling (persistent)
+  - ATTR CommitUnchangedObjects: BooleanAttributeType
+  - ATTR DataHandling: EnumerationAttributeType
+  - ATTR Handling: EnumerationAttributeType
+  - ATTR IgnoreEmptyKeys: BooleanAttributeType
+  - ATTR PrintNotFoundMessages: BooleanAttributeType
+  - ACCESS_RULE [ExcelImporter.Configurator] Create=yes, Delete=yes, Default=ReadWrite
+    - MEMBER ExcelImporter.ReferenceHandling.Handling: ReadWrite
+    - MEMBER ExcelImporter.ReferenceHandling.DataHandling: ReadWrite
+    - MEMBER ExcelImporter.ReferenceHandling.PrintNotFoundMessages: ReadWrite
+    - MEMBER ExcelImporter.ReferenceHandling.CommitUnchangedObjects: ReadWrite
+    - MEMBER ExcelImporter.ReferenceHandling.IgnoreEmptyKeys: ReadWrite
+    - MEMBER ExcelImporter.ReferenceHandling_Template: ReadWrite
+    - MEMBER ExcelImporter.ReferenceHandling_MxObjectReference: ReadWrite
+  - ACCESS_RULE [ExcelImporter.Readonly] Create=no, Delete=no, Default=ReadOnly
+    - MEMBER ExcelImporter.ReferenceHandling.Handling: ReadOnly
+    - MEMBER ExcelImporter.ReferenceHandling.DataHandling: ReadOnly
+    - MEMBER ExcelImporter.ReferenceHandling.PrintNotFoundMessages: ReadOnly
+    - MEMBER ExcelImporter.ReferenceHandling.CommitUnchangedObjects: ReadOnly
+    - MEMBER ExcelImporter.ReferenceHandling.IgnoreEmptyKeys: ReadOnly
+    - MEMBER ExcelImporter.ReferenceHandling_Template: ReadOnly
+    - MEMBER ExcelImporter.ReferenceHandling_MxObjectReference: ReadOnly
+- ENTITY ExcelImporter.Template (persistent)
+  - ATTR Description: StringAttributeType
+  - ATTR FirstDataRowNumber: IntegerAttributeType
+  - ATTR HeaderRowNumber: IntegerAttributeType
+  - ATTR ImportAction: EnumerationAttributeType
+  - ATTR Nr: AutoNumberAttributeType
+  - ATTR SheetIndex: IntegerAttributeType
+  - ATTR Status: EnumerationAttributeType
+  - ATTR TemplateType: EnumerationAttributeType
+  - ATTR Title: StringAttributeType
+  - ACCESS_RULE [ExcelImporter.Readonly] Create=no, Delete=no, Default=None
+    - MEMBER ExcelImporter.Template.Nr: ReadOnly
+    - MEMBER ExcelImporter.Template.Title: ReadOnly
+    - MEMBER ExcelImporter.Template.Description: ReadOnly
+    - MEMBER ExcelImporter.Template.SheetIndex: ReadOnly
+    - MEMBER ExcelImporter.Template.HeaderRowNumber: ReadOnly
+    - MEMBER ExcelImporter.Template.FirstDataRowNumber: ReadOnly
+    - MEMBER ExcelImporter.Template.Status: ReadOnly
+    - MEMBER ExcelImporter.Template.ImportAction: ReadOnly
+    - MEMBER ExcelImporter.Template.TemplateType: ReadOnly
+    - MEMBER ExcelImporter.Template_AdditionalProperties: ReadOnly
+    - MEMBER ExcelImporter.Template_MasterTemplate: ReadOnly
+    - MEMBER ExcelImporter.Template_MxObjectType: ReadOnly
+    - MEMBER ExcelImporter.Template_MxObjectReference_ParentAssociation: ReadOnly
+  - ACCESS_RULE [ExcelImporter.Configurator] Create=yes, Delete=yes, Default=ReadWrite
+    - MEMBER ExcelImporter.Template.Nr: ReadOnly
+    - MEMBER ExcelImporter.Template.Title: ReadWrite
+    - MEMBER ExcelImporter.Template.Description: ReadWrite
+    - MEMBER ExcelImporter.Template.SheetIndex: ReadWrite
+    - MEMBER ExcelImporter.Template.HeaderRowNumber: ReadWrite
+    - MEMBER ExcelImporter.Template.FirstDataRowNumber: ReadWrite
+    - MEMBER ExcelImporter.Template.Status: ReadWrite
+    - MEMBER ExcelImporter.Template.ImportAction: ReadWrite
+    - MEMBER ExcelImporter.Template.TemplateType: ReadWrite
+    - MEMBER ExcelImporter.Template_AdditionalProperties: ReadWrite
+    - MEMBER ExcelImporter.Template_MasterTemplate: ReadWrite
+    - MEMBER ExcelImporter.Template_MxObjectType: ReadWrite
+    - MEMBER ExcelImporter.Template_MxObjectReference_ParentAssociation: ReadWrite
+- ENTITY ExcelImporter.TemplateDocument (persistent, generalization=System.FileDocument)
+  - ACCESS_RULE [ExcelImporter.Configurator] Create=yes, Delete=yes, Default=None
+    - MEMBER System.FileDocument.FileID: ReadOnly
+    - MEMBER System.FileDocument.Name: ReadWrite
+    - MEMBER System.FileDocument.DeleteAfterDownload: ReadWrite
+    - MEMBER System.FileDocument.Contents: ReadWrite
+    - MEMBER System.FileDocument.HasContents: ReadOnly
+    - MEMBER System.FileDocument.Size: ReadOnly
+    - MEMBER ExcelImporter.TemplateDocument_Template: ReadWrite
+  - ACCESS_RULE [ExcelImporter.Readonly] Create=no, Delete=no, Default=None
+    - MEMBER System.FileDocument.FileID: ReadOnly
+    - MEMBER System.FileDocument.Name: ReadOnly
+    - MEMBER System.FileDocument.DeleteAfterDownload: ReadOnly
+    - MEMBER System.FileDocument.Contents: ReadOnly
+    - MEMBER System.FileDocument.HasContents: ReadOnly
+    - MEMBER System.FileDocument.Size: ReadOnly
+    - MEMBER ExcelImporter.TemplateDocument_Template: ReadOnly
+- ENTITY ExcelImporter.XMLDocumentTemplate (persistent, generalization=System.FileDocument)
+  - ACCESS_RULE [ExcelImporter.Configurator] Create=yes, Delete=yes, Default=ReadWrite
+    - MEMBER System.FileDocument.FileID: ReadOnly
+    - MEMBER System.FileDocument.Name: ReadWrite
+    - MEMBER System.FileDocument.DeleteAfterDownload: ReadWrite
+    - MEMBER System.FileDocument.Contents: ReadWrite
+    - MEMBER System.FileDocument.HasContents: ReadOnly
+    - MEMBER System.FileDocument.Size: ReadOnly
+    - MEMBER ExcelImporter.XMLDocumentTemplate_Template: ReadWrite
+
+## Associations
+- ASSOC ExcelImporter.Column_MasterColumn: ExcelImporter.Column [*-1] ExcelImporter.Column
+- ASSOC ExcelImporter.Column_Template: ExcelImporter.Column [*-1] ExcelImporter.Template
+- ASSOC ExcelImporter.Log_XMLDocumentTemplate: ExcelImporter.Log [*-1] ExcelImporter.XMLDocumentTemplate
+- ASSOC ExcelImporter.ReferenceHandling_Template: ExcelImporter.ReferenceHandling [*-1] ExcelImporter.Template
+- ASSOC ExcelImporter.TemplateDocument_Template: ExcelImporter.TemplateDocument [*-1] ExcelImporter.Template
+- ASSOC ExcelImporter.Template_AdditionalProperties: ExcelImporter.Template [1-1] ExcelImporter.AdditionalProperties
+- ASSOC ExcelImporter.Template_MasterTemplate: ExcelImporter.Template [*-1] ExcelImporter.Template
+- ASSOC ExcelImporter.XMLDocumentTemplate_Template: ExcelImporter.XMLDocumentTemplate [*-1] ExcelImporter.Template
+
+## Enumerations
+- ENUM ExcelImporter.DataSource: CellValue, DocumentPropertyRowNr, DocumentPropertySheetNr, StaticValue
+- ENUM ExcelImporter.ImportActions: CreateObjects, OnlyCreateNewObjects, SynchronizeObjects, SynchronizeOnlyExisting
+- ENUM ExcelImporter.MappingType: Attribute, DoNotUse, Reference
+- ENUM ExcelImporter.ReferenceDataHandling: Append, Overwrite
+- ENUM ExcelImporter.ReferenceHandlingEnum: CreateEverything, FindCreate, FindIgnore, OnlyCreateNewObjects
+- ENUM ExcelImporter.ReferenceKeyType: NoKey, YesMainAndAssociatedObject, YesOnlyAssociatedObject, YesOnlyMainObject
+- ENUM ExcelImporter.RemoveIndicator: Nothing, RemoveUnchangedObjects, TrackChanges
+- ENUM ExcelImporter.StatisticsLevel: AllStatistics, NoStatistics, OnlyFinalStatistics
+- ENUM ExcelImporter.Status: INFO, INVALID, VALID
+- ENUM ExcelImporter.TemplateType: Normal, Wizard
+- ENUM ExcelImporter.ValidationResult: InvalidAttribute, InvalidAutoNumberSelection, InvalidReference, InvalidReferencedObject, NoAssociationKeys, NoAttributeSelected, NoReferencedObjectSelected, NoReferenceSelected, UnUsed, ValidAttribute, ValidReference
+- ENUM ExcelImporter.ValidationResult2: NoInputParams, Valid, WrongNrOfInputParams, WrongReturnType
+- ENUM ExcelImporter.YesNo: No, Yes

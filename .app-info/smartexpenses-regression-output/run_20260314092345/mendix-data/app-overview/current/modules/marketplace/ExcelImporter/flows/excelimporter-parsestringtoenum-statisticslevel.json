@@ -1,0 +1,261 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ParseStringToEnum_StatisticsLevel",
+                  "stableId":  "b067e1a3-f187-41a2-8e20-c661a3089c7a",
+                  "slug":  "excelimporter-parsestringtoenum-statisticslevel",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-parsestringtoenum-statisticslevel.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-parsestringtoenum-statisticslevel.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-parsestringtoenum-statisticslevel.json",
+                  "l2Logical":  "flow:ExcelImporter.ParseStringToEnum_StatisticsLevel",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "b067e1a3-f187-41a2-8e20-c661a3089c7a",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.ParseStringToEnum_StatisticsLevel",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "516959d7-4473-42bf-b381-d8860384ff77",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a3cb360c-ed3c-467a-890e-2dcb2b65e886",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b6e35d26-9a24-499f-84de-c91ee32a1a16",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f2d16a95-cfcf-42b7-9237-2ee8bb676498",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "fe7f5b2d-98bc-4a9d-9274-11858bc8ef1d",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "557ad00a-f540-43f7-b408-9edd37b1f531",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "empty? expression=$PrintStatisticsMessages = empty",
+                      "detail":  "empty? expression=$PrintStatisticsMessages = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6d54995e-9857-4a75-8da7-9cc73293bfad",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=$PrintStatisticsMessages = \u0027AllStatistics\u0027",
+                      "detail":  "expression=$PrintStatisticsMessages = \u0027AllStatistics\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6b4ea034-8f8e-45c3-a78c-2ec81a002986",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=$PrintStatisticsMessages = \u0027NoStatistics\u0027",
+                      "detail":  "expression=$PrintStatisticsMessages = \u0027NoStatistics\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e15be779-fe57-4074-a711-c1ae476c8812",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "expression=$PrintStatisticsMessages = \u0027OnlyFinalStatistics\u0027",
+                      "detail":  "expression=$PrintStatisticsMessages = \u0027OnlyFinalStatistics\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e23be7ca-3bfc-40d5-bb26-e8143028977a",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7782344e-6fe2-460f-94eb-03fd4b604f86",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "3b6274b6-0062-4f7a-98a5-973d78ee7472",
+                      "originNodeId":  "6d54995e-9857-4a75-8da7-9cc73293bfad",
+                      "destinationNodeId":  "a3cb360c-ed3c-467a-890e-2dcb2b65e886",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fdd452ea-4fa8-4416-8666-2bbed5069943",
+                      "originNodeId":  "6d54995e-9857-4a75-8da7-9cc73293bfad",
+                      "destinationNodeId":  "e15be779-fe57-4074-a711-c1ae476c8812",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "d4cd585d-b98c-4f28-a3ec-f147c602b4f4",
+                      "originNodeId":  "e15be779-fe57-4074-a711-c1ae476c8812",
+                      "destinationNodeId":  "6b4ea034-8f8e-45c3-a78c-2ec81a002986",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "c95edbfb-63b1-4851-b2fe-4eb7faa5704c",
+                      "originNodeId":  "6b4ea034-8f8e-45c3-a78c-2ec81a002986",
+                      "destinationNodeId":  "b6e35d26-9a24-499f-84de-c91ee32a1a16",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c4d7124e-5b5f-47c9-b2a0-8e03b0993b81",
+                      "originNodeId":  "e15be779-fe57-4074-a711-c1ae476c8812",
+                      "destinationNodeId":  "fe7f5b2d-98bc-4a9d-9274-11858bc8ef1d",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "319ff53e-f1d7-48f8-85c7-91d6adc19b4d",
+                      "originNodeId":  "557ad00a-f540-43f7-b408-9edd37b1f531",
+                      "destinationNodeId":  "6d54995e-9857-4a75-8da7-9cc73293bfad",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "296ef1fe-8cce-4169-8d6f-8cc9c9b9390c",
+                      "originNodeId":  "557ad00a-f540-43f7-b408-9edd37b1f531",
+                      "destinationNodeId":  "f2d16a95-cfcf-42b7-9237-2ee8bb676498",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "dddf4527-e9c2-411e-8ab1-24b3d1ae62aa",
+                      "originNodeId":  "7782344e-6fe2-460f-94eb-03fd4b604f86",
+                      "destinationNodeId":  "557ad00a-f540-43f7-b408-9edd37b1f531",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "548eaed0-3c50-4c3a-8702-ea57b59b3c62",
+                      "originNodeId":  "6b4ea034-8f8e-45c3-a78c-2ec81a002986",
+                      "destinationNodeId":  "516959d7-4473-42bf-b381-d8860384ff77",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "7782344e-6fe2-460f-94eb-03fd4b604f86"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7782344e-6fe2-460f-94eb-03fd4b604f86",
+                                         "557ad00a-f540-43f7-b408-9edd37b1f531",
+                                         "6d54995e-9857-4a75-8da7-9cc73293bfad",
+                                         "a3cb360c-ed3c-467a-890e-2dcb2b65e886",
+                                         "e15be779-fe57-4074-a711-c1ae476c8812",
+                                         "fe7f5b2d-98bc-4a9d-9274-11858bc8ef1d",
+                                         "6b4ea034-8f8e-45c3-a78c-2ec81a002986",
+                                         "b6e35d26-9a24-499f-84de-c91ee32a1a16",
+                                         "516959d7-4473-42bf-b381-d8860384ff77",
+                                         "f2d16a95-cfcf-42b7-9237-2ee8bb676498"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.ParseStringToEnum_StatisticsLevel\r\nNODES=11; EDGES=9\r\n1. START\r\n2. DECISION empty? expression=$PrintStatisticsMessages = empty\r\n3. BRANCH when EnumerationCase=false\r\n  4. DECISION expression=$PrintStatisticsMessages = \u0027AllStatistics\u0027\r\n  5. BRANCH when EnumerationCase=true\r\n    6. END\r\n  7. BRANCH when EnumerationCase=false\r\n    8. DECISION expression=$PrintStatisticsMessages = \u0027OnlyFinalStatistics\u0027\r\n    9. BRANCH when EnumerationCase=true\r\n      10. END\r\n    11. BRANCH when EnumerationCase=false\r\n      12. DECISION expression=$PrintStatisticsMessages = \u0027NoStatistics\u0027\r\n      13. BRANCH when EnumerationCase=true\r\n        14. END\r\n      15. BRANCH when EnumerationCase=false\r\n        16. END\r\n17. BRANCH when EnumerationCase=true\r\n  18. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

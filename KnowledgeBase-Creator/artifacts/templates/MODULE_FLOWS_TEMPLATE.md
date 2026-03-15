@@ -36,10 +36,10 @@
 
 No flow details documented yet.
 
-## Flow Evidence
+## Tier 1 Deep Narratives
 
-No flow evidence documented yet.
+No Tier 1 deep narratives documented yet.
 
-## Flow Interpretation
+## Evidence Index
 
-Reserved for `/enrichkb`. Add AI narrative only in this section.
+No flow evidence index documented yet.

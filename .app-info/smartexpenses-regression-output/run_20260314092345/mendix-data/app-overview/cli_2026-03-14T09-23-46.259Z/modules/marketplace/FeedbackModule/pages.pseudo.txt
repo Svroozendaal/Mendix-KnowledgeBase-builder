@@ -1,0 +1,42 @@
+# Pages: FeedbackModule
+Pages: 6, Snippets: 1
+
+## Pages
+
+PAGE FeedbackModule.PopupFailure
+  Title: "Something went wrong"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=no)
+  Allowed roles: FeedbackModule.User
+
+PAGE FeedbackModule.PopupFailure_Logo
+  Title: "Something went wrong"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=no)
+  Allowed roles: FeedbackModule.User
+  [EXCLUDED]
+
+PAGE FeedbackModule.PopupSuccess
+  Title: "Feedback Submitted"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=no)
+  Allowed roles: FeedbackModule.User
+  Parameters: Response (FeedbackModule.ResponseHelper)
+
+PAGE FeedbackModule.PopupSuccess_Logo
+  Title: "Feedback Submitted"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=no)
+  Allowed roles: FeedbackModule.User
+  Parameters: Response (FeedbackModule.ResponseHelper)
+  [EXCLUDED]
+
+PAGE FeedbackModule.ShareFeedback
+  Title: "Share your feedback"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: FeedbackModule.User
+
+PAGE FeedbackModule.ShareFeedback_Logo
+  Title: "Share your feedback"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: FeedbackModule.User
+  [EXCLUDED]
+
+## Snippets
+- SNIPPET FeedbackModule._ReadMe (Web)

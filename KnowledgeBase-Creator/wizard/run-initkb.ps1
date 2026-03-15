@@ -467,6 +467,7 @@ function Write-CreatorLinkFile {
         dataRoot = $ResolvedDataRoot
         knowledgeBaseRoot = $ResolvedKnowledgeBaseRoot
         lastRunFolder = $ResolvedRunFolder
+        currentAliasPath = (Join-Path (Split-Path -Parent $ResolvedRunFolder) "current")
         updatedAtUtc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
     }
 

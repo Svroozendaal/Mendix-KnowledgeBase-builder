@@ -1,0 +1,902 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.SF_Template_CheckNrs",
+                  "stableId":  "a79d2479-ed24-4c71-bc46-3a7a427f2ec4",
+                  "slug":  "excelimporter-sf-template-checknrs",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-sf-template-checknrs.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-sf-template-checknrs.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-sf-template-checknrs.json",
+                  "l2Logical":  "flow:ExcelImporter.SF_Template_CheckNrs",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "a79d2479-ed24-4c71-bc46-3a7a427f2ec4",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.SF_Template_CheckNrs",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "1ab77583-8cee-4ea6-8c5f-d890f9daf960",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "22768e36-e805-43ac-b724-dd1786bc254e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3d00a977-c96b-472d-99c7-ccd9f405938c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c70531b8-7196-46c4-8f4e-7ea21205227a",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d96ae4f0-7035-4dad-99d5-7ed15d925627",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "edc5493d-3919-413b-ace2-0efb776d6357",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeVariableAction: change variable IsValid=false",
+                      "detail":  "change variable IsValid=false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "77c751d9-1cbf-44f5-aea0-90d9ae618b13",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable IsValid=true",
+                      "detail":  "create variable IsValid=true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "08bdeff8-3900-4b78-8a09-f088ae92b348",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "226d2eb7-93b1-47be-9d2e-b5238c449670",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3c1c5405-b29a-4762-a83c-3b0696d854e8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9fc03429-ff7f-4c3b-8269-e0b7642c1fbc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "aa4d55c6-4db0-4c74-bdae-8901451ba731",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ecd54603-71af-4cc1-9eeb-084b97d73eee",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "detail":  "ValidationFeedbackAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "29f28a15-0a78-4ed8-8393-63088e7ce92a",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "71417b2e-3e61-48c6-be66-68ddf30c943f",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "86443966-89c3-4e5c-a624-ed5bd8ff0c2b",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a03d8577-1523-4d88-affe-6cdf4e46c1c4",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d76fff80-3ef5-4aa0-87ea-8e688ea43dee",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "eda48622-0f3f-4299-96ab-25c3796b30cc",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f2de57eb-a33f-4c2f-a38f-c456da8dd34f",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3b494e7e-1eb0-4857-b35f-7eed9aab1114",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "HeaderRownr \u003c 1 expression=$Template/HeaderRowNumber \u003c 1",
+                      "detail":  "HeaderRownr \u003c 1 expression=$Template/HeaderRowNumber \u003c 1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cd0aa3b8-8d7e-4e81-9128-d68731b07881",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "HeaderRownr = empty expression=$Template/HeaderRowNumber = empty",
+                      "detail":  "HeaderRownr = empty expression=$Template/HeaderRowNumber = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "aa8d2384-f0cb-4eb9-a6e6-1362cac2170b",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "ImportRowNr \u003c 1 expression=$Template/FirstDataRowNumber \u003c 1",
+                      "detail":  "ImportRowNr \u003c 1 expression=$Template/FirstDataRowNumber \u003c 1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6f9e3f17-735c-48cc-b4b5-318ece4e2d7b",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "ImportRowNr = empty expression=$Template/FirstDataRowNumber = empty",
+                      "detail":  "ImportRowNr = empty expression=$Template/FirstDataRowNumber = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "dd148b67-abcc-46cd-8de6-fdec37a1b462",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "SheetIndex \u003c 1 expression=$Template/SheetIndex \u003c 1",
+                      "detail":  "SheetIndex \u003c 1 expression=$Template/SheetIndex \u003c 1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3815f58d-3ae1-4097-bb3b-294dc602ad84",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "SheetIndex = empty expression=$Template/SheetIndex = empty",
+                      "detail":  "SheetIndex = empty expression=$Template/SheetIndex = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3437fc32-0d05-421f-816d-d9207769a315",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Show messages expression=$ShowWarningPopup",
+                      "detail":  "Show messages expression=$ShowWarningPopup",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3bb23c14-95fb-4ea2-8e9d-fb2d7ca2d426",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Show messages expression=$ShowWarningPopup",
+                      "detail":  "Show messages expression=$ShowWarningPopup",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7df3f49b-340f-4f46-b9c0-8b6275a6a581",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Show messages expression=$ShowWarningPopup",
+                      "detail":  "Show messages expression=$ShowWarningPopup",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "90abda9c-065a-462b-b6d5-5fccf9de91da",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Show messages expression=$ShowWarningPopup",
+                      "detail":  "Show messages expression=$ShowWarningPopup",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c87863a1-ba10-4761-a206-ff08ce59a983",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Show messages expression=$ShowWarningPopup",
+                      "detail":  "Show messages expression=$ShowWarningPopup",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "edbf157c-f1a5-45e3-a7d9-60731e14f5d3",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Show messages expression=$ShowWarningPopup",
+                      "detail":  "Show messages expression=$ShowWarningPopup",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e26cc26b-30b1-407f-86af-6e29bb21d5c5",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "feda2e26-8d1c-4ed3-af55-87acdef79804",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3a960175-af72-42e7-95c3-00948313c324",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "41dcdb5d-42fb-447e-bdf6-cbae7f6e279c",
+                      "originNodeId":  "3a960175-af72-42e7-95c3-00948313c324",
+                      "destinationNodeId":  "77c751d9-1cbf-44f5-aea0-90d9ae618b13",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6b87caf4-49d8-4f2d-9f54-9bd54fe8c0b9",
+                      "originNodeId":  "3815f58d-3ae1-4097-bb3b-294dc602ad84",
+                      "destinationNodeId":  "d76fff80-3ef5-4aa0-87ea-8e688ea43dee",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c0b2354e-dc25-4636-b0ba-5b60cd90720e",
+                      "originNodeId":  "3815f58d-3ae1-4097-bb3b-294dc602ad84",
+                      "destinationNodeId":  "edc5493d-3919-413b-ace2-0efb776d6357",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "3c196fb6-f7cf-4ffc-969a-fd6c2215ec60",
+                      "originNodeId":  "edc5493d-3919-413b-ace2-0efb776d6357",
+                      "destinationNodeId":  "90abda9c-065a-462b-b6d5-5fccf9de91da",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "402e25c6-fcfa-491c-abd5-4918488e6bc9",
+                      "originNodeId":  "aa4d55c6-4db0-4c74-bdae-8901451ba731",
+                      "destinationNodeId":  "d76fff80-3ef5-4aa0-87ea-8e688ea43dee",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "9fa34957-c9d0-44ec-b95e-4ee523e7d711",
+                      "originNodeId":  "d76fff80-3ef5-4aa0-87ea-8e688ea43dee",
+                      "destinationNodeId":  "dd148b67-abcc-46cd-8de6-fdec37a1b462",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "de04190c-c71a-459d-84f0-5df17a815bec",
+                      "originNodeId":  "dd148b67-abcc-46cd-8de6-fdec37a1b462",
+                      "destinationNodeId":  "f2de57eb-a33f-4c2f-a38f-c456da8dd34f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "687917ed-219a-4269-aae3-cc6ef1c23c11",
+                      "originNodeId":  "dd148b67-abcc-46cd-8de6-fdec37a1b462",
+                      "destinationNodeId":  "d96ae4f0-7035-4dad-99d5-7ed15d925627",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "9bb0ce5a-07fb-4b29-a2e6-b850ff8d8ee5",
+                      "originNodeId":  "08bdeff8-3900-4b78-8a09-f088ae92b348",
+                      "destinationNodeId":  "f2de57eb-a33f-4c2f-a38f-c456da8dd34f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "790d0e70-42f6-42e1-8ef2-0b3bab94a4fe",
+                      "originNodeId":  "f2de57eb-a33f-4c2f-a38f-c456da8dd34f",
+                      "destinationNodeId":  "cd0aa3b8-8d7e-4e81-9128-d68731b07881",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "1abd5b23-c470-4483-aeb6-12ce3e46ba7e",
+                      "originNodeId":  "cd0aa3b8-8d7e-4e81-9128-d68731b07881",
+                      "destinationNodeId":  "eda48622-0f3f-4299-96ab-25c3796b30cc",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "97561db4-b021-4442-b769-78458138944f",
+                      "originNodeId":  "cd0aa3b8-8d7e-4e81-9128-d68731b07881",
+                      "destinationNodeId":  "22768e36-e805-43ac-b724-dd1786bc254e",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "2545085b-0686-44bb-839d-f77184750d01",
+                      "originNodeId":  "3c1c5405-b29a-4762-a83c-3b0696d854e8",
+                      "destinationNodeId":  "eda48622-0f3f-4299-96ab-25c3796b30cc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "a778ff64-fd20-4aef-9886-ba66b72e5179",
+                      "originNodeId":  "eda48622-0f3f-4299-96ab-25c3796b30cc",
+                      "destinationNodeId":  "3b494e7e-1eb0-4857-b35f-7eed9aab1114",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9f1422ae-ba2f-4b06-ae6c-7905e7287938",
+                      "originNodeId":  "3b494e7e-1eb0-4857-b35f-7eed9aab1114",
+                      "destinationNodeId":  "a03d8577-1523-4d88-affe-6cdf4e46c1c4",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ed39f46e-b89e-403b-80fe-aeca1be0ead3",
+                      "originNodeId":  "3b494e7e-1eb0-4857-b35f-7eed9aab1114",
+                      "destinationNodeId":  "c70531b8-7196-46c4-8f4e-7ea21205227a",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "eb73c786-1de7-4196-b675-328cd3dc8947",
+                      "originNodeId":  "226d2eb7-93b1-47be-9d2e-b5238c449670",
+                      "destinationNodeId":  "a03d8577-1523-4d88-affe-6cdf4e46c1c4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "c1be0636-2ae0-437e-b940-aa95380c5bf8",
+                      "originNodeId":  "6f9e3f17-735c-48cc-b4b5-318ece4e2d7b",
+                      "destinationNodeId":  "71417b2e-3e61-48c6-be66-68ddf30c943f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "71301afe-97ad-444a-8fd6-cb0fc8d35db5",
+                      "originNodeId":  "6f9e3f17-735c-48cc-b4b5-318ece4e2d7b",
+                      "destinationNodeId":  "1ab77583-8cee-4ea6-8c5f-d890f9daf960",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "7a11bc94-bb5c-4c4b-9062-39ff2d77f44e",
+                      "originNodeId":  "9fc03429-ff7f-4c3b-8269-e0b7642c1fbc",
+                      "destinationNodeId":  "71417b2e-3e61-48c6-be66-68ddf30c943f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "6f31ec8e-ed33-42cf-b12e-ebb9e79d42d4",
+                      "originNodeId":  "71417b2e-3e61-48c6-be66-68ddf30c943f",
+                      "destinationNodeId":  "aa8d2384-f0cb-4eb9-a6e6-1362cac2170b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "31cb0c8e-d8f2-45d7-a9ef-ea316f2674c5",
+                      "originNodeId":  "aa8d2384-f0cb-4eb9-a6e6-1362cac2170b",
+                      "destinationNodeId":  "86443966-89c3-4e5c-a624-ed5bd8ff0c2b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "802cb8c3-c380-49e9-8423-d3317f21aef1",
+                      "originNodeId":  "aa8d2384-f0cb-4eb9-a6e6-1362cac2170b",
+                      "destinationNodeId":  "3d00a977-c96b-472d-99c7-ccd9f405938c",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "9a25060d-080c-4f39-ae82-87babc4c98f2",
+                      "originNodeId":  "ecd54603-71af-4cc1-9eeb-084b97d73eee",
+                      "destinationNodeId":  "86443966-89c3-4e5c-a624-ed5bd8ff0c2b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "52c2e68b-a779-41cb-9407-2ea44cb9e42c",
+                      "originNodeId":  "a03d8577-1523-4d88-affe-6cdf4e46c1c4",
+                      "destinationNodeId":  "6f9e3f17-735c-48cc-b4b5-318ece4e2d7b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "75674ba3-6deb-402b-b6ff-90d07e40d114",
+                      "originNodeId":  "86443966-89c3-4e5c-a624-ed5bd8ff0c2b",
+                      "destinationNodeId":  "29f28a15-0a78-4ed8-8393-63088e7ce92a",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c1f0517a-e72c-41b5-8c16-19c47cec2762",
+                      "originNodeId":  "77c751d9-1cbf-44f5-aea0-90d9ae618b13",
+                      "destinationNodeId":  "3815f58d-3ae1-4097-bb3b-294dc602ad84",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1037652f-2360-420e-93ae-9d5d7447ad7c",
+                      "originNodeId":  "d96ae4f0-7035-4dad-99d5-7ed15d925627",
+                      "destinationNodeId":  "3bb23c14-95fb-4ea2-8e9d-fb2d7ca2d426",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "d1db6624-0fcb-402a-86eb-9cfdf1ef8f46",
+                      "originNodeId":  "22768e36-e805-43ac-b724-dd1786bc254e",
+                      "destinationNodeId":  "7df3f49b-340f-4f46-b9c0-8b6275a6a581",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "e5d96c83-4814-4009-b88e-538c06e3132c",
+                      "originNodeId":  "c70531b8-7196-46c4-8f4e-7ea21205227a",
+                      "destinationNodeId":  "3437fc32-0d05-421f-816d-d9207769a315",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "13d99d4b-ef4b-4216-bf7e-379df8e0bf5f",
+                      "originNodeId":  "1ab77583-8cee-4ea6-8c5f-d890f9daf960",
+                      "destinationNodeId":  "c87863a1-ba10-4761-a206-ff08ce59a983",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "8dc3a406-e2a2-4dff-9dfb-0d5f6b09404f",
+                      "originNodeId":  "3d00a977-c96b-472d-99c7-ccd9f405938c",
+                      "destinationNodeId":  "edbf157c-f1a5-45e3-a7d9-60731e14f5d3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "09aca04f-d3a2-4f37-8baa-0961c3eba48e",
+                      "originNodeId":  "90abda9c-065a-462b-b6d5-5fccf9de91da",
+                      "destinationNodeId":  "aa4d55c6-4db0-4c74-bdae-8901451ba731",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "7c402647-ea6d-4e52-a406-896637ad82f0",
+                      "originNodeId":  "90abda9c-065a-462b-b6d5-5fccf9de91da",
+                      "destinationNodeId":  "d76fff80-3ef5-4aa0-87ea-8e688ea43dee",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "ddb7252e-c86a-4d25-ad79-c20dc6c7c5a7",
+                      "originNodeId":  "3bb23c14-95fb-4ea2-8e9d-fb2d7ca2d426",
+                      "destinationNodeId":  "08bdeff8-3900-4b78-8a09-f088ae92b348",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "347a4d4a-6712-4954-a4ea-9daa03851fda",
+                      "originNodeId":  "3bb23c14-95fb-4ea2-8e9d-fb2d7ca2d426",
+                      "destinationNodeId":  "f2de57eb-a33f-4c2f-a38f-c456da8dd34f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "a0a36d0b-edb8-422a-9811-9222998b7df0",
+                      "originNodeId":  "c87863a1-ba10-4761-a206-ff08ce59a983",
+                      "destinationNodeId":  "9fc03429-ff7f-4c3b-8269-e0b7642c1fbc",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "9ddbbdd3-fd63-4746-9224-bb08add1de1b",
+                      "originNodeId":  "c87863a1-ba10-4761-a206-ff08ce59a983",
+                      "destinationNodeId":  "71417b2e-3e61-48c6-be66-68ddf30c943f",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "05c4a09d-7b87-4569-9fc3-84527c6496b1",
+                      "originNodeId":  "edbf157c-f1a5-45e3-a7d9-60731e14f5d3",
+                      "destinationNodeId":  "ecd54603-71af-4cc1-9eeb-084b97d73eee",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "9f949692-2b50-4606-9f71-7123d1817f57",
+                      "originNodeId":  "edbf157c-f1a5-45e3-a7d9-60731e14f5d3",
+                      "destinationNodeId":  "86443966-89c3-4e5c-a624-ed5bd8ff0c2b",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "58ca2a0e-4ccc-4b72-aee1-c2df8cfa5528",
+                      "originNodeId":  "3437fc32-0d05-421f-816d-d9207769a315",
+                      "destinationNodeId":  "226d2eb7-93b1-47be-9d2e-b5238c449670",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "03c7b461-e752-43e3-9362-e40b70f6eb6f",
+                      "originNodeId":  "7df3f49b-340f-4f46-b9c0-8b6275a6a581",
+                      "destinationNodeId":  "3c1c5405-b29a-4762-a83c-3b0696d854e8",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "38ab0ca3-cebd-4421-ac00-57d70c1168cb",
+                      "originNodeId":  "3437fc32-0d05-421f-816d-d9207769a315",
+                      "destinationNodeId":  "a03d8577-1523-4d88-affe-6cdf4e46c1c4",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "28d861b4-6603-4cd6-9a2b-2b08990ff43a",
+                      "originNodeId":  "7df3f49b-340f-4f46-b9c0-8b6275a6a581",
+                      "destinationNodeId":  "eda48622-0f3f-4299-96ab-25c3796b30cc",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "3a960175-af72-42e7-95c3-00948313c324"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "3a960175-af72-42e7-95c3-00948313c324",
+                                         "77c751d9-1cbf-44f5-aea0-90d9ae618b13",
+                                         "3815f58d-3ae1-4097-bb3b-294dc602ad84",
+                                         "d76fff80-3ef5-4aa0-87ea-8e688ea43dee",
+                                         "dd148b67-abcc-46cd-8de6-fdec37a1b462",
+                                         "f2de57eb-a33f-4c2f-a38f-c456da8dd34f",
+                                         "cd0aa3b8-8d7e-4e81-9128-d68731b07881",
+                                         "eda48622-0f3f-4299-96ab-25c3796b30cc",
+                                         "3b494e7e-1eb0-4857-b35f-7eed9aab1114",
+                                         "a03d8577-1523-4d88-affe-6cdf4e46c1c4",
+                                         "6f9e3f17-735c-48cc-b4b5-318ece4e2d7b",
+                                         "71417b2e-3e61-48c6-be66-68ddf30c943f",
+                                         "aa8d2384-f0cb-4eb9-a6e6-1362cac2170b",
+                                         "86443966-89c3-4e5c-a624-ed5bd8ff0c2b",
+                                         "29f28a15-0a78-4ed8-8393-63088e7ce92a",
+                                         "3d00a977-c96b-472d-99c7-ccd9f405938c",
+                                         "edbf157c-f1a5-45e3-a7d9-60731e14f5d3",
+                                         "ecd54603-71af-4cc1-9eeb-084b97d73eee",
+                                         "1ab77583-8cee-4ea6-8c5f-d890f9daf960",
+                                         "c87863a1-ba10-4761-a206-ff08ce59a983",
+                                         "9fc03429-ff7f-4c3b-8269-e0b7642c1fbc",
+                                         "c70531b8-7196-46c4-8f4e-7ea21205227a",
+                                         "3437fc32-0d05-421f-816d-d9207769a315",
+                                         "226d2eb7-93b1-47be-9d2e-b5238c449670",
+                                         "22768e36-e805-43ac-b724-dd1786bc254e",
+                                         "7df3f49b-340f-4f46-b9c0-8b6275a6a581",
+                                         "3c1c5405-b29a-4762-a83c-3b0696d854e8",
+                                         "d96ae4f0-7035-4dad-99d5-7ed15d925627",
+                                         "3bb23c14-95fb-4ea2-8e9d-fb2d7ca2d426",
+                                         "08bdeff8-3900-4b78-8a09-f088ae92b348",
+                                         "edc5493d-3919-413b-ace2-0efb776d6357",
+                                         "90abda9c-065a-462b-b6d5-5fccf9de91da",
+                                         "aa4d55c6-4db0-4c74-bdae-8901451ba731"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.SF_Template_CheckNrs\r\nNODES=35; EDGES=44\r\n1. START\r\n2. ACTION CreateVariableAction: create variable IsValid=true\r\n3. DECISION SheetIndex = empty expression=$Template/SheetIndex = empty\r\n4. BRANCH when EnumerationCase=false\r\n  5. NODE ExclusiveMerge: ExclusiveMerge\r\n  6. DECISION SheetIndex \u003c 1 expression=$Template/SheetIndex \u003c 1\r\n  7. BRANCH when EnumerationCase=false\r\n    8. NODE ExclusiveMerge: ExclusiveMerge\r\n    9. DECISION HeaderRownr = empty expression=$Template/HeaderRowNumber = empty\r\n    10. BRANCH when EnumerationCase=false\r\n      11. NODE ExclusiveMerge: ExclusiveMerge\r\n      12. DECISION HeaderRownr \u003c 1 expression=$Template/HeaderRowNumber \u003c 1\r\n      13. BRANCH when EnumerationCase=false\r\n        14. NODE ExclusiveMerge: ExclusiveMerge\r\n        15. DECISION ImportRowNr = empty expression=$Template/FirstDataRowNumber = empty\r\n        16. BRANCH when EnumerationCase=false\r\n          17. NODE ExclusiveMerge: ExclusiveMerge\r\n          18. DECISION ImportRowNr \u003c 1 expression=$Template/FirstDataRowNumber \u003c 1\r\n          19. BRANCH when EnumerationCase=false\r\n            20. NODE ExclusiveMerge: ExclusiveMerge\r\n            21. END\r\n          22. BRANCH when EnumerationCase=true\r\n            23. ACTION ChangeVariableAction: change variable IsValid=false\r\n            24. DECISION Show messages expression=$ShowWarningPopup\r\n            25. BRANCH when EnumerationCase=false\r\n              26. REF ExclusiveMerge\r\n            27. BRANCH when EnumerationCase=true\r\n              28. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n              29. REF ExclusiveMerge\r\n        30. BRANCH when EnumerationCase=true\r\n          31. ACTION ChangeVariableAction: change variable IsValid=false\r\n          32. DECISION Show messages expression=$ShowWarningPopup\r\n          33. BRANCH when EnumerationCase=false\r\n            34. REF ExclusiveMerge\r\n          35. BRANCH when EnumerationCase=true\r\n            36. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n            37. REF ExclusiveMerge\r\n      38. BRANCH when EnumerationCase=true\r\n        39. ACTION ChangeVariableAction: change variable IsValid=false\r\n        40. DECISION Show messages expression=$ShowWarningPopup\r\n        41. BRANCH when EnumerationCase=false\r\n          42. REF ExclusiveMerge\r\n        43. BRANCH when EnumerationCase=true\r\n          44. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n          45. REF ExclusiveMerge\r\n    46. BRANCH when EnumerationCase=true\r\n      47. ACTION ChangeVariableAction: change variable IsValid=false\r\n      48. DECISION Show messages expression=$ShowWarningPopup\r\n      49. BRANCH when EnumerationCase=false\r\n        50. REF ExclusiveMerge\r\n      51. BRANCH when EnumerationCase=true\r\n        52. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n        53. REF ExclusiveMerge\r\n  54. BRANCH when EnumerationCase=true\r\n    55. ACTION ChangeVariableAction: change variable IsValid=false\r\n    56. DECISION Show messages expression=$ShowWarningPopup\r\n    57. BRANCH when EnumerationCase=false\r\n      58. REF ExclusiveMerge\r\n    59. BRANCH when EnumerationCase=true\r\n      60. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n      61. REF ExclusiveMerge\r\n62. BRANCH when EnumerationCase=true\r\n  63. ACTION ChangeVariableAction: change variable IsValid=false\r\n  64. DECISION Show messages expression=$ShowWarningPopup\r\n  65. BRANCH when EnumerationCase=false\r\n    66. REF ExclusiveMerge\r\n  67. BRANCH when EnumerationCase=true\r\n    68. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n    69. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.Ch_Template_CheckNrs",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "44fe47cf-fb86-4874-b6cb-bec3e8b590c6",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.SF_Template_CheckNrs",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.IVK_SaveContinue_CreateTemplateFromDoc",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "64fe5fc9-0237-43f5-bb76-d0b510d987f2",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.SF_Template_CheckNrs",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.ValidateTemplate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "0099fbc3-082f-4195-8b2a-e04b2950bc6c",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.SF_Template_CheckNrs",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.ValidateTemplate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "65f7d31f-8f3a-4cb4-ad06-078d50813a02",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.SF_Template_CheckNrs",
+                          "isInternal":  true
+                      }
+                  ]
+}

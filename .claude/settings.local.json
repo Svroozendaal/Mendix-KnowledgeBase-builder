@@ -50,7 +50,19 @@
       "Bash(find /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/artifacts/.agents -type f -name *)",
       "Bash(dotnet build:*)",
       "Bash(dotnet publish:*)",
-      "Bash(tasklist)"
+      "Bash(tasklist)",
+      "Bash(grep -E \"\\\\.\\(cs|xaml|csproj\\)$\")",
+      "Bash(powershell -NoProfile -Command \"& { $null = [System.Management.Automation.Language.Parser]::ParseFile\\(''c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/lib/ai-provider.ps1'', [ref]$null, [ref]$errors\\); if \\($errors.Count -gt 0\\) { $errors | ForEach-Object { Write-Host $_.ToString\\(\\) } } else { Write-Host ''OK - no parse errors'' } }\")",
+      "Bash(powershell -NoProfile -ExecutionPolicy Bypass -Command \". ''c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/lib/ai-provider.ps1''; Write-Host ''Functions loaded successfully''; Get-Command -Name Get-AiConfig,Write-AiConfigSummary,Invoke-AiPrompt,Test-AiProviderReady -CommandType Function | ForEach-Object { Write-Host \\(''  '' + $_.Name\\) }\")",
+      "Read(//c/Users/Simon/AppData/Roaming/npm/**)",
+      "Bash(dir \"C:\\\\Users\\\\Simon\\\\AppData\\\\Roaming\\\\npm\\\\claude*\")",
+      "Bash(grep -rn \"Copy-Item\\\\|\\\\.agents\" /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/*.ps1)",
+      "Bash(find c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data -type f -name *.md -o -name *.json)",
+      "Bash(find c:/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/.agents/skills -type f -name *.md)",
+      "Bash(xargs grep:*)",
+      "Bash(grep -E \"\\\\.md$\")",
+      "Bash(find C:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator -path */.agents/* -type f)",
+      "Bash(find C:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator -path */knowledge-base/* -type f)"
     ]
   }
 }

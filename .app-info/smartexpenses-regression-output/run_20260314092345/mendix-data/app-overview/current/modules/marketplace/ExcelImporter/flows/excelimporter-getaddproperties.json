@@ -1,0 +1,248 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.GetAddProperties",
+                  "stableId":  "64ce4e8d-bcb3-44b2-92b9-bc746d08e39c",
+                  "slug":  "excelimporter-getaddproperties",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-getaddproperties.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-getaddproperties.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-getaddproperties.json",
+                  "l2Logical":  "flow:ExcelImporter.GetAddProperties",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "64ce4e8d-bcb3-44b2-92b9-bc746d08e39c",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.GetAddProperties",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "3723d89a-2c73-4869-9f3b-b086e5467ef8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewAdditionalProperties (Template_AdditionalProperties=$Template; refreshInClient=false)",
+                      "detail":  "change NewAdditionalProperties (Template_AdditionalProperties=$Template; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ac17cfbf-ab1d-462b-aee1-7eea98a32307",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Template (Template_AdditionalProperties=$NewAdditionalProperties; refreshInClient=false)",
+                      "detail":  "change Template (Template_AdditionalProperties=$NewAdditionalProperties; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4925ae28-d427-424c-8703-3c3a64891490",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.AdditionalProperties as NewAdditionalProperties",
+                      "detail":  "create ExcelImporter.AdditionalProperties as NewAdditionalProperties",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "f0e52773-6a1f-45ca-bade-7169d2952848",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve AddProperties over association Template_AdditionalProperties from Template",
+                      "detail":  "retrieve AddProperties over association Template_AdditionalProperties from Template",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d2dc7567-a46c-431d-a610-908eb5943558",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d5ce09a6-b6b8-48b1-b883-3eec475b029b",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b7dff1de-7c0f-412e-9182-eadd4360bcdf",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "found? expression=$AddProperties != empty",
+                      "detail":  "found? expression=$AddProperties != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ce20ea36-05ef-47d3-b6ca-61fcea7cc25b",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a223caff-6adf-451a-8531-1203b4b56d1c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "caf68306-894c-4f9c-88d6-68fd38979a28",
+                      "originNodeId":  "a223caff-6adf-451a-8531-1203b4b56d1c",
+                      "destinationNodeId":  "f0e52773-6a1f-45ca-bade-7169d2952848",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "90b49172-7a21-4a4e-8383-5dc37163c29d",
+                      "originNodeId":  "f0e52773-6a1f-45ca-bade-7169d2952848",
+                      "destinationNodeId":  "b7dff1de-7c0f-412e-9182-eadd4360bcdf",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "18da4c58-4c1b-4ea0-b56d-6677add56910",
+                      "originNodeId":  "b7dff1de-7c0f-412e-9182-eadd4360bcdf",
+                      "destinationNodeId":  "d2dc7567-a46c-431d-a610-908eb5943558",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "807a9a29-e37c-436e-a638-606bacfa9819",
+                      "originNodeId":  "b7dff1de-7c0f-412e-9182-eadd4360bcdf",
+                      "destinationNodeId":  "4925ae28-d427-424c-8703-3c3a64891490",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "e14c6a66-0c8e-4056-a9f1-6dfe82ec6560",
+                      "originNodeId":  "4925ae28-d427-424c-8703-3c3a64891490",
+                      "destinationNodeId":  "3723d89a-2c73-4869-9f3b-b086e5467ef8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3a82c842-b3dd-48b5-bc89-5b54d15313ad",
+                      "originNodeId":  "3723d89a-2c73-4869-9f3b-b086e5467ef8",
+                      "destinationNodeId":  "ac17cfbf-ab1d-462b-aee1-7eea98a32307",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3e57a79c-143a-4055-804c-92f376da9f9c",
+                      "originNodeId":  "ac17cfbf-ab1d-462b-aee1-7eea98a32307",
+                      "destinationNodeId":  "d5ce09a6-b6b8-48b1-b883-3eec475b029b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "a223caff-6adf-451a-8531-1203b4b56d1c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "a223caff-6adf-451a-8531-1203b4b56d1c",
+                                         "f0e52773-6a1f-45ca-bade-7169d2952848",
+                                         "b7dff1de-7c0f-412e-9182-eadd4360bcdf",
+                                         "d2dc7567-a46c-431d-a610-908eb5943558",
+                                         "4925ae28-d427-424c-8703-3c3a64891490",
+                                         "3723d89a-2c73-4869-9f3b-b086e5467ef8",
+                                         "ac17cfbf-ab1d-462b-aee1-7eea98a32307",
+                                         "d5ce09a6-b6b8-48b1-b883-3eec475b029b"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.GetAddProperties\r\nNODES=9; EDGES=7\r\n1. START\r\n2. ACTION RetrieveAction: retrieve AddProperties over association Template_AdditionalProperties from Template\r\n3. DECISION found? expression=$AddProperties != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. END\r\n6. BRANCH when EnumerationCase=false\r\n  7. ACTION CreateObjectAction: create ExcelImporter.AdditionalProperties as NewAdditionalProperties\r\n  8. ACTION ChangeObjectAction: change NewAdditionalProperties (Template_AdditionalProperties=$Template; refreshInClient=false)\r\n  9. ACTION ChangeObjectAction: change Template (Template_AdditionalProperties=$NewAdditionalProperties; refreshInClient=false)\r\n  10. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.IVK_SaveTemplate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "bc0c4748-0855-4667-b158-4a1cbe4da48c",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.GetAddProperties",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.SetupTemplate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "db1e7377-3b71-4f3e-b9ec-77fbf1ecaedb",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.GetAddProperties",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.ValidateTemplate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "bd8a7b10-642e-45f2-bef6-2576e14802d5",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.GetAddProperties",
+                          "isInternal":  true
+                      }
+                  ]
+}

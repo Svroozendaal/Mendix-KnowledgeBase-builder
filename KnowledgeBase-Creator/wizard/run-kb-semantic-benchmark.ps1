@@ -22,6 +22,8 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+. (Join-Path $scriptRoot "lib/app-overview-resolver.ps1")
 
 function Load-Json {
     param([string]$Path)
@@ -54,7 +56,11 @@ function Get-MarkdownTableRows {
     foreach ($raw in $lines) {
         $line = $raw.Trim()
         if (-not $line.StartsWith("|") -or -not $line.EndsWith("|")) {
-            if ($inTable -and $separatorSeen) { break }
+            if ($inTable -and $separatorSeen) {
+                $headers = @()
+                $inTable = $false
+                $separatorSeen = $false
+            }
             continue
         }
 
@@ -84,50 +90,21 @@ function Get-MarkdownTableRows {
 function Resolve-RunFolderFromSources {
     param([string]$KbRootPath)
 
-    $sourcesManifest = Join-Path $KbRootPath "_sources/manifest.json"
-    if (-not (Test-Path $sourcesManifest -PathType Leaf)) { return $null }
-
-    $manifest = Get-Content -Raw $sourcesManifest | ConvertFrom-Json
-    $artifactPath = $null
-    $preferred = @($manifest.artifacts | Where-Object { $_.type -eq "general-all-modules-json" } | Select-Object -First 1)
-    if ($preferred.Count -gt 0) {
-        $artifactPath = [string]$preferred[0].path
-    } else {
-        $first = @($manifest.artifacts | Select-Object -First 1)
-        if ($first.Count -gt 0) {
-            $artifactPath = [string]$first[0].path
-        }
-    }
-
-    if ([string]::IsNullOrWhiteSpace($artifactPath)) { return $null }
-    if (-not (Test-Path $artifactPath -PathType Leaf)) { return $null }
-
-    $artifactParent = Split-Path -Parent $artifactPath
-    $folderName = Split-Path -Leaf $artifactParent
-    if ($folderName -eq "general") {
-        return (Split-Path -Parent $artifactParent)
-    }
-    if ($folderName -eq "modules") {
-        return (Split-Path -Parent $artifactParent)
-    }
-    $parentName = Split-Path -Leaf (Split-Path -Parent $artifactParent)
-    if ($parentName -eq "modules") {
-        return (Split-Path -Parent (Split-Path -Parent $artifactParent))
-    }
-    return $null
+    return Resolve-OverviewRunFolderFromKnowledgeBase -KbRootPath $KbRootPath
 }
 
 function Get-CrossModuleCallEdgeCount {
     param(
         [string]$RunFolder,
-        [string[]]$ModuleNames
+        [string[]]$ModuleNames,
+        [hashtable]$ModuleCatalogByName
     )
 
     $edgeCount = 0
     $flowModuleMap = @{}
 
     foreach ($module in @($ModuleNames)) {
-        $flowsPath = Join-Path $RunFolder "modules/$module/flows.json"
+        $flowsPath = Get-OverviewModuleFilePath -RootPath $RunFolder -ModuleName $module -FileName "flows.json" -ModuleCatalogByName $ModuleCatalogByName
         if (-not (Test-Path $flowsPath -PathType Leaf)) { continue }
         $flows = Load-Json -Path $flowsPath
         foreach ($flow in @($flows.flows)) {
@@ -136,7 +113,7 @@ function Get-CrossModuleCallEdgeCount {
     }
 
     foreach ($module in @($ModuleNames)) {
-        $flowsPath = Join-Path $RunFolder "modules/$module/flows.json"
+        $flowsPath = Get-OverviewModuleFilePath -RootPath $RunFolder -ModuleName $module -FileName "flows.json" -ModuleCatalogByName $ModuleCatalogByName
         if (-not (Test-Path $flowsPath -PathType Leaf)) { continue }
         $flows = Load-Json -Path $flowsPath
         foreach ($flow in @($flows.flows)) {
@@ -157,12 +134,13 @@ function Get-CrossModuleCallEdgeCount {
 function Get-CustomPageEvidenceSet {
     param(
         [string]$RunFolder,
-        [string[]]$CustomModules
+        [string[]]$CustomModules,
+        [hashtable]$ModuleCatalogByName
     )
 
     $customPages = @{}
     foreach ($module in @($CustomModules)) {
-        $pagesPath = Join-Path $RunFolder "modules/$module/pages.json"
+        $pagesPath = Get-OverviewModuleFilePath -RootPath $RunFolder -ModuleName $module -FileName "pages.json" -ModuleCatalogByName $ModuleCatalogByName
         if (-not (Test-Path $pagesPath -PathType Leaf)) { continue }
         $pages = Load-Json -Path $pagesPath
         foreach ($page in @($pages.pages)) {
@@ -172,7 +150,7 @@ function Get-CustomPageEvidenceSet {
 
     $expectedPagesWithEvidence = New-Object "System.Collections.Generic.HashSet[string]"
     foreach ($module in @($CustomModules)) {
-        $flowsPath = Join-Path $RunFolder "modules/$module/flows.json"
+        $flowsPath = Get-OverviewModuleFilePath -RootPath $RunFolder -ModuleName $module -FileName "flows.json" -ModuleCatalogByName $ModuleCatalogByName
         if (-not (Test-Path $flowsPath -PathType Leaf)) { continue }
         $flows = Load-Json -Path $flowsPath
         foreach ($flow in @($flows.flows)) {
@@ -307,7 +285,11 @@ $unknownTodoFile = Join-Path $kbRoot "_reports/UNKNOWN_TODO.md"
 $runFolder = Resolve-RunFolderFromSources -KbRootPath $kbRoot
 $customModules = @()
 $moduleNames = @()
+$moduleCatalogByName = @{}
 if ($runFolder) {
+    $runManifest = Load-OverviewManifest -RunFolder $runFolder
+    $moduleCatalog = @(Get-OverviewModuleCatalog -RunFolder $runFolder -Manifest $runManifest)
+    $moduleCatalogByName = Get-OverviewModuleCatalogMap -ModuleCatalog $moduleCatalog
     $allModulesPath = Join-Path $runFolder "general/all-modules.json"
     if (Test-Path $allModulesPath -PathType Leaf) {
         $allModules = Load-Json -Path $allModulesPath
@@ -362,7 +344,7 @@ if ($customModules.Count -eq 0) {
 # S3
 $callEdgeCount = 0
 if ($runFolder -and $moduleNames.Count -gt 0) {
-    $callEdgeCount = Get-CrossModuleCallEdgeCount -RunFolder $runFolder -ModuleNames $moduleNames
+    $callEdgeCount = Get-CrossModuleCallEdgeCount -RunFolder $runFolder -ModuleNames $moduleNames -ModuleCatalogByName $moduleCatalogByName
 }
 if ($callEdgeCount -eq 0) {
     $structuralResults.Add((New-BenchmarkResult -Id "S3" -Question "Cross-module dependency table has non-zero rows when callEdges exist." -Critical $true -Weight 10 -Status "N/A" -EvidenceHits 0 -EvidenceTotal 0 -Score 0 -Details "No cross-module call edges in source evidence.")) | Out-Null
@@ -381,7 +363,7 @@ if ($callEdgeCount -eq 0) {
 # S4
 $expectedPages = @()
 if ($runFolder -and $customModules.Count -gt 0) {
-    $expectedPages = Get-CustomPageEvidenceSet -RunFolder $runFolder -CustomModules $customModules
+    $expectedPages = Get-CustomPageEvidenceSet -RunFolder $runFolder -CustomModules $customModules -ModuleCatalogByName $moduleCatalogByName
 }
 if ($expectedPages.Count -eq 0) {
     $structuralResults.Add((New-BenchmarkResult -Id "S4" -Question "Page-flow linkage rows are non-Unknown where show-page evidence exists." -Critical $false -Weight 10 -Status "N/A" -EvidenceHits 0 -EvidenceTotal 0 -Score 0 -Details "No show-page evidence found for custom modules.")) | Out-Null

@@ -1,0 +1,45 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.BudgetTerm_MasterNewEdit",
+                  "stableId":  "SmartExpenses.BudgetTerm_MasterNewEdit",
+                  "slug":  "smartexpenses-budgetterm-masternewedit",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-budgetterm-masternewedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/pages/smartexpenses-budgetterm-masternewedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/pages/smartexpenses-budgetterm-masternewedit.json",
+                  "l2Logical":  "page:SmartExpenses.BudgetTerm_MasterNewEdit",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/pages/INDEX.json"
+              },
+    "qualifiedName":  "SmartExpenses.BudgetTerm_MasterNewEdit",
+    "name":  "BudgetTerm_MasterNewEdit",
+    "title":  "Edit Budget Term",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "SmartExpenses.Admin"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "BudgetTerm",
+                           "entityType":  "SmartExpenses.BudgetTerm"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        null
+                    ],
+    "clientActions":  [
+                          null
+                      ],
+    "navigationProvenance":  [
+                                 null
+                             ]
+}

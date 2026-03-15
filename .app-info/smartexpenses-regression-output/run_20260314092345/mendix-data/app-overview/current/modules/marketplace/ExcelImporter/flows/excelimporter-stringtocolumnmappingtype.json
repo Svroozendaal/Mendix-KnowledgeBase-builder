@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.StringToColumnMappingType",
+                  "stableId":  "50219c8f-d8ac-4a13-96a9-fd36e4f054da",
+                  "slug":  "excelimporter-stringtocolumnmappingtype",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtocolumnmappingtype.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtocolumnmappingtype.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-stringtocolumnmappingtype.json",
+                  "l2Logical":  "flow:ExcelImporter.StringToColumnMappingType",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "50219c8f-d8ac-4a13-96a9-fd36e4f054da",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.StringToColumnMappingType",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "75e84bf1-ea79-4534-929a-008c43c827ea",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable Enum=if $Input = \u0027Attribute\u0027 then ExcelImporter.MappingType.Attribute else if $Input = \u0027DoNotUse\u0027 then ExcelImporter.MappingType.DoNotUse else if $Input = \u0027Reference\u0027 then ExcelImporter.MappingType.Reference else empty",
+                      "detail":  "create variable Enum=if $Input = \u0027Attribute\u0027 then ExcelImporter.MappingType.Attribute else if $Input = \u0027DoNotUse\u0027 then ExcelImporter.MappingType.DoNotUse else if $Input = \u0027Reference\u0027 then ExcelImporter.MappingType.Reference else empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "501719a3-fd17-4b70-8337-0fc4d8e5ae0e",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse String value to MappingType Enumeration.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "4c140bc6-10da-4d01-8cae-6c15a73b5ec1",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e597372f-9f53-4854-9a2a-53f8c35910e8",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2f39309e-37d6-4eeb-9275-4da63f25edc5",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "acfd89d5-669c-4fd9-ae9f-6479c7dc7282",
+                      "originNodeId":  "2f39309e-37d6-4eeb-9275-4da63f25edc5",
+                      "destinationNodeId":  "75e84bf1-ea79-4534-929a-008c43c827ea",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ddb60152-cdf5-43d4-a8ef-51eb61ac9b32",
+                      "originNodeId":  "75e84bf1-ea79-4534-929a-008c43c827ea",
+                      "destinationNodeId":  "4c140bc6-10da-4d01-8cae-6c15a73b5ec1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "2f39309e-37d6-4eeb-9275-4da63f25edc5"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "2f39309e-37d6-4eeb-9275-4da63f25edc5",
+                                         "75e84bf1-ea79-4534-929a-008c43c827ea",
+                                         "4c140bc6-10da-4d01-8cae-6c15a73b5ec1"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.StringToColumnMappingType\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable Enum=if $Input = \u0027Attribute\u0027 then ExcelImporter.MappingType.Attribute else if $Input = \u0027DoNotUse\u0027 then ExcelImporter.MappingType.DoNotUse else if $Input = \u0027Reference\u0027 then ExcelImporter.MappingType.Reference else empty\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

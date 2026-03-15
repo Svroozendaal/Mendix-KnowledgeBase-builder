@@ -1,0 +1,13 @@
+# Pages: New_Module
+Pages: 1, Snippets: 1
+
+## Pages
+
+PAGE New_Module.Pagina_test
+  Title: "Pagina test"
+  Layout: Atlas_Core.Atlas_Default
+  Parameters: Entity2 (New_Module.Entity2)
+
+## Snippets
+- SNIPPET New_Module.SNP_testsnippet (Web)
+  Parameters: GeneralizationEntityImage (New_Module.GeneralizationEntityImage)

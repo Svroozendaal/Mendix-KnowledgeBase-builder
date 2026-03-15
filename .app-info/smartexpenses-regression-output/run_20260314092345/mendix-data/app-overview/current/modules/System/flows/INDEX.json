@@ -1,0 +1,25 @@
+{
+    "objectType":  "flow-collection",
+    "module":  "System",
+    "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+    "l0Path":  "knowledge-base/modules/System/flows/INDEX.abstract.md",
+    "l1Path":  "knowledge-base/modules/System/FLOWS.md",
+    "l2Path":  "app-overview/current/modules/System/flows/INDEX.json",
+    "items":  [
+                  {
+                      "objectType":  "flow",
+                      "qualifiedName":  "System.ShowHomePage",
+                      "stableId":  "a8bf0599-c6c1-4de7-8eb5-95e6671c1607",
+                      "slug":  "system-showhomepage",
+                      "kind":  "Microflow",
+                      "nodeCount":  3,
+                      "title":  null,
+                      "roleCount":  null,
+                      "l0Path":  "knowledge-base/modules/System/flows/system-showhomepage.abstract.md",
+                      "l1Path":  "knowledge-base/modules/System/flows/system-showhomepage.overview.md",
+                      "l2Path":  "app-overview/current/modules/System/flows/system-showhomepage.json",
+                      "l2Logical":  "flow:System.ShowHomePage",
+                      "sourceRun":  "cli_2026-03-14T09-23-46.259Z"
+                  }
+              ]
+}

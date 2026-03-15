@@ -1,0 +1,240 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ImporterHelper",
+                  "qualifiedName":  "ImporterHelper.CWS_GetProducts",
+                  "stableId":  "45ff07cb-a305-4927-8c78-dc5e18105e98",
+                  "slug":  "importerhelper-cws-getproducts",
+                  "l0Path":  "knowledge-base/modules/ImporterHelper/flows/importerhelper-cws-getproducts.abstract.md",
+                  "l1Path":  "knowledge-base/modules/ImporterHelper/flows/importerhelper-cws-getproducts.overview.md",
+                  "l2Path":  "app-overview/current/modules/ImporterHelper/flows/importerhelper-cws-getproducts.json",
+                  "l2Logical":  "flow:ImporterHelper.CWS_GetProducts",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/ImporterHelper/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/ImporterHelper/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/ImporterHelper/flows/INDEX.json"
+              },
+    "flowId":  "45ff07cb-a305-4927-8c78-dc5e18105e98",
+    "kind":  "Microflow",
+    "qualifiedName":  "ImporterHelper.CWS_GetProducts",
+    "module":  "ImporterHelper",
+    "nodes":  [
+                  {
+                      "nodeId":  "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "AggregateListAction: AggregateListAction (output=CountTransactions, errorHandlingType=Rollback)",
+                      "detail":  "AggregateListAction (output=CountTransactions, errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "37b26612-4809-40ac-991c-650d03fb9c8e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CommitAction: commit Response (refreshInClient=true, withEvents=true)",
+                      "detail":  "commit Response (refreshInClient=true, withEvents=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1186db5a-0735-45f5-a470-6269c235c7ec",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RestCallAction: RestCallAction (errorHandlingType=Rollback)",
+                      "detail":  "RestCallAction (errorHandlingType=Rollback)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=Het is gelukt! {1} transacties zijn opgehaald!, type=Information, blocking=true)",
+                      "detail":  "show message (text=Het is gelukt! {1} transacties zijn opgehaald!, type=Information, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowMessageAction: show message (text=Het ophalen van transacties is niet gelukt!, type=Error, blocking=true)",
+                      "detail":  "show message (text=Het ophalen van transacties is niet gelukt!, type=Error, blocking=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "625fc2b5-879c-4373-a9a7-cfb0bfd231fd",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6ebd8698-298a-4913-8f1b-77d6e4d512c2",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2012f427-41d5-49bc-99e5-c209124505c4",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Response full? expression=$Response != empty",
+                      "detail":  "Response full? expression=$Response != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "3e558610-00f1-4a86-9daf-634500ac7daf",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b9e02b0a-09c9-4a56-bd49-80a561907330",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "095fa942-76be-439b-b82c-39e0a14f37d2",
+                      "originNodeId":  "b9e02b0a-09c9-4a56-bd49-80a561907330",
+                      "destinationNodeId":  "1186db5a-0735-45f5-a470-6269c235c7ec",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1c51ee1f-4db3-4913-91ed-f348c984fcda",
+                      "originNodeId":  "1186db5a-0735-45f5-a470-6269c235c7ec",
+                      "destinationNodeId":  "2012f427-41d5-49bc-99e5-c209124505c4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "03955560-ee11-4fb9-86d4-db3ea29d7f9f",
+                      "originNodeId":  "2012f427-41d5-49bc-99e5-c209124505c4",
+                      "destinationNodeId":  "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "04b076bc-d17d-43d8-bf07-ff9c68f33828",
+                      "originNodeId":  "2012f427-41d5-49bc-99e5-c209124505c4",
+                      "destinationNodeId":  "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "da4bb242-b873-48d0-9cb5-0c617c1944f6",
+                      "originNodeId":  "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+                      "destinationNodeId":  "37b26612-4809-40ac-991c-650d03fb9c8e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "712940ac-cf2e-4bea-9b05-e308cca616f7",
+                      "originNodeId":  "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+                      "destinationNodeId":  "625fc2b5-879c-4373-a9a7-cfb0bfd231fd",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "2e3ec042-f917-45dd-a98f-bda21fd1bd0a",
+                      "originNodeId":  "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+                      "destinationNodeId":  "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "b09c542e-a262-4b26-a3b5-7983c4d0f506",
+                      "originNodeId":  "37b26612-4809-40ac-991c-650d03fb9c8e",
+                      "destinationNodeId":  "6ebd8698-298a-4913-8f1b-77d6e4d512c2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "b9e02b0a-09c9-4a56-bd49-80a561907330"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "b9e02b0a-09c9-4a56-bd49-80a561907330",
+                                         "1186db5a-0735-45f5-a470-6269c235c7ec",
+                                         "2012f427-41d5-49bc-99e5-c209124505c4",
+                                         "bb5ac2a0-58be-4be8-9861-7fb346085f3c",
+                                         "48e1fbcc-75e1-4312-a04f-5a35e843cafb",
+                                         "37b26612-4809-40ac-991c-650d03fb9c8e",
+                                         "6ebd8698-298a-4913-8f1b-77d6e4d512c2",
+                                         "de051f3b-5eb0-4ae9-a7aa-f73db302e8d3",
+                                         "625fc2b5-879c-4373-a9a7-cfb0bfd231fd"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ImporterHelper.CWS_GetProducts\r\nNODES=10; EDGES=8\r\n1. START\r\n2. ACTION RestCallAction: RestCallAction (errorHandlingType=Rollback)\r\n3. DECISION Response full? expression=$Response != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION AggregateListAction: AggregateListAction (output=CountTransactions, errorHandlingType=Rollback)\r\n  6. ACTION ShowMessageAction: show message (text=Het is gelukt! {1} transacties zijn opgehaald!, type=Information, blocking=true)\r\n  7. ACTION CommitAction: commit Response (refreshInClient=true, withEvents=true)\r\n  8. END\r\n9. BRANCH when EnumerationCase=false\r\n  10. ACTION ShowMessageAction: show message (text=Het ophalen van transacties is niet gelukt!, type=Error, blocking=true)\r\n  11. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

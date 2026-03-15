@@ -1,0 +1,426 @@
+{
+  "module": "MxModelReflection",
+  "pages": [
+    {
+      "qualifiedName": "MxModelReflection.DbSizeEstimate_NewEdit",
+      "name": "DbSizeEstimate_NewEdit",
+      "title": "Edit Db Size Estimate",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [
+        {
+          "name": "DbSizeEstimate",
+          "entityType": "MxModelReflection.DbSizeEstimate"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.EnumValue_Select",
+      "name": "EnumValue_Select",
+      "title": "Select an enumeration value",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.MemberEnum_View",
+      "name": "MemberEnum_View",
+      "title": "View enum member",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [
+        {
+          "name": "MxObjectEnum",
+          "entityType": "MxModelReflection.MxObjectEnum"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.Member_Select",
+      "name": "Member_Select",
+      "title": "Select an object member",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.Member_View",
+      "name": "Member_View",
+      "title": "View member",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [
+        {
+          "name": "MxObjectMember",
+          "entityType": "MxModelReflection.MxObjectMember"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.Microflow_Select",
+      "name": "Microflow_Select",
+      "title": "Select a microflow",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.Microflow_View",
+      "name": "Microflow_View",
+      "title": "Microflow details",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [
+        {
+          "name": "Microflows",
+          "entityType": "MxModelReflection.Microflows"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObjectReference_Select",
+      "name": "MxObjectReference_Select",
+      "title": "Select an object reference",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObjectReference_View",
+      "name": "MxObjectReference_View",
+      "title": "Referentie details",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [
+        {
+          "name": "MxObjectReference",
+          "entityType": "MxModelReflection.MxObjectReference"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObjects_Overview",
+      "name": "MxObjects_Overview",
+      "title": "Domain model reflection",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObjectType_Select",
+      "name": "MxObjectType_Select",
+      "title": "Select an objecttype",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObject_Details",
+      "name": "MxObject_Details",
+      "title": "Object details",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [
+        {
+          "name": "MxObjectType",
+          "entityType": "MxModelReflection.MxObjectType"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 1000,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.SizeEstimate_Overview",
+      "name": "SizeEstimate_Overview",
+      "title": "Size estimate",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.TestPattern_Edit",
+      "name": "TestPattern_Edit",
+      "title": "Test a Pattern",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [
+        {
+          "name": "TestPattern",
+          "entityType": "MxModelReflection.TestPattern"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.TokenOverview",
+      "name": "TokenOverview",
+      "title": "Tokens",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator",
+        "MxModelReflection.Readonly"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.Token_NewEdit",
+      "name": "Token_NewEdit",
+      "title": "Token details",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator",
+        "MxModelReflection.TokenUser"
+      ],
+      "parameters": [
+        {
+          "name": "Token",
+          "entityType": "MxModelReflection.Token"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    },
+    {
+      "qualifiedName": "MxModelReflection.ValueType_View",
+      "name": "ValueType_View",
+      "title": "Type details",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "MxModelReflection.ModelAdministrator"
+      ],
+      "parameters": [
+        {
+          "name": "ValueType",
+          "entityType": "MxModelReflection.ValueType"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false
+    }
+  ],
+  "snippets": [
+    {
+      "qualifiedName": "MxModelReflection.DbSizeEstimate",
+      "name": "DbSizeEstimate",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "DbSizeEstimate",
+          "entityType": "MxModelReflection.DbSizeEstimate"
+        }
+      ]
+    },
+    {
+      "qualifiedName": "MxModelReflection.Member",
+      "name": "Member",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "MxObjectMember",
+          "entityType": "MxModelReflection.MxObjectMember"
+        }
+      ]
+    },
+    {
+      "qualifiedName": "MxModelReflection.MemberEnum",
+      "name": "MemberEnum",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "MxObjectEnum",
+          "entityType": "MxModelReflection.MxObjectEnum"
+        }
+      ]
+    },
+    {
+      "qualifiedName": "MxModelReflection.Microflow",
+      "name": "Microflow",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "Microflows",
+          "entityType": "MxModelReflection.Microflows"
+        }
+      ]
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObject",
+      "name": "MxObject",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "MxObjectType",
+          "entityType": "MxModelReflection.MxObjectType"
+        }
+      ]
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObjectReference",
+      "name": "MxObjectReference",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "MxObjectReference",
+          "entityType": "MxModelReflection.MxObjectReference"
+        }
+      ]
+    },
+    {
+      "qualifiedName": "MxModelReflection.MxObjects",
+      "name": "MxObjects",
+      "type": "Web",
+      "parameters": []
+    },
+    {
+      "qualifiedName": "MxModelReflection.Readme",
+      "name": "Readme",
+      "type": "Web",
+      "parameters": []
+    },
+    {
+      "qualifiedName": "MxModelReflection.SizeEstimate",
+      "name": "SizeEstimate",
+      "type": "Web",
+      "parameters": []
+    },
+    {
+      "qualifiedName": "MxModelReflection.Token",
+      "name": "Token",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "Token",
+          "entityType": "MxModelReflection.Token"
+        }
+      ]
+    },
+    {
+      "qualifiedName": "MxModelReflection.Tokens",
+      "name": "Tokens",
+      "type": "Web",
+      "parameters": []
+    },
+    {
+      "qualifiedName": "MxModelReflection.ValueType",
+      "name": "ValueType",
+      "type": "Web",
+      "parameters": [
+        {
+          "name": "ValueType",
+          "entityType": "MxModelReflection.ValueType"
+        }
+      ]
+    }
+  ]
+}

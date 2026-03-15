@@ -47,11 +47,18 @@ Execute the `mendix-overview-module-interpretation` skill for each selected modu
 
 1. Read all 4 files from `<run-folder>/modules/<Module>/`.
 2. Write outputs to `<kb-root>/modules/<Module>/`:
-   - `README.md`
-   - `DOMAIN.md`
-   - `FLOWS.md`
-   - `PAGES.md`
-   - `RESOURCES.md`
+   - `README.md` — module hub with navigation and source pointers
+   - `DOMAIN.md` — entities, associations, lifecycle matrix, access rules
+   - `FLOWS.md` — flow catalogue with L0/L1/L2 links in the Flow Links table
+   - `PAGES.md` — page inventory with L0/L1/L2 links in the Page Links table
+   - `RESOURCES.md` — constants and scheduled events
+   - `INTERPRETATION.md` — AI narrative placeholder (enriched in Phase 2)
+   - `flows/INDEX.abstract.md` — collection L0 abstract for all flows
+   - `flows/<slug>.abstract.md` — per-flow L0 abstract
+   - `flows/<slug>.overview.md` — per-flow L1 overview
+   - `pages/INDEX.abstract.md` — collection L0 abstract for all pages
+   - `pages/<slug>.abstract.md` — per-page L0 abstract
+   - `pages/<slug>.overview.md` — per-page L1 overview
 
 Process modules in alphabetical order for deterministic output.
 
@@ -100,8 +107,8 @@ Inputs used:
 
 Outputs produced:
 - App-level: [4 files in app/]
-- Module-level: [n modules x 5 files]
-- Routing: [5 files]
+- Module-level: [n modules x 6 summary files + per-flow L0/L1 + per-page L0/L1]
+- Routing: [5 files with L0/L1/L2 links]
 
 Validation:
 - Completeness: [pass/fail]

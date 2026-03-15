@@ -46,6 +46,12 @@ function Resolve-ClaudeCli {
     if (-not [string]::IsNullOrWhiteSpace($ExplicitPath)) {
         $resolved = Normalize-AbsolutePath -Path $ExplicitPath
         if (Test-Path $resolved -PathType Leaf) {
+            # Prefer .cmd shim on Windows — extensionless npm shims are bash
+            # scripts that Process.Start cannot execute.
+            if (-not ($resolved -match '\.(exe|cmd|bat|ps1)$')) {
+                $cmdVariant = "$resolved.cmd"
+                if (Test-Path $cmdVariant -PathType Leaf) { return $cmdVariant }
+            }
             return $resolved
         }
         Write-Warning "Explicit claude CLI path not found: $resolved"
@@ -53,7 +59,14 @@ function Resolve-ClaudeCli {
 
     $onPath = Get-Command claude -ErrorAction SilentlyContinue
     if ($null -ne $onPath) {
-        return $onPath.Source
+        $src = $onPath.Source
+        # Prefer the .cmd shim on Windows — the extensionless npm shim is a
+        # bash script that Process.Start cannot execute.
+        if ($src -and -not ($src -match '\.(exe|cmd|bat|ps1)$')) {
+            $cmdVariant = "$src.cmd"
+            if (Test-Path $cmdVariant -PathType Leaf) { return $cmdVariant }
+        }
+        return $src
     }
 
     $candidates = @(
@@ -195,13 +208,14 @@ Key parameters:
 - Creator root: $packageRoot
 
 Follow the SKILL.md procedure exactly:
-1. Read the target KB ROUTING.md and _reports/UNKNOWN_TODO.md
-2. Read the source pseudo.txt files from the run folder
-3. Enrich app-level KB files conservatively, and enrich module KB files only inside the reserved interpretation headings (`## Interpretation`, `## Domain Interpretation`, `## Flow Interpretation`, `## Page Interpretation`)
-4. Resolve Unknown items where evidence exists
-5. Mark all AI-added narratives as Confidence: Inferred
-6. Never remove export-backed data, headings, tables, links, anchors, or pointer/evidence blocks
-7. Prioritise custom modules over marketplace modules
+1. Treat AGENTS/framework docs as session bootstrap, then read the target KB ROUTING.md and _reports/UNKNOWN_TODO.md once.
+2. Enrich app-level KB files first.
+3. Then enrich custom modules one at a time, loading only that module's collection abstracts, object overviews as needed, and source pseudo exports.
+4. Write module narrative only to `modules/<Name>/INTERPRETATION.md`.
+5. Resolve Unknown items where evidence exists.
+6. Mark all AI-added narratives as Confidence: Inferred.
+7. Never remove export-backed data, headings, tables, links, anchors, or pointer/evidence blocks.
+8. Prioritise custom modules over marketplace modules.
 
 After enrichment, report which files were enriched and any remaining gaps.
 "@
@@ -215,24 +229,31 @@ $promptFile = [IO.Path]::GetTempFileName()
 try {
     Set-Content -Path $promptFile -Value $enrichPrompt -Encoding UTF8
 
+    $claudeArgs = "-p --verbose --max-turns 50 --allowedTools Read,Edit,Write,Glob,Grep --output-format stream-json"
+
     $claudeProcess = New-Object System.Diagnostics.ProcessStartInfo
-    $claudeProcess.FileName = $claudeCliResolved
     $claudeProcess.UseShellExecute = $false
     $claudeProcess.RedirectStandardOutput = $true
     $claudeProcess.RedirectStandardError = $true
+    $claudeProcess.RedirectStandardInput = $true
     $claudeProcess.CreateNoWindow = $true
     $claudeProcess.WorkingDirectory = $packageRoot
-    $claudeProcess.ArgumentList.Add("-p")
-    $claudeProcess.ArgumentList.Add($enrichPrompt)
-    $claudeProcess.ArgumentList.Add("--verbose")
-    $claudeProcess.ArgumentList.Add("--max-turns")
-    $claudeProcess.ArgumentList.Add("50")
-    $claudeProcess.ArgumentList.Add("--allowedTools")
-    $claudeProcess.ArgumentList.Add("Read,Edit,Write,Glob,Grep")
-    $claudeProcess.ArgumentList.Add("--output-format")
-    $claudeProcess.ArgumentList.Add("stream-json")
+
+    # .cmd / .ps1 npm shims cannot be started directly by Process.Start;
+    # route them through cmd.exe so Windows resolves the script host.
+    if ($claudeCliResolved -match '\.(cmd|bat|ps1)$') {
+        $claudeProcess.FileName = "cmd.exe"
+        $claudeProcess.Arguments = "/c `"`"$claudeCliResolved`" $claudeArgs`""
+    } else {
+        $claudeProcess.FileName = $claudeCliResolved
+        $claudeProcess.Arguments = $claudeArgs
+    }
 
     $process = [System.Diagnostics.Process]::Start($claudeProcess)
+
+    # Feed the prompt through stdin
+    $process.StandardInput.Write($enrichPrompt)
+    $process.StandardInput.Close()
 
     # Read stdout line by line
     while ($null -ne ($line = $process.StandardOutput.ReadLine())) {

@@ -1,0 +1,40 @@
+{
+    "objectType":  "flow-collection",
+    "module":  "New_Module",
+    "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+    "l0Path":  "knowledge-base/modules/New_Module/flows/INDEX.abstract.md",
+    "l1Path":  "knowledge-base/modules/New_Module/FLOWS.md",
+    "l2Path":  "app-overview/current/modules/New_Module/flows/INDEX.json",
+    "items":  [
+                  {
+                      "objectType":  "flow",
+                      "qualifiedName":  "New_Module.ACO_new",
+                      "stableId":  "3a2752de-694a-431e-af02-abbb7257099a",
+                      "slug":  "new-module-aco-new",
+                      "kind":  "Microflow",
+                      "nodeCount":  10,
+                      "title":  null,
+                      "roleCount":  null,
+                      "l0Path":  "knowledge-base/modules/New_Module/flows/new-module-aco-new.abstract.md",
+                      "l1Path":  "knowledge-base/modules/New_Module/flows/new-module-aco-new.overview.md",
+                      "l2Path":  "app-overview/current/modules/New_Module/flows/new-module-aco-new.json",
+                      "l2Logical":  "flow:New_Module.ACO_new",
+                      "sourceRun":  "cli_2026-03-14T09-23-46.259Z"
+                  },
+                  {
+                      "objectType":  "flow",
+                      "qualifiedName":  "New_Module.BCO_new",
+                      "stableId":  "6ae81a70-01c4-4dff-85ab-8f908adbb547",
+                      "slug":  "new-module-bco-new",
+                      "kind":  "Microflow",
+                      "nodeCount":  4,
+                      "title":  null,
+                      "roleCount":  null,
+                      "l0Path":  "knowledge-base/modules/New_Module/flows/new-module-bco-new.abstract.md",
+                      "l1Path":  "knowledge-base/modules/New_Module/flows/new-module-bco-new.overview.md",
+                      "l2Path":  "app-overview/current/modules/New_Module/flows/new-module-bco-new.json",
+                      "l2Logical":  "flow:New_Module.BCO_new",
+                      "sourceRun":  "cli_2026-03-14T09-23-46.259Z"
+                  }
+              ]
+}

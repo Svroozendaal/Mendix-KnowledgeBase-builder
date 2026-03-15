@@ -12,16 +12,16 @@
 |---|---|
 | none | none |
 
+## Journey Fragments
+
+No journey fragments documented yet.
+
 ## Snippets
 
 | Snippet | Type | Parameters |
 |---|---|---|
 | none | none | none |
 
-## Page Evidence
+## Evidence Index
 
-No page evidence documented yet.
-
-## Page Interpretation
-
-Reserved for `/enrichkb`. Add AI narrative only in this section.
+No page evidence index documented yet.

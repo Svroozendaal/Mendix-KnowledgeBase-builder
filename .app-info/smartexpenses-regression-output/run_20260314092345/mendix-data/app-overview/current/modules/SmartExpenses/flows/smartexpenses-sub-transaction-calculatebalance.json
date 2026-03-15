@@ -1,0 +1,225 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+                  "stableId":  "01df8be1-53ff-4958-8f8d-628f4f0848f4",
+                  "slug":  "smartexpenses-sub-transaction-calculatebalance",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-sub-transaction-calculatebalance.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-sub-transaction-calculatebalance.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-sub-transaction-calculatebalance.json",
+                  "l2Logical":  "flow:SmartExpenses.SUB_Transaction_CalculateBalance",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "01df8be1-53ff-4958-8f8d-628f4f0848f4",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "2831d19e-b609-4186-98d0-3c320c24dd18",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow SmartExpenses.SUB_Balance_Recalculate -\u003e SumBalance",
+                      "detail":  "call microflow SmartExpenses.SUB_Balance_Recalculate -\u003e SumBalance",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "SmartExpenses.SUB_Balance_Recalculate",
+                                        "sourceNodeId":  "2831d19e-b609-4186-98d0-3c320c24dd18"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "1535863c-40cb-4c53-bab4-9932be2566f8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Balance over association Transaction_Balance from Transaction",
+                      "detail":  "retrieve Balance over association Transaction_Balance from Transaction",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b9accfdb-072d-482e-97ba-fddb816c50bc",
+                      "nodeType":  "Annotation",
+                      "label":  "Checking whether Balance excists, then caluclates total value of transaction in that balance",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2522b689-fac1-4c54-bca1-6b5e9707ac08",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d74e5935-8cb1-46fc-8233-a5aaa08c5ed4",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "07343a48-9815-46e1-893c-33c79b695974",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "Balance exists? expression=$Balance != empty",
+                      "detail":  "Balance exists? expression=$Balance != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "743d437c-27f1-42f4-95c4-53350f21a510",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "68130aaa-83b6-4881-91a7-6bc0423c3d80",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "1927846f-d480-46b9-be3f-0c0bb8b3f6a7",
+                      "originNodeId":  "1535863c-40cb-4c53-bab4-9932be2566f8",
+                      "destinationNodeId":  "07343a48-9815-46e1-893c-33c79b695974",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a96444a3-3005-4681-a098-0caca2fe366c",
+                      "originNodeId":  "07343a48-9815-46e1-893c-33c79b695974",
+                      "destinationNodeId":  "2831d19e-b609-4186-98d0-3c320c24dd18",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "4a40bfb7-7628-4f4b-82e6-0be70dbcc1ae",
+                      "originNodeId":  "68130aaa-83b6-4881-91a7-6bc0423c3d80",
+                      "destinationNodeId":  "1535863c-40cb-4c53-bab4-9932be2566f8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "e82b0066-5c37-45cb-9ef2-6019d6634268",
+                      "originNodeId":  "07343a48-9815-46e1-893c-33c79b695974",
+                      "destinationNodeId":  "2522b689-fac1-4c54-bca1-6b5e9707ac08",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "cc50bc14-2b7f-43fc-ba01-2b10a3692463",
+                      "originNodeId":  "2831d19e-b609-4186-98d0-3c320c24dd18",
+                      "destinationNodeId":  "d74e5935-8cb1-46fc-8233-a5aaa08c5ed4",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "SmartExpenses.SUB_Balance_Recalculate",
+                      "sourceNodeId":  "2831d19e-b609-4186-98d0-3c320c24dd18"
+                  }
+              ],
+    "startNodeIds":  [
+                         "68130aaa-83b6-4881-91a7-6bc0423c3d80"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "68130aaa-83b6-4881-91a7-6bc0423c3d80",
+                                         "1535863c-40cb-4c53-bab4-9932be2566f8",
+                                         "07343a48-9815-46e1-893c-33c79b695974",
+                                         "2831d19e-b609-4186-98d0-3c320c24dd18",
+                                         "d74e5935-8cb1-46fc-8233-a5aaa08c5ed4",
+                                         "2522b689-fac1-4c54-bca1-6b5e9707ac08"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.SUB_Transaction_CalculateBalance\r\nNODES=8; EDGES=5\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Balance over association Transaction_Balance from Transaction\r\n3. DECISION Balance exists? expression=$Balance != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION MicroflowCallAction: call microflow SmartExpenses.SUB_Balance_Recalculate -\u003e SumBalance\r\n  6. END\r\n7. BRANCH when EnumerationCase=false\r\n  8. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.BCO_Transaction",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "f7da75da-abd2-4e22-a7c4-dad60c4717b9",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.BD_Transaction",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "6c95ac33-151f-437f-b7a1-0e070e27aa4a",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.SUB_Transaction_CalculateBalance",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "2831d19e-b609-4186-98d0-3c320c24dd18",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.SUB_Balance_Recalculate",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.OCH_BulkEditHelper_setBudgetTerm",
+                  "stableId":  "2953c3a8-6441-4fff-a89b-97d4bdbcb935",
+                  "slug":  "smartexpenses-och-bulkedithelper-setbudgetterm",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbudgetterm.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbudgetterm.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-och-bulkedithelper-setbudgetterm.json",
+                  "l2Logical":  "flow:SmartExpenses.OCH_BulkEditHelper_setBudgetTerm",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "2953c3a8-6441-4fff-a89b-97d4bdbcb935",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "SmartExpenses.OCH_BulkEditHelper_setBudgetTerm",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "197b5b2a-2983-44d9-a6a1-b237a9c8c7b0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change BulkEditHelper (BulkEditHelper_BudgetTerm=$BudgetTerm; refreshInClient=true)",
+                      "detail":  "change BulkEditHelper (BulkEditHelper_BudgetTerm=$BudgetTerm; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "eb4f378a-6b85-4e5e-9f0d-d6dc0eb6a7b7",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5b6c381e-49fc-4327-bc92-61f05d89c0f4",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "ab9420e0-9de9-4a2f-a7c3-6cb171696c5b",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5fa9a1ec-bba0-47c4-ace1-aa60cb2a1d6c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "57b15798-f758-47a7-ad9f-92df942d79c5",
+                      "originNodeId":  "5fa9a1ec-bba0-47c4-ace1-aa60cb2a1d6c",
+                      "destinationNodeId":  "197b5b2a-2983-44d9-a6a1-b237a9c8c7b0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "649bd980-df0f-4719-bf22-46d7e8fbcbef",
+                      "originNodeId":  "197b5b2a-2983-44d9-a6a1-b237a9c8c7b0",
+                      "destinationNodeId":  "eb4f378a-6b85-4e5e-9f0d-d6dc0eb6a7b7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "5fa9a1ec-bba0-47c4-ace1-aa60cb2a1d6c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "5fa9a1ec-bba0-47c4-ace1-aa60cb2a1d6c",
+                                         "197b5b2a-2983-44d9-a6a1-b237a9c8c7b0",
+                                         "eb4f378a-6b85-4e5e-9f0d-d6dc0eb6a7b7"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: SmartExpenses.OCH_BulkEditHelper_setBudgetTerm\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION ChangeObjectAction: change BulkEditHelper (BulkEditHelper_BudgetTerm=$BudgetTerm; refreshInClient=true)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,276 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.Ch_Column_SetDefaultObject",
+                  "stableId":  "5c8774ed-1423-4d50-acbb-8d7aa30892c9",
+                  "slug":  "excelimporter-ch-column-setdefaultobject",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ch-column-setdefaultobject.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ch-column-setdefaultobject.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-ch-column-setdefaultobject.json",
+                  "l2Logical":  "flow:ExcelImporter.Ch_Column_SetDefaultObject",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "5c8774ed-1423-4d50-acbb-8d7aa30892c9",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.Ch_Column_SetDefaultObject",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "2bfcc5c4-4d62-409c-813a-3d8242455dd5",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change Columns (Column_MxObjectType_Reference=empty, Column_MxObjectMember_Reference=empty; refreshInClient=true)",
+                      "detail":  "change Columns (Column_MxObjectType_Reference=empty, Column_MxObjectMember_Reference=empty; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "da93109f-255f-4d3a-be10-2ab18eb93a3c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow ExcelImporter.Ch_SetReference",
+                      "detail":  "call microflow ExcelImporter.Ch_SetReference",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "ExcelImporter.Ch_SetReference",
+                                        "sourceNodeId":  "da93109f-255f-4d3a-be10-2ab18eb93a3c"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "1bffdd8a-bdd8-4ffc-99d0-74700f597993",
+                      "nodeType":  "ActionActivity",
+                      "label":  "MicroflowCallAction: call microflow ExcelImporter.Column_SetCorrectRefObjectType",
+                      "detail":  "call microflow ExcelImporter.Column_SetCorrectRefObjectType",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "ExcelImporter.Column_SetCorrectRefObjectType",
+                                        "sourceNodeId":  "1bffdd8a-bdd8-4ffc-99d0-74700f597993"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "aec5dac4-ee2d-4db5-8a9a-0b79feb83509",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve MxObjectType over association Column_MxObjectType from Columns",
+                      "detail":  "retrieve MxObjectType over association Column_MxObjectType from Columns",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "14d4c270-4012-4814-9ca5-2ebcd2941a6b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve Reference over association Column_MxObjectReference from Columns",
+                      "detail":  "retrieve Reference over association Column_MxObjectReference from Columns",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1f67628e-5525-48aa-95c9-a3d8341860e9",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "28143a84-5759-47a5-8a54-657429eb8821",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d144fafa-c023-45cd-9e82-3be1a20e0cad",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "found? expression=$Reference != empty",
+                      "detail":  "found? expression=$Reference != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5668c013-3221-4e69-95ac-936797a009f9",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "73fc9206-2eea-4bce-91ee-61524d3d385c",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "ad6f38a5-1eed-4d29-a418-1458fdb579b7",
+                      "originNodeId":  "73fc9206-2eea-4bce-91ee-61524d3d385c",
+                      "destinationNodeId":  "da93109f-255f-4d3a-be10-2ab18eb93a3c",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "ea0a9415-f726-4c14-8d9a-22767af642f5",
+                      "originNodeId":  "14d4c270-4012-4814-9ca5-2ebcd2941a6b",
+                      "destinationNodeId":  "d144fafa-c023-45cd-9e82-3be1a20e0cad",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3ccd0440-f68e-4985-bd76-a65658de1f97",
+                      "originNodeId":  "d144fafa-c023-45cd-9e82-3be1a20e0cad",
+                      "destinationNodeId":  "2bfcc5c4-4d62-409c-813a-3d8242455dd5",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "3240f73a-b08b-4b44-917f-25a197b38258",
+                      "originNodeId":  "2bfcc5c4-4d62-409c-813a-3d8242455dd5",
+                      "destinationNodeId":  "1f67628e-5525-48aa-95c9-a3d8341860e9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "0110f1aa-10fb-4dfc-8cc2-71dafa56b9cd",
+                      "originNodeId":  "da93109f-255f-4d3a-be10-2ab18eb93a3c",
+                      "destinationNodeId":  "14d4c270-4012-4814-9ca5-2ebcd2941a6b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a73dceb0-b97b-42af-8f60-04453b682208",
+                      "originNodeId":  "d144fafa-c023-45cd-9e82-3be1a20e0cad",
+                      "destinationNodeId":  "aec5dac4-ee2d-4db5-8a9a-0b79feb83509",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "f688f71f-be49-4b46-9efc-b38d6709a52c",
+                      "originNodeId":  "1bffdd8a-bdd8-4ffc-99d0-74700f597993",
+                      "destinationNodeId":  "28143a84-5759-47a5-8a54-657429eb8821",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "56d16bcc-4a17-4fe5-a117-54e2ee524327",
+                      "originNodeId":  "aec5dac4-ee2d-4db5-8a9a-0b79feb83509",
+                      "destinationNodeId":  "1bffdd8a-bdd8-4ffc-99d0-74700f597993",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "ExcelImporter.Ch_SetReference",
+                      "sourceNodeId":  "da93109f-255f-4d3a-be10-2ab18eb93a3c"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "ExcelImporter.Column_SetCorrectRefObjectType",
+                      "sourceNodeId":  "1bffdd8a-bdd8-4ffc-99d0-74700f597993"
+                  }
+              ],
+    "startNodeIds":  [
+                         "73fc9206-2eea-4bce-91ee-61524d3d385c"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "73fc9206-2eea-4bce-91ee-61524d3d385c",
+                                         "da93109f-255f-4d3a-be10-2ab18eb93a3c",
+                                         "14d4c270-4012-4814-9ca5-2ebcd2941a6b",
+                                         "d144fafa-c023-45cd-9e82-3be1a20e0cad",
+                                         "aec5dac4-ee2d-4db5-8a9a-0b79feb83509",
+                                         "1bffdd8a-bdd8-4ffc-99d0-74700f597993",
+                                         "28143a84-5759-47a5-8a54-657429eb8821",
+                                         "2bfcc5c4-4d62-409c-813a-3d8242455dd5",
+                                         "1f67628e-5525-48aa-95c9-a3d8341860e9"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.Ch_Column_SetDefaultObject\r\nNODES=10; EDGES=8\r\n1. START\r\n2. ACTION MicroflowCallAction: call microflow ExcelImporter.Ch_SetReference\r\n3. ACTION RetrieveAction: retrieve Reference over association Column_MxObjectReference from Columns\r\n4. DECISION found? expression=$Reference != empty\r\n5. BRANCH when EnumerationCase=true\r\n  6. ACTION RetrieveAction: retrieve MxObjectType over association Column_MxObjectType from Columns\r\n  7. ACTION MicroflowCallAction: call microflow ExcelImporter.Column_SetCorrectRefObjectType\r\n  8. END\r\n9. BRANCH when EnumerationCase=false\r\n  10. ACTION ChangeObjectAction: change Columns (Column_MxObjectType_Reference=empty, Column_MxObjectMember_Reference=empty; refreshInClient=true)\r\n  11. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.Ch_Column_SetDefaultObject",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "da93109f-255f-4d3a-be10-2ab18eb93a3c",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.Ch_SetReference",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "ExcelImporter",
+                          "callerFlow":  "ExcelImporter.Ch_Column_SetDefaultObject",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "1bffdd8a-bdd8-4ffc-99d0-74700f597993",
+                          "targetModule":  "ExcelImporter",
+                          "targetFlow":  "ExcelImporter.Column_SetCorrectRefObjectType",
+                          "isInternal":  true
+                      }
+                  ]
+}

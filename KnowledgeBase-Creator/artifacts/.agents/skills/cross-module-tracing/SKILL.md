@@ -6,7 +6,7 @@ Trace dependencies and data flows across module boundaries to understand couplin
 
 ## Used By
 
-KB Analyst, Planner, Best Practice Recommender
+KB Analyst, KB Flow Tracer, Planner, Best Practice Recommender
 
 ## Procedure
 
@@ -23,3 +23,7 @@ A dependency trace showing:
 - Call chain (flow-level path across modules).
 - Data flow (which entities are passed between modules).
 - Coupling assessment (tight / loose / none).
+
+## Related Skills
+
+- For flow-level chain resolution with entity/page aggregation and cycle detection, use the `flow-chain-tracing` skill (`.agents/skills/flow-chain-tracing/SKILL.md`) instead. That skill resolves the full execution tree including entity and page aggregation, whereas this skill focuses on module-level dependency structure.

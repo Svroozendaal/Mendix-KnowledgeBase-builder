@@ -14,20 +14,31 @@ Module roles: Unknown
 
 Inferred: Unknown
 
+## Capability Map
+
+No capability map documented yet.
+
+## Primary User Journeys
+
+No user journeys documented yet.
+
+## Top risks/unknowns in model understanding
+
+- Unknown: none documented yet.
+
 ## Navigation
 
 - [DOMAIN.md](DOMAIN.md)
 - [FLOWS.md](FLOWS.md)
+- [flows/INDEX.abstract.md](flows/INDEX.abstract.md)
 - [PAGES.md](PAGES.md)
+- [pages/INDEX.abstract.md](pages/INDEX.abstract.md)
 - [RESOURCES.md](RESOURCES.md)
+- [INTERPRETATION.md](INTERPRETATION.md)
 
 ## Source Pointers
 
 - Export overview: none
-
-## Interpretation
-
-Reserved for `/enrichkb`. Add AI narrative only in this section.
 
 ## Cross-Module Dependencies
 

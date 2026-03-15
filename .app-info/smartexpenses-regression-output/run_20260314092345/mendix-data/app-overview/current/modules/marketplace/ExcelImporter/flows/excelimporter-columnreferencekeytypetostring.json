@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.ColumnReferenceKeyTypeToString",
+                  "stableId":  "b0cbc7e4-74be-4179-8d61-9e89c74cc744",
+                  "slug":  "excelimporter-columnreferencekeytypetostring",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-columnreferencekeytypetostring.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-columnreferencekeytypetostring.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-columnreferencekeytypetostring.json",
+                  "l2Logical":  "flow:ExcelImporter.ColumnReferenceKeyTypeToString",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "b0cbc7e4-74be-4179-8d61-9e89c74cc744",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.ColumnReferenceKeyTypeToString",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "33a18f05-e25a-4b0e-9387-09024471a1d3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable ReferenceKeyTypeString=getKey($ReferenceKeyType)",
+                      "detail":  "create variable ReferenceKeyTypeString=getKey($ReferenceKeyType)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "605b6f3c-6b91-4293-891c-151dc6402c1a",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse Enum ReferenceKeyType to a String",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2e3f1ad5-ff0c-43d1-8059-ad981310a5e2",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a0d0c162-0d53-4c9e-adcf-f8d4d60611fb",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "df816110-640d-4725-b6a5-a4e5d505e3a6",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "e64aa0c2-9ead-4b61-bc22-7d3ea35c1e75",
+                      "originNodeId":  "df816110-640d-4725-b6a5-a4e5d505e3a6",
+                      "destinationNodeId":  "33a18f05-e25a-4b0e-9387-09024471a1d3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "62c78f4e-68a7-448c-8341-fc27ff4d9b16",
+                      "originNodeId":  "33a18f05-e25a-4b0e-9387-09024471a1d3",
+                      "destinationNodeId":  "2e3f1ad5-ff0c-43d1-8059-ad981310a5e2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "df816110-640d-4725-b6a5-a4e5d505e3a6"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "df816110-640d-4725-b6a5-a4e5d505e3a6",
+                                         "33a18f05-e25a-4b0e-9387-09024471a1d3",
+                                         "2e3f1ad5-ff0c-43d1-8059-ad981310a5e2"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.ColumnReferenceKeyTypeToString\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable ReferenceKeyTypeString=getKey($ReferenceKeyType)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,57 @@
+{
+  "projectSecurity": {
+    "securityLevel": "CheckEverything",
+    "adminUserName": "MxAdmin",
+    "enableGuestAccess": true,
+    "guestUserRoleName": "Anonymous",
+    "userRoles": [
+      {
+        "name": "Administrator",
+        "moduleRoles": [
+          "Administration.Administrator",
+          "ExcelImporter.Configurator",
+          "MxModelReflection.ModelAdministrator",
+          "System.Administrator",
+          "SmartExpenses.Admin",
+          "SmartExpenses.User",
+          "ImporterHelper.ExcelImporter",
+          "ImporterHelper.RESTImporter"
+        ],
+        "manageAllRoles": true,
+        "checkSecurity": true
+      },
+      {
+        "name": "FBG",
+        "moduleRoles": [
+          "Administration.User",
+          "System.User",
+          "SmartExpenses.User",
+          "ImporterHelper.ExcelImporter",
+          "ImporterHelper.RESTImporter"
+        ],
+        "manageAllRoles": false,
+        "checkSecurity": true
+      },
+      {
+        "name": "Anonymous",
+        "moduleRoles": [
+          "Administration.User",
+          "Atlas_Web_Content.Anonymous",
+          "System.User"
+        ],
+        "manageAllRoles": false,
+        "checkSecurity": true
+      },
+      {
+        "name": "Parent",
+        "moduleRoles": [
+          "Administration.User",
+          "System.User",
+          "SmartExpenses.Parent"
+        ],
+        "manageAllRoles": false,
+        "checkSecurity": true
+      }
+    ]
+  }
+}

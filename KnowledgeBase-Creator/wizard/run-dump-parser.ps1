@@ -15,6 +15,7 @@ $envPath = Join-Path $packageRoot ".env"
 $artifactsRoot = Join-Path $packageRoot "artifacts/templates"
 $agentsArtifactRoot = Join-Path $packageRoot "artifacts/.agents"
 $dataRootArtifactsRoot = Join-Path $packageRoot "artifacts/data-root"
+. (Join-Path $wizardRoot "lib/app-overview-resolver.ps1")
 
 function Read-DotEnv {
     param([string]$Path)
@@ -238,30 +239,8 @@ function Get-ModulesFromManifest {
     param([string]$ManifestPath)
 
     $manifest = Get-Content -Raw $ManifestPath | ConvertFrom-Json
-    $modulesByName = @{}
-
-    foreach ($artifact in @($manifest.artifacts)) {
-        if ($artifact.type -ne "module-domain-model-json") { continue }
-        $artifactPath = [string]$artifact.path
-        if ([string]::IsNullOrWhiteSpace($artifactPath)) { continue }
-
-        if ($artifactPath -match "[\\/]modules[\\/]marketplace[\\/]([^\\/]+)[\\/]domain-model\.json$") {
-            $modulesByName[$matches[1]] = [pscustomobject]@{
-                Name = $matches[1]
-                Category = "Marketplace"
-            }
-            continue
-        }
-
-        if ($artifactPath -match "[\\/]modules[\\/]([^\\/]+)[\\/]domain-model\.json$") {
-            $modulesByName[$matches[1]] = [pscustomobject]@{
-                Name = $matches[1]
-                Category = "Unknown"
-            }
-        }
-    }
-
-    return @($modulesByName.Values | Sort-Object Name)
+    $runFolderPath = Split-Path -Parent $ManifestPath
+    return @(Get-OverviewModuleCatalog -RunFolder $runFolderPath -Manifest $manifest)
 }
 
 function Get-ModuleRelativePath {
@@ -381,6 +360,18 @@ function Invoke-PwshScript {
     }
 }
 
+function Sync-CurrentAppOverviewAlias {
+    param(
+        [string]$AppOverviewRoot,
+        [string]$RunFolder
+    )
+
+    $moduleCatalog = @(Get-ModulesFromManifest -ManifestPath (Join-Path $RunFolder "manifest.json"))
+    $moduleCatalogByName = Get-OverviewModuleCatalogMap -ModuleCatalog $moduleCatalog
+    $syncInfo = Sync-AppOverviewCurrentAlias -RunFolder $RunFolder -ModuleCatalogByName $moduleCatalogByName
+    return [string]$syncInfo.CurrentAliasPath
+}
+
 function Seed-KbTemplates {
     param(
         [string]$ArtifactsRoot,
@@ -389,7 +380,7 @@ function Seed-KbTemplates {
         [string]$KbRoot,
         [string]$AppName,
         [string]$RunFolder,
-        [string[]]$Modules
+        [object[]]$Modules
     )
 
     $generatedAt = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
@@ -536,6 +527,7 @@ function Write-CreatorLinkFile {
         dataRoot = $DataRoot
         knowledgeBaseRoot = $KbRoot
         lastRunFolder = $RunFolder
+        currentAliasPath = (Join-Path (Split-Path -Parent $RunFolder) "current")
         updatedAtUtc = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
     }
 
@@ -753,6 +745,9 @@ if (-not $SkipParser) {
 } else {
     Write-Host "[2/8] Parser step skipped." -ForegroundColor DarkYellow
 }
+
+Write-Host "[2b/8] Syncing app-overview/current alias..." -ForegroundColor Yellow
+Sync-CurrentAppOverviewAlias -AppOverviewRoot $appOverviewRoot -RunFolder $resolvedRunFolder
 
 $manifestPath = Join-Path $resolvedRunFolder "manifest.json"
 if (-not (Test-Path $manifestPath -PathType Leaf)) {

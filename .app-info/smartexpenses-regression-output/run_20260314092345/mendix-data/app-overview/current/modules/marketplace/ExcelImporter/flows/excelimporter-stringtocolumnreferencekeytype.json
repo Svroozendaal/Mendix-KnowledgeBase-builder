@@ -1,0 +1,125 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.StringToColumnReferenceKeyType",
+                  "stableId":  "30904bae-1393-4167-af1b-5bbbb092835b",
+                  "slug":  "excelimporter-stringtocolumnreferencekeytype",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtocolumnreferencekeytype.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-stringtocolumnreferencekeytype.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-stringtocolumnreferencekeytype.json",
+                  "l2Logical":  "flow:ExcelImporter.StringToColumnReferenceKeyType",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "30904bae-1393-4167-af1b-5bbbb092835b",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.StringToColumnReferenceKeyType",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "1974ed22-4253-436a-a057-86b7fa62714b",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable Enum=if $Input = \u0027NoKey\u0027 then ExcelImporter.ReferenceKeyType.NoKey else if $Input = \u0027YesMainAndAssociatedObject\u0027 then ExcelImporter.ReferenceKeyType.YesMainAndAssociatedObject else if $Input = \u0027YesOnlyAssociatedObject\u0027 then E...",
+                      "detail":  "create variable Enum=if $Input = \u0027NoKey\u0027 then ExcelImporter.ReferenceKeyType.NoKey else if $Input = \u0027YesMainAndAssociatedObject\u0027 then ExcelImporter.ReferenceKeyType.YesMainAndAssociatedObject else if $Input = \u0027YesOnlyAssociatedObject\u0027 then E...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "23e70025-6e9f-4e25-8c48-64f7f688c211",
+                      "nodeType":  "Annotation",
+                      "label":  "Parse String value to ReferenceKeyType Enumeration.",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "cec1632a-69de-49cc-86e5-bde42c31faa8",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bc40589b-b3ce-4fe1-a4f2-9ef3867189f3",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9e2c8096-ad57-4adf-8320-753aa9f6253b",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "92f764e7-696c-4c0e-9492-e12d68b9cd08",
+                      "originNodeId":  "9e2c8096-ad57-4adf-8320-753aa9f6253b",
+                      "destinationNodeId":  "1974ed22-4253-436a-a057-86b7fa62714b",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c53f1d91-f0b3-46ad-86d0-a7db8b8f777b",
+                      "originNodeId":  "1974ed22-4253-436a-a057-86b7fa62714b",
+                      "destinationNodeId":  "cec1632a-69de-49cc-86e5-bde42c31faa8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "9e2c8096-ad57-4adf-8320-753aa9f6253b"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "9e2c8096-ad57-4adf-8320-753aa9f6253b",
+                                         "1974ed22-4253-436a-a057-86b7fa62714b",
+                                         "cec1632a-69de-49cc-86e5-bde42c31faa8"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.StringToColumnReferenceKeyType\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable Enum=if $Input = \u0027NoKey\u0027 then ExcelImporter.ReferenceKeyType.NoKey else if $Input = \u0027YesMainAndAssociatedObject\u0027 then ExcelImporter.ReferenceKeyType.YesMainAndAssociatedObject else if $Input = \u0027YesOnlyAssociatedObject\u0027 then E...\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

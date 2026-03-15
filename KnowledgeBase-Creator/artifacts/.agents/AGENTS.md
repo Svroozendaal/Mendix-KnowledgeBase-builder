@@ -23,24 +23,28 @@ When a task arrives, classify it and route to the correct agent.
 
 Routing rules, evaluate in order:
 
-1. Question about a specific module, entity, or flow? -> KB Navigator
-2. Question about cross-module dependencies or architecture? -> KB Analyst
-3. Question about security roles or access rules? -> KB Security Reviewer
-4. Question about page structure or UI flows? -> KB UX Interpreter
-5. Question about data model or domain relationships? -> KB Domain Expert
-6. "How do I build X?" or implementation guidance? -> Mendix Developer
-7. User story mapping or requirement analysis? -> User Story Interpreter
-8. Planning, sequencing, or scoping work? -> Planner
-9. Breaking plans into actionable tasks? -> Todo Maker
-10. Best practice review or convention check? -> Best Practice Recommender
-11. Unsure which agent or skill applies? -> KB Navigator
+1. Question about a specific module, entity, or flow lookup? -> KB Navigator
+2. Question about a business feature or capability ("How does X work?", "What features does this app have?")? -> KB Feature Interpreter
+3. Question asking to trace, follow, or understand a specific flow's execution chain? -> KB Flow Tracer
+4. Question about cross-module dependencies, architecture, or blast radius of a change? -> KB Analyst
+5. Question about security roles or access rules? -> KB Security Reviewer
+6. Question about page structure or UI flows? -> KB UX Interpreter
+7. Question about data model or domain relationships? -> KB Domain Expert
+8. "How do I build X?" or implementation guidance? -> Mendix Developer
+9. User story mapping or requirement analysis? -> User Story Interpreter
+10. Planning, sequencing, or scoping work? -> Planner
+11. Breaking plans into actionable tasks? -> Todo Maker
+12. Best practice review or convention check? -> Best Practice Recommender
+13. Unsure which agent or skill applies? -> KB Navigator
 
 Multi-agent tasks:
 
 - Understand and Plan: KB Navigator -> KB Analyst -> Planner -> Todo Maker
 - User Story: User Story Interpreter -> Mendix Developer -> Planner -> Todo Maker
 - Review: Best Practice Recommender -> KB Security Reviewer -> KB Analyst
-- Impact Analysis: KB Navigator -> KB Analyst -> KB Domain Expert
+- Impact Analysis: KB Navigator -> KB Analyst (with `impact-analysis` skill) -> KB Domain Expert
+- Feature Discovery: KB Navigator -> KB Feature Interpreter (with `feature-search` skill) -> KB Flow Tracer (if chain needed) -> KB Analyst (if cross-module)
+- Flow Tracing: KB Navigator -> KB Flow Tracer (with `flow-chain-tracing` skill) -> KB Analyst (for architectural implications)
 
 ## Scope Boundary - READ-ONLY EXCEPT `/enrichkb`
 
@@ -111,6 +115,8 @@ If a user asks to rebuild or regenerate from source, use `/initkb` only to hand 
 | KB Domain Expert | `.agents/agents/KB_DOMAIN_EXPERT.md` | Domain model interpretation, entity relationships, data lifecycle |
 | KB Security Reviewer | `.agents/agents/KB_SECURITY_REVIEWER.md` | Security role analysis, access rule interpretation |
 | KB UX Interpreter | `.agents/agents/KB_UX_INTERPRETER.md` | Page structure, UI flow analysis, user journey mapping |
+| KB Feature Interpreter | `.agents/agents/KB_FEATURE_INTERPRETER.md` | Synthesise business-feature-level answers from technical KB data |
+| KB Flow Tracer | `.agents/agents/KB_FLOW_TRACER.md` | Trace complete flow execution chains across modules |
 
 ### Development and Planning Agents
 
@@ -131,6 +137,9 @@ If a user asks to rebuild or regenerate from source, use `/initkb` only to hand 
 - `.agents/skills/entity-lifecycle/SKILL.md` - Map entity CRUD operations across flows
 - `.agents/skills/flow-interpretation/SKILL.md` - Interpret microflow and nanoflow logic
 - `.agents/skills/page-flow-linking/SKILL.md` - Connect pages to their backing flows and data sources
+- `.agents/skills/feature-search/SKILL.md` - Map natural language feature questions to relevant KB files
+- `.agents/skills/flow-chain-tracing/SKILL.md` - Follow calls/called-by chains to build complete execution trees
+- `.agents/skills/impact-analysis/SKILL.md` - Trace blast radius of changes to flows, entities, or pages
 
 ### Reference Skills
 

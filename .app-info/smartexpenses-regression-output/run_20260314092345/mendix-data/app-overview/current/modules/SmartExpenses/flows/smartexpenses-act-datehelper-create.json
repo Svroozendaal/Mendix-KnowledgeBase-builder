@@ -1,0 +1,134 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_DateHelper_Create",
+                  "stableId":  "0a2f1651-0bd9-4051-800a-9b66469d81f4",
+                  "slug":  "smartexpenses-act-datehelper-create",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-datehelper-create.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-datehelper-create.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-datehelper-create.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_DateHelper_Create",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "0a2f1651-0bd9-4051-800a-9b66469d81f4",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_DateHelper_Create",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "6f49bd48-2c66-4d8f-ab11-21071be54e62",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.DateHelper as NewDateHelper (SelectedDate=[%BeginOfCurrentDay%], DateHelper_FBGProfile=$FBGProfile)",
+                      "detail":  "create SmartExpenses.DateHelper as NewDateHelper (SelectedDate=[%BeginOfCurrentDay%], DateHelper_FBGProfile=$FBGProfile)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "965f7463-0018-400c-8139-d414fa880906",
+                      "nodeType":  "Annotation",
+                      "label":  "Creates DateHelper entity",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5d725784-2cc6-4ecc-99d6-b7db20a3028f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0ea9b833-0979-4ac8-814d-47b27cb8d2be",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "811c160c-c9e6-481f-a156-3a35b8c6d05f",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "9a8aabe0-17a9-4580-922b-8ff5cd3f8537",
+                      "originNodeId":  "811c160c-c9e6-481f-a156-3a35b8c6d05f",
+                      "destinationNodeId":  "6f49bd48-2c66-4d8f-ab11-21071be54e62",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "86644603-e9b3-4dff-891a-dd98c05bcc5a",
+                      "originNodeId":  "6f49bd48-2c66-4d8f-ab11-21071be54e62",
+                      "destinationNodeId":  "5d725784-2cc6-4ecc-99d6-b7db20a3028f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "811c160c-c9e6-481f-a156-3a35b8c6d05f"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "811c160c-c9e6-481f-a156-3a35b8c6d05f",
+                                         "6f49bd48-2c66-4d8f-ab11-21071be54e62",
+                                         "5d725784-2cc6-4ecc-99d6-b7db20a3028f"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_DateHelper_Create\r\nNODES=5; EDGES=2\r\n1. START\r\n2. ACTION CreateObjectAction: create SmartExpenses.DateHelper as NewDateHelper (SelectedDate=[%BeginOfCurrentDay%], DateHelper_FBGProfile=$FBGProfile)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "SmartExpenses",
+                          "callerFlow":  "SmartExpenses.ACT_BudgetType_OpenOverviewPAge",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "3360aa11-b44b-432b-b202-afdbc2b489f1",
+                          "targetModule":  "SmartExpenses",
+                          "targetFlow":  "SmartExpenses.ACT_DateHelper_Create",
+                          "isInternal":  true
+                      }
+                  ]
+}

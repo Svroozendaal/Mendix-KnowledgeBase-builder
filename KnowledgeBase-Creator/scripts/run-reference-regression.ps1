@@ -45,7 +45,7 @@ if ($LASTEXITCODE -ne 0) { throw "Scaffold failed with exit code $LASTEXITCODE" 
 & powershell -NoProfile -ExecutionPolicy Bypass -File $composeScript -RunFolder $ReferenceRunFolder -OutputRoot $generatedKbFolder -AppName $AppName -GeneratedAtUtc $GeneratedAtUtc
 if ($LASTEXITCODE -ne 0) { throw "Compose failed with exit code $LASTEXITCODE" }
 
-& powershell -NoProfile -ExecutionPolicy Bypass -File $qualityScript -OutputRoot $generatedKbFolder -AppName $AppName
+& powershell -NoProfile -ExecutionPolicy Bypass -File $qualityScript -OutputRoot $generatedKbFolder -AppName $AppName -GeneratedAtUtc $GeneratedAtUtc -KbRootDisplay "reference/$AppName"
 if ($LASTEXITCODE -ne 0) { throw "Quality gate failed with exit code $LASTEXITCODE" }
 
 & powershell -NoProfile -ExecutionPolicy Bypass -File $benchmarkScript -OutputRoot $generatedKbFolder -AppName $AppName -GeneratedAtUtc $GeneratedAtUtc -KbRootDisplay "reference/$AppName"

@@ -1,0 +1,369 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.IVK_DuplicateTemplate",
+                  "stableId":  "164cb110-44de-4bb0-9308-70eaf755e799",
+                  "slug":  "excelimporter-ivk-duplicatetemplate",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ivk-duplicatetemplate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-ivk-duplicatetemplate.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-ivk-duplicatetemplate.json",
+                  "l2Logical":  "flow:ExcelImporter.IVK_DuplicateTemplate",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "164cb110-44de-4bb0-9308-70eaf755e799",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.IVK_DuplicateTemplate",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "d4fa6758-8e04-4f59-aeac-29a04132cfbb",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change AdditionalProperties_Copy (PrintStatisticsMessages=$AdditionalProperties/PrintStatisticsMessages, PrintNotFoundMessages_MainObject=$AdditionalProperties/PrintNotFoundMessages_MainObject, IgnoreEmptyKeys=$AdditionalProperties/IgnoreEmptyKeys, CommitUnchangedObjects_MainObject=$AdditionalProperties/CommitUnchangedObjects_MainObject, RemoveUnsyncedObjects=$AdditionalProperties/RemoveUnsyncedObjects, ResetEmptyAssociations=$AdditionalProperties/ResetEmptyAssociations, AdditionalProperties_MxObjectMember_RemoveIndicator=$AdditionalProperties/ExcelImporter.AdditionalProperties_MxObjectMember_RemoveIndicator; refreshInClient=true)",
+                      "detail":  "change AdditionalProperties_Copy (PrintStatisticsMessages=$AdditionalProperties/PrintStatisticsMessages, PrintNotFoundMessages_MainObject=$AdditionalProperties/PrintNotFoundMessages_MainObject, IgnoreEmptyKeys=$AdditionalProperties/IgnoreEmptyKeys, CommitUnchangedObjects_MainObject=$AdditionalProperties/CommitUnchangedObjects_MainObject, RemoveUnsyncedObjects=$AdditionalProperties/RemoveUnsyncedObjects, ResetEmptyAssociations=$AdditionalProperties/ResetEmptyAssociations, AdditionalProperties_MxObjectMember_RemoveIndicator=$AdditionalProperties/ExcelImporter.AdditionalProperties_MxObjectMember_RemoveIndicator; refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "5728b973-6418-4c9b-a751-9b3e6e90e53e",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewColumn (ColNumber=$Column/ColNumber, Text=$Column/Text, MappingType=$Column/MappingType, IsKey=$Column/IsKey, IsReferenceKey=$Column/IsReferenceKey, Status=$Column/Status, Details=$Column/Details, CaseSensitive=$Column/CaseSensitive, +13 more; refreshInClient=true)",
+                      "detail":  "change NewColumn (ColNumber=$Column/ColNumber, Text=$Column/Text, MappingType=$Column/MappingType, IsKey=$Column/IsKey, IsReferenceKey=$Column/IsReferenceKey, Status=$Column/Status, Details=$Column/Details, CaseSensitive=$Column/CaseSensitive, +13 more; refreshInClient=true)",
+                      "loopOwnerId":  "a17ffd3e-bdae-4f7d-9dbb-7337c574f6c2",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8af5d534-973e-40cd-8a93-042f73ddc6b7",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewTemplate (refreshInClient=true)",
+                      "detail":  "change NewTemplate (refreshInClient=true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "15e95b3e-78b0-4c5b-934d-5dbdc0e5add0",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change NewTemplate (Title=$Template/Title, Description=$Template/Description, SheetIndex=$Template/SheetIndex, HeaderRowNumber=$Template/HeaderRowNumber, FirstDataRowNumber=$Template/FirstDataRowNumber, ImportAction=$Template/ImportAction, Template_MxObjectType=$Template/ExcelImporter.Template_MxObjectType, Template_MxObjectReference_ParentAssociation=$Template/ExcelImporter.Template_MxObjectReference_ParentAssociation, +1 more; refreshInClient=false)",
+                      "detail":  "change NewTemplate (Title=$Template/Title, Description=$Template/Description, SheetIndex=$Template/SheetIndex, HeaderRowNumber=$Template/HeaderRowNumber, FirstDataRowNumber=$Template/FirstDataRowNumber, ImportAction=$Template/ImportAction, Template_MxObjectType=$Template/ExcelImporter.Template_MxObjectType, Template_MxObjectReference_ParentAssociation=$Template/ExcelImporter.Template_MxObjectReference_ParentAssociation, +1 more; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "48d7489b-f43e-4936-a081-007aa014ffb9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change ReferenceHandling_copy (Handling=$ReferenceHandling/Handling, DataHandling=$ReferenceHandling/DataHandling, PrintNotFoundMessages=$ReferenceHandling/PrintNotFoundMessages, CommitUnchangedObjects=$ReferenceHandling/CommitUnchangedObjects; refreshInClient=false)",
+                      "detail":  "change ReferenceHandling_copy (Handling=$ReferenceHandling/Handling, DataHandling=$ReferenceHandling/DataHandling, PrintNotFoundMessages=$ReferenceHandling/PrintNotFoundMessages, CommitUnchangedObjects=$ReferenceHandling/CommitUnchangedObjects; refreshInClient=false)",
+                      "loopOwnerId":  "67e59e47-8fea-40f4-a371-8a0d4f4da72f",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1db3bb71-a0ec-4c19-a61e-b0e0675c912c",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.Column as NewColumn",
+                      "detail":  "create ExcelImporter.Column as NewColumn",
+                      "loopOwnerId":  "a17ffd3e-bdae-4f7d-9dbb-7337c574f6c2",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "055c516a-479d-47d8-82db-335b85333682",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create ExcelImporter.Template as NewTemplate",
+                      "detail":  "create ExcelImporter.Template as NewTemplate",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "8ad2d33b-2c1d-490f-b841-74636ecc2c50",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve AdditionalProperties over association Template_AdditionalProperties from Template",
+                      "detail":  "retrieve AdditionalProperties over association Template_AdditionalProperties from Template",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "0b96cdc4-988d-4357-b5b6-0cdca0bacbcc",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve AdditionalProperties_Copy over association Template_AdditionalProperties from Template",
+                      "detail":  "retrieve AdditionalProperties_Copy over association Template_AdditionalProperties from Template",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "1ed5bde6-45cc-4fcd-969e-a24dc58389e8",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve ColumnList from ExcelImporter.Column",
+                      "detail":  "retrieve ColumnList from ExcelImporter.Column",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "93551da8-d759-4cb5-8ed3-3f945057da46",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve ReferenceHandlingList from ExcelImporter.ReferenceHandling",
+                      "detail":  "retrieve ReferenceHandlingList from ExcelImporter.ReferenceHandling",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "33485f63-6004-4d37-8b0c-936f965baff3",
+                      "nodeType":  "ActionActivity",
+                      "label":  "RetrieveAction: retrieve ReferenceHandling_copy from ExcelImporter.ReferenceHandling",
+                      "detail":  "retrieve ReferenceHandling_copy from ExcelImporter.ReferenceHandling",
+                      "loopOwnerId":  "67e59e47-8fea-40f4-a371-8a0d4f4da72f",
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "bae417ef-9887-4a43-aecd-603fed27e866",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a17ffd3e-bdae-4f7d-9dbb-7337c574f6c2",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate ColumnList as Column",
+                      "detail":  "iterate ColumnList as Column",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "67e59e47-8fea-40f4-a371-8a0d4f4da72f",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "iterate ReferenceHandlingList as ReferenceHandling",
+                      "detail":  "iterate ReferenceHandlingList as ReferenceHandling",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7df10e54-dd2c-4f9a-a7fe-7f4089d0f1e8",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7bc27aa4-3c61-4441-87fb-39a45d0b4719",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "032dfef6-1e42-48d6-90cd-06e80e795d24",
+                      "originNodeId":  "7bc27aa4-3c61-4441-87fb-39a45d0b4719",
+                      "destinationNodeId":  "055c516a-479d-47d8-82db-335b85333682",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "069ec359-10a1-4360-adf4-46c8dd345c26",
+                      "originNodeId":  "055c516a-479d-47d8-82db-335b85333682",
+                      "destinationNodeId":  "15e95b3e-78b0-4c5b-934d-5dbdc0e5add0",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1d8672b3-61df-43ba-bb01-16f31f4cf11b",
+                      "originNodeId":  "15e95b3e-78b0-4c5b-934d-5dbdc0e5add0",
+                      "destinationNodeId":  "1ed5bde6-45cc-4fcd-969e-a24dc58389e8",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "68d350fc-2fc9-4c90-8fe4-47f1439ee5ab",
+                      "originNodeId":  "1ed5bde6-45cc-4fcd-969e-a24dc58389e8",
+                      "destinationNodeId":  "a17ffd3e-bdae-4f7d-9dbb-7337c574f6c2",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "1fd04e02-d839-4c7d-b0c4-c9e22d90e0b7",
+                      "originNodeId":  "1db3bb71-a0ec-4c19-a61e-b0e0675c912c",
+                      "destinationNodeId":  "5728b973-6418-4c9b-a751-9b3e6e90e53e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "475da64b-83ca-4239-836c-6ab1ffc1c56d",
+                      "originNodeId":  "a17ffd3e-bdae-4f7d-9dbb-7337c574f6c2",
+                      "destinationNodeId":  "8ad2d33b-2c1d-490f-b841-74636ecc2c50",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c26dbb9a-391b-4866-bf40-5ad9845f046d",
+                      "originNodeId":  "8ad2d33b-2c1d-490f-b841-74636ecc2c50",
+                      "destinationNodeId":  "0b96cdc4-988d-4357-b5b6-0cdca0bacbcc",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "c591d31f-4bbf-484b-b5d1-e856dd915424",
+                      "originNodeId":  "0b96cdc4-988d-4357-b5b6-0cdca0bacbcc",
+                      "destinationNodeId":  "d4fa6758-8e04-4f59-aeac-29a04132cfbb",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "73051f47-dc41-4050-bd32-18f208192940",
+                      "originNodeId":  "d4fa6758-8e04-4f59-aeac-29a04132cfbb",
+                      "destinationNodeId":  "93551da8-d759-4cb5-8ed3-3f945057da46",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "185cc2d8-0c00-4c33-95ae-d19dbbfd41e2",
+                      "originNodeId":  "8af5d534-973e-40cd-8a93-042f73ddc6b7",
+                      "destinationNodeId":  "bae417ef-9887-4a43-aecd-603fed27e866",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "fc11c7a1-8307-4d49-830b-fb9c821a2e4f",
+                      "originNodeId":  "93551da8-d759-4cb5-8ed3-3f945057da46",
+                      "destinationNodeId":  "67e59e47-8fea-40f4-a371-8a0d4f4da72f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9f23605d-c264-4ef1-9c43-e386bb11a167",
+                      "originNodeId":  "67e59e47-8fea-40f4-a371-8a0d4f4da72f",
+                      "destinationNodeId":  "8af5d534-973e-40cd-8a93-042f73ddc6b7",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "a41f3a67-aa7a-4784-8e14-3427d71ce8c9",
+                      "originNodeId":  "33485f63-6004-4d37-8b0c-936f965baff3",
+                      "destinationNodeId":  "48d7489b-f43e-4936-a081-007aa014ffb9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "7bc27aa4-3c61-4441-87fb-39a45d0b4719"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "7bc27aa4-3c61-4441-87fb-39a45d0b4719",
+                                         "055c516a-479d-47d8-82db-335b85333682",
+                                         "15e95b3e-78b0-4c5b-934d-5dbdc0e5add0",
+                                         "1ed5bde6-45cc-4fcd-969e-a24dc58389e8",
+                                         "a17ffd3e-bdae-4f7d-9dbb-7337c574f6c2",
+                                         "1db3bb71-a0ec-4c19-a61e-b0e0675c912c",
+                                         "5728b973-6418-4c9b-a751-9b3e6e90e53e",
+                                         "8ad2d33b-2c1d-490f-b841-74636ecc2c50",
+                                         "0b96cdc4-988d-4357-b5b6-0cdca0bacbcc",
+                                         "d4fa6758-8e04-4f59-aeac-29a04132cfbb",
+                                         "93551da8-d759-4cb5-8ed3-3f945057da46",
+                                         "67e59e47-8fea-40f4-a371-8a0d4f4da72f",
+                                         "33485f63-6004-4d37-8b0c-936f965baff3",
+                                         "48d7489b-f43e-4936-a081-007aa014ffb9",
+                                         "8af5d534-973e-40cd-8a93-042f73ddc6b7",
+                                         "bae417ef-9887-4a43-aecd-603fed27e866"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.IVK_DuplicateTemplate\r\nNODES=13; EDGES=11\r\n1. START\r\n2. ACTION CreateObjectAction: create ExcelImporter.Template as NewTemplate\r\n3. ACTION ChangeObjectAction: change NewTemplate (Title=$Template/Title, Description=$Template/Description, SheetIndex=$Template/SheetIndex, HeaderRowNumber=$Template/HeaderRowNumber, FirstDataRowNumber=$Template/FirstDataRowNumber, ImportAction=$Template/ImportAction, Template_MxObjectType=$Template/ExcelImporter.Template_MxObjectType, Template_MxObjectReference_ParentAssociation=$Template/ExcelImporter.Template_MxObjectReference_ParentAssociation, +1 more; refreshInClient=false)\r\n4. ACTION RetrieveAction: retrieve ColumnList from ExcelImporter.Column\r\n5. LOOP iterate ColumnList as Column\r\n  6. LOOP BODY\r\n    7. ACTION CreateObjectAction: create ExcelImporter.Column as NewColumn\r\n    8. ACTION ChangeObjectAction: change NewColumn (ColNumber=$Column/ColNumber, Text=$Column/Text, MappingType=$Column/MappingType, IsKey=$Column/IsKey, IsReferenceKey=$Column/IsReferenceKey, Status=$Column/Status, Details=$Column/Details, CaseSensitive=$Column/CaseSensitive, +13 more; refreshInClient=true)\r\n9. ACTION RetrieveAction: retrieve AdditionalProperties over association Template_AdditionalProperties from Template\r\n10. ACTION RetrieveAction: retrieve AdditionalProperties_Copy over association Template_AdditionalProperties from Template\r\n11. ACTION ChangeObjectAction: change AdditionalProperties_Copy (PrintStatisticsMessages=$AdditionalProperties/PrintStatisticsMessages, PrintNotFoundMessages_MainObject=$AdditionalProperties/PrintNotFoundMessages_MainObject, IgnoreEmptyKeys=$AdditionalProperties/IgnoreEmptyKeys, CommitUnchangedObjects_MainObject=$AdditionalProperties/CommitUnchangedObjects_MainObject, RemoveUnsyncedObjects=$AdditionalProperties/RemoveUnsyncedObjects, ResetEmptyAssociations=$AdditionalProperties/ResetEmptyAssociations, AdditionalProperties_MxObjectMember_RemoveIndicator=$AdditionalProperties/ExcelImporter.AdditionalProperties_MxObjectMember_RemoveIndicator; refreshInClient=true)\r\n12. ACTION RetrieveAction: retrieve ReferenceHandlingList from ExcelImporter.ReferenceHandling\r\n13. LOOP iterate ReferenceHandlingList as ReferenceHandling\r\n  14. LOOP BODY\r\n    15. ACTION RetrieveAction: retrieve ReferenceHandling_copy from ExcelImporter.ReferenceHandling\r\n    16. ACTION ChangeObjectAction: change ReferenceHandling_copy (Handling=$ReferenceHandling/Handling, DataHandling=$ReferenceHandling/DataHandling, PrintNotFoundMessages=$ReferenceHandling/PrintNotFoundMessages, CommitUnchangedObjects=$ReferenceHandling/CommitUnchangedObjects; refreshInClient=false)\r\n17. ACTION ChangeObjectAction: change NewTemplate (refreshInClient=true)\r\n18. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

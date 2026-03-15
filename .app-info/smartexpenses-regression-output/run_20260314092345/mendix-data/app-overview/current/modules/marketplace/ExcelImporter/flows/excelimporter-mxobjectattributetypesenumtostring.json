@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "ExcelImporter",
+                  "qualifiedName":  "ExcelImporter.MxObjectAttributeTypesEnumToString",
+                  "stableId":  "5832521b-ffb7-4a1c-9ec2-6a51ce7dcbff",
+                  "slug":  "excelimporter-mxobjectattributetypesenumtostring",
+                  "l0Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-mxobjectattributetypesenumtostring.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/ExcelImporter/flows/excelimporter-mxobjectattributetypesenumtostring.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/ExcelImporter/flows/excelimporter-mxobjectattributetypesenumtostring.json",
+                  "l2Logical":  "flow:ExcelImporter.MxObjectAttributeTypesEnumToString",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/marketplace/ExcelImporter/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/ExcelImporter/flows/INDEX.json"
+              },
+    "flowId":  "5832521b-ffb7-4a1c-9ec2-6a51ce7dcbff",
+    "kind":  "Microflow",
+    "qualifiedName":  "ExcelImporter.MxObjectAttributeTypesEnumToString",
+    "module":  "ExcelImporter",
+    "nodes":  [
+                  {
+                      "nodeId":  "9ee500ae-bad3-42f8-abc4-1673929d7c43",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateVariableAction: create variable AttributeTypeString=getKey($AttributeTypes)",
+                      "detail":  "create variable AttributeTypeString=getKey($AttributeTypes)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "2b721c4c-4a5c-468d-ae4f-91b2b3c9526f",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "a7936dab-abc8-4043-9b1d-c8bcc0428b92",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e514c9e8-01fb-4b15-bbad-e8701b298320",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "f39d82a1-4a73-4d5e-bab1-aab8d804bf2d",
+                      "originNodeId":  "e514c9e8-01fb-4b15-bbad-e8701b298320",
+                      "destinationNodeId":  "9ee500ae-bad3-42f8-abc4-1673929d7c43",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "afeec6f6-d31e-43c8-8eb5-5ba0a6edcea6",
+                      "originNodeId":  "9ee500ae-bad3-42f8-abc4-1673929d7c43",
+                      "destinationNodeId":  "2b721c4c-4a5c-468d-ae4f-91b2b3c9526f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "e514c9e8-01fb-4b15-bbad-e8701b298320"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "e514c9e8-01fb-4b15-bbad-e8701b298320",
+                                         "9ee500ae-bad3-42f8-abc4-1673929d7c43",
+                                         "2b721c4c-4a5c-468d-ae4f-91b2b3c9526f"
+                                     ],
+    "pseudocode":  "FLOW Microflow: ExcelImporter.MxObjectAttributeTypesEnumToString\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION CreateVariableAction: create variable AttributeTypeString=getKey($AttributeTypes)\r\n3. END",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}

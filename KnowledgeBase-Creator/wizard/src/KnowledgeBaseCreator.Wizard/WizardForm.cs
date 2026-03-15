@@ -10,6 +10,7 @@ internal sealed class WizardForm : Form
     private readonly TextBox _appFolderBox = new() { Dock = DockStyle.Fill, ReadOnly = true };
     private readonly Button _runButton = new() { Text = "Run Pipeline", AutoSize = true };
     private readonly Button _enrichButton = new() { Text = "Enrich KB", AutoSize = true, Enabled = false };
+    private readonly Button _settingsButton = new() { Text = "AI Settings...", AutoSize = true };
     private readonly CheckBox _autoEnrichCheck = new() { Text = "Auto-enrich after pipeline", AutoSize = true };
     private readonly TextBox _logBox = new()
     {
@@ -86,11 +87,12 @@ internal sealed class WizardForm : Form
         AddRow(settings, 3, "mx.exe", _mxPathBox, autoDetectMxButton, browseMxButton);
         AddRow(settings, 4, "Output data root", _dataRootBox, browseDataRootButton, EmptyControl());
         AddRow(settings, 5, "Mendix app folder", _appFolderBox, EmptyControl(), EmptyControl());
-        AddRow(settings, 6, string.Empty, _autoEnrichCheck, EmptyControl(), EmptyControl());
+        AddRow(settings, 6, string.Empty, _autoEnrichCheck, _settingsButton, EmptyControl());
         AddRow(settings, 7, string.Empty, _runButton, _enrichButton, EmptyControl());
 
         _runButton.Click += async (_, _) => await RunPipelineAsync();
         _enrichButton.Click += async (_, _) => await RunEnrichmentAsync();
+        _settingsButton.Click += (_, _) => OpenAiSettings();
         root.Controls.Add(settings, 0, 0);
 
         var logPanel = new GroupBox
@@ -251,6 +253,26 @@ internal sealed class WizardForm : Form
         }
     }
 
+    private void OpenAiSettings()
+    {
+        var currentSettings = _config.AiSettings ?? new AiSettings();
+        using var form = new SettingsForm(currentSettings);
+        if (form.ShowDialog(this) == DialogResult.OK)
+        {
+            _config.AiSettings = form.Result;
+            WizardRuntime.SaveConfig(_configPath, _config);
+            AppendLog($"AI provider set to: {ProviderLabel(form.Result.Provider)}");
+        }
+    }
+
+    private static string ProviderLabel(AiProvider provider) => provider switch
+    {
+        AiProvider.ClaudeCli => "Claude CLI",
+        AiProvider.CodexCli => "Codex CLI",
+        AiProvider.ClaudeApi => "Claude API",
+        _ => provider.ToString(),
+    };
+
     private async Task RunPipelineAsync()
     {
         try
@@ -294,6 +316,7 @@ internal sealed class WizardForm : Form
                 LastMxExePath = mxPath,
                 LastDataRoot = dataRoot,
                 AutoEnrichAfterPipeline = _autoEnrichCheck.Checked,
+                AiSettings = _config.AiSettings, // preserve AI settings across pipeline runs
             };
             WizardRuntime.SaveConfig(_configPath, _config);
 
@@ -387,15 +410,31 @@ internal sealed class WizardForm : Form
             }
 
             var appName = _appNameBox.Text.Trim();
-            var claudePath = _config.LastClaudePath;
+            var aiSettings = _config.AiSettings ?? new AiSettings();
 
             AppendLog($"Knowledge base: {kbRoot}");
             AppendLog($"App name: {appName}");
+            AppendLog($"AI provider: {ProviderLabel(aiSettings.Provider)}");
 
-            var (claudeFound, detectedClaudePath) = WizardRuntime.DetectClaudeCli(claudePath);
-            if (claudeFound)
+            // Resolve the effective CLI path for the selected provider
+            string? effectiveCliPath = null;
+            switch (aiSettings.Provider)
             {
-                AppendLog($"Claude CLI: {detectedClaudePath}");
+                case AiProvider.ClaudeCli:
+                    var (claudeFound, detectedClaudePath) = WizardRuntime.DetectClaudeCli(aiSettings.ClaudeCliPath);
+                    effectiveCliPath = detectedClaudePath;
+                    if (claudeFound)
+                        AppendLog($"Claude CLI: {detectedClaudePath}");
+                    break;
+                case AiProvider.CodexCli:
+                    var (codexFound, detectedCodexPath) = WizardRuntime.DetectCodexCli(aiSettings.CodexCliPath);
+                    effectiveCliPath = detectedCodexPath;
+                    if (codexFound)
+                        AppendLog($"Codex CLI: {detectedCodexPath}");
+                    break;
+                case AiProvider.ClaudeApi:
+                    AppendLog($"Model: {aiSettings.ClaudeApiModel}");
+                    break;
             }
 
             var exitCode = await WizardRuntime.RunEnrichmentAsync(
@@ -403,7 +442,8 @@ internal sealed class WizardForm : Form
                 wizardRoot: _wizardRoot,
                 kbRoot: kbRoot,
                 appName: appName,
-                claudePath: claudePath,
+                claudePath: effectiveCliPath,
+                aiSettings: aiSettings,
                 log: AppendLog
             );
 

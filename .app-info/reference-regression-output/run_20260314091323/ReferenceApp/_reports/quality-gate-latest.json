@@ -1,0 +1,25 @@
+﻿{
+    "appName":  "ReferenceApp",
+    "kbRoot":  "reference/ReferenceApp",
+    "generatedAtUtc":  "2026-03-05T00:00:00Z",
+    "overallPass":  true,
+    "filesChecked":  37,
+    "issueCount":  0,
+    "issues":  [
+
+               ],
+    "semanticMetrics":  {
+                            "ExpectedCustomPages":  1,
+                            "EntityThreshold":  90,
+                            "PageCoveragePercent":  100,
+                            "ExpectedCustomEntities":  1,
+                            "ExpectedCustomFlows":  2,
+                            "EntityPass":  true,
+                            "FlowThreshold":  90,
+                            "EntityCoveragePercent":  100,
+                            "PageThreshold":  95,
+                            "FlowPass":  true,
+                            "PagePass":  true,
+                            "FlowCoveragePercent":  100
+                        }
+}

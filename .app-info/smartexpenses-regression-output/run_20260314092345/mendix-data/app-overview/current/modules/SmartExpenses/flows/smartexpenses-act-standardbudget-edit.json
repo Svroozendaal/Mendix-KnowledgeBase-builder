@@ -1,0 +1,300 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "SmartExpenses",
+                  "qualifiedName":  "SmartExpenses.ACT_StandardBudget_Edit",
+                  "stableId":  "899b21c7-ef5d-4cc7-93ae-a8a37e504578",
+                  "slug":  "smartexpenses-act-standardbudget-edit",
+                  "l0Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-standardbudget-edit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/SmartExpenses/flows/smartexpenses-act-standardbudget-edit.overview.md",
+                  "l2Path":  "app-overview/current/modules/SmartExpenses/flows/smartexpenses-act-standardbudget-edit.json",
+                  "l2Logical":  "flow:SmartExpenses.ACT_StandardBudget_Edit",
+                  "sourceRun":  "cli_2026-03-14T09-23-46.259Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-14T09-23-46.259Z/modules/SmartExpenses/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/SmartExpenses/flows/INDEX.json"
+              },
+    "flowId":  "899b21c7-ef5d-4cc7-93ae-a8a37e504578",
+    "kind":  "Microflow",
+    "qualifiedName":  "SmartExpenses.ACT_StandardBudget_Edit",
+    "module":  "SmartExpenses",
+    "nodes":  [
+                  {
+                      "nodeId":  "17b63414-400a-42c9-a20b-43cbf178f987",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ChangeObjectAction: change StandardBudget (Logo_StandardBudget=$NewLogo_1; refreshInClient=false)",
+                      "detail":  "change StandardBudget (Logo_StandardBudget=$NewLogo_1; refreshInClient=false)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7049344b-054c-4aa2-abb7-05ad34b91e27",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.Logo as NewLogo",
+                      "detail":  "create SmartExpenses.Logo as NewLogo",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "c64f0979-d9d7-433c-8279-6678827b8322",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.Logo as NewLogo_1",
+                      "detail":  "create SmartExpenses.Logo as NewLogo_1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "387177a2-c546-4d41-be41-28009b1002b1",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CreateObjectAction: create SmartExpenses.StandardBudget as StandardBudget_2 (Logo_StandardBudget=$NewLogo)",
+                      "detail":  "create SmartExpenses.StandardBudget as StandardBudget_2 (Logo_StandardBudget=$NewLogo)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "aeca2352-0b3a-4dd0-b1dc-26c5a7aa09f9",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ShowPageAction: show page SmartExpenses.StandardBudget_NewEdit",
+                      "detail":  "show page SmartExpenses.StandardBudget_NewEdit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "934cd2e9-f97d-44ff-8f32-1be23f6fe68e",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "7566c8c8-7dee-4ae4-8ea7-c174d14291e3",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "d5960ac6-5a61-4ed2-a21c-6b9f36ffd08f",
+                      "nodeType":  "ExclusiveMerge",
+                      "label":  "ExclusiveMerge",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "e64f9a71-da88-417a-8660-7058a953b5ec",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "logo object excist? expression=$StandardBudget/SmartExpenses.Logo_StandardBudget/SmartExpenses.Logo != empty",
+                      "detail":  "logo object excist? expression=$StandardBudget/SmartExpenses.Logo_StandardBudget/SmartExpenses.Logo != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "6b5f8415-acae-4707-ba41-df86963352fa",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "StandardBudget exists? expression=$StandardBudget != empty",
+                      "detail":  "StandardBudget exists? expression=$StandardBudget != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "b069938e-2d29-4816-b83f-9537eaca995d",
+                      "nodeType":  "MicroflowParameterObject",
+                      "label":  "MicroflowParameterObject",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  false,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "9f12cfaa-777c-4b41-a345-ce7ecec49942",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "2d44daeb-8847-44b7-83ab-b51b98fca8dd",
+                      "originNodeId":  "9f12cfaa-777c-4b41-a345-ce7ecec49942",
+                      "destinationNodeId":  "6b5f8415-acae-4707-ba41-df86963352fa",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "31d2d5ed-3b93-4ccc-90d1-1e440253283a",
+                      "originNodeId":  "6b5f8415-acae-4707-ba41-df86963352fa",
+                      "destinationNodeId":  "e64f9a71-da88-417a-8660-7058a953b5ec",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "8697218f-6d84-460b-82f8-c159661f467a",
+                      "originNodeId":  "6b5f8415-acae-4707-ba41-df86963352fa",
+                      "destinationNodeId":  "7049344b-054c-4aa2-abb7-05ad34b91e27",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "413c4ca9-526e-403b-a305-3b280dc80add",
+                      "originNodeId":  "e64f9a71-da88-417a-8660-7058a953b5ec",
+                      "destinationNodeId":  "7566c8c8-7dee-4ae4-8ea7-c174d14291e3",
+                      "condition":  "EnumerationCase=true",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "5721d702-6db3-467b-9415-e6819cce3706",
+                      "originNodeId":  "aeca2352-0b3a-4dd0-b1dc-26c5a7aa09f9",
+                      "destinationNodeId":  "934cd2e9-f97d-44ff-8f32-1be23f6fe68e",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "135f99b2-4c09-40a2-9682-8bd7eca5fbe1",
+                      "originNodeId":  "7566c8c8-7dee-4ae4-8ea7-c174d14291e3",
+                      "destinationNodeId":  "aeca2352-0b3a-4dd0-b1dc-26c5a7aa09f9",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "9ececf5e-7731-49c2-bc21-baa60f8dea52",
+                      "originNodeId":  "387177a2-c546-4d41-be41-28009b1002b1",
+                      "destinationNodeId":  "d5960ac6-5a61-4ed2-a21c-6b9f36ffd08f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "ffbd5874-69fc-4bc8-a5cd-d9649f6164f2",
+                      "originNodeId":  "7049344b-054c-4aa2-abb7-05ad34b91e27",
+                      "destinationNodeId":  "387177a2-c546-4d41-be41-28009b1002b1",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "6822a4a7-1069-4294-9254-68fbc8d62f3c",
+                      "originNodeId":  "e64f9a71-da88-417a-8660-7058a953b5ec",
+                      "destinationNodeId":  "c64f0979-d9d7-433c-8279-6678827b8322",
+                      "condition":  "EnumerationCase=false",
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  2,
+                      "destinationConnectionIndex":  0
+                  },
+                  {
+                      "edgeId":  "d78a9a67-9088-4321-9cb1-1e44438c8c78",
+                      "originNodeId":  "c64f0979-d9d7-433c-8279-6678827b8322",
+                      "destinationNodeId":  "17b63414-400a-42c9-a20b-43cbf178f987",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  },
+                  {
+                      "edgeId":  "3ff1015f-aa75-44b0-a422-838eca59b285",
+                      "originNodeId":  "d5960ac6-5a61-4ed2-a21c-6b9f36ffd08f",
+                      "destinationNodeId":  "7566c8c8-7dee-4ae4-8ea7-c174d14291e3",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  0,
+                      "destinationConnectionIndex":  2
+                  },
+                  {
+                      "edgeId":  "246665eb-c8ab-46ad-b628-afca63550422",
+                      "originNodeId":  "17b63414-400a-42c9-a20b-43cbf178f987",
+                      "destinationNodeId":  "d5960ac6-5a61-4ed2-a21c-6b9f36ffd08f",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  1,
+                      "destinationConnectionIndex":  3
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "9f12cfaa-777c-4b41-a345-ce7ecec49942"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "9f12cfaa-777c-4b41-a345-ce7ecec49942",
+                                         "6b5f8415-acae-4707-ba41-df86963352fa",
+                                         "e64f9a71-da88-417a-8660-7058a953b5ec",
+                                         "7566c8c8-7dee-4ae4-8ea7-c174d14291e3",
+                                         "aeca2352-0b3a-4dd0-b1dc-26c5a7aa09f9",
+                                         "934cd2e9-f97d-44ff-8f32-1be23f6fe68e",
+                                         "c64f0979-d9d7-433c-8279-6678827b8322",
+                                         "17b63414-400a-42c9-a20b-43cbf178f987",
+                                         "d5960ac6-5a61-4ed2-a21c-6b9f36ffd08f",
+                                         "7049344b-054c-4aa2-abb7-05ad34b91e27",
+                                         "387177a2-c546-4d41-be41-28009b1002b1"
+                                     ],
+    "pseudocode":  "FLOW Microflow: SmartExpenses.ACT_StandardBudget_Edit\r\nNODES=12; EDGES=12\r\n1. START\r\n2. DECISION StandardBudget exists? expression=$StandardBudget != empty\r\n3. BRANCH when EnumerationCase=true\r\n  4. DECISION logo object excist? expression=$StandardBudget/SmartExpenses.Logo_StandardBudget/SmartExpenses.Logo != empty\r\n  5. BRANCH when EnumerationCase=true\r\n    6. NODE ExclusiveMerge: ExclusiveMerge\r\n    7. ACTION ShowPageAction: show page SmartExpenses.StandardBudget_NewEdit\r\n    8. END\r\n  9. BRANCH when EnumerationCase=false\r\n    10. ACTION CreateObjectAction: create SmartExpenses.Logo as NewLogo_1\r\n    11. ACTION ChangeObjectAction: change StandardBudget (Logo_StandardBudget=$NewLogo_1; refreshInClient=false)\r\n    12. NODE ExclusiveMerge: ExclusiveMerge\r\n    13. REF ExclusiveMerge\r\n14. BRANCH when EnumerationCase=false\r\n  15. ACTION CreateObjectAction: create SmartExpenses.Logo as NewLogo\r\n  16. ACTION CreateObjectAction: create SmartExpenses.StandardBudget as StandardBudget_2 (Logo_StandardBudget=$NewLogo)\r\n  17. REF ExclusiveMerge",
+    "retrieveActions":  [
+                            null
+                        ],
+    "decisionActions":  [
+                            null
+                        ],
+    "showPageActions":  [
+                            null
+                        ],
+    "mutationActions":  [
+                            null
+                        ],
+    "callEdges":  [
+
+                  ]
+}
