@@ -13,7 +13,7 @@ export class FileNotFoundError extends Error {
 }
 
 const MAX_FILE_LENGTH = 5_000;
-const MAX_SEARCH_RESULTS = 20;
+const MAX_SEARCH_RESULTS = 10;
 
 export class KBNavigator {
   async readFile(kbRoot: string, relativePath: string): Promise<string> {

@@ -23,8 +23,8 @@ This is an app-specific agent for this project. It does not have a generic base 
    - Start with collection abstracts (`flows/INDEX.abstract.md`, `pages/INDEX.abstract.md`) for module-level triage.
    - Read L0 abstracts (`<slug>.abstract.md`) to decide relevance — minimal token cost.
    - Read L1 overviews (`<slug>.overview.md`) for structured answers — steps, entities, decisions.
-   - Read L2 JSON (`app-overview/current/.../<slug>.json`) only for exact verification. Trust L2 over L1 when they differ.
-4. **Traverse pointer chain**: app-level -> module-level -> collection L0 -> object L0 -> L1 -> L2.
+   - **L2 JSON (`app-overview/`) is BLOCKED by default.** Do not read raw data without explicit user approval (see Guardrails rule 6).
+4. **Traverse pointer chain**: app-level -> module-level -> collection L0 -> object L0 -> L1. Stop at L1 unless the user has granted raw data access.
 5. **Use route indexes** (`routes/*.md`) for cross-cutting lookups — these include direct L0/L1/L2 links.
 6. **Check `INTERPRETATION.md`** for AI-generated business narrative (Confidence: Inferred).
 7. **Return concise explanation** with supporting file references.
@@ -44,7 +44,7 @@ This is an app-specific agent for this project. It does not have a generic base 
 | "What pages does the Admin role see?" | `routes/by-page.md` → filter by Admin role | L0/L1 page links | Route → L0 |
 | "Which modules depend on SmartExpenses?" | `routes/cross-module.md` | Dependency matrix | Route index |
 | "What does flow ACT_Balance_Create do?" | `routes/by-flow.md` → L0 link | L0 → L1 overview | L0 → L1 |
-| "What is the exact expression in decision X?" | L1 overview first | L2 JSON if needed | L1 → L2 |
+| "What is the exact expression in decision X?" | L1 overview first | Ask user before accessing L2 JSON | L1 (→ L2 with approval) |
 
 ## Guardrails
 
@@ -53,6 +53,7 @@ This is an app-specific agent for this project. It does not have a generic base 
 3. Prefer exact file and section pointers over broad summaries.
 4. Distinguish documented facts from interpretation.
 5. When the KB is insufficient, explicitly say so and suggest what the `KNOWLEDGEBASE_CREATOR` should add.
+6. **HARD BLOCK — Raw data access forbidden by default.** Do NOT read files under `app-overview/` or `dumps/` without explicit user approval. When the KB cannot answer a question, stop and ask the user: _"The knowledge base does not contain enough detail to answer this. Searching the raw app data (`app-overview/`) would provide the answer but costs significantly more tokens and time. May I proceed?"_ Only access raw data after the user says yes.
 
 ## Output Template
 

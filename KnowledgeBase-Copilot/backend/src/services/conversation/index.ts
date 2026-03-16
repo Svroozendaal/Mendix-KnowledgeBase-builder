@@ -10,7 +10,7 @@ import { KBNavigator } from '../kb-navigator/index.js';
 import { createLogger } from '../../logger.js';
 
 const log = createLogger('Conversation');
-const MAX_TOOL_LOOPS = 20;
+const MAX_TOOL_LOOPS = 8;
 const MAX_RATE_LIMIT_RETRIES = 5;
 /** Max number of messages to keep in full when sending to the API. */
 const HISTORY_WINDOW_SIZE = 10;
@@ -64,10 +64,6 @@ export class ConversationService {
     log.debug(`System prompt built`, { length: systemPrompt.length, kbRoot });
     const newMessages: Message[] = [userMsg];
 
-    // Index of the user message that starts this turn — everything before it
-    // is eligible for compression when building the API view.
-    const turnStartIndex = conversation.messages.length - 1;
-
     let loopCount = 0;
     let rateLimitRetries = 0;
 
@@ -77,7 +73,7 @@ export class ConversationService {
 
       // Build a compressed view of the history for the API call.
       // Original conversation.messages is never mutated — full history is preserved for storage.
-      const optimisedMessages = this.buildApiView(conversation.messages, turnStartIndex);
+      const optimisedMessages = this.buildApiView(conversation.messages);
       log.debug(`Optimised message view`, { original: conversation.messages.length, optimised: optimisedMessages.length });
 
       // Send conversation to AI (with rate-limit retry)
@@ -297,51 +293,61 @@ export class ConversationService {
   // ---------------------------------------------------------------------------
 
   /**
-   * Build synthetic tool-call messages that pre-load READER.md and ROUTING.md
-   * into the conversation so the AI doesn't spend extra API calls reading them.
+   * Pre-load READER.md and ROUTING.md as synthetic tool_use / tool_result
+   * message pairs.  This has two benefits over plain-text seeding:
+   * 1. The existing compressOldToolResults() logic will automatically shrink
+   *    these results once newer tool calls push them out of the keep window.
+   * 2. The AI sees them as "already called read_file" so it won't re-request.
    */
   private async seedKbContext(kbRoot: string): Promise<Message[]> {
     const files = ['READER.md', 'ROUTING.md'];
-    const toolUseBlocks: Message['content'] = [];
-    const toolResultBlocks: Message['content'] = [];
+    const messages: Message[] = [];
+    const now = new Date().toISOString();
 
     for (const file of files) {
-      const toolCallId = `seed_${file.replace('.', '_').toLowerCase()}`;
       let content: string;
       try {
         content = await kbNavigator.readFile(kbRoot, file);
       } catch {
-        content = `(${file} not found)`;
+        continue; // file not found — skip
       }
 
-      toolUseBlocks.push({
-        type: 'tool_use',
-        toolCall: { id: toolCallId, name: 'read_file', arguments: { path: file } },
-      });
-      toolResultBlocks.push({
-        type: 'tool_result',
-        toolResult: { toolCallId, content, isError: false },
-      });
+      const toolCallId = `seed_${file.replace('.', '_')}_${randomUUID().slice(0, 8)}`;
+
+      // Assistant message with a synthetic tool_use block (as if AI called read_file)
+      const assistantMsg: Message = {
+        id: `seed_assistant_${randomUUID()}`,
+        role: 'assistant',
+        content: [{
+          type: 'tool_use',
+          toolCall: {
+            id: toolCallId,
+            name: 'read_file',
+            arguments: { path: file },
+          },
+        }],
+        timestamp: now,
+      };
+
+      // User message with the tool_result (as if KB Navigator returned the content)
+      const resultMsg: Message = {
+        id: `seed_result_${randomUUID()}`,
+        role: 'user',
+        content: [{
+          type: 'tool_result',
+          toolResult: {
+            toolCallId,
+            content,
+            isError: false,
+          },
+        }],
+        timestamp: now,
+      };
+
+      messages.push(assistantMsg, resultMsg);
     }
 
-    const assistantMsg: Message = {
-      id: randomUUID(),
-      role: 'assistant',
-      content: [
-        { type: 'text', text: 'I\'ll start by reading the KB navigation files.' },
-        ...toolUseBlocks,
-      ],
-      timestamp: new Date().toISOString(),
-    };
-
-    const toolResultMsg: Message = {
-      id: randomUUID(),
-      role: 'user',
-      content: toolResultBlocks,
-      timestamp: new Date().toISOString(),
-    };
-
-    return [assistantMsg, toolResultMsg];
+    return messages;
   }
 
   // ---------------------------------------------------------------------------
@@ -354,19 +360,35 @@ export class ConversationService {
    * 2. Window old messages if the history is long.
    * The original conversation.messages array is never mutated.
    */
-  private buildApiView(messages: Message[], turnStartIndex: number): Message[] {
-    let view = this.compressOldToolResults(messages, turnStartIndex);
+  private buildApiView(messages: Message[]): Message[] {
+    let view = this.compressOldToolResults(messages);
     view = this.windowMessages(view);
     return view;
   }
 
   /**
-   * Replace tool_result content from previous turns with short placeholders.
-   * Messages at or after turnStartIndex (the current turn) are kept in full.
+   * Replace tool_result content with short placeholders, keeping only the most
+   * recent KEEP_FULL_RESULTS tool-result messages in full. This applies both to
+   * previous turns AND earlier iterations within the current turn's tool loop —
+   * the key insight is that within a single question the AI can make 10+ tool
+   * calls, and resending all results in full each time is the #1 token cost.
    */
-  private compressOldToolResults(messages: Message[], turnStartIndex: number): Message[] {
+  private compressOldToolResults(messages: Message[]): Message[] {
+    const KEEP_FULL_RESULTS = 2;
+
+    // Find indices of all tool-result messages (newest last)
+    const toolResultIndices: number[] = [];
+    for (let i = 0; i < messages.length; i++) {
+      if (messages[i].role === 'user' && messages[i].content.some(b => b.type === 'tool_result')) {
+        toolResultIndices.push(i);
+      }
+    }
+
+    // Keep the last KEEP_FULL_RESULTS tool-result messages in full
+    const keepFullSet = new Set(toolResultIndices.slice(-KEEP_FULL_RESULTS));
+
     return messages.map((msg, idx) => {
-      if (idx >= turnStartIndex) return msg;
+      if (keepFullSet.has(idx)) return msg;
       if (msg.role !== 'user') return msg;
 
       const hasToolResult = msg.content.some(b => b.type === 'tool_result');

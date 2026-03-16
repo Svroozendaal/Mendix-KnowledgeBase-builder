@@ -18,7 +18,13 @@ export function useConversation(conversationId: string | null) {
       return;
     }
     api.getConversation(conversationId)
-      .then((conv) => setMessages(conv.messages))
+      .then((conv) => {
+        const filtered = conv.messages.filter((m) =>
+          !m.id.startsWith('seed_') &&
+          !(m.role === 'user' && m.content.every((b) => b.type === 'tool_result'))
+        );
+        setMessages(filtered);
+      })
       .catch(console.error);
   }, [conversationId]);
 
@@ -101,10 +107,13 @@ export function useConversation(conversationId: string | null) {
             api.getConversation(conversationId)
               .then((conv) => {
                 const filtered = conv.messages.filter((m) => {
-                  // Keep all assistant and genuine user messages
                   // Skip user-role messages that only contain tool_result blocks
                   // (these are internal API round-trips, not user input)
                   if (m.role === 'user' && m.content.every((b) => b.type === 'tool_result')) {
+                    return false;
+                  }
+                  // Skip pre-seeded KB context messages (internal bootstrap)
+                  if (m.id.startsWith('seed_')) {
                     return false;
                   }
                   return true;

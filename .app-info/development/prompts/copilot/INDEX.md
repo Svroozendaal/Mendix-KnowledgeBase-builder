@@ -35,6 +35,12 @@ The final version will be embedded as a Mendix Studio Pro extension (React/TypeS
 | 05 | [05-FRONTEND_CHAT_UI.md](05-FRONTEND_CHAT_UI.md) | High | 04 | `frontend/` |
 | 06 | [06-INTEGRATION_AND_POLISH.md](06-INTEGRATION_AND_POLISH.md) | High | 05 | All |
 
+### Copilot Optimisation Track
+
+| # | Prompt | Priority | Depends On | Target Package |
+|---|---|---|---|---|
+| 07 | [07-QUESTION_CLASSIFIER.md](07-QUESTION_CLASSIFIER.md) | High | 06 | `backend/` |
+
 ## Dependency Graph
 
 ```text
@@ -44,9 +50,10 @@ Phase 1 (Scaffold)
       -> Phase 4 (API + WebSocket)
         -> Phase 5 (Frontend Chat UI)
           -> Phase 6 (Integration + Polish)
+            -> Phase 7 (Question Classifier — fast-path routing)
 ```
 
-All phases are strictly sequential. Each phase's entry criteria require the previous phase to be complete.
+Phases 1–6 are strictly sequential. Phase 7+ (optimisation track) requires phase 6 to be complete but can be developed independently of each other.
 
 ## Parallel Execution Notes
 

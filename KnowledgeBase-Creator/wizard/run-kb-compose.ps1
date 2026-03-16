@@ -1449,18 +1449,19 @@ Confidence: Export-backed
 - Use ``modules/<Module>/`` for app and system modules, and ``modules/_marktplace/<Module>/`` for marketplace modules.
 - Use ``routes/`` files for cross-cut indexes by entity, page, and flow.
 - Open collection abstracts first, then object overview files second.
-- Open object JSON in ``app-overview/current/...`` only for exact verification.
-- If L1 and L2 differ, trust L2.
+
+**RAW DATA ACCESS BLOCKED.** Do NOT open files in ``app-overview/`` or ``dumps/`` without explicit user approval. If the KB cannot answer a question, stop and ask the user before escalating to raw data — it costs significantly more tokens and time.
 
 Confidence: Export-backed
 
 ## How to answer questions
 
 - For behaviour questions, trace: trigger -> flow chain -> entity mutations -> shown pages -> role constraints.
-- For exact microflow, retrieve, XPath, datasource, or client-action questions, follow route-table L2 links into ``app-overview/current/...``.
+- For exact microflow, retrieve, XPath, datasource, or client-action questions, answer from L0/L1 KB files first. **Do NOT follow L2 links into ``app-overview/`` without explicit user approval.**
 - For business interpretation, open ``INTERPRETATION.md`` only after the summary/evidence layers.
 - Prefer custom modules for deep app-specific answers.
 - Use support modules mainly for dependencies that affect custom behaviour.
+- **If a question cannot be answered from KB files alone**, tell the user what is missing and ask: _"Answering this requires reading raw app data, which costs more tokens and time. May I proceed?"_
 
 Confidence: Inferred
 
@@ -1539,8 +1540,7 @@ $($moduleIndexRows -join "`n")
 
 - Open a route index or module collection abstract first.
 - Open the object overview second.
-- Open the stable L2 JSON under ``app-overview/current/...`` only when exact verification is required.
-- If L1 and L2 differ, trust L2.
+- **Do NOT open L2 JSON under ``app-overview/`` without explicit user approval.** Raw data access costs more tokens and time. Ask the user first.
 
 ## Source
 

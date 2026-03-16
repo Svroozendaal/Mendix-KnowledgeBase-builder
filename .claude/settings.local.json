@@ -112,7 +112,10 @@
       "Bash(wc -c /c/Workspaces/Mendix-KnowledgeBase-builder/mendix-data/knowledge-base/app/*.md)",
       "Bash(/tmp/system_prompt_static.txt:*)",
       "Read(//tmp/**)",
-      "Bash(taskkill //PID 194576 //F)"
+      "Bash(taskkill //PID 194576 //F)",
+      "Bash(find c:WorkspacesMendix-KnowledgeBase-buildermendix-dataknowledge-base -type f -name *.md)",
+      "Bash(find c:WorkspacesMendix-KnowledgeBase-buildermendix-dataknowledge-base -name *.md -type f)",
+      "Bash(find c:WorkspacesMendix-KnowledgeBase-buildermendix-dataknowledge-basemodulesSmartExpenses -type f -name *.md)"
     ]
   }
 }

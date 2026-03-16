@@ -70,6 +70,7 @@ export class ClaudeCliProvider implements AIProvider {
 
     const args = [
       '--print',
+      '--verbose',
       '--output-format', 'stream-json',
       '--max-turns', '1',
     ];
@@ -112,6 +113,7 @@ export class ClaudeCliProvider implements AIProvider {
     const decoder = new TextDecoder();
     let buffer = '';
     let chunkCount = 0;
+    const parser = new StreamJsonParser();
 
     const stdout = child.stdout;
     if (!stdout) {
@@ -127,7 +129,7 @@ export class ClaudeCliProvider implements AIProvider {
         const trimmed = line.trim();
         if (!trimmed) continue;
 
-        const chunk = parseStreamJsonLine(trimmed);
+        const chunk = parser.parseLine(trimmed);
         if (chunk) {
           chunkCount++;
           if (chunk.type === 'error') {
@@ -140,7 +142,7 @@ export class ClaudeCliProvider implements AIProvider {
 
     // Process remaining buffer
     if (buffer.trim()) {
-      const chunk = parseStreamJsonLine(buffer.trim());
+      const chunk = parser.parseLine(buffer.trim());
       if (chunk) {
         chunkCount++;
         yield chunk;
@@ -178,70 +180,70 @@ export class ClaudeCliProvider implements AIProvider {
   }
 }
 
-function parseStreamJsonLine(line: string): StreamChunk | null {
-  try {
-    const obj = JSON.parse(line);
+/**
+ * Stateful parser for Claude CLI stream-json output.
+ *
+ * Claude CLI emits both summary events ("assistant", "result") and incremental
+ * streaming events ("content_block_*", "message_*"). We ONLY use the streaming
+ * events to avoid duplicating content. The parser tracks the current block type
+ * so that content_block_stop only emits tool_use_end for tool blocks (not text).
+ */
+class StreamJsonParser {
+  private currentBlockType: 'text' | 'tool_use' | null = null;
 
-    // Claude CLI stream-json: "assistant" message type
-    if (obj.type === 'assistant' && obj.message?.content) {
-      // Yield individual content blocks
-      for (const block of obj.message.content) {
-        if (block.type === 'text' && block.text) {
-          return { type: 'text_delta', text: block.text };
-        }
-        if (block.type === 'tool_use') {
+  parseLine(line: string): StreamChunk | null {
+    try {
+      const obj = JSON.parse(line);
+
+      // Ignore summary events — these duplicate the streaming content
+      if (obj.type === 'assistant' || obj.type === 'result') {
+        return null;
+      }
+
+      // Track block type on start
+      if (obj.type === 'content_block_start') {
+        this.currentBlockType = obj.content_block?.type ?? null;
+        if (this.currentBlockType === 'tool_use') {
           return {
             type: 'tool_use_start',
-            toolCallId: block.id,
-            toolName: block.name,
-            partialJson: JSON.stringify(block.input),
+            toolCallId: obj.content_block.id,
+            toolName: obj.content_block.name,
           };
         }
+        return null; // text block starts don't need a chunk
       }
-    }
 
-    // "result" type — final text
-    if (obj.type === 'result' && obj.result) {
-      return { type: 'text_delta', text: obj.result };
-    }
-
-    // Content block events (streaming mode)
-    if (obj.type === 'content_block_start' && obj.content_block?.type === 'tool_use') {
-      return {
-        type: 'tool_use_start',
-        toolCallId: obj.content_block.id,
-        toolName: obj.content_block.name,
-      };
-    }
-
-    if (obj.type === 'content_block_delta') {
-      if (obj.delta?.type === 'text_delta') {
-        return { type: 'text_delta', text: obj.delta.text };
+      if (obj.type === 'content_block_delta') {
+        if (obj.delta?.type === 'text_delta') {
+          return { type: 'text_delta', text: obj.delta.text };
+        }
+        if (obj.delta?.type === 'input_json_delta') {
+          return { type: 'tool_use_delta', partialJson: obj.delta.partial_json };
+        }
       }
-      if (obj.delta?.type === 'input_json_delta') {
-        return { type: 'tool_use_delta', partialJson: obj.delta.partial_json };
+
+      if (obj.type === 'content_block_stop') {
+        const wasToolBlock = this.currentBlockType === 'tool_use';
+        this.currentBlockType = null;
+        return wasToolBlock ? { type: 'tool_use_end' } : null;
       }
-    }
 
-    if (obj.type === 'content_block_stop') {
-      return { type: 'tool_use_end' };
-    }
+      if (obj.type === 'message_stop') {
+        return { type: 'message_stop', stopReason: 'end_turn' };
+      }
 
-    if (obj.type === 'message_stop') {
-      return { type: 'message_stop', stopReason: 'end_turn' };
-    }
+      if (obj.type === 'message_delta' && obj.delta?.stop_reason) {
+        return { type: 'message_stop', stopReason: obj.delta.stop_reason };
+      }
 
-    if (obj.type === 'message_delta' && obj.delta?.stop_reason) {
-      return { type: 'message_stop', stopReason: obj.delta.stop_reason };
-    }
+      if (obj.type === 'error') {
+        return { type: 'error', error: obj.error?.message ?? String(obj.error) };
+      }
 
-    if (obj.type === 'error') {
-      return { type: 'error', error: obj.error?.message ?? String(obj.error) };
+      return null;
+    } catch {
+      // Not JSON — ignore non-JSON lines (CLI diagnostics, etc.)
+      return null;
     }
-
-    return null;
-  } catch {
-    // Not JSON — treat as raw text
-    return { type: 'text_delta', text: line };
   }
 }
