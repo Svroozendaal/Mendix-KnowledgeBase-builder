@@ -10,52 +10,52 @@ Read before starting:
 
 1. `.agents/AGENTS.md`
 2. `.app-info/development/prompts/copilot improvement/INDEX.md`
-3. Generated KB: `mendix-data/knowledge-base/modules/MyFirstModule/INTERPRETATION.md`
-4. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_FEATURE_INTERPRETER.md`
-5. Generated KB: `mendix-data/knowledge-base/.agents/AI_WORKFLOW.md`
-6. Generated KB: `mendix-data/knowledge-base/.agents/skills/enrichkb/SKILL.md`
-7. Generated KB: `mendix-data/knowledge-base/READER.md`
-8. Generated KB: `mendix-data/knowledge-base/ROUTING.md`
+3. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_FEATURE_INTERPRETER.md` — current interpreter procedure
+4. `KnowledgeBase-Creator/artifacts/.agents/agents/DEVELOPMENT_TEAM.md` — current orchestrator
+5. `KnowledgeBase-Creator/artifacts/.agents/AI_WORKFLOW.md` — current workflow
+6. `KnowledgeBase-Creator/artifacts/.agents/skills/enrichkb/SKILL.md` — current enrichment skill
+7. `KnowledgeBase-Creator/artifacts/templates/ROUTING_TEMPLATE.md` — current routing template
+8. `KnowledgeBase-Creator/artifacts/templates/KNOWLEDGEBASE_READER.md` — current READER.md template
+9. Generated KB example: `mendix-data/knowledge-base/modules/MyFirstModule/INTERPRETATION.md`
 
 ## Problem Statement
 
-`INTERPRETATION.md` files contain the business narrative that transforms technical artefact listings into human-readable explanations of what a module does and why. They include Module Purpose, Domain Narrative, Flow Narrative (grouped by business intent), and Page Narrative — the exact content a bot needs to understand features.
+`INTERPRETATION.md` files contain business narratives — Module Purpose, Domain Narrative, Flow Narrative (grouped by intent), and Page Narrative. This is the exact content a bot needs to understand features.
 
 However, the current workflow treats INTERPRETATION.md as optional enrichment:
 
-1. **In KB Feature Interpreter (step 7 of 8):** "Check whether `INTERPRETATION.md` contains enriched content (not placeholder stubs). If enriched, scan..." — it is the last thing checked, after all technical files.
-2. **In READER.md:** "For business interpretation, open `INTERPRETATION.md` only after the summary/evidence layers." — explicitly deprioritised.
-3. **In the `/develop` workflow:** INTERPRETATION.md is not referenced at all in any phase.
-4. **In ROUTING.md:** INTERPRETATION.md is not listed in the quick-lookup table.
-5. **In QUICKSTART.md (Prompt 03):** Not mentioned in the reading depth guide.
+1. **KB Feature Interpreter (step 7 of 8):** Checked last, after all technical files.
+2. **READER.md template:** "Open `INTERPRETATION.md` only after the summary/evidence layers."
+3. **Development Team workflow:** INTERPRETATION.md not referenced in any phase.
+4. **ROUTING template:** INTERPRETATION.md not listed in quick-lookup table.
 
-The result: a bot working through the development workflow never reads the richest source of business context. It constructs feature understanding from technical tables (FLOWS.md, DOMAIN.md) when a pre-synthesised business narrative already exists.
+Result: a bot working through `/develop` never reads the richest source of business context.
 
 ## Entry Criteria
 
-1. The KB Creator pipeline generates INTERPRETATION.md files (even if as stubs before `/enrichkb`).
-2. The `/enrichkb` skill and compose step are functional.
+1. The compose step generates INTERPRETATION.md files (even as stubs before `/enrichkb`).
+2. Agent artifact files exist in `KnowledgeBase-Creator/artifacts/.agents/`.
 
 ## Deliverable
 
-### 1. Add "KB Maturity" indicator to ROUTING.md and QUICKSTART.md
+### 1. Add "KB Maturity" indicator to routing template
 
-Add a metadata line to ROUTING.md header:
+In `KnowledgeBase-Creator/artifacts/templates/ROUTING_TEMPLATE.md`, add a metadata section:
 
 ```markdown
 ## KB Maturity
 
 - **Base layer**: Export-backed content (DOMAIN.md, FLOWS.md, PAGES.md, routes). Always present.
-- **Narrative layer**: AI-enriched interpretations (INTERPRETATION.md). Status: **[Enriched / Stub]**
+- **Narrative layer**: AI-enriched interpretations (INTERPRETATION.md). Status: **{{EnrichedStatus}}**
 
 If the narrative layer shows "Stub", run `/enrichkb` to add business context. Answers will be significantly more useful with the narrative layer populated.
 ```
 
-Generate this status during compose by checking whether INTERPRETATION.md files contain more than just template stubs.
+In `KnowledgeBase-Creator/wizard/run-kb-compose.ps1`, add logic to determine `{{EnrichedStatus}}` by checking whether INTERPRETATION.md files contain more than template stubs. Set to `Enriched` or `Stub`.
 
-### 2. Elevate INTERPRETATION.md in reading order
+### 2. Elevate INTERPRETATION.md in KB Feature Interpreter
 
-**Update KB Feature Interpreter procedure** — move INTERPRETATION.md to step 3 (after module README, before drilling into flows):
+In `KnowledgeBase-Creator/artifacts/.agents/agents/KB_FEATURE_INTERPRETER.md`, move INTERPRETATION.md reading to step 3 (after module README, before drilling into flows):
 
 ```markdown
 1. Parse the question. Extract feature keywords.
@@ -71,83 +71,82 @@ Generate this status during compose by checking whether INTERPRETATION.md files 
 6. Synthesise the Feature Report.
 ```
 
-**Update READER.md** — change the guidance:
+### 3. Reference INTERPRETATION.md in Development Team
 
-```markdown
-- For behaviour questions: start with INTERPRETATION.md for business context, then trace technical detail through FLOWS.md → L0 → L1 if needed.
-```
+In `KnowledgeBase-Creator/artifacts/.agents/agents/DEVELOPMENT_TEAM.md`:
 
-Remove the instruction "open `INTERPRETATION.md` only after the summary/evidence layers."
-
-### 3. Reference INTERPRETATION.md in the `/develop` workflow
-
-**Update DEVELOPMENT_TEAM.md Phase 1 (Story Mapping):**
-
-After mapping the story to modules, add:
-
+**Phase 1 (Story Mapping)** — add:
 ```markdown
    e. For each candidate module, read `INTERPRETATION.md` for business context. The Flow Narrative section groups flows by business intent — use this to understand how the story relates to existing capabilities.
 ```
 
-**Update DEVELOPMENT_TEAM.md Phase 2 (High-Level Solution):**
-
-Add:
-
+**Phase 2 (High-Level Solution)** — add:
 ```markdown
    Reference `INTERPRETATION.md` Flow Narrative and Page Narrative when proposing where new functionality fits within the existing module structure.
 ```
 
-### 4. Add INTERPRETATION.md to ROUTING.md quick-lookup
+### 4. Update READER.md template
 
-Add a row:
+In `KnowledgeBase-Creator/artifacts/templates/KNOWLEDGEBASE_READER.md`, change the guidance:
+
+**Remove:** "For business interpretation, open `INTERPRETATION.md` only after the summary/evidence layers."
+
+**Replace with:** "For behaviour questions: start with `INTERPRETATION.md` for business context, then trace technical detail through `FLOWS.md` → L0 → L1 if needed."
+
+### 5. Add INTERPRETATION.md to routing template quick-lookup
+
+In `KnowledgeBase-Creator/artifacts/templates/ROUTING_TEMPLATE.md`, add:
 
 ```markdown
 | "What is the business purpose of module X?" | `modules/X/INTERPRETATION.md` | `modules/X/README.md` |
 ```
 
-### 5. Post-compose enrichment prompt
+### 6. Add enrichment recommendation to QUICKSTART template
 
-After the KB is generated, if INTERPRETATION.md files are stubs, display a recommendation:
+In `KnowledgeBase-Creator/artifacts/templates/QUICKSTART_TEMPLATE.md` (from Prompt 03), add a conditional section:
 
 ```markdown
+{{#if IsStub}}
 ## Enrichment Recommended
 
-The narrative layer (INTERPRETATION.md) has not been enriched yet. This KB contains export-backed technical data but lacks business narrative.
-
-Run `/enrichkb` to add the AI narrative layer. This will:
-- Describe each module's business purpose.
-- Group flows by business intent.
-- Explain page layouts in user journey context.
-- Add domain model narrative with entity relationship explanations.
-
-Answers about features, user stories, and development planning will be significantly more useful with enrichment.
+The narrative layer (INTERPRETATION.md) has not been enriched yet. Run `/enrichkb` to add business context. Feature understanding, user story mapping, and development planning will be significantly more useful with enrichment.
+{{/if}}
 ```
 
-Add this to the QUICKSTART.md template (from Prompt 03) as a conditional section.
+### 7. Add quality gate enrichment advisory
 
-### 6. Quality gate enrichment check
-
-Add a quality gate **advisory** (not error) that reports:
-- How many INTERPRETATION.md files are stubs vs enriched.
-- Total word count of enriched narratives.
+In `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1`, add an advisory (not error) that reports:
+- How many INTERPRETATION.md files are stubs vs enriched (custom modules only).
 - Suggestion to run `/enrichkb` if >50% are stubs.
+
+## Files Changed (all under `KnowledgeBase-Creator/`)
+
+| File | Change |
+|---|---|
+| `artifacts/templates/ROUTING_TEMPLATE.md` | Add KB Maturity section, add INTERPRETATION.md to quick-lookup |
+| `artifacts/templates/KNOWLEDGEBASE_READER.md` | Elevate INTERPRETATION.md reading order |
+| `artifacts/templates/QUICKSTART_TEMPLATE.md` | Add conditional enrichment recommendation (depends on Prompt 03) |
+| `artifacts/.agents/agents/KB_FEATURE_INTERPRETER.md` | Move INTERPRETATION.md to step 3 |
+| `artifacts/.agents/agents/DEVELOPMENT_TEAM.md` | Add INTERPRETATION.md references to Phases 1+2 |
+| `artifacts/.agents/AI_WORKFLOW.md` | Update reading guidance |
+| `wizard/run-kb-compose.ps1` | Add enrichment status detection |
+| `wizard/run-kb-quality-gate.ps1` | Add enrichment advisory |
 
 ## Exit Criteria
 
 1. INTERPRETATION.md is read early (step 3) in the KB Feature Interpreter procedure.
 2. INTERPRETATION.md is referenced in the `/develop` workflow phases.
-3. ROUTING.md and QUICKSTART.md include KB maturity status.
-4. READER.md no longer deprioritises INTERPRETATION.md.
-5. A bot answering "How does registration work?" checks INTERPRETATION.md before drilling into individual flow L0/L1 files.
-6. The quality gate reports enrichment status.
+3. Generated ROUTING.md includes KB maturity status.
+4. Generated READER.md no longer deprioritises INTERPRETATION.md.
+5. All future KBs include these changes automatically.
 
 ## Skills to Use
 
-- Agent: **Developer** (agent file updates, compose template changes)
-- Agent: **Documenter** (workflow documentation)
+- Agent: **Developer** (agent artifacts, compose script, quality gate)
+- Agent: **Documenter** (template updates)
 
 ## Notes
 
 - This prompt does NOT change how INTERPRETATION.md is generated or enriched — that is the domain of `/enrichkb`. This prompt changes how it is consumed by reading agents.
-- For marketplace modules, INTERPRETATION.md may remain as stubs permanently (they are reference-only). The maturity check should only count custom modules.
-- The key insight: INTERPRETATION.md is the only file in the KB that provides the "why" layer. Everything else is "what" (entities, flows, pages) or "how" (L1 step details). For development guidance, "why" should come before "what".
+- For marketplace modules, INTERPRETATION.md may remain as stubs permanently. The maturity check should only count custom modules.
+- Key insight: INTERPRETATION.md is the only file providing the "why" layer. Everything else is "what" or "how". For development guidance, "why" should come before "what".

@@ -10,69 +10,40 @@ Read before starting:
 
 1. `.agents/AGENTS.md`
 2. `.app-info/development/prompts/copilot improvement/INDEX.md`
-3. Generated KB: `mendix-data/knowledge-base/.agents/AGENTS.md`
-4. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_NAVIGATOR.md`
-5. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_FEATURE_INTERPRETER.md`
-6. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_FLOW_TRACER.md`
-7. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_ANALYST.md`
-8. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_DOMAIN_EXPERT.md`
-9. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_SECURITY_REVIEWER.md`
-10. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_UX_INTERPRETER.md`
+3. `KnowledgeBase-Creator/artifacts/.agents/AGENTS.md` — current KB agent governance
+4. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_NAVIGATOR.md`
+5. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_FEATURE_INTERPRETER.md`
+6. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_FLOW_TRACER.md`
+7. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_ANALYST.md`
+8. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_DOMAIN_EXPERT.md`
+9. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_SECURITY_REVIEWER.md`
+10. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_UX_INTERPRETER.md`
+11. `KnowledgeBase-Creator/artifacts/.agents/agents/DEVELOPMENT_TEAM.md`
 
 ## Problem Statement
 
-The KB defines 7 interpretation agents (Navigator, Feature Interpreter, Flow Tracer, Analyst, Domain Expert, Security Reviewer, UX Interpreter) plus 6 development agents (Development Team, Mendix Developer, Mendix Syntax, User Story Interpreter, Planner, Todo Maker). That is 13 agent personas in a system where a single LLM conversation handles all of them.
+The KB defines 7 interpretation agents (Navigator, Feature Interpreter, Flow Tracer, Analyst, Domain Expert, Security Reviewer, UX Interpreter) plus 6 development agents. That is 13 agent personas handled by a single LLM conversation.
 
-In practice, "delegating to the KB Feature Interpreter" means the LLM:
-1. Reads `KB_FEATURE_INTERPRETER.md` (~100 lines of persona definition).
-2. Adopts that persona's operating procedure.
-3. Reads the same KB files it would have read anyway.
-4. Produces output in the agent's specified format.
-5. "Hands off" back to the orchestrator.
+In practice, "delegating to the KB Feature Interpreter" means the LLM reads ~100 lines of persona definition, adopts the persona, reads the same KB files it would have read anyway, produces output in that persona's format, then "hands off" back. The persona-switching overhead adds tokens without changing the reasoning.
 
-Steps 1, 2, and 5 add token overhead without changing what files are read (step 3) or what reasoning is done. The persona definition is essentially a skill procedure wrapped in an agent identity.
-
-The 7 interpretation agents differ primarily in:
-- **What files they read** (already determined by the routing table).
-- **What output format they produce** (a structural template).
-- **What escalation rules they follow** (pointing to each other).
-
-These are characteristics of **skills**, not distinct agents.
+The 7 interpretation agents differ primarily in what files they read, what output format they produce, and what escalation rules they follow. These are characteristics of **skills**, not agents.
 
 ## Entry Criteria
 
-1. The KB agent framework is functional.
+1. The KB agent framework files exist in `KnowledgeBase-Creator/artifacts/.agents/`.
 2. Prompts 04 (Merge Phases) and 05 (Reading Budgets) are implemented.
 
 ## Deliverable
 
-### 1. Consolidate 7 interpretation agents into 1 agent + 5 skills
+### 1. Create KB Reader agent (replaces KB Navigator)
 
-**Keep as agents:**
-- **KB Reader** (renamed from KB Navigator) — the single interpretation agent. It reads the KB and answers questions, invoking skills as needed.
-- **Development Team** — the orchestrator for `/develop`.
-- **Mendix Developer** — implementation guidance.
-- **Mendix Syntax** — syntax enrichment.
-- **User Story Interpreter** — story parsing (can also become a skill within Development Team, but keep for now).
-- **Planner** — work sequencing.
-- **Todo Maker** — task breakdown.
-- **Best Practice Recommender** — convention checking.
-
-**Convert to skills:**
-- KB Feature Interpreter → `.agents/skills/feature-interpretation/SKILL.md`
-- KB Flow Tracer → `.agents/skills/flow-chain-tracing/SKILL.md` (already mostly a skill wrapper)
-- KB Analyst → `.agents/skills/impact-analysis/SKILL.md` (already mostly a skill wrapper)
-- KB Domain Expert → `.agents/skills/domain-analysis/SKILL.md`
-- KB Security Reviewer → `.agents/skills/security-analysis/SKILL.md`
-- KB UX Interpreter → `.agents/skills/ux-analysis/SKILL.md`
-
-### 2. Create the KB Reader agent
-
-`KB_READER.md` replaces `KB_NAVIGATOR.md` and absorbs the routing logic from all 7 interpretation agents:
+Create `KnowledgeBase-Creator/artifacts/.agents/agents/KB_READER.md`:
 
 ```markdown
 # KB_READER
 ## Knowledge Base Interpretation Agent
+
+> **Scope:** This agent operates exclusively on the pre-built knowledge base files. It does not run pipelines, access `.mpr` files, call Mendix tooling, or modify any KB content.
 
 ## Role
 
@@ -112,75 +83,121 @@ Any question about the application that does not require implementation planning
 | Security question | security-analysis | Level 2-3 |
 | Data model question | domain-analysis | Level 2 |
 | Page/UI question | ux-analysis | Level 2 |
+
+## Stop Signal
+You have enough information when you can answer the question with specific KB file citations. Start at the lowest reading depth and escalate only if needed.
 ```
 
-### 3. Convert each agent to a skill
+### 2. Convert 5 interpretation agents into skills
 
-For each converted agent, extract the **Operating Procedure** and **Output Format** into a skill file. Remove the persona preamble, scope reminder, and escalation section (the KB Reader handles escalation).
+Extract the **Operating Procedure** and **Output Format** from each agent file into a new skill file. Remove persona preambles, scope reminders, and escalation sections.
 
-Example conversion for KB Feature Interpreter:
+Create these new skill files under `KnowledgeBase-Creator/artifacts/.agents/skills/`:
 
-**Before (agent):**
-```markdown
-# KB_FEATURE_INTERPRETER
-## Role
-You synthesise business-feature-level answers...
-## When to Use
-...
-## Operating Procedure
-1. Parse the question...
-2. Invoke feature-search...
-...
-## Output Format
-## Feature Report: ...
-## Escalation
-Hand off to KB Analyst...
-```
+| New Skill | Source Agent | Location |
+|---|---|---|
+| `skills/feature-interpretation/SKILL.md` | `agents/KB_FEATURE_INTERPRETER.md` | Extract procedure steps 1-8 and output format |
+| `skills/domain-analysis/SKILL.md` | `agents/KB_DOMAIN_EXPERT.md` | Extract entity analysis procedure and output format |
+| `skills/security-analysis/SKILL.md` | `agents/KB_SECURITY_REVIEWER.md` | Extract security review procedure and output format |
+| `skills/ux-analysis/SKILL.md` | `agents/KB_UX_INTERPRETER.md` | Extract page/UI analysis procedure and output format |
 
-**After (skill):**
-```markdown
-# SKILL: Feature Interpretation
-## Purpose
-Synthesise a business-feature-level answer from technical KB data.
-## Used By
-KB Reader
-## Procedure
-1. Parse the question...
-2. Invoke feature-search...
-...
-## Output Format
-## Feature Report: ...
-```
+Note: `flow-chain-tracing` and `impact-analysis` skills already exist. KB_FLOW_TRACER and KB_ANALYST are already thin wrappers around these skills — just remove the agent wrappers.
+
+### 3. Delete replaced agent files
+
+Remove from `KnowledgeBase-Creator/artifacts/.agents/agents/`:
+- `KB_NAVIGATOR.md` (replaced by `KB_READER.md`)
+- `KB_FEATURE_INTERPRETER.md` (replaced by `skills/feature-interpretation/SKILL.md`)
+- `KB_FLOW_TRACER.md` (replaced by `skills/flow-chain-tracing/SKILL.md` — already exists)
+- `KB_ANALYST.md` (replaced by `skills/impact-analysis/SKILL.md` — already exists)
+- `KB_DOMAIN_EXPERT.md` (replaced by `skills/domain-analysis/SKILL.md`)
+- `KB_SECURITY_REVIEWER.md` (replaced by `skills/security-analysis/SKILL.md`)
+- `KB_UX_INTERPRETER.md` (replaced by `skills/ux-analysis/SKILL.md`)
 
 ### 4. Update AGENTS.md roster
 
-Replace the 7 interpretation agent rows with 1 KB Reader row. Add the new skills to the Skills Overview section.
+In `KnowledgeBase-Creator/artifacts/.agents/AGENTS.md`:
 
-### 5. Update DEVELOPMENT_TEAM.md sub-agent table
+**Agent Roster — replace 7 interpretation rows with 1:**
 
-Replace references to KB Feature Interpreter, KB Flow Tracer, KB Analyst, KB Security Reviewer with "KB Reader (using [skill-name] skill)".
+```markdown
+### KB Interpretation
+
+| Agent | File | Responsibility |
+|---|---|---|
+| KB Reader | `.agents/agents/KB_READER.md` | Read and interpret the KB, invoke skills for specialised analysis |
+```
+
+**Skills Overview — add new skills:**
+
+```markdown
+### Analysis Skills (invoked by KB Reader)
+
+- `.agents/skills/feature-interpretation/SKILL.md` — synthesise feature-level answers
+- `.agents/skills/domain-analysis/SKILL.md` — entity relationships and data lifecycle
+- `.agents/skills/security-analysis/SKILL.md` — role analysis, access rules, XPath constraints
+- `.agents/skills/ux-analysis/SKILL.md` — page structure, UI flows, user journeys
+```
+
+**Agent Selection Logic — simplify routing:**
+
+Replace the 7 interpretation routing rules with:
+```markdown
+1. Any question about the application? → KB Reader
+```
+
+### 5. Update DEVELOPMENT_TEAM.md references
+
+In `KnowledgeBase-Creator/artifacts/.agents/agents/DEVELOPMENT_TEAM.md`, replace sub-agent references:
+
+| Old Reference | New Reference |
+|---|---|
+| "Delegate to KB Feature Interpreter" | "KB Reader invokes `feature-interpretation` skill" |
+| "Delegate to KB Flow Tracer" | "KB Reader invokes `flow-chain-tracing` skill" |
+| "Delegate to KB Analyst" | "KB Reader invokes `impact-analysis` skill" |
+| "Delegate to KB Security Reviewer" | "KB Reader invokes `security-analysis` skill" |
 
 ### 6. Update AI_WORKFLOW.md
 
-Simplify the agent routing section. Replace 13 routing rules with ~7.
+In `KnowledgeBase-Creator/artifacts/.agents/AI_WORKFLOW.md`, simplify agent routing. Replace 7+ interpretation routing rules with "KB Reader" as the single interpretation entry point.
+
+## Files Changed (all under `KnowledgeBase-Creator/artifacts/.agents/`)
+
+| File | Change |
+|---|---|
+| `agents/KB_READER.md` | **New** — single interpretation agent |
+| `skills/feature-interpretation/SKILL.md` | **New** — extracted from KB_FEATURE_INTERPRETER.md |
+| `skills/domain-analysis/SKILL.md` | **New** — extracted from KB_DOMAIN_EXPERT.md |
+| `skills/security-analysis/SKILL.md` | **New** — extracted from KB_SECURITY_REVIEWER.md |
+| `skills/ux-analysis/SKILL.md` | **New** — extracted from KB_UX_INTERPRETER.md |
+| `agents/KB_NAVIGATOR.md` | **Delete** |
+| `agents/KB_FEATURE_INTERPRETER.md` | **Delete** |
+| `agents/KB_FLOW_TRACER.md` | **Delete** |
+| `agents/KB_ANALYST.md` | **Delete** |
+| `agents/KB_DOMAIN_EXPERT.md` | **Delete** |
+| `agents/KB_SECURITY_REVIEWER.md` | **Delete** |
+| `agents/KB_UX_INTERPRETER.md` | **Delete** |
+| `AGENTS.md` | Simplified roster and routing |
+| `AI_WORKFLOW.md` | Simplified routing section |
+| `agents/DEVELOPMENT_TEAM.md` | Update sub-agent references |
 
 ## Exit Criteria
 
-1. Agent roster is reduced from 13 to 8 agents.
-2. 5 new skills replace 6 removed agents (KB Navigator + KB Feature Interpreter merged into KB Reader + feature-interpretation skill; KB Flow Tracer already has flow-chain-tracing skill so just remove the agent wrapper).
-3. All functionality is preserved — the same questions produce the same quality answers.
-4. The `/develop` workflow works with the new agent/skill structure.
-5. A bot loading the KB reads 1 agent definition (KB Reader) instead of potentially 7 (all interpretation agents).
+1. Agent roster reduced from 13 to 8 agents.
+2. 4 new skills replace 7 removed agents.
+3. All functionality preserved — same questions produce same quality answers.
+4. The `/develop` workflow works with the new structure.
+5. A bot loading the KB reads 1 agent definition (KB Reader) instead of potentially 7.
+6. All future generated KBs use the simplified structure.
 
 ## Skills to Use
 
-- Agent: **Architect** (structural redesign of agent/skill boundaries)
-- Agent: **Developer** (file creation and updates)
-- Agent: **Documenter** (roster and workflow documentation)
+- Agent: **Architect** (structural redesign)
+- Agent: **Developer** (file creation, deletion, updates)
+- Agent: **Documenter** (roster and workflow)
 
 ## Notes
 
-- The Development/Planning agents (Mendix Developer, Mendix Syntax, User Story Interpreter, Planner, Todo Maker, Best Practice Recommender) remain as agents because they have distinct responsibilities in the `/develop` workflow phases. They are not interchangeable and each owns a specific phase.
-- The key insight: interpretation agents are **stateless readers** — they read KB files, apply a procedure, and produce output. That is exactly what skills are. Agents should be reserved for roles that have **state** (like the Development Team orchestrator tracking phases) or **distinct expertise** (like Mendix Developer knowing Mendix best practices).
-- This change also makes it easier to add new analysis capabilities: just add a skill, register it in the KB Reader's skills table. No need to create a full agent definition.
-- If the team prefers to keep the agent abstractions for conceptual clarity, an alternative is to keep the agent files but mark them as "thin wrappers" that just invoke the underlying skill. This avoids the persona overhead while preserving the mental model.
+- Development/Planning agents remain as agents because they own specific `/develop` phases and have distinct expertise.
+- Key insight: interpretation agents are **stateless readers** — they read, apply a procedure, and produce output. That is exactly what skills are. Agents should be reserved for roles with **state** or **distinct expertise**.
+- If the team prefers to keep agent abstractions for conceptual clarity, an alternative is to keep the files but mark them as "thin wrappers" that invoke the underlying skill.

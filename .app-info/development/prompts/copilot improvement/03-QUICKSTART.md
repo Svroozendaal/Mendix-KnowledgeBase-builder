@@ -10,12 +10,13 @@ Read before starting:
 
 1. `.agents/AGENTS.md`
 2. `.app-info/development/prompts/copilot improvement/INDEX.md`
-3. Generated KB: `mendix-data/knowledge-base/CLAUDE.md`
-4. Generated KB: `mendix-data/knowledge-base/READER.md`
-5. Generated KB: `mendix-data/knowledge-base/ROUTING.md`
-6. Generated KB: `mendix-data/knowledge-base/.agents/AGENTS.md`
-7. Generated KB: `mendix-data/knowledge-base/.agents/FRAMEWORK.md`
-8. Generated KB: `mendix-data/knowledge-base/.agents/AI_WORKFLOW.md`
+3. `KnowledgeBase-Creator/artifacts/templates/CLAUDE_MD_TEMPLATE.md` — current CLAUDE.md template
+4. `KnowledgeBase-Creator/artifacts/templates/ROUTING_TEMPLATE.md` — current routing template
+5. `KnowledgeBase-Creator/artifacts/.agents/AGENTS.md` — current agent governance
+6. `KnowledgeBase-Creator/artifacts/.agents/FRAMEWORK.md` — current framework description
+7. `KnowledgeBase-Creator/artifacts/.agents/AI_WORKFLOW.md` — current workflow
+8. `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` — compose script
+9. Generated KB example: `mendix-data/knowledge-base/CLAUDE.md` (to see current output)
 
 ## Problem Statement
 
@@ -28,40 +29,35 @@ A bot must read 6 files before answering its first question:
 5. `READER.md` — 56 lines of navigation and confidence levels.
 6. `ROUTING.md` — variable length, module index and quick lookups.
 
-Much of this content overlaps (scope boundary is repeated in 3 files, navigation instructions in 4 files, agent routing rules in 2 files). A bot loading all 6 files burns ~2,500 tokens on bootstrapping before it reads a single piece of application content.
+Much of this content overlaps. A bot loading all 6 files burns ~2,500 tokens on bootstrapping before reading a single piece of application content.
 
 ## Entry Criteria
 
-1. The KB Creator pipeline generates CLAUDE.md, READER.md, and ROUTING.md.
-2. The KB agent framework files (AGENTS.md, FRAMEWORK.md, AI_WORKFLOW.md) are generated or copied into the KB.
+1. The compose script generates CLAUDE.md and ROUTING.md from templates.
+2. Agent framework files are copied from `artifacts/.agents/`.
 
 ## Deliverable
 
-### 1. New compose artifact: `QUICKSTART.md`
-
-Generate a single file at KB root that contains everything a bot needs to start working, in ~150 lines:
+### 1. New compose template: `KnowledgeBase-Creator/artifacts/templates/QUICKSTART_TEMPLATE.md`
 
 ```markdown
-# Quick Start — [App Name]
+# Quick Start — {{AppName}}
 
-Generated at: [timestamp] | Format: [version] | Enriched: [Yes/No]
+Generated at: {{GeneratedAt}} | Format: {{FormatVersion}} | Enriched: {{EnrichedStatus}}
 
 ## This App
 
-[1-3 sentences from APP_OVERVIEW.md mission summary]
+{{AppMissionSummary}}
 
 ## Modules
 
 | Module | Type | Key Entities | Custom Flows | Priority |
 |---|---|---|---|---|
-| MyFirstModule | Custom | Course, TrainingEvent, Registration, Location, Trainer, Trainee | 48 | Core |
-| AdministrationExtension | Custom | — | 1 | Supporting |
-| Administration | Marketplace | Account | 13 | Reference |
-| ... | ... | ... | ... | ... |
+{{ModuleRows}}
 
 ## Security Roles
 
-[Compact role list from SECURITY.md: role name → module roles]
+{{RoleSummary}}
 
 ## How to Find Things
 
@@ -112,9 +108,24 @@ For navigation rules: `READER.md`
 For full module index: `ROUTING.md`
 ```
 
-### 2. Update CLAUDE.md
+### 2. Add QUICKSTART generation to compose script
 
-Change the CLAUDE.md reading order to start with QUICKSTART.md:
+In `KnowledgeBase-Creator/wizard/run-kb-compose.ps1`, add a function to generate `QUICKSTART.md`:
+
+1. Read the app name from the export metadata.
+2. Build the module table from the module landscape data (already available during compose).
+3. Build the role summary from the security export data.
+4. Extract the app mission summary from the APP_OVERVIEW compose data.
+5. Determine enrichment status by checking whether any INTERPRETATION.md files contain more than template stubs.
+6. Fill the template and write to `{KB}/QUICKSTART.md`.
+
+**Placement:** Generate QUICKSTART.md after APP_OVERVIEW.md and MODULE_LANDSCAPE.md are generated (it depends on both).
+
+**Size constraint:** If the app has >15 modules, show only the top 15 by priority score and add "See `ROUTING.md` for the full list of {{TotalModules}} modules." Keep the file under 200 lines.
+
+### 3. Update CLAUDE.md template
+
+In `KnowledgeBase-Creator/artifacts/templates/CLAUDE_MD_TEMPLATE.md`, change the reading order:
 
 ```markdown
 Before executing any task, read `QUICKSTART.md` for a fast-start overview.
@@ -127,33 +138,42 @@ For full detail, read:
 5. `ROUTING.md` — module and route index
 ```
 
-### 3. New compose template: `_artifacts/QUICKSTART_TEMPLATE.md`
+### 4. Add quality gate check
 
-Create the template with placeholders for app name, module table, role list, and generation metadata.
-
-### 4. Quality gate check
-
-Add a quality gate rule:
+In `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1`, add validation rules:
 - `QUICKSTART.md` exists at KB root.
 - It contains at least one module row.
-- It contains the app name from APP_OVERVIEW.md.
+- It contains the app name.
 - It is under 200 lines.
+
+### 5. Register in pipeline
+
+In `KnowledgeBase-Creator/wizard/run-dump-parser.ps1`, ensure QUICKSTART.md generation is called after APP_OVERVIEW and MODULE_LANDSCAPE are composed.
+
+## Files Changed (all under `KnowledgeBase-Creator/`)
+
+| File | Change |
+|---|---|
+| `artifacts/templates/QUICKSTART_TEMPLATE.md` | **New** — template for fast-context file |
+| `artifacts/templates/CLAUDE_MD_TEMPLATE.md` | Point to QUICKSTART.md as primary entry |
+| `wizard/run-kb-compose.ps1` | Add QUICKSTART.md generation function |
+| `wizard/run-kb-quality-gate.ps1` | Add QUICKSTART validation rules |
+| `wizard/run-dump-parser.ps1` | Wire QUICKSTART generation into pipeline sequence |
 
 ## Exit Criteria
 
-1. `QUICKSTART.md` is generated during compose.
+1. `QUICKSTART.md` is generated at KB root for every KB.
 2. A bot can cold-start from `QUICKSTART.md` alone and know: what the app is, which modules exist, how to find things, and what the scope rules are.
 3. The full reference files remain available for deep dives.
-4. CLAUDE.md points to QUICKSTART.md as the primary entry point.
+4. Generated CLAUDE.md points to QUICKSTART.md as the primary entry point.
 
 ## Skills to Use
 
-- Agent: **Developer** (compose step code changes)
+- Agent: **Developer** (compose script, pipeline changes)
 - Agent: **Documenter** (template creation)
 
 ## Notes
 
-- QUICKSTART.md must be regenerated every time the KB is rebuilt. It is a deterministic artifact.
+- QUICKSTART.md is regenerated every time the KB is rebuilt. It is a deterministic artifact.
 - The "Enriched: Yes/No" flag tells the bot whether INTERPRETATION.md files are populated — this affects answer quality expectations.
-- Keep the file under 200 lines. If the app has 50+ modules, show the top 10 by priority and add "See ROUTING.md for full list".
 - The Reading Depth Guide section is new guidance that does not exist in any current file. It is critical for token efficiency.

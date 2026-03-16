@@ -10,40 +10,30 @@ Read before starting:
 
 1. `.agents/AGENTS.md`
 2. `.app-info/development/prompts/copilot improvement/INDEX.md`
-3. Generated KB: `mendix-data/knowledge-base/.agents/AI_WORKFLOW.md`
-4. Generated KB: `mendix-data/knowledge-base/.agents/FRAMEWORK.md`
-5. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_FEATURE_INTERPRETER.md`
-6. Generated KB: `mendix-data/knowledge-base/.agents/agents/KB_FLOW_TRACER.md`
-7. Generated KB: `mendix-data/knowledge-base/.agents/agents/DEVELOPMENT_TEAM.md`
+3. `KnowledgeBase-Creator/artifacts/.agents/AI_WORKFLOW.md` — current workflow
+4. `KnowledgeBase-Creator/artifacts/.agents/FRAMEWORK.md` — current framework description
+5. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_FEATURE_INTERPRETER.md`
+6. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_FLOW_TRACER.md`
+7. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_ANALYST.md`
+8. `KnowledgeBase-Creator/artifacts/.agents/agents/KB_NAVIGATOR.md`
+9. `KnowledgeBase-Creator/artifacts/.agents/agents/DEVELOPMENT_TEAM.md`
 
 ## Problem Statement
 
 The current workflow tells the bot to drill from ROUTING → module README → FLOWS → L0 → L1, but never tells it when to **stop reading**. There are no explicit signals for "you have enough information to answer this question."
 
-A bot trying to understand "registration" will:
-1. Read ROUTING.md (full file)
-2. Read MODULE_LANDSCAPE.md (full file)
-3. Read MyFirstModule/README.md (full file)
-4. Read MyFirstModule/FLOWS.md (full file — 48 flows, ~3,000 lines)
-5. Read every L0 abstract that mentions "registration"
-6. Read every L1 overview for matched flows
-7. Read DOMAIN.md (full file)
-8. Read INTERPRETATION.md (full file)
-9. Read routes/by-entity.md (full file — ~20KB)
-10. Read routes/by-flow.md (full file — ~50KB)
-
-That is 10+ file reads, potentially 100KB+ of text, when the answer might have been available after step 3.
+A bot trying to understand "registration" may read 10+ files and 100KB+ of text when the answer was available after reading 3 files.
 
 ## Entry Criteria
 
-1. The KB agent workflow files exist.
-2. The L0/L1/L2 layer structure is in place.
+1. The KB agent workflow files exist in `artifacts/.agents/`.
+2. The L0/L1/L2 layer structure is established.
 
 ## Deliverable
 
-### 1. Define reading depth levels in AI_WORKFLOW.md
+### 1. Add reading depth levels to AI_WORKFLOW.md
 
-Add a new section "Reading Depth Guide" to `AI_WORKFLOW.md`:
+In `KnowledgeBase-Creator/artifacts/.agents/AI_WORKFLOW.md`, add a new section:
 
 ```markdown
 ## Reading Depth Guide
@@ -51,57 +41,75 @@ Add a new section "Reading Depth Guide" to `AI_WORKFLOW.md`:
 Match your reading depth to the question complexity. Start shallow, go deeper only if needed.
 
 ### Level 1: Quick Lookup (1-3 file reads)
-**Use when:** The question is a simple lookup — "What module does entity X belong to?", "How many flows are in module Y?", "What roles exist?"
-**Read:** ROUTING.md or `routes/keyword-index.md` → one target file → answer.
+**Use when:** Simple lookup — "What module does entity X belong to?", "How many flows are in module Y?", "What roles exist?"
+**Read:** `routes/keyword-index.md` or ROUTING.md → one target file → answer.
 **Stop when:** You can cite a specific file and section that answers the question.
 
 ### Level 2: Feature Understanding (3-6 file reads)
-**Use when:** The question asks about a capability — "How does registration work?", "What does module X do?"
-**Read:** `routes/keyword-index.md` → module README (Capability Map, Primary User Journeys) → FLOWS.md (scan tier 1 flows only) → top 2-3 L0 abstracts → 1 L1 overview for the central flow.
+**Use when:** Capability question — "How does registration work?", "What does module X do?"
+**Read:** `routes/keyword-index.md` → module README (Capability Map, Primary User Journeys) → INTERPRETATION.md → FLOWS.md (Tier 1 flows only) → top 2-3 L0 abstracts → 1 L1 overview for the central flow.
 **Stop when:** You can describe the feature in business terms and cite the key flows and entities involved.
 
 ### Level 3: Deep Investigation (6-12 file reads)
-**Use when:** The question requires tracing, impact analysis, or development planning — "Trace flow X end-to-end", "What is affected if I change entity Y?", `/develop`.
-**Read:** Everything in Level 2, plus: all related L1 overviews → DOMAIN.md → INTERPRETATION.md → routes/by-entity.md (for the relevant entities only, not the whole file) → routes/cross-module.md → app/SECURITY.md.
+**Use when:** Tracing, impact analysis, or development planning — "Trace flow X end-to-end", "What is affected if I change entity Y?", `/develop`.
+**Read:** Everything in Level 2, plus: all related L1 overviews → DOMAIN.md → routes/by-entity.md (relevant entities only) → routes/cross-module.md → app/SECURITY.md.
 **Stop when:** You have traced all relevant chains, identified all affected artefacts, and can assess the blast radius.
 
 ### Level 4: Full Context (12+ file reads)
-**Use when:** The `/develop` workflow is producing an implementation plan (Phases 4-6).
+**Use when:** `/develop` workflow producing an implementation plan (Phases 3-5).
 **Read:** Everything in Level 3, plus: all L1 overviews for affected flows → full DOMAIN.md for all affected modules → full SECURITY.md → all route files for cross-referencing.
 **Stop when:** The implementation plan has no unresolved references.
 ```
 
-### 2. Add stop signals to agent procedures
+### 2. Add stop signals to each interpretation agent
 
-Update each interpretation agent to include explicit stop criteria:
+In `KnowledgeBase-Creator/artifacts/.agents/agents/`, add a "Stop Signal" section to each:
 
-**KB Navigator** — add:
+**KB_NAVIGATOR.md:**
 ```markdown
 ## Stop Signal
 You have enough information when you can point the user to the specific KB file and section that answers their question. Do NOT read the file yourself unless the user explicitly asks for its content.
 ```
 
-**KB Feature Interpreter** — add:
+**KB_FEATURE_INTERPRETER.md:**
 ```markdown
 ## Stop Signal
 You have enough information when you can describe the feature in business terms, list the key modules/flows/entities involved, and cite the files. Do NOT read every L1 overview — read only the top 1-2 central flows at L1 depth. Use L0 abstracts for triage.
 ```
 
-**KB Flow Tracer** — add:
+**KB_FLOW_TRACER.md:**
 ```markdown
 ## Stop Signal
-You have enough information when the chain tree is complete (no unresolved calls) and you have cross-referenced entities and pages for the traced chain. Do NOT trace flows that are only tangentially related (e.g., utility sub-flows that are called by many chains).
+You have enough information when the chain tree is complete (no unresolved calls) and you have cross-referenced entities and pages for the traced chain. Do NOT trace flows that are only tangentially related (e.g., utility sub-flows called by many chains).
 ```
 
-**KB Analyst** — add:
+**KB_ANALYST.md:**
 ```markdown
 ## Stop Signal
-You have enough information when you can rate the blast radius (Small/Medium/Large) and list all directly affected artefacts. Do NOT trace secondary effects beyond one hop (e.g., if flow A calls flow B which calls flow C, and you are analysing a change to A, trace B but stop at C unless B is high-impact).
+You have enough information when you can rate the blast radius (Small/Medium/Large) and list all directly affected artefacts. Do NOT trace secondary effects beyond one hop unless the intermediate flow is high-impact.
 ```
 
-### 3. Add "partial reads" guidance
+**KB_DOMAIN_EXPERT.md:**
+```markdown
+## Stop Signal
+You have enough information when you can describe the entity's shape, its associations, its lifecycle flows, and its access rules. Do NOT read flows that only tangentially reference the entity.
+```
 
-Add to `FRAMEWORK.md` or `AI_WORKFLOW.md`:
+**KB_SECURITY_REVIEWER.md:**
+```markdown
+## Stop Signal
+You have enough information when you can list the relevant access rules, role assignments, and XPath constraints for the artefacts in question. Do NOT audit the entire app's security model for a question about one entity.
+```
+
+**KB_UX_INTERPRETER.md:**
+```markdown
+## Stop Signal
+You have enough information when you can describe the page structure, its data sources, and its role visibility. Do NOT trace every flow called from buttons on the page unless the question specifically asks about page behaviour.
+```
+
+### 3. Add partial reads guidance
+
+In `KnowledgeBase-Creator/artifacts/.agents/AI_WORKFLOW.md`, add a section:
 
 ```markdown
 ## Partial File Reading
@@ -115,14 +123,14 @@ Not every file needs to be read in full. Use these strategies:
 - **ROUTING.md**: Read the quick-lookup table and module index. Skip the metadata section unless you need generation context.
 ```
 
-### 4. Add reading depth to query pattern table
+### 4. Add depth column to query pattern table
 
-Update the "Common Query Patterns" table in `AI_WORKFLOW.md` to include a "Depth" column:
+In `KnowledgeBase-Creator/artifacts/.agents/AI_WORKFLOW.md`, update the "Common Query Patterns" table to include a "Depth" column:
 
 ```markdown
 | Query type | Start with | Then check | Depth |
 |---|---|---|---|
-| "What does module X do?" | `modules/X/README.md` | `DOMAIN.md`, `FLOWS.md` | Level 2 |
+| "What does module X do?" | `modules/X/README.md` | `INTERPRETATION.md`, `FLOWS.md` | Level 2 |
 | "Which flows use entity Y?" | `routes/by-entity.md` | `modules/<module>/FLOWS.md` | Level 1 |
 | "How does feature X work?" | `routes/keyword-index.md` | README, INTERPRETATION.md, L0/L1 | Level 2 |
 | "Trace flow X" | `routes/by-flow.md` | L1, flow-chain-tracing | Level 3 |
@@ -130,21 +138,33 @@ Update the "Common Query Patterns" table in `AI_WORKFLOW.md` to include a "Depth
 | `/develop` | `DEVELOPMENT_TEAM.md` | Full 6-phase workflow | Level 3-4 |
 ```
 
+## Files Changed (all under `KnowledgeBase-Creator/artifacts/.agents/`)
+
+| File | Change |
+|---|---|
+| `AI_WORKFLOW.md` | Add Reading Depth Guide, Partial File Reading, depth column in query table |
+| `agents/KB_NAVIGATOR.md` | Add Stop Signal section |
+| `agents/KB_FEATURE_INTERPRETER.md` | Add Stop Signal section |
+| `agents/KB_FLOW_TRACER.md` | Add Stop Signal section |
+| `agents/KB_ANALYST.md` | Add Stop Signal section |
+| `agents/KB_DOMAIN_EXPERT.md` | Add Stop Signal section |
+| `agents/KB_SECURITY_REVIEWER.md` | Add Stop Signal section |
+| `agents/KB_UX_INTERPRETER.md` | Add Stop Signal section |
+
 ## Exit Criteria
 
-1. AI_WORKFLOW.md has a "Reading Depth Guide" section with 4 levels.
+1. AI_WORKFLOW.md has a "Reading Depth Guide" with 4 levels and a "Partial File Reading" section.
 2. Every interpretation agent has an explicit "Stop Signal" section.
 3. The Common Query Patterns table includes a Depth column.
 4. A bot answering "What module does Course belong to?" reads 1-2 files (Level 1), not 10.
-5. A bot answering "How does registration work?" reads 3-6 files (Level 2), not 10+.
+5. All future generated KBs include these reading guides.
 
 ## Skills to Use
 
-- Agent: **Developer** (agent file updates)
+- Agent: **Developer** (agent artifact file updates)
 - Agent: **Documenter** (workflow documentation)
 
 ## Notes
 
 - Reading budgets are guidance, not hard limits. If a Level 2 answer is insufficient, the bot should escalate to Level 3 and explain why.
-- The partial reads guidance is especially important for `routes/by-flow.md`, which can be 50KB+ for large apps. A bot should search for specific keywords, not load the entire file.
-- These changes do not require modifications to the KB Creator pipeline — they are purely agent workflow documentation changes.
+- These changes are purely to agent artifact files — no compose script or template changes needed.
