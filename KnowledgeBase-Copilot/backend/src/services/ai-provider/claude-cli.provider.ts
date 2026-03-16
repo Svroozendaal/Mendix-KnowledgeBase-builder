@@ -1,14 +1,17 @@
 import { spawn } from 'node:child_process';
-import type { AiSettings, Message, MessageContent } from '@kb-copilot/shared';
-import type { AIProvider, AIProviderOptions, StreamChunk, ToolDefinition } from './types.js';
+import type { AiSettings, Message } from '@kb-copilot/shared';
+import type { AIProvider, AIProviderOptions, StreamChunk } from './types.js';
 import { resolveClaudeCliPath } from './cli-resolver.js';
 import { CliNotFoundError, AuthenticationError, ProviderError } from './errors.js';
 import { createLogger } from '../../logger.js';
 
 const log = createLogger('ClaudeCLI');
 
+/** Max turns the CLI is allowed to run internally (tool calls + responses). */
+const CLI_MAX_TURNS = 10;
+
 function messagesToCliInput(messages: Message[]): string {
-  // Claude CLI expects a single prompt via -p flag.
+  // Claude CLI expects a single prompt via stdin.
   // We concatenate the conversation into a structured prompt.
   const parts: string[] = [];
   for (const msg of messages) {
@@ -30,18 +33,6 @@ function messagesToCliInput(messages: Message[]): string {
   return parts.join('\n\n');
 }
 
-function buildToolPromptSection(tools: ToolDefinition[]): string {
-  const lines = ['You have access to the following tools:\n'];
-  for (const tool of tools) {
-    lines.push(`## ${tool.name}`);
-    lines.push(tool.description);
-    lines.push(`Parameters: ${JSON.stringify(tool.input_schema, null, 2)}`);
-    lines.push(`To use this tool, respond with a JSON block: {"tool": "${tool.name}", "arguments": {...}}`);
-    lines.push('');
-  }
-  return lines.join('\n');
-}
-
 export class ClaudeCliProvider implements AIProvider {
   constructor(private settings: AiSettings) {}
 
@@ -53,12 +44,10 @@ export class ClaudeCliProvider implements AIProvider {
 
     const prompt = messagesToCliInput(options.messages);
 
-    // Build system prompt (including tool definitions)
-    let systemPrompt = options.systemPrompt ?? '';
-    if (options.tools && options.tools.length > 0) {
-      const toolSection = buildToolPromptSection(options.tools);
-      systemPrompt = systemPrompt ? systemPrompt + '\n\n' + toolSection : toolSection;
-    }
+    // The system prompt guides the model but we don't embed custom tool
+    // definitions — the CLI has its own native tools (Read, Grep, Glob, etc.)
+    // and the model will use those to navigate the KB.
+    const systemPrompt = options.systemPrompt ?? '';
 
     // On Windows, cmd.exe has an ~8192 char command-line limit. The prompt and
     // system prompt easily exceed this. We pipe everything via stdin instead.
@@ -72,7 +61,7 @@ export class ClaudeCliProvider implements AIProvider {
       '--print',
       '--verbose',
       '--output-format', 'stream-json',
-      '--max-turns', '1',
+      '--max-turns', String(CLI_MAX_TURNS),
     ];
 
     log.info(`Spawning Claude CLI`, { cliPath, argCount: args.length, promptLength: prompt.length, systemPromptLength: systemPrompt.length, stdinLength: stdinContent.length });
@@ -129,8 +118,8 @@ export class ClaudeCliProvider implements AIProvider {
         const trimmed = line.trim();
         if (!trimmed) continue;
 
-        const chunk = parser.parseLine(trimmed);
-        if (chunk) {
+        const chunks = parser.parseLine(trimmed);
+        for (const chunk of chunks) {
           chunkCount++;
           if (chunk.type === 'error') {
             log.error(`CLI stream error`, { error: chunk.error });
@@ -142,8 +131,8 @@ export class ClaudeCliProvider implements AIProvider {
 
     // Process remaining buffer
     if (buffer.trim()) {
-      const chunk = parser.parseLine(buffer.trim());
-      if (chunk) {
+      const chunks = parser.parseLine(buffer.trim());
+      for (const chunk of chunks) {
         chunkCount++;
         yield chunk;
       }
@@ -183,67 +172,59 @@ export class ClaudeCliProvider implements AIProvider {
 /**
  * Stateful parser for Claude CLI stream-json output.
  *
- * Claude CLI emits both summary events ("assistant", "result") and incremental
- * streaming events ("content_block_*", "message_*"). We ONLY use the streaming
- * events to avoid duplicating content. The parser tracks the current block type
- * so that content_block_stop only emits tool_use_end for tool blocks (not text).
+ * Claude CLI `--output-format stream-json` emits summary events:
+ *   - "system"    — init info (ignored)
+ *   - "assistant" — full assistant message with content blocks (text, tool_use, thinking)
+ *   - "user"      — tool results from the CLI's internal tool execution (ignored —
+ *                    the CLI handles its own tool loop)
+ *   - "result"    — final completion summary with stop_reason and usage
+ *   - "rate_limit_event" — rate limit info (ignored)
+ *
+ * We extract text content from "assistant" events and forward them as text_delta
+ * chunks. The "result" event signals completion.
  */
 class StreamJsonParser {
-  private currentBlockType: 'text' | 'tool_use' | null = null;
-
-  parseLine(line: string): StreamChunk | null {
+  parseLine(line: string): StreamChunk[] {
     try {
       const obj = JSON.parse(line);
 
-      // Ignore summary events — these duplicate the streaming content
-      if (obj.type === 'assistant' || obj.type === 'result') {
-        return null;
-      }
+      // Assistant message — extract text content blocks
+      if (obj.type === 'assistant') {
+        const content = obj.message?.content;
+        if (!Array.isArray(content)) return [];
 
-      // Track block type on start
-      if (obj.type === 'content_block_start') {
-        this.currentBlockType = obj.content_block?.type ?? null;
-        if (this.currentBlockType === 'tool_use') {
-          return {
-            type: 'tool_use_start',
-            toolCallId: obj.content_block.id,
-            toolName: obj.content_block.name,
-          };
+        const chunks: StreamChunk[] = [];
+        for (const block of content) {
+          if (block.type === 'text' && block.text) {
+            chunks.push({ type: 'text_delta', text: block.text });
+          }
+          // thinking blocks and tool_use blocks from the CLI's internal tools
+          // are not forwarded — the CLI handles its own tool loop
         }
-        return null; // text block starts don't need a chunk
+        return chunks;
       }
 
-      if (obj.type === 'content_block_delta') {
-        if (obj.delta?.type === 'text_delta') {
-          return { type: 'text_delta', text: obj.delta.text };
+      // Result — signals completion
+      if (obj.type === 'result') {
+        const stopReason = obj.stop_reason ?? (obj.subtype === 'error_max_turns' ? 'end_turn' : 'end_turn');
+        const chunks: StreamChunk[] = [
+          { type: 'message_stop', stopReason },
+        ];
+        if (obj.is_error) {
+          chunks.unshift({ type: 'error', error: obj.result ?? 'CLI execution failed' });
         }
-        if (obj.delta?.type === 'input_json_delta') {
-          return { type: 'tool_use_delta', partialJson: obj.delta.partial_json };
-        }
-      }
-
-      if (obj.type === 'content_block_stop') {
-        const wasToolBlock = this.currentBlockType === 'tool_use';
-        this.currentBlockType = null;
-        return wasToolBlock ? { type: 'tool_use_end' } : null;
-      }
-
-      if (obj.type === 'message_stop') {
-        return { type: 'message_stop', stopReason: 'end_turn' };
-      }
-
-      if (obj.type === 'message_delta' && obj.delta?.stop_reason) {
-        return { type: 'message_stop', stopReason: obj.delta.stop_reason };
+        return chunks;
       }
 
       if (obj.type === 'error') {
-        return { type: 'error', error: obj.error?.message ?? String(obj.error) };
+        return [{ type: 'error', error: obj.error?.message ?? String(obj.error) }];
       }
 
-      return null;
+      // system, user (tool results), rate_limit_event — ignored
+      return [];
     } catch {
       // Not JSON — ignore non-JSON lines (CLI diagnostics, etc.)
-      return null;
+      return [];
     }
   }
 }

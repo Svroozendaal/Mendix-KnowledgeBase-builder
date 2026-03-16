@@ -4,7 +4,7 @@ import type { WSClientMessage, WSServerEvent } from '@kb-copilot/shared';
 import { ConversationService } from '../services/conversation/index.js';
 import { ConversationStore } from '../services/conversation-store/index.js';
 import { ConfigService } from '../services/config/index.js';
-import { CliNotFoundError, AuthenticationError, ApiError, RateLimitError, ProviderError } from '../services/ai-provider/index.js';
+import { CliNotFoundError, AuthenticationError, ProviderError } from '../services/ai-provider/index.js';
 import { createLogger } from '../logger.js';
 
 const log = createLogger('WebSocket');
@@ -147,12 +147,6 @@ function mapErrorToEvent(err: unknown, conversationId: string): WSServerEvent {
   }
   if (err instanceof AuthenticationError) {
     return { type: 'error', message: err.message, code: 'AUTH_FAILED' };
-  }
-  if (err instanceof RateLimitError) {
-    return { type: 'error', message: `Rate limited. Max retries exceeded. ${err.message}`, code: 'RATE_LIMITED' };
-  }
-  if (err instanceof ApiError) {
-    return { type: 'error', message: err.message, code: 'API_ERROR' };
   }
   if (err instanceof ProviderError) {
     return { type: 'error', message: err.message, code: 'PROVIDER_ERROR' };

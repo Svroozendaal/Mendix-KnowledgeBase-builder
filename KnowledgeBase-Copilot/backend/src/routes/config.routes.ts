@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ConfigService, isMaskedKey } from '../services/config/index.js';
+import { ConfigService } from '../services/config/index.js';
 import { AIProviderService } from '../services/ai-provider/index.js';
 import type { CopilotConfig } from '@kb-copilot/shared';
 
@@ -9,7 +9,7 @@ const providerService = new AIProviderService();
 
 router.get('/', async (_req, res, next) => {
   try {
-    const config = await configService.getMaskedConfig();
+    const config = await configService.loadConfig();
     res.json(config);
   } catch (err) {
     next(err);
@@ -19,16 +19,9 @@ router.get('/', async (_req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const incoming = req.body as CopilotConfig;
-
-    // Preserve existing API key if the incoming one is the masked form
-    if (isMaskedKey(incoming.aiSettings.claudeApiKey)) {
-      const existing = await configService.loadConfig();
-      incoming.aiSettings.claudeApiKey = existing.aiSettings.claudeApiKey;
-    }
-
     await configService.saveConfig(incoming);
-    const masked = await configService.getMaskedConfig();
-    res.json(masked);
+    const saved = await configService.loadConfig();
+    res.json(saved);
   } catch (err) {
     next(err);
   }

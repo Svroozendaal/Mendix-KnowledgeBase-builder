@@ -1,34 +1,30 @@
 import { randomUUID } from 'node:crypto';
+import { AiProvider } from '@kb-copilot/shared';
 import type { AiSettings, Message, Conversation, ToolCall } from '@kb-copilot/shared';
 import type { WSServerEvent } from '@kb-copilot/shared';
-import { AIProviderService, RateLimitError } from '../ai-provider/index.js';
+import { AIProviderService } from '../ai-provider/index.js';
 import type { StreamChunk } from '../ai-provider/index.js';
 import { ToolExecutor } from '../tool-executor/index.js';
 import { KB_TOOLS } from '../tool-executor/tool-definitions.js';
 import { SystemPromptBuilder } from '../system-prompt/index.js';
 import { KBNavigator } from '../kb-navigator/index.js';
+import { QuestionClassifier, CLASSIFICATION_HINTS } from '../question-classifier/index.js';
+import type { ClassificationResult } from '../question-classifier/index.js';
 import { createLogger } from '../../logger.js';
 
 const log = createLogger('Conversation');
 const MAX_TOOL_LOOPS = 8;
-const MAX_RATE_LIMIT_RETRIES = 5;
-/** Max number of messages to keep in full when sending to the API. */
+/** Max number of messages to keep in full when sending to the provider. */
 const HISTORY_WINDOW_SIZE = 10;
-
-/** Sleep that can be aborted via an AbortSignal. */
-function abortableSleep(ms: number, signal?: AbortSignal): Promise<void> {
-  return new Promise<void>((resolve, reject) => {
-    if (signal?.aborted) { reject(signal.reason ?? new DOMException('Aborted', 'AbortError')); return; }
-    const timer = setTimeout(resolve, ms);
-    const onAbort = () => { clearTimeout(timer); reject(signal!.reason ?? new DOMException('Aborted', 'AbortError')); };
-    signal?.addEventListener('abort', onAbort, { once: true });
-  });
-}
+/** Max files to pre-fetch for direct-lookup questions. */
+const MAX_PREFETCH_FILES = 2;
 
 const providerService = new AIProviderService();
 const toolExecutor = new ToolExecutor();
 const systemPromptBuilder = new SystemPromptBuilder();
 const kbNavigator = new KBNavigator();
+/** One classifier per kbRoot, lazily initialised. */
+const classifierCache = new Map<string, QuestionClassifier>();
 
 export class ConversationService {
   async processMessage(
@@ -60,51 +56,49 @@ export class ConversationService {
     };
     conversation.messages.push(userMsg);
 
-    const systemPrompt = await systemPromptBuilder.buildSystemPrompt(kbRoot);
-    log.debug(`System prompt built`, { length: systemPrompt.length, kbRoot });
+    // --- Question classification & pre-fetch ---
+    const classifier = await this.getClassifier(kbRoot);
+    const classification = classifier.classify(userMessage);
+    log.info('Question classified', { category: classification.category, confidence: classification.confidence, artifacts: classification.detectedArtifacts });
+
+    if (classification.confidence === 'high' && classification.category.startsWith('direct-')) {
+      const prefetched = await this.prefetchContext(kbRoot, classification);
+      if (prefetched.length > 0) {
+        conversation.messages.push(...prefetched);
+        log.info('Pre-fetched context injected', { messageCount: prefetched.length });
+      }
+    }
+
+    // Build system prompt with optional classification hint.
+    // CLI providers use their own native tools (Read, Grep, Glob) and need
+    // the KB root path in the prompt so the model can form absolute paths.
+    const useCliTools = settings.provider === AiProvider.ClaudeCli || settings.provider === AiProvider.CodexCli;
+    const hint = CLASSIFICATION_HINTS[classification.category];
+    const systemPrompt = await systemPromptBuilder.buildSystemPrompt(kbRoot, hint, useCliTools);
+    log.debug(`System prompt built`, { length: systemPrompt.length, kbRoot, useCliTools, hint: hint?.slice(0, 60) });
     const newMessages: Message[] = [userMsg];
 
     let loopCount = 0;
-    let rateLimitRetries = 0;
 
     while (loopCount < MAX_TOOL_LOOPS) {
       loopCount++;
       log.info(`Tool loop iteration ${loopCount}/${MAX_TOOL_LOOPS}`, { totalMessages: conversation.messages.length });
 
-      // Build a compressed view of the history for the API call.
+      // Build a compressed view of the history for the provider call.
       // Original conversation.messages is never mutated — full history is preserved for storage.
       const optimisedMessages = this.buildApiView(conversation.messages);
       log.debug(`Optimised message view`, { original: conversation.messages.length, optimised: optimisedMessages.length });
 
-      // Send conversation to AI (with rate-limit retry)
-      let collectResult: Awaited<ReturnType<ConversationService['collectStream']>>;
-      try {
-        const stream = providerService.sendMessage(settings, {
-          messages: optimisedMessages,
-          systemPrompt,
-          tools: KB_TOOLS,
-          onCancel: signal,
-        });
+      // Send conversation to AI
+      const stream = providerService.sendMessage(settings, {
+        messages: optimisedMessages,
+        systemPrompt,
+        tools: KB_TOOLS,
+        onCancel: signal,
+      });
 
-        log.debug(`Collecting stream...`);
-        collectResult = await this.collectStream(stream, onEvent);
-        rateLimitRetries = 0; // reset on success
-      } catch (err) {
-        if (err instanceof RateLimitError && rateLimitRetries < MAX_RATE_LIMIT_RETRIES) {
-          rateLimitRetries++;
-          const waitMs = err.retryAfterMs;
-          log.warn(`Rate limited — waiting ${waitMs}ms before retry (attempt ${rateLimitRetries}/${MAX_RATE_LIMIT_RETRIES})`);
-          onEvent({
-            type: 'rate_limit',
-            retryAfterMs: waitMs,
-            message: `Rate limited. Retrying in ${Math.ceil(waitMs / 1000)} seconds... (${rateLimitRetries}/${MAX_RATE_LIMIT_RETRIES})`,
-          });
-          await abortableSleep(waitMs, signal);
-          loopCount--; // don't count this as a tool-loop iteration
-          continue;
-        }
-        throw err; // non-retryable or max retries exceeded
-      }
+      log.debug(`Collecting stream...`);
+      const collectResult = await this.collectStream(stream, onEvent);
 
       const { assistantMessage, toolCalls, stopReason, usage } = collectResult;
 
@@ -188,6 +182,90 @@ export class ConversationService {
 
     log.info(`processMessage finished`, { newMessageCount: newMessages.length, totalMessages: conversation.messages.length });
     return newMessages;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Question classification helpers
+  // ---------------------------------------------------------------------------
+
+  /** Get or create a classifier for the given kbRoot. */
+  private async getClassifier(kbRoot: string): Promise<QuestionClassifier> {
+    let classifier = classifierCache.get(kbRoot);
+    if (!classifier) {
+      classifier = new QuestionClassifier(kbRoot);
+      await classifier.initialize();
+      classifierCache.set(kbRoot, classifier);
+    }
+    return classifier;
+  }
+
+  /**
+   * Pre-fetch KB files matching the classification's suggested searches.
+   * Returns synthetic tool_use / tool_result message pairs so the AI
+   * sees the content as if it had already called search_content + read_file.
+   */
+  private async prefetchContext(kbRoot: string, classification: ClassificationResult): Promise<Message[]> {
+    const messages: Message[] = [];
+    const now = new Date().toISOString();
+    const filesRead = new Set<string>();
+
+    for (const query of classification.suggestedSearches) {
+      if (filesRead.size >= MAX_PREFETCH_FILES) break;
+
+      let results;
+      try {
+        results = await kbNavigator.searchContent(kbRoot, query);
+      } catch {
+        continue;
+      }
+      if (results.length === 0) continue;
+
+      // Deduplicate by file — read the top-ranked file
+      const topFile = results[0].file;
+      if (filesRead.has(topFile)) continue;
+      filesRead.add(topFile);
+
+      let content: string;
+      try {
+        content = await kbNavigator.readFile(kbRoot, topFile);
+      } catch {
+        continue;
+      }
+
+      const toolCallId = `prefetch_${randomUUID().slice(0, 8)}`;
+
+      const assistantMsg: Message = {
+        id: `prefetch_assistant_${randomUUID()}`,
+        role: 'assistant',
+        content: [{
+          type: 'tool_use',
+          toolCall: {
+            id: toolCallId,
+            name: 'read_file',
+            arguments: { path: topFile },
+          },
+        }],
+        timestamp: now,
+      };
+
+      const resultMsg: Message = {
+        id: `prefetch_result_${randomUUID()}`,
+        role: 'user',
+        content: [{
+          type: 'tool_result',
+          toolResult: {
+            toolCallId,
+            content,
+            isError: false,
+          },
+        }],
+        timestamp: now,
+      };
+
+      messages.push(assistantMsg, resultMsg);
+    }
+
+    return messages;
   }
 
   private async collectStream(

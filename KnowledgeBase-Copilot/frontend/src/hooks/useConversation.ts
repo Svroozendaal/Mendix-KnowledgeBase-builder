@@ -125,30 +125,6 @@ export function useConversation(conversationId: string | null) {
           break;
         }
 
-        case 'rate_limit': {
-          // Show rate-limit notice — backend is auto-retrying, keep streaming
-          setMessages((prev) => {
-            const updated = [...prev];
-            const last = updated[updated.length - 1];
-            if (last?.role === 'assistant') {
-              // Append to current assistant message
-              last.content.push({ type: 'text', text: `\n\n_${event.message}_\n\n` });
-              return [...updated];
-            }
-            // No assistant message yet — create one
-            return [
-              ...updated,
-              {
-                id: crypto.randomUUID(),
-                role: 'assistant',
-                content: [{ type: 'text', text: `_${event.message}_` }],
-                timestamp: new Date().toISOString(),
-              },
-            ];
-          });
-          break;
-        }
-
         case 'error': {
           setMessages((prev) => [
             ...prev,

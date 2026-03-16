@@ -18,13 +18,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = parseInt(process.env.PORT ?? '3001', 10);
 
-// In production, allow same-origin requests; in dev, allow Vite dev server
+// In dev, allow Vite dev server origin; always allow same-origin
 const isDev = process.env.NODE_ENV !== 'production';
-if (isDev) {
-  app.use(cors({ origin: 'http://localhost:5173' }));
-} else {
-  app.use(cors());
-}
+app.use(cors({ origin: isDev ? 'http://localhost:5173' : '*' }));
 app.use(express.json());
 
 // Health check
@@ -37,9 +33,9 @@ app.use('/api/config', configRoutes);
 app.use('/api/kb', kbRoutes);
 app.use('/api/conversations', conversationRoutes);
 
-// In production, serve the built frontend files
+// Serve the built frontend files (both dev and production — needed for Mendix WebView on port 3001)
 const frontendDist = resolve(__dirname, '../../frontend/dist');
-if (!isDev && existsSync(frontendDist)) {
+if (existsSync(frontendDist)) {
   app.use(express.static(frontendDist));
   // SPA fallback — serve index.html for any non-API route
   app.get('*', (_req, res) => {
@@ -57,8 +53,8 @@ setupWebSocket(server);
 server.listen(PORT, () => {
   log.info(`KB Copilot backend running on port ${PORT}`);
   log.info(`Log file: ${LOG_FILE_PATH}`);
-  if (!isDev && existsSync(frontendDist)) {
+  if (existsSync(frontendDist)) {
     log.info(`Frontend served from ${frontendDist}`);
-    log.info(`Open http://localhost:${PORT} in your browser`);
   }
+  log.info(`Open http://localhost:${PORT} in your browser`);
 });

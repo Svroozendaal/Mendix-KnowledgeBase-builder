@@ -856,6 +856,14 @@ internal static class WizardRuntime
             return Task.FromResult(1);
         }
 
+        var copilotDll = Path.Combine(copilotSource, "KbCopilotExtension.dll");
+        if (!File.Exists(copilotDll))
+        {
+            log?.Invoke($"ERROR: CoPilot DLL not found in artifacts: {copilotDll}");
+            log?.Invoke("Run build-extension.ps1 in KnowledgeBase-Copilot/ to build the extension first.");
+            return Task.FromResult(1);
+        }
+
         var extensionsDir = Path.Combine(appFolder, "extensions");
         var copilotDest = Path.Combine(extensionsDir, "kb-copilot");
 

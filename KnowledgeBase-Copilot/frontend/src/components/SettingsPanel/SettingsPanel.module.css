@@ -78,16 +78,6 @@
   border-color: var(--color-primary);
 }
 
-.keyRow {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.keyRow .input {
-  flex: 1;
-}
-
-.toggleBtn,
 .detectBtn,
 .testBtn {
   padding: 0.375rem 0.75rem;
@@ -99,7 +89,6 @@
   margin-top: 0.5rem;
 }
 
-.toggleBtn:hover,
 .detectBtn:hover,
 .testBtn:hover {
   background: var(--color-surface-alt);

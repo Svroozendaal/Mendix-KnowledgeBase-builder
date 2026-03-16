@@ -7,11 +7,9 @@ const CONFIG_PATH = join(process.cwd(), 'copilot-config.json');
 
 const DEFAULT_CONFIG: CopilotConfig = {
   aiSettings: {
-    provider: AiProvider.ClaudeApi,
+    provider: AiProvider.ClaudeCli,
     claudeCliPath: null,
     codexCliPath: null,
-    claudeApiKey: null,
-    claudeApiModel: 'claude-sonnet-4-20250514',
   },
   lastKbRoot: null,
 };
@@ -30,25 +28,4 @@ export class ConfigService {
     await mkdir(dirname(CONFIG_PATH), { recursive: true });
     await writeFile(CONFIG_PATH, JSON.stringify(config, null, 2), 'utf-8');
   }
-
-  async getMaskedConfig(): Promise<CopilotConfig> {
-    const config = await this.loadConfig();
-    return {
-      ...config,
-      aiSettings: {
-        ...config.aiSettings,
-        claudeApiKey: maskApiKey(config.aiSettings.claudeApiKey),
-      },
-    };
-  }
-}
-
-export function maskApiKey(key: string | null): string | null {
-  if (!key) return null;
-  if (key.length <= 12) return '...';
-  return key.slice(0, 12) + '...';
-}
-
-export function isMaskedKey(key: string | null): boolean {
-  return key !== null && key.endsWith('...');
 }

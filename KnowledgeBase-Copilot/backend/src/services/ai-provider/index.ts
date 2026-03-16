@@ -3,7 +3,6 @@ import type { AiSettings } from '@kb-copilot/shared';
 import type { AIProvider, AIProviderOptions, StreamChunk } from './types.js';
 import { ClaudeCliProvider } from './claude-cli.provider.js';
 import { CodexCliProvider } from './codex-cli.provider.js';
-import { ClaudeApiProvider } from './claude-api.provider.js';
 import { resolveClaudeCliPath, resolveCodexCliPath } from './cli-resolver.js';
 import { ProviderError } from './errors.js';
 
@@ -14,8 +13,6 @@ export class AIProviderService {
         return new ClaudeCliProvider(settings);
       case AiProvider.CodexCli:
         return new CodexCliProvider(settings);
-      case AiProvider.ClaudeApi:
-        return new ClaudeApiProvider(settings);
       default:
         throw new ProviderError(`Unknown provider: ${settings.provider}`);
     }
@@ -40,4 +37,4 @@ export class AIProviderService {
 }
 
 export { type AIProvider, type AIProviderOptions, type StreamChunk, type ToolDefinition } from './types.js';
-export { CliNotFoundError, AuthenticationError, ApiError, RateLimitError, ProviderError } from './errors.js';
+export { CliNotFoundError, AuthenticationError, ProviderError } from './errors.js';

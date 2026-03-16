@@ -115,7 +115,18 @@
       "Bash(taskkill //PID 194576 //F)",
       "Bash(find c:WorkspacesMendix-KnowledgeBase-buildermendix-dataknowledge-base -type f -name *.md)",
       "Bash(find c:WorkspacesMendix-KnowledgeBase-buildermendix-dataknowledge-base -name *.md -type f)",
-      "Bash(find c:WorkspacesMendix-KnowledgeBase-buildermendix-dataknowledge-basemodulesSmartExpenses -type f -name *.md)"
+      "Bash(find c:WorkspacesMendix-KnowledgeBase-buildermendix-dataknowledge-basemodulesSmartExpenses -type f -name *.md)",
+      "Bash(grep -iE \"\\\\.md$|readme|install|deploy\")",
+      "Bash(find C:WorkspacesMendix-KnowledgeBase-builder -maxdepth 3 -type f -name *install* -o -name *deploy* -o -name *extension*)",
+      "Bash(grep -r extensions C:WorkspacesMendix-KnowledgeBase-builder --include=*.md --include=*.ps1)",
+      "Bash(find C:WorkspacesMendix-KnowledgeBase-builder -name manifest.json -o -name *.mxext)",
+      "Bash(unset CLAUDECODE)",
+      "Bash(claude --output-format stream-json --max-turns 1 --print)",
+      "Bash(powershell -ExecutionPolicy Bypass -File build-extension.ps1)",
+      "Bash(claude -p \"Say hello in one word\" --output-format stream-json --max-turns 1)",
+      "Bash(claude -p \"Say hello in one word\" --output-format stream-json --max-turns 1 --verbose)",
+      "Bash(claude -p 'Read the file CLAUDE.md using the Read tool' --output-format stream-json --max-turns 1 --verbose)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/)"
     ]
   }
 }

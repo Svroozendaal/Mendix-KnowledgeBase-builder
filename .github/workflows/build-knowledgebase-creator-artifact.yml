@@ -38,6 +38,17 @@ jobs:
             -p:DebugSymbols=false `
             -o ./KnowledgeBase-Creator
 
+      - name: Build CoPilot extension
+        shell: pwsh
+        run: |
+          $projectDir = "./KnowledgeBase-Copilot/mendix-extension/KbCopilotExtension"
+          $artifactDir = "./KnowledgeBase-Creator/artifacts/CoPilot"
+          if (Test-Path $artifactDir) { Remove-Item $artifactDir -Recurse -Force }
+          New-Item $artifactDir -ItemType Directory -Force | Out-Null
+          dotnet publish $projectDir -c Release -o $artifactDir
+          @{ mx_extensions = @('KbCopilotExtension.dll'); mx_build_extensions = @() } |
+            ConvertTo-Json | Set-Content (Join-Path $artifactDir 'manifest.json') -Encoding UTF8
+
       - name: Clean source build outputs inside artifact
         shell: pwsh
         run: |

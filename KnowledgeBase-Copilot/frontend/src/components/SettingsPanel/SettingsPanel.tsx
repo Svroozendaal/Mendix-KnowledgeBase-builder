@@ -9,18 +9,11 @@ interface SettingsPanelProps {
   onClose: () => void;
 }
 
-const MODEL_OPTIONS = [
-  { value: 'claude-sonnet-4-20250514', label: 'Claude Sonnet 4' },
-  { value: 'claude-haiku-4-5-20251001', label: 'Claude Haiku 4.5' },
-  { value: 'claude-opus-4-6', label: 'Claude Opus 4.6' },
-];
-
 export function SettingsPanel({ onClose }: SettingsPanelProps) {
   const { config, updateConfig } = useApp();
   const [draft, setDraft] = useState<CopilotConfig | null>(null);
   const [testResult, setTestResult] = useState<string | null>(null);
   const [cliStatus, setCliStatus] = useState<string | null>(null);
-  const [showKey, setShowKey] = useState(false);
 
   useEffect(() => {
     if (config) setDraft({ ...config, aiSettings: { ...config.aiSettings } });
@@ -79,7 +72,6 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
               />
               {p === AiProvider.ClaudeCli && 'Claude CLI'}
               {p === AiProvider.CodexCli && 'Codex CLI'}
-              {p === AiProvider.ClaudeApi && 'Claude API'}
             </label>
           ))}
         </fieldset>
@@ -123,46 +115,6 @@ export function SettingsPanel({ onClose }: SettingsPanelProps) {
               Auto detect
             </button>
             {cliStatus && <span className={styles.statusText}>{cliStatus}</span>}
-          </div>
-        )}
-
-        {provider === AiProvider.ClaudeApi && (
-          <div className={styles.providerPanel}>
-            <label className={styles.label}>
-              API Key
-              <div className={styles.keyRow}>
-                <input
-                  type={showKey ? 'text' : 'password'}
-                  className={styles.input}
-                  value={draft.aiSettings.claudeApiKey ?? ''}
-                  onChange={(e) =>
-                    setDraft({ ...draft, aiSettings: { ...draft.aiSettings, claudeApiKey: e.target.value || null } })
-                  }
-                  placeholder="sk-ant-..."
-                />
-                <button
-                  className={styles.toggleBtn}
-                  onClick={() => setShowKey(!showKey)}
-                  type="button"
-                >
-                  {showKey ? 'Hide' : 'Show'}
-                </button>
-              </div>
-            </label>
-            <label className={styles.label}>
-              Model
-              <select
-                className={styles.select}
-                value={draft.aiSettings.claudeApiModel ?? 'claude-sonnet-4-20250514'}
-                onChange={(e) =>
-                  setDraft({ ...draft, aiSettings: { ...draft.aiSettings, claudeApiModel: e.target.value } })
-                }
-              >
-                {MODEL_OPTIONS.map((m) => (
-                  <option key={m.value} value={m.value}>{m.label}</option>
-                ))}
-              </select>
-            </label>
           </div>
         )}
 

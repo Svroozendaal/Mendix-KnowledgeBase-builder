@@ -21,18 +21,3 @@ export class AuthenticationError extends ProviderError {
   }
 }
 
-export class ApiError extends ProviderError {
-  constructor(message: string) {
-    super(message, 4);
-    this.name = 'ApiError';
-  }
-}
-
-export class RateLimitError extends ProviderError {
-  readonly retryAfterMs: number;
-  constructor(retryAfterMs: number) {
-    super(`Rate limited. Retry after ${Math.ceil(retryAfterMs / 1000)}s.`, 5);
-    this.name = 'RateLimitError';
-    this.retryAfterMs = retryAfterMs;
-  }
-}

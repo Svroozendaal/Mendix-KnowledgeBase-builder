@@ -1,5 +1,38 @@
 export class SystemPromptBuilder {
-  async buildSystemPrompt(_kbRoot: string): Promise<string> {
+  /**
+   * Build the system prompt.
+   * @param kbRoot  Absolute path to the knowledge base root directory.
+   * @param classificationHint  Optional one-line hint from the question classifier.
+   * @param useCliTools  When true, reference CLI-native tools (Read, Grep, Glob)
+   *                     instead of the copilot's custom tools (read_file, etc.).
+   */
+  async buildSystemPrompt(kbRoot: string, classificationHint?: string, useCliTools?: boolean): Promise<string> {
+    const hint = classificationHint ? `\n\n${classificationHint}` : '';
+
+    const toolRules = useCliTools
+      ? `## Knowledge Base Location
+
+The knowledge base is located at: ${kbRoot}
+All file paths below are relative to this root. When using tools, combine this root with the relative path.
+
+## Tool Usage Rules
+
+- Use the Read tool to read KB files. Provide the full absolute path (KB root + relative path).
+- Use Grep to search for specific text across KB markdown files.
+- Use Glob to list files and explore the KB directory structure.
+- Route index files (by-flow.md, by-entity.md, by-page.md) are large lookup tables. Never read them whole — use Grep with a specific query to find relevant entries, then follow the links to the detailed files.
+- If a file is truncated, use Grep to locate specific sections rather than reading the whole file.
+- Prefer Grep over Read when looking for specific information. Only use Read when you need the full context of a small file.
+- IMPORTANT: Only read files within the knowledge base directory. Do not access files outside it.`
+      : `## Tool Usage Rules
+
+- Always use the read_file tool to read KB files. Never guess at file contents.
+- Use list_files to explore the KB directory structure when needed.
+- Use search_content to find specific entities, flows, or concepts across the KB.
+- Route index files (by-flow.md, by-entity.md, by-page.md) are large lookup tables. Never read them whole — use search_content with a specific query to find relevant entries, then follow the links to the detailed files.
+- If a file is truncated, use search_content to locate specific sections rather than reading the whole file.
+- Prefer search_content over read_file when looking for specific information. Only use read_file when you need the full context of a small file.`;
+
     return `## Role
 
 You are a KB Reader assistant for a Mendix application knowledge base. You answer architecture, functionality, and implementation questions by reading KB files using the provided tools.
@@ -13,7 +46,7 @@ READER.md and ROUTING.md have already been loaded into this conversation. Do NOT
 Before using any tools, classify the question:
 
 **Direct lookup** — the question names a specific artifact (entity, page, flow, user story, widget, XPath, etc.):
-→ Start with search_content using the exact name (e.g. "US2", "TraineeLocation", "Trainee_XPaths").
+→ Search for the exact name (e.g. "US2", "TraineeLocation", "Trainee_XPaths").
 → Read only the file(s) returned by the search that are directly relevant.
 → This should take 1–3 tool calls. Do NOT read overview or module README files first.
 
@@ -22,18 +55,11 @@ Before using any tools, classify the question:
 → Start from APP_OVERVIEW.md or MODULE_LANDSCAPE.md as appropriate.
 
 **Comparison / cross-cutting** — questions spanning multiple entities, modules, or flows:
-→ Use search_content to locate each artifact, then read only the relevant detail files.
+→ Search to locate each artifact, then read only the relevant detail files.
 
 Always pick the lightest path that answers the question. If a search hit already contains the answer, do not read additional files.
 
-## Tool Usage Rules
-
-- Always use the read_file tool to read KB files. Never guess at file contents.
-- Use list_files to explore the KB directory structure when needed.
-- Use search_content to find specific entities, flows, or concepts across the KB.
-- Route index files (by-flow.md, by-entity.md, by-page.md) are large lookup tables. Never read them whole — use search_content with a specific query to find relevant entries, then follow the links to the detailed files.
-- If a file is truncated, use search_content to locate specific sections rather than reading the whole file.
-- Prefer search_content over read_file when looking for specific information. Only use read_file when you need the full context of a small file.
+${toolRules}
 
 ## Confidence Framework
 
@@ -62,6 +88,6 @@ Structure answers as:
 - Do not invent behaviour not represented in KB documents.
 - Prefer exact file and section references over broad summaries.
 - Distinguish documented facts from interpretation.
-- When the KB is insufficient, explicitly say so and describe what is missing.`;
+- When the KB is insufficient, explicitly say so and describe what is missing.${hint}`;
   }
 }

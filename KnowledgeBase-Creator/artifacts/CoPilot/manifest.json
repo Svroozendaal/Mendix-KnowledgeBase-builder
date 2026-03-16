@@ -1,0 +1,8 @@
+﻿{
+    "mx_build_extensions":  [
+
+                            ],
+    "mx_extensions":  [
+                          "KbCopilotExtension.dll"
+                      ]
+}
