@@ -28,21 +28,21 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
 
 ## Procedure
 
-1. Read `AGENTS.md`.
-2. Read `.agents/agents/KNOWLEDGEBASE_CREATOR.md`.
-3. Read `.agents/agents/OVERVIEW_KB_BUILDER.md`.
-4. Bootstrap once per session:
-   - `ROUTING.md`
+1. Bootstrap once per session — read only these KB files for orientation:
+   - `ROUTING.md` (in the knowledge base root)
    - `_reports/UNKNOWN_TODO.md`
-5. Read app-level source pseudo files:
+   Do NOT read AGENTS.md, KNOWLEDGEBASE_CREATOR.md, OVERVIEW_KB_BUILDER.md,
+   or AI_WORKFLOW.md — the caller already provides enrichment guidance via the
+   general-interpretation and module-interpretation skill files.
+2. Read app-level source pseudo files:
    - `general/app-info.pseudo.txt`
    - `general/user-roles.pseudo.txt`
-6. Enrich the app-level KB files conservatively:
+3. Enrich the app-level KB files conservatively:
    - `app/APP_OVERVIEW.md`
    - `app/MODULE_LANDSCAPE.md`
    - `app/SECURITY.md`
    - `app/CALL_GRAPH.md`
-7. Enrich custom modules one at a time. For each module, load:
+4. Enrich custom modules one at a time. For each module, load:
    - `modules/<Name>/README.md` — module hub and navigation
    - `modules/<Name>/DOMAIN.md` — entity shape and lifecycle
    - `modules/<Name>/FLOWS.md` — flow catalogue with L0/L1/L2 links
@@ -52,13 +52,13 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
    - `modules/<Name>/pages/INDEX.abstract.md` — collection L0 for page triage
    - Individual L1 page overviews (`pages/<slug>.overview.md`) as needed
    - `modules/<Name>/INTERPRETATION.md` — the only writable file
-   - `lastRunFolder/modules/<Name>/domain-model.pseudo.txt`
-   - `lastRunFolder/modules/<Name>/flows.pseudo.txt`
-   - `lastRunFolder/modules/<Name>/pages.pseudo.txt`
+   - `lastRunFolder/modules/<Name>/domain-model.pseudo.txt` — prefer targeted reads for large files
+   - `lastRunFolder/modules/<Name>/flows.pseudo.txt` — prefer targeted reads for large files
+   - `lastRunFolder/modules/<Name>/pages.pseudo.txt` — prefer targeted reads for large files
    - `lastRunFolder/modules/<Name>/resources.pseudo.txt`
-8. Write module narrative only to `modules/<Name>/INTERPRETATION.md`.
-9. Resolve items in `_reports/UNKNOWN_TODO.md` when the source run folder provides enough evidence.
-10. Re-run scaffold validation and quality gate from the creator package.
+5. Write module narrative only to `modules/<Name>/INTERPRETATION.md`.
+6. Resolve items in `_reports/UNKNOWN_TODO.md` when the source run folder provides enough evidence.
+7. Re-run scaffold validation and quality gate from the creator package.
 
 ## Guardrails
 

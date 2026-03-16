@@ -10,6 +10,10 @@ internal sealed class WizardForm : Form
     private readonly TextBox _appFolderBox = new() { Dock = DockStyle.Fill, ReadOnly = true };
     private readonly Button _runButton = new() { Text = "Run Pipeline", AutoSize = true };
     private readonly Button _enrichButton = new() { Text = "Enrich KB", AutoSize = true, Enabled = false };
+    private readonly Button _enrichModulesButton = new() { Text = "Enrich Modules...", AutoSize = true, Enabled = false };
+    private readonly Button _updateAgentsButton = new() { Text = "Update Agents", AutoSize = true, Enabled = false };
+    private readonly Button _addCopilotButton = new() { Text = "Add Copilot", AutoSize = true };
+    private readonly Button _openAppButton = new() { Text = "Open App", AutoSize = true };
     private readonly Button _settingsButton = new() { Text = "AI Settings...", AutoSize = true };
     private readonly CheckBox _autoEnrichCheck = new() { Text = "Auto-enrich after pipeline", AutoSize = true };
     private readonly TextBox _logBox = new()
@@ -59,7 +63,7 @@ internal sealed class WizardForm : Form
         {
             Dock = DockStyle.Top,
             ColumnCount = 4,
-            RowCount = 9,
+            RowCount = 10,
             AutoSize = true,
             Padding = new Padding(12),
         };
@@ -89,10 +93,21 @@ internal sealed class WizardForm : Form
         AddRow(settings, 4, "Output data root", _dataRootBox, browseDataRootButton, EmptyControl());
         AddRow(settings, 5, "Mendix app folder", _appFolderBox, EmptyControl(), EmptyControl());
         AddRow(settings, 6, string.Empty, _autoEnrichCheck, _settingsButton, EmptyControl());
-        AddRow(settings, 7, string.Empty, _runButton, _enrichButton, EmptyControl());
+
+        var actionFlow = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, WrapContents = false };
+        actionFlow.Controls.AddRange([_runButton, _enrichButton, _enrichModulesButton, _updateAgentsButton]);
+        AddRow(settings, 7, string.Empty, actionFlow, EmptyControl(), EmptyControl());
+
+        var appFlow = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, WrapContents = false };
+        appFlow.Controls.AddRange([_addCopilotButton, _openAppButton]);
+        AddRow(settings, 8, string.Empty, appFlow, EmptyControl(), EmptyControl());
 
         _runButton.Click += async (_, _) => await RunPipelineAsync();
         _enrichButton.Click += async (_, _) => await RunEnrichmentAsync();
+        _enrichModulesButton.Click += async (_, _) => await RunEnrichModulesAsync();
+        _updateAgentsButton.Click += async (_, _) => await RunUpdateAgentsAsync();
+        _addCopilotButton.Click += async (_, _) => await RunAddCopilotAsync();
+        _openAppButton.Click += (_, _) => RunOpenApp();
         _settingsButton.Click += (_, _) => OpenAiSettings();
         root.Controls.Add(settings, 0, 0);
 
@@ -187,6 +202,8 @@ internal sealed class WizardForm : Form
         }
 
         _enrichButton.Enabled = _enrichReady;
+        _enrichModulesButton.Enabled = _enrichReady;
+        _updateAgentsButton.Enabled = _enrichReady;
     }
 
     private void BrowseMpr()
@@ -383,6 +400,8 @@ internal sealed class WizardForm : Form
 
             _enrichReady = true;
             _enrichButton.Enabled = true;
+            _enrichModulesButton.Enabled = true;
+            _updateAgentsButton.Enabled = true;
 
             if (_autoEnrichCheck.Checked)
             {
@@ -527,6 +546,283 @@ internal sealed class WizardForm : Form
         }
     }
 
+    private async Task RunEnrichModulesAsync()
+    {
+        try
+        {
+            var dataRoot = WizardRuntime.NormalizeDataRootInput(_dataRootBox.Text);
+            var kbRoot = Path.Combine(dataRoot, "knowledge-base");
+
+            AppendLog($"Loading modules from KB: {kbRoot}");
+            var modules = WizardRuntime.LoadModuleList(kbRoot);
+            AppendLog($"Found {modules.Count} module(s)");
+
+            if (modules.Count == 0)
+            {
+                MessageBox.Show(
+                    this,
+                    $"No modules found.{Environment.NewLine}{Environment.NewLine}Checked KB root: {kbRoot}{Environment.NewLine}{Environment.NewLine}Ensure the pipeline has been run and all-modules.json exists in the source run folder referenced by creator-link.json.",
+                    "No modules",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            using var picker = new ModulePickerForm(modules);
+            if (picker.ShowDialog(this) != DialogResult.OK || picker.SelectedModules.Length == 0)
+                return;
+
+            ToggleUi(false);
+            AppendLog("");
+            AppendLog($"=== Starting AI enrichment for {picker.SelectedModules.Length} selected module(s) ===");
+            foreach (var m in picker.SelectedModules)
+                AppendLog($"  - {m}");
+
+            var creatorLinkPath = Path.Combine(kbRoot, "_sources", "creator-link.json");
+            if (!File.Exists(creatorLinkPath))
+            {
+                AppendLog("ERROR: creator-link.json not found. Run the pipeline first.");
+                return;
+            }
+
+            var appName = _appNameBox.Text.Trim();
+            var aiSettings = _config.AiSettings ?? new AiSettings();
+
+            AppendLog($"AI provider: {ProviderLabel(aiSettings.Provider)}");
+
+            string? effectiveCliPath = null;
+            switch (aiSettings.Provider)
+            {
+                case AiProvider.ClaudeCli:
+                    var (claudeFound, detectedClaudePath) = WizardRuntime.DetectClaudeCli(aiSettings.ClaudeCliPath);
+                    effectiveCliPath = detectedClaudePath;
+                    if (claudeFound) AppendLog($"Claude CLI: {detectedClaudePath}");
+                    break;
+                case AiProvider.CodexCli:
+                    var (codexFound, detectedCodexPath) = WizardRuntime.DetectCodexCli(aiSettings.CodexCliPath);
+                    effectiveCliPath = detectedCodexPath;
+                    if (codexFound) AppendLog($"Codex CLI: {detectedCodexPath}");
+                    break;
+                case AiProvider.ClaudeApi:
+                    AppendLog($"Model: {aiSettings.ClaudeApiModel}");
+                    break;
+            }
+
+            var exitCode = await WizardRuntime.RunEnrichmentAsync(
+                packageRoot: _packageRoot,
+                wizardRoot: _wizardRoot,
+                kbRoot: kbRoot,
+                appName: appName,
+                claudePath: effectiveCliPath,
+                aiSettings: aiSettings,
+                enrichModules: picker.SelectedModules,
+                log: AppendLog
+            );
+
+            if (exitCode == 2)
+            {
+                AppendLog("Claude CLI not found.");
+                return;
+            }
+
+            if (exitCode != 0)
+            {
+                AppendLog($"Enrichment failed with exit code {exitCode}.");
+                MessageBox.Show(this, $"Enrichment failed with exit code {exitCode}.", "Enrichment failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            AppendLog("Module enrichment completed successfully.");
+            MessageBox.Show(
+                this,
+                $"AI enrichment completed for {picker.SelectedModules.Length} module(s).{Environment.NewLine}{Environment.NewLine}Knowledge base:{Environment.NewLine}{kbRoot}",
+                "Enrichment complete",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+        catch (Exception ex)
+        {
+            AppendLog($"ERROR: {ex.Message}");
+            MessageBox.Show(this, ex.Message, "Enrichment failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            ToggleUi(true);
+        }
+    }
+
+    private async Task RunUpdateAgentsAsync()
+    {
+        try
+        {
+            ToggleUi(false);
+            AppendLog("");
+            AppendLog("=== Updating KB agents ===");
+
+            var dataRoot = WizardRuntime.NormalizeDataRootInput(_dataRootBox.Text);
+            var kbRoot = Path.Combine(dataRoot, "knowledge-base");
+
+            if (!Directory.Exists(kbRoot))
+            {
+                AppendLog("ERROR: Knowledge base not found. Run the pipeline first.");
+                MessageBox.Show(this, "Knowledge base folder not found. Run the pipeline first.",
+                    "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var exitCode = await WizardRuntime.UpdateKbAgentsAsync(
+                packageRoot: _packageRoot,
+                kbRoot: kbRoot,
+                log: AppendLog
+            );
+
+            if (exitCode != 0)
+            {
+                AppendLog("Agents update failed.");
+                MessageBox.Show(this, "Failed to update agents. Check the log for details.",
+                    "Update failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            AppendLog("Agents updated successfully.");
+            MessageBox.Show(
+                this,
+                $"KB agents folder updated from package artifacts.{Environment.NewLine}{Environment.NewLine}Destination:{Environment.NewLine}{Path.Combine(kbRoot, ".agents")}",
+                "Agents updated",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+        catch (Exception ex)
+        {
+            AppendLog($"ERROR: {ex.Message}");
+            MessageBox.Show(this, ex.Message, "Update failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            ToggleUi(true);
+        }
+    }
+
+    private async Task RunAddCopilotAsync()
+    {
+        try
+        {
+            var mprPath = _mprPathBox.Text.Trim();
+            if (!File.Exists(mprPath))
+            {
+                MessageBox.Show(this, "Select a valid .mpr file first.", "No app selected",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var appFolder = Path.GetDirectoryName(mprPath)!;
+            var copilotDest = Path.Combine(appFolder, "extensions", "kb-copilot");
+
+            if (Directory.Exists(copilotDest))
+            {
+                var answer = MessageBox.Show(
+                    this,
+                    $"CoPilot already exists at:{Environment.NewLine}{copilotDest}{Environment.NewLine}{Environment.NewLine}Replace it?",
+                    "CoPilot exists",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+                if (answer != DialogResult.Yes) return;
+            }
+
+            ToggleUi(false);
+            _logBox.Clear();
+            AppendLog("=== Adding CoPilot extension ===");
+            AppendLog($"App folder: {appFolder}");
+
+            var exitCode = await WizardRuntime.AddCopilotAsync(
+                packageRoot: _packageRoot,
+                appFolder: appFolder,
+                log: AppendLog
+            );
+
+            if (exitCode != 0)
+            {
+                AppendLog($"Add CoPilot failed with exit code {exitCode}.");
+                MessageBox.Show(this, $"Failed to add CoPilot. Check the log for details.",
+                    "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            AppendLog($"CoPilot extension installed at: {copilotDest}");
+            AppendLog("Use \"Open App\" to launch Studio Pro with extension support.");
+
+            MessageBox.Show(
+                this,
+                $"CoPilot extension added.{Environment.NewLine}{Environment.NewLine}" +
+                $"Location:{Environment.NewLine}{copilotDest}{Environment.NewLine}{Environment.NewLine}" +
+                $"Use \"Open App\" to launch Studio Pro with --enable-extension-development.",
+                "CoPilot added",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        }
+        catch (Exception ex)
+        {
+            AppendLog($"ERROR: {ex.Message}");
+            MessageBox.Show(this, ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            ToggleUi(true);
+        }
+    }
+
+    private void RunOpenApp()
+    {
+        try
+        {
+            var mprPath = _mprPathBox.Text.Trim();
+            if (!File.Exists(mprPath))
+            {
+                MessageBox.Show(this, "Select a valid .mpr file first.", "No app selected",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var mxPath = _mxPathBox.Text.Trim();
+            var installRoot = _installRootBox.Text.Trim();
+            var studioProExe = WizardRuntime.FindStudioProExe(
+                string.IsNullOrWhiteSpace(mxPath) ? null : mxPath,
+                string.IsNullOrWhiteSpace(installRoot) ? null : installRoot
+            );
+
+            if (string.IsNullOrWhiteSpace(studioProExe))
+            {
+                MessageBox.Show(
+                    this,
+                    $"Could not find studiopro.exe.{Environment.NewLine}{Environment.NewLine}" +
+                    "Ensure the Mendix install root or mx.exe path is set correctly.",
+                    "Studio Pro not found",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            AppendLog($"Opening Studio Pro: {studioProExe}");
+            AppendLog($"App: {mprPath}");
+            AppendLog("Flags: --enable-extension-development");
+
+            WizardRuntime.OpenMendixApp(studioProExe, mprPath);
+
+            AppendLog("Studio Pro launched.");
+        }
+        catch (Exception ex)
+        {
+            AppendLog($"ERROR: {ex.Message}");
+            MessageBox.Show(this, ex.Message, "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
     private bool _enrichReady;
 
     private void ToggleUi(bool enabled)
@@ -534,6 +830,10 @@ internal sealed class WizardForm : Form
         _runButton.Enabled = enabled;
         _autoEnrichCheck.Enabled = enabled;
         _enrichButton.Enabled = enabled && _enrichReady;
+        _enrichModulesButton.Enabled = enabled && _enrichReady;
+        _updateAgentsButton.Enabled = enabled && _enrichReady;
+        _addCopilotButton.Enabled = enabled;
+        _openAppButton.Enabled = enabled;
         Cursor = enabled ? Cursors.Default : Cursors.WaitCursor;
     }
 

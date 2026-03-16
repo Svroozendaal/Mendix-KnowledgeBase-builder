@@ -40,4 +40,4 @@ export class AIProviderService {
 }
 
 export { type AIProvider, type AIProviderOptions, type StreamChunk, type ToolDefinition } from './types.js';
-export { CliNotFoundError, AuthenticationError, ApiError, ProviderError } from './errors.js';
+export { CliNotFoundError, AuthenticationError, ApiError, RateLimitError, ProviderError } from './errors.js';

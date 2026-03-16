@@ -246,39 +246,70 @@ if ([string]::IsNullOrWhiteSpace($claudeCliResolved)) {
 
 Write-Host "Claude CLI:          $claudeCliResolved"
 
+# --- Resolve module filter ---
+$enrichModulesEnv = [Environment]::GetEnvironmentVariable("ENRICH_MODULES")
+$moduleFilterList = @()
+$moduleFilterPrompt = ""
+if (-not [string]::IsNullOrWhiteSpace($enrichModulesEnv)) {
+    $moduleFilterList = @($enrichModulesEnv.Split(',', [System.StringSplitOptions]::RemoveEmptyEntries) | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" })
+    if ($moduleFilterList.Count -gt 0) {
+        $moduleNames = ($moduleFilterList | ForEach-Object { "- $_" }) -join "`n"
+        $moduleFilterPrompt = @"
+
+IMPORTANT — MODULE SCOPE RESTRICTION:
+Only enrich the following modules (skip all others):
+$moduleNames
+
+Do NOT enrich app-level files (APP_OVERVIEW.md, MODULE_LANDSCAPE.md, SECURITY.md, CALL_GRAPH.md).
+Do NOT resolve Unknown items outside the listed modules.
+Only process the modules listed above, one at a time.
+"@
+        Write-Host "Module filter:       $($moduleFilterList.Count) module(s)" -ForegroundColor Cyan
+        foreach ($m in $moduleFilterList) {
+            Write-Host "  - $m"
+        }
+    }
+} else {
+    Write-Host "Module filter:       all (no filter)" -ForegroundColor Cyan
+}
+
 # --- Build enrichment prompt ---
-$agentsMdPath = Join-Path $packageRoot "AGENTS.md"
-$kbCreatorAgentPath = Join-Path $packageRoot ".agents\agents\KNOWLEDGEBASE_CREATOR.md"
-$kbBuilderAgentPath = Join-Path $packageRoot ".agents\agents\OVERVIEW_KB_BUILDER.md"
 $enrichSkillPath = Join-Path $packageRoot ".agents\skills\enrichkb\SKILL.md"
+$generalSkillPath = Join-Path $packageRoot ".agents\skills\mendix-overview-general-interpretation\SKILL.md"
+$moduleSkillPath = Join-Path $packageRoot ".agents\skills\mendix-overview-module-interpretation\SKILL.md"
 
 $enrichPrompt = @"
 You are running the enrichKB workflow for the Mendix KnowledgeBase Creator.
 
-Read the following files in order to understand the enrichment procedure:
-1. $agentsMdPath
-2. $kbCreatorAgentPath
-3. $kbBuilderAgentPath
-4. $enrichSkillPath
+Read ONLY these three files for the enrichment procedure and guidance:
+1. $enrichSkillPath — the master procedure (follow this exactly)
+2. $generalSkillPath — guidance for app-level file enrichment
+3. $moduleSkillPath — guidance for per-module file enrichment
 
-Then execute the enrichment procedure defined in the enrichkb SKILL.md.
+IMPORTANT: Do NOT follow any instructions to read additional agent or framework
+files (AGENTS.md, KNOWLEDGEBASE_CREATOR.md, OVERVIEW_KB_BUILDER.md,
+AI_WORKFLOW.md). All necessary instructions are already in the three files above.
+Reading extra framework files wastes tokens without adding value.
 
 Key parameters:
 - Knowledge base root: $resolvedKbRoot
 - Source run folder: $resolvedRunFolder
 - App name: $resolvedAppName
-- Creator root: $packageRoot
 
-Follow the SKILL.md procedure exactly:
-1. Treat AGENTS/framework docs as session bootstrap, then read the target KB ROUTING.md and _reports/UNKNOWN_TODO.md once.
-2. Enrich app-level KB files first.
-3. Then enrich custom modules one at a time, loading only that module's collection abstracts, object overviews as needed, and source pseudo exports.
-4. Write module narrative only to `modules/<Name>/INTERPRETATION.md`.
+Execute the enrichkb SKILL.md procedure:
+1. Read the target KB's ROUTING.md and _reports/UNKNOWN_TODO.md once for orientation.
+2. Enrich app-level KB files first (use general-interpretation guidance).
+3. Then enrich custom modules one at a time (use module-interpretation guidance),
+   loading only that module's collection abstracts, L1 overviews as needed, and
+   source pseudo exports. Prefer targeted heading reads over full-file loads for
+   large pseudo.txt files.
+4. Write module narrative only to modules/<Name>/INTERPRETATION.md.
 5. Resolve Unknown items where evidence exists.
 6. Mark all AI-added narratives as Confidence: Inferred.
-7. Never remove export-backed data, headings, tables, links, anchors, or pointer/evidence blocks.
+7. Never remove export-backed data, headings, tables, links, anchors, or
+   pointer/evidence blocks. Never edit L0/L1 overview files.
 8. Prioritise custom modules over marketplace modules.
-
+$moduleFilterPrompt
 After enrichment, report which files were enriched and any remaining gaps.
 "@
 

@@ -27,3 +27,12 @@ export class ApiError extends ProviderError {
     this.name = 'ApiError';
   }
 }
+
+export class RateLimitError extends ProviderError {
+  readonly retryAfterMs: number;
+  constructor(retryAfterMs: number) {
+    super(`Rate limited. Retry after ${Math.ceil(retryAfterMs / 1000)}s.`, 5);
+    this.name = 'RateLimitError';
+    this.retryAfterMs = retryAfterMs;
+  }
+}

@@ -44,9 +44,16 @@ export interface ErrorEvent {
   code?: string;
 }
 
+export interface RateLimitEvent {
+  type: 'rate_limit';
+  retryAfterMs: number;
+  message: string;
+}
+
 export type WSServerEvent =
   | TextDeltaEvent
   | ToolCallEvent
   | ToolResultEvent
   | DoneEvent
-  | ErrorEvent;
+  | ErrorEvent
+  | RateLimitEvent;

@@ -96,12 +96,47 @@ export function useConversation(conversationId: string | null) {
         case 'done': {
           setIsStreaming(false);
           streamingMsgRef.current = null;
-          // Reload from server to get the persisted state
+          // Reload from server, but filter out internal tool-result-only messages
           if (conversationId) {
             api.getConversation(conversationId)
-              .then((conv) => setMessages(conv.messages))
+              .then((conv) => {
+                const filtered = conv.messages.filter((m) => {
+                  // Keep all assistant and genuine user messages
+                  // Skip user-role messages that only contain tool_result blocks
+                  // (these are internal API round-trips, not user input)
+                  if (m.role === 'user' && m.content.every((b) => b.type === 'tool_result')) {
+                    return false;
+                  }
+                  return true;
+                });
+                setMessages(filtered);
+              })
               .catch(console.error);
           }
+          break;
+        }
+
+        case 'rate_limit': {
+          // Show rate-limit notice — backend is auto-retrying, keep streaming
+          setMessages((prev) => {
+            const updated = [...prev];
+            const last = updated[updated.length - 1];
+            if (last?.role === 'assistant') {
+              // Append to current assistant message
+              last.content.push({ type: 'text', text: `\n\n_${event.message}_\n\n` });
+              return [...updated];
+            }
+            // No assistant message yet — create one
+            return [
+              ...updated,
+              {
+                id: crypto.randomUUID(),
+                role: 'assistant',
+                content: [{ type: 'text', text: `_${event.message}_` }],
+                timestamp: new Date().toISOString(),
+              },
+            ];
+          });
           break;
         }
 

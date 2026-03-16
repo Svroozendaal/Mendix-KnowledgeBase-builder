@@ -38,6 +38,15 @@ internal sealed class WizardConfig
     public AiSettings? AiSettings { get; set; }
 }
 
+internal sealed class ModuleInfo
+{
+    public string Name { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public int EntityCount { get; set; }
+    public int FlowCount { get; set; }
+    public int PageCount { get; set; }
+}
+
 internal sealed class DetectionResult
 {
     public bool Success { get; set; }
@@ -311,6 +320,143 @@ internal static class WizardRuntime
         return process.ExitCode;
     }
 
+    public static List<ModuleInfo> LoadModuleList(string kbRoot)
+    {
+        var sourcesDir = Path.Combine(kbRoot, "_sources");
+        var creatorLinkPath = Path.Combine(sourcesDir, "creator-link.json");
+        if (!File.Exists(creatorLinkPath))
+        {
+            return [];
+        }
+
+        string? runFolder = null;
+        try
+        {
+            var linkJson = File.ReadAllText(creatorLinkPath);
+            using var doc = JsonDocument.Parse(linkJson);
+            if (doc.RootElement.TryGetProperty("lastRunFolder", out var rf))
+                runFolder = rf.GetString();
+
+            // If lastRunFolder doesn't exist, try currentAliasPath
+            if (string.IsNullOrWhiteSpace(runFolder) || !Directory.Exists(runFolder))
+            {
+                if (doc.RootElement.TryGetProperty("currentAliasPath", out var ca))
+                {
+                    var candidate = ca.GetString();
+                    if (!string.IsNullOrWhiteSpace(candidate) && Directory.Exists(candidate))
+                        runFolder = candidate;
+                }
+            }
+
+            // Fall back: derive from KB root
+            if (string.IsNullOrWhiteSpace(runFolder) || !Directory.Exists(runFolder))
+            {
+                var dataRoot = Directory.GetParent(kbRoot)?.FullName;
+                if (!string.IsNullOrWhiteSpace(dataRoot))
+                {
+                    var localCurrent = Path.Combine(dataRoot, "app-overview", "current");
+                    if (Directory.Exists(localCurrent))
+                        runFolder = localCurrent;
+                }
+            }
+        }
+        catch
+        {
+            return [];
+        }
+
+        if (string.IsNullOrWhiteSpace(runFolder))
+            return [];
+
+        var allModulesPath = Path.Combine(runFolder, "general", "all-modules.json");
+        if (!File.Exists(allModulesPath))
+            return [];
+
+        try
+        {
+            var modulesJson = File.ReadAllText(allModulesPath);
+            using var doc = JsonDocument.Parse(modulesJson);
+
+            if (!doc.RootElement.TryGetProperty("modules", out var modulesArray))
+                return [];
+
+            var result = new List<ModuleInfo>();
+            foreach (var m in modulesArray.EnumerateArray())
+            {
+                var name = m.TryGetProperty("module", out var n) ? n.GetString() : null;
+                var category = m.TryGetProperty("category", out var c) ? c.GetString() : "Unknown";
+                if (string.IsNullOrWhiteSpace(name)) continue;
+
+                result.Add(new ModuleInfo
+                {
+                    Name = name!,
+                    Category = category ?? "Unknown",
+                    EntityCount = m.TryGetProperty("entityCount", out var ec) ? ec.GetInt32() : 0,
+                    FlowCount = m.TryGetProperty("flowCount", out var fc) ? fc.GetInt32() : 0,
+                    PageCount = m.TryGetProperty("pageCount", out var pc) ? pc.GetInt32() : 0,
+                });
+            }
+
+            return result;
+        }
+        catch
+        {
+            return [];
+        }
+    }
+
+    public static async Task<int> UpdateKbAgentsAsync(
+        string packageRoot,
+        string kbRoot,
+        Action<string>? log = null)
+    {
+        var agentsSource = Path.Combine(packageRoot, "artifacts", ".agents");
+        if (!Directory.Exists(agentsSource))
+        {
+            log?.Invoke($"ERROR: Agents source not found: {agentsSource}");
+            return 1;
+        }
+
+        var agentsDest = Path.Combine(kbRoot, ".agents");
+
+        return await Task.Run(() =>
+        {
+            try
+            {
+                if (Directory.Exists(agentsDest))
+                {
+                    log?.Invoke($"Removing existing .agents folder: {agentsDest}");
+                    Directory.Delete(agentsDest, recursive: true);
+                }
+
+                log?.Invoke($"Copying agents from: {agentsSource}");
+                CopyDirectoryRecursive(agentsSource, agentsDest);
+                log?.Invoke($"Agents updated: {agentsDest}");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                log?.Invoke($"ERROR: {ex.Message}");
+                return 1;
+            }
+        });
+    }
+
+    private static void CopyDirectoryRecursive(string source, string destination)
+    {
+        Directory.CreateDirectory(destination);
+
+        foreach (var file in Directory.GetFiles(source))
+        {
+            File.Copy(file, Path.Combine(destination, Path.GetFileName(file)), overwrite: true);
+        }
+
+        foreach (var dir in Directory.GetDirectories(source))
+        {
+            CopyDirectoryRecursive(dir, Path.Combine(destination, Path.GetFileName(dir)));
+        }
+    }
+
     public static async Task<int> RunEnrichmentAsync(
         string packageRoot,
         string wizardRoot,
@@ -318,6 +464,7 @@ internal static class WizardRuntime
         string appName,
         string? claudePath,
         AiSettings? aiSettings = null,
+        string[]? enrichModules = null,
         Action<string>? log = null)
     {
         var runScript = Path.Combine(wizardRoot, "run-enrichkb.ps1");
@@ -366,6 +513,12 @@ internal static class WizardRuntime
         else if (!string.IsNullOrWhiteSpace(claudePath))
         {
             psi.Environment["CLAUDE_CLI_PATH"] = claudePath;
+        }
+
+        // Pass module filter (comma-separated list of module names)
+        if (enrichModules is { Length: > 0 })
+        {
+            psi.Environment["ENRICH_MODULES"] = string.Join(",", enrichModules);
         }
 
         using var process = new Process { StartInfo = psi, EnableRaisingEvents = true };
@@ -689,6 +842,100 @@ internal static class WizardRuntime
         }
 
         return parent.FullName;
+    }
+
+    public static Task<int> AddCopilotAsync(
+        string packageRoot,
+        string appFolder,
+        Action<string>? log = null)
+    {
+        var copilotSource = Path.Combine(packageRoot, "artifacts", "CoPilot");
+        if (!Directory.Exists(copilotSource))
+        {
+            log?.Invoke($"ERROR: CoPilot artifact not found: {copilotSource}");
+            return Task.FromResult(1);
+        }
+
+        var extensionsDir = Path.Combine(appFolder, "extensions");
+        var copilotDest = Path.Combine(extensionsDir, "kb-copilot");
+
+        return Task.Run(() =>
+        {
+            try
+            {
+                Directory.CreateDirectory(extensionsDir);
+
+                if (Directory.Exists(copilotDest))
+                {
+                    log?.Invoke($"Removing existing copilot: {copilotDest}");
+                    Directory.Delete(copilotDest, recursive: true);
+                }
+
+                log?.Invoke($"Copying CoPilot to: {copilotDest}");
+                CopyDirectoryRecursive(copilotSource, copilotDest);
+
+                log?.Invoke("CoPilot extension installed successfully.");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                log?.Invoke($"ERROR: {ex.Message}");
+                return 1;
+            }
+        });
+    }
+
+    public static string? FindStudioProExe(string? mxPath, string? installRoot)
+    {
+        // Try to find studiopro.exe near mx.exe
+        if (!string.IsNullOrWhiteSpace(mxPath) && File.Exists(mxPath))
+        {
+            var mxDir = Path.GetDirectoryName(mxPath)!;
+
+            // mx.exe is typically at <version>/modeler/mx.exe
+            // studiopro.exe is at <version>/modeler/studiopro.exe
+            var candidate = Path.Combine(mxDir, "studiopro.exe");
+            if (File.Exists(candidate))
+                return candidate;
+
+            // Also check parent directory
+            var parent = Directory.GetParent(mxDir);
+            if (parent is not null)
+            {
+                candidate = Path.Combine(parent.FullName, "modeler", "studiopro.exe");
+                if (File.Exists(candidate))
+                    return candidate;
+            }
+        }
+
+        // Fallback: search under install root
+        if (!string.IsNullOrWhiteSpace(installRoot) && Directory.Exists(installRoot))
+        {
+            // Find newest version directory containing studiopro.exe
+            var candidates = Directory.GetDirectories(installRoot)
+                .Select(d => Path.Combine(d, "modeler", "studiopro.exe"))
+                .Where(File.Exists)
+                .OrderByDescending(p => new FileInfo(p).LastWriteTimeUtc)
+                .ToList();
+
+            if (candidates.Count > 0)
+                return candidates[0];
+        }
+
+        return null;
+    }
+
+    public static void OpenMendixApp(string studioProPath, string mprPath)
+    {
+        var psi = new ProcessStartInfo
+        {
+            FileName = studioProPath,
+            UseShellExecute = true,
+        };
+        psi.ArgumentList.Add("--enable-extension-development");
+        psi.ArgumentList.Add(mprPath);
+
+        Process.Start(psi);
     }
 
     private static IEnumerable<string> EnumerateAncestorPaths(string path)

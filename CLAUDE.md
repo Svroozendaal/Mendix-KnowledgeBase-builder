@@ -19,4 +19,3 @@ This is the **Mendix KnowledgeBase Builder** â€” a pipeline that converts M
 - **Advanced script bootstrap**: `KnowledgeBase-Creator/wizard/run-dump-parser.ps1`
 - **AI start file**: `KnowledgeBase-Creator/AGENTS.md`
 - **Understand a generated KB**: read `READER.md` inside `KnowledgeBase-Creator/mendix-data/knowledge-base/`
-

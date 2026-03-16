@@ -12,7 +12,7 @@ export class FileNotFoundError extends Error {
   }
 }
 
-const MAX_FILE_LENGTH = 10_000;
+const MAX_FILE_LENGTH = 5_000;
 const MAX_SEARCH_RESULTS = 20;
 
 export class KBNavigator {
@@ -30,7 +30,7 @@ export class KBNavigator {
     }
 
     if (content.length > MAX_FILE_LENGTH) {
-      return content.slice(0, MAX_FILE_LENGTH) + '\n\n[truncated]';
+      return content.slice(0, MAX_FILE_LENGTH) + '\n\n[truncated — use search_content to find specific sections]';
     }
     return content;
   }

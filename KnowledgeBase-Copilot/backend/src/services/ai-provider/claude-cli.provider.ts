@@ -3,6 +3,9 @@ import type { AiSettings, Message, MessageContent } from '@kb-copilot/shared';
 import type { AIProvider, AIProviderOptions, StreamChunk, ToolDefinition } from './types.js';
 import { resolveClaudeCliPath } from './cli-resolver.js';
 import { CliNotFoundError, AuthenticationError, ProviderError } from './errors.js';
+import { createLogger } from '../../logger.js';
+
+const log = createLogger('ClaudeCLI');
 
 function messagesToCliInput(messages: Message[]): string {
   // Claude CLI expects a single prompt via -p flag.
@@ -49,40 +52,66 @@ export class ClaudeCliProvider implements AIProvider {
     }
 
     const prompt = messagesToCliInput(options.messages);
+
+    // Build system prompt (including tool definitions)
+    let systemPrompt = options.systemPrompt ?? '';
+    if (options.tools && options.tools.length > 0) {
+      const toolSection = buildToolPromptSection(options.tools);
+      systemPrompt = systemPrompt ? systemPrompt + '\n\n' + toolSection : toolSection;
+    }
+
+    // On Windows, cmd.exe has an ~8192 char command-line limit. The prompt and
+    // system prompt easily exceed this. We pipe everything via stdin instead.
+    // The system prompt is included as a <system> preamble in the piped input
+    // so nothing large appears on the command line.
+    const stdinContent = systemPrompt
+      ? `<system>\n${systemPrompt}\n</system>\n\n${prompt}`
+      : prompt;
+
     const args = [
-      '-p', prompt,
       '--print',
       '--output-format', 'stream-json',
       '--max-turns', '1',
     ];
 
-    if (options.systemPrompt) {
-      args.push('--system-prompt', options.systemPrompt);
-    }
+    log.info(`Spawning Claude CLI`, { cliPath, argCount: args.length, promptLength: prompt.length, systemPromptLength: systemPrompt.length, stdinLength: stdinContent.length });
 
-    // Include tool definitions in system prompt for Claude CLI
-    if (options.tools && options.tools.length > 0) {
-      const toolSection = buildToolPromptSection(options.tools);
-      if (options.systemPrompt) {
-        args[args.indexOf('--system-prompt') + 1] = options.systemPrompt + '\n\n' + toolSection;
-      } else {
-        args.push('--system-prompt', toolSection);
-      }
-    }
+    // Strip CLAUDECODE env var to allow spawning Claude CLI from within a
+    // Claude Code session (e.g. when the backend is started via Claude Code).
+    const env = { ...process.env };
+    delete env.CLAUDECODE;
 
     const child = spawn(cliPath, args, {
-      stdio: ['ignore', 'pipe', 'pipe'],
+      stdio: ['pipe', 'pipe', 'pipe'],
+      shell: process.platform === 'win32',
+      env,
+    });
+
+    // Write the combined prompt to stdin and close it
+    child.stdin?.write(stdinContent);
+    child.stdin?.end();
+
+    // Capture stderr for diagnostics
+    let stderrData = '';
+    child.stderr?.on('data', (chunk: Buffer) => {
+      stderrData += chunk.toString();
+    });
+
+    child.on('error', (err) => {
+      log.error(`CLI spawn error`, { error: err.message });
     });
 
     // Handle cancellation
     if (options.onCancel) {
       options.onCancel.addEventListener('abort', () => {
+        log.info(`Cancelling CLI process`);
         child.kill('SIGTERM');
       }, { once: true });
     }
 
     const decoder = new TextDecoder();
     let buffer = '';
+    let chunkCount = 0;
 
     const stdout = child.stdout;
     if (!stdout) {
@@ -99,25 +128,44 @@ export class ClaudeCliProvider implements AIProvider {
         if (!trimmed) continue;
 
         const chunk = parseStreamJsonLine(trimmed);
-        if (chunk) yield chunk;
+        if (chunk) {
+          chunkCount++;
+          if (chunk.type === 'error') {
+            log.error(`CLI stream error`, { error: chunk.error });
+          }
+          yield chunk;
+        }
       }
     }
 
     // Process remaining buffer
     if (buffer.trim()) {
       const chunk = parseStreamJsonLine(buffer.trim());
-      if (chunk) yield chunk;
+      if (chunk) {
+        chunkCount++;
+        yield chunk;
+      }
     }
+
+    log.info(`CLI stdout ended`, { chunkCount });
 
     // Wait for process to exit
     const exitCode = await new Promise<number>((resolve) => {
       child.on('close', (code) => resolve(code ?? 0));
     });
 
-    if (exitCode === 1) {
-      throw new AuthenticationError('Claude CLI');
-    } else if (exitCode !== 0) {
-      throw new ProviderError(`Claude CLI exited with code ${exitCode}`, exitCode);
+    if (stderrData.trim()) {
+      log.warn(`CLI stderr`, { stderr: stderrData.trim().slice(0, 500) });
+    }
+
+    log.info(`CLI process exited`, { exitCode });
+
+    if (exitCode !== 0) {
+      const stderr = stderrData.trim().toLowerCase();
+      if (stderr.includes('auth') || stderr.includes('credentials') || stderr.includes('api key') || stderr.includes('unauthorized')) {
+        throw new AuthenticationError('Claude CLI');
+      }
+      throw new ProviderError(`Claude CLI exited with code ${exitCode}: ${stderrData.trim().slice(0, 200)}`, exitCode);
     }
   }
 
