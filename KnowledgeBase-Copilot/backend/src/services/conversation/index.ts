@@ -95,6 +95,7 @@ export class ConversationService {
         systemPrompt,
         tools: KB_TOOLS,
         onCancel: signal,
+        cwd: kbRoot,
       });
 
       log.debug(`Collecting stream...`);

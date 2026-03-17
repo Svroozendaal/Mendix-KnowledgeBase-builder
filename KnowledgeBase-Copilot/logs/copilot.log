@@ -2263,3 +2263,907 @@
 [2026-03-16T20:01:46.267Z] INFO [Conversation] processMessage finished | {"newMessageCount":2,"totalMessages":6}
 [2026-03-16T20:01:46.267Z] INFO [WebSocket] processMessage completed in 25208ms
 [2026-03-16T20:01:46.268Z] INFO [WebSocket] Conversation saved
+[2026-03-16T20:06:32.169Z] INFO [Server] KB Copilot backend running on port 3001
+[2026-03-16T20:06:32.171Z] INFO [Server] Log file: C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\logs\copilot.log
+[2026-03-16T20:06:32.171Z] INFO [Server] Frontend served from C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\frontend\dist
+[2026-03-16T20:06:32.171Z] INFO [Server] Open http://localhost:3001 in your browser
+[2026-03-16T20:06:32.388Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:32.400Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:32.416Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:34.011Z] INFO [Server] KB Copilot backend running on port 3001
+[2026-03-16T20:06:34.013Z] INFO [Server] Log file: C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\logs\copilot.log
+[2026-03-16T20:06:34.013Z] INFO [Server] Frontend served from C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\frontend\dist
+[2026-03-16T20:06:34.013Z] INFO [Server] Open http://localhost:3001 in your browser
+[2026-03-16T20:06:34.295Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:34.321Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:34.337Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:34.680Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:34.915Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:42.641Z] INFO [Server] KB Copilot backend running on port 3001
+[2026-03-16T20:06:42.642Z] INFO [Server] Log file: C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\logs\copilot.log
+[2026-03-16T20:06:42.642Z] INFO [Server] Frontend served from C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\frontend\dist
+[2026-03-16T20:06:42.643Z] INFO [Server] Open http://localhost:3001 in your browser
+[2026-03-16T20:06:42.994Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:42.996Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:43.006Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:06:43.021Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:12:58.161Z] INFO [Server] KB Copilot backend running on port 3001
+[2026-03-16T20:12:58.162Z] INFO [Server] Log file: C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\logs\copilot.log
+[2026-03-16T20:12:58.163Z] INFO [Server] Frontend served from C:\Workspaces\Mendix-KnowledgeBase-builder\KnowledgeBase-Copilot\frontend\dist
+[2026-03-16T20:12:58.163Z] INFO [Server] Open http://localhost:3001 in your browser
+[2026-03-16T20:12:58.203Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:12:58.215Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:12:58.289Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:12:59.169Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:13:11.761Z] INFO [WebSocket] Received WS message | {"type":"message","conversationId":"657ab9bc-1e35-485b-a931-1076f16b55e4"}
+[2026-03-16T20:13:11.762Z] DEBUG [WebSocket] Config loaded | {"provider":"ClaudeCli"}
+[2026-03-16T20:13:11.763Z] DEBUG [WebSocket] Conversation loaded | {"id":"657ab9bc-1e35-485b-a931-1076f16b55e4","messageCount":6}
+[2026-03-16T20:13:11.764Z] INFO [WebSocket] Starting processMessage | {"kbRoot":"C:\\Workspaces\\Mendix\\Mastering Advanced XPaths - Starting point-main\\mendix-data\\knowledge-base","provider":"ClaudeCli"}
+[2026-03-16T20:13:11.764Z] INFO [Conversation] Processing message for conversation 657ab9bc-1e35-485b-a931-1076f16b55e4 | {"userMessage":"check again"}
+[2026-03-16T20:13:11.768Z] INFO [QuestionClassifier] Artifact index built | {"entities":92,"pages":52,"flows":124}
+[2026-03-16T20:13:11.774Z] INFO [Conversation] Question classified | {"category":"unknown","confidence":"low","artifacts":[]}
+[2026-03-16T20:13:11.775Z] DEBUG [Conversation] System prompt built | {"length":3548,"kbRoot":"C:\\Workspaces\\Mendix\\Mastering Advanced XPaths - Starting point-main\\mendix-data\\knowledge-base","useCliTools":true}
+[2026-03-16T20:13:11.775Z] INFO [Conversation] Tool loop iteration 1/8 | {"totalMessages":7}
+[2026-03-16T20:13:11.776Z] DEBUG [Conversation] Optimised message view | {"original":7,"optimised":7}
+[2026-03-16T20:13:11.776Z] DEBUG [Conversation] Collecting stream...
+[2026-03-16T20:13:11.777Z] INFO [ClaudeCLI] Spawning Claude CLI | {"cliPath":"C:\\Users\\Simon\\AppData\\Roaming\\npm\\claude","argCount":6,"promptLength":7676,"systemPromptLength":3548,"stdinLength":11245}
+[2026-03-16T20:14:22.012Z] DEBUG [WebSocket] Sending WS event | {"type":"text_delta"}
+[2026-03-16T20:14:28.880Z] DEBUG [WebSocket] Sending WS event | {"type":"text_delta"}
+[2026-03-16T20:14:35.140Z] INFO [ClaudeCLI] CLI stdout ended | {"chunkCount":3}
+[2026-03-16T20:14:35.141Z] INFO [ClaudeCLI] CLI process exited | {"exitCode":0}
+[2026-03-16T20:14:35.141Z] INFO [Conversation] Stream collected | {"stopReason":"tool_use","toolCallCount":0,"contentBlockCount":1}
+[2026-03-16T20:14:35.142Z] INFO [Conversation] Conversation turn complete | {"stopReason":"tool_use","loopCount":1}
+[2026-03-16T20:14:35.142Z] DEBUG [WebSocket] Sending WS event | {"type":"done"}
+[2026-03-16T20:14:35.142Z] INFO [Conversation] processMessage finished | {"newMessageCount":2,"totalMessages":8}
+[2026-03-16T20:14:35.143Z] INFO [WebSocket] processMessage completed in 83380ms
+[2026-03-16T20:14:35.144Z] INFO [WebSocket] Conversation saved
+[2026-03-16T20:17:46.690Z] INFO [WebSocket] Received WS message | {"type":"message","conversationId":"4eac51da-e4d7-4b10-9080-a22c8e4a52c6"}
+[2026-03-16T20:17:46.691Z] DEBUG [WebSocket] Config loaded | {"provider":"ClaudeCli"}
+[2026-03-16T20:17:46.692Z] DEBUG [WebSocket] Conversation loaded | {"id":"4eac51da-e4d7-4b10-9080-a22c8e4a52c6","messageCount":0}
+[2026-03-16T20:17:46.692Z] INFO [WebSocket] Starting processMessage | {"kbRoot":"C:\\Workspaces\\Mendix\\Mastering Advanced XPaths - Starting point-main\\mendix-data\\knowledge-base","provider":"ClaudeCli"}
+[2026-03-16T20:17:46.692Z] INFO [Conversation] Processing message for conversation 4eac51da-e4d7-4b10-9080-a22c8e4a52c6 | {"userMessage":"using the development-team, help me make this story\n\nUser Story 2\n    As an administrator, I want to"}
+[2026-03-16T20:17:46.694Z] INFO [Conversation] Pre-seeded KB context | {"messageCount":4}
+[2026-03-16T20:17:46.698Z] INFO [Conversation] Question classified | {"category":"comparison","confidence":"high","artifacts":["US2","MyFirstModule.Trainee","System.User","MyFirstModule.Trainee_Xpaths"]}
+[2026-03-16T20:17:46.698Z] DEBUG [Conversation] System prompt built | {"length":3548,"kbRoot":"C:\\Workspaces\\Mendix\\Mastering Advanced XPaths - Starting point-main\\mendix-data\\knowledge-base","useCliTools":true}
+[2026-03-16T20:17:46.698Z] INFO [Conversation] Tool loop iteration 1/8 | {"totalMessages":5}
+[2026-03-16T20:17:46.698Z] DEBUG [Conversation] Optimised message view | {"original":5,"optimised":5}
+[2026-03-16T20:17:46.699Z] DEBUG [Conversation] Collecting stream...
+[2026-03-16T20:17:46.699Z] INFO [ClaudeCLI] Spawning Claude CLI | {"cliPath":"C:\\Users\\Simon\\AppData\\Roaming\\npm\\claude","argCount":6,"promptLength":6182,"systemPromptLength":3548,"stdinLength":9751}
+[2026-03-16T20:18:37.879Z] DEBUG [WebSocket] Sending WS event | {"type":"text_delta"}
+[2026-03-16T20:18:57.571Z] DEBUG [WebSocket] Sending WS event | {"type":"text_delta"}
+[2026-03-16T20:18:59.285Z] INFO [ClaudeCLI] CLI stdout ended | {"chunkCount":3}
+[2026-03-16T20:18:59.286Z] INFO [ClaudeCLI] CLI process exited | {"exitCode":0}
+[2026-03-16T20:18:59.286Z] INFO [Conversation] Stream collected | {"stopReason":"tool_use","toolCallCount":0,"contentBlockCount":1}
+[2026-03-16T20:18:59.286Z] INFO [Conversation] Conversation turn complete | {"stopReason":"tool_use","loopCount":1}
+[2026-03-16T20:18:59.286Z] DEBUG [WebSocket] Sending WS event | {"type":"done"}
+[2026-03-16T20:18:59.287Z] INFO [Conversation] processMessage finished | {"newMessageCount":2,"totalMessages":6}
+[2026-03-16T20:18:59.287Z] INFO [WebSocket] processMessage completed in 72597ms
+[2026-03-16T20:18:59.288Z] INFO [WebSocket] Conversation saved
+[2026-03-16T20:57:18.034Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T20:57:18.036Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T20:57:18.037Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T20:57:19.051Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:57:19.065Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T20:57:19.094Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T21:27:48.049Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T21:27:48.050Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T21:27:48.051Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T21:27:49.437Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T21:27:49.451Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T21:27:49.467Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T21:58:17.826Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T21:58:17.827Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T21:58:17.827Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T21:58:18.840Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T21:58:18.857Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T21:58:18.884Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T22:28:47.819Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T22:28:47.820Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T22:28:47.820Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T22:28:48.826Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T22:28:48.840Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T22:28:48.856Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T22:59:17.813Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T22:59:17.815Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T22:59:17.816Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T22:59:19.148Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T22:59:19.163Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T22:59:19.179Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T23:29:47.784Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T23:29:47.786Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T23:29:47.787Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-16T23:29:48.789Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T23:29:48.803Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-16T23:29:48.819Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T00:00:17.799Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T00:00:17.800Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T00:00:17.801Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T00:00:18.808Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T00:00:18.820Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T00:00:18.835Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T00:30:47.779Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T00:30:47.780Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T00:30:47.781Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T00:30:49.256Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T00:30:49.276Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T00:30:49.291Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T01:01:17.784Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T01:01:17.784Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T01:01:17.785Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T01:01:18.793Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T01:01:18.810Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T01:01:18.825Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T01:31:47.784Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T01:31:47.786Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T01:31:47.786Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T01:31:48.791Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T01:31:48.806Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T01:31:48.823Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T02:02:17.790Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T02:02:17.791Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T02:02:17.792Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T02:02:18.808Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T02:02:18.821Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T02:02:18.837Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T02:32:47.792Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T02:32:47.793Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T02:32:47.793Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T02:32:48.798Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T02:32:48.814Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T02:32:48.829Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T03:03:17.798Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T03:03:17.800Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T03:03:17.800Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T03:03:18.809Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T03:03:18.825Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T03:03:18.852Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T03:33:47.829Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T03:33:47.830Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T03:33:47.830Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T03:33:48.842Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T03:33:48.856Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T03:33:48.872Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T04:04:17.821Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T04:04:17.822Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T04:04:17.823Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T04:04:18.835Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T04:04:18.850Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T04:04:18.866Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T04:34:47.840Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T04:34:47.841Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T04:34:47.841Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T04:34:48.852Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T04:34:48.874Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T04:34:48.890Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T05:05:17.814Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T05:05:17.815Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T05:05:17.815Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T05:05:18.819Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T05:05:18.831Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T05:05:18.850Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T05:35:47.794Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T05:35:47.795Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T05:35:47.795Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T05:35:48.799Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T05:35:48.812Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T05:35:48.831Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:06:17.816Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:06:17.818Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:06:17.819Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:06:18.825Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:06:18.842Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:06:18.857Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:37:46.207Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:37:46.210Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:37:46.210Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:37:47.223Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:37:47.238Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:37:47.262Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:41:16.192Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:41:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:41:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:41:17.196Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:41:17.210Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:41:17.225Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:44:46.192Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:44:46.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:44:46.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:44:47.196Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:44:47.210Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:44:47.229Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:48:16.162Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:48:16.163Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:48:16.163Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:48:17.170Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:48:17.184Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:48:17.200Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:51:46.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:51:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:51:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:51:47.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:51:47.220Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:51:47.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:55:16.169Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:55:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:55:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:55:18.256Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:55:18.282Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:55:18.298Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:58:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:58:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:58:46.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T06:58:48.249Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:58:48.272Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T06:58:48.302Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:02:16.190Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:02:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:02:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:02:17.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:02:17.217Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:02:17.237Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:09:16.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:09:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:09:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:09:17.213Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:09:17.228Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:09:17.249Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:12:46.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:12:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:12:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:12:47.179Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:12:47.194Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:12:47.218Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:16:16.186Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:16:16.187Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:16:16.187Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:16:17.203Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:16:17.217Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:16:17.232Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:19:46.167Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:19:46.168Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:19:46.168Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:19:47.176Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:19:47.196Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:19:47.213Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:23:16.156Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:23:16.157Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:23:16.157Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:23:17.167Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:23:17.182Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:23:17.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:26:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:26:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:26:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:26:47.213Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:26:47.241Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:26:47.265Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:30:16.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:30:16.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:30:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:30:17.203Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:30:17.218Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:30:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:33:46.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:33:46.206Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:33:46.206Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:33:47.215Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:33:47.235Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:33:47.252Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:37:16.160Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:37:16.161Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:37:16.161Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:37:17.658Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:37:17.677Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:37:17.693Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:40:46.135Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:40:46.136Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:40:46.137Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:40:47.140Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:40:47.154Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:40:47.174Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:44:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:44:16.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:44:16.200Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:44:17.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:44:17.220Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:44:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:47:46.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:47:46.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:47:46.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:47:47.185Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:47:47.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:47:47.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:51:16.189Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:51:16.190Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:51:16.191Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:51:17.205Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:51:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:51:17.243Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:54:46.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:54:46.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:54:46.200Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:54:47.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:54:47.235Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:54:47.249Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:58:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:58:16.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:58:16.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T07:58:17.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:58:17.221Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T07:58:17.237Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:01:46.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:01:46.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:01:46.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:01:47.176Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:01:47.190Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:01:47.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:05:16.168Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:05:16.169Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:05:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:05:18.258Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:05:18.285Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:05:18.298Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:08:46.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:08:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:08:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:08:47.187Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:08:47.204Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:08:47.220Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:12:16.191Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:12:16.192Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:12:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:12:17.198Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:12:17.212Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:12:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:15:46.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:15:46.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:15:46.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:15:47.178Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:15:47.193Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:15:47.216Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:19:16.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:19:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:19:16.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:19:17.208Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:19:17.226Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:19:17.243Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:22:46.160Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:22:46.161Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:22:46.161Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:22:47.175Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:22:47.192Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:22:47.208Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:26:16.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:26:16.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:26:16.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:26:17.204Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:26:17.225Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:26:17.249Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:29:46.166Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:29:46.167Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:29:46.167Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:29:47.183Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:29:47.205Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:29:47.222Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:33:16.177Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:33:16.178Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:33:16.178Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:33:17.187Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:33:17.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:33:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:36:46.202Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:36:46.204Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:36:46.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:36:47.211Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:36:47.226Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:36:47.250Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:40:16.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:40:16.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:40:16.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:40:17.175Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:40:17.190Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:40:17.206Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:43:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:43:46.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:43:46.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:43:47.187Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:43:47.206Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:43:47.224Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:47:16.180Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:47:16.181Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:47:16.182Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:47:17.187Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:47:17.201Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:47:17.218Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:50:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:50:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:50:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:50:47.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:50:47.234Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:50:47.259Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:54:16.155Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:54:16.156Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:54:16.157Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:54:17.160Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:54:17.186Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:54:17.206Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:57:46.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:57:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:57:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T08:57:47.702Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:57:47.746Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T08:57:47.769Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:01:16.166Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:01:16.167Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:01:16.167Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:01:17.179Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:01:17.193Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:01:17.209Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:04:46.176Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:04:46.176Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:04:46.177Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:04:47.183Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:04:47.198Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:04:47.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:08:16.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:08:16.176Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:08:16.176Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:08:17.190Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:08:17.216Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:08:17.240Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:11:46.184Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:11:46.185Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:11:46.186Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:11:47.192Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:11:47.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:11:47.224Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:15:16.192Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:15:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:15:16.194Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:15:17.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:15:17.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:15:17.235Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:18:46.182Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:18:46.183Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:18:46.184Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:18:47.191Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:18:47.206Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:18:47.226Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:22:16.169Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:22:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:22:16.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:22:17.186Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:22:17.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:22:17.215Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:25:46.150Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:25:46.250Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:25:46.251Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:25:47.158Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:25:47.177Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:25:47.194Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:29:16.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:29:16.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:29:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:29:17.204Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:29:17.218Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:29:17.235Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:32:46.189Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:32:46.190Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:32:46.191Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:32:47.201Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:32:47.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:32:47.238Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:36:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:36:16.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:36:16.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:36:17.185Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:36:17.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:36:17.216Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:39:46.187Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:39:46.188Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:39:46.188Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:39:47.200Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:39:47.217Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:39:47.234Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:43:16.214Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:43:16.215Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:43:16.215Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:43:17.226Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:43:17.246Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:43:17.271Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:46:46.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:46:46.176Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:46:46.176Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:46:47.186Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:46:47.213Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:46:47.237Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:50:16.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:50:16.200Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:50:16.200Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:50:17.215Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:50:17.229Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:50:17.254Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:53:46.166Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:53:46.167Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:53:46.167Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:53:47.171Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:53:47.186Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:53:47.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:57:16.187Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:57:16.188Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:57:16.188Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T09:57:17.189Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:57:17.204Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T09:57:17.221Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:00:46.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:00:46.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:00:46.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:00:47.181Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:00:47.196Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:00:47.213Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:04:16.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:04:16.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:04:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:04:17.206Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:04:17.224Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:04:17.239Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:07:46.208Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:07:46.210Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:07:46.212Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:07:47.227Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:07:47.244Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:07:47.259Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:11:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:11:16.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:11:16.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:11:17.194Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:11:17.217Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:11:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:14:46.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:14:46.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:14:46.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:14:47.735Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:14:47.764Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:14:47.790Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:18:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:18:16.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:18:16.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:18:17.175Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:18:17.189Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:18:17.209Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:21:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:21:46.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:21:46.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:21:47.225Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:21:47.242Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:21:47.255Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:25:16.179Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:25:16.180Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:25:16.181Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:25:17.191Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:25:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:25:17.232Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:28:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:28:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:28:46.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:28:47.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:28:47.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:28:47.229Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:32:16.181Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:32:16.182Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:32:16.182Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:32:17.188Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:32:17.211Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:32:17.228Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:35:46.199Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:35:46.200Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:35:46.200Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:35:47.203Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:35:47.218Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:35:47.242Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:39:16.162Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:39:16.163Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:39:16.164Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:39:17.167Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:39:17.185Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:39:17.201Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:42:46.171Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:42:46.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:42:46.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:42:47.175Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:42:47.190Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:42:47.206Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:46:16.168Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:46:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:46:16.170Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:46:17.179Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:46:17.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:46:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:49:46.189Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:49:46.190Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:49:46.190Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:49:47.201Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:49:47.215Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:49:47.231Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:53:16.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:53:16.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:53:16.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:53:17.181Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:53:17.195Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:53:17.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:56:46.207Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:56:46.207Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:56:46.208Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T10:56:47.224Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:56:47.241Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T10:56:47.257Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:00:16.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:00:16.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:00:16.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:00:17.204Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:00:17.221Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:00:17.237Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:03:46.145Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:03:46.146Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:03:46.146Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:03:47.165Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:03:47.178Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:03:47.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:07:16.177Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:07:16.178Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:07:16.179Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:07:17.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:07:17.225Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:07:17.242Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:10:46.214Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:10:46.217Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:10:46.217Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:10:47.228Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:10:47.241Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:10:47.263Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:14:16.212Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:14:16.213Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:14:16.213Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:14:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:14:17.235Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:14:17.259Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:17:46.211Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:17:46.212Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:17:46.213Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:17:47.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:17:47.234Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:17:47.269Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:21:16.200Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:21:16.201Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:21:16.202Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:21:17.212Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:21:17.227Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:21:17.243Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:24:46.215Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:24:46.216Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:24:46.217Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:24:47.227Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:24:47.241Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:24:47.257Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:28:16.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:28:16.175Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:28:16.176Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:28:17.178Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:28:17.193Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:28:17.211Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:31:46.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:31:46.194Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:31:46.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:31:47.208Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:31:47.223Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:31:47.248Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:35:16.192Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:35:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:35:16.194Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:35:17.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:35:17.223Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:35:17.248Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:38:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:38:46.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:38:46.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:38:47.208Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:38:47.220Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:38:47.237Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:42:16.202Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:42:16.203Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:42:16.203Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:42:17.205Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:42:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:42:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:45:46.225Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:45:46.226Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:45:46.227Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:45:47.232Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:45:47.247Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:45:47.264Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:49:16.204Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:49:16.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:49:16.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:49:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:49:17.234Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:49:17.250Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:52:46.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:52:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:52:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:52:47.210Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:52:47.235Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:52:47.249Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:56:16.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:56:16.206Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:56:16.206Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:56:17.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:56:17.237Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:56:17.262Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:59:46.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:59:46.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:59:46.174Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T11:59:47.181Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:59:47.194Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T11:59:47.210Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:03:16.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:03:16.206Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:03:16.207Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:03:17.217Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:03:17.232Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:03:17.248Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:06:46.177Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:06:46.178Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:06:46.179Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:06:47.192Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:06:47.205Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:06:47.222Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:10:16.162Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:10:16.178Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:10:16.179Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:10:17.170Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:10:17.184Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:10:17.203Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:13:46.238Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:13:46.240Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:13:46.241Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:13:47.255Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:13:47.269Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:13:47.294Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:17:16.204Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:17:16.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:17:16.206Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:17:17.205Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:17:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:17:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:20:46.179Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:20:46.180Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:20:46.181Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:20:47.192Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:20:47.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:20:47.224Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:24:16.212Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:24:16.214Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:24:16.214Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:24:17.221Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:24:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:24:17.260Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:27:46.182Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:27:46.183Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:27:46.183Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:27:47.183Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:27:47.198Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:27:47.223Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:31:16.227Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:31:16.229Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:31:16.230Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:31:17.236Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:31:17.251Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:31:17.268Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:34:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:34:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:34:46.198Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:34:47.202Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:34:47.217Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:34:47.233Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:38:16.183Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:38:16.184Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:38:16.184Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:38:17.186Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:38:17.201Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:38:17.225Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:41:46.194Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:41:46.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:41:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:41:47.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:41:47.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:41:47.230Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:45:16.202Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:45:16.203Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:45:16.204Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:45:17.219Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:45:17.233Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:45:17.259Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:48:46.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:48:46.196Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:48:46.197Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:48:47.207Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:48:47.222Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:48:47.246Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:52:16.239Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:52:16.240Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:52:16.241Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:52:17.247Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:52:17.262Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:52:17.278Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:55:46.216Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:55:46.217Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:55:46.218Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:55:48.171Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:55:48.194Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:55:48.239Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:59:16.221Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:59:16.222Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:59:16.222Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T12:59:17.226Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:59:17.239Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T12:59:17.254Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:02:46.186Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:02:46.188Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:02:46.188Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:02:47.200Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:02:47.220Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:02:47.239Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:06:16.205Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:06:16.207Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:06:16.208Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:06:17.210Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:06:17.223Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:06:17.239Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:09:46.209Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:09:46.214Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:09:46.215Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:09:47.229Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:09:47.244Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:09:47.260Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:13:16.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:13:16.172Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:13:16.173Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:13:17.182Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:13:17.197Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:13:17.216Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:16:46.180Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:16:46.182Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:16:46.182Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:16:47.196Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:16:47.211Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:16:47.235Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:20:16.193Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:20:16.194Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:20:16.195Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:20:17.205Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:20:17.229Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:20:17.246Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:23:46.219Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:23:46.221Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:23:46.221Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:23:47.232Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:23:47.246Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:23:47.271Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:27:16.229Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:27:16.231Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:27:16.232Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:27:17.244Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:27:17.258Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:27:17.283Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:30:46.185Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:30:46.187Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:30:46.187Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:30:47.199Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:30:47.214Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:30:47.230Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T13:50:05.665Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:50:05.666Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T13:50:05.667Z] INFO [WebSocket] WebSocket connection closed | {"code":1006,"reason":""}
+[2026-03-17T16:42:26.769Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T16:42:26.825Z] INFO [WebSocket] New WebSocket connection established
+[2026-03-17T16:42:26.879Z] INFO [WebSocket] New WebSocket connection established

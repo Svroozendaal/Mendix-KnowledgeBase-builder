@@ -55,6 +55,12 @@ Phase 1 (Scaffold)
 
 Phases 1–6 are strictly sequential. Phase 7+ (optimisation track) requires phase 6 to be complete but can be developed independently of each other.
 
+### Extension Rewrite Track (supersedes this architecture)
+
+The [extension rewrite prompts](../extension/INDEX.md) define a new track that ports the Node.js Copilot backend to C# and integrates it into a unified Mendix Studio Pro extension. The prompts in this file remain as reference for the TypeScript implementations being ported.
+
+See also: [12-UNIFIED_EXTENSION_SPEC.md](../../product-plan/12-UNIFIED_EXTENSION_SPEC.md) for the full requirements spec.
+
 ## Parallel Execution Notes
 
 1. Phases must run in order — each builds on the previous.

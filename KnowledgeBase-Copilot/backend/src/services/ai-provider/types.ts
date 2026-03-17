@@ -16,6 +16,8 @@ export interface AIProviderOptions {
   tools?: ToolDefinition[];
   maxTokens?: number;
   onCancel?: AbortSignal;
+  /** Working directory for CLI providers (e.g. KB root). */
+  cwd?: string;
 }
 
 export type StreamChunkType =

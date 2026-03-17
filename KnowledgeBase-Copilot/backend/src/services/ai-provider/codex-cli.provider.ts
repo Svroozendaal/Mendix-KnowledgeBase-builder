@@ -30,6 +30,7 @@ export class CodexCliProvider implements AIProvider {
 
     const child = spawn(cliPath, args, {
       stdio: ['ignore', 'pipe', 'pipe'],
+      cwd: options.cwd ?? process.cwd(),
     });
 
     if (options.onCancel) {

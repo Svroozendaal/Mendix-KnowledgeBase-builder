@@ -64,6 +64,22 @@ Out of scope:
 11. [11-CONTEXT_CONVERSATION_AGENT_SPEC.md](11-CONTEXT_CONVERSATION_AGENT_SPEC.md)
     Post-KB conversation agent contract for interview-derived app context, additive overlay outputs, and GAPSMITH handoff mapping.
 
+12. [12-UNIFIED_EXTENSION_SPEC.md](12-UNIFIED_EXTENSION_SPEC.md)
+    Unified Mendix Studio Pro extension requirements: self-contained C# DLL combining KB Copilot, KB Creator, and Mendix Development (mx CLI). Marketplace-ready architecture.
+
+## Unified Extension Track (2026-03-17)
+
+This extension adds a unified Studio Pro extension that replaces the current Node.js backend + thin C# shell architecture with a single self-contained DLL. See [development prompts](../development/prompts/extension/INDEX.md) for the phased implementation plan.
+
+Locked details:
+
+1. Architecture: single C# DLL using `WebServerExtension` + WebView message bridge.
+2. Three feature areas: KB Copilot (ported from TS), KB Creator (integrated from existing C# pipeline), Mendix Development (mx CLI bridge).
+3. Frontend: React 18 SPA with tabbed UI (Copilot / Creator / Developer), served as embedded static assets.
+4. AI providers: Claude CLI + Codex CLI via `System.Diagnostics.Process`.
+5. Target: Mendix Studio Pro 10.24+ only. Mendix Marketplace distribution.
+6. No MCP, no IModel API — all Mendix model operations via mx CLI.
+
 ## Context Conversation Extension (2026-03-05)
 
 This extension adds a product-owner-first context conversation layer to improve AI answer quality without altering export-backed facts.

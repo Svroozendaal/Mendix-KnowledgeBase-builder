@@ -75,6 +75,7 @@ export class ClaudeCliProvider implements AIProvider {
       stdio: ['pipe', 'pipe', 'pipe'],
       shell: process.platform === 'win32',
       env,
+      cwd: options.cwd ?? process.cwd(),
     });
 
     // Write the combined prompt to stdin and close it
