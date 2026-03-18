@@ -131,7 +131,10 @@
       "Bash(grep -E \"\\\\.\\(cs|csproj\\)$\")",
       "Bash(powershell -NoProfile -Command \"[System.Management.Automation.Language.Parser]::ParseFile\\(''c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/run-kb-compose.ps1'', [ref]$null, [ref]$errors\\); if \\($errors.Count -gt 0\\) { $errors | ForEach-Object { Write-Host $_.ToString\\(\\) } } else { Write-Host ''No syntax errors'' }\")",
       "Bash(powershell -NoProfile -Command \"$e = $null; [System.Management.Automation.Language.Parser]::ParseFile\\(''c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1'', [ref]$null, [ref]$e\\); if \\($e -and $e.Count -gt 0\\) { $e | ForEach-Object { Write-Host $_.ToString\\(\\) } } else { Write-Host ''No syntax errors'' }\")",
-      "Bash(\"c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/Mendix-model-overview-parser/bin/win-x64/ModelOverviewCli.exe\" --help)"
+      "Bash(\"c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/Mendix-model-overview-parser/bin/win-x64/ModelOverviewCli.exe\" --help)",
+      "Bash(wc -l \"C:\\\\Workspaces\\\\Tools\\\\mxcli\\\\mdl\\\\executor\"/*.go)",
+      "Bash(grep -r \"schemaVersion\\\\|GeneratedAtUtc\" /c/Workspaces/Mendix-KnowledgeBase-builder-mendix-cli-implementation --include=*.json)",
+      "Bash(find /c/Workspaces/Mendix-KnowledgeBase-builder-mendix-cli-implementation -type f -name *route*)"
     ]
   }
 }

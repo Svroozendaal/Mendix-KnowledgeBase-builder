@@ -16,4 +16,5 @@ build-artifacts/
 # Mendix runtime data (large dumps, temp files)
 mendix-data/*
 tests/*
+/mxcli
 
