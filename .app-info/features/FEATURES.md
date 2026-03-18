@@ -9,6 +9,8 @@ This file is the index of all implemented features in this application.
 | Full model overview export (app + modules, v2.0) | DONE | `model-overview-export-pipeline.md` |
 | Model overview CLI test harness | DONE | `model-overview-cli.md` |
 | Portable KnowledgeBase Creator drop-in artifact | DONE | `knowledgebase-creator-artifact.md` |
+| KnowledgeBase Copilot (AI chat against KB) | DONE | `knowledgebase-copilot.md` |
+| Unified Mendix Studio Pro extension | PLANNED | `unified-extension.md` |
 
 ## Status values
 

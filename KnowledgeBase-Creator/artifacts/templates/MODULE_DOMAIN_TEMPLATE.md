@@ -1,4 +1,4 @@
-﻿# Domain Model: {{MODULE_NAME}}
+# Domain Model: {{MODULE_NAME}}
 
 ## Entities
 
@@ -25,6 +25,12 @@ No enumerations documented yet.
 ## Entity Index
 
 No entity index documented yet.
+
+### {{EntityName}}
+
+| Attribute | Type |
+|---|---|
+{{AttributeRows}}
 
 ## Source
 

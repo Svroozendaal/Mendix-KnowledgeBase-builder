@@ -460,6 +460,33 @@ if (Test-Path $readerFile -PathType Leaf) {
     }
 }
 
+# QUICKSTART.md checks
+$quickstartFile = Join-Path $kbRoot "QUICKSTART.md"
+Assert-Headings -File $quickstartFile -Headings @(
+    "## This App",
+    "## Modules",
+    "## Security Roles",
+    "## How to Find Things",
+    "## Agent Routing",
+    "## Scope Rules",
+    "## Reading Depth Guide"
+)
+Assert-TemplateHeadings -FilePath $quickstartFile -TemplatePath (Join-Path $artifactsRoot "QUICKSTART_TEMPLATE.md")
+
+if (Test-Path $quickstartFile -PathType Leaf) {
+    $qsText = Get-Content -Raw $quickstartFile
+    $qsLines = @(Get-Content $quickstartFile)
+    if ($qsLines.Count -gt 200) {
+        Add-Issue -Severity "error" -File $quickstartFile -Message "QUICKSTART.md exceeds 200 lines ($($qsLines.Count) lines). Keep it compact."
+    }
+    if ($qsText -notmatch "\| .+ \| .+ \| .+ \| .+ \| .+ \|") {
+        Add-Issue -Severity "error" -File $quickstartFile -Message "QUICKSTART.md has no module rows in the Modules table."
+    }
+    if ($qsText -notmatch "# Quick Start .+ \S") {
+        Add-Issue -Severity "error" -File $quickstartFile -Message "QUICKSTART.md is missing the app name in the title heading."
+    }
+}
+
 Assert-Headings -File $routingFile -Headings @(
     "# Knowledge Base Routing",
     "## Quick lookup",
@@ -559,6 +586,48 @@ else {
             "## Source"
         )
 
+        # Attribute table quality checks in DOMAIN.md Entity Index
+        if (Test-Path $domain -PathType Leaf) {
+            $domainText = Get-Content -Raw $domain
+            $allowedAttrTypes = @("String", "Integer", "Long", "Decimal", "Boolean", "DateTime", "AutoNumber", "Binary", "HashString", "Enumeration")
+
+            # Build lookup of entity attribute counts from the Entities summary table
+            $entitySummaryCountMap = @{}
+            $summaryTableMatches = [regex]::Matches($domainText, "^\|\s*([^|]+)\s*\|\s*(True|False|true|false)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|$", [System.Text.RegularExpressions.RegexOptions]::Multiline)
+            foreach ($stm in $summaryTableMatches) {
+                $entitySummaryCountMap[$stm.Groups[1].Value.Trim()] = [int]$stm.Groups[3].Value
+            }
+
+            $entitySectionMatches = [regex]::Matches($domainText, "(?ms)^### (.+?)$\s*(.*?)(?=^### |\z)")
+            foreach ($esm in $entitySectionMatches) {
+                $entitySectionName = $esm.Groups[1].Value.Trim()
+                $entitySectionBody = $esm.Groups[2].Value
+                if ($entitySectionBody -match "\| Attribute \| Type \|") {
+                    $attrRowMatches = [regex]::Matches($entitySectionBody, "^\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|$", [System.Text.RegularExpressions.RegexOptions]::Multiline)
+                    $dataRowCount = 0
+                    foreach ($arm in $attrRowMatches) {
+                        $col1 = $arm.Groups[1].Value.Trim()
+                        $col2 = $arm.Groups[2].Value.Trim()
+                        if ($col1 -eq "Attribute" -or $col1 -match "^---") { continue }
+                        $dataRowCount++
+                        $isValidType = ($col2 -in $allowedAttrTypes) -or ($col2 -match "^\w+\.\w+$")
+                        if (-not $isValidType) {
+                            Add-Issue -Severity "error" -File $domain -Message "Entity '$entitySectionName' attribute '$col1' has unknown type: $col2"
+                        }
+                    }
+                    # Cross-check: attribute table rows should not exceed summary count
+                    if ($entitySummaryCountMap.ContainsKey($entitySectionName)) {
+                        $summaryCount = $entitySummaryCountMap[$entitySectionName]
+                        if ($dataRowCount -gt $summaryCount) {
+                            Add-Issue -Severity "error" -File $domain -Message "Entity '$entitySectionName' attribute table has $dataRowCount rows but summary shows $summaryCount attributes."
+                        }
+                    }
+                } elseif ($entitySectionBody -notmatch "No attributes") {
+                    Add-Issue -Severity "error" -File $domain -Message "Entity '$entitySectionName' section is missing attribute table."
+                }
+            }
+        }
+
         Assert-Headings -File $flows -Headings @(
             "## Flow Catalogue",
             "### Action Flows (ACT_*)",
@@ -621,6 +690,41 @@ Assert-Headings -File (Join-Path $routesDir "by-entity.md") -Headings @("# Entit
 Assert-Headings -File (Join-Path $routesDir "by-page.md") -Headings @("# Page Index")
 Assert-Headings -File (Join-Path $routesDir "by-flow.md") -Headings @("# Flow Index")
 Assert-Headings -File (Join-Path $routesDir "cross-module.md") -Headings @("# Cross-Module Dependencies")
+Assert-Headings -File (Join-Path $routesDir "keyword-index.md") -Headings @("# Keyword Index", "## Index")
+Assert-TemplateHeadings -FilePath (Join-Path $routesDir "keyword-index.md") -TemplatePath (Join-Path $artifactsRoot "KEYWORD_INDEX_TEMPLATE.md")
+
+# Keyword index coverage checks
+$keywordIndexFile = Join-Path $routesDir "keyword-index.md"
+if (Test-Path $keywordIndexFile -PathType Leaf) {
+    $kwText = Get-Content -Raw $keywordIndexFile
+    $kwTextLower = $kwText.ToLowerInvariant()
+
+    $byEntityFile = Join-Path $routesDir "by-entity.md"
+    if (Test-Path $byEntityFile -PathType Leaf) {
+        $entityRows = Get-MarkdownTableRows -FilePath $byEntityFile
+        foreach ($row in $entityRows) {
+            $entityName = [string]$row.'Entity'
+            if ([string]::IsNullOrWhiteSpace($entityName) -or $entityName -eq "none") { continue }
+            if ($kwTextLower -notmatch [regex]::Escape($entityName.ToLowerInvariant())) {
+                Add-Issue -Severity "error" -File $keywordIndexFile -Message "Entity '$entityName' from by-entity.md has no keyword index entry."
+            }
+        }
+    }
+
+    $byFlowFile = Join-Path $routesDir "by-flow.md"
+    if (Test-Path $byFlowFile -PathType Leaf) {
+        $flowRows = Get-MarkdownTableRows -FilePath $byFlowFile
+        foreach ($row in $flowRows) {
+            $flowName = [string]$row.'Flow'
+            $tier = [string]$row.'Tier'
+            if ([string]::IsNullOrWhiteSpace($flowName) -or $flowName -eq "none") { continue }
+            if ($tier -ne "1") { continue }
+            if ($kwText -notmatch [regex]::Escape($flowName)) {
+                Add-Issue -Severity "error" -File $keywordIndexFile -Message "Tier 1 flow '$flowName' from by-flow.md has no keyword index entry."
+            }
+        }
+    }
+}
 
 # Template-derived heading contract (single source of truth in artifacts/)
 Assert-TemplateHeadings -FilePath $readerFile -TemplatePath (Join-Path $artifactsRoot "KNOWLEDGEBASE_READER.md")

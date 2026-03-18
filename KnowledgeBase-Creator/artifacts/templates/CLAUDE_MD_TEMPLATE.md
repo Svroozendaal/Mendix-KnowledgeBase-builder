@@ -2,13 +2,14 @@
 
 This is an AI-navigable knowledge base for the **{{APP_NAME}}** Mendix application.
 
-Before executing any task, read the following files in order:
+Before executing any task, read `QUICKSTART.md` for a fast-start overview.
 
-1. `.agents/AGENTS.md` - governance, agent roster, and orchestration logic.
-2. `.agents/FRAMEWORK.md` - knowledge base structure and navigation model.
-3. `.agents/AI_WORKFLOW.md` - standard operating flow for KB interpretation.
-4. `READER.md` - how to read this knowledge base.
-5. `ROUTING.md` - quick lookup for modules, entities, flows, and pages.
+For full detail, read:
+1. `.agents/AGENTS.md` - governance and agent roster
+2. `.agents/FRAMEWORK.md` - KB structure
+3. `.agents/AI_WORKFLOW.md` - operating flow
+4. `READER.md` - how to read this KB
+5. `ROUTING.md` - module and route index
 
 ## Scope
 
@@ -18,7 +19,7 @@ This knowledge base is a **read-only artifact for normal interpretation**. The o
 
 - **What is this app?** -> `app/APP_OVERVIEW.md`
 - **Which modules matter?** -> `app/MODULE_LANDSCAPE.md`
-- **Find an entity/flow/page** -> `ROUTING.md`
+- **Find an entity/flow/page** -> `ROUTING.md` or `routes/keyword-index.md`
 - **Security roles** -> `app/SECURITY.md`
 - **Add the AI narrative layer to this KB?** -> `/enrichkb`
 - **Rebuild from source?** -> `/initkb`

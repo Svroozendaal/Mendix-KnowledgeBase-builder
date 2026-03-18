@@ -4,10 +4,11 @@
 
 Mendix KnowledgeBase Builder is a Windows-first toolchain that turns a Mendix `.mpr` application model into a self-contained, AI-navigable markdown knowledge base.
 
-The product has two linked outputs:
+The product has three linked outputs:
 
 1. A creator package in `KnowledgeBase-Creator/` that runs the pipeline.
 2. A generated knowledge base in `mendix-data/knowledge-base/` that can be queried, enriched, validated, and shared as a standalone artifact.
+3. A copilot chat application in `KnowledgeBase-Copilot/` that lets users query the KB conversationally through an AI assistant.
 
 Its purpose is to let an AI assistant answer questions about a Mendix application without needing the raw `.mpr` file or the entire codebase in context.
 
@@ -230,6 +231,35 @@ GAPSMITH is the follow-up analysis workflow for identifying whether remaining pr
 3. AI interpretation gaps
 4. app-specific context gaps
 
+### 5. KnowledgeBase Copilot
+
+The Copilot is a chat application that lets users query the generated KB conversationally. It reads KB files on-the-fly using tool calls, following the L0/L1/L2 navigation pattern.
+
+Location: `KnowledgeBase-Copilot/`
+
+Architecture:
+
+1. **Backend** — Node.js + Express + TypeScript server on port 3001 with WebSocket streaming.
+2. **Frontend** — React 18 + Vite SPA with real-time chat UI, conversation management, and KB selection.
+3. **AI Providers** — pluggable CLI-based providers (Claude CLI, Codex CLI) that spawn child processes and stream responses.
+4. **Mendix Extension** — C# dockable pane that embeds the Copilot UI inside Mendix Studio Pro via WebView.
+
+Key services:
+
+1. `ai-provider/` — abstraction over CLI-based AI providers with streaming support.
+2. `kb-navigator/` — path-sandboxed file listing, search, and reads within the KB.
+3. `conversation/` — orchestrates message processing, system prompt assembly, and tool execution.
+4. `question-classifier/` — fast-path routing for different question types.
+
+Quick start: `cd KnowledgeBase-Copilot && npm install && npm run dev`
+
+### 6. Unified Mendix Studio Pro Extension (Planned)
+
+A self-contained C# extension that replaces the current Node.js backend + thin C# shell with a single DLL. Combines KB Copilot, KB Creator, and Mendix Developer (mx CLI bridge) in one Marketplace-ready package.
+
+Spec: `.app-info/product-plan/12-UNIFIED_EXTENSION_SPEC.md`
+Prompts: `.app-info/development/prompts/extension/INDEX.md`
+
 ## Current Product Status
 
 Implemented and documented areas already present in the repository include:
@@ -238,6 +268,11 @@ Implemented and documented areas already present in the repository include:
 2. model overview export v2.0
 3. model overview CLI test harness
 4. portable KnowledgeBase Creator artifact
+5. KnowledgeBase Copilot (AI chat against KB)
+
+Planned:
+
+6. unified Mendix Studio Pro extension (single C# DLL)
 
 The repository also contains a substantial product-plan set covering:
 
@@ -285,3 +320,5 @@ The repository also contains a substantial product-plan set covering:
 8. How do AI enrichment and GAPSMITH fit into the workflow?
 9. Which parts are implemented already versus still part of the longer-term roadmap?
 10. What are the main risks or limitations of the current approach?
+11. How does the KnowledgeBase Copilot work and how do I set it up?
+12. What is the planned unified Mendix extension and how does it differ from the current Copilot?

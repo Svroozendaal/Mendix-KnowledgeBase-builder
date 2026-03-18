@@ -1,5 +1,5 @@
-﻿# Entity Index
+# Entity Index
 
-| Entity | Module | Used by Flows | Shown on Pages |
-|---|---|---|---|
-| none | none | none | none |
+| Entity | Module | Attributes | Used by Flows | Shown on Pages |
+|---|---|---|---|---|
+| none | none | none | none | none |

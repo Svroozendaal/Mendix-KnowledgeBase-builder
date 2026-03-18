@@ -19,3 +19,11 @@ This folder stores application-level documentation produced during development.
 - Parser gap analyses and coverage reports.
 - Export format contracts and specifications.
 - Product-direction docs for portable KB creation packaging.
+- Copilot and extension architecture documentation.
+
+## Related documentation elsewhere
+
+- KnowledgeBase Copilot architecture: `../../KnowledgeBase-Copilot/README.md`
+- Unified extension spec: `../product-plan/12-UNIFIED_EXTENSION_SPEC.md`
+- Copilot feature details: `../features/knowledgebase-copilot.md`
+- Unified extension feature details: `../features/unified-extension.md`

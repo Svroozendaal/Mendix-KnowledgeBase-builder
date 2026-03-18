@@ -13,7 +13,10 @@ Read this file after `.agents/AGENTS.md` and `.agents/FRAMEWORK.md` to understan
 | `skills/` | Mendix-specific interpretation skills | `OVERVIEW.md`, per-skill `SKILL.md` |
 | `features/` | Product direction and feature registry | `FEATURES.md`, `knowledgebase-creator-artifact.md` |
 | `product-plan/` | Product plan and spec documents | `00-INDEX.md` (start here) |
-| `development/prompts/` | Implementation prompts for gap fixes | `INDEX.md` (start here) |
+| `development/prompts/copilot/` | Copilot implementation prompts (01–07) | `INDEX.md` |
+| `development/prompts/copilot improvement/` | Copilot optimisation prompts (01–10) | `INDEX.md` |
+| `development/prompts/extension/` | Unified extension rewrite prompts (01–07) | `INDEX.md` |
+| `development/prompts/` | All implementation prompts | per-track `INDEX.md` files |
 
 ## Navigation Rules
 
@@ -32,6 +35,11 @@ Read this file after `.agents/AGENTS.md` and `.agents/FRAMEWORK.md` to understan
 - Run portable drop-in package: `../KnowledgeBase-Creator/KnowledgeBaseCreator.exe`
 - Advanced script bootstrap: `../KnowledgeBase-Creator/wizard/run-dump-parser.ps1`
 - Build downloadable artifact package: `../.github/workflows/build-knowledgebase-creator-artifact.yml` (`workflow_dispatch`)
+- KnowledgeBase Copilot (AI chat UI): `../KnowledgeBase-Copilot/` (`npm run dev`)
+- Copilot development prompts: `development/prompts/copilot/INDEX.md`
+- Copilot improvement prompts: `development/prompts/copilot improvement/INDEX.md`
+- Unified extension rewrite: `development/prompts/extension/INDEX.md`
+- Unified extension spec: `product-plan/12-UNIFIED_EXTENSION_SPEC.md`
 
 ## Pipeline Overview
 

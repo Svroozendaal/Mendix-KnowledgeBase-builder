@@ -173,6 +173,7 @@ function Get-ExpectedFiles($modules) {
     $files = @(
         "READER.md",
         "ROUTING.md",
+        "QUICKSTART.md",
         "app/APP_OVERVIEW.md",
         "app/MODULE_LANDSCAPE.md",
         "app/CALL_GRAPH.md",
@@ -181,6 +182,7 @@ function Get-ExpectedFiles($modules) {
         "routes/by-page.md",
         "routes/by-flow.md",
         "routes/cross-module.md",
+        "routes/keyword-index.md",
         "_sources/manifest.json",
         "_sources/SOURCE_REF.md"
     )

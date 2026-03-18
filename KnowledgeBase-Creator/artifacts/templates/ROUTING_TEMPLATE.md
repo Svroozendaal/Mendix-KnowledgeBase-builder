@@ -12,6 +12,7 @@
 | Page-level lookup | [routes/by-page.md](routes/by-page.md) |
 | Flow-level lookup | [routes/by-flow.md](routes/by-flow.md) |
 | Cross-module dependencies | [routes/cross-module.md](routes/cross-module.md) |
+| Find features related to keyword X | [routes/keyword-index.md](routes/keyword-index.md) |
 
 ## Module index
 

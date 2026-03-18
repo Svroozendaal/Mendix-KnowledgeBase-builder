@@ -16,6 +16,8 @@ Current per-feature files:
 - `model-overview-export-pipeline.md`
 - `model-overview-cli.md`
 - `knowledgebase-creator-artifact.md`
+- `knowledgebase-copilot.md`
+- `unified-extension.md`
 
 ## How to Use
 

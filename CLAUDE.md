@@ -40,3 +40,7 @@ This is the **Mendix KnowledgeBase Builder** â€” a pipeline that converts M
 - **Advanced script bootstrap**: `KnowledgeBase-Creator/wizard/run-dump-parser.ps1`
 - **AI start file**: `KnowledgeBase-Creator/AGENTS.md`
 - **Understand a generated KB**: read `READER.md` inside `KnowledgeBase-Creator/mendix-data/knowledge-base/`
+- **KnowledgeBase Copilot** (AI chat UI): `KnowledgeBase-Copilot/` — Node.js + React app for conversational KB queries
+- **Copilot quick start**: `cd KnowledgeBase-Copilot && npm install && npm run dev`
+- **Mendix extension**: `KnowledgeBase-Copilot/mendix-extension/` — Studio Pro dockable pane
+- **Unified extension spec**: `.app-info/product-plan/12-UNIFIED_EXTENSION_SPEC.md`
