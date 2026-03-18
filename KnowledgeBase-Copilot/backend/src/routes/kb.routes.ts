@@ -72,6 +72,74 @@ router.post('/validate', async (req, res, next) => {
   }
 });
 
+router.post('/discover', async (req, res, next) => {
+  try {
+    const { appRoot } = req.body as { appRoot: string };
+
+    if (!appRoot) {
+      res.json({ valid: false, error: 'No appRoot provided.' });
+      return;
+    }
+
+    // Look for knowledge-base inside mendix-data/
+    const kbPath = join(appRoot, 'mendix-data', 'knowledge-base');
+
+    try {
+      const s = await stat(kbPath);
+      if (!s.isDirectory()) {
+        res.json({ valid: false, error: 'mendix-data/knowledge-base is not a directory.' });
+        return;
+      }
+    } catch {
+      res.json({ valid: false, error: 'No mendix-data/knowledge-base folder found in the app root.' });
+      return;
+    }
+
+    // Check READER.md
+    const hasReader = await fileExists(join(kbPath, 'READER.md'));
+    if (!hasReader) {
+      res.json({ valid: false, error: 'knowledge-base folder found but READER.md is missing. Run the KB Creator first.' });
+      return;
+    }
+
+    const hasRouting = await fileExists(join(kbPath, 'ROUTING.md'));
+
+    let moduleCount = 0;
+    try {
+      const modulesDir = join(kbPath, 'modules');
+      const entries = await readdir(modulesDir, { withFileTypes: true });
+      moduleCount = entries.filter((e) => e.isDirectory()).length;
+    } catch { /* no modules dir */ }
+
+    let appName = 'Unknown';
+    try {
+      const readerContent = await readFile(join(kbPath, 'READER.md'), 'utf-8');
+      const match = readerContent.match(/application\s+`([^`]+)`/i)
+        ?? readerContent.match(/# .*?([A-Z][a-zA-Z0-9_]+)/);
+      if (match?.[1]) appName = match[1];
+    } catch { /* ignore */ }
+
+    const info: KBInfo = {
+      appName,
+      kbRoot: kbPath,
+      hasReader,
+      hasRouting,
+      moduleCount,
+    };
+
+    cachedKbInfo = info;
+
+    // Persist as lastKbRoot
+    const config = await configService.loadConfig();
+    config.lastKbRoot = kbPath;
+    await configService.saveConfig(config);
+
+    res.json({ valid: true, info });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/info', async (_req, res, next) => {
   try {
     if (cachedKbInfo) {

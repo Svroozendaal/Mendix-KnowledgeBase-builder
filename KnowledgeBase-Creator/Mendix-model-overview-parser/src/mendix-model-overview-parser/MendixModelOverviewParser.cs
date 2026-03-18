@@ -698,6 +698,43 @@ internal static class MendixModelOverviewParser
             return Array.Empty<OverviewAttribute>();
         }
 
+        // Build a lookup of validation rules by attribute qualified name.
+        var validationByAttribute = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (TryReadProperty(entityObject, "validationRules", out var rulesElement) &&
+            rulesElement.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var rule in rulesElement.EnumerateArray())
+            {
+                if (rule.ValueKind != JsonValueKind.Object)
+                    continue;
+
+                var ruleAttr = TryReadStringProperty(rule, "attribute");
+                if (string.IsNullOrWhiteSpace(ruleAttr))
+                    continue;
+
+                string? summary = null;
+                if (TryReadProperty(rule, "ruleInfo", out var ruleInfo) &&
+                    ruleInfo.ValueKind == JsonValueKind.Object)
+                {
+                    var ruleType = TryReadStringProperty(ruleInfo, "$Type") ?? "";
+                    summary = ruleType switch
+                    {
+                        "DomainModels$RequiredRuleInfo" => "Required",
+                        "DomainModels$UniqueRuleInfo" => "Unique",
+                        "DomainModels$RegExRuleInfo" => "Regex",
+                        "DomainModels$RangeRuleInfo" => "Range",
+                        "DomainModels$MaxLengthRuleInfo" => "MaxLength",
+                        _ => ShortTypeName(ruleType)
+                    };
+                }
+
+                if (!string.IsNullOrWhiteSpace(summary) && !validationByAttribute.ContainsKey(ruleAttr))
+                {
+                    validationByAttribute[ruleAttr] = summary;
+                }
+            }
+        }
+
         var attributes = new List<OverviewAttribute>();
         foreach (var attribute in attributesElement.EnumerateArray())
         {
@@ -719,7 +756,60 @@ internal static class MendixModelOverviewParser
                 "<unknown>";
 
             var type = ReadAttributeType(attribute);
-            attributes.Add(new OverviewAttribute(Name: name, Type: type));
+
+            // Extract enumeration qualified name from type object.
+            string? enumerationName = null;
+            if (TryReadProperty(attribute, "type", out var typeElement) &&
+                typeElement.ValueKind == JsonValueKind.Object)
+            {
+                var typeModelType = TryReadStringProperty(typeElement, "$Type");
+                if (string.Equals(typeModelType, "DomainModels$EnumerationAttributeType", StringComparison.OrdinalIgnoreCase))
+                {
+                    enumerationName = TryReadStringProperty(typeElement, "enumeration");
+                }
+            }
+
+            // Extract length from type object (strings have length, decimals may have totalNumberOfDecimals).
+            int? length = null;
+            if (TryReadProperty(attribute, "type", out var typeElemForLength) &&
+                typeElemForLength.ValueKind == JsonValueKind.Object)
+            {
+                if (TryReadIntProperty(typeElemForLength, "length", out var lengthVal))
+                    length = lengthVal;
+                else if (TryReadIntProperty(typeElemForLength, "totalNumberOfDecimals", out var decimals))
+                    length = decimals;
+            }
+
+            // Extract default value from value object.
+            string? defaultValue = null;
+            if (TryReadProperty(attribute, "value", out var valueElement) &&
+                valueElement.ValueKind == JsonValueKind.Object)
+            {
+                var valueType = TryReadStringProperty(valueElement, "$Type");
+                if (string.Equals(valueType, "DomainModels$StoredValue", StringComparison.OrdinalIgnoreCase))
+                {
+                    var dv = TryReadStringProperty(valueElement, "defaultValue");
+                    if (!string.IsNullOrEmpty(dv))
+                        defaultValue = dv;
+                }
+                else if (string.Equals(valueType, "DomainModels$CalculatedValue", StringComparison.OrdinalIgnoreCase))
+                {
+                    var microflow = TryReadStringProperty(valueElement, "microflow");
+                    defaultValue = !string.IsNullOrWhiteSpace(microflow) ? $"Calculated({microflow})" : "Calculated";
+                }
+            }
+
+            // Look up validation summary from entity-level validation rules.
+            var qualifiedName = TryReadStringProperty(attribute, "$QualifiedName") ?? "";
+            validationByAttribute.TryGetValue(qualifiedName, out var validationSummary);
+
+            attributes.Add(new OverviewAttribute(
+                Name: name,
+                Type: type,
+                EnumerationName: enumerationName,
+                Length: length,
+                DefaultValue: defaultValue,
+                ValidationSummary: validationSummary));
         }
 
         return attributes
@@ -3556,7 +3646,11 @@ internal sealed record OverviewEntity(
 
 internal sealed record OverviewAttribute(
     string Name,
-    string? Type);
+    string? Type,
+    string? EnumerationName,
+    int? Length,
+    string? DefaultValue,
+    string? ValidationSummary);
 
 internal sealed record OverviewAssociation(
     string Name,

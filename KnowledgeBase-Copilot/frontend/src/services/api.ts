@@ -39,6 +39,11 @@ export const validateKb = (path: string) =>
     body: JSON.stringify({ path }),
   });
 export const getKbInfo = () => request<KBInfo>('/kb/info');
+export const discoverKb = (appRoot: string) =>
+  request<{ valid: boolean; info?: KBInfo; error?: string }>('/kb/discover', {
+    method: 'POST',
+    body: JSON.stringify({ appRoot }),
+  });
 
 // Conversations
 export const getConversations = () => request<ConversationMeta[]>('/conversations');

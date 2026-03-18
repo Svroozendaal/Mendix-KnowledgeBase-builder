@@ -28,8 +28,8 @@ No entity index documented yet.
 
 ### {{EntityName}}
 
-| Attribute | Type |
-|---|---|
+| Attribute | Type | Length/Precision | Default | Validation |
+|---|---|---|---|---|
 {{AttributeRows}}
 
 ## Source

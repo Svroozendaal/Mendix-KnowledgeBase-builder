@@ -166,8 +166,13 @@ function Get-AttributeDisplayType {
         [string]$RawType,
         [string]$AttributeName,
         [string]$EntityName,
-        $Entity
+        $Entity,
+        [string]$EnumerationName
     )
+    # If the attribute is an enumeration and we have the qualified enum name, use it.
+    if ($EnumerationName -and $RawType -eq "EnumerationAttributeType") {
+        return $EnumerationName
+    }
     if ($attributeTypeMap.ContainsKey($RawType)) {
         return $attributeTypeMap[$RawType]
     }
@@ -181,8 +186,12 @@ function Get-EntityAttributeRows {
     foreach ($attr in @($Entity.attributes)) {
         $attrName = [string]$attr.name
         if ($systemAttributes.Contains($attrName)) { continue }
-        $displayType = Get-AttributeDisplayType -RawType ([string]$attr.type) -AttributeName $attrName -EntityName ([string]$Entity.name) -Entity $Entity
-        $rows.Add("| $attrName | $displayType |") | Out-Null
+        $enumName = if ($attr.enumerationName) { [string]$attr.enumerationName } else { "" }
+        $displayType = Get-AttributeDisplayType -RawType ([string]$attr.type) -AttributeName $attrName -EntityName ([string]$Entity.name) -Entity $Entity -EnumerationName $enumName
+        $lengthCol = if ($null -ne $attr.length) { [string]$attr.length } else { [char]0x2014 }
+        $defaultCol = if ($attr.defaultValue -and [string]$attr.defaultValue -ne "") { [string]$attr.defaultValue } else { [char]0x2014 }
+        $validationCol = if ($attr.validationSummary -and [string]$attr.validationSummary -ne "") { [string]$attr.validationSummary } else { [char]0x2014 }
+        $rows.Add("| $attrName | $displayType | $lengthCol | $defaultCol | $validationCol |") | Out-Null
     }
     return $rows
 }
@@ -2192,8 +2201,8 @@ $($riskRows -join "`n")
         $attrTableSection = if ($attrTableRows.Count -gt 0) {
             @(
                 "",
-                "| Attribute | Type |",
-                "|---|---|",
+                "| Attribute | Type | Length/Precision | Default | Validation |",
+                "|---|---|---|---|---|",
                 ($attrTableRows -join "`n")
             ) -join "`n"
         } else {

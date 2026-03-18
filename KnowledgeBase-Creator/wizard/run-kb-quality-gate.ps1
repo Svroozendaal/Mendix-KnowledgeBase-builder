@@ -598,21 +598,36 @@ else {
                 $entitySummaryCountMap[$stm.Groups[1].Value.Trim()] = [int]$stm.Groups[3].Value
             }
 
+            # Collect all enumerations listed in the Enumerations section for cross-validation
+            $knownEnums = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+            $enumRowMatches = [regex]::Matches($domainText, "^\|\s*([A-Za-z_]\w*\.\w+)\s*\|\s*\d+\s*\|", [System.Text.RegularExpressions.RegexOptions]::Multiline)
+            foreach ($erm in $enumRowMatches) {
+                $knownEnums.Add($erm.Groups[1].Value.Trim()) | Out-Null
+            }
+
             $entitySectionMatches = [regex]::Matches($domainText, "(?ms)^### (.+?)$\s*(.*?)(?=^### |\z)")
             foreach ($esm in $entitySectionMatches) {
                 $entitySectionName = $esm.Groups[1].Value.Trim()
                 $entitySectionBody = $esm.Groups[2].Value
+                # Match both 2-column (legacy) and 5-column attribute tables
                 if ($entitySectionBody -match "\| Attribute \| Type \|") {
-                    $attrRowMatches = [regex]::Matches($entitySectionBody, "^\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|$", [System.Text.RegularExpressions.RegexOptions]::Multiline)
+                    $attrRowMatches = [regex]::Matches($entitySectionBody, "^\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|", [System.Text.RegularExpressions.RegexOptions]::Multiline)
                     $dataRowCount = 0
                     foreach ($arm in $attrRowMatches) {
                         $col1 = $arm.Groups[1].Value.Trim()
                         $col2 = $arm.Groups[2].Value.Trim()
                         if ($col1 -eq "Attribute" -or $col1 -match "^---") { continue }
                         $dataRowCount++
+                        # Type is valid if it is in the allowed list or matches a qualified name (Module.EnumName)
                         $isValidType = ($col2 -in $allowedAttrTypes) -or ($col2 -match "^\w+\.\w+$")
                         if (-not $isValidType) {
                             Add-Issue -Severity "error" -File $domain -Message "Entity '$entitySectionName' attribute '$col1' has unknown type: $col2"
+                        }
+                        # If the type looks like a qualified enum reference, check it exists in the Enumerations section
+                        if ($col2 -match "^\w+\.\w+" -and $col2 -notin $allowedAttrTypes -and $knownEnums.Count -gt 0) {
+                            if (-not $knownEnums.Contains($col2)) {
+                                Add-Issue -Severity "warning" -File $domain -Message "Entity '$entitySectionName' attribute '$col1' references enum '$col2' not found in Enumerations section."
+                            }
                         }
                     }
                     # Cross-check: attribute table rows should not exceed summary count
@@ -724,6 +739,19 @@ if (Test-Path $keywordIndexFile -PathType Leaf) {
             }
         }
     }
+
+    # Validate that entity anchor links in keyword-index.md resolve to actual anchors in DOMAIN.md
+    $kwEntityLinkMatches = [regex]::Matches($kwText, "\]\(\.\./modules/([^)]+)/DOMAIN\.md#(entity-[a-z0-9-]+)\)")
+    foreach ($linkMatch in $kwEntityLinkMatches) {
+        $linkModulePath = $linkMatch.Groups[1].Value
+        $linkAnchor = $linkMatch.Groups[2].Value
+        $targetDomainPath = Join-Path $kbRoot "modules" $linkModulePath "DOMAIN.md"
+        if (-not (Test-Path $targetDomainPath -PathType Leaf)) { continue }
+        $targetContent = Get-Content -Raw $targetDomainPath
+        if ($targetContent -notmatch "<a id=`"$([regex]::Escape($linkAnchor))`">") {
+            Add-Issue -Severity "warning" -File $keywordIndexFile -Message "Anchor '#$linkAnchor' not found in modules/$linkModulePath/DOMAIN.md"
+        }
+    }
 }
 
 # Template-derived heading contract (single source of truth in artifacts/)
@@ -744,6 +772,47 @@ if (Test-Path $modulesDir -PathType Container) {
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "DOMAIN.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_DOMAIN_TEMPLATE.md")
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "INTERPRETATION.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_INTERPRETATION_TEMPLATE.md")
         Assert-TemplateHeadings -FilePath (Join-Path $mod.FullName "RESOURCES.md") -TemplatePath (Join-Path $artifactsRoot "MODULE_RESOURCES_TEMPLATE.md")
+    }
+}
+
+# Cross-check: by-entity.md attribute counts vs DOMAIN.md attribute table row counts
+$byEntityCrossFile = Join-Path $routesDir "by-entity.md"
+if (Test-Path $byEntityCrossFile -PathType Leaf) {
+    $crossEntityRows = Get-MarkdownTableRows -FilePath $byEntityCrossFile
+    foreach ($row in $crossEntityRows) {
+        $entityQName = [string]$row.'Entity'
+        if ([string]::IsNullOrWhiteSpace($entityQName) -or $entityQName -eq "none") { continue }
+        $attrCell = [string]$row.'Attributes'
+        if ($attrCell -match "\((\d+)\)\s*$") {
+            $expectedCount = [int]$Matches[1]
+            # Determine the DOMAIN.md file for this entity's module
+            $entityParts = $entityQName -split "\.", 2
+            if ($entityParts.Count -ge 2) {
+                $entityModule = $entityParts[0]
+                $domainCandidates = @(
+                    (Join-Path $modulesDir $entityModule "DOMAIN.md"),
+                    (Join-Path $modulesDir "_marktplace" $entityModule "DOMAIN.md")
+                )
+                $domainFile = $domainCandidates | Where-Object { Test-Path $_ -PathType Leaf } | Select-Object -First 1
+                if ($domainFile) {
+                    $domainContent = Get-Content -Raw $domainFile
+                    $anchorId = ("entity-" + $entityQName.Replace(".", "-")).ToLowerInvariant()
+                    # Find the entity section and count attribute table rows
+                    $entitySectionPattern = "(?ms)<a id=`"$([regex]::Escape($anchorId))`"></a>\s*### .+?$\s*(.*?)(?=<a id=|## Source|\z)"
+                    if ($domainContent -match $entitySectionPattern) {
+                        $sectionBody = $Matches[1]
+                        if ($sectionBody -match "\| Attribute \| Type \|") {
+                            $domainAttrRows = [regex]::Matches($sectionBody, "^\|\s*[^|]+\s*\|\s*[^|]+\s*\|", [System.Text.RegularExpressions.RegexOptions]::Multiline)
+                            # Subtract header and separator rows
+                            $domainCount = ($domainAttrRows | Where-Object { $_.Value -notmatch "Attribute \| Type" -and $_.Value -notmatch "^---|\|---" }).Count
+                            if ($domainCount -ne $expectedCount) {
+                                Add-Issue -Severity "warning" -File $byEntityCrossFile -Message "Entity '$entityQName' shows ($expectedCount) in by-entity.md but DOMAIN.md has $domainCount attribute rows."
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

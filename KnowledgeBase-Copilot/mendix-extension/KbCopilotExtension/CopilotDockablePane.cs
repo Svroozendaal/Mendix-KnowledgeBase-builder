@@ -8,7 +8,7 @@ namespace KbCopilotExtension;
 public class CopilotDockablePane : DockablePaneExtension
 {
     public const string PaneId = "kb-copilot-pane";
-    private const string CopilotUrl = "http://localhost:3001";
+    private const string CopilotBaseUrl = "http://localhost:3001";
 
     public override string Id => PaneId;
 
@@ -26,7 +26,16 @@ public class CopilotDockablePane : DockablePaneExtension
 
         public override void InitWebView(IWebView webView)
         {
-            webView.Address = new Uri(CopilotUrl);
+            var appRoot = CurrentApp?.Root?.DirectoryPath;
+            if (!string.IsNullOrEmpty(appRoot))
+            {
+                var encoded = Uri.EscapeDataString(appRoot);
+                webView.Address = new Uri($"{CopilotBaseUrl}?appRoot={encoded}");
+            }
+            else
+            {
+                webView.Address = new Uri(CopilotBaseUrl);
+            }
         }
     }
 }

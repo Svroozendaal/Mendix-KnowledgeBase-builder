@@ -36,11 +36,27 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [currentConversation, setCurrentConversation] = useState<Conversation | null>(null);
   const [conversations, setConversations] = useState<ConversationMeta[]>([]);
 
-  // Load config and conversations on mount
+  // Load config and conversations on mount; auto-discover KB when running as extension
   useEffect(() => {
     api.getConfig().then(setConfig).catch(console.error);
     api.getConversations().then(setConversations).catch(console.error);
-    api.getKbInfo().then(setKbInfo).catch(() => {});
+
+    // Try cached KB first, then auto-discover from appRoot query param (Mendix extension)
+    api.getKbInfo()
+      .then(setKbInfo)
+      .catch(() => {
+        const params = new URLSearchParams(window.location.search);
+        const appRoot = params.get('appRoot');
+        if (appRoot) {
+          api.discoverKb(appRoot)
+            .then((result) => {
+              if (result.valid && result.info) {
+                setKbInfo(result.info);
+              }
+            })
+            .catch(() => {});
+        }
+      });
   }, []);
 
   const updateConfig = useCallback(async (newConfig: CopilotConfig) => {

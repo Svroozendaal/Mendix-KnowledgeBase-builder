@@ -128,7 +128,10 @@
       "Bash(claude -p 'Read the file CLAUDE.md using the Read tool' --output-format stream-json --max-turns 1 --verbose)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001/)",
       "Bash(wc -l /c/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Copilot/backend/src/services/question-classifier/*.ts)",
-      "Bash(grep -E \"\\\\.\\(cs|csproj\\)$\")"
+      "Bash(grep -E \"\\\\.\\(cs|csproj\\)$\")",
+      "Bash(powershell -NoProfile -Command \"[System.Management.Automation.Language.Parser]::ParseFile\\(''c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/run-kb-compose.ps1'', [ref]$null, [ref]$errors\\); if \\($errors.Count -gt 0\\) { $errors | ForEach-Object { Write-Host $_.ToString\\(\\) } } else { Write-Host ''No syntax errors'' }\")",
+      "Bash(powershell -NoProfile -Command \"$e = $null; [System.Management.Automation.Language.Parser]::ParseFile\\(''c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1'', [ref]$null, [ref]$e\\); if \\($e -and $e.Count -gt 0\\) { $e | ForEach-Object { Write-Host $_.ToString\\(\\) } } else { Write-Host ''No syntax errors'' }\")",
+      "Bash(\"c:/Workspaces/Mendix-KnowledgeBase-builder/KnowledgeBase-Creator/Mendix-model-overview-parser/bin/win-x64/ModelOverviewCli.exe\" --help)"
     ]
   }
 }

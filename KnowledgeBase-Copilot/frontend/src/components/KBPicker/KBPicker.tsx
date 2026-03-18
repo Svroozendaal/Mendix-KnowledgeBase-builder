@@ -9,7 +9,7 @@ interface KBPickerProps {
 export function KBPicker({ onClose }: KBPickerProps) {
   const { kbInfo, setKbRoot, config } = useApp();
   const [path, setPath] = useState(kbInfo?.kbRoot ?? config?.lastKbRoot ?? '');
-  const [status, setStatus] = useState<'idle' | 'valid' | 'invalid'>('idle');
+  const [status, setStatus] = useState<'idle' | 'valid' | 'invalid'>(kbInfo ? 'valid' : 'idle');
   const [errorMsg, setErrorMsg] = useState('');
   const [validating, setValidating] = useState(false);
 
