@@ -564,13 +564,16 @@ function Sync-AppOverviewCurrentAlias {
         $selectedModules = @($currentManifest.selectedModules | ForEach-Object { [string]$_ })
     }
     $artifactArray = $artifacts.ToArray()
-    $updatedManifest = @{
+    $updatedManifest = [ordered]@{
         schemaVersion = [string]$currentManifest.schemaVersion
         generatedAtUtc = [string]$currentManifest.generatedAtUtc
         selectedModules = $selectedModules
-        artifactCount = $artifactArray.Count
-        artifacts = $artifactArray
     }
+    if ($currentManifest.PSObject.Properties.Name -contains "generator" -and -not [string]::IsNullOrWhiteSpace([string]$currentManifest.generator)) {
+        $updatedManifest.generator = [string]$currentManifest.generator
+    }
+    $updatedManifest.artifactCount = $artifactArray.Count
+    $updatedManifest.artifacts = $artifactArray
     Write-JsonUtf8NoBom -Path $currentManifestPath -Value $updatedManifest
 
     return [pscustomobject]@{

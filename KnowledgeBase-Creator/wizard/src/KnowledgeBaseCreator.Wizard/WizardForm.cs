@@ -4,10 +4,14 @@ internal sealed class WizardForm : Form
 {
     private readonly TextBox _mprPathBox = new() { Dock = DockStyle.Fill };
     private readonly TextBox _appNameBox = new() { Dock = DockStyle.Fill };
+    private readonly ComboBox _extractionModeBox = new() { Dock = DockStyle.Fill, DropDownStyle = ComboBoxStyle.DropDownList };
     private readonly TextBox _installRootBox = new() { Dock = DockStyle.Fill };
     private readonly TextBox _mxPathBox = new() { Dock = DockStyle.Fill };
     private readonly TextBox _dataRootBox = new() { Dock = DockStyle.Fill };
     private readonly TextBox _appFolderBox = new() { Dock = DockStyle.Fill, ReadOnly = true };
+    private readonly Button _browseInstallButton = new() { Text = "Browse...", AutoSize = true };
+    private readonly Button _browseMxButton = new() { Text = "Browse...", AutoSize = true };
+    private readonly Button _autoDetectMxButton = new() { Text = "Auto detect", AutoSize = true };
     private readonly Button _runButton = new() { Text = "Run Pipeline", AutoSize = true };
     private readonly Button _enrichButton = new() { Text = "Enrich KB", AutoSize = true, Enabled = false };
     private readonly Button _enrichModulesButton = new() { Text = "Enrich Modules...", AutoSize = true, Enabled = false };
@@ -63,7 +67,7 @@ internal sealed class WizardForm : Form
         {
             Dock = DockStyle.Top,
             ColumnCount = 4,
-            RowCount = 10,
+            RowCount = 11,
             AutoSize = true,
             Padding = new Padding(12),
         };
@@ -74,33 +78,32 @@ internal sealed class WizardForm : Form
 
         var browseMprButton = new Button { Text = "Browse...", AutoSize = true };
         browseMprButton.Click += (_, _) => BrowseMpr();
-        var browseInstallButton = new Button { Text = "Browse...", AutoSize = true };
-        browseInstallButton.Click += (_, _) => BrowseInstallRoot();
-        var browseMxButton = new Button { Text = "Browse...", AutoSize = true };
-        browseMxButton.Click += (_, _) => BrowseMx();
+        _browseInstallButton.Click += (_, _) => BrowseInstallRoot();
+        _browseMxButton.Click += (_, _) => BrowseMx();
         var browseDataRootButton = new Button { Text = "Browse...", AutoSize = true };
         browseDataRootButton.Click += (_, _) => BrowseDataRoot();
-        var autoDetectMxButton = new Button { Text = "Auto detect", AutoSize = true };
-        autoDetectMxButton.Click += (_, _) => AutoDetectMx();
+        _autoDetectMxButton.Click += (_, _) => AutoDetectMx();
 
         _mprPathBox.TextChanged += (_, _) => OnMprPathChanged();
         _dataRootBox.TextChanged += (_, _) => RefreshEnrichReady();
+        _extractionModeBox.SelectedIndexChanged += (_, _) => ApplyExtractionModeUiState();
 
         AddRow(settings, 0, "MPR file", _mprPathBox, browseMprButton, EmptyControl());
         AddRow(settings, 1, "App name", _appNameBox, EmptyControl(), EmptyControl());
-        AddRow(settings, 2, "Mendix install root", _installRootBox, browseInstallButton, EmptyControl());
-        AddRow(settings, 3, "mx.exe", _mxPathBox, autoDetectMxButton, browseMxButton);
-        AddRow(settings, 4, "Output data root", _dataRootBox, browseDataRootButton, EmptyControl());
-        AddRow(settings, 5, "Mendix app folder", _appFolderBox, EmptyControl(), EmptyControl());
-        AddRow(settings, 6, string.Empty, _autoEnrichCheck, _settingsButton, EmptyControl());
+        AddRow(settings, 2, "Extraction mode", _extractionModeBox, EmptyControl(), EmptyControl());
+        AddRow(settings, 3, "Mendix install root", _installRootBox, _browseInstallButton, EmptyControl());
+        AddRow(settings, 4, "mx.exe", _mxPathBox, _autoDetectMxButton, _browseMxButton);
+        AddRow(settings, 5, "Output data root", _dataRootBox, browseDataRootButton, EmptyControl());
+        AddRow(settings, 6, "Mendix app folder", _appFolderBox, EmptyControl(), EmptyControl());
+        AddRow(settings, 7, string.Empty, _autoEnrichCheck, _settingsButton, EmptyControl());
 
         var actionFlow = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, WrapContents = false };
         actionFlow.Controls.AddRange([_runButton, _enrichButton, _enrichModulesButton, _updateAgentsButton]);
-        AddRow(settings, 7, string.Empty, actionFlow, EmptyControl(), EmptyControl());
+        AddRow(settings, 8, string.Empty, actionFlow, EmptyControl(), EmptyControl());
 
         var appFlow = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, WrapContents = false };
         appFlow.Controls.AddRange([_addCopilotButton, _openAppButton]);
-        AddRow(settings, 8, string.Empty, appFlow, EmptyControl(), EmptyControl());
+        AddRow(settings, 9, string.Empty, appFlow, EmptyControl(), EmptyControl());
 
         _runButton.Click += async (_, _) => await RunPipelineAsync();
         _enrichButton.Click += async (_, _) => await RunEnrichmentAsync();
@@ -134,13 +137,46 @@ internal sealed class WizardForm : Form
 
     private void LoadDefaults()
     {
+        _extractionModeBox.Items.Clear();
+        _extractionModeBox.Items.Add(ExtractionMode.LegacyDumpParser.ToString());
+        _extractionModeBox.Items.Add(ExtractionMode.MxCli.ToString());
+
         _mprPathBox.Text = _config.LastMprPath ?? string.Empty;
         _appNameBox.Text = _config.LastAppName ?? string.Empty;
         _installRootBox.Text = WizardRuntime.ResolveInstallRootDefault(_config);
         _mxPathBox.Text = _config.LastMxExePath ?? string.Empty;
         _dataRootBox.Text = _config.LastDataRoot ?? string.Empty;
         _autoEnrichCheck.Checked = _config.AutoEnrichAfterPipeline ?? false;
+        _extractionModeBox.SelectedItem = WizardRuntime.ResolveExtractionModeDefault(_config).ToString();
+        if (_extractionModeBox.SelectedIndex < 0)
+        {
+            _extractionModeBox.SelectedItem = ExtractionMode.MxCli.ToString();
+        }
+        ApplyExtractionModeUiState();
         RefreshDataRoot();
+    }
+
+    private ExtractionMode GetSelectedExtractionMode()
+    {
+        if (_extractionModeBox.SelectedItem is string selected &&
+            Enum.TryParse<ExtractionMode>(selected, ignoreCase: true, out var mode))
+        {
+            return mode;
+        }
+
+        return ExtractionMode.MxCli;
+    }
+
+    private void ApplyExtractionModeUiState()
+    {
+        var mode = GetSelectedExtractionMode();
+        var usesLegacyMx = mode == ExtractionMode.LegacyDumpParser;
+
+        _installRootBox.Enabled = usesLegacyMx;
+        _mxPathBox.Enabled = usesLegacyMx;
+        _browseInstallButton.Enabled = usesLegacyMx;
+        _browseMxButton.Enabled = usesLegacyMx;
+        _autoDetectMxButton.Enabled = usesLegacyMx;
     }
 
     private void OnMprPathChanged()
@@ -274,6 +310,12 @@ internal sealed class WizardForm : Form
 
     private void AutoDetectMx()
     {
+        if (GetSelectedExtractionMode() != ExtractionMode.LegacyDumpParser)
+        {
+            AppendLog("mx.exe auto-detect is only used in LegacyDumpParser mode.");
+            return;
+        }
+
         try
         {
             var mprPath = WizardRuntime.ValidateMprPath(_mprPathBox.Text);
@@ -326,21 +368,45 @@ internal sealed class WizardForm : Form
 
             var mprPath = WizardRuntime.ValidateMprPath(_mprPathBox.Text);
             var appName = _appNameBox.Text.Trim();
+            var extractionMode = GetSelectedExtractionMode();
             if (string.IsNullOrWhiteSpace(appName))
             {
                 appName = Path.GetFileNameWithoutExtension(mprPath);
                 _appNameBox.Text = appName;
             }
 
-            var mxPathInput = _mxPathBox.Text.Trim();
-            if (string.IsNullOrWhiteSpace(mxPathInput))
+            string? mxPath = null;
+            if (extractionMode == ExtractionMode.LegacyDumpParser)
             {
-                AppendLog("mx.exe not provided. Attempting auto-detection...");
-                AutoDetectMx();
-                mxPathInput = _mxPathBox.Text.Trim();
+                var mxPathInput = _mxPathBox.Text.Trim();
+                if (string.IsNullOrWhiteSpace(mxPathInput))
+                {
+                    AppendLog("mx.exe not provided. Attempting auto-detection...");
+                    AutoDetectMx();
+                    mxPathInput = _mxPathBox.Text.Trim();
+                }
+
+                mxPath = WizardRuntime.ValidateMxPath(mxPathInput);
+            }
+            else
+            {
+                var (foundMxCli, mxCliPath, mxCliVersion, mxCliError) = WizardRuntime.DetectMxCli();
+                if (!foundMxCli)
+                {
+                    var detail = string.IsNullOrWhiteSpace(mxCliError)
+                        ? "mxcli not found on PATH."
+                        : mxCliError;
+                    throw new InvalidOperationException(
+                        $"MxCli mode requires mxcli on PATH. {detail} Install mxcli and verify 'mxcli --version'.");
+                }
+
+                AppendLog($"mxcli: {mxCliPath}");
+                if (!string.IsNullOrWhiteSpace(mxCliVersion))
+                {
+                    AppendLog($"mxcli version: {mxCliVersion}");
+                }
             }
 
-            var mxPath = WizardRuntime.ValidateMxPath(mxPathInput);
             var dataRoot = WizardRuntime.NormalizeDataRootInput(_dataRootBox.Text);
             var kbRoot = Path.Combine(dataRoot, "knowledge-base");
             var creatorLinkPath = Path.Combine(kbRoot, "_sources", "creator-link.json");
@@ -348,7 +414,11 @@ internal sealed class WizardForm : Form
             AppendLog("Starting pipeline...");
             AppendLog($"MPR: {mprPath}");
             AppendLog($"App: {appName}");
-            AppendLog($"mx.exe: {mxPath}");
+            AppendLog($"Extraction mode: {extractionMode}");
+            if (extractionMode == ExtractionMode.LegacyDumpParser)
+            {
+                AppendLog($"mx.exe: {mxPath}");
+            }
             AppendLog($"Data root: {dataRoot}");
             AppendLog($"Knowledge base root: {kbRoot}");
 
@@ -357,8 +427,9 @@ internal sealed class WizardForm : Form
                 LastMprPath = mprPath,
                 LastAppName = appName,
                 LastInstallRoot = _installRootBox.Text.Trim(),
-                LastMxExePath = mxPath,
+                LastMxExePath = extractionMode == ExtractionMode.LegacyDumpParser ? mxPath : _config.LastMxExePath,
                 LastDataRoot = dataRoot,
+                LastExtractionMode = extractionMode.ToString(),
                 AutoEnrichAfterPipeline = _autoEnrichCheck.Checked,
                 AiSettings = _config.AiSettings, // preserve AI settings across pipeline runs
             };
@@ -371,6 +442,7 @@ internal sealed class WizardForm : Form
                 appName: appName,
                 mxPath: mxPath,
                 dataRoot: dataRoot,
+                extractionMode: extractionMode,
                 log: AppendLog
             );
 
@@ -388,7 +460,7 @@ internal sealed class WizardForm : Form
             if (!string.IsNullOrWhiteSpace(runFolder))
             {
                 creatorLinkPath = WizardRuntime.WriteCreatorLink(
-                    _packageRoot, kbRoot, dataRoot, appName, mprPath, runFolder);
+                    _packageRoot, kbRoot, dataRoot, appName, mprPath, runFolder, extractionMode);
                 AppendLog($"Creator link written: {creatorLinkPath}");
             }
             else
@@ -829,11 +901,24 @@ internal sealed class WizardForm : Form
     {
         _runButton.Enabled = enabled;
         _autoEnrichCheck.Enabled = enabled;
+        _extractionModeBox.Enabled = enabled;
         _enrichButton.Enabled = enabled && _enrichReady;
         _enrichModulesButton.Enabled = enabled && _enrichReady;
         _updateAgentsButton.Enabled = enabled && _enrichReady;
         _addCopilotButton.Enabled = enabled;
         _openAppButton.Enabled = enabled;
+        if (enabled)
+        {
+            ApplyExtractionModeUiState();
+        }
+        else
+        {
+            _installRootBox.Enabled = false;
+            _mxPathBox.Enabled = false;
+            _browseInstallButton.Enabled = false;
+            _browseMxButton.Enabled = false;
+            _autoDetectMxButton.Enabled = false;
+        }
         Cursor = enabled ? Cursors.Default : Cursors.WaitCursor;
     }
 

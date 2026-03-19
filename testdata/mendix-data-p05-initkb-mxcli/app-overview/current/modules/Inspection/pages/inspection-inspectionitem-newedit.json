@@ -1,0 +1,65 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.InspectionItem_NewEdit",
+                  "stableId":  "Inspection.InspectionItem_NewEdit",
+                  "slug":  "inspection-inspectionitem-newedit",
+                  "l0Path":  "knowledge-base/modules/Inspection/pages/inspection-inspectionitem-newedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/pages/inspection-inspectionitem-newedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/pages/inspection-inspectionitem-newedit.json",
+                  "l2Logical":  "page:Inspection.InspectionItem_NewEdit",
+                  "sourceRun":  "cli_2026-03-18T20-47-05.912Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/pages/INDEX.json"
+              },
+    "qualifiedName":  "Inspection.InspectionItem_NewEdit",
+    "name":  "InspectionItem_NewEdit",
+    "title":  "Edit Inspection Item",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "Inspection.Manager"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "InspectionItem",
+                           "entityType":  "Inspection.InspectionItem"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        {
+                            "sourceId":  "dataView5",
+                            "sourceType":  "Parameter",
+                            "entity":  "Inspection.InspectionItem",
+                            "constraint":  null,
+                            "flowName":  null,
+                            "summary":  "Parameter datasource: $InspectionItem"
+                        }
+                    ],
+    "clientActions":  [
+                          {
+                              "actionId":  "actionButton2",
+                              "actionType":  "CancelChangesClientAction",
+                              "summary":  "CancelChangesClientAction",
+                              "targetPage":  null,
+                              "flowName":  null
+                          },
+                          {
+                              "actionId":  "actionButton1",
+                              "actionType":  "SaveChangesClientAction",
+                              "summary":  "SaveChangesClientAction",
+                              "targetPage":  null,
+                              "flowName":  null
+                          }
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

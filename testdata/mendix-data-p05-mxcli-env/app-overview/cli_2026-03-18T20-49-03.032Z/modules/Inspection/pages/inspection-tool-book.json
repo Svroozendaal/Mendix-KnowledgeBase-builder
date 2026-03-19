@@ -1,0 +1,65 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.Tool_Book",
+                  "stableId":  "Inspection.Tool_Book",
+                  "slug":  "inspection-tool-book",
+                  "l0Path":  "knowledge-base/modules/Inspection/pages/inspection-tool-book.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/pages/inspection-tool-book.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/pages/inspection-tool-book.json",
+                  "l2Logical":  "page:Inspection.Tool_Book",
+                  "sourceRun":  "cli_2026-03-18T20-49-03.032Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Inspection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Inspection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/pages/INDEX.json"
+              },
+    "qualifiedName":  "Inspection.Tool_Book",
+    "name":  "Tool_Book",
+    "title":  "Edit Equipment",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "Inspection.Manager"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "Tool",
+                           "entityType":  "Inspection.Tool"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        {
+                            "sourceId":  "dataView1",
+                            "sourceType":  "Parameter",
+                            "entity":  "Inspection.Tool",
+                            "constraint":  null,
+                            "flowName":  null,
+                            "summary":  "Parameter datasource: $Tool"
+                        }
+                    ],
+    "clientActions":  [
+                          {
+                              "actionId":  "actionButton2",
+                              "actionType":  "CancelChangesClientAction",
+                              "summary":  "CancelChangesClientAction",
+                              "targetPage":  null,
+                              "flowName":  null
+                          },
+                          {
+                              "actionId":  "actionButton1",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Tool_Validate",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Tool_Validate"
+                          }
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

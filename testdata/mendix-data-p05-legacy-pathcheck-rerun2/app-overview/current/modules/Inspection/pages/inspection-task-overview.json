@@ -1,0 +1,192 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.Task_Overview",
+    "stableId": "Inspection.Task_Overview",
+    "slug": "inspection-task-overview",
+    "l0Path": "knowledge-base/modules/Inspection/pages/inspection-task-overview.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/pages/inspection-task-overview.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/pages/inspection-task-overview.json",
+    "l2Logical": "page:Inspection.Task_Overview",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/pages/INDEX.json"
+  },
+  "qualifiedName": "Inspection.Task_Overview",
+  "name": "Task_Overview",
+  "title": "Tasks",
+  "layout": "Inspection.Emixa_Custom",
+  "allowedRoles": [
+    "Inspection.Inspector",
+    "Inspection.Manager"
+  ],
+  "parameters": [],
+  "isPopup": false,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": null,
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "a56b975d-3f4a-4627-b56f-4969def7cb32",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Inspection.ACT_ReportHelper_Create",
+      "targetPage": null,
+      "flowName": "Inspection.ACT_ReportHelper_Create"
+    },
+    {
+      "actionId": "05e69ad2-5b6c-41e8-a4bd-9b4014634399",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "0cb303e4-bf4f-4102-bd5c-3c4c85009e32",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "131277d9-765c-4fda-ab2f-ed1c1f932307",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "204fdb4d-de7d-4b8b-826d-b7a4d04883bf",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "3298cb26-15f2-40d5-aeb6-a14cd5e2f693",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "39651ad2-9c98-438f-b270-c60c58d4698f",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "3b1ffc96-11cf-4410-80dc-e561f7d1826c",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "5c8c7085-a530-4d14-a09d-b0eb9b92986a",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "6a76357b-9a96-41a2-a0eb-527866c8584b",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "6a9e62fe-1c5f-442a-bf73-7a78fe0017d5",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "8e578b7b-394f-42c5-8411-5ebb29ba66e5",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "8ff98141-4642-5929-84d9-23ce06724b4a",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "a6d0af39-bf3d-4bcd-90e2-6cd29c801547",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "a94372d0-a624-4cfc-a05e-1e1cbeb8d477",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "ab5b21e4-a73e-4c1c-936d-5bcb617a98b9",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "c9d6fad5-b555-4e64-a76d-958b11c05a14",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "cd7ff5cb-12b8-47f6-a810-2f045c52fd26",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "d92f45da-16ec-4451-8817-51c19361d0c4",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "dc775293-8c60-5055-b0bb-3726a4bd4e30",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "e37bf39b-778e-42d8-9bd2-c1aeb11039cd",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": [
+    {
+      "provenanceId": "5d4f09bb-69f0-4a56-93e2-eda128e71cbb",
+      "sourceType": "MenuItem",
+      "summary": "Menu item \u0022Tasks\u0022 in profile Responsive",
+      "page": "Inspection.Task_Overview",
+      "userRole": null,
+      "flowName": null
+    }
+  ]
+}

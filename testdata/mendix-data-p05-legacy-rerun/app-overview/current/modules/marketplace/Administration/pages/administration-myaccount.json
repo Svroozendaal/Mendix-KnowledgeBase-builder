@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Administration",
+    "qualifiedName": "Administration.MyAccount",
+    "stableId": "Administration.MyAccount",
+    "slug": "administration-myaccount",
+    "l0Path": "knowledge-base/modules/_marktplace/Administration/pages/administration-myaccount.abstract.md",
+    "l1Path": "knowledge-base/modules/_marktplace/Administration/pages/administration-myaccount.overview.md",
+    "l2Path": "app-overview/current/modules/marketplace/Administration/pages/administration-myaccount.json",
+    "l2Logical": "page:Administration.MyAccount",
+    "sourceRun": "cli_2026-03-18T20-52-48.461Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/marketplace/Administration/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/marketplace/Administration/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/marketplace/Administration/pages/INDEX.json"
+  },
+  "qualifiedName": "Administration.MyAccount",
+  "name": "MyAccount",
+  "title": "My Account",
+  "layout": "Atlas_Core.PopupLayout",
+  "allowedRoles": [],
+  "parameters": [
+    {
+      "name": "Account",
+      "entityType": "Administration.Account"
+    }
+  ],
+  "isPopup": true,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": null,
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "930309ef-00d5-4906-9fb9-7e5182d3c847",
+      "actionType": "CancelChangesClientAction",
+      "summary": "CancelChangesClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "2f4bdaee-5973-4320-bc17-409425f9e445",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Administration.ShowMyPasswordForm",
+      "targetPage": null,
+      "flowName": "Administration.ShowMyPasswordForm"
+    },
+    {
+      "actionId": "16b12a68-c96b-5372-83df-10e185254027",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "20e9cfc4-f852-4712-86d4-a4746ed84ffb",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "38e2d32a-2f9c-4ac9-bd6a-5549689b04f7",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "54796c1b-e3f8-4270-afb1-439a64b19712",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "6f32abbe-71b8-4685-8194-84eadb79f511",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "a93099e4-b88e-4108-9e23-8abf3b7eff7b",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "c3e52b13-9146-42ed-8292-e1a8519ec8cb",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "d54d8278-0c8f-496c-8749-69bb9a85b1de",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "d649b14d-78e8-53b6-ad4d-5bff5e459385",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "abc589fb-6154-4eac-bf33-91c3cced29c3",
+      "actionType": "SaveChangesClientAction",
+      "summary": "SaveChangesClientAction",
+      "targetPage": null,
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": []
+}

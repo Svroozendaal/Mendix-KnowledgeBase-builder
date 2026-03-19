@@ -1,0 +1,124 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.SUB_Account_GetFromInspector",
+    "stableId": "bd0d867e-42f7-4673-b7d3-a8f98a0e686d",
+    "slug": "inspection-sub-account-getfrominspector",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-sub-account-getfrominspector.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-sub-account-getfrominspector.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-sub-account-getfrominspector.json",
+    "l2Logical": "flow:Inspection.SUB_Account_GetFromInspector",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "bd0d867e-42f7-4673-b7d3-a8f98a0e686d",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.SUB_Account_GetFromInspector",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "366e83be-f561-41a3-802d-8fa1874312cc",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve Account_Inspector over association Inspector_Account from Inspector",
+      "detail": "retrieve Account_Inspector over association Inspector_Account from Inspector",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "b435eda6-46ac-4ccb-b5c7-93b33fa1bda0",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "34407d1f-cdfd-43a2-bd7b-2fc88ce45e31",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "4a1fa46a-3a7f-4e62-836b-d49068af69c0",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "494137bb-1798-45f8-b227-0a5377b71f7e",
+      "originNodeId": "4a1fa46a-3a7f-4e62-836b-d49068af69c0",
+      "destinationNodeId": "366e83be-f561-41a3-802d-8fa1874312cc",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "60d280be-4641-468b-9644-c925d4bed225",
+      "originNodeId": "366e83be-f561-41a3-802d-8fa1874312cc",
+      "destinationNodeId": "b435eda6-46ac-4ccb-b5c7-93b33fa1bda0",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "4a1fa46a-3a7f-4e62-836b-d49068af69c0"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "4a1fa46a-3a7f-4e62-836b-d49068af69c0",
+    "366e83be-f561-41a3-802d-8fa1874312cc",
+    "b435eda6-46ac-4ccb-b5c7-93b33fa1bda0"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.SUB_Account_GetFromInspector\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Account_Inspector over association Inspector_Account from Inspector\r\n3. END",
+  "retrieveActions": [
+    {
+      "nodeId": "366e83be-f561-41a3-802d-8fa1874312cc",
+      "summary": "RetrieveAction: retrieve Account_Inspector over association Inspector_Account from Inspector retrieve Account_Inspector over association Inspector_Account from Inspector",
+      "sourceKind": "Association",
+      "entity": null,
+      "association": "Inspector_Account",
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [],
+  "callEdges": [
+    {
+      "callerModule": "Notification",
+      "callerFlow": "Notification.SE_Notification_SendToInspectors",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "abeda3cd-fc29-439d-b8c8-6d681ee351fc",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.SUB_Account_GetFromInspector",
+      "isInternal": true
+    },
+    {
+      "callerModule": "Notification",
+      "callerFlow": "Notification.SUB_Notification_SendToInspector",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "cd89ca78-9a31-4803-8035-a8f1b41894f5",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.SUB_Account_GetFromInspector",
+      "isInternal": true
+    }
+  ]
+}

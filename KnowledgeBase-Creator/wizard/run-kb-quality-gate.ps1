@@ -745,7 +745,7 @@ if (Test-Path $keywordIndexFile -PathType Leaf) {
     foreach ($linkMatch in $kwEntityLinkMatches) {
         $linkModulePath = $linkMatch.Groups[1].Value
         $linkAnchor = $linkMatch.Groups[2].Value
-        $targetDomainPath = Join-Path $kbRoot "modules" $linkModulePath "DOMAIN.md"
+        $targetDomainPath = Join-Path (Join-Path (Join-Path $kbRoot "modules") $linkModulePath) "DOMAIN.md"
         if (-not (Test-Path $targetDomainPath -PathType Leaf)) { continue }
         $targetContent = Get-Content -Raw $targetDomainPath
         if ($targetContent -notmatch "<a id=`"$([regex]::Escape($linkAnchor))`">") {
@@ -790,8 +790,8 @@ if (Test-Path $byEntityCrossFile -PathType Leaf) {
             if ($entityParts.Count -ge 2) {
                 $entityModule = $entityParts[0]
                 $domainCandidates = @(
-                    (Join-Path $modulesDir $entityModule "DOMAIN.md"),
-                    (Join-Path $modulesDir "_marktplace" $entityModule "DOMAIN.md")
+                    (Join-Path (Join-Path $modulesDir $entityModule) "DOMAIN.md"),
+                    (Join-Path (Join-Path (Join-Path $modulesDir "_marktplace") $entityModule) "DOMAIN.md")
                 )
                 $domainFile = $domainCandidates | Where-Object { Test-Path $_ -PathType Leaf } | Select-Object -First 1
                 if ($domainFile) {

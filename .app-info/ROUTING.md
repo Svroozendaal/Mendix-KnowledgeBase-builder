@@ -45,7 +45,7 @@ Read this file after `.agents/AGENTS.md` and `.agents/FRAMEWORK.md` to understan
 
 ```text
 Mendix .mpr file
-  -> (mx dump-mpr + MendixModelOverviewParser)
+  -> (mxcli extraction default; LegacyDumpParser fallback)
 Model Overview Export (v2.0) -> mendix-data/app-overview/<run>/
   -> (KNOWLEDGEBASE_CREATOR)
 AI-Navigable Knowledge Base -> mendix-data/knowledge-base/
@@ -59,7 +59,7 @@ Portable package output -> KnowledgeBase-Creator/
 | Script | Purpose |
 |---|---|
 | `KnowledgeBase-Creator/KnowledgeBaseCreator.exe` | Interactive Windows launcher for full KB creation workflow |
-| `KnowledgeBase-Creator/wizard/run-dump-parser.ps1` | Advanced script bootstrap for dump, parser, scaffold, composition, and validation |
+| `KnowledgeBase-Creator/wizard/run-dump-parser.ps1` | Advanced script bootstrap for extraction, scaffold, composition, and validation |
 | `KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1` | Scaffold KB folder structure or validate completeness |
 | `KnowledgeBase-Creator/wizard/run-kb-compose.ps1` | Compose deterministic knowledge-base markdown from model overview exports |
 | `KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1` | Validate KB content contract (required headings, links, and quality markers) |

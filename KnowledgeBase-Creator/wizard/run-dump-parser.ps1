@@ -4,7 +4,9 @@ param(
     [switch]$SkipDump,
     [switch]$SkipParser,
     [switch]$SkipScaffold,
-    [string]$RunFolder
+    [string]$RunFolder,
+    [ValidateSet("LegacyDumpParser", "MxCli")]
+    [string]$ExtractionMode
 )
 
 $ErrorActionPreference = "Stop"
@@ -123,6 +125,69 @@ function Apply-EnvironmentOverrides {
         $envValue = [Environment]::GetEnvironmentVariable($key)
         if ([string]::IsNullOrWhiteSpace($envValue)) { continue }
         $Settings[$key] = $envValue.Trim()
+    }
+}
+
+function Resolve-ExtractionMode {
+    param(
+        [string]$ExplicitExtractionMode,
+        [hashtable]$Settings
+    )
+
+    $rawValue = if (-not [string]::IsNullOrWhiteSpace($ExplicitExtractionMode)) {
+        $ExplicitExtractionMode
+    } else {
+        Get-Setting -Settings $Settings -Key "KB_EXTRACTION_MODE" -Default "MxCli"
+    }
+
+    if ([string]::IsNullOrWhiteSpace($rawValue)) {
+        return "MxCli"
+    }
+
+    $normalized = $rawValue.Trim().ToLowerInvariant()
+    switch ($normalized) {
+        "legacydumpparser" { return "LegacyDumpParser" }
+        "mxcli" { return "MxCli" }
+        default {
+            throw "Invalid extraction mode '$rawValue'. Valid values: LegacyDumpParser, MxCli."
+        }
+    }
+}
+
+function Resolve-SelectedModulesFromFilter {
+    param([string]$ModuleFilter)
+
+    if ([string]::IsNullOrWhiteSpace($ModuleFilter) -or $ModuleFilter -eq "*") {
+        return @()
+    }
+
+    return @(
+        $ModuleFilter.Split(",") |
+        ForEach-Object { $_.Trim() } |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+        Sort-Object -Unique
+    )
+}
+
+function Resolve-MxCliOnPath {
+    $command = Get-Command "mxcli" -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($null -eq $command -or [string]::IsNullOrWhiteSpace($command.Source) -or -not (Test-Path $command.Source -PathType Leaf)) {
+        throw "Extraction mode 'MxCli' requires mxcli on PATH. Install mxcli and confirm 'mxcli --version' works in this shell."
+    }
+
+    $versionOutput = & $command.Source --version 2>&1
+    $exitCode = $LASTEXITCODE
+    if ($exitCode -ne 0) {
+        $detail = ($versionOutput | Out-String).Trim()
+        if ([string]::IsNullOrWhiteSpace($detail)) {
+            $detail = "mxcli --version failed with exit code $exitCode."
+        }
+        throw "Extraction mode 'MxCli' failed preflight check. $detail"
+    }
+
+    return [pscustomobject]@{
+        Path = (Resolve-Path $command.Source).Path
+        Version = (($versionOutput | Out-String).Trim())
     }
 }
 
@@ -508,7 +573,8 @@ function Write-CreatorLinkFile {
         [string]$DataRoot,
         [string]$AppName,
         [string]$RunFolder,
-        [string]$MprPath
+        [string]$MprPath,
+        [string]$ExtractionMode
     )
 
     if (-not (Test-Path $KbRoot -PathType Container)) {
@@ -523,6 +589,7 @@ function Write-CreatorLinkFile {
         creatorRoot = $packageRoot
         creatorInitkbRunner = (Join-Path $wizardRoot "run-initkb.ps1")
         appName = $AppName
+        extractionMode = $ExtractionMode
         mprPath = $MprPath
         dataRoot = $DataRoot
         knowledgeBaseRoot = $KbRoot
@@ -542,7 +609,8 @@ function Write-InitKbHandoffFile {
         [string]$DataRoot,
         [string]$AppName,
         [string]$RunFolder,
-        [string]$CreatorLinkPath
+        [string]$CreatorLinkPath,
+        [string]$ExtractionMode
     )
 
     if (-not (Test-Path $KbRoot -PathType Container)) {
@@ -563,6 +631,7 @@ function Write-InitKbHandoffFile {
         "- Data root: $DataRoot",
         "- Knowledge base root: $KbRoot",
         "- Source run folder: $RunFolder",
+        "- Extraction mode: $ExtractionMode",
         "- Creator link: $CreatorLinkPath",
         "",
         "## Purpose",
@@ -609,8 +678,11 @@ Apply-EnvironmentOverrides -Settings $settings -Keys @(
     "CUSTOM_SCENARIOS_PATH",
     "CUSTOM_SCENARIOS",
     "DUMP_FILE_PATH",
-    "DUMP_PATH"
+    "DUMP_PATH",
+    "KB_EXTRACTION_MODE"
 )
+
+$resolvedExtractionMode = Resolve-ExtractionMode -ExplicitExtractionMode $ExtractionMode -Settings $settings
 
 $configuredDataRoot = Get-Setting -Settings $settings -Key "MENDIX_DATA_ROOT"
 $dataRoot = if ([string]::IsNullOrWhiteSpace($configuredDataRoot)) {
@@ -630,11 +702,15 @@ $scaffoldScript = Join-Path $wizardRoot "run-kb-scaffold.ps1"
 $composeScript = Join-Path $wizardRoot "run-kb-compose.ps1"
 $qualityGateScript = Join-Path $wizardRoot "run-kb-quality-gate.ps1"
 $semanticBenchmarkScript = Join-Path $wizardRoot "run-kb-semantic-benchmark.ps1"
+$mxCliFullRunScript = Join-Path $wizardRoot "run-mxcli-json-v2-full-run.ps1"
 
 if (-not (Test-Path $scaffoldScript -PathType Leaf)) { throw "Missing scaffold script: $scaffoldScript" }
 if (-not (Test-Path $composeScript -PathType Leaf)) { throw "Missing composer script: $composeScript" }
 if (-not (Test-Path $qualityGateScript -PathType Leaf)) { throw "Missing quality gate script: $qualityGateScript" }
 if (-not (Test-Path $semanticBenchmarkScript -PathType Leaf)) { throw "Missing semantic benchmark script: $semanticBenchmarkScript" }
+if ($resolvedExtractionMode -eq "MxCli" -and -not (Test-Path $mxCliFullRunScript -PathType Leaf)) {
+    throw "MxCli extraction script is missing: $mxCliFullRunScript"
+}
 
 $dumpsRoot = Join-Path $dataRoot "dumps"
 $appOverviewRoot = Join-Path $dataRoot "app-overview"
@@ -653,10 +729,11 @@ $appToken = Sanitize-Token -Value $appName
 $dumpFolder = Join-Path $dumpsRoot "${timestamp}_$appToken"
 $dumpPath = Join-Path $dumpFolder "working-dump.json"
 $resolvedRunFolder = $null
+$skipExtraction = $SkipParser -or ($resolvedExtractionMode -eq "LegacyDumpParser" -and $SkipDump)
 
 if (-not [string]::IsNullOrWhiteSpace($RunFolder)) {
     $resolvedRunFolder = Resolve-ExistingRunFolder -Path $RunFolder
-} elseif ($SkipParser -or $SkipDump) {
+} elseif ($skipExtraction) {
     $resolvedRunFolder = Get-LatestRunFolder -Root $appOverviewRoot
     if (-not $resolvedRunFolder) {
         throw "No existing run folder found in $appOverviewRoot. Provide -RunFolder explicitly."
@@ -667,83 +744,135 @@ if (-not [string]::IsNullOrWhiteSpace($RunFolder)) {
 
 $mxExe = $null
 $mprPath = $null
-if (-not $SkipDump) {
-    $mxExe = Resolve-MxExe -Settings $settings
-    $mprPath = Resolve-MprPath -Settings $settings
-    New-Item -ItemType Directory -Path $dumpFolder -Force | Out-Null
+$mxCliInfo = $null
+$selectedModules = @(Resolve-SelectedModulesFromFilter -ModuleFilter $moduleFilter)
+
+if ($resolvedExtractionMode -eq "LegacyDumpParser") {
+    if (-not $SkipDump) {
+        $mxExe = Resolve-MxExe -Settings $settings
+        $mprPath = Resolve-MprPath -Settings $settings
+        New-Item -ItemType Directory -Path $dumpFolder -Force | Out-Null
+    } else {
+        $dumpPath = Get-SettingAny -Settings $settings -Keys @("DUMP_FILE_PATH", "DUMP_PATH")
+        $mprPath = Resolve-MprPathIfAvailable -Settings $settings
+    }
 } else {
-    $dumpPath = Get-SettingAny -Settings $settings -Keys @("DUMP_FILE_PATH", "DUMP_PATH")
+    if (-not $SkipParser) {
+        $mprPath = Resolve-MprPath -Settings $settings
+        $mxCliInfo = Resolve-MxCliOnPath
+    } else {
+        $mprPath = Resolve-MprPathIfAvailable -Settings $settings
+    }
+    $dumpPath = $null
 }
 
 Write-Host ""
 Write-Host "=== KnowledgeBase Creator ===" -ForegroundColor Cyan
 Write-Host "App name:      $appName"
+Write-Host "Extractor:     $resolvedExtractionMode"
 Write-Host "Data root:     $dataRoot"
 Write-Host "Run folder:    $resolvedRunFolder"
 Write-Host "Skip dump:     $SkipDump"
 Write-Host "Skip parser:   $SkipParser"
 Write-Host "Skip scaffold: $SkipScaffold"
-if (-not $SkipDump) {
+if ($resolvedExtractionMode -eq "LegacyDumpParser" -and -not $SkipDump) {
     Write-Host "mx.exe:        $mxExe"
     Write-Host "mpr:           $mprPath"
     Write-Host "dump:          $dumpPath"
+} elseif ($resolvedExtractionMode -eq "MxCli" -and $null -ne $mxCliInfo) {
+    Write-Host "mxcli:         $([string]$mxCliInfo.Path)"
+    Write-Host "mxcli version: $([string]$mxCliInfo.Version)"
+    Write-Host "mpr:           $mprPath"
+}
+if ($selectedModules.Count -gt 0) {
+    Write-Host "Modules:       $($selectedModules -join ', ')"
 }
 if (-not [string]::IsNullOrWhiteSpace($customScenariosPath)) {
     Write-Host "Custom bench:  $customScenariosPath"
 }
 
-if (-not $SkipDump) {
-    Write-Host ""
-    Write-Host "[1/8] Dumping .mpr..." -ForegroundColor Yellow
-    & $mxExe dump-mpr $mprPath --output-file $dumpPath
-    if ($LASTEXITCODE -ne 0) {
-        throw "mx dump-mpr failed with exit code $LASTEXITCODE"
+if ($resolvedExtractionMode -eq "LegacyDumpParser") {
+    if (-not $SkipDump) {
+        Write-Host ""
+        Write-Host "[1/8] Dumping .mpr..." -ForegroundColor Yellow
+        & $mxExe dump-mpr $mprPath --output-file $dumpPath
+        if ($LASTEXITCODE -ne 0) {
+            throw "mx dump-mpr failed with exit code $LASTEXITCODE"
+        }
+    } else {
+        Write-Host ""
+        Write-Host "[1/8] Dump step skipped." -ForegroundColor DarkYellow
     }
 } else {
     Write-Host ""
-    Write-Host "[1/8] Dump step skipped." -ForegroundColor DarkYellow
+    Write-Host "[1/8] Dump step skipped (MxCli mode)." -ForegroundColor DarkYellow
 }
 
 if (-not $SkipParser) {
-    Write-Host "[2/8] Building app-overview export..." -ForegroundColor Yellow
-    if ($SkipDump) {
-        if ([string]::IsNullOrWhiteSpace($dumpPath)) {
-            throw "SkipDump was used without SkipParser. Set DUMP_FILE_PATH in .env."
+    if ($resolvedExtractionMode -eq "LegacyDumpParser") {
+        Write-Host "[2/8] Building app-overview export..." -ForegroundColor Yellow
+        if ($SkipDump) {
+            if ([string]::IsNullOrWhiteSpace($dumpPath)) {
+                throw "SkipDump was used without SkipParser. Set DUMP_FILE_PATH in .env."
+            }
+            if (-not (Test-Path $dumpPath -PathType Leaf)) {
+                throw "Configured dump file does not exist: $dumpPath"
+            }
         }
-        if (-not (Test-Path $dumpPath -PathType Leaf)) {
-            throw "Configured dump file does not exist: $dumpPath"
-        }
-    }
 
-    if (-not (Test-Path $resolvedRunFolder -PathType Container)) {
-        New-Item -ItemType Directory -Path $resolvedRunFolder -Force | Out-Null
-    }
+        if (-not (Test-Path $resolvedRunFolder -PathType Container)) {
+            New-Item -ItemType Directory -Path $resolvedRunFolder -Force | Out-Null
+        }
 
-    if (Test-Path $parserExe -PathType Leaf) {
-        $args = @("--dump", $dumpPath, "--output", $resolvedRunFolder)
-        if (-not [string]::IsNullOrWhiteSpace($moduleFilter) -and $moduleFilter -ne "*") {
-            $args += @("--modules", $moduleFilter)
+        if (Test-Path $parserExe -PathType Leaf) {
+            $args = @("--dump", $dumpPath, "--output", $resolvedRunFolder)
+            if (-not [string]::IsNullOrWhiteSpace($moduleFilter) -and $moduleFilter -ne "*") {
+                $args += @("--modules", $moduleFilter)
+            }
+            & $parserExe @args
+            if ($LASTEXITCODE -ne 0) {
+                throw "Parser executable failed with exit code $LASTEXITCODE"
+            }
         }
-        & $parserExe @args
-        if ($LASTEXITCODE -ne 0) {
-            throw "Parser executable failed with exit code $LASTEXITCODE"
+        elseif (Test-Path $parserSourceProject -PathType Leaf) {
+            $args = @("run", "--project", $parserSourceProject, "--configuration", "Release", "--", "--dump", $dumpPath, "--output", $resolvedRunFolder)
+            if (-not [string]::IsNullOrWhiteSpace($moduleFilter) -and $moduleFilter -ne "*") {
+                $args += @("--modules", $moduleFilter)
+            }
+            & dotnet @args
+            if ($LASTEXITCODE -ne 0) {
+                throw "Parser fallback (dotnet run) failed with exit code $LASTEXITCODE"
+            }
         }
-    }
-    elseif (Test-Path $parserSourceProject -PathType Leaf) {
-        $args = @("run", "--project", $parserSourceProject, "--configuration", "Release", "--", "--dump", $dumpPath, "--output", $resolvedRunFolder)
-        if (-not [string]::IsNullOrWhiteSpace($moduleFilter) -and $moduleFilter -ne "*") {
-            $args += @("--modules", $moduleFilter)
+        else {
+            throw "No parser binary or source project found in package."
         }
-        & dotnet @args
-        if ($LASTEXITCODE -ne 0) {
-            throw "Parser fallback (dotnet run) failed with exit code $LASTEXITCODE"
+    } else {
+        Write-Host "[2/8] Building app-overview export via mxcli..." -ForegroundColor Yellow
+        if ([string]::IsNullOrWhiteSpace($mprPath)) {
+            throw "MxCli extraction requires a resolved .mpr path."
         }
-    }
-    else {
-        throw "No parser binary or source project found in package."
+
+        $runFolderParent = Split-Path -Parent $resolvedRunFolder
+        if (-not [string]::Equals($runFolderParent, $appOverviewRoot, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "MxCli extraction requires run folders under app-overview root. RunFolder parent must be: $appOverviewRoot"
+        }
+
+        $runId = Split-Path -Leaf $resolvedRunFolder
+        $mxCliArgs = @(
+            "-ProjectPath", $mprPath,
+            "-AppOverviewRoot", $appOverviewRoot,
+            "-RunId", $runId
+        )
+        if ($selectedModules.Count -gt 0) {
+            $mxCliArgs += "-SelectedModules"
+            $mxCliArgs += $selectedModules
+        }
+
+        Invoke-PwshScript -ScriptPath $mxCliFullRunScript -Arguments $mxCliArgs -ErrorPrefix "run-mxcli-json-v2-full-run.ps1"
     }
 } else {
-    Write-Host "[2/8] Parser step skipped." -ForegroundColor DarkYellow
+    Write-Host "[2/8] Extraction step skipped." -ForegroundColor DarkYellow
 }
 
 Write-Host "[2b/8] Syncing app-overview/current alias..." -ForegroundColor Yellow
@@ -751,12 +880,12 @@ Sync-CurrentAppOverviewAlias -AppOverviewRoot $appOverviewRoot -RunFolder $resol
 
 $manifestPath = Join-Path $resolvedRunFolder "manifest.json"
 if (-not (Test-Path $manifestPath -PathType Leaf)) {
-    throw "Parser output manifest missing: $manifestPath"
+    throw "Extraction output manifest missing: $manifestPath"
 }
 
 $manifest = Get-Content -Raw $manifestPath | ConvertFrom-Json
 if ($manifest.schemaVersion -ne "2.0") {
-    throw "Expected parser schemaVersion 2.0, got $($manifest.schemaVersion)"
+    throw "Expected extraction schemaVersion 2.0, got $($manifest.schemaVersion)"
 }
 
 $modules = Get-ModulesFromManifest -ManifestPath $manifestPath
@@ -789,8 +918,8 @@ $creatorLinkMprPath = if (-not [string]::IsNullOrWhiteSpace($mprPath)) {
 } else {
     Resolve-MprPathIfAvailable -Settings $settings
 }
-$creatorLinkPath = Write-CreatorLinkFile -KbRoot $kbRoot -DataRoot $dataRoot -AppName $appName -RunFolder $resolvedRunFolder -MprPath $creatorLinkMprPath
-$initKbHandoffPath = Write-InitKbHandoffFile -KbRoot $kbRoot -DataRoot $dataRoot -AppName $appName -RunFolder $resolvedRunFolder -CreatorLinkPath $creatorLinkPath
+$creatorLinkPath = Write-CreatorLinkFile -KbRoot $kbRoot -DataRoot $dataRoot -AppName $appName -RunFolder $resolvedRunFolder -MprPath $creatorLinkMprPath -ExtractionMode $resolvedExtractionMode
+$initKbHandoffPath = Write-InitKbHandoffFile -KbRoot $kbRoot -DataRoot $dataRoot -AppName $appName -RunFolder $resolvedRunFolder -CreatorLinkPath $creatorLinkPath -ExtractionMode $resolvedExtractionMode
 
 Write-Host "[6/8] Running scaffold validation..." -ForegroundColor Yellow
 Invoke-PwshScript -ScriptPath $scaffoldScript -Arguments @("-Validate", "-OutputRoot", $knowledgeBaseRoot, "-AppName", $appName) -ErrorPrefix "Scaffold validation"
@@ -830,6 +959,7 @@ try {
 Write-Host ""
 Write-Host "Completed." -ForegroundColor Green
 Write-Host "App name:                    $appName"
+Write-Host "Extraction mode:             $resolvedExtractionMode"
 Write-Host "Run folder:                  $resolvedRunFolder"
 Write-Host "Module count:                $($modules.Count)"
 Write-Host "Structural validation status: $structuralValidationStatus"

@@ -1,0 +1,587 @@
+# Flows: Inspection
+Flows: 41
+
+FLOW Microflow: Inspection.ACT_Accessory_Create
+NODES=4; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create Inspection.Accessory as NewAccessory
+3. ACTION ShowPageAction: show page Inspection.Assessory_NewEdit
+4. END
+
+FLOW Microflow: Inspection.ACT_Assessory_Book
+NODES=14; EDGES=12
+1. START
+2. DECISION IsStock? expression=$Accessory/AmountInStock != 0
+3. BRANCH when EnumerationCase=true
+  4. ACTION ChangeObjectAction: change Accessory (AmountInStock=$Accessory/AmountInStock - 1; refreshInClient=false)
+  5. DECISION AmountInStock > 10? expression=$Accessory/AmountInStock > 10
+  6. BRANCH when EnumerationCase=true
+    7. ACTION CommitAction: commit Accessory (refreshInClient=true, withEvents=true)
+    8. END
+  9. BRANCH when EnumerationCase=false
+    10. DECISION AmountInStock = 0 expression=$Accessory/AmountInStock = 0
+    11. BRANCH when EnumerationCase=true
+      12. ACTION ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Out_of_stock; refreshInClient=true)
+      13. END
+    14. BRANCH when EnumerationCase=false
+      15. ACTION ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Almost_out_of_stock; refreshInClient=true)
+      16. END
+17. BRANCH when EnumerationCase=false
+  18. ACTION ShowMessageAction: show message (text=This assessory is currently out of stock., type=Information, blocking=true)
+  19. END
+
+FLOW Microflow: Inspection.ACT_Assessory_Delete
+NODES=4; EDGES=2
+1. START
+2. ACTION DeleteAction: delete Accessory (refreshInClient=true)
+3. END
+
+FLOW Microflow: Inspection.ACT_CoverPhoto_Create
+NODES=5; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create Inspection.CoverPhoto as NewInspectorPhoto (Task_CoverPhoto=$Task)
+3. ACTION ShowPageAction: show page Inspection.CoverPhoto_NewEdit
+4. END
+
+FLOW Microflow: Inspection.ACT_CoverPhoto_Save
+NODES=5; EDGES=3
+1. START
+2. ACTION CommitAction: commit CoverPhoto (refreshInClient=true, withEvents=true)
+3. ACTION CloseFormAction: close page
+4. END
+
+FLOW Microflow: Inspection.ACT_InspectorPhoto_Create
+NODES=5; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create Inspection.InspectorPhoto as NewInspectorPhoto (InspectorPhoto_Inspector=$Inspector)
+3. ACTION ShowPageAction: show page Inspection.InspectorPhoto_NewEdit
+4. END
+
+FLOW Microflow: Inspection.ACT_Inspector_Save
+NODES=8; EDGES=6
+1. START
+2. ACTION MicroflowCallAction: call microflow Inspection.VAL_Inspector_Validate -> IsValid
+3. DECISION valid? expression=$IsValid
+4. BRANCH when EnumerationCase=true
+  5. ACTION CommitAction: commit Inspector (refreshInClient=true, withEvents=true)
+  6. ACTION CloseFormAction: close page
+  7. END
+8. BRANCH when EnumerationCase=false
+  9. END
+
+FLOW Microflow: Inspection.ACT_Registration_Create
+NODES=4; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create Inspection.Registration as NewRegistration
+3. ACTION ShowPageAction: show page Inspection.Registration_NewEdit
+4. END
+
+FLOW Microflow: Inspection.ACT_Registration_Save
+NODES=15; EDGES=13
+1. START
+2. ACTION MicroflowCallAction: call microflow Inspection.VAL_Registration_Validate -> IsValid
+3. DECISION valid? expression=$IsValid
+4. BRANCH when EnumerationCase=true
+  5. ACTION CreateObjectAction: create Administration.Account as NewAccount (Name=$Registration/UserName, Password=$Registration/Password, FullName=$Registration/FullName, Email=$Registration/EmailAddress)
+  6. ACTION CloseFormAction: close page
+  7. DECISION is inspector? expression=$Registration/Role = Inspection.Enum_Registration_UserRole.Inspector
+  8. BRANCH when EnumerationCase=true
+    9. ACTION RetrieveAction: retrieve UserRole_Inspector from System.UserRole
+    10. ACTION CreateObjectAction: create Inspection.Inspector as NewInspector (Name=$Registration/UserName, Inspector_Account=$NewAccount)
+    11. ACTION ChangeObjectAction: change NewAccount (UserRoles=$UserRole_Inspector; refreshInClient=false)
+    12. END
+  13. BRANCH when EnumerationCase=false
+    14. ACTION RetrieveAction: retrieve UserRole_Manager from System.UserRole
+    15. ACTION ChangeObjectAction: change NewAccount (UserRoles=$UserRole_Manager; refreshInClient=false)
+    16. END
+17. BRANCH when EnumerationCase=false
+  18. END
+
+FLOW Microflow: Inspection.ACT_ReportHelper_Create
+NODES=4; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create Inspection.ReportHelper as NewReportHelper
+3. ACTION ShowPageAction: show page Inspection.Report_NewEdit
+4. END
+
+FLOW Microflow: Inspection.ACT_Report_ApplyFilters
+NODES=13; EDGES=11
+1. START
+2. ACTION RetrieveAction: retrieve TaskList_Filtered from Inspection.Task
+3. DECISION any tasks found according to the filter? expression=$TaskList_Filtered != empty
+4. BRANCH when EnumerationCase=true
+  5. ACTION CreateListAction: CreateListAction (output=TaskList_ToCommit, entity=Inspection.Task, errorHandlingType=Rollback)
+  6. ACTION CreateObjectAction: create Inspection.Report as NewReport (Name='Filtered Task Report')
+  7. LOOP iterate TaskList_Filtered as IteratorTask
+    8. LOOP BODY
+      9. ACTION ChangeObjectAction: change IteratorTask (Task_Report=$NewReport; refreshInClient=false)
+  10. ACTION CommitAction: commit TaskList_ToCommit (refreshInClient=false, withEvents=true)
+  11. ACTION GenerateDocumentAction: GenerateDocumentAction (errorHandlingType=Rollback)
+  12. ACTION DownloadFileAction: DownloadFileAction (errorHandlingType=Rollback)
+  13. END
+14. BRANCH when EnumerationCase=false
+  15. ACTION ShowMessageAction: show message (text=No tasks found based on these filters, type=Information, blocking=true)
+  16. END
+
+FLOW Microflow: Inspection.ACT_Report_Generate
+NODES=8; EDGES=7
+1. START
+2. ACTION RetrieveAction: retrieve TaskList_All from Inspection.Task
+3. ACTION CreateObjectAction: create Inspection.Report as NewReport (Name='Tasks report')
+4. LOOP iterate TaskList_All as IteratorTask
+  5. LOOP BODY
+    6. ACTION ChangeObjectAction: change IteratorTask (Task_Report=$NewReport; refreshInClient=false)
+7. ACTION CommitAction: commit NewReport (refreshInClient=false, withEvents=true)
+8. ACTION GenerateDocumentAction: GenerateDocumentAction (errorHandlingType=Rollback)
+9. ACTION DownloadFileAction: DownloadFileAction (errorHandlingType=Rollback)
+10. END
+
+FLOW Microflow: Inspection.ACT_Task_Create
+NODES=5; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create Inspection.Task as NewTask (Created=[%CurrentDateTime%], Status=Inspection.Enum_TaskStatus.To_do, Task_InspectionItem=$InspectionItem)
+3. ACTION ShowPageAction: show page Inspection.Task_NewEdit
+4. END
+
+FLOW Microflow: Inspection.ACT_Task_Save
+NODES=14; EDGES=14
+1. START
+2. ACTION MicroflowCallAction: call microflow Inspection.VAL_Task_Validate -> IsValid
+3. DECISION IsValid? expression=$IsValid
+4. BRANCH when EnumerationCase=true
+  5. DECISION status is set to 'to do'? expression=$Task/Status = Inspection.Enum_TaskStatus.To_do
+  6. BRANCH when EnumerationCase=true
+    7. ACTION MicroflowCallAction: call microflow Notification.SUB_Notification_SendToInspector
+    8. NODE ExclusiveMerge: ExclusiveMerge
+    9. ACTION CommitAction: commit Task (refreshInClient=true, withEvents=true)
+    10. ACTION CloseFormAction: close page
+    11. END
+  12. BRANCH when EnumerationCase=false
+    13. DECISION task set to 'done'? expression=$Task/Status = Inspection.Enum_TaskStatus.Done
+    14. BRANCH when EnumerationCase=true
+      15. ACTION MicroflowCallAction: call microflow Notification.SUB_Notification_SendToManager
+      16. REF ExclusiveMerge
+    17. BRANCH when EnumerationCase=false
+      18. REF ExclusiveMerge
+19. BRANCH when EnumerationCase=false
+  20. ACTION ShowMessageAction: show message (text=Please fill out the required fields., type=Information, blocking=true)
+  21. END
+
+FLOW Microflow: Inspection.ACT_Task_SetToDone
+NODES=11; EDGES=9
+1. START
+2. ACTION MicroflowCallAction: call microflow Inspection.VAL_Task_Validate -> IsValid
+3. DECISION IsValid? expression=$IsValid
+4. BRANCH when EnumerationCase=true
+  5. ACTION MicroflowCallAction: call microflow Notification.SUB_Notification_SendToManager
+  6. ACTION ChangeObjectAction: change Task (Status=Inspection.Enum_TaskStatus.Done; refreshInClient=true)
+  7. ACTION ShowMessageAction: show message (text=Task has been set to done., type=Information, blocking=true)
+  8. ACTION CloseFormAction: close page
+  9. END
+10. BRANCH when EnumerationCase=false
+  11. ACTION ShowMessageAction: show message (text=Please fill out the empty fields., type=Information, blocking=true)
+  12. END
+
+FLOW Microflow: Inspection.ACT_Task_SetToInProgress
+NODES=5; EDGES=3
+1. START
+2. ACTION ChangeObjectAction: change Task (Status=Inspection.Enum_TaskStatus.Running; refreshInClient=true)
+3. ACTION ShowMessageAction: show message (text=Task has been set to 'in progress'., type=Information, blocking=true)
+4. END
+
+FLOW Microflow: Inspection.ACT_Tool_Book
+NODES=4; EDGES=2
+1. START
+2. ACTION ShowPageAction: show page Inspection.Tool_Book
+3. END
+
+FLOW Microflow: Inspection.ACT_Tool_Create
+NODES=4; EDGES=3
+1. START
+2. ACTION CreateObjectAction: create Inspection.Tool as NewTool
+3. ACTION ShowPageAction: show page Inspection.Tool_NewEdit
+4. END
+
+FLOW Microflow: Inspection.ACT_Tool_Delete
+NODES=4; EDGES=2
+1. START
+2. ACTION DeleteAction: delete Tool (refreshInClient=true)
+3. END
+
+FLOW Microflow: Inspection.ACT_Tool_Validate
+NODES=14; EDGES=11
+1. START
+2. ACTION RetrieveAction: retrieve Booking from Inspection.Booking
+3. DECISION Empty? expression=$Booking = empty
+4. BRANCH when EnumerationCase=true
+  5. ACTION MicroflowCallAction: call microflow Inspection.VAL_Tool_Validate -> IsValid
+  6. DECISION IsValid? expression=$IsValid
+  7. BRANCH when EnumerationCase=true
+    8. ACTION CreateObjectAction: create Inspection.Booking as NewBooking (Booking_Equipment=$Tool, Date=$Tool/ReservationDate)
+    9. ACTION ChangeObjectAction: change Tool (refreshInClient=true)
+    10. ACTION CloseFormAction: close page
+    11. END
+  12. BRANCH when EnumerationCase=false
+    13. END
+14. BRANCH when EnumerationCase=false
+  15. ACTION ShowMessageAction: show message (text=There is already a booking for this date., type=Information, blocking=true)
+  16. END
+
+FLOW Microflow: Inspection.BCo_Inspector
+NODES=7; EDGES=5
+1. START
+2. ACTION RetrieveAction: retrieve UserRole_Inspector from System.UserRole
+3. DECISION doesn't have an account? expression=$Inspector/Inspection.Inspector_Account = empty
+4. BRANCH when EnumerationCase=true
+  5. ACTION CreateObjectAction: create Administration.Account as NewAccount (FullName=$Inspector/Name, Email=$Inspector/EmailAddress, Name=$Inspector/EmailAddress, Password='Mendix123456', UserRoles=$UserRole_Inspector, Inspector_Account=$Inspector)
+  6. END
+7. BRANCH when EnumerationCase=false
+  8. END
+
+FLOW Microflow: Inspection.CAL_Inspector_TasksOpen
+NODES=5; EDGES=3
+1. START
+2. ACTION RetrieveAction: retrieve TaskList_Open from Inspection.Task
+3. ACTION AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)
+4. END
+
+FLOW Microflow: Inspection.CAL_Inspector_TasksOverdue
+NODES=5; EDGES=3
+1. START
+2. ACTION RetrieveAction: retrieve TaskList_OverDue from Inspection.Task
+3. ACTION AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)
+4. END
+
+FLOW Microflow: Inspection.DSL_Inspector_Selectable
+NODES=4; EDGES=2
+1. START
+2. ACTION RetrieveAction: retrieve InspectorList_All from Inspection.Inspector
+3. END
+
+FLOW Microflow: Inspection.DS_Booking_RetrieveUpcomming
+NODES=7; EDGES=4
+1. START
+2. ACTION RetrieveAction: retrieve Booking over association Booking_Equipment from Tool
+3. ACTION ListOperationAction: ListOperationAction (output=NewBookingList, errorHandlingType=Rollback)
+4. ACTION ListOperationAction: ListOperationAction (output=NewBooking, errorHandlingType=Rollback)
+5. END
+
+FLOW Microflow: Inspection.DS_Inspector_GetFromCurrentUSer
+NODES=3; EDGES=2
+1. START
+2. ACTION RetrieveAction: retrieve Inspector from Inspection.Inspector
+3. END
+
+FLOW Microflow: Inspection.DS_Task_GetFromNotification
+NODES=4; EDGES=2
+1. START
+2. ACTION RetrieveAction: retrieve Task from Inspection.Task
+3. END
+
+FLOW Microflow: Inspection.DS_UserRole_GetFromCurrentUser
+NODES=5; EDGES=4
+1. START
+2. ACTION RetrieveAction: retrieve AccountCurrent from Administration.Account
+3. ACTION RetrieveAction: retrieve UserRoleList over association UserRoles from AccountCurrent
+4. ACTION ListOperationAction: ListOperationAction (output=ManagerRole, errorHandlingType=Rollback)
+5. END
+
+FLOW Microflow: Inspection.OCH_Task_Refresh
+NODES=4; EDGES=2
+1. START
+2. ACTION ChangeObjectAction: change Task (refreshInClient=true)
+3. END
+
+FLOW Microflow: Inspection.SE_Booking_DeleteOlderThenToday
+NODES=3; EDGES=2
+1. START
+2. ACTION MicroflowCallAction: call microflow Inspection.SUB_Booking_Delete
+3. END
+
+FLOW Microflow: Inspection.SE_Equipment_OrderNew
+NODES=9; EDGES=8
+1. START
+2. ACTION RetrieveAction: retrieve EquipmentList from Inspection.Equipment
+3. ACTION CreateListAction: CreateListAction (output=AccessoryList, entity=Inspection.Accessory, errorHandlingType=Rollback)
+4. ACTION MicroflowCallAction: call microflow Inspection.SUB_Equipment_Cast
+5. ACTION ListOperationAction: ListOperationAction (output=NewAccessoryList, errorHandlingType=Rollback)
+6. ACTION ListOperationAction: ListOperationAction (output=NewAccessoryListToOrder, errorHandlingType=Rollback)
+7. ACTION MicroflowCallAction: call microflow Inspection.SUB_Accessory_Order
+8. ACTION CommitAction: commit NewAccessoryListToOrder (refreshInClient=false, withEvents=true)
+9. END
+
+FLOW Microflow: Inspection.SUB_Accessory_Order
+NODES=5; EDGES=2
+1. START
+2. LOOP iterate AccessoryListToOrder as IteratorAccessory
+  3. LOOP BODY
+    4. DECISION AmountInStock = 0? expression=$IteratorAccessory/AmountInStock = 0
+    5. ACTION ChangeObjectAction: change IteratorAccessory (AmountInStock=$IteratorAccessory/AmountInStock + 5, EquipmentStatus=Inspection.ENUM_Accessory_Status.In_Stock; refreshInClient=false)
+    6. ACTION ChangeObjectAction: change IteratorAccessory (AmountInStock=10, EquipmentStatus=Inspection.ENUM_Accessory_Status.In_Stock; refreshInClient=false)
+7. END
+
+FLOW Microflow: Inspection.SUB_Account_GetFromInspector
+NODES=4; EDGES=2
+1. START
+2. ACTION RetrieveAction: retrieve Account_Inspector over association Inspector_Account from Inspector
+3. END
+
+FLOW Microflow: Inspection.SUB_Booking_Delete
+NODES=4; EDGES=3
+1. START
+2. ACTION RetrieveAction: retrieve BookingList from Inspection.Booking
+3. ACTION DeleteAction: delete BookingList (refreshInClient=false)
+4. END
+
+FLOW Microflow: Inspection.SUB_Equipment_Cast
+NODES=5; EDGES=2
+1. START
+2. LOOP iterate EquipmentList as IteratorEquipment
+  3. LOOP BODY
+    4. DECISION split IteratorEquipment
+    5. ACTION ChangeListAction: change AccessoryList (type=Add, value=$Accessory)
+    6. NODE ExclusiveMerge: ExclusiveMerge
+    7. ACTION CastAction: CastAction (output=Accessory, errorHandlingType=Rollback)
+    8. NODE ContinueEvent: ContinueEvent
+9. END
+
+FLOW Microflow: Inspection.VAL_Inspector_Validate
+NODES=28; EDGES=32
+1. START
+2. ACTION CreateVariableAction: create variable IsValid=true
+3. DECISION Is Name not empty? expression=trim($Inspector/Name) != ''
+4. BRANCH when EnumerationCase=true
+  5. NODE ExclusiveMerge: ExclusiveMerge
+  6. DECISION Is Telephone not empty? expression=trim($Inspector/Telephone) != ''
+  7. BRANCH when EnumerationCase=true
+    8. NODE ExclusiveMerge: ExclusiveMerge
+    9. DECISION Is Email address not empty? expression=trim($Inspector/EmailAddress) != ''
+    10. BRANCH when EnumerationCase=true
+      11. NODE ExclusiveMerge: ExclusiveMerge
+      12. DECISION Is Location not empty? expression=trim($Inspector/Location) != ''
+      13. BRANCH when EnumerationCase=true
+        14. NODE ExclusiveMerge: ExclusiveMerge
+        15. DECISION Is Country not empty? expression=trim($Inspector/Country) != ''
+        16. BRANCH when EnumerationCase=true
+          17. NODE ExclusiveMerge: ExclusiveMerge
+          18. DECISION Is level not empty? expression=$Inspector/Level != empty
+          19. BRANCH when EnumerationCase=true
+            20. NODE ExclusiveMerge: ExclusiveMerge
+            21. END
+          22. BRANCH when EnumerationCase=false
+            23. ACTION ChangeVariableAction: change variable IsValid=false
+            24. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+            25. REF ExclusiveMerge
+        26. BRANCH when EnumerationCase=false
+          27. ACTION ChangeVariableAction: change variable IsValid=false
+          28. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+          29. REF ExclusiveMerge
+      30. BRANCH when EnumerationCase=false
+        31. ACTION ChangeVariableAction: change variable IsValid=false
+        32. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+        33. REF ExclusiveMerge
+    34. BRANCH when EnumerationCase=false
+      35. ACTION ChangeVariableAction: change variable IsValid=false
+      36. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+      37. REF ExclusiveMerge
+  38. BRANCH when EnumerationCase=false
+    39. ACTION ChangeVariableAction: change variable IsValid=false
+    40. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+    41. REF ExclusiveMerge
+42. BRANCH when EnumerationCase=false
+  43. ACTION ChangeVariableAction: change variable IsValid=false
+  44. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+  45. REF ExclusiveMerge
+
+FLOW Microflow: Inspection.VAL_Registration_Validate
+NODES=29; EDGES=32
+1. START
+2. ACTION CreateVariableAction: create variable IsValid=true
+3. DECISION Is full name not empty? expression=trim($Registration/FullName) != ''
+4. BRANCH when EnumerationCase=true
+  5. NODE ExclusiveMerge: ExclusiveMerge
+  6. DECISION Is email address not empty? expression=trim($Registration/EmailAddress) != ''
+  7. BRANCH when EnumerationCase=true
+    8. NODE ExclusiveMerge: ExclusiveMerge
+    9. DECISION Is User name not empty? expression=trim($Registration/UserName) != ''
+    10. BRANCH when EnumerationCase=true
+      11. NODE ExclusiveMerge: ExclusiveMerge
+      12. DECISION Is Password not empty? expression=trim($Registration/Password) != ''
+      13. BRANCH when EnumerationCase=true
+        14. NODE ExclusiveMerge: ExclusiveMerge
+        15. DECISION Is Role not empty? expression=$Registration/Role != empty
+        16. BRANCH when EnumerationCase=true
+          17. NODE ExclusiveMerge: ExclusiveMerge
+          18. DECISION do passwords match? expression=$Registration/Password = $Registration/ConfirmPassword
+          19. BRANCH when EnumerationCase=true
+            20. NODE ExclusiveMerge: ExclusiveMerge
+            21. END
+          22. BRANCH when EnumerationCase=false
+            23. ACTION ChangeVariableAction: change variable IsValid=false
+            24. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+            25. REF ExclusiveMerge
+        26. BRANCH when EnumerationCase=false
+          27. ACTION ChangeVariableAction: change variable IsValid=false
+          28. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+          29. REF ExclusiveMerge
+      30. BRANCH when EnumerationCase=false
+        31. ACTION ChangeVariableAction: change variable IsValid=false
+        32. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+        33. REF ExclusiveMerge
+    34. BRANCH when EnumerationCase=false
+      35. ACTION ChangeVariableAction: change variable IsValid=false
+      36. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+      37. REF ExclusiveMerge
+  38. BRANCH when EnumerationCase=false
+    39. ACTION ChangeVariableAction: change variable IsValid=false
+    40. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+    41. REF ExclusiveMerge
+42. BRANCH when EnumerationCase=false
+  43. ACTION ChangeVariableAction: change variable IsValid=false
+  44. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+  45. REF ExclusiveMerge
+
+FLOW Microflow: Inspection.VAL_Task_Validate
+NODES=34; EDGES=40
+1. START
+2. ACTION CreateVariableAction: create variable IsValid=true
+3. ACTION MicroflowCallAction: call microflow Inspection.DS_UserRole_GetFromCurrentUser -> UserRole
+4. DECISION user role manager or admin? expression=$UserRole/Name = 'Manager' or $UserRole/Name = 'Administrator'
+5. BRANCH when EnumerationCase=true
+  6. NODE ExclusiveMerge: ExclusiveMerge
+  7. DECISION Is Title not empty?
+  8. BRANCH when EnumerationCase=true
+    9. NODE ExclusiveMerge: ExclusiveMerge
+    10. DECISION Is Description not empty? expression=trim($Task/Description) != ''
+    11. BRANCH when EnumerationCase=true
+      12. NODE ExclusiveMerge: ExclusiveMerge
+      13. DECISION Is Priority not empty? expression=$Task/Priority != empty
+      14. BRANCH when EnumerationCase=true
+        15. NODE ExclusiveMerge: ExclusiveMerge
+        16. DECISION Is Created on not empty? expression=$Task/Created != empty
+        17. BRANCH when EnumerationCase=true
+          18. NODE ExclusiveMerge: ExclusiveMerge
+          19. DECISION Is Status not empty? expression=$Task/Status != empty
+          20. BRANCH when EnumerationCase=true
+            21. NODE ExclusiveMerge: ExclusiveMerge
+            22. DECISION Is Due date not empty? expression=$Task/DueDate != empty
+            23. BRANCH when EnumerationCase=true
+              24. NODE ExclusiveMerge: ExclusiveMerge
+              25. END
+            26. BRANCH when EnumerationCase=false
+              27. ACTION ChangeVariableAction: change variable IsValid=false
+              28. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+              29. REF ExclusiveMerge
+          30. BRANCH when EnumerationCase=false
+            31. ACTION ChangeVariableAction: change variable IsValid=false
+            32. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+            33. REF ExclusiveMerge
+        34. BRANCH when EnumerationCase=false
+          35. ACTION ChangeVariableAction: change variable IsValid=false
+          36. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+          37. REF ExclusiveMerge
+      38. BRANCH when EnumerationCase=false
+        39. ACTION ChangeVariableAction: change variable IsValid=false
+        40. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+        41. REF ExclusiveMerge
+    42. BRANCH when EnumerationCase=false
+      43. ACTION ChangeVariableAction: change variable IsValid=false
+      44. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+      45. REF ExclusiveMerge
+  46. BRANCH when EnumerationCase=false
+    47. ACTION ChangeVariableAction: change variable IsValid=false
+    48. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+    49. REF ExclusiveMerge
+50. BRANCH when EnumerationCase=false
+  51. DECISION Is remarks not empty? expression=trim($Task/AdditionalRemarks) != ''
+  52. BRANCH when EnumerationCase=true
+    53. REF ExclusiveMerge
+  54. BRANCH when EnumerationCase=false
+    55. ACTION ChangeVariableAction: change variable IsValid=false
+    56. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+    57. REF ExclusiveMerge
+
+FLOW Microflow: Inspection.VAL_Tool_Validate
+NODES=13; EDGES=12
+1. START
+2. ACTION CreateVariableAction: create variable IsValid=true
+3. DECISION ReservationDate filled? expression=$Tool/ReservationDate != empty
+4. BRANCH when EnumerationCase=true
+  5. NODE ExclusiveMerge: ExclusiveMerge
+  6. DECISION ReservationDate valid? expression=$Tool/ReservationDate >= [%CurrentDateTime%]
+  7. BRANCH when EnumerationCase=true
+    8. NODE ExclusiveMerge: ExclusiveMerge
+    9. END
+  10. BRANCH when EnumerationCase=false
+    11. ACTION ChangeVariableAction: change variable IsValid=false
+    12. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+    13. REF ExclusiveMerge
+14. BRANCH when EnumerationCase=false
+  15. ACTION ChangeVariableAction: change variable IsValid=false
+  16. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)
+  17. REF ExclusiveMerge
+
+FLOW Rule: Inspection.RUL_Task_Save_Validate
+NODES=23; EDGES=26
+1. START
+2. ACTION CreateVariableAction: create variable IsValid=true
+3. DECISION Is Title not empty? expression=trim($Task/Title) != ''
+4. BRANCH when EnumerationCase=true
+  5. NODE ExclusiveMerge: ExclusiveMerge
+  6. DECISION Is Description not empty? expression=trim($Task/Description) != ''
+  7. BRANCH when EnumerationCase=true
+    8. NODE ExclusiveMerge: ExclusiveMerge
+    9. DECISION Is Priority not empty? expression=$Task/Priority != empty
+    10. BRANCH when EnumerationCase=true
+      11. NODE ExclusiveMerge: ExclusiveMerge
+      12. DECISION Is Created on not empty? expression=$Task/Created != empty
+      13. BRANCH when EnumerationCase=true
+        14. NODE ExclusiveMerge: ExclusiveMerge
+        15. DECISION Is Status not empty? expression=$Task/Status != empty
+        16. BRANCH when EnumerationCase=true
+          17. NODE ExclusiveMerge: ExclusiveMerge
+          18. DECISION Is Due date not empty? expression=$Task/DueDate != empty
+          19. BRANCH when EnumerationCase=true
+            20. NODE ExclusiveMerge: ExclusiveMerge
+            21. END
+          22. BRANCH when EnumerationCase=false
+            23. ACTION ChangeVariableAction: change variable IsValid=false
+            24. REF ExclusiveMerge
+        25. BRANCH when EnumerationCase=false
+          26. ACTION ChangeVariableAction: change variable IsValid=false
+          27. REF ExclusiveMerge
+      28. BRANCH when EnumerationCase=false
+        29. ACTION ChangeVariableAction: change variable IsValid=false
+        30. REF ExclusiveMerge
+    31. BRANCH when EnumerationCase=false
+      32. ACTION ChangeVariableAction: change variable IsValid=false
+      33. REF ExclusiveMerge
+  34. BRANCH when EnumerationCase=false
+    35. ACTION ChangeVariableAction: change variable IsValid=false
+    36. REF ExclusiveMerge
+37. BRANCH when EnumerationCase=false
+  38. ACTION ChangeVariableAction: change variable IsValid=false
+  39. REF ExclusiveMerge
+
+FLOW Rule: Inspection.RUL_Task_Title_Validate
+NODES=5; EDGES=3
+1. START
+2. DECISION Title filled? expression=trim($Task/Title) != ''
+3. BRANCH when EnumerationCase=true
+  4. END
+5. BRANCH when EnumerationCase=false
+  6. END
+
+## Outgoing Calls
+- Inspection.ACT_Inspector_Save -> Inspection.VAL_Inspector_Validate (Microflow, internal)
+- Inspection.ACT_Registration_Save -> Inspection.VAL_Registration_Validate (Microflow, internal)
+- Inspection.ACT_Task_Save -> Inspection.VAL_Task_Validate (Microflow, internal)
+- Inspection.ACT_Task_Save -> Notification.SUB_Notification_SendToInspector (Microflow, internal)
+- Inspection.ACT_Task_Save -> Notification.SUB_Notification_SendToManager (Microflow, internal)
+- Inspection.ACT_Task_SetToDone -> Inspection.VAL_Task_Validate (Microflow, internal)
+- Inspection.ACT_Task_SetToDone -> Notification.SUB_Notification_SendToManager (Microflow, internal)
+- Inspection.ACT_Tool_Validate -> Inspection.VAL_Tool_Validate (Microflow, internal)
+- Inspection.SE_Booking_DeleteOlderThenToday -> Inspection.SUB_Booking_Delete (Microflow, internal)
+- Inspection.SE_Equipment_OrderNew -> Inspection.SUB_Accessory_Order (Microflow, internal)
+- Inspection.SE_Equipment_OrderNew -> Inspection.SUB_Equipment_Cast (Microflow, internal)
+- Inspection.VAL_Task_Validate -> Inspection.DS_UserRole_GetFromCurrentUser (Microflow, internal)

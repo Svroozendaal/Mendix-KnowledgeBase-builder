@@ -1,0 +1,209 @@
+{
+  "module": "NanoflowCommons",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "NanoflowCommons.Geolocation",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Accuracy",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "Altitude",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "AltitudeAccuracy",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "Heading",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "Latitude",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "Longitude",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "Speed",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "Timestamp",
+            "type": "DateTimeAttributeType",
+            "enumerationName": null,
+            "length": null,
+            "defaultValue": null,
+            "validationSummary": null
+          }
+        ],
+        "accessRules": [
+          {
+            "ruleKey": "rule-1",
+            "moduleRoles": [
+              "NanoflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "xPathEvidence": null,
+            "memberAccesses": [
+              {
+                "memberName": "NanoflowCommons.Geolocation.Timestamp",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Geolocation.Latitude",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Geolocation.Longitude",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Geolocation.Altitude",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Geolocation.Accuracy",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Geolocation.AltitudeAccuracy",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Geolocation.Heading",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Geolocation.Speed",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "NanoflowCommons.Position",
+        "isPersistable": false,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Latitude",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "Longitude",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          }
+        ],
+        "accessRules": [
+          {
+            "ruleKey": "rule-1",
+            "moduleRoles": [
+              "NanoflowCommons.User"
+            ],
+            "allowCreate": true,
+            "allowDelete": true,
+            "defaultMemberAccessRights": "ReadWrite",
+            "xPathConstraint": null,
+            "xPathEvidence": null,
+            "memberAccesses": [
+              {
+                "memberName": "NanoflowCommons.Position.Latitude",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              },
+              {
+                "memberName": "NanoflowCommons.Position.Longitude",
+                "memberKind": "Attribute",
+                "accessRights": "ReadWrite"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "associations": [],
+    "enumerations": [
+      {
+        "name": "NanoflowCommons.Enum_DistanceUnit",
+        "values": [
+          "KILOMETER",
+          "NAUTICAL_MILE",
+          "STATUTE_MILE"
+        ]
+      },
+      {
+        "name": "NanoflowCommons.GeocodingProvider",
+        "values": [
+          "Geocodio",
+          "Google",
+          "LocationIQ",
+          "MapQuest"
+        ]
+      },
+      {
+        "name": "NanoflowCommons.Platform",
+        "values": [
+          "Hybrid_mobile",
+          "Native_mobile",
+          "Web"
+        ]
+      }
+    ]
+  }
+}

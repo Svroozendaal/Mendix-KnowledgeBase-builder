@@ -1,0 +1,49 @@
+{
+  "module": "Atlas_Web_Content",
+  "domainModel": {
+    "entities": [
+      {
+        "name": "Atlas_Web_Content.LoginContext",
+        "isPersistable": true,
+        "generalization": null,
+        "attributes": [
+          {
+            "name": "Password",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "RememberMe",
+            "type": "BooleanAttributeType",
+            "enumerationName": null,
+            "length": null,
+            "defaultValue": "false",
+            "validationSummary": null
+          },
+          {
+            "name": "Username",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          },
+          {
+            "name": "ValidationMessage",
+            "type": "StringAttributeType",
+            "enumerationName": null,
+            "length": 200,
+            "defaultValue": null,
+            "validationSummary": null
+          }
+        ],
+        "accessRules": []
+      }
+    ],
+    "associations": [],
+    "enumerations": []
+  }
+}

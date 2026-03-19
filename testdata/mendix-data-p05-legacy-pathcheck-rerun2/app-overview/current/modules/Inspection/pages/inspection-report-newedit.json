@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.Report_NewEdit",
+    "stableId": "Inspection.Report_NewEdit",
+    "slug": "inspection-report-newedit",
+    "l0Path": "knowledge-base/modules/Inspection/pages/inspection-report-newedit.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/pages/inspection-report-newedit.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/pages/inspection-report-newedit.json",
+    "l2Logical": "page:Inspection.Report_NewEdit",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/pages/INDEX.json"
+  },
+  "qualifiedName": "Inspection.Report_NewEdit",
+  "name": "Report_NewEdit",
+  "title": "Generate report",
+  "layout": "Atlas_Core.PopupLayout",
+  "allowedRoles": [
+    "Inspection.Administrator",
+    "Inspection.Manager"
+  ],
+  "parameters": [
+    {
+      "name": "ReportHelper",
+      "entityType": "Inspection.ReportHelper"
+    }
+  ],
+  "isPopup": true,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": null,
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "0c705b2f-8f83-4aba-bca4-b2913c148a50",
+      "actionType": "CancelChangesClientAction",
+      "summary": "CancelChangesClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "3ad719e1-08e1-44ff-b6b9-4dbfc12fe1b2",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Inspection.ACT_Report_Generate",
+      "targetPage": null,
+      "flowName": "Inspection.ACT_Report_Generate"
+    },
+    {
+      "actionId": "83cbf178-285b-4889-a6a7-e92721ed746c",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Inspection.ACT_Report_ApplyFilters",
+      "targetPage": null,
+      "flowName": "Inspection.ACT_Report_ApplyFilters"
+    },
+    {
+      "actionId": "02d4e8c5-d0eb-4084-97fb-1be159976b83",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "1ab03b4c-176c-4695-848e-c9fa6430aa0e",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "31b6ddee-aed2-40f4-8448-28a088d2fe13",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "3e6517d0-2851-4755-9235-2215f909658a",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "43297698-0caa-4d38-84e1-3c9974982fec",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "464603ef-ee76-4537-b112-c836593c0f2e",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "74e413b4-0dc8-4c3f-adfa-fb1baa31fdac",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "8dcef3c5-11ee-46ed-811b-1d598ce2edb2",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "b8e930f5-e205-4d31-8cdc-7b34c604fd8d",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": []
+}

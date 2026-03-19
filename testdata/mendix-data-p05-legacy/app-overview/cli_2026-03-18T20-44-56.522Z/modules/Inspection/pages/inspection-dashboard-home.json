@@ -1,0 +1,196 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.Dashboard_Home",
+    "stableId": "Inspection.Dashboard_Home",
+    "slug": "inspection-dashboard-home",
+    "l0Path": "knowledge-base/modules/Inspection/pages/inspection-dashboard-home.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/pages/inspection-dashboard-home.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/pages/inspection-dashboard-home.json",
+    "l2Logical": "page:Inspection.Dashboard_Home",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/pages/INDEX.json"
+  },
+  "qualifiedName": "Inspection.Dashboard_Home",
+  "name": "Dashboard_Home",
+  "title": "Dashboard",
+  "layout": "Inspection.Emixa_Custom",
+  "allowedRoles": [
+    "Inspection.Administrator",
+    "Inspection.Inspector",
+    "Inspection.Manager"
+  ],
+  "parameters": [],
+  "isPopup": false,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": null,
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "0b8dfff1-c78b-4932-b5aa-d788553b6981",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "3409e7dd-fae6-4ae4-990c-bd658ab8b337",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "366408ea-7aa9-4a49-ba5e-452b095cfbf4",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "45c63d14-4657-4751-9b41-2a3de39394e9",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "4ac83065-e5b9-40f9-93b5-c4c047c7faa8",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "4c842458-4a86-4a7a-8c75-25b1c6e5f2c2",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "5453e9bd-5fa1-4313-a512-85af256b48c4",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "915aa6c5-f7b3-4062-8826-6110c324f244",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "932b0690-ffb9-4263-890e-e258e07a35d3",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "ada34920-f2ca-4add-bca0-e1e13a0572f3",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "2a1f315c-c245-4356-b8e2-70274a67fd80",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.InspectionItem_FromDashboard",
+      "targetPage": "Inspection.InspectionItem_FromDashboard",
+      "flowName": null
+    },
+    {
+      "actionId": "4133394c-1b98-4b55-9545-f6c9232c34cd",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.Inspector_Overview",
+      "targetPage": "Inspection.Inspector_Overview",
+      "flowName": null
+    },
+    {
+      "actionId": "4977261f-02bb-4a35-ad82-ce22a9da0e3f",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.Inspector_Overview",
+      "targetPage": "Inspection.Inspector_Overview",
+      "flowName": null
+    },
+    {
+      "actionId": "7344c5c7-47ed-4896-93ff-d1af61c4817e",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.InspectionItem_Overview",
+      "targetPage": "Inspection.InspectionItem_Overview",
+      "flowName": null
+    },
+    {
+      "actionId": "a26f3748-a8e6-4a62-b38e-39622b3b9560",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.Task_Overview",
+      "targetPage": "Inspection.Task_Overview",
+      "flowName": null
+    },
+    {
+      "actionId": "ac06c502-e47a-4be0-a510-ade12e94f158",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.InspectionItem_Overview",
+      "targetPage": "Inspection.InspectionItem_Overview",
+      "flowName": null
+    },
+    {
+      "actionId": "b0fe189b-463c-438e-a09b-35df84a11c8f",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.Inspector_Account_NewEdit",
+      "targetPage": "Inspection.Inspector_Account_NewEdit",
+      "flowName": null
+    },
+    {
+      "actionId": "bbcb60eb-9698-4669-851b-d7017657b46f",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Inspection.InspectionItem_Overview",
+      "targetPage": "Inspection.InspectionItem_Overview",
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": [
+    {
+      "provenanceId": "8802e42b-daec-40e9-a596-90fa0a79f933",
+      "sourceType": "MenuItem",
+      "summary": "Menu item \u0022Dashboard\u0022 in profile Responsive",
+      "page": "Inspection.Dashboard_Home",
+      "userRole": null,
+      "flowName": null
+    },
+    {
+      "provenanceId": "a16be9a1-6716-4e2b-87cc-11d47658d091",
+      "sourceType": "RoleBasedHomePage",
+      "summary": "Role-based homepage in profile Responsive for role Administrator",
+      "page": "Inspection.Dashboard_Home",
+      "userRole": "Administrator",
+      "flowName": null
+    },
+    {
+      "provenanceId": "1569fa11-3d64-44c3-8207-d09f3633b75c",
+      "sourceType": "RoleBasedHomePage",
+      "summary": "Role-based homepage in profile Responsive for role Inspector",
+      "page": "Inspection.Dashboard_Home",
+      "userRole": "Inspector",
+      "flowName": null
+    },
+    {
+      "provenanceId": "034159be-097f-4d4d-92f5-a2b404e14282",
+      "sourceType": "RoleBasedHomePage",
+      "summary": "Role-based homepage in profile Responsive for role Manager",
+      "page": "Inspection.Dashboard_Home",
+      "userRole": "Manager",
+      "flowName": null
+    }
+  ]
+}

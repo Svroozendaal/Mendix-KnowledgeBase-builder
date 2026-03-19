@@ -1,0 +1,175 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.BCo_Inspector",
+    "stableId": "fec16b8c-4bf1-4157-be70-ca001f0c5b56",
+    "slug": "inspection-bco-inspector",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-bco-inspector.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-bco-inspector.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-bco-inspector.json",
+    "l2Logical": "flow:Inspection.BCo_Inspector",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "fec16b8c-4bf1-4157-be70-ca001f0c5b56",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.BCo_Inspector",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "651bc152-3235-426f-9f0b-0ba340a1493f",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Administration.Account as NewAccount (FullName=$Inspector/Name, Email=$Inspector/EmailAddress, Name=$Inspector/EmailAddress, Password=\u0027Mendix123456\u0027, UserRoles=$UserRole_Inspector, Inspector_Account=$Inspector)",
+      "detail": "create Administration.Account as NewAccount (FullName=$Inspector/Name, Email=$Inspector/EmailAddress, Name=$Inspector/EmailAddress, Password=\u0027Mendix123456\u0027, UserRoles=$UserRole_Inspector, Inspector_Account=$Inspector)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "94812430-5b51-4aec-b29c-b931f7884ec5",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve UserRole_Inspector from System.UserRole",
+      "detail": "retrieve UserRole_Inspector from System.UserRole",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ba4dbabf-991c-49c7-bdab-2ff8d1f00248",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "fd27c339-f240-4f58-8409-df8d4c54b640",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "1fb9d2cc-324b-4820-91d6-cd28c4905438",
+      "nodeType": "ExclusiveSplit",
+      "label": "doesn\u0027t have an account? expression=$Inspector/Inspection.Inspector_Account = empty",
+      "detail": "doesn\u0027t have an account? expression=$Inspector/Inspection.Inspector_Account = empty",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "cc127bcf-a11f-42f6-ae65-14061bfcba6b",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "5e08d6a3-9f51-482f-844e-61810dbaf008",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "2ade1d6c-bfd2-40d1-aca1-f31ab589fd08",
+      "originNodeId": "5e08d6a3-9f51-482f-844e-61810dbaf008",
+      "destinationNodeId": "94812430-5b51-4aec-b29c-b931f7884ec5",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "8494e2a8-1204-492b-bbc9-5866607ca47e",
+      "originNodeId": "94812430-5b51-4aec-b29c-b931f7884ec5",
+      "destinationNodeId": "1fb9d2cc-324b-4820-91d6-cd28c4905438",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "a0af34b3-8ecf-4cdd-923a-11cc97daecbf",
+      "originNodeId": "651bc152-3235-426f-9f0b-0ba340a1493f",
+      "destinationNodeId": "fd27c339-f240-4f58-8409-df8d4c54b640",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "e86cb56f-1710-4d0b-9d42-dfc78c9b2302",
+      "originNodeId": "1fb9d2cc-324b-4820-91d6-cd28c4905438",
+      "destinationNodeId": "651bc152-3235-426f-9f0b-0ba340a1493f",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "3d79244e-ad59-40a7-83f8-9d35ff36da9f",
+      "originNodeId": "1fb9d2cc-324b-4820-91d6-cd28c4905438",
+      "destinationNodeId": "ba4dbabf-991c-49c7-bdab-2ff8d1f00248",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "5e08d6a3-9f51-482f-844e-61810dbaf008"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "5e08d6a3-9f51-482f-844e-61810dbaf008",
+    "94812430-5b51-4aec-b29c-b931f7884ec5",
+    "1fb9d2cc-324b-4820-91d6-cd28c4905438",
+    "651bc152-3235-426f-9f0b-0ba340a1493f",
+    "fd27c339-f240-4f58-8409-df8d4c54b640",
+    "ba4dbabf-991c-49c7-bdab-2ff8d1f00248"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.BCo_Inspector\r\nNODES=7; EDGES=5\r\n1. START\r\n2. ACTION RetrieveAction: retrieve UserRole_Inspector from System.UserRole\r\n3. DECISION doesn\u0027t have an account? expression=$Inspector/Inspection.Inspector_Account = empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION CreateObjectAction: create Administration.Account as NewAccount (FullName=$Inspector/Name, Email=$Inspector/EmailAddress, Name=$Inspector/EmailAddress, Password=\u0027Mendix123456\u0027, UserRoles=$UserRole_Inspector, Inspector_Account=$Inspector)\r\n  6. END\r\n7. BRANCH when EnumerationCase=false\r\n  8. END",
+  "retrieveActions": [
+    {
+      "nodeId": "94812430-5b51-4aec-b29c-b931f7884ec5",
+      "summary": "RetrieveAction: retrieve UserRole_Inspector from System.UserRole retrieve UserRole_Inspector from System.UserRole",
+      "sourceKind": "Database",
+      "entity": "System.UserRole",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [
+    {
+      "nodeId": "1fb9d2cc-324b-4820-91d6-cd28c4905438",
+      "summary": "doesn\u0027t have an account? expression=$Inspector/Inspection.Inspector_Account = empty doesn\u0027t have an account? expression=$Inspector/Inspection.Inspector_Account = empty",
+      "caption": "doesn\u0027t have an account?",
+      "expression": "$Inspector/Inspection.Inspector_Account = empty doesn\u0027t have an account? expression=$Inspector/Inspection.Inspector_Account = empty"
+    }
+  ],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "651bc152-3235-426f-9f0b-0ba340a1493f",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Administration.Account as NewAccount (FullName=$Inspector/Name, Email=$Inspector/EmailAddress, Name=$Inspector/EmailAddress, Password=\u0027Mendix123456\u0027, UserRoles=$UserRole_Inspector, Inspector_Ac...",
+      "entity": "Administration.Account",
+      "memberSummary": null
+    }
+  ],
+  "callEdges": []
+}

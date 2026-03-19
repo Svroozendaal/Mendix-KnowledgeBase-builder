@@ -1,0 +1,60 @@
+---
+objectType: flow
+module: Inspection
+qualifiedName: Inspection.ACT_InspectorPhoto_Create
+stableId: ac8e86cf-445a-4435-8b38-cc62dd938c7f
+slug: inspection-act-inspectorphoto-create
+layer: L1
+l0: inspection-act-inspectorphoto-create.abstract.md
+l2Path: ../../../../../mendix-data-p05-legacy/app-overview/current/modules/Inspection/flows/inspection-act-inspectorphoto-create.json
+l2Logical: flow:Inspection.ACT_InspectorPhoto_Create
+sourceRun: cli_2026-03-18T20-44-56.522Z
+collectionL0: INDEX.abstract.md
+collectionL1: ../FLOWS.md
+---
+# Flow Overview: Inspection.ACT_InspectorPhoto_Create
+
+## Summary
+
+- Likely acts as a UI entry or navigation handler because it shows Inspection.InspectorPhoto_NewEdit.
+- L0: [abstract](inspection-act-inspectorphoto-create.abstract.md)
+- L2: [json](../../../../../mendix-data-p05-legacy/app-overview/current/modules/Inspection/flows/inspection-act-inspectorphoto-create.json)
+
+## Main Steps
+
+- ShowPageAction: show page Inspection.InspectorPhoto_NewEdit show page Inspection.InspectorPhoto_NewEdit
+- CreateObjectAction: create Inspection.InspectorPhoto as NewInspectorPhoto (InspectorPhoto_Inspector=$Inspector) create Inspection.InspectorPhoto as NewInspectorPhoto (InspectorPhoto_Inspector=$Inspector)
+
+## Trigger/Input/Output Context
+
+- Kind: Microflow
+- Entry/call context: No inbound caller was exported; this likely starts from UI interaction or navigation.
+- Output/UI context: Shows Inspection.InspectorPhoto_NewEdit.
+
+## Key Entities Touched
+
+- Inspection.InspectorPhoto
+
+## Called / Called By
+
+- Calls: none
+- Called by: none
+
+## Shown Pages
+
+- Inspection.InspectorPhoto_NewEdit
+
+## Important Retrieves/Decisions/Mutations
+
+- nodeId=ebc036a5-0384-40d1-874e-086cb02eeee4; actionKind=Create; entity=Inspection.InspectorPhoto; members=InspectorPhoto_Inspector=$Inspector; summary=CreateObjectAction: create Inspection.InspectorPhoto as NewInspectorPhoto (InspectorPhoto_Inspector=$Inspector) create Inspection.InspectorPhoto as NewInspectorPhoto (InspectorPhoto_Inspector=$Inspector)
+
+## Warnings/Unknowns
+
+- No material warnings from deterministic export synthesis.
+
+## Source
+
+- Stable JSON: [json](../../../../../mendix-data-p05-legacy/app-overview/current/modules/Inspection/flows/inspection-act-inspectorphoto-create.json)
+- Aggregate export: [flows.json](../../../../../mendix-data-p05-legacy/app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.json)
+- Aggregate pseudo: [flows.pseudo.txt](../../../../../mendix-data-p05-legacy/app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.pseudo.txt)
+- Traceability: sourceRun=cli_2026-03-18T20-44-56.522Z

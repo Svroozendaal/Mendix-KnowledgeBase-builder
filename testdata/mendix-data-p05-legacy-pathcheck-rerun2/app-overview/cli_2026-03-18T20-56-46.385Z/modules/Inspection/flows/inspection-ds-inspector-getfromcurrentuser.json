@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.DS_Inspector_GetFromCurrentUSer",
+    "stableId": "6199590a-6d3a-408d-8d3f-6547f1db91df",
+    "slug": "inspection-ds-inspector-getfromcurrentuser",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-ds-inspector-getfromcurrentuser.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-ds-inspector-getfromcurrentuser.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-ds-inspector-getfromcurrentuser.json",
+    "l2Logical": "flow:Inspection.DS_Inspector_GetFromCurrentUSer",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "6199590a-6d3a-408d-8d3f-6547f1db91df",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.DS_Inspector_GetFromCurrentUSer",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "fa5e9b6f-3f95-4581-8a5c-8980fa085663",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve Inspector from Inspection.Inspector",
+      "detail": "retrieve Inspector from Inspection.Inspector",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ceac19e7-43a1-4a55-9d70-f9b794e578dd",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "afe80314-03ab-4eb8-b25e-3ed3cb865fb9",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "78f2ef04-c5a4-463c-9b27-f91d84767350",
+      "originNodeId": "afe80314-03ab-4eb8-b25e-3ed3cb865fb9",
+      "destinationNodeId": "fa5e9b6f-3f95-4581-8a5c-8980fa085663",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "c20ad856-88ad-4086-bc62-6ef9894b8a41",
+      "originNodeId": "fa5e9b6f-3f95-4581-8a5c-8980fa085663",
+      "destinationNodeId": "ceac19e7-43a1-4a55-9d70-f9b794e578dd",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "afe80314-03ab-4eb8-b25e-3ed3cb865fb9"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "afe80314-03ab-4eb8-b25e-3ed3cb865fb9",
+    "fa5e9b6f-3f95-4581-8a5c-8980fa085663",
+    "ceac19e7-43a1-4a55-9d70-f9b794e578dd"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.DS_Inspector_GetFromCurrentUSer\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Inspector from Inspection.Inspector\r\n3. END",
+  "retrieveActions": [
+    {
+      "nodeId": "fa5e9b6f-3f95-4581-8a5c-8980fa085663",
+      "summary": "RetrieveAction: retrieve Inspector from Inspection.Inspector retrieve Inspector from Inspection.Inspector",
+      "sourceKind": "Database",
+      "entity": "Inspection.Inspector",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [],
+  "callEdges": []
+}

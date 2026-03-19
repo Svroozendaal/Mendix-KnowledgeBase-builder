@@ -1,0 +1,27 @@
+# Pages: Notification
+Pages: 3, Snippets: 0
+
+## Pages
+
+PAGE Notification.Script_Overview
+  Title: "Script Overview"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Notification.Administrator
+  Client actions: MicroflowClientAction, flow=Notification.TEMP_Notifications_AllDelete
+  Navigation provenance: Menu item "Scripts" in profile Responsive
+
+PAGE Notification.Notification_Overview_Unread
+  Title: "Unread notifications"
+  Layout: Notification.Notification_Layout
+  Allowed roles: Notification.Inspector, Notification.Manager
+  Data sources: Microflow datasource: Inspection.DS_Task_GetFromNotification
+  Client actions: MicroflowClientAction, flow=Notification.ACT_Notification_MarkAsRead | DeleteClientAction
+  Navigation provenance: Menu item "Notifications" in profile Responsive
+
+PAGE Notification.Notification_Overview_Read
+  Title: "Read notifications"
+  Layout: Notification.Notification_Layout
+  Allowed roles: Notification.Inspector, Notification.Manager
+  Client actions: DeleteClientAction
+
+## Snippets

@@ -1,0 +1,19 @@
+{
+    "module":  "Inspection",
+    "constants":  [
+
+                  ],
+    "scheduledEvents":  [
+                            {
+                                "qualifiedName":  "Inspection.SE_Booking_DeleteOlderThenToday",
+                                "name":  "SE_Booking_DeleteOlderThenToday",
+                                "documentation":  null,
+                                "schedule":  null,
+                                "microflow":  "Inspection.SE_Booking_DeleteOlderThenToday",
+                                "nanoflow":  null
+                            }
+                        ],
+    "otherResources":  [
+
+                       ]
+}

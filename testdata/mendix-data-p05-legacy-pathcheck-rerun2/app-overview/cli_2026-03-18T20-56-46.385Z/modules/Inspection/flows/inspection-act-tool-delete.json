@@ -1,0 +1,102 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_Tool_Delete",
+    "stableId": "d3b128c1-593e-438d-a003-302298e3e538",
+    "slug": "inspection-act-tool-delete",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-tool-delete.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-tool-delete.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-tool-delete.json",
+    "l2Logical": "flow:Inspection.ACT_Tool_Delete",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "d3b128c1-593e-438d-a003-302298e3e538",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_Tool_Delete",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "9a20c628-eaaa-4afb-b10d-2552e6004064",
+      "nodeType": "ActionActivity",
+      "label": "DeleteAction: delete Tool (refreshInClient=true)",
+      "detail": "delete Tool (refreshInClient=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "a510b0bd-eb24-4e51-8b71-9c268c22169b",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "be6d5adc-0154-4ad8-9152-fcea6849d27e",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "967a55b3-d505-4f77-9fe9-2698845bc5e0",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "064df71c-c74e-42bf-bacd-c22690d1281a",
+      "originNodeId": "967a55b3-d505-4f77-9fe9-2698845bc5e0",
+      "destinationNodeId": "9a20c628-eaaa-4afb-b10d-2552e6004064",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "a4710774-cf2f-4dfb-a89c-41ecdfabf60c",
+      "originNodeId": "9a20c628-eaaa-4afb-b10d-2552e6004064",
+      "destinationNodeId": "a510b0bd-eb24-4e51-8b71-9c268c22169b",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "967a55b3-d505-4f77-9fe9-2698845bc5e0"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "967a55b3-d505-4f77-9fe9-2698845bc5e0",
+    "9a20c628-eaaa-4afb-b10d-2552e6004064",
+    "a510b0bd-eb24-4e51-8b71-9c268c22169b"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_Tool_Delete\r\nNODES=4; EDGES=2\r\n1. START\r\n2. ACTION DeleteAction: delete Tool (refreshInClient=true)\r\n3. END",
+  "retrieveActions": [],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "9a20c628-eaaa-4afb-b10d-2552e6004064",
+      "actionKind": "Delete",
+      "summary": "DeleteAction: delete Tool (refreshInClient=true) delete Tool (refreshInClient=true)",
+      "entity": null,
+      "memberSummary": "refreshInClient=true"
+    }
+  ],
+  "callEdges": []
+}

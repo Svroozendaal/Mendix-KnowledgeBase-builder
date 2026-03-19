@@ -1,0 +1,35 @@
+# Domain Model: NanoflowCommons
+Entities: 2, Associations: 0, Enumerations: 3
+
+## Entities
+- ENTITY NanoflowCommons.Geolocation (non-persistent)
+  - ATTR Accuracy: StringAttributeType
+  - ATTR Altitude: StringAttributeType
+  - ATTR AltitudeAccuracy: StringAttributeType
+  - ATTR Heading: StringAttributeType
+  - ATTR Latitude: StringAttributeType
+  - ATTR Longitude: StringAttributeType
+  - ATTR Speed: StringAttributeType
+  - ATTR Timestamp: DateTimeAttributeType
+  - ACCESS_RULE rule-1 [NanoflowCommons.User] Create=yes, Delete=yes, Default=Unknown
+    - MEMBER NanoflowCommons.Geolocation.Timestamp: None
+    - MEMBER NanoflowCommons.Geolocation.Latitude: None
+    - MEMBER NanoflowCommons.Geolocation.Longitude: None
+    - MEMBER NanoflowCommons.Geolocation.Altitude: None
+    - MEMBER NanoflowCommons.Geolocation.Accuracy: None
+    - MEMBER NanoflowCommons.Geolocation.AltitudeAccuracy: None
+    - MEMBER NanoflowCommons.Geolocation.Heading: None
+    - MEMBER NanoflowCommons.Geolocation.Speed: None
+- ENTITY NanoflowCommons.Position (non-persistent)
+  - ATTR Latitude: StringAttributeType
+  - ATTR Longitude: StringAttributeType
+  - ACCESS_RULE rule-1 [NanoflowCommons.User] Create=yes, Delete=yes, Default=Unknown
+    - MEMBER NanoflowCommons.Position.Latitude: None
+    - MEMBER NanoflowCommons.Position.Longitude: None
+
+## Associations
+
+## Enumerations
+- ENUM NanoflowCommons.Enum_DistanceUnit: KILOMETER, NAUTICAL_MILE, STATUTE_MILE
+- ENUM NanoflowCommons.GeocodingProvider: Geocodio, Google, LocationIQ, MapQuest
+- ENUM NanoflowCommons.Platform: Hybrid_mobile, Native_mobile, Web

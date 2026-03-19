@@ -1,0 +1,1427 @@
+{
+    "schemaVersion":  "2.0",
+    "generatedAtUtc":  "2026-03-18T20:49:03.4679055Z",
+    "selectedModules":  [
+
+                        ],
+    "generator":  "mxcli",
+    "artifactCount":  354,
+    "artifacts":  [
+                      {
+                          "type":  "module-domain-model-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\domain-model.json"
+                      },
+                      {
+                          "type":  "module-domain-model-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\domain-model.json"
+                      },
+                      {
+                          "type":  "module-domain-model-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\domain-model.json"
+                      },
+                      {
+                          "type":  "module-domain-model-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\domain-model.json"
+                      },
+                      {
+                          "type":  "module-domain-model-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\domain-model.json"
+                      },
+                      {
+                          "type":  "module-domain-model-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\domain-model.json"
+                      },
+                      {
+                          "type":  "module-domain-model-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\domain-model.json"
+                      },
+                      {
+                          "type":  "general-app-info-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\app-info.json"
+                      },
+                      {
+                          "type":  "general-user-roles-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\user-roles.json"
+                      },
+                      {
+                          "type":  "general-all-modules-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\all-modules.json"
+                      },
+                      {
+                          "type":  "general-marketplace-modules-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\marketplace-modules.json"
+                      },
+                      {
+                          "type":  "general-app-info-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\app-info.pseudo.txt"
+                      },
+                      {
+                          "type":  "general-user-roles-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\user-roles.pseudo.txt"
+                      },
+                      {
+                          "type":  "general-all-modules-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\all-modules.pseudo.txt"
+                      },
+                      {
+                          "type":  "general-marketplace-modules-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\general\\marketplace-modules.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-domain-model-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\domain-model.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flows-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows.json"
+                      },
+                      {
+                          "type":  "module-flows-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-pages-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages.json"
+                      },
+                      {
+                          "type":  "module-pages-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-resources-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\resources.json"
+                      },
+                      {
+                          "type":  "module-resources-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\resources.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-domain-model-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\domain-model.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flows-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\flows.json"
+                      },
+                      {
+                          "type":  "module-flows-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\flows.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-pages-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\pages.json"
+                      },
+                      {
+                          "type":  "module-pages-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\pages.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-resources-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\resources.json"
+                      },
+                      {
+                          "type":  "module-resources-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\resources.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-domain-model-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\domain-model.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flows-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\flows.json"
+                      },
+                      {
+                          "type":  "module-flows-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\flows.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-pages-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages.json"
+                      },
+                      {
+                          "type":  "module-pages-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-resources-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\resources.json"
+                      },
+                      {
+                          "type":  "module-resources-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\resources.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-domain-model-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\domain-model.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flows-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\flows.json"
+                      },
+                      {
+                          "type":  "module-flows-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\flows.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-pages-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\pages.json"
+                      },
+                      {
+                          "type":  "module-pages-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\pages.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-resources-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\resources.json"
+                      },
+                      {
+                          "type":  "module-resources-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\resources.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-domain-model-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\domain-model.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flows-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows.json"
+                      },
+                      {
+                          "type":  "module-flows-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-pages-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages.json"
+                      },
+                      {
+                          "type":  "module-pages-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-resources-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\resources.json"
+                      },
+                      {
+                          "type":  "module-resources-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\resources.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-domain-model-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\domain-model.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flows-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\flows.json"
+                      },
+                      {
+                          "type":  "module-flows-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\flows.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-pages-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\pages.json"
+                      },
+                      {
+                          "type":  "module-pages-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\pages.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-resources-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\resources.json"
+                      },
+                      {
+                          "type":  "module-resources-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\resources.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-domain-model-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\domain-model.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flows-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows.json"
+                      },
+                      {
+                          "type":  "module-flows-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-pages-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages.json"
+                      },
+                      {
+                          "type":  "module-pages-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-resources-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\resources.json"
+                      },
+                      {
+                          "type":  "module-resources-pseudo",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\resources.pseudo.txt"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-changemypassword.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-changemypassword.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-changepassword.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-changepassword.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-managemyaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-managemyaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-newaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-newaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-newwebserviceaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-newwebserviceaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-retrievetimezones.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-retrievetimezones.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-savenewaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-savenewaccount.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-showmypasswordform.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-showmypasswordform.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-showpasswordform.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\administration-showpasswordform.json"
+                      },
+                      {
+                          "type":  "module-flow-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\flows\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-account-edit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-account-edit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-account-new.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-account-new.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-account-overview.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-account-overview.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-activesessions.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-activesessions.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-changemypasswordform.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-changemypasswordform.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-changepasswordform.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-changepasswordform.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-myaccount.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-myaccount.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-runtimeinstances.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-runtimeinstances.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-scheduledevents.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-scheduledevents.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-userrole-select.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\administration-userrole-select.json"
+                      },
+                      {
+                          "type":  "module-page-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Administration\\pages\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-flow-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\flows\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-page-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Core\\pages\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\flows\\atlas-web-content-act-login.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\flows\\atlas-web-content-act-login.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\flows\\atlas-web-content-ds-logincontext.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\flows\\atlas-web-content-ds-logincontext.json"
+                      },
+                      {
+                          "type":  "module-flow-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\flows\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-blank.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-blank.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-blank-phone.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-blank-phone.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-action-center.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-action-center.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-navigation.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-navigation.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-page-settings.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-page-settings.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-status.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-status.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-transactions.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-dashboard-transactions.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-cards.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-cards.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-map.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-map.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-summary.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-summary.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-timeline.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-detail-timeline.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-centered.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-centered.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-columns.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-columns.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-columns-edit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-columns-edit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-horizontal-edit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-horizontal-edit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-split.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-split.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-vertical-edit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-form-vertical-edit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid-card.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid-card.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid-tabs.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid-tabs.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid-with-navigation.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-grid-with-navigation.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-columns.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-columns.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-filtered.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-filtered.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-masterdetail.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-masterdetail.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-status.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-list-status.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-login.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-login.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-dashboard-springboard.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-dashboard-springboard.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-detail.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-detail.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-detail-confirmation.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-detail-confirmation.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-form.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-form.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-list-doubleline.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-list-doubleline.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-list-tabbed.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-phone-list-tabbed.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-selectwithdatagrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-selectwithdatagrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-selectwithlistview-select.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-selectwithlistview-select.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-selectwithtemplategrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-selectwithtemplategrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-blank.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-blank.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-dashboard-springboard.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-dashboard-springboard.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-detail-masterdetail.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-detail-masterdetail.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-form-details.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-form-details.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-form-master-detail.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-form-master-detail.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-list-doubleline.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-list-doubleline.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-list-tabbed.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-list-tabbed.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-login.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-login.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-selectwithdatagrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-selectwithdatagrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-selectwithlistview-select.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-selectwithlistview-select.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-selectwithtemplategrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tablet-selectwithtemplategrid-select.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tabs-card.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tabs-card.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tabs-centered.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tabs-centered.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tabs-fullwidth.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-tabs-fullwidth.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-wizard-form.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-wizard-form.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-wizard-form-centered.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\atlas-web-content-wizard-form-centered.json"
+                      },
+                      {
+                          "type":  "module-page-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\Atlas_Web_Content\\pages\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-flow-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\flows\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-page-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\DataWidgets\\pages\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-accessory-create.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-accessory-create.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-assessory-book.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-assessory-book.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-assessory-delete.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-assessory-delete.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-coverphoto-create.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-coverphoto-create.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-coverphoto-save.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-coverphoto-save.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-inspector-save.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-inspector-save.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-inspectorphoto-create.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-inspectorphoto-create.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-registration-create.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-registration-create.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-registration-save.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-registration-save.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-report-applyfilters.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-report-applyfilters.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-report-generate.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-report-generate.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-reporthelper-create.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-reporthelper-create.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-create.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-create.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-save.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-save.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-settodone.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-settodone.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-settoinprogress.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-task-settoinprogress.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-book.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-book.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-create.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-create.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-delete.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-delete.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-act-tool-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-bco-inspector.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-bco-inspector.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-cal-inspector-tasksopen.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-cal-inspector-tasksopen.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-cal-inspector-tasksoverdue.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-cal-inspector-tasksoverdue.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-booking-retrieveupcomming.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-booking-retrieveupcomming.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-inspector-getfromcurrentuser.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-inspector-getfromcurrentuser.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-task-getfromnotification.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-task-getfromnotification.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-userrole-getfromcurrentuser.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-ds-userrole-getfromcurrentuser.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-dsl-inspector-selectable.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-dsl-inspector-selectable.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-och-task-refresh.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-och-task-refresh.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-se-booking-deleteolderthentoday.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-se-booking-deleteolderthentoday.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-se-equipment-ordernew.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-se-equipment-ordernew.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-accessory-order.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-accessory-order.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-account-getfrominspector.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-account-getfrominspector.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-booking-delete.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-booking-delete.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-equipment-cast.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-sub-equipment-cast.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-inspector-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-inspector-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-registration-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-registration-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-task-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-task-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-tool-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\inspection-val-tool-validate.json"
+                      },
+                      {
+                          "type":  "module-flow-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\flows\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-account-loginpage-splitleft.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-account-loginpage-splitleft.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-assessory-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-assessory-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-coverphoto-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-coverphoto-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-dashboard-home.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-dashboard-home.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-equipment-overview.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-equipment-overview.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectionitem-fromdashboard.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectionitem-fromdashboard.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectionitem-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectionitem-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectionitem-overview.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectionitem-overview.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspector-account-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspector-account-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspector-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspector-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspector-overview.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspector-overview.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectorphoto-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-inspectorphoto-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-registration-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-registration-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-report-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-report-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-task-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-task-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-task-overview.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-task-overview.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-tool-book.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-tool-book.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-tool-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\inspection-tool-newedit.json"
+                      },
+                      {
+                          "type":  "module-page-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Inspection\\pages\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-flow-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\flows\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-page-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\marketplace\\NanoflowCommons\\pages\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-act-notification-markasread.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-act-notification-markasread.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-se-notification-sendtoinspectors.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-se-notification-sendtoinspectors.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-sub-notification-sendtoinspector.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-sub-notification-sendtoinspector.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-sub-notification-sendtomanager.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-sub-notification-sendtomanager.json"
+                      },
+                      {
+                          "type":  "module-flow-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-temp-notifications-alldelete.json"
+                      },
+                      {
+                          "type":  "module-flow-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\notification-temp-notifications-alldelete.json"
+                      },
+                      {
+                          "type":  "module-flow-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\flows\\INDEX.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages\\notification-notification-overview-read.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages\\notification-notification-overview-read.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages\\notification-notification-overview-unread.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages\\notification-notification-overview-unread.json"
+                      },
+                      {
+                          "type":  "module-page-object-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages\\notification-script-overview.json"
+                      },
+                      {
+                          "type":  "module-page-detail-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages\\notification-script-overview.json"
+                      },
+                      {
+                          "type":  "module-page-index-json",
+                          "path":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-mxcli-env\\app-overview\\cli_2026-03-18T20-49-03.032Z\\modules\\Notification\\pages\\INDEX.json"
+                      }
+                  ]
+}

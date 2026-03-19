@@ -1,0 +1,302 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Notification",
+                  "qualifiedName":  "Notification.SE_Notification_SendToInspectors",
+                  "stableId":  "6fb3fe1e-1357-4f6b-8e91-08fbb96f8e90",
+                  "slug":  "notification-se-notification-sendtoinspectors",
+                  "l0Path":  "knowledge-base/modules/Notification/flows/notification-se-notification-sendtoinspectors.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Notification/flows/notification-se-notification-sendtoinspectors.overview.md",
+                  "l2Path":  "app-overview/current/modules/Notification/flows/notification-se-notification-sendtoinspectors.json",
+                  "l2Logical":  "flow:Notification.SE_Notification_SendToInspectors",
+                  "sourceRun":  "cli_2026-03-18T20-49-03.032Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Notification/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Notification/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Notification/flows/INDEX.json"
+              },
+    "flowId":  "6fb3fe1e-1357-4f6b-8e91-08fbb96f8e90",
+    "kind":  "Microflow",
+    "qualifiedName":  "Notification.SE_Notification_SendToInspectors",
+    "module":  "Notification",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve from Inspection.Task WHERE DueDate = \u0027[%BeginOfCurrentDay%]\u0027",
+                      "detail":  "RETRIEVE $TaskList FROM Inspection.Task WHERE DueDate = \u0027[%BeginOfCurrentDay%]\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create list of Notification.Notification",
+                      "detail":  "$NotificationList_ToCommit = CREATE LIST of Notification.Notification",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-loop",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "LOOP $IteratorTask IN $TaskList",
+                      "detail":  "LOOP $IteratorTask IN $TaskList",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve over association $IteratorTask/Inspection.Task_Inspector",
+                      "detail":  "RETRIEVE $Inspector FROM ASSOCIATION $IteratorTask/Inspection.Task_Inspector",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-call",
+                      "nodeType":  "ActionActivity",
+                      "label":  "call microflow Inspection.SUB_Account_GetFromInspector -\u003e Account_Inspector",
+                      "detail":  "$Account_Inspector = CALL MICROFLOW Inspection.SUB_Account_GetFromInspector(Inspector = $Inspector) ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "Inspection.SUB_Account_GetFromInspector",
+                                        "sourceNodeId":  "n006-call"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Notification.Notification (Title = \u0027Task: \u0027 + $IteratorTask/Title + \u0027 is due today.\u0027 , Notification_Account = $Account_Inspector, AssociatedObject = $IteratorTask/TaskID)",
+                      "detail":  "$NewNotification = CREATE Notification.Notification (Title = \u0027Task: \u0027 + $IteratorTask/Title + \u0027 is due today.\u0027 , Notification_Account = $Account_Inspector, AssociatedObject = $IteratorTask/TaskID)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-add",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ADD $NewNotification TO $NotificationList_ToCommit",
+                      "detail":  "ADD $NewNotification TO $NotificationList_ToCommit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n009-commit",
+                      "nodeType":  "ActionActivity",
+                      "label":  "commit $NotificationList_ToCommit WITH EVENTS ON ERROR ROLLBACK",
+                      "detail":  "COMMIT $NotificationList_ToCommit WITH EVENTS ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n010-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-219b08a9c5f9",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-7034fd20620a",
+                      "originNodeId":  "n002-retrieve",
+                      "destinationNodeId":  "n003-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-3ad0b7c6df25",
+                      "originNodeId":  "n003-create",
+                      "destinationNodeId":  "n004-loop",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-59810cdf311d",
+                      "originNodeId":  "n004-loop",
+                      "destinationNodeId":  "n005-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-f51102901963",
+                      "originNodeId":  "n005-retrieve",
+                      "destinationNodeId":  "n006-call",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-29642286c4d4",
+                      "originNodeId":  "n006-call",
+                      "destinationNodeId":  "n007-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-dcd1bca6675f",
+                      "originNodeId":  "n007-create",
+                      "destinationNodeId":  "n008-add",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-d80b449241f8",
+                      "originNodeId":  "n008-add",
+                      "destinationNodeId":  "n009-commit",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-451ad42654dc",
+                      "originNodeId":  "n009-commit",
+                      "destinationNodeId":  "n010-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "Inspection.SUB_Account_GetFromInspector",
+                      "sourceNodeId":  "n006-call"
+                  }
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-retrieve",
+                                         "n003-create",
+                                         "n004-loop",
+                                         "n005-retrieve",
+                                         "n006-call",
+                                         "n007-create",
+                                         "n008-add",
+                                         "n009-commit",
+                                         "n010-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Notification.SE_Notification_SendToInspectors\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n002-retrieve",
+                                "summary":  "retrieve from Inspection.Task WHERE DueDate = \u0027[%BeginOfCurrentDay%]\u0027",
+                                "sourceKind":  "Database",
+                                "entity":  "Inspection.Task",
+                                "association":  null,
+                                "xPath":  "DueDate = \u0027[%BeginOfCurrentDay%]\u0027"
+                            },
+                            {
+                                "nodeId":  "n005-retrieve",
+                                "summary":  "retrieve over association $IteratorTask/Inspection.Task_Inspector",
+                                "sourceKind":  "Association",
+                                "entity":  null,
+                                "association":  "$IteratorTask/Inspection.Task_Inspector",
+                                "xPath":  null
+                            }
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n003-create",
+                                "actionKind":  "Create",
+                                "summary":  "create list of Notification.Notification",
+                                "entity":  "Notification.Notification",
+                                "memberSummary":  null
+                            },
+                            {
+                                "nodeId":  "n007-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Notification.Notification (Title = \u0027Task: \u0027 + $IteratorTask/Title + \u0027 is due today.\u0027 , Notification_Account = $Account_Inspector, AssociatedObject = $IteratorTask/TaskID)",
+                                "entity":  "Notification.Notification",
+                                "memberSummary":  "(Title = \u0027Task: \u0027 + $IteratorTask/Title + \u0027 is due today.\u0027 , Notification_Account = $Account_Inspector, AssociatedObject = $IteratorTask/TaskID)"
+                            },
+                            {
+                                "nodeId":  "n009-commit",
+                                "actionKind":  "Commit",
+                                "summary":  "commit $NotificationList_ToCommit WITH EVENTS ON ERROR ROLLBACK",
+                                "entity":  "Notification.Notification",
+                                "memberSummary":  null
+                            }
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Notification",
+                          "callerFlow":  "Notification.SE_Notification_SendToInspectors",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n006-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.SUB_Account_GetFromInspector",
+                          "isInternal":  false
+                      }
+                  ]
+}

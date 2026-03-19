@@ -12,7 +12,7 @@ This agent is called by `KNOWLEDGEBASE_CREATOR` and should not be invoked direct
 3. `.app-info/skills/mendix-overview-general-interpretation/SKILL.md`
 4. `.app-info/skills/mendix-overview-module-interpretation/SKILL.md`
 5. `.app-info/skills/mendix-overview-routing-synthesis/SKILL.md`
-6. Source export run folder (v2.0 structure):
+6. Source export run folder (v2.0 structure, produced by `MxCli` by default):
    - `<run-folder>/manifest.json`
    - `<run-folder>/general/` (app-info, user-roles, all-modules, marketplace-modules)
    - `<run-folder>/modules/<Module>/` (domain-model, flows, pages, resources)
@@ -24,9 +24,10 @@ This agent is called by `KNOWLEDGEBASE_CREATOR` and should not be invoked direct
 ### Phase 1: Validate export artefacts
 
 1. Read `<run-folder>/manifest.json` - confirm `schemaVersion` is `"2.0"`.
-2. Verify `<run-folder>/general/` contains all 4 file pairs (app-info, user-roles, all-modules, marketplace-modules).
-3. For each module in the manifest artifact list, verify `<run-folder>/modules/<Module>/` contains all 4 file pairs (domain-model, flows, pages, resources).
-4. Report missing files before proceeding. If critical files are missing, stop and report to KNOWLEDGEBASE_CREATOR.
+2. If `manifest.generator` exists, treat `mxcli` as the expected default generator value.
+3. Verify `<run-folder>/general/` contains all 4 file pairs (app-info, user-roles, all-modules, marketplace-modules).
+4. For each module in the manifest artifact list, verify `<run-folder>/modules/<Module>/` contains all 4 file pairs (domain-model, flows, pages, resources).
+5. Report missing files before proceeding. If critical files are missing, stop and report to KNOWLEDGEBASE_CREATOR.
 
 ### Phase 2: Build app-level documentation
 

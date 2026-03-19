@@ -1,0 +1,137 @@
+{
+    "module":  "Notification",
+    "pages":  [
+                  {
+                      "qualifiedName":  "Notification.Notification_Overview_Read",
+                      "name":  "Notification_Overview_Read",
+                      "title":  "Read notifications",
+                      "layout":  "Notification.Notification_Layout",
+                      "allowedRoles":  [
+                                           "Notification.Inspector",
+                                           "Notification.Manager"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "DeleteClientAction",
+                                                "summary":  "DeleteClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Notification.Notification_Overview_Unread",
+                      "name":  "Notification_Overview_Unread",
+                      "title":  "Unread notifications",
+                      "layout":  "Notification.Notification_Layout",
+                      "allowedRoles":  [
+                                           "Notification.Inspector",
+                                           "Notification.Manager"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView1",
+                                              "sourceType":  "Microflow",
+                                              "entity":  null,
+                                              "constraint":  null,
+                                              "flowName":  "Inspection.DS_Task_GetFromNotification",
+                                              "summary":  "Microflow datasource: Inspection.DS_Task_GetFromNotification"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Notification.ACT_Notification_MarkAsRead",
+                                                "targetPage":  null,
+                                                "flowName":  "Notification.ACT_Notification_MarkAsRead"
+                                            },
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "DeleteClientAction",
+                                                "summary":  "DeleteClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+                                                   {
+                                                       "provenanceId":  "nav-7e56ca8a178b",
+                                                       "sourceType":  "MenuItem",
+                                                       "summary":  "Menu item \"Notifications\" in profile Responsive",
+                                                       "page":  "Notification.Notification_Overview_Unread",
+                                                       "userRole":  null,
+                                                       "flowName":  null
+                                                   }
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Notification.Script_Overview",
+                      "name":  "Script_Overview",
+                      "title":  "Script Overview",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Notification.Administrator"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Notification.TEMP_Notifications_AllDelete",
+                                                "targetPage":  null,
+                                                "flowName":  "Notification.TEMP_Notifications_AllDelete"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+                                                   {
+                                                       "provenanceId":  "nav-f86dfdf4607e",
+                                                       "sourceType":  "MenuItem",
+                                                       "summary":  "Menu item \"Scripts\" in profile Responsive",
+                                                       "page":  "Notification.Script_Overview",
+                                                       "userRole":  null,
+                                                       "flowName":  null
+                                                   }
+                                               ]
+                  }
+              ],
+    "snippets":  [
+
+                 ]
+}

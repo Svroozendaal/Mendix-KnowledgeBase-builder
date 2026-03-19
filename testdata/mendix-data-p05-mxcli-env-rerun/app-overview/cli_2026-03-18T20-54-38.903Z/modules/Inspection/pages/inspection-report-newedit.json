@@ -1,0 +1,66 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.Report_NewEdit",
+                  "stableId":  "Inspection.Report_NewEdit",
+                  "slug":  "inspection-report-newedit",
+                  "l0Path":  "knowledge-base/modules/Inspection/pages/inspection-report-newedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/pages/inspection-report-newedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/pages/inspection-report-newedit.json",
+                  "l2Logical":  "page:Inspection.Report_NewEdit",
+                  "sourceRun":  "cli_2026-03-18T20-54-38.903Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/pages/INDEX.json"
+              },
+    "qualifiedName":  "Inspection.Report_NewEdit",
+    "name":  "Report_NewEdit",
+    "title":  "Generate report",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "Inspection.Administrator",
+                         "Inspection.Manager"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "ReportHelper",
+                           "entityType":  "Inspection.ReportHelper"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        {
+                            "sourceId":  "dataView5",
+                            "sourceType":  "Parameter",
+                            "entity":  "Inspection.ReportHelper",
+                            "constraint":  null,
+                            "flowName":  null,
+                            "summary":  "Parameter datasource: $ReportHelper"
+                        }
+                    ],
+    "clientActions":  [
+                          {
+                              "actionId":  "actionButton3",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Report_Generate",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Report_Generate"
+                          },
+                          {
+                              "actionId":  "actionButton1",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Report_ApplyFilters",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Report_ApplyFilters"
+                          }
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

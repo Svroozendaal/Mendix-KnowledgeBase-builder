@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Atlas_Web_Content",
+                  "qualifiedName":  "Atlas_Web_Content.Phone_Dashboard_Springboard",
+                  "stableId":  "Atlas_Web_Content.Phone_Dashboard_Springboard",
+                  "slug":  "atlas-web-content-phone-dashboard-springboard",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-phone-dashboard-springboard.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-phone-dashboard-springboard.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/atlas-web-content-phone-dashboard-springboard.json",
+                  "l2Logical":  "page:Atlas_Web_Content.Phone_Dashboard_Springboard",
+                  "sourceRun":  "cli_2026-03-18T20-54-38.903Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/marketplace/Atlas_Web_Content/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/marketplace/Atlas_Web_Content/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/INDEX.json"
+              },
+    "qualifiedName":  "Atlas_Web_Content.Phone_Dashboard_Springboard",
+    "name":  "Phone_Dashboard_Springboard",
+    "title":  "Phone_Dashboard_Springboard",
+    "layout":  null,
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+
+                    ],
+    "clientActions":  [
+
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

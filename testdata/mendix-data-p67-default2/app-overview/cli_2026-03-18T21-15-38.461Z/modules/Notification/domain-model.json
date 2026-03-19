@@ -1,0 +1,138 @@
+{
+    "module":  "Notification",
+    "domainModel":  {
+                        "entities":  [
+                                         {
+                                             "name":  "Notification.Notification",
+                                             "isPersistable":  true,
+                                             "generalization":  null,
+                                             "attributes":  [
+                                                                {
+                                                                    "name":  "Title",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Message",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "isRead",
+                                                                    "type":  "BooleanAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  "false",
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "AssociatedObject",
+                                                                    "type":  "LongAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  "0",
+                                                                    "validationSummary":  null
+                                                                }
+                                                            ],
+                                             "accessRules":  [
+                                                                 {
+                                                                     "ruleKey":  "rule-1",
+                                                                     "moduleRoles":  [
+                                                                                         "Notification.Inspector"
+                                                                                     ],
+                                                                     "allowCreate":  false,
+                                                                     "allowDelete":  true,
+                                                                     "defaultMemberAccessRights":  null,
+                                                                     "xPathConstraint":  null,
+                                                                     "xPathEvidence":  null,
+                                                                     "memberAccesses":  [
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.Title",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "ReadOnly"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.Message",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "ReadOnly"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.isRead",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "ReadOnly"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.AssociatedObject",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification_Account",
+                                                                                                "memberKind":  "Association",
+                                                                                                "accessRights":  "ReadOnly"
+                                                                                            }
+                                                                                        ]
+                                                                 },
+                                                                 {
+                                                                     "ruleKey":  "rule-2",
+                                                                     "moduleRoles":  [
+                                                                                         "Notification.Manager"
+                                                                                     ],
+                                                                     "allowCreate":  false,
+                                                                     "allowDelete":  true,
+                                                                     "defaultMemberAccessRights":  null,
+                                                                     "xPathConstraint":  null,
+                                                                     "xPathEvidence":  null,
+                                                                     "memberAccesses":  [
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.Title",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "ReadWrite"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.Message",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "ReadWrite"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.isRead",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "ReadOnly"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification.AssociatedObject",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "Notification.Notification_Account",
+                                                                                                "memberKind":  "Association",
+                                                                                                "accessRights":  "ReadWrite"
+                                                                                            }
+                                                                                        ]
+                                                                 }
+                                                             ]
+                                         }
+                                     ],
+                        "associations":  [
+                                             {
+                                                 "name":  "Notification.Notification_Account",
+                                                 "parentEntity":  "Notification.Notification",
+                                                 "childEntity":  "Administration.Account",
+                                                 "cardinality":  "*-*",
+                                                 "type":  "ReferenceSet",
+                                                 "owner":  "Default",
+                                                 "storageFormat":  "Table"
+                                             }
+                                         ],
+                        "enumerations":  [
+
+                                         ]
+                    }
+}

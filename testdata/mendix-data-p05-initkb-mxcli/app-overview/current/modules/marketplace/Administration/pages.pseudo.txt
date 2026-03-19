@@ -1,0 +1,68 @@
+# Pages: Administration
+Pages: 10, Snippets: 0
+
+## Pages
+
+PAGE Administration.MyAccount
+  Title: "My Account"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Parameters: Account (Administration.Account)
+  Data sources: Parameter datasource: $Account
+  Client actions: MicroflowClientAction, flow=Administration.ShowMyPasswordForm
+
+PAGE Administration.ChangePasswordForm
+  Title: "Change Password"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Parameters: AccountPasswordData (Administration.AccountPasswordData)
+  Data sources: Parameter datasource: $AccountPasswordData
+  Client actions: MicroflowClientAction, flow=Administration.ChangePassword
+
+PAGE Administration.RuntimeInstances
+  Title: "Runtime Instances"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: Administration.Administrator
+
+PAGE Administration.UserRole_Select
+  Title: "Select user roles"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Administration.Administrator
+
+PAGE Administration.ScheduledEvents
+  Title: "Scheduled Events"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: Administration.Administrator
+
+PAGE Administration.Account_New
+  Title: "New Account"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Administration.Administrator
+  Parameters: AccountPasswordData (Administration.AccountPasswordData)
+  Data sources: Parameter datasource: $AccountPasswordData
+  Client actions: MicroflowClientAction, flow=Administration.SaveNewAccount
+
+PAGE Administration.Account_Edit
+  Title: "Account bewerken"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Administration.Administrator
+  Parameters: Account (Administration.Account)
+  Data sources: Parameter datasource: $Account
+
+PAGE Administration.Account_Overview
+  Title: "Accounts"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: Administration.Administrator
+  Navigation provenance: Menu item "Accounts" in profile Responsive
+
+PAGE Administration.ChangeMyPasswordForm
+  Title: "Wachtwoord veranderen"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Parameters: AccountPasswordData (Administration.AccountPasswordData)
+  Data sources: Parameter datasource: $AccountPasswordData
+  Client actions: MicroflowClientAction, flow=Administration.ChangeMyPassword
+
+PAGE Administration.ActiveSessions
+  Title: "Active Sessions"
+  Layout: Atlas_Core.Atlas_Default
+  Allowed roles: Administration.Administrator
+
+## Snippets

@@ -1,0 +1,209 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Notification",
+    "qualifiedName": "Notification.SUB_Notification_SendToInspector",
+    "stableId": "e177067f-ceb7-4f02-a440-2783e58cbad5",
+    "slug": "notification-sub-notification-sendtoinspector",
+    "l0Path": "knowledge-base/modules/Notification/flows/notification-sub-notification-sendtoinspector.abstract.md",
+    "l1Path": "knowledge-base/modules/Notification/flows/notification-sub-notification-sendtoinspector.overview.md",
+    "l2Path": "app-overview/current/modules/Notification/flows/notification-sub-notification-sendtoinspector.json",
+    "l2Logical": "flow:Notification.SUB_Notification_SendToInspector",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Notification/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Notification/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Notification/flows/INDEX.json"
+  },
+  "flowId": "e177067f-ceb7-4f02-a440-2783e58cbad5",
+  "kind": "Microflow",
+  "qualifiedName": "Notification.SUB_Notification_SendToInspector",
+  "module": "Notification",
+  "nodes": [
+    {
+      "nodeId": "b60142d5-c4fe-4af9-88da-3b9c0661acd8",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Notification.Notification as NewNotification (Title=\u0027An inspection task has been assigned to you on \u0027 \u002B formatDateTime([%CurrentDateTime%], \u0027dd/MM/yyyy\u0027), Notification_Account=$Account_Inspector, AssociatedObject=$Task/TaskID, Message=$Account_Assigner/FullName \u002B \u0027 has assigned a task to you.\u0027)",
+      "detail": "create Notification.Notification as NewNotification (Title=\u0027An inspection task has been assigned to you on \u0027 \u002B formatDateTime([%CurrentDateTime%], \u0027dd/MM/yyyy\u0027), Notification_Account=$Account_Inspector, AssociatedObject=$Task/TaskID, Message=$Account_Assigner/FullName \u002B \u0027 has assigned a task to you.\u0027)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "cd89ca78-9a31-4803-8035-a8f1b41894f5",
+      "nodeType": "ActionActivity",
+      "label": "MicroflowCallAction: call microflow Inspection.SUB_Account_GetFromInspector -\u003E Account_Inspector",
+      "detail": "call microflow Inspection.SUB_Account_GetFromInspector -\u003E Account_Inspector",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": [
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "Inspection.SUB_Account_GetFromInspector",
+          "sourceNodeId": "cd89ca78-9a31-4803-8035-a8f1b41894f5"
+        }
+      ]
+    },
+    {
+      "nodeId": "8ed00d42-1c99-48f6-b2ce-3e0c58fe9751",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve Account_Assigner from Administration.Account",
+      "detail": "retrieve Account_Assigner from Administration.Account",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "25414eba-a62b-409e-9e52-873a1b5c9041",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve Inspector over association Task_Inspector from Task",
+      "detail": "retrieve Inspector over association Task_Inspector from Task",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "e48aa51c-ba52-48f4-8400-27e4ee1e6a01",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f9121f34-0147-4a4e-a966-55860c4b5acc",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "25912d6b-89de-4b11-9b40-6796f76eee22",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "1d01ae21-d825-492a-ac9f-103035acafcf",
+      "originNodeId": "25912d6b-89de-4b11-9b40-6796f76eee22",
+      "destinationNodeId": "25414eba-a62b-409e-9e52-873a1b5c9041",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "5ef78f75-e701-41c2-8950-81f64aa9bcc5",
+      "originNodeId": "b60142d5-c4fe-4af9-88da-3b9c0661acd8",
+      "destinationNodeId": "e48aa51c-ba52-48f4-8400-27e4ee1e6a01",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "0f73e5ce-a2cd-46f7-a536-71640bab4887",
+      "originNodeId": "8ed00d42-1c99-48f6-b2ce-3e0c58fe9751",
+      "destinationNodeId": "b60142d5-c4fe-4af9-88da-3b9c0661acd8",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "d6d0c4da-d58d-4d7e-b3bf-6d93875f7821",
+      "originNodeId": "25414eba-a62b-409e-9e52-873a1b5c9041",
+      "destinationNodeId": "cd89ca78-9a31-4803-8035-a8f1b41894f5",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "fcc7aa72-eb4a-4506-8c1a-9b5bc43e32eb",
+      "originNodeId": "cd89ca78-9a31-4803-8035-a8f1b41894f5",
+      "destinationNodeId": "8ed00d42-1c99-48f6-b2ce-3e0c58fe9751",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [
+    {
+      "callKind": "Microflow",
+      "targetFlowName": "Inspection.SUB_Account_GetFromInspector",
+      "sourceNodeId": "cd89ca78-9a31-4803-8035-a8f1b41894f5"
+    }
+  ],
+  "startNodeIds": [
+    "25912d6b-89de-4b11-9b40-6796f76eee22"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "25912d6b-89de-4b11-9b40-6796f76eee22",
+    "25414eba-a62b-409e-9e52-873a1b5c9041",
+    "cd89ca78-9a31-4803-8035-a8f1b41894f5",
+    "8ed00d42-1c99-48f6-b2ce-3e0c58fe9751",
+    "b60142d5-c4fe-4af9-88da-3b9c0661acd8",
+    "e48aa51c-ba52-48f4-8400-27e4ee1e6a01"
+  ],
+  "pseudocode": "FLOW Microflow: Notification.SUB_Notification_SendToInspector\r\nNODES=7; EDGES=5\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Inspector over association Task_Inspector from Task\r\n3. ACTION MicroflowCallAction: call microflow Inspection.SUB_Account_GetFromInspector -\u003E Account_Inspector\r\n4. ACTION RetrieveAction: retrieve Account_Assigner from Administration.Account\r\n5. ACTION CreateObjectAction: create Notification.Notification as NewNotification (Title=\u0027An inspection task has been assigned to you on \u0027 \u002B formatDateTime([%CurrentDateTime%], \u0027dd/MM/yyyy\u0027), Notification_Account=$Account_Inspector, AssociatedObject=$Task/TaskID, Message=$Account_Assigner/FullName \u002B \u0027 has assigned a task to you.\u0027)\r\n6. END",
+  "retrieveActions": [
+    {
+      "nodeId": "25414eba-a62b-409e-9e52-873a1b5c9041",
+      "summary": "RetrieveAction: retrieve Inspector over association Task_Inspector from Task retrieve Inspector over association Task_Inspector from Task",
+      "sourceKind": "Association",
+      "entity": null,
+      "association": "Task_Inspector",
+      "xPath": null
+    },
+    {
+      "nodeId": "8ed00d42-1c99-48f6-b2ce-3e0c58fe9751",
+      "summary": "RetrieveAction: retrieve Account_Assigner from Administration.Account retrieve Account_Assigner from Administration.Account",
+      "sourceKind": "Database",
+      "entity": "Administration.Account",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "b60142d5-c4fe-4af9-88da-3b9c0661acd8",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Notification.Notification as NewNotification (Title=\u0027An inspection task has been assigned to you on \u0027 \u002B formatDateTime([%CurrentDateTime%], \u0027dd/MM/yyyy\u0027), Notification_Account=$Account_Inspecto...",
+      "entity": "Notification.Notification",
+      "memberSummary": "Title=\u0027An inspection task has been assigned to you on \u0027 \u002B formatDateTime([%CurrentDateTime%], \u0027dd/MM/yyyy\u0027"
+    }
+  ],
+  "callEdges": [
+    {
+      "callerModule": "Inspection",
+      "callerFlow": "Inspection.ACT_Task_Save",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "06414055-0510-4875-a807-4c1039ad0566",
+      "targetModule": "Notification",
+      "targetFlow": "Notification.SUB_Notification_SendToInspector",
+      "isInternal": true
+    },
+    {
+      "callerModule": "Notification",
+      "callerFlow": "Notification.SUB_Notification_SendToInspector",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "cd89ca78-9a31-4803-8035-a8f1b41894f5",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.SUB_Account_GetFromInspector",
+      "isInternal": true
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.DS_UserRole_GetFromCurrentUser",
+    "stableId": "f30baa04-ff29-4fbc-8040-32becd095cec",
+    "slug": "inspection-ds-userrole-getfromcurrentuser",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-ds-userrole-getfromcurrentuser.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-ds-userrole-getfromcurrentuser.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-ds-userrole-getfromcurrentuser.json",
+    "l2Logical": "flow:Inspection.DS_UserRole_GetFromCurrentUser",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "f30baa04-ff29-4fbc-8040-32becd095cec",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.DS_UserRole_GetFromCurrentUser",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "ac0d0683-9f35-456d-80c1-1d814d0bdfdf",
+      "nodeType": "ActionActivity",
+      "label": "ListOperationAction: ListOperationAction (output=ManagerRole, errorHandlingType=Rollback)",
+      "detail": "ListOperationAction (output=ManagerRole, errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ea4f8ae2-9698-4d3a-be12-12f6a402dac4",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve AccountCurrent from Administration.Account",
+      "detail": "retrieve AccountCurrent from Administration.Account",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "fc9458b6-b7f9-4a20-8b88-181041ed0c1d",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve UserRoleList over association UserRoles from AccountCurrent",
+      "detail": "retrieve UserRoleList over association UserRoles from AccountCurrent",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "a779c6f1-0572-432a-a3ad-25be8736c5b5",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "509b49f4-df35-4a47-a22a-38387376f63e",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "41cac732-10a4-4949-a392-5fd0f005499b",
+      "originNodeId": "509b49f4-df35-4a47-a22a-38387376f63e",
+      "destinationNodeId": "ea4f8ae2-9698-4d3a-be12-12f6a402dac4",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "8dd841e4-a636-488d-a3e6-ffd0c7fef2c5",
+      "originNodeId": "ea4f8ae2-9698-4d3a-be12-12f6a402dac4",
+      "destinationNodeId": "fc9458b6-b7f9-4a20-8b88-181041ed0c1d",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "829d8c53-2538-45b8-9332-0eb0538bcd2f",
+      "originNodeId": "fc9458b6-b7f9-4a20-8b88-181041ed0c1d",
+      "destinationNodeId": "ac0d0683-9f35-456d-80c1-1d814d0bdfdf",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "f5f318e4-d8e8-46ee-bd42-35ad32525a91",
+      "originNodeId": "ac0d0683-9f35-456d-80c1-1d814d0bdfdf",
+      "destinationNodeId": "a779c6f1-0572-432a-a3ad-25be8736c5b5",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "509b49f4-df35-4a47-a22a-38387376f63e"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "509b49f4-df35-4a47-a22a-38387376f63e",
+    "ea4f8ae2-9698-4d3a-be12-12f6a402dac4",
+    "fc9458b6-b7f9-4a20-8b88-181041ed0c1d",
+    "ac0d0683-9f35-456d-80c1-1d814d0bdfdf",
+    "a779c6f1-0572-432a-a3ad-25be8736c5b5"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.DS_UserRole_GetFromCurrentUser\r\nNODES=5; EDGES=4\r\n1. START\r\n2. ACTION RetrieveAction: retrieve AccountCurrent from Administration.Account\r\n3. ACTION RetrieveAction: retrieve UserRoleList over association UserRoles from AccountCurrent\r\n4. ACTION ListOperationAction: ListOperationAction (output=ManagerRole, errorHandlingType=Rollback)\r\n5. END",
+  "retrieveActions": [
+    {
+      "nodeId": "ea4f8ae2-9698-4d3a-be12-12f6a402dac4",
+      "summary": "RetrieveAction: retrieve AccountCurrent from Administration.Account retrieve AccountCurrent from Administration.Account",
+      "sourceKind": "Database",
+      "entity": "Administration.Account",
+      "association": null,
+      "xPath": null
+    },
+    {
+      "nodeId": "fc9458b6-b7f9-4a20-8b88-181041ed0c1d",
+      "summary": "RetrieveAction: retrieve UserRoleList over association UserRoles from AccountCurrent retrieve UserRoleList over association UserRoles from AccountCurrent",
+      "sourceKind": "Association",
+      "entity": null,
+      "association": "UserRoles",
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [],
+  "callEdges": [
+    {
+      "callerModule": "Inspection",
+      "callerFlow": "Inspection.VAL_Task_Validate",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "53273f40-9491-4ee3-bd94-44671cf89478",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.DS_UserRole_GetFromCurrentUser",
+      "isInternal": true
+    }
+  ]
+}

@@ -1,0 +1,332 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_Assessory_Book",
+    "stableId": "55c66afc-5ad1-4865-aa64-1fb050493d8e",
+    "slug": "inspection-act-assessory-book",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-assessory-book.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-assessory-book.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-assessory-book.json",
+    "l2Logical": "flow:Inspection.ACT_Assessory_Book",
+    "sourceRun": "cli_2026-03-18T20-52-48.461Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "55c66afc-5ad1-4865-aa64-1fb050493d8e",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_Assessory_Book",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "3d02d895-4b71-4d28-83fa-fd06c79ea4c6",
+      "nodeType": "ActionActivity",
+      "label": "ChangeObjectAction: change Accessory (AmountInStock=$Accessory/AmountInStock - 1; refreshInClient=false)",
+      "detail": "change Accessory (AmountInStock=$Accessory/AmountInStock - 1; refreshInClient=false)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "9ef8b7c5-87d3-4837-8c72-2f1da7072013",
+      "nodeType": "ActionActivity",
+      "label": "ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Almost_out_of_stock; refreshInClient=true)",
+      "detail": "change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Almost_out_of_stock; refreshInClient=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "2c877347-bad9-46f1-8c6f-009ff5c46b35",
+      "nodeType": "ActionActivity",
+      "label": "ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Out_of_stock; refreshInClient=true)",
+      "detail": "change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Out_of_stock; refreshInClient=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "01b751fd-96a8-4fb8-9632-9ab248b3d201",
+      "nodeType": "ActionActivity",
+      "label": "CommitAction: commit Accessory (refreshInClient=true, withEvents=true)",
+      "detail": "commit Accessory (refreshInClient=true, withEvents=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "1d608ede-d45c-4cfc-b5bb-02686daa62f2",
+      "nodeType": "ActionActivity",
+      "label": "ShowMessageAction: show message (text=This assessory is currently out of stock., type=Information, blocking=true)",
+      "detail": "show message (text=This assessory is currently out of stock., type=Information, blocking=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "53a0bdb8-5126-4af8-aadf-ddfa260c46ed",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "6c31dbe2-c0ce-46f1-a551-f345188be6e4",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "839a3b24-c7ba-4c13-90ad-e077dd2a1133",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f8df80f5-09d5-4a82-aa62-f993d3fc2511",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "e81512f0-6fc5-4b32-8720-10969939402a",
+      "nodeType": "ExclusiveSplit",
+      "label": "AmountInStock = 0 expression=$Accessory/AmountInStock = 0",
+      "detail": "AmountInStock = 0 expression=$Accessory/AmountInStock = 0",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "db6617a7-02f6-4187-a1c6-a78aa104740d",
+      "nodeType": "ExclusiveSplit",
+      "label": "AmountInStock \u003E 10? expression=$Accessory/AmountInStock \u003E 10",
+      "detail": "AmountInStock \u003E 10? expression=$Accessory/AmountInStock \u003E 10",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "4f9c3c8e-cc0f-4985-a28a-d74bbf32079b",
+      "nodeType": "ExclusiveSplit",
+      "label": "IsStock? expression=$Accessory/AmountInStock != 0",
+      "detail": "IsStock? expression=$Accessory/AmountInStock != 0",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "2e69910e-4cec-427e-8a8e-133d49356bbe",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "37ae0fcc-b86f-45f6-b48d-84e7fcb9949a",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "282f519e-a7f6-4525-9ecb-3d1e1490d176",
+      "originNodeId": "37ae0fcc-b86f-45f6-b48d-84e7fcb9949a",
+      "destinationNodeId": "4f9c3c8e-cc0f-4985-a28a-d74bbf32079b",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "111bccfa-c535-480e-90d3-f7f6e582e80b",
+      "originNodeId": "3d02d895-4b71-4d28-83fa-fd06c79ea4c6",
+      "destinationNodeId": "db6617a7-02f6-4187-a1c6-a78aa104740d",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "2105b0ef-eb99-45f8-aa8d-e10a1b600298",
+      "originNodeId": "4f9c3c8e-cc0f-4985-a28a-d74bbf32079b",
+      "destinationNodeId": "3d02d895-4b71-4d28-83fa-fd06c79ea4c6",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "f0571919-b58b-47a0-b323-a6360354ac03",
+      "originNodeId": "4f9c3c8e-cc0f-4985-a28a-d74bbf32079b",
+      "destinationNodeId": "1d608ede-d45c-4cfc-b5bb-02686daa62f2",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "0c5d59b8-9568-4eb6-aa54-944f0eebfaec",
+      "originNodeId": "1d608ede-d45c-4cfc-b5bb-02686daa62f2",
+      "destinationNodeId": "53a0bdb8-5126-4af8-aadf-ddfa260c46ed",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "a5593b13-8f56-4447-ab9e-e9abef841b5b",
+      "originNodeId": "db6617a7-02f6-4187-a1c6-a78aa104740d",
+      "destinationNodeId": "01b751fd-96a8-4fb8-9632-9ab248b3d201",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "aa183776-b14c-408c-abfa-98666e437526",
+      "originNodeId": "db6617a7-02f6-4187-a1c6-a78aa104740d",
+      "destinationNodeId": "e81512f0-6fc5-4b32-8720-10969939402a",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "a6d0eb93-542c-4fa2-a24e-fb067db0d5ec",
+      "originNodeId": "e81512f0-6fc5-4b32-8720-10969939402a",
+      "destinationNodeId": "9ef8b7c5-87d3-4837-8c72-2f1da7072013",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "c6a83201-bba8-4b17-82c4-36b8e0712089",
+      "originNodeId": "e81512f0-6fc5-4b32-8720-10969939402a",
+      "destinationNodeId": "2c877347-bad9-46f1-8c6f-009ff5c46b35",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "7d0e20db-172c-4b74-8c97-5ed1e6bc3501",
+      "originNodeId": "2c877347-bad9-46f1-8c6f-009ff5c46b35",
+      "destinationNodeId": "839a3b24-c7ba-4c13-90ad-e077dd2a1133",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "8e556e27-a29a-417e-925f-1f08172582a3",
+      "originNodeId": "9ef8b7c5-87d3-4837-8c72-2f1da7072013",
+      "destinationNodeId": "6c31dbe2-c0ce-46f1-a551-f345188be6e4",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "6c7e53db-86b1-4aef-a805-ab99fdfe0858",
+      "originNodeId": "01b751fd-96a8-4fb8-9632-9ab248b3d201",
+      "destinationNodeId": "f8df80f5-09d5-4a82-aa62-f993d3fc2511",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "37ae0fcc-b86f-45f6-b48d-84e7fcb9949a"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "37ae0fcc-b86f-45f6-b48d-84e7fcb9949a",
+    "4f9c3c8e-cc0f-4985-a28a-d74bbf32079b",
+    "3d02d895-4b71-4d28-83fa-fd06c79ea4c6",
+    "db6617a7-02f6-4187-a1c6-a78aa104740d",
+    "01b751fd-96a8-4fb8-9632-9ab248b3d201",
+    "f8df80f5-09d5-4a82-aa62-f993d3fc2511",
+    "e81512f0-6fc5-4b32-8720-10969939402a",
+    "2c877347-bad9-46f1-8c6f-009ff5c46b35",
+    "839a3b24-c7ba-4c13-90ad-e077dd2a1133",
+    "9ef8b7c5-87d3-4837-8c72-2f1da7072013",
+    "6c31dbe2-c0ce-46f1-a551-f345188be6e4",
+    "1d608ede-d45c-4cfc-b5bb-02686daa62f2",
+    "53a0bdb8-5126-4af8-aadf-ddfa260c46ed"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_Assessory_Book\r\nNODES=14; EDGES=12\r\n1. START\r\n2. DECISION IsStock? expression=$Accessory/AmountInStock != 0\r\n3. BRANCH when EnumerationCase=true\r\n  4. ACTION ChangeObjectAction: change Accessory (AmountInStock=$Accessory/AmountInStock - 1; refreshInClient=false)\r\n  5. DECISION AmountInStock \u003E 10? expression=$Accessory/AmountInStock \u003E 10\r\n  6. BRANCH when EnumerationCase=true\r\n    7. ACTION CommitAction: commit Accessory (refreshInClient=true, withEvents=true)\r\n    8. END\r\n  9. BRANCH when EnumerationCase=false\r\n    10. DECISION AmountInStock = 0 expression=$Accessory/AmountInStock = 0\r\n    11. BRANCH when EnumerationCase=true\r\n      12. ACTION ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Out_of_stock; refreshInClient=true)\r\n      13. END\r\n    14. BRANCH when EnumerationCase=false\r\n      15. ACTION ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Almost_out_of_stock; refreshInClient=true)\r\n      16. END\r\n17. BRANCH when EnumerationCase=false\r\n  18. ACTION ShowMessageAction: show message (text=This assessory is currently out of stock., type=Information, blocking=true)\r\n  19. END",
+  "retrieveActions": [],
+  "decisionActions": [
+    {
+      "nodeId": "4f9c3c8e-cc0f-4985-a28a-d74bbf32079b",
+      "summary": "IsStock? expression=$Accessory/AmountInStock != 0 IsStock? expression=$Accessory/AmountInStock != 0",
+      "caption": "IsStock?",
+      "expression": "$Accessory/AmountInStock != 0 IsStock? expression=$Accessory/AmountInStock != 0"
+    },
+    {
+      "nodeId": "db6617a7-02f6-4187-a1c6-a78aa104740d",
+      "summary": "AmountInStock \u003E 10? expression=$Accessory/AmountInStock \u003E 10 AmountInStock \u003E 10? expression=$Accessory/AmountInStock \u003E 10",
+      "caption": "AmountInStock \u003E 10?",
+      "expression": "$Accessory/AmountInStock \u003E 10 AmountInStock \u003E 10? expression=$Accessory/AmountInStock \u003E 10"
+    },
+    {
+      "nodeId": "e81512f0-6fc5-4b32-8720-10969939402a",
+      "summary": "AmountInStock = 0 expression=$Accessory/AmountInStock = 0 AmountInStock = 0 expression=$Accessory/AmountInStock = 0",
+      "caption": "AmountInStock = 0",
+      "expression": "$Accessory/AmountInStock = 0 AmountInStock = 0 expression=$Accessory/AmountInStock = 0"
+    }
+  ],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "01b751fd-96a8-4fb8-9632-9ab248b3d201",
+      "actionKind": "Commit",
+      "summary": "CommitAction: commit Accessory (refreshInClient=true, withEvents=true) commit Accessory (refreshInClient=true, withEvents=true)",
+      "entity": null,
+      "memberSummary": "refreshInClient=true, withEvents=true"
+    },
+    {
+      "nodeId": "2c877347-bad9-46f1-8c6f-009ff5c46b35",
+      "actionKind": "Change",
+      "summary": "ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Out_of_stock; refreshInClient=true) change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Out_of_stock; refreshInClient=...",
+      "entity": "Inspection.ENUM_Accessory_Status",
+      "memberSummary": "EquipmentStatus=Inspection.ENUM_Accessory_Status.Out_of_stock; refreshInClient=true"
+    },
+    {
+      "nodeId": "3d02d895-4b71-4d28-83fa-fd06c79ea4c6",
+      "actionKind": "Change",
+      "summary": "ChangeObjectAction: change Accessory (AmountInStock=$Accessory/AmountInStock - 1; refreshInClient=false) change Accessory (AmountInStock=$Accessory/AmountInStock - 1; refreshInClient=false)",
+      "entity": null,
+      "memberSummary": "AmountInStock=$Accessory/AmountInStock - 1; refreshInClient=false"
+    },
+    {
+      "nodeId": "9ef8b7c5-87d3-4837-8c72-2f1da7072013",
+      "actionKind": "Change",
+      "summary": "ChangeObjectAction: change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Almost_out_of_stock; refreshInClient=true) change Accessory (EquipmentStatus=Inspection.ENUM_Accessory_Status.Almost_out_of_stock; re...",
+      "entity": "Inspection.ENUM_Accessory_Status",
+      "memberSummary": "EquipmentStatus=Inspection.ENUM_Accessory_Status.Almost_out_of_stock; refreshInClient=true"
+    }
+  ],
+  "callEdges": []
+}

@@ -1,0 +1,1027 @@
+{
+    "module":  "Inspection",
+    "pages":  [
+                  {
+                      "qualifiedName":  "Inspection.Account_LoginPage_SplitLeft",
+                      "name":  "Account_LoginPage_SplitLeft",
+                      "title":  "Emixa Inspection App",
+                      "layout":  "Inspection.Emixa_Login",
+                      "allowedRoles":  [
+                                           "Inspection.Anonymous"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  "loginpage-splitleft",
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Registration_Create",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Registration_Create"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+                                                   {
+                                                       "provenanceId":  "nav-06c6cc5ea848",
+                                                       "sourceType":  "HomePage",
+                                                       "summary":  "Homepage in profile Responsive",
+                                                       "page":  "Inspection.Account_LoginPage_SplitLeft",
+                                                       "userRole":  null,
+                                                       "flowName":  null
+                                                   }
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Assessory_NewEdit",
+                      "name":  "Assessory_NewEdit",
+                      "title":  "Edit Equipment",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "Accessory",
+                                             "entityType":  "Inspection.Accessory"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView1",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.Accessory",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $Accessory"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "SaveChangesClientAction",
+                                                "summary":  "SaveChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.CoverPhoto_NewEdit",
+                      "name":  "CoverPhoto_NewEdit",
+                      "title":  "Edit profile image",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "CoverPhoto",
+                                             "entityType":  "Inspection.CoverPhoto"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView5",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.CoverPhoto",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $CoverPhoto"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_CoverPhoto_Save",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_CoverPhoto_Save"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Dashboard_Home",
+                      "name":  "Dashboard_Home",
+                      "title":  "Dashboard",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Administrator",
+                                           "Inspection.Inspector",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton15",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.Task_Overview",
+                                                "targetPage":  "Inspection.Task_Overview",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton22",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.InspectionItem_Overview",
+                                                "targetPage":  "Inspection.InspectionItem_Overview",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton19",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.InspectionItem_Overview",
+                                                "targetPage":  "Inspection.InspectionItem_Overview",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton21",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.Inspector_Overview",
+                                                "targetPage":  "Inspection.Inspector_Overview",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton20",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.Inspector_Account_NewEdit",
+                                                "targetPage":  "Inspection.Inspector_Account_NewEdit",
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+                                                   {
+                                                       "provenanceId":  "nav-386117d90325",
+                                                       "sourceType":  "RoleBasedHomePage",
+                                                       "summary":  "Role-based homepage in profile Responsive for role Administrator",
+                                                       "page":  "Inspection.Dashboard_Home",
+                                                       "userRole":  "Administrator",
+                                                       "flowName":  null
+                                                   },
+                                                   {
+                                                       "provenanceId":  "nav-2620a9570aee",
+                                                       "sourceType":  "MenuItem",
+                                                       "summary":  "Menu item \"Dashboard\" in profile Responsive",
+                                                       "page":  "Inspection.Dashboard_Home",
+                                                       "userRole":  null,
+                                                       "flowName":  null
+                                                   },
+                                                   {
+                                                       "provenanceId":  "nav-83d2ebd720ba",
+                                                       "sourceType":  "RoleBasedHomePage",
+                                                       "summary":  "Role-based homepage in profile Responsive for role Inspector",
+                                                       "page":  "Inspection.Dashboard_Home",
+                                                       "userRole":  "Inspector",
+                                                       "flowName":  null
+                                                   },
+                                                   {
+                                                       "provenanceId":  "nav-91235d430945",
+                                                       "sourceType":  "RoleBasedHomePage",
+                                                       "summary":  "Role-based homepage in profile Responsive for role Manager",
+                                                       "page":  "Inspection.Dashboard_Home",
+                                                       "userRole":  "Manager",
+                                                       "flowName":  null
+                                                   }
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Equipment_Overview",
+                      "name":  "Equipment_Overview",
+                      "title":  "Equipment Overview",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Inspector",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataGrid2",
+                                              "sourceType":  "Database",
+                                              "entity":  "Inspection.Accessory",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Database datasource: Inspection.Accessory"
+                                          },
+                                          {
+                                              "sourceId":  "dataGrid3",
+                                              "sourceType":  "Database",
+                                              "entity":  "Inspection.Tool",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Database datasource: Inspection.Tool"
+                                          },
+                                          {
+                                              "sourceId":  "dataView1",
+                                              "sourceType":  "Microflow",
+                                              "entity":  null,
+                                              "constraint":  null,
+                                              "flowName":  "Inspection.DS_Booking_RetrieveUpcomming",
+                                              "summary":  "Microflow datasource: Inspection.DS_Booking_RetrieveUpcomming"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Accessory_Create",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Accessory_Create"
+                                            },
+                                            {
+                                                "actionId":  "actionButton7",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.Assessory_NewEdit",
+                                                "targetPage":  "Inspection.Assessory_NewEdit",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Assessory_Delete",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Assessory_Delete"
+                                            },
+                                            {
+                                                "actionId":  "actionButton6",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Tool_Create",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Tool_Create"
+                                            },
+                                            {
+                                                "actionId":  "actionButton4",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.Tool_NewEdit",
+                                                "targetPage":  "Inspection.Tool_NewEdit",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton8",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Tool_Delete",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Tool_Delete"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+                                                   {
+                                                       "provenanceId":  "nav-da4df37641fa",
+                                                       "sourceType":  "MenuItem",
+                                                       "summary":  "Menu item \"Equipment management\" in profile Responsive",
+                                                       "page":  "Inspection.Equipment_Overview",
+                                                       "userRole":  null,
+                                                       "flowName":  null
+                                                   }
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.InspectionItem_FromDashboard",
+                      "name":  "InspectionItem_FromDashboard",
+                      "title":  "Inspection Items",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Administrator",
+                                           "Inspection.Inspector",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "InspectionItem",
+                                             "entityType":  "Inspection.InspectionItem"
+                                         }
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView1",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.InspectionItem",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $InspectionItem"
+                                          }
+                                      ],
+                      "clientActions":  [
+
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.InspectionItem_NewEdit",
+                      "name":  "InspectionItem_NewEdit",
+                      "title":  "Edit Inspection Item",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "InspectionItem",
+                                             "entityType":  "Inspection.InspectionItem"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView5",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.InspectionItem",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $InspectionItem"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "SaveChangesClientAction",
+                                                "summary":  "SaveChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.InspectionItem_Overview",
+                      "name":  "InspectionItem_Overview",
+                      "title":  "Inspection Items",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Inspector",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "CreateObjectClientAction",
+                                                "summary":  "CreateObjectClientAction, page=Inspection.InspectionItem_NewEdit",
+                                                "targetPage":  "Inspection.InspectionItem_NewEdit",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Task_Create",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Task_Create"
+                                            },
+                                            {
+                                                "actionId":  "actionButton4",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.InspectionItem_NewEdit",
+                                                "targetPage":  "Inspection.InspectionItem_NewEdit",
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Inspector_Account_NewEdit",
+                      "name":  "Inspector_Account_NewEdit",
+                      "title":  "Inspector Account New edit",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Inspector"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "SaveChangesClientAction",
+                                                "summary":  "SaveChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Inspector_NewEdit",
+                      "name":  "Inspector_NewEdit",
+                      "title":  "Edit Inspector",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Administrator",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "Inspector",
+                                             "entityType":  "Inspection.Inspector"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView5",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.Inspector",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $Inspector"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton3",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_InspectorPhoto_Create",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_InspectorPhoto_Create"
+                                            },
+                                            {
+                                                "actionId":  "actionButton4",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.InspectorPhoto_NewEdit",
+                                                "targetPage":  "Inspection.InspectorPhoto_NewEdit",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Inspector_Save",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Inspector_Save"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Inspector_Overview",
+                      "name":  "Inspector_Overview",
+                      "title":  "Inspectors",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Administrator",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "CreateObjectClientAction",
+                                                "summary":  "CreateObjectClientAction, page=Inspection.Inspector_NewEdit",
+                                                "targetPage":  "Inspection.Inspector_NewEdit",
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "DeleteClientAction",
+                                                "summary":  "DeleteClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton5",
+                                                "actionType":  "PageClientAction",
+                                                "summary":  "PageClientAction, page=Inspection.Inspector_NewEdit",
+                                                "targetPage":  "Inspection.Inspector_NewEdit",
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+                                                   {
+                                                       "provenanceId":  "nav-d1de63e68224",
+                                                       "sourceType":  "MenuItem",
+                                                       "summary":  "Menu item \"Inspectors\" in profile Responsive",
+                                                       "page":  "Inspection.Inspector_Overview",
+                                                       "userRole":  null,
+                                                       "flowName":  null
+                                                   }
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.InspectorPhoto_NewEdit",
+                      "name":  "InspectorPhoto_NewEdit",
+                      "title":  "Edit profile image",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "InspectorPhoto",
+                                             "entityType":  "Inspection.InspectorPhoto"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView5",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.InspectorPhoto",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $InspectorPhoto"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "SaveChangesClientAction",
+                                                "summary":  "SaveChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Registration_NewEdit",
+                      "name":  "Registration_NewEdit",
+                      "title":  "Edit Registration",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "Registration",
+                                             "entityType":  "Inspection.Registration"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView5",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.Registration",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $Registration"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Registration_Save",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Registration_Save"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Report_NewEdit",
+                      "name":  "Report_NewEdit",
+                      "title":  "Generate report",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Administrator",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "ReportHelper",
+                                             "entityType":  "Inspection.ReportHelper"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView5",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.ReportHelper",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $ReportHelper"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton3",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Report_Generate",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Report_Generate"
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Report_ApplyFilters",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Report_ApplyFilters"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Task_NewEdit",
+                      "name":  "Task_NewEdit",
+                      "title":  "Edit Smart Task",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Inspector",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "Task",
+                                             "entityType":  "Inspection.Task"
+                                         }
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView5",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.Task",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $Task"
+                                          },
+                                          {
+                                              "sourceId":  "dataView1",
+                                              "sourceType":  "Microflow",
+                                              "entity":  null,
+                                              "constraint":  null,
+                                              "flowName":  "Inspection.DS_UserRole_GetFromCurrentUser",
+                                              "summary":  "Microflow datasource: Inspection.DS_UserRole_GetFromCurrentUser"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton3",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_CoverPhoto_Create",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_CoverPhoto_Create"
+                                            },
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton6",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Task_SetToDone",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Task_SetToDone"
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Task_Save",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Task_Save"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Task_Overview",
+                      "name":  "Task_Overview",
+                      "title":  "Tasks",
+                      "layout":  "Inspection.Emixa_Custom",
+                      "allowedRoles":  [
+                                           "Inspection.Inspector",
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+
+                                     ],
+                      "isPopup":  false,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_ReportHelper_Create",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_ReportHelper_Create"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+                                                   {
+                                                       "provenanceId":  "nav-0b8433523d3e",
+                                                       "sourceType":  "MenuItem",
+                                                       "summary":  "Menu item \"Tasks\" in profile Responsive",
+                                                       "page":  "Inspection.Task_Overview",
+                                                       "userRole":  null,
+                                                       "flowName":  null
+                                                   }
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Tool_Book",
+                      "name":  "Tool_Book",
+                      "title":  "Edit Equipment",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "Tool",
+                                             "entityType":  "Inspection.Tool"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView1",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.Tool",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $Tool"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "MicroflowClientAction",
+                                                "summary":  "MicroflowClientAction, flow=Inspection.ACT_Tool_Validate",
+                                                "targetPage":  null,
+                                                "flowName":  "Inspection.ACT_Tool_Validate"
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  },
+                  {
+                      "qualifiedName":  "Inspection.Tool_NewEdit",
+                      "name":  "Tool_NewEdit",
+                      "title":  "Edit Equipment",
+                      "layout":  "Atlas_Core.PopupLayout",
+                      "allowedRoles":  [
+                                           "Inspection.Manager"
+                                       ],
+                      "parameters":  [
+                                         {
+                                             "name":  "Tool",
+                                             "entityType":  "Inspection.Tool"
+                                         }
+                                     ],
+                      "isPopup":  true,
+                      "popupWidth":  0,
+                      "popupHeight":  0,
+                      "popupResizable":  true,
+                      "url":  null,
+                      "excluded":  false,
+                      "dataSources":  [
+                                          {
+                                              "sourceId":  "dataView1",
+                                              "sourceType":  "Parameter",
+                                              "entity":  "Inspection.Tool",
+                                              "constraint":  null,
+                                              "flowName":  null,
+                                              "summary":  "Parameter datasource: $Tool"
+                                          }
+                                      ],
+                      "clientActions":  [
+                                            {
+                                                "actionId":  "actionButton2",
+                                                "actionType":  "CancelChangesClientAction",
+                                                "summary":  "CancelChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            },
+                                            {
+                                                "actionId":  "actionButton1",
+                                                "actionType":  "SaveChangesClientAction",
+                                                "summary":  "SaveChangesClientAction",
+                                                "targetPage":  null,
+                                                "flowName":  null
+                                            }
+                                        ],
+                      "navigationProvenance":  [
+
+                                               ]
+                  }
+              ],
+    "snippets":  [
+                     {
+                         "qualifiedName":  "Inspection.SNP_InspectionItem_Details",
+                         "name":  "SNP_InspectionItem_Details",
+                         "type":  "Web",
+                         "parameters":  [
+
+                                        ]
+                     },
+                     {
+                         "qualifiedName":  "Inspection.SNP_InspectionItem_Image",
+                         "name":  "SNP_InspectionItem_Image",
+                         "type":  "Web",
+                         "parameters":  [
+
+                                        ]
+                     },
+                     {
+                         "qualifiedName":  "Inspection.SNP_Task_Overview",
+                         "name":  "SNP_Task_Overview",
+                         "type":  "Web",
+                         "parameters":  [
+
+                                        ]
+                     },
+                     {
+                         "qualifiedName":  "Inspection.SNP_Task_Select",
+                         "name":  "SNP_Task_Select",
+                         "type":  "Web",
+                         "parameters":  [
+
+                                        ]
+                     }
+                 ]
+}

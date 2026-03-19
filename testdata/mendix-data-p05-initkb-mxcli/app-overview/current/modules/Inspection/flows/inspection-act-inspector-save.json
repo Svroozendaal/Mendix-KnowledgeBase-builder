@@ -1,0 +1,194 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_Inspector_Save",
+                  "stableId":  "5407b316-96ac-43e0-9d61-c483a9334092",
+                  "slug":  "inspection-act-inspector-save",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-inspector-save.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-inspector-save.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-inspector-save.json",
+                  "l2Logical":  "flow:Inspection.ACT_Inspector_Save",
+                  "sourceRun":  "cli_2026-03-18T20-47-05.912Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "5407b316-96ac-43e0-9d61-c483a9334092",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_Inspector_Save",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-call",
+                      "nodeType":  "ActionActivity",
+                      "label":  "call microflow Inspection.VAL_Inspector_Validate -\u003e IsValid",
+                      "detail":  "$IsValid = CALL MICROFLOW Inspection.VAL_Inspector_Validate(Inspector = $Inspector) ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "Inspection.VAL_Inspector_Validate",
+                                        "sourceNodeId":  "n002-call"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$IsValid",
+                      "detail":  "IF expression=$IsValid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-commit",
+                      "nodeType":  "ActionActivity",
+                      "label":  "commit $Inspector WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                      "detail":  "COMMIT $Inspector WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-close",
+                      "nodeType":  "ActionActivity",
+                      "label":  "close page",
+                      "detail":  "CLOSE PAGE",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-2e52dbb7e877",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-call",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-00d62b7988a4",
+                      "originNodeId":  "n002-call",
+                      "destinationNodeId":  "n003-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-0994869ffa69",
+                      "originNodeId":  "n003-decision",
+                      "destinationNodeId":  "n004-commit",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-a33063f05667",
+                      "originNodeId":  "n004-commit",
+                      "destinationNodeId":  "n005-close",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-35fe9d4825a0",
+                      "originNodeId":  "n005-close",
+                      "destinationNodeId":  "n006-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "Inspection.VAL_Inspector_Validate",
+                      "sourceNodeId":  "n002-call"
+                  }
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-call",
+                                         "n003-decision",
+                                         "n004-commit",
+                                         "n005-close",
+                                         "n006-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_Inspector_Save\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n003-decision",
+                                "summary":  "IF $IsValid",
+                                "caption":  "IF",
+                                "expression":  "$IsValid"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n004-commit",
+                                "actionKind":  "Commit",
+                                "summary":  "commit $Inspector WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                                "entity":  "Inspection.Inspector",
+                                "memberSummary":  null
+                            }
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.ACT_Inspector_Save",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n002-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.VAL_Inspector_Validate",
+                          "isInternal":  true
+                      }
+                  ]
+}

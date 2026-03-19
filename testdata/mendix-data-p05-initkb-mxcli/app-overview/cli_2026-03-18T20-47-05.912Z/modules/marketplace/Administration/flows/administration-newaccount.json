@@ -1,0 +1,162 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.NewAccount",
+                  "stableId":  "75e636c0-6dd7-4430-9b1d-7f9b71bcd86f",
+                  "slug":  "administration-newaccount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-newaccount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-newaccount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/flows/administration-newaccount.json",
+                  "l2Logical":  "flow:Administration.NewAccount",
+                  "sourceRun":  "cli_2026-03-18T20-47-05.912Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/marketplace/Administration/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/marketplace/Administration/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/flows/INDEX.json"
+              },
+    "flowId":  "75e636c0-6dd7-4430-9b1d-7f9b71bcd86f",
+    "kind":  "Microflow",
+    "qualifiedName":  "Administration.NewAccount",
+    "module":  "Administration",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Administration.Account",
+                      "detail":  "$NewAccount = CREATE Administration.Account",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Administration.AccountPasswordData (AccountPasswordData_Account = $NewAccount)",
+                      "detail":  "$AccountPasswordData = CREATE Administration.AccountPasswordData (AccountPasswordData_Account = $NewAccount)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show page Administration.Account_New",
+                      "detail":  "SHOW PAGE Administration.Account_New($AccountPasswordData = $AccountPasswordData)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-c580dab24234",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-8ec62a404779",
+                      "originNodeId":  "n002-create",
+                      "destinationNodeId":  "n003-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-3f6c4b01ed4e",
+                      "originNodeId":  "n003-create",
+                      "destinationNodeId":  "n004-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-cb85d5f69026",
+                      "originNodeId":  "n004-show",
+                      "destinationNodeId":  "n005-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-create",
+                                         "n003-create",
+                                         "n004-show",
+                                         "n005-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Administration.NewAccount\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+                            {
+                                "nodeId":  "n004-show",
+                                "summary":  "show page Administration.Account_New",
+                                "targetPage":  "Administration.Account_New"
+                            }
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n002-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Administration.Account",
+                                "entity":  "Administration.Account",
+                                "memberSummary":  null
+                            },
+                            {
+                                "nodeId":  "n003-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Administration.AccountPasswordData (AccountPasswordData_Account = $NewAccount)",
+                                "entity":  "Administration.AccountPasswordData",
+                                "memberSummary":  "(AccountPasswordData_Account = $NewAccount)"
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}

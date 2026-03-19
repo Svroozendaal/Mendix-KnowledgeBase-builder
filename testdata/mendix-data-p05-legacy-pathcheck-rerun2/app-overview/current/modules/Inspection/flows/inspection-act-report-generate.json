@@ -1,0 +1,221 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_Report_Generate",
+    "stableId": "0d4bd6ee-299a-4bd3-b178-bb4c23bc643f",
+    "slug": "inspection-act-report-generate",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-report-generate.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-report-generate.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-report-generate.json",
+    "l2Logical": "flow:Inspection.ACT_Report_Generate",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "0d4bd6ee-299a-4bd3-b178-bb4c23bc643f",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_Report_Generate",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "0460d7a2-5501-4a6b-be66-db331cf9515a",
+      "nodeType": "ActionActivity",
+      "label": "ChangeObjectAction: change IteratorTask (Task_Report=$NewReport; refreshInClient=false)",
+      "detail": "change IteratorTask (Task_Report=$NewReport; refreshInClient=false)",
+      "loopOwnerId": "e8bf6eca-dc68-431c-a866-b2d0a09cf095",
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "dfb67248-194d-49c5-b75c-32478dcb8d7c",
+      "nodeType": "ActionActivity",
+      "label": "CommitAction: commit NewReport (refreshInClient=false, withEvents=true)",
+      "detail": "commit NewReport (refreshInClient=false, withEvents=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "477017a1-0773-4533-9ad0-f8da50a902e4",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Inspection.Report as NewReport (Name=\u0027Tasks report\u0027)",
+      "detail": "create Inspection.Report as NewReport (Name=\u0027Tasks report\u0027)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "16493f45-5412-4a30-bd7d-a62c374a9215",
+      "nodeType": "ActionActivity",
+      "label": "DownloadFileAction: DownloadFileAction (errorHandlingType=Rollback)",
+      "detail": "DownloadFileAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "30e73b31-26e3-4729-93e3-212d47ab84ab",
+      "nodeType": "ActionActivity",
+      "label": "GenerateDocumentAction: GenerateDocumentAction (errorHandlingType=Rollback)",
+      "detail": "GenerateDocumentAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "06a18412-7dac-4c24-a2b0-dca3a125f70e",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve TaskList_All from Inspection.Task",
+      "detail": "retrieve TaskList_All from Inspection.Task",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "82bfd332-30ab-4f9a-910e-69455db7f690",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "e8bf6eca-dc68-431c-a866-b2d0a09cf095",
+      "nodeType": "LoopedActivity",
+      "label": "iterate TaskList_All as IteratorTask",
+      "detail": "iterate TaskList_All as IteratorTask",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "49922355-c85e-40ac-95ac-9cb85f524955",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "9af0eac0-f0aa-4354-a657-e7297db551d2",
+      "originNodeId": "49922355-c85e-40ac-95ac-9cb85f524955",
+      "destinationNodeId": "06a18412-7dac-4c24-a2b0-dca3a125f70e",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "b62bd29d-6a22-4127-998b-f2df2dc5a83f",
+      "originNodeId": "06a18412-7dac-4c24-a2b0-dca3a125f70e",
+      "destinationNodeId": "477017a1-0773-4533-9ad0-f8da50a902e4",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "04fd2fb0-49de-4fb2-8cf2-8607a5cbab20",
+      "originNodeId": "477017a1-0773-4533-9ad0-f8da50a902e4",
+      "destinationNodeId": "e8bf6eca-dc68-431c-a866-b2d0a09cf095",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "1077fa60-586c-403f-98cb-104f05ed50b7",
+      "originNodeId": "e8bf6eca-dc68-431c-a866-b2d0a09cf095",
+      "destinationNodeId": "dfb67248-194d-49c5-b75c-32478dcb8d7c",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "e8c8b36a-939d-43d9-8bc0-cb427f301a4e",
+      "originNodeId": "dfb67248-194d-49c5-b75c-32478dcb8d7c",
+      "destinationNodeId": "30e73b31-26e3-4729-93e3-212d47ab84ab",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "b9542a68-5e45-44c7-9e45-cddc5edbc40d",
+      "originNodeId": "30e73b31-26e3-4729-93e3-212d47ab84ab",
+      "destinationNodeId": "16493f45-5412-4a30-bd7d-a62c374a9215",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "fd048f45-40ce-4970-926d-d4791fdce12d",
+      "originNodeId": "16493f45-5412-4a30-bd7d-a62c374a9215",
+      "destinationNodeId": "82bfd332-30ab-4f9a-910e-69455db7f690",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "49922355-c85e-40ac-95ac-9cb85f524955"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "49922355-c85e-40ac-95ac-9cb85f524955",
+    "06a18412-7dac-4c24-a2b0-dca3a125f70e",
+    "477017a1-0773-4533-9ad0-f8da50a902e4",
+    "e8bf6eca-dc68-431c-a866-b2d0a09cf095",
+    "0460d7a2-5501-4a6b-be66-db331cf9515a",
+    "dfb67248-194d-49c5-b75c-32478dcb8d7c",
+    "30e73b31-26e3-4729-93e3-212d47ab84ab",
+    "16493f45-5412-4a30-bd7d-a62c374a9215",
+    "82bfd332-30ab-4f9a-910e-69455db7f690"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_Report_Generate\r\nNODES=8; EDGES=7\r\n1. START\r\n2. ACTION RetrieveAction: retrieve TaskList_All from Inspection.Task\r\n3. ACTION CreateObjectAction: create Inspection.Report as NewReport (Name=\u0027Tasks report\u0027)\r\n4. LOOP iterate TaskList_All as IteratorTask\r\n  5. LOOP BODY\r\n    6. ACTION ChangeObjectAction: change IteratorTask (Task_Report=$NewReport; refreshInClient=false)\r\n7. ACTION CommitAction: commit NewReport (refreshInClient=false, withEvents=true)\r\n8. ACTION GenerateDocumentAction: GenerateDocumentAction (errorHandlingType=Rollback)\r\n9. ACTION DownloadFileAction: DownloadFileAction (errorHandlingType=Rollback)\r\n10. END",
+  "retrieveActions": [
+    {
+      "nodeId": "06a18412-7dac-4c24-a2b0-dca3a125f70e",
+      "summary": "RetrieveAction: retrieve TaskList_All from Inspection.Task retrieve TaskList_All from Inspection.Task",
+      "sourceKind": "Database",
+      "entity": "Inspection.Task",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "0460d7a2-5501-4a6b-be66-db331cf9515a",
+      "actionKind": "Change",
+      "summary": "ChangeObjectAction: change IteratorTask (Task_Report=$NewReport; refreshInClient=false) change IteratorTask (Task_Report=$NewReport; refreshInClient=false)",
+      "entity": null,
+      "memberSummary": "Task_Report=$NewReport; refreshInClient=false"
+    },
+    {
+      "nodeId": "477017a1-0773-4533-9ad0-f8da50a902e4",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Inspection.Report as NewReport (Name=\u0027Tasks report\u0027) create Inspection.Report as NewReport (Name=\u0027Tasks report\u0027)",
+      "entity": "Inspection.Report",
+      "memberSummary": "Name=\u0027Tasks report\u0027"
+    },
+    {
+      "nodeId": "dfb67248-194d-49c5-b75c-32478dcb8d7c",
+      "actionKind": "Commit",
+      "summary": "CommitAction: commit NewReport (refreshInClient=false, withEvents=true) commit NewReport (refreshInClient=false, withEvents=true)",
+      "entity": null,
+      "memberSummary": "refreshInClient=false, withEvents=true"
+    }
+  ],
+  "callEdges": []
+}

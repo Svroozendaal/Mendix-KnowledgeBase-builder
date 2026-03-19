@@ -1,0 +1,303 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_Report_ApplyFilters",
+                  "stableId":  "7f8544ed-92db-4a35-a561-84a9768625a6",
+                  "slug":  "inspection-act-report-applyfilters",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-report-applyfilters.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-report-applyfilters.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-report-applyfilters.json",
+                  "l2Logical":  "flow:Inspection.ACT_Report_ApplyFilters",
+                  "sourceRun":  "cli_2026-03-18T20-47-05.912Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "7f8544ed-92db-4a35-a561-84a9768625a6",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_Report_ApplyFilters",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve from Inspection.Task WHERE Created \u003e= $ReportHelper/StartDate] [DueDate \u003c= $ReportHelper/EndDate] [_Type = $ReportHelper/Category",
+                      "detail":  "RETRIEVE $TaskList_Filtered FROM Inspection.Task WHERE Created \u003e= $ReportHelper/StartDate] [DueDate \u003c= $ReportHelper/EndDate] [_Type = $ReportHelper/Category",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$TaskList_Filtered != empty",
+                      "detail":  "IF expression=$TaskList_Filtered != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create list of Inspection.Task",
+                      "detail":  "$TaskList_ToCommit = CREATE LIST of Inspection.Task",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Inspection.Report (Name = \u0027Filtered Task Report\u0027)",
+                      "detail":  "$NewReport = CREATE Inspection.Report (Name = \u0027Filtered Task Report\u0027)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-loop",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "LOOP $IteratorTask IN $TaskList_Filtered",
+                      "detail":  "LOOP $IteratorTask IN $TaskList_Filtered",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-commit",
+                      "nodeType":  "ActionActivity",
+                      "label":  "commit $TaskList_ToCommit WITH EVENTS ON ERROR ROLLBACK",
+                      "detail":  "COMMIT $TaskList_ToCommit WITH EVENTS ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-microflows",
+                      "nodeType":  "ActionActivity",
+                      "label":  "Microflows$GenerateDocumentAction",
+                      "detail":  "-- Unsupported action type: Microflows$GenerateDocumentAction",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n009-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "*microflows.DownloadFileAction",
+                      "detail":  "-- Unknown action: *microflows.DownloadFileAction",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n010-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show message (No tasks found based on these filters, type=Information)",
+                      "detail":  "SHOW MESSAGE \u0027No tasks found based on these filters\u0027 TYPE Information",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n011-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-219b08a9c5f9",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c5b7b5fcda46",
+                      "originNodeId":  "n002-retrieve",
+                      "destinationNodeId":  "n003-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-32d2154c8b17",
+                      "originNodeId":  "n003-decision",
+                      "destinationNodeId":  "n004-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-3d25a677ebcf",
+                      "originNodeId":  "n004-create",
+                      "destinationNodeId":  "n005-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-3395df23e543",
+                      "originNodeId":  "n005-create",
+                      "destinationNodeId":  "n006-loop",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-b4affbf5facf",
+                      "originNodeId":  "n006-loop",
+                      "destinationNodeId":  "n007-commit",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-56b00dca8f69",
+                      "originNodeId":  "n007-commit",
+                      "destinationNodeId":  "n008-microflows",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-935ad0dc5728",
+                      "originNodeId":  "n008-microflows",
+                      "destinationNodeId":  "n009-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-fcd93e517e1a",
+                      "originNodeId":  "n009-action",
+                      "destinationNodeId":  "n010-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-b86fee5f6465",
+                      "originNodeId":  "n010-show",
+                      "destinationNodeId":  "n011-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-retrieve",
+                                         "n003-decision",
+                                         "n004-create",
+                                         "n005-create",
+                                         "n006-loop",
+                                         "n007-commit",
+                                         "n008-microflows",
+                                         "n009-action",
+                                         "n010-show",
+                                         "n011-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_Report_ApplyFilters\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n002-retrieve",
+                                "summary":  "retrieve from Inspection.Task WHERE Created \u003e= $ReportHelper/StartDate] [DueDate \u003c= $ReportHelper/EndDate] [_Type = $ReportHelper/Category",
+                                "sourceKind":  "Database",
+                                "entity":  "Inspection.Task",
+                                "association":  null,
+                                "xPath":  "Created \u003e= $ReportHelper/StartDate] [DueDate \u003c= $ReportHelper/EndDate] [_Type = $ReportHelper/Category"
+                            }
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n003-decision",
+                                "summary":  "IF $TaskList_Filtered != empty",
+                                "caption":  "IF",
+                                "expression":  "$TaskList_Filtered != empty"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n004-create",
+                                "actionKind":  "Create",
+                                "summary":  "create list of Inspection.Task",
+                                "entity":  "Inspection.Task",
+                                "memberSummary":  null
+                            },
+                            {
+                                "nodeId":  "n005-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Inspection.Report (Name = \u0027Filtered Task Report\u0027)",
+                                "entity":  "Inspection.Report",
+                                "memberSummary":  "(Name = \u0027Filtered Task Report\u0027)"
+                            },
+                            {
+                                "nodeId":  "n007-commit",
+                                "actionKind":  "Commit",
+                                "summary":  "commit $TaskList_ToCommit WITH EVENTS ON ERROR ROLLBACK",
+                                "entity":  "Inspection.Task",
+                                "memberSummary":  null
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}

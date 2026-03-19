@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_Tool_Create",
+    "stableId": "f7557a9f-8f21-48f0-bf51-829753587468",
+    "slug": "inspection-act-tool-create",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-tool-create.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-tool-create.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-tool-create.json",
+    "l2Logical": "flow:Inspection.ACT_Tool_Create",
+    "sourceRun": "cli_2026-03-18T20-52-48.461Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "f7557a9f-8f21-48f0-bf51-829753587468",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_Tool_Create",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "fd9a756f-a53e-4509-b94c-9e7a43b1d053",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Inspection.Tool as NewTool",
+      "detail": "create Inspection.Tool as NewTool",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "af4d5435-6520-4b4d-9cd4-b2cb7759f224",
+      "nodeType": "ActionActivity",
+      "label": "ShowPageAction: show page Inspection.Tool_NewEdit",
+      "detail": "show page Inspection.Tool_NewEdit",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "571a80f7-d373-40e6-b04e-8520db310a27",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "4274a2d8-543e-425a-95c5-b769df9d8387",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "bfe62bae-c802-42d6-b6e3-bf9ee4346d5b",
+      "originNodeId": "4274a2d8-543e-425a-95c5-b769df9d8387",
+      "destinationNodeId": "fd9a756f-a53e-4509-b94c-9e7a43b1d053",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "0746c71a-b3d1-47cc-a976-b7b4369025a4",
+      "originNodeId": "fd9a756f-a53e-4509-b94c-9e7a43b1d053",
+      "destinationNodeId": "af4d5435-6520-4b4d-9cd4-b2cb7759f224",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "d7789e8a-5250-469e-8f02-93e99e41e9a3",
+      "originNodeId": "af4d5435-6520-4b4d-9cd4-b2cb7759f224",
+      "destinationNodeId": "571a80f7-d373-40e6-b04e-8520db310a27",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "4274a2d8-543e-425a-95c5-b769df9d8387"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "4274a2d8-543e-425a-95c5-b769df9d8387",
+    "fd9a756f-a53e-4509-b94c-9e7a43b1d053",
+    "af4d5435-6520-4b4d-9cd4-b2cb7759f224",
+    "571a80f7-d373-40e6-b04e-8520db310a27"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_Tool_Create\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create Inspection.Tool as NewTool\r\n3. ACTION ShowPageAction: show page Inspection.Tool_NewEdit\r\n4. END",
+  "retrieveActions": [],
+  "decisionActions": [],
+  "showPageActions": [
+    {
+      "nodeId": "af4d5435-6520-4b4d-9cd4-b2cb7759f224",
+      "summary": "ShowPageAction: show page Inspection.Tool_NewEdit show page Inspection.Tool_NewEdit",
+      "targetPage": "Inspection.Tool_NewEdit"
+    }
+  ],
+  "mutationActions": [
+    {
+      "nodeId": "fd9a756f-a53e-4509-b94c-9e7a43b1d053",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Inspection.Tool as NewTool create Inspection.Tool as NewTool",
+      "entity": "Inspection.Tool",
+      "memberSummary": null
+    }
+  ],
+  "callEdges": []
+}

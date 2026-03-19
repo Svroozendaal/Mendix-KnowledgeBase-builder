@@ -5,6 +5,8 @@ param(
     [string]$MxPath,
     [string]$DataRoot,
     [string]$KnowledgeBaseRoot,
+    [ValidateSet("LegacyDumpParser", "MxCli")]
+    [string]$ExtractionMode,
     [switch]$OpenVsCode
 )
 
@@ -105,6 +107,32 @@ function Apply-EnvironmentOverrides {
         }
 
         $Settings[$key] = $envValue.Trim()
+    }
+}
+
+function Resolve-ExtractionMode {
+    param(
+        [string]$ExplicitExtractionMode,
+        [hashtable]$Settings
+    )
+
+    $rawValue = if (-not [string]::IsNullOrWhiteSpace($ExplicitExtractionMode)) {
+        $ExplicitExtractionMode
+    } else {
+        Get-Setting -Settings $Settings -Key "KB_EXTRACTION_MODE" -Default "MxCli"
+    }
+
+    if ([string]::IsNullOrWhiteSpace($rawValue)) {
+        return "MxCli"
+    }
+
+    $normalized = $rawValue.Trim().ToLowerInvariant()
+    switch ($normalized) {
+        "legacydumpparser" { return "LegacyDumpParser" }
+        "mxcli" { return "MxCli" }
+        default {
+            throw "Invalid extraction mode '$rawValue'. Valid values: LegacyDumpParser, MxCli."
+        }
     }
 }
 
@@ -368,7 +396,8 @@ function Invoke-DumpParser {
         [string]$ResolvedMprPath,
         [string]$ResolvedAppName,
         [string]$ResolvedMxPath,
-        [string]$ResolvedDataRoot
+        [string]$ResolvedDataRoot,
+        [string]$ResolvedExtractionMode
     )
 
     $backup = @{}
@@ -381,18 +410,25 @@ function Invoke-DumpParser {
             Set-ScopedEnvironmentValue -Backup $backup -Name "MENDIX_MPR_PATH" -Value $ResolvedMprPath
             Set-ScopedEnvironmentValue -Backup $backup -Name "MENDIX_APP_PATH" -Value (Split-Path -Parent $ResolvedMprPath)
         }
-        if (-not [string]::IsNullOrWhiteSpace($ResolvedMxPath)) {
+        if ($ResolvedExtractionMode -eq "LegacyDumpParser" -and -not [string]::IsNullOrWhiteSpace($ResolvedMxPath)) {
             Set-ScopedEnvironmentValue -Backup $backup -Name "MENDIX_MX_EXE" -Value $ResolvedMxPath
         }
         if (-not [string]::IsNullOrWhiteSpace($ResolvedDataRoot)) {
             Set-ScopedEnvironmentValue -Backup $backup -Name "MENDIX_DATA_ROOT" -Value $ResolvedDataRoot
         }
+        Set-ScopedEnvironmentValue -Backup $backup -Name "KB_EXTRACTION_MODE" -Value $ResolvedExtractionMode
 
         $output = New-Object System.Collections.Generic.List[string]
         $previousErrorActionPreference = $ErrorActionPreference
         $ErrorActionPreference = "Continue"
         try {
-            & powershell -NoProfile -ExecutionPolicy Bypass -File $runDumpParserScript 2>&1 | ForEach-Object {
+            $scriptArgs = @(
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", $runDumpParserScript,
+                "-ExtractionMode", $ResolvedExtractionMode
+            )
+            & powershell @scriptArgs 2>&1 | ForEach-Object {
                 $line = $_.ToString()
                 $output.Add($line)
                 Write-Host $line
@@ -452,7 +488,8 @@ function Write-CreatorLinkFile {
         [string]$ResolvedDataRoot,
         [string]$ResolvedAppName,
         [string]$ResolvedMprPath,
-        [string]$ResolvedRunFolder
+        [string]$ResolvedRunFolder,
+        [string]$ResolvedExtractionMode
     )
 
     $sourcesRoot = Join-Path $ResolvedKnowledgeBaseRoot "_sources"
@@ -463,6 +500,7 @@ function Write-CreatorLinkFile {
         creatorRoot = $packageRoot
         creatorInitkbRunner = $creatorRunnerPath
         appName = $ResolvedAppName
+        extractionMode = $ResolvedExtractionMode
         mprPath = $ResolvedMprPath
         dataRoot = $ResolvedDataRoot
         knowledgeBaseRoot = $ResolvedKnowledgeBaseRoot
@@ -485,7 +523,8 @@ function Write-HandoffFile {
         [string]$ArchivePath,
         [string]$StructuralValidationStatus,
         [string]$QualityGateStatus,
-        [string]$BenchmarkStatus
+        [string]$BenchmarkStatus,
+        [string]$ResolvedExtractionMode
     )
 
     $sourcesRoot = Join-Path $ResolvedKnowledgeBaseRoot "_sources"
@@ -504,6 +543,7 @@ function Write-HandoffFile {
         "- Data root: $ResolvedDataRoot",
         "- Knowledge base root: $ResolvedKnowledgeBaseRoot",
         "- Run folder: $ResolvedRunFolder",
+        "- Extraction mode: $ResolvedExtractionMode",
         "- Archived previous data root: $archiveSummary",
         "",
         "## Pipeline summary",
@@ -583,6 +623,7 @@ function Invoke-Phase2Handoff {
         [string]$StructuralValidationStatus,
         [string]$QualityGateStatus,
         [string]$BenchmarkStatus,
+        [string]$ResolvedExtractionMode,
         [bool]$ShouldOpenVsCode
     )
 
@@ -591,7 +632,8 @@ function Invoke-Phase2Handoff {
         -ResolvedDataRoot $ResolvedDataRoot `
         -ResolvedAppName $ResolvedAppName `
         -ResolvedMprPath $ResolvedMprPath `
-        -ResolvedRunFolder $ResolvedRunFolder
+        -ResolvedRunFolder $ResolvedRunFolder `
+        -ResolvedExtractionMode $ResolvedExtractionMode
 
     $handoffPath = Write-HandoffFile `
         -ResolvedKnowledgeBaseRoot $ResolvedKnowledgeBaseRoot `
@@ -601,7 +643,8 @@ function Invoke-Phase2Handoff {
         -ArchivePath $ArchivePath `
         -StructuralValidationStatus $StructuralValidationStatus `
         -QualityGateStatus $QualityGateStatus `
-        -BenchmarkStatus $BenchmarkStatus
+        -BenchmarkStatus $BenchmarkStatus `
+        -ResolvedExtractionMode $ResolvedExtractionMode
 
     Write-Host ""
     Write-Host "Phase 2 handoff ready." -ForegroundColor Green
@@ -634,8 +677,10 @@ Apply-EnvironmentOverrides -Settings $settings -Keys @(
     "CUSTOM_SCENARIOS_PATH",
     "CUSTOM_SCENARIOS",
     "DUMP_FILE_PATH",
-    "DUMP_PATH"
+    "DUMP_PATH",
+    "KB_EXTRACTION_MODE"
 )
+$resolvedExtractionMode = Resolve-ExtractionMode -ExplicitExtractionMode $ExtractionMode -Settings $settings
 
 $resolvedKnowledgeBaseRoot = Normalize-KnowledgeBaseRootPath -Path $KnowledgeBaseRoot
 $resolvedExplicitDataRoot = Normalize-DataRootPath -Path $DataRoot
@@ -661,8 +706,11 @@ if ([string]::IsNullOrWhiteSpace($resolvedAppName) -and -not [string]::IsNullOrW
 }
 
 $resolvedMxPath = Normalize-AbsolutePath -Path $MxPath
-if (-not [string]::IsNullOrWhiteSpace($resolvedMxPath) -and -not (Test-Path $resolvedMxPath -PathType Leaf)) {
+if ($resolvedExtractionMode -eq "LegacyDumpParser" -and -not [string]::IsNullOrWhiteSpace($resolvedMxPath) -and -not (Test-Path $resolvedMxPath -PathType Leaf)) {
     throw "Configured mx.exe path does not exist: $resolvedMxPath"
+}
+if ($resolvedExtractionMode -eq "MxCli") {
+    $resolvedMxPath = $null
 }
 
 $resolvedDataRoot = Resolve-DataRoot `
@@ -686,6 +734,7 @@ $resolvedKnowledgeBaseRoot = if (-not [string]::IsNullOrWhiteSpace($resolvedKnow
 Write-Host ""
 Write-Host "=== initkb ===" -ForegroundColor Cyan
 Write-Host "Creator root:                $packageRoot"
+Write-Host "Extraction mode:             $resolvedExtractionMode"
 Write-Host "Target data root:            $resolvedDataRoot"
 Write-Host "Target knowledge base root:  $resolvedKnowledgeBaseRoot"
 if (-not [string]::IsNullOrWhiteSpace($resolvedMprPath)) {
@@ -694,7 +743,7 @@ if (-not [string]::IsNullOrWhiteSpace($resolvedMprPath)) {
 if (-not [string]::IsNullOrWhiteSpace($resolvedAppName)) {
     Write-Host "Resolved app name:           $resolvedAppName"
 }
-if (-not [string]::IsNullOrWhiteSpace($resolvedMxPath)) {
+if ($resolvedExtractionMode -eq "LegacyDumpParser" -and -not [string]::IsNullOrWhiteSpace($resolvedMxPath)) {
     Write-Host "Resolved mx.exe:             $resolvedMxPath"
 }
 
@@ -707,7 +756,8 @@ $pipelineResult = Invoke-DumpParser `
     -ResolvedMprPath $resolvedMprPath `
     -ResolvedAppName $resolvedAppName `
     -ResolvedMxPath $resolvedMxPath `
-    -ResolvedDataRoot $resolvedDataRoot
+    -ResolvedDataRoot $resolvedDataRoot `
+    -ResolvedExtractionMode $resolvedExtractionMode
 
 if ($pipelineResult.ExitCode -ne 0) {
     Write-Error "initkb failed because the pipeline exited with code $($pipelineResult.ExitCode)."
@@ -746,4 +796,5 @@ Invoke-Phase2Handoff `
     -StructuralValidationStatus $structuralValidationStatus `
     -QualityGateStatus $qualityGateStatus `
     -BenchmarkStatus $benchmarkStatus `
+    -ResolvedExtractionMode $resolvedExtractionMode `
     -ShouldOpenVsCode:$OpenVsCode.IsPresent

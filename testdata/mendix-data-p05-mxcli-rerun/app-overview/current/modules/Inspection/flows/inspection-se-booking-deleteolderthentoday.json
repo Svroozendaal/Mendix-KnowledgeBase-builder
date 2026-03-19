@@ -1,0 +1,120 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.SE_Booking_DeleteOlderThenToday",
+                  "stableId":  "d79b7af1-348b-489e-a422-6129bef83531",
+                  "slug":  "inspection-se-booking-deleteolderthentoday",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-se-booking-deleteolderthentoday.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-se-booking-deleteolderthentoday.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-se-booking-deleteolderthentoday.json",
+                  "l2Logical":  "flow:Inspection.SE_Booking_DeleteOlderThenToday",
+                  "sourceRun":  "cli_2026-03-18T20-53-14.243Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-53-14.243Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-53-14.243Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "d79b7af1-348b-489e-a422-6129bef83531",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.SE_Booking_DeleteOlderThenToday",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-call",
+                      "nodeType":  "ActionActivity",
+                      "label":  "call microflow Inspection.SUB_Booking_Delete",
+                      "detail":  "CALL MICROFLOW Inspection.SUB_Booking_Delete() ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "Inspection.SUB_Booking_Delete",
+                                        "sourceNodeId":  "n002-call"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-2e52dbb7e877",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-call",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-90d070fea1c4",
+                      "originNodeId":  "n002-call",
+                      "destinationNodeId":  "n003-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "Inspection.SUB_Booking_Delete",
+                      "sourceNodeId":  "n002-call"
+                  }
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-call",
+                                         "n003-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.SE_Booking_DeleteOlderThenToday\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.SE_Booking_DeleteOlderThenToday",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n002-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.SUB_Booking_Delete",
+                          "isInternal":  true
+                      }
+                  ]
+}

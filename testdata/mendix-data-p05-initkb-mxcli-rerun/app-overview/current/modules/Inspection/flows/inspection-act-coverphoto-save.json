@@ -1,0 +1,124 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_CoverPhoto_Save",
+                  "stableId":  "1ff4d8f8-a639-4bb4-8897-764b26df984e",
+                  "slug":  "inspection-act-coverphoto-save",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-coverphoto-save.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-coverphoto-save.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-coverphoto-save.json",
+                  "l2Logical":  "flow:Inspection.ACT_CoverPhoto_Save",
+                  "sourceRun":  "cli_2026-03-18T20-57-13.045Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "1ff4d8f8-a639-4bb4-8897-764b26df984e",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_CoverPhoto_Save",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "@color Purple COMMIT $CoverPhoto WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                      "detail":  "@color Purple COMMIT $CoverPhoto WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-close",
+                      "nodeType":  "ActionActivity",
+                      "label":  "close page",
+                      "detail":  "CLOSE PAGE",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-514c3f6e8484",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-332229defc85",
+                      "originNodeId":  "n002-action",
+                      "destinationNodeId":  "n003-close",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-52601feaf6ef",
+                      "originNodeId":  "n003-close",
+                      "destinationNodeId":  "n004-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-action",
+                                         "n003-close",
+                                         "n004-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_CoverPhoto_Save\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+
+                  ]
+}

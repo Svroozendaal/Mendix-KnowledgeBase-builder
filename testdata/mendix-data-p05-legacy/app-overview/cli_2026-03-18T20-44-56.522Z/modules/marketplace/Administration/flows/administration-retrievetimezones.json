@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Administration",
+    "qualifiedName": "Administration.RetrieveTimeZones",
+    "stableId": "5e692cf3-f200-4ae6-8043-e8cc9c9ed6c5",
+    "slug": "administration-retrievetimezones",
+    "l0Path": "knowledge-base/modules/_marktplace/Administration/flows/administration-retrievetimezones.abstract.md",
+    "l1Path": "knowledge-base/modules/_marktplace/Administration/flows/administration-retrievetimezones.overview.md",
+    "l2Path": "app-overview/current/modules/marketplace/Administration/flows/administration-retrievetimezones.json",
+    "l2Logical": "flow:Administration.RetrieveTimeZones",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/marketplace/Administration/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/marketplace/Administration/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/marketplace/Administration/flows/INDEX.json"
+  },
+  "flowId": "5e692cf3-f200-4ae6-8043-e8cc9c9ed6c5",
+  "kind": "Microflow",
+  "qualifiedName": "Administration.RetrieveTimeZones",
+  "module": "Administration",
+  "nodes": [
+    {
+      "nodeId": "0a0c5139-976c-4319-8e1c-c4829439c384",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve TimeZones from System.TimeZone",
+      "detail": "retrieve TimeZones from System.TimeZone",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "e3791b99-b4bc-41eb-85d3-aaf40135bc9c",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "c9d26cb6-d154-4201-a662-67cc5f55fdfe",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "f44d96e0-5f12-469b-8e99-df740c89870e",
+      "originNodeId": "c9d26cb6-d154-4201-a662-67cc5f55fdfe",
+      "destinationNodeId": "0a0c5139-976c-4319-8e1c-c4829439c384",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "8290aa09-d78a-44b2-aafc-6e4dcb2368e0",
+      "originNodeId": "0a0c5139-976c-4319-8e1c-c4829439c384",
+      "destinationNodeId": "e3791b99-b4bc-41eb-85d3-aaf40135bc9c",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "c9d26cb6-d154-4201-a662-67cc5f55fdfe"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "c9d26cb6-d154-4201-a662-67cc5f55fdfe",
+    "0a0c5139-976c-4319-8e1c-c4829439c384",
+    "e3791b99-b4bc-41eb-85d3-aaf40135bc9c"
+  ],
+  "pseudocode": "FLOW Microflow: Administration.RetrieveTimeZones\r\nNODES=3; EDGES=2\r\n1. START\r\n2. ACTION RetrieveAction: retrieve TimeZones from System.TimeZone\r\n3. END",
+  "retrieveActions": [
+    {
+      "nodeId": "0a0c5139-976c-4319-8e1c-c4829439c384",
+      "summary": "RetrieveAction: retrieve TimeZones from System.TimeZone retrieve TimeZones from System.TimeZone",
+      "sourceKind": "Database",
+      "entity": "System.TimeZone",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [],
+  "callEdges": []
+}

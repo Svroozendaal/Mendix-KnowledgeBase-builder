@@ -1,0 +1,170 @@
+{
+  "module": "Notification",
+  "pages": [
+    {
+      "qualifiedName": "Notification.Notification_Overview_Read",
+      "name": "Notification_Overview_Read",
+      "title": "Read notifications",
+      "layout": "Notification.Notification_Layout",
+      "allowedRoles": [
+        "Notification.Inspector",
+        "Notification.Manager"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "57c20f7d-a570-4d39-93ee-89dbdcc880e9",
+          "actionType": "DeleteClientAction",
+          "summary": "DeleteClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "6d124299-2a2b-4be0-8d6e-b9fbc097e22f",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "86c2bc31-d736-4510-8126-db0b77375313",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "b1dacc9e-19e1-4b79-9867-7648caaa344b",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Notification.Notification_Overview_Unread",
+      "name": "Notification_Overview_Unread",
+      "title": "Unread notifications",
+      "layout": "Notification.Notification_Layout",
+      "allowedRoles": [
+        "Notification.Inspector",
+        "Notification.Manager"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "7b99a84b-c586-4614-8da4-d65cccbaaf2a",
+          "actionType": "DeleteClientAction",
+          "summary": "DeleteClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "277fb2b7-4e38-4b70-a7bc-dd5dbb9f3742",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Notification.ACT_Notification_MarkAsRead",
+          "targetPage": null,
+          "flowName": "Notification.ACT_Notification_MarkAsRead"
+        },
+        {
+          "actionId": "186f8d0d-9867-49fa-a6d2-9037128246de",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "a321b15e-5ea1-4d7c-b97e-d574f9e9fda7",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "cfc33acf-07ab-4e93-a649-3d82b97ab2c6",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "d257a0d4-754a-4860-99b5-a12959369b30",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "f8751aad-5316-4dd2-80ef-6a0a52609cff",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": [
+        {
+          "provenanceId": "3732bda8-6dda-4e0e-bed3-59159877bdca",
+          "sourceType": "MenuItem",
+          "summary": "Menu item \u0022Notifications\u0022 in profile Responsive",
+          "page": "Notification.Notification_Overview_Unread",
+          "userRole": null,
+          "flowName": null
+        }
+      ]
+    },
+    {
+      "qualifiedName": "Notification.Script_Overview",
+      "name": "Script_Overview",
+      "title": "Script Overview",
+      "layout": "Inspection.Emixa_Custom",
+      "allowedRoles": [
+        "Notification.Administrator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "57ffc9a5-3619-4876-8eec-cf976ae28fd1",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Notification.TEMP_Notifications_AllDelete",
+          "targetPage": null,
+          "flowName": "Notification.TEMP_Notifications_AllDelete"
+        }
+      ],
+      "navigationProvenance": [
+        {
+          "provenanceId": "56b35a73-eed7-4ae7-81ba-02a73a8685e9",
+          "sourceType": "MenuItem",
+          "summary": "Menu item \u0022Scripts\u0022 in profile Responsive",
+          "page": "Notification.Script_Overview",
+          "userRole": null,
+          "flowName": null
+        }
+      ]
+    }
+  ],
+  "snippets": []
+}

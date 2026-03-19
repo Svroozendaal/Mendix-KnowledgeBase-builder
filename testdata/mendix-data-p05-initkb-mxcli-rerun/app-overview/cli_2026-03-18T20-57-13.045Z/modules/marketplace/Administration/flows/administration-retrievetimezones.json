@@ -1,0 +1,131 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.RetrieveTimeZones",
+                  "stableId":  "5e692cf3-f200-4ae6-8043-e8cc9c9ed6c5",
+                  "slug":  "administration-retrievetimezones",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-retrievetimezones.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-retrievetimezones.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/flows/administration-retrievetimezones.json",
+                  "l2Logical":  "flow:Administration.RetrieveTimeZones",
+                  "sourceRun":  "cli_2026-03-18T20-57-13.045Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/marketplace/Administration/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/marketplace/Administration/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/flows/INDEX.json"
+              },
+    "flowId":  "5e692cf3-f200-4ae6-8043-e8cc9c9ed6c5",
+    "kind":  "Microflow",
+    "qualifiedName":  "Administration.RetrieveTimeZones",
+    "module":  "Administration",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve from System.TimeZone SORT BY System.TimeZone.RawOffset ASC, System.TimeZone.Description ASC",
+                      "detail":  "RETRIEVE $TimeZones FROM System.TimeZone SORT BY System.TimeZone.RawOffset ASC, System.TimeZone.Description ASC",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-return",
+                      "nodeType":  "ActionActivity",
+                      "label":  "return $TimeZones",
+                      "detail":  "RETURN $TimeZones",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-219b08a9c5f9",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-df28dbc4662f",
+                      "originNodeId":  "n002-retrieve",
+                      "destinationNodeId":  "n003-return",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-8d7e9296605f",
+                      "originNodeId":  "n003-return",
+                      "destinationNodeId":  "n004-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-retrieve",
+                                         "n003-return",
+                                         "n004-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Administration.RetrieveTimeZones\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n002-retrieve",
+                                "summary":  "retrieve from System.TimeZone SORT BY System.TimeZone.RawOffset ASC, System.TimeZone.Description ASC",
+                                "sourceKind":  "Database",
+                                "entity":  "System.TimeZone",
+                                "association":  null,
+                                "xPath":  null
+                            }
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+
+                  ]
+}

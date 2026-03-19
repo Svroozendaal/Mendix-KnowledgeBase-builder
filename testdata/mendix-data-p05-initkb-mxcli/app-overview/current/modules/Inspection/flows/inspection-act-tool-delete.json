@@ -1,0 +1,109 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_Tool_Delete",
+                  "stableId":  "d3b128c1-593e-438d-a003-302298e3e538",
+                  "slug":  "inspection-act-tool-delete",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-tool-delete.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-tool-delete.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-tool-delete.json",
+                  "l2Logical":  "flow:Inspection.ACT_Tool_Delete",
+                  "sourceRun":  "cli_2026-03-18T20-47-05.912Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "d3b128c1-593e-438d-a003-302298e3e538",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_Tool_Delete",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-delete",
+                      "nodeType":  "ActionActivity",
+                      "label":  "delete $Tool",
+                      "detail":  "DELETE $Tool",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-b0969cf06c6b",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-delete",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-87550bfa49b6",
+                      "originNodeId":  "n002-delete",
+                      "destinationNodeId":  "n003-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-delete",
+                                         "n003-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_Tool_Delete\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n002-delete",
+                                "actionKind":  "Delete",
+                                "summary":  "delete $Tool",
+                                "entity":  "Inspection.Tool",
+                                "memberSummary":  null
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}

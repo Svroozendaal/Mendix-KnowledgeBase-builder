@@ -1,0 +1,121 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.Account_LoginPage_SplitLeft",
+    "stableId": "Inspection.Account_LoginPage_SplitLeft",
+    "slug": "inspection-account-loginpage-splitleft",
+    "l0Path": "knowledge-base/modules/Inspection/pages/inspection-account-loginpage-splitleft.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/pages/inspection-account-loginpage-splitleft.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/pages/inspection-account-loginpage-splitleft.json",
+    "l2Logical": "page:Inspection.Account_LoginPage_SplitLeft",
+    "sourceRun": "cli_2026-03-18T20-52-48.461Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/pages/INDEX.json"
+  },
+  "qualifiedName": "Inspection.Account_LoginPage_SplitLeft",
+  "name": "Account_LoginPage_SplitLeft",
+  "title": "Emixa Inspection App",
+  "layout": "Inspection.Emixa_Login",
+  "allowedRoles": [
+    "Inspection.Anonymous"
+  ],
+  "parameters": [],
+  "isPopup": false,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": "loginpage-splitleft",
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "16722f5e-c992-40f0-9543-c4457f333a89",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Inspection.ACT_Registration_Create",
+      "targetPage": null,
+      "flowName": "Inspection.ACT_Registration_Create"
+    },
+    {
+      "actionId": "031e1ea1-33ed-49aa-8932-bd8399778ecd",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "269a7b60-7ac5-4655-a1de-8c46c9442789",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "2e7b5ffa-5174-4931-99af-4c5114f8267b",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "32f60eef-9128-48e8-8582-676e91866683",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "427ea323-ad71-46e6-bb71-d9f1cf301094",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "77f53703-2922-407a-b130-e27f97cff509",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "b030bf95-0c4d-4a7e-bba2-bf3e2deb81f5",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "bfd38732-eec6-4df9-9b77-60dfa6dbae95",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "cd6bb4c7-0252-4e93-ab8f-c56d20887051",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "daa33b31-706d-476f-96db-aafa68ece093",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": [
+    {
+      "provenanceId": "5c2b63f0-22d6-56ca-bf18-9999f54c0871",
+      "sourceType": "HomePage",
+      "summary": "Homepage in profile Responsive",
+      "page": "Inspection.Account_LoginPage_SplitLeft",
+      "userRole": null,
+      "flowName": null
+    }
+  ]
+}

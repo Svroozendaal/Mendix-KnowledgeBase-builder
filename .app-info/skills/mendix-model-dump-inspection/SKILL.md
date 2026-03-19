@@ -5,6 +5,17 @@ description: Retrieve detailed Mendix model changes from `mx dump-mpr` JSON arti
 
 # MENDIX MODEL DUMP INSPECTION
 
+## Status
+
+Legacy compatibility skill. Default creator extraction path is now `MxCli`.
+
+Use this skill only when:
+1. explicitly running `LegacyDumpParser` mode, or
+2. maintaining historical dump-based parser behaviour.
+
+For default extraction and reader live-query behaviour, use:
+- `.app-info/skills/mendix-mxcli/SKILL.md`
+
 ## REQUIRED REFERENCES
 
 - `references/PARSER_LIBRARY.md`

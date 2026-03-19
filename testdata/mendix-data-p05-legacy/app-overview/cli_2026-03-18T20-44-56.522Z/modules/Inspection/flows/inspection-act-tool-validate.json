@@ -1,0 +1,334 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_Tool_Validate",
+    "stableId": "5081f960-a45e-4f9b-b57d-7a87b0d8a26c",
+    "slug": "inspection-act-tool-validate",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-tool-validate.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-tool-validate.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-tool-validate.json",
+    "l2Logical": "flow:Inspection.ACT_Tool_Validate",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "5081f960-a45e-4f9b-b57d-7a87b0d8a26c",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_Tool_Validate",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "84c11f64-8195-40b7-8281-79bd45515d78",
+      "nodeType": "ActionActivity",
+      "label": "ChangeObjectAction: change Tool (refreshInClient=true)",
+      "detail": "change Tool (refreshInClient=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "a929e516-87f9-4326-8814-4cb09b0794ca",
+      "nodeType": "ActionActivity",
+      "label": "CloseFormAction: close page",
+      "detail": "close page",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f49ca909-ded1-4323-8cc4-ea472bac4dfb",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Inspection.Booking as NewBooking (Booking_Equipment=$Tool, Date=$Tool/ReservationDate)",
+      "detail": "create Inspection.Booking as NewBooking (Booking_Equipment=$Tool, Date=$Tool/ReservationDate)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "b878a256-07b2-4427-b7ad-aa794013f6ba",
+      "nodeType": "ActionActivity",
+      "label": "MicroflowCallAction: call microflow Inspection.VAL_Tool_Validate -\u003E IsValid",
+      "detail": "call microflow Inspection.VAL_Tool_Validate -\u003E IsValid",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": [
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "Inspection.VAL_Tool_Validate",
+          "sourceNodeId": "b878a256-07b2-4427-b7ad-aa794013f6ba"
+        }
+      ]
+    },
+    {
+      "nodeId": "2cc427e7-f4c6-4036-871b-78c7feb97dcd",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve Booking from Inspection.Booking",
+      "detail": "retrieve Booking from Inspection.Booking",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "bfefbd5e-ad31-4396-9c18-0e493b99ae6a",
+      "nodeType": "ActionActivity",
+      "label": "ShowMessageAction: show message (text=There is already a booking for this date., type=Information, blocking=true)",
+      "detail": "show message (text=There is already a booking for this date., type=Information, blocking=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "7b5073fc-8d9d-48c3-a2b8-8f4cd0ffbc8a",
+      "nodeType": "Annotation",
+      "label": "Refresh to trigger DS microflow",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "070ed7db-8078-4306-9e01-6afabffa2845",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "59264985-f3a4-480d-8ef9-fd799e62ef33",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f271b244-df3a-4171-bca4-454d31a0573c",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ea8859e8-06f8-4728-a6a9-392d5ea809aa",
+      "nodeType": "ExclusiveSplit",
+      "label": "Empty? expression=$Booking = empty",
+      "detail": "Empty? expression=$Booking = empty",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "6f1556d2-5631-4688-9d04-04f367a19d6f",
+      "nodeType": "ExclusiveSplit",
+      "label": "IsValid? expression=$IsValid",
+      "detail": "IsValid? expression=$IsValid",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "8de0c980-76c1-451a-ac80-1f5aff90a916",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "ef1513fb-fe5a-46c3-99fe-f9b66b9c07fc",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "6f7084a7-2214-46bf-a0ae-84fa05ef53fc",
+      "originNodeId": "ef1513fb-fe5a-46c3-99fe-f9b66b9c07fc",
+      "destinationNodeId": "2cc427e7-f4c6-4036-871b-78c7feb97dcd",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "6bf0d2a3-f91a-4cc1-b1d8-e89f0d856613",
+      "originNodeId": "b878a256-07b2-4427-b7ad-aa794013f6ba",
+      "destinationNodeId": "6f1556d2-5631-4688-9d04-04f367a19d6f",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "3d62760a-f2ef-437e-ae4d-73ea9eeefcc1",
+      "originNodeId": "6f1556d2-5631-4688-9d04-04f367a19d6f",
+      "destinationNodeId": "f49ca909-ded1-4323-8cc4-ea472bac4dfb",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "e5863cb4-f327-4578-8823-4fea11b18bc1",
+      "originNodeId": "6f1556d2-5631-4688-9d04-04f367a19d6f",
+      "destinationNodeId": "f271b244-df3a-4171-bca4-454d31a0573c",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "ef693877-2c0e-482f-af0e-dc6662ff77ff",
+      "originNodeId": "a929e516-87f9-4326-8814-4cb09b0794ca",
+      "destinationNodeId": "59264985-f3a4-480d-8ef9-fd799e62ef33",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "c5902bc8-2208-491c-8389-4c682b12c873",
+      "originNodeId": "2cc427e7-f4c6-4036-871b-78c7feb97dcd",
+      "destinationNodeId": "ea8859e8-06f8-4728-a6a9-392d5ea809aa",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "67922809-0b9c-4eb6-a57e-caa230b97837",
+      "originNodeId": "ea8859e8-06f8-4728-a6a9-392d5ea809aa",
+      "destinationNodeId": "bfefbd5e-ad31-4396-9c18-0e493b99ae6a",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "d9541387-6089-46ad-8215-07078c69dbee",
+      "originNodeId": "bfefbd5e-ad31-4396-9c18-0e493b99ae6a",
+      "destinationNodeId": "070ed7db-8078-4306-9e01-6afabffa2845",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "1840913a-d69e-4149-b7fb-cb4907844dfc",
+      "originNodeId": "ea8859e8-06f8-4728-a6a9-392d5ea809aa",
+      "destinationNodeId": "b878a256-07b2-4427-b7ad-aa794013f6ba",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "d6a7ad54-e34a-4c1d-a496-6a47c01a6b70",
+      "originNodeId": "f49ca909-ded1-4323-8cc4-ea472bac4dfb",
+      "destinationNodeId": "84c11f64-8195-40b7-8281-79bd45515d78",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "32253235-e236-4fd4-860b-9c46ff02b961",
+      "originNodeId": "84c11f64-8195-40b7-8281-79bd45515d78",
+      "destinationNodeId": "a929e516-87f9-4326-8814-4cb09b0794ca",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [
+    {
+      "callKind": "Microflow",
+      "targetFlowName": "Inspection.VAL_Tool_Validate",
+      "sourceNodeId": "b878a256-07b2-4427-b7ad-aa794013f6ba"
+    }
+  ],
+  "startNodeIds": [
+    "ef1513fb-fe5a-46c3-99fe-f9b66b9c07fc"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "ef1513fb-fe5a-46c3-99fe-f9b66b9c07fc",
+    "2cc427e7-f4c6-4036-871b-78c7feb97dcd",
+    "ea8859e8-06f8-4728-a6a9-392d5ea809aa",
+    "b878a256-07b2-4427-b7ad-aa794013f6ba",
+    "6f1556d2-5631-4688-9d04-04f367a19d6f",
+    "f49ca909-ded1-4323-8cc4-ea472bac4dfb",
+    "84c11f64-8195-40b7-8281-79bd45515d78",
+    "a929e516-87f9-4326-8814-4cb09b0794ca",
+    "59264985-f3a4-480d-8ef9-fd799e62ef33",
+    "f271b244-df3a-4171-bca4-454d31a0573c",
+    "bfefbd5e-ad31-4396-9c18-0e493b99ae6a",
+    "070ed7db-8078-4306-9e01-6afabffa2845"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_Tool_Validate\r\nNODES=14; EDGES=11\r\n1. START\r\n2. ACTION RetrieveAction: retrieve Booking from Inspection.Booking\r\n3. DECISION Empty? expression=$Booking = empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. ACTION MicroflowCallAction: call microflow Inspection.VAL_Tool_Validate -\u003E IsValid\r\n  6. DECISION IsValid? expression=$IsValid\r\n  7. BRANCH when EnumerationCase=true\r\n    8. ACTION CreateObjectAction: create Inspection.Booking as NewBooking (Booking_Equipment=$Tool, Date=$Tool/ReservationDate)\r\n    9. ACTION ChangeObjectAction: change Tool (refreshInClient=true)\r\n    10. ACTION CloseFormAction: close page\r\n    11. END\r\n  12. BRANCH when EnumerationCase=false\r\n    13. END\r\n14. BRANCH when EnumerationCase=false\r\n  15. ACTION ShowMessageAction: show message (text=There is already a booking for this date., type=Information, blocking=true)\r\n  16. END",
+  "retrieveActions": [
+    {
+      "nodeId": "2cc427e7-f4c6-4036-871b-78c7feb97dcd",
+      "summary": "RetrieveAction: retrieve Booking from Inspection.Booking retrieve Booking from Inspection.Booking",
+      "sourceKind": "Database",
+      "entity": "Inspection.Booking",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [
+    {
+      "nodeId": "6f1556d2-5631-4688-9d04-04f367a19d6f",
+      "summary": "IsValid? expression=$IsValid IsValid? expression=$IsValid",
+      "caption": "IsValid?",
+      "expression": "$IsValid IsValid? expression=$IsValid"
+    },
+    {
+      "nodeId": "ea8859e8-06f8-4728-a6a9-392d5ea809aa",
+      "summary": "Empty? expression=$Booking = empty Empty? expression=$Booking = empty",
+      "caption": "Empty?",
+      "expression": "$Booking = empty Empty? expression=$Booking = empty"
+    }
+  ],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "84c11f64-8195-40b7-8281-79bd45515d78",
+      "actionKind": "Change",
+      "summary": "ChangeObjectAction: change Tool (refreshInClient=true) change Tool (refreshInClient=true)",
+      "entity": null,
+      "memberSummary": "refreshInClient=true"
+    },
+    {
+      "nodeId": "f49ca909-ded1-4323-8cc4-ea472bac4dfb",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Inspection.Booking as NewBooking (Booking_Equipment=$Tool, Date=$Tool/ReservationDate) create Inspection.Booking as NewBooking (Booking_Equipment=$Tool, Date=$Tool/ReservationDate)",
+      "entity": "Inspection.Booking",
+      "memberSummary": "Booking_Equipment=$Tool, Date=$Tool/ReservationDate"
+    }
+  ],
+  "callEdges": [
+    {
+      "callerModule": "Inspection",
+      "callerFlow": "Inspection.ACT_Tool_Validate",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "b878a256-07b2-4427-b7ad-aa794013f6ba",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.VAL_Tool_Validate",
+      "isInternal": true
+    }
+  ]
+}

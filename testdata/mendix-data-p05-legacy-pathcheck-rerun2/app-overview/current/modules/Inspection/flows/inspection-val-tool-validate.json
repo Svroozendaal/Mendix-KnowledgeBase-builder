@@ -1,0 +1,319 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.VAL_Tool_Validate",
+    "stableId": "43b0ec21-c41a-4461-9604-e9a6a19d87d5",
+    "slug": "inspection-val-tool-validate",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-val-tool-validate.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-val-tool-validate.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-val-tool-validate.json",
+    "l2Logical": "flow:Inspection.VAL_Tool_Validate",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "43b0ec21-c41a-4461-9604-e9a6a19d87d5",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.VAL_Tool_Validate",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "3e166267-377b-42c1-ab96-3efbbfd0ac79",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f4c1070a-6925-4fc2-b50f-02e24cf515e6",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "1495553d-b7d3-4d2d-93f8-573828828e46",
+      "nodeType": "ActionActivity",
+      "label": "CreateVariableAction: create variable IsValid=true",
+      "detail": "create variable IsValid=true",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "39405ff2-491d-4d9e-b2f7-3d61f08c756d",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "c0f7c956-7479-41e8-a74c-3a25b4d23a4a",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ac22962f-de86-420a-bb5a-21d89bc488f8",
+      "nodeType": "Annotation",
+      "label": "Add your annotation here.",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "3c5308fb-79e3-41e6-86a7-e85a68b76486",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "09e3ab11-0b37-498d-ada9-2496eb5ac995",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "3960e280-6899-40ba-9586-6f5755da30eb",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "4a5a3bd8-4656-4138-8de8-42f16ba8dfb5",
+      "nodeType": "ExclusiveSplit",
+      "label": "ReservationDate filled? expression=$Tool/ReservationDate != empty",
+      "detail": "ReservationDate filled? expression=$Tool/ReservationDate != empty",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "a49e7f1d-2fc3-481e-a262-ae221161d7a8",
+      "nodeType": "ExclusiveSplit",
+      "label": "ReservationDate valid? expression=$Tool/ReservationDate \u003E= [%CurrentDateTime%]",
+      "detail": "ReservationDate valid? expression=$Tool/ReservationDate \u003E= [%CurrentDateTime%]",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "bbb937d0-7213-4f57-99b6-850309b72224",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "b7a1cd2a-0f96-4f29-a2ee-c606db8c08d4",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "88c593a8-5be1-42de-a3bf-d4b4a786205e",
+      "originNodeId": "b7a1cd2a-0f96-4f29-a2ee-c606db8c08d4",
+      "destinationNodeId": "1495553d-b7d3-4d2d-93f8-573828828e46",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "035ad7cc-9a0f-4a90-a666-5d5c4ef66738",
+      "originNodeId": "1495553d-b7d3-4d2d-93f8-573828828e46",
+      "destinationNodeId": "4a5a3bd8-4656-4138-8de8-42f16ba8dfb5",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "d70a7a30-cb09-40ec-980d-4e1d4e30c32e",
+      "originNodeId": "4a5a3bd8-4656-4138-8de8-42f16ba8dfb5",
+      "destinationNodeId": "09e3ab11-0b37-498d-ada9-2496eb5ac995",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "327000e2-5671-4300-be70-aa9aaf351dc1",
+      "originNodeId": "09e3ab11-0b37-498d-ada9-2496eb5ac995",
+      "destinationNodeId": "a49e7f1d-2fc3-481e-a262-ae221161d7a8",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "a78e8c94-fd4b-4cea-85b0-d49445d222de",
+      "originNodeId": "4a5a3bd8-4656-4138-8de8-42f16ba8dfb5",
+      "destinationNodeId": "f4c1070a-6925-4fc2-b50f-02e24cf515e6",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "df770710-385b-4b22-ab60-aece09c1bbbd",
+      "originNodeId": "f4c1070a-6925-4fc2-b50f-02e24cf515e6",
+      "destinationNodeId": "39405ff2-491d-4d9e-b2f7-3d61f08c756d",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "417041de-e069-454d-809b-e1e2f5723721",
+      "originNodeId": "39405ff2-491d-4d9e-b2f7-3d61f08c756d",
+      "destinationNodeId": "09e3ab11-0b37-498d-ada9-2496eb5ac995",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "e464d8d2-288e-4633-96d9-e71f169c4db8",
+      "originNodeId": "a49e7f1d-2fc3-481e-a262-ae221161d7a8",
+      "destinationNodeId": "3960e280-6899-40ba-9586-6f5755da30eb",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "7337c8ea-e1c3-4da0-b561-045a3628dd29",
+      "originNodeId": "a49e7f1d-2fc3-481e-a262-ae221161d7a8",
+      "destinationNodeId": "3e166267-377b-42c1-ab96-3efbbfd0ac79",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "40c67b5a-f9f2-4ec0-b745-d52fc5a5f4ca",
+      "originNodeId": "3e166267-377b-42c1-ab96-3efbbfd0ac79",
+      "destinationNodeId": "c0f7c956-7479-41e8-a74c-3a25b4d23a4a",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "77ed5c32-df6b-4b8e-b186-1756e4408db0",
+      "originNodeId": "c0f7c956-7479-41e8-a74c-3a25b4d23a4a",
+      "destinationNodeId": "3960e280-6899-40ba-9586-6f5755da30eb",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "062ba102-1f60-4604-b02b-1ea429bea138",
+      "originNodeId": "3960e280-6899-40ba-9586-6f5755da30eb",
+      "destinationNodeId": "3c5308fb-79e3-41e6-86a7-e85a68b76486",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "b7a1cd2a-0f96-4f29-a2ee-c606db8c08d4"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "b7a1cd2a-0f96-4f29-a2ee-c606db8c08d4",
+    "1495553d-b7d3-4d2d-93f8-573828828e46",
+    "4a5a3bd8-4656-4138-8de8-42f16ba8dfb5",
+    "09e3ab11-0b37-498d-ada9-2496eb5ac995",
+    "a49e7f1d-2fc3-481e-a262-ae221161d7a8",
+    "3960e280-6899-40ba-9586-6f5755da30eb",
+    "3c5308fb-79e3-41e6-86a7-e85a68b76486",
+    "3e166267-377b-42c1-ab96-3efbbfd0ac79",
+    "c0f7c956-7479-41e8-a74c-3a25b4d23a4a",
+    "f4c1070a-6925-4fc2-b50f-02e24cf515e6",
+    "39405ff2-491d-4d9e-b2f7-3d61f08c756d"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.VAL_Tool_Validate\r\nNODES=13; EDGES=12\r\n1. START\r\n2. ACTION CreateVariableAction: create variable IsValid=true\r\n3. DECISION ReservationDate filled? expression=$Tool/ReservationDate != empty\r\n4. BRANCH when EnumerationCase=true\r\n  5. NODE ExclusiveMerge: ExclusiveMerge\r\n  6. DECISION ReservationDate valid? expression=$Tool/ReservationDate \u003E= [%CurrentDateTime%]\r\n  7. BRANCH when EnumerationCase=true\r\n    8. NODE ExclusiveMerge: ExclusiveMerge\r\n    9. END\r\n  10. BRANCH when EnumerationCase=false\r\n    11. ACTION ChangeVariableAction: change variable IsValid=false\r\n    12. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n    13. REF ExclusiveMerge\r\n14. BRANCH when EnumerationCase=false\r\n  15. ACTION ChangeVariableAction: change variable IsValid=false\r\n  16. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n  17. REF ExclusiveMerge",
+  "retrieveActions": [],
+  "decisionActions": [
+    {
+      "nodeId": "4a5a3bd8-4656-4138-8de8-42f16ba8dfb5",
+      "summary": "ReservationDate filled? expression=$Tool/ReservationDate != empty ReservationDate filled? expression=$Tool/ReservationDate != empty",
+      "caption": "ReservationDate filled?",
+      "expression": "$Tool/ReservationDate != empty ReservationDate filled? expression=$Tool/ReservationDate != empty"
+    },
+    {
+      "nodeId": "a49e7f1d-2fc3-481e-a262-ae221161d7a8",
+      "summary": "ReservationDate valid? expression=$Tool/ReservationDate \u003E= [%CurrentDateTime%] ReservationDate valid? expression=$Tool/ReservationDate \u003E= [%CurrentDateTime%]",
+      "caption": "ReservationDate valid?",
+      "expression": "$Tool/ReservationDate \u003E= [%CurrentDateTime%] ReservationDate valid? expression=$Tool/ReservationDate \u003E= [%CurrentDateTime%]"
+    }
+  ],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "1495553d-b7d3-4d2d-93f8-573828828e46",
+      "actionKind": "Create",
+      "summary": "CreateVariableAction: create variable IsValid=true create variable IsValid=true",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "3e166267-377b-42c1-ab96-3efbbfd0ac79",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "f4c1070a-6925-4fc2-b50f-02e24cf515e6",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    }
+  ],
+  "callEdges": [
+    {
+      "callerModule": "Inspection",
+      "callerFlow": "Inspection.ACT_Tool_Validate",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "b878a256-07b2-4427-b7ad-aa794013f6ba",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.VAL_Tool_Validate",
+      "isInternal": true
+    }
+  ]
+}

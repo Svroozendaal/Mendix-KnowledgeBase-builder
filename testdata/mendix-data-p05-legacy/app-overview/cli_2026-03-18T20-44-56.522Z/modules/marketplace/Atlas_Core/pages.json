@@ -1,0 +1,18 @@
+{
+  "module": "Atlas_Core",
+  "pages": [],
+  "snippets": [
+    {
+      "qualifiedName": "Atlas_Core.FeedbackWidget",
+      "name": "FeedbackWidget",
+      "type": "Web",
+      "parameters": []
+    },
+    {
+      "qualifiedName": "Atlas_Core.LanguageSelectorWidget",
+      "name": "LanguageSelectorWidget",
+      "type": "Web",
+      "parameters": []
+    }
+  ]
+}

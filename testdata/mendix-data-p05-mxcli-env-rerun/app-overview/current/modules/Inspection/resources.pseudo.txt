@@ -1,0 +1,5 @@
+# Resources: Inspection
+Constants: 0, Scheduled Events: 1
+
+## Scheduled Events
+SCHEDULED_EVENT Inspection.SE_Booking_DeleteOlderThenToday

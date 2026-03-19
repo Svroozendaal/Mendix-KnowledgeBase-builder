@@ -1,0 +1,20 @@
+{
+    "schemaVersion":  "2.0",
+    "generatedAtUtc":  "2026-03-18T21:10:02.6177036Z",
+    "sourceMprPath":  "C:\\Workspaces\\Mendix\\Emixa_InspectionApp\\Emixa_InspectionApp.mpr",
+    "sourceDumpPath":  null,
+    "summary":  {
+                    "moduleCount":  7,
+                    "entityCount":  18,
+                    "associationCount":  10,
+                    "enumerationCount":  11,
+                    "flowCount":  55,
+                    "microflowCount":  53,
+                    "nanoflowCount":  2,
+                    "ruleCount":  null,
+                    "workflowCount":  0,
+                    "flowNodeCount":  387,
+                    "flowEdgeCount":  null,
+                    "flowCallEdgeCount":  14
+                }
+}

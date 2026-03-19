@@ -151,6 +151,7 @@ Constructs the AI system prompt from KB content:
      - **Confidence framework** (from `OVERVIEW_KB_READER.md`):
        - `export-backed` — data from model export (L1/L2), treat as fact
        - `inferred` — derived from naming conventions or patterns
+       - `mxcli-live` — read-only allowlisted live-query result resolved via `creator-link.json -> mprPath`
        - `unknown` — data not available, flag explicitly
      - **Output format**: Answers should include evidence (file paths), confidence level, and gaps found
      - **Guardrails**: Do not invent behaviour. Prefer exact file references. Distinguish facts from interpretation.

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace KnowledgeBaseCreator.Wizard;
@@ -9,6 +10,12 @@ internal enum AiProvider
     ClaudeCli,
     CodexCli,
     ClaudeApi,
+}
+
+internal enum ExtractionMode
+{
+    LegacyDumpParser,
+    MxCli,
 }
 
 internal sealed class AiSettings
@@ -34,6 +41,8 @@ internal sealed class WizardConfig
     public string? LastMxExePath { get; set; }
     public string? LastDataRoot { get; set; }
     public string? LastClaudePath { get; set; }
+    [JsonPropertyName("LastExtractionMode")]
+    public string? LastExtractionMode { get; set; }
     public bool? AutoEnrichAfterPipeline { get; set; }
     public AiSettings? AiSettings { get; set; }
 }
@@ -136,6 +145,24 @@ internal static class WizardRuntime
         }
 
         return @"C:\Program Files\Mendix";
+    }
+
+    public static ExtractionMode ResolveExtractionModeDefault(WizardConfig config)
+    {
+        if (!string.IsNullOrWhiteSpace(config.LastExtractionMode))
+        {
+            if (Enum.TryParse<ExtractionMode>(config.LastExtractionMode, ignoreCase: true, out var parsed))
+                return parsed;
+        }
+
+        var envValue = Environment.GetEnvironmentVariable("KB_EXTRACTION_MODE");
+        if (!string.IsNullOrWhiteSpace(envValue) &&
+            Enum.TryParse<ExtractionMode>(envValue.Trim(), ignoreCase: true, out var envMode))
+        {
+            return envMode;
+        }
+
+        return ExtractionMode.MxCli;
     }
 
     public static string ValidateMprPath(string path)
@@ -267,8 +294,9 @@ internal static class WizardRuntime
         string wizardRoot,
         string mprPath,
         string appName,
-        string mxPath,
+        string? mxPath,
         string dataRoot,
+        ExtractionMode extractionMode,
         Action<string>? log = null)
     {
         var runScript = Path.Combine(wizardRoot, "run-dump-parser.ps1");
@@ -294,15 +322,24 @@ internal static class WizardRuntime
 
         psi.Environment["MPR_FILE_PATH"] = mprPath;
         psi.Environment["APP_NAME"] = appName;
-        psi.Environment["MENDIX_MX_EXE"] = mxPath;
         psi.Environment["MENDIX_DATA_ROOT"] = dataRoot;
         psi.Environment["MENDIX_APP_PATH"] = Path.GetDirectoryName(mprPath)!;
+        psi.Environment["KB_EXTRACTION_MODE"] = extractionMode.ToString();
 
-        var studioProPath = InferStudioProPath(mxPath);
-        if (!string.IsNullOrWhiteSpace(studioProPath))
+        if (extractionMode == ExtractionMode.LegacyDumpParser)
         {
-            psi.Environment["STUDIO_PRO_PATH"] = studioProPath;
-            psi.Environment["MENDIX_STUDIO_PRO_PATH"] = studioProPath;
+            if (string.IsNullOrWhiteSpace(mxPath))
+            {
+                throw new InvalidOperationException("LegacyDumpParser mode requires mx.exe.");
+            }
+
+            psi.Environment["MENDIX_MX_EXE"] = mxPath;
+            var studioProPath = InferStudioProPath(mxPath);
+            if (!string.IsNullOrWhiteSpace(studioProPath))
+            {
+                psi.Environment["STUDIO_PRO_PATH"] = studioProPath;
+                psi.Environment["MENDIX_STUDIO_PRO_PATH"] = studioProPath;
+            }
         }
 
         using var process = new Process { StartInfo = psi, EnableRaisingEvents = true };
@@ -556,7 +593,8 @@ internal static class WizardRuntime
         string dataRoot,
         string appName,
         string mprPath,
-        string runFolder)
+        string runFolder,
+        ExtractionMode extractionMode)
     {
         var sourcesDir = Path.Combine(kbRoot, "_sources");
         Directory.CreateDirectory(sourcesDir);
@@ -566,6 +604,7 @@ internal static class WizardRuntime
             ["schemaVersion"] = "1.0",
             ["creatorRoot"] = packageRoot,
             ["appName"] = appName,
+            ["extractionMode"] = extractionMode.ToString(),
             ["mprPath"] = mprPath,
             ["dataRoot"] = dataRoot,
             ["knowledgeBaseRoot"] = kbRoot,
@@ -703,6 +742,64 @@ internal static class WizardRuntime
         }
 
         return (false, null);
+    }
+
+    public static (bool Found, string? Path, string? Version, string? Error) DetectMxCli()
+    {
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "where",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            psi.ArgumentList.Add("mxcli");
+
+            using var process = Process.Start(psi);
+            if (process is null)
+                return (false, null, null, "Unable to start PATH lookup for mxcli.");
+
+            var output = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit();
+            if (process.ExitCode != 0 || string.IsNullOrWhiteSpace(output))
+                return (false, null, null, "mxcli not found on PATH.");
+
+            var firstLine = output.Split('\n', StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+            if (!File.Exists(firstLine))
+                return (false, null, null, "mxcli path resolved from PATH does not exist.");
+
+            var versionPsi = new ProcessStartInfo
+            {
+                FileName = firstLine,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            versionPsi.ArgumentList.Add("--version");
+
+            using var versionProcess = Process.Start(versionPsi);
+            if (versionProcess is null)
+                return (false, firstLine, null, "Failed to execute mxcli --version.");
+
+            var stdout = versionProcess.StandardOutput.ReadToEnd().Trim();
+            var stderr = versionProcess.StandardError.ReadToEnd().Trim();
+            versionProcess.WaitForExit();
+
+            if (versionProcess.ExitCode != 0)
+            {
+                var err = string.IsNullOrWhiteSpace(stderr) ? $"mxcli --version failed with exit code {versionProcess.ExitCode}." : stderr;
+                return (false, firstLine, null, err);
+            }
+
+            return (true, firstLine, stdout, null);
+        }
+        catch (Exception ex)
+        {
+            return (false, null, null, ex.Message);
+        }
     }
 
     public static bool ValidateClaudeApiKey(string? apiKey)

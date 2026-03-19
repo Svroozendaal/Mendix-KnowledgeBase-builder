@@ -1563,6 +1563,25 @@ Confidence: Export-backed
 
 Confidence: Inferred
 
+## Reader Live Query (mxcli-live)
+
+- Resolve live-query ``.mpr`` from ``_sources/creator-link.json -> mprPath``.
+- If ``creator-link.json`` or ``mprPath`` is missing, disable live queries and report the reason.
+- Allowlisted read-only commands:
+1. ``mxcli describe entity <qualified-name> -p <app.mpr>``
+2. ``mxcli describe enumeration <qualified-name> -p <app.mpr>``
+3. ``mxcli describe page <qualified-name> -p <app.mpr>``
+4. ``mxcli describe microflow <qualified-name> -p <app.mpr>``
+5. ``mxcli callers <qualified-name> -p <app.mpr> --transitive``
+6. ``mxcli refs <qualified-name> -p <app.mpr>``
+7. ``mxcli show associations <module> -p <app.mpr>``
+8. ``mxcli show constants <module> -p <app.mpr>``
+9. ``mxcli -p <app.mpr> -c "SHOW PROJECT SECURITY"``
+
+Approval is still required before:
+- reading ``app-overview/`` or ``dumps/``,
+- running non-allowlisted commands.
+
 ## KB Commands
 
 - This KB remains read-only for normal interpretation.
@@ -1577,6 +1596,7 @@ Confidence: Export-backed
 
 - ``Export-backed``: direct from JSON export.
 - ``Inferred``: deterministic synthesis from export data (for example tier ranking, capability grouping).
+- ``mxcli-live``: read-only live query result from the allowlisted command set.
 - ``Unknown``: source data is absent or non-derivable.
 
 ## Source
@@ -1639,6 +1659,7 @@ $($moduleIndexRows -join "`n")
 
 - Open a route index or module collection abstract first.
 - Open the object overview second.
+- If KB evidence is insufficient, use ``mxcli-live`` allowlisted read-only commands.
 - **Do NOT open L2 JSON under ``app-overview/`` without explicit user approval.** Raw data access costs more tokens and time. Ask the user first.
 
 ## Source

@@ -1,0 +1,711 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.VAL_Registration_Validate",
+    "stableId": "c6f60961-a61c-462e-83f5-c3530cfc3414",
+    "slug": "inspection-val-registration-validate",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-val-registration-validate.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-val-registration-validate.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-val-registration-validate.json",
+    "l2Logical": "flow:Inspection.VAL_Registration_Validate",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "c6f60961-a61c-462e-83f5-c3530cfc3414",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.VAL_Registration_Validate",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "1a6f016f-e441-465d-9b79-4d37281c6287",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "3dba609e-3481-4d58-a5f4-90987a3b2812",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "586837cd-5f8a-4dca-8fbf-dabded82f40e",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "770cb2e5-11ee-4fde-8e64-02e7706e7eba",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "93d5cbb2-97e4-4625-914b-ca2f9258465e",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "b13591d0-d9fc-4d8b-89cd-7277dd74f4fc",
+      "nodeType": "ActionActivity",
+      "label": "ChangeVariableAction: change variable IsValid=false",
+      "detail": "change variable IsValid=false",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "19729fe5-6df0-4a05-8705-06105249d724",
+      "nodeType": "ActionActivity",
+      "label": "CreateVariableAction: create variable IsValid=true",
+      "detail": "create variable IsValid=true",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "38432e04-c75e-4c13-b134-d1ae64fcc51c",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "3ccf5173-444c-47ad-a91e-4b5830f3a13a",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "528a5c71-353f-4b9a-9587-ca2da6e2cccc",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ac7a700d-4e03-4126-b62f-a268b3e13304",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ce75278e-ac08-48f4-9ae4-278a93dad318",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "ef2582c8-82c6-4a49-b7f8-a4e7b780c133",
+      "nodeType": "ActionActivity",
+      "label": "ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "detail": "ValidationFeedbackAction (errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "35c18753-ec5c-44a4-8e0d-249069c5c927",
+      "nodeType": "Annotation",
+      "label": "Add your annotation here.",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "20c89689-1975-4ae5-9cf0-3f3b69147017",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "0a02556c-aa3a-4138-b3b9-7864021b88d4",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "3436b91c-bf63-45e6-a9a1-ad04b199973b",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "aea0dcc7-1ed9-4e08-80a7-9f8a2de1845c",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "b0ec1e4a-11da-4924-9ec5-b8eb7d8b9125",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "dddfa401-1945-4541-bf42-b052e67dbd8a",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f770ff09-6b7d-4eb2-92c4-2ae69431bfcc",
+      "nodeType": "ExclusiveMerge",
+      "label": "ExclusiveMerge",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "6567cbc5-88bc-4f66-9b23-4e19214d8615",
+      "nodeType": "ExclusiveSplit",
+      "label": "do passwords match? expression=$Registration/Password = $Registration/ConfirmPassword",
+      "detail": "do passwords match? expression=$Registration/Password = $Registration/ConfirmPassword",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "c8e41150-3b16-4054-b520-bb4875e2a797",
+      "nodeType": "ExclusiveSplit",
+      "label": "Is email address not empty? expression=trim($Registration/EmailAddress) != \u0027\u0027",
+      "detail": "Is email address not empty? expression=trim($Registration/EmailAddress) != \u0027\u0027",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "4a764e82-032c-46aa-9333-54cb6a6298e6",
+      "nodeType": "ExclusiveSplit",
+      "label": "Is full name not empty? expression=trim($Registration/FullName) != \u0027\u0027",
+      "detail": "Is full name not empty? expression=trim($Registration/FullName) != \u0027\u0027",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "4cd839f2-cad8-4ba7-b395-fbe8252a0e74",
+      "nodeType": "ExclusiveSplit",
+      "label": "Is Password not empty? expression=trim($Registration/Password) != \u0027\u0027",
+      "detail": "Is Password not empty? expression=trim($Registration/Password) != \u0027\u0027",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "318bcabd-63df-4f4f-bde4-46ed1262b89d",
+      "nodeType": "ExclusiveSplit",
+      "label": "Is Role not empty? expression=$Registration/Role != empty",
+      "detail": "Is Role not empty? expression=$Registration/Role != empty",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "00c0f200-73b7-4da2-8a15-907d8a322210",
+      "nodeType": "ExclusiveSplit",
+      "label": "Is User name not empty? expression=trim($Registration/UserName) != \u0027\u0027",
+      "detail": "Is User name not empty? expression=trim($Registration/UserName) != \u0027\u0027",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "bd737437-517f-4c88-8c6e-a028701602c4",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "2634892b-94ab-460e-a8f1-cdd91486e937",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "0c0f9ac5-06d5-4675-a2ae-013973ea6b9a",
+      "originNodeId": "2634892b-94ab-460e-a8f1-cdd91486e937",
+      "destinationNodeId": "19729fe5-6df0-4a05-8705-06105249d724",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "df56e79c-08ca-4168-91df-7fdc43ece966",
+      "originNodeId": "19729fe5-6df0-4a05-8705-06105249d724",
+      "destinationNodeId": "4a764e82-032c-46aa-9333-54cb6a6298e6",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "6b5574ad-2235-4ceb-b8df-f33d5526cfc3",
+      "originNodeId": "00c0f200-73b7-4da2-8a15-907d8a322210",
+      "destinationNodeId": "dddfa401-1945-4541-bf42-b052e67dbd8a",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "2ea1ab72-b00d-466d-b5a5-6240e300d9f2",
+      "originNodeId": "dddfa401-1945-4541-bf42-b052e67dbd8a",
+      "destinationNodeId": "4cd839f2-cad8-4ba7-b395-fbe8252a0e74",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "a2b26529-6406-4e14-aefe-7f4fe9261ced",
+      "originNodeId": "00c0f200-73b7-4da2-8a15-907d8a322210",
+      "destinationNodeId": "1a6f016f-e441-465d-9b79-4d37281c6287",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "a1c2c08d-66c8-4f5a-8646-ec073cbe2221",
+      "originNodeId": "1a6f016f-e441-465d-9b79-4d37281c6287",
+      "destinationNodeId": "3ccf5173-444c-47ad-a91e-4b5830f3a13a",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "18f1be88-81ef-4bf9-b920-6f9c676b74b0",
+      "originNodeId": "3ccf5173-444c-47ad-a91e-4b5830f3a13a",
+      "destinationNodeId": "dddfa401-1945-4541-bf42-b052e67dbd8a",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "8dd59193-02d3-4fa8-90f2-816491ee5ed5",
+      "originNodeId": "4cd839f2-cad8-4ba7-b395-fbe8252a0e74",
+      "destinationNodeId": "f770ff09-6b7d-4eb2-92c4-2ae69431bfcc",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "dd1153a3-b246-42e0-b290-c4c4b63cb3ef",
+      "originNodeId": "f770ff09-6b7d-4eb2-92c4-2ae69431bfcc",
+      "destinationNodeId": "318bcabd-63df-4f4f-bde4-46ed1262b89d",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "3e4c33a6-df4f-417a-976d-516536975034",
+      "originNodeId": "4cd839f2-cad8-4ba7-b395-fbe8252a0e74",
+      "destinationNodeId": "586837cd-5f8a-4dca-8fbf-dabded82f40e",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "4a81395d-affc-4666-a94d-057dd3495d10",
+      "originNodeId": "586837cd-5f8a-4dca-8fbf-dabded82f40e",
+      "destinationNodeId": "ac7a700d-4e03-4126-b62f-a268b3e13304",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "eb5893e8-6b22-4692-a8c2-281c4f573063",
+      "originNodeId": "ac7a700d-4e03-4126-b62f-a268b3e13304",
+      "destinationNodeId": "f770ff09-6b7d-4eb2-92c4-2ae69431bfcc",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "dce82405-e3c3-4b4f-9201-d323164966f6",
+      "originNodeId": "318bcabd-63df-4f4f-bde4-46ed1262b89d",
+      "destinationNodeId": "3436b91c-bf63-45e6-a9a1-ad04b199973b",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "04f96bc6-b4b7-42c1-bf5a-79039f5a01a3",
+      "originNodeId": "3436b91c-bf63-45e6-a9a1-ad04b199973b",
+      "destinationNodeId": "6567cbc5-88bc-4f66-9b23-4e19214d8615",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "0c1d1de8-189c-4178-922e-57ac8d1e4b81",
+      "originNodeId": "318bcabd-63df-4f4f-bde4-46ed1262b89d",
+      "destinationNodeId": "770cb2e5-11ee-4fde-8e64-02e7706e7eba",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "d9d744a5-e40d-4f69-b955-6331daae45a5",
+      "originNodeId": "770cb2e5-11ee-4fde-8e64-02e7706e7eba",
+      "destinationNodeId": "528a5c71-353f-4b9a-9587-ca2da6e2cccc",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "a7364cd3-7c5b-4983-9f42-aa40b7d41645",
+      "originNodeId": "528a5c71-353f-4b9a-9587-ca2da6e2cccc",
+      "destinationNodeId": "3436b91c-bf63-45e6-a9a1-ad04b199973b",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "87ed0f8a-fc6e-4b44-bd51-fe0ea88f77b5",
+      "originNodeId": "6567cbc5-88bc-4f66-9b23-4e19214d8615",
+      "destinationNodeId": "b0ec1e4a-11da-4924-9ec5-b8eb7d8b9125",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "6bfaf46f-2a38-4339-9476-22176348d2da",
+      "originNodeId": "3dba609e-3481-4d58-a5f4-90987a3b2812",
+      "destinationNodeId": "38432e04-c75e-4c13-b134-d1ae64fcc51c",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "620a1f9c-10da-407a-9e79-bfac32c92382",
+      "originNodeId": "6567cbc5-88bc-4f66-9b23-4e19214d8615",
+      "destinationNodeId": "3dba609e-3481-4d58-a5f4-90987a3b2812",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "9d55475c-5407-4939-a80e-e7988aec5848",
+      "originNodeId": "b0ec1e4a-11da-4924-9ec5-b8eb7d8b9125",
+      "destinationNodeId": "20c89689-1975-4ae5-9cf0-3f3b69147017",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "80eabe35-c12b-4c98-8d14-6a7044ef63cd",
+      "originNodeId": "38432e04-c75e-4c13-b134-d1ae64fcc51c",
+      "destinationNodeId": "b0ec1e4a-11da-4924-9ec5-b8eb7d8b9125",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "b3a30143-5195-467e-bea2-94c158fe6909",
+      "originNodeId": "c8e41150-3b16-4054-b520-bb4875e2a797",
+      "destinationNodeId": "0a02556c-aa3a-4138-b3b9-7864021b88d4",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "de4a8a93-13ad-4d17-9d34-74ae32584e99",
+      "originNodeId": "c8e41150-3b16-4054-b520-bb4875e2a797",
+      "destinationNodeId": "b13591d0-d9fc-4d8b-89cd-7277dd74f4fc",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "46d81738-e03d-4127-afbd-854cfe4b837b",
+      "originNodeId": "b13591d0-d9fc-4d8b-89cd-7277dd74f4fc",
+      "destinationNodeId": "ce75278e-ac08-48f4-9ae4-278a93dad318",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "0292e3e3-0b32-4fc1-8fb5-0c6d12cfecb6",
+      "originNodeId": "ce75278e-ac08-48f4-9ae4-278a93dad318",
+      "destinationNodeId": "0a02556c-aa3a-4138-b3b9-7864021b88d4",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "987eb0a5-dcaf-4751-8a89-7fee3ca45876",
+      "originNodeId": "0a02556c-aa3a-4138-b3b9-7864021b88d4",
+      "destinationNodeId": "00c0f200-73b7-4da2-8a15-907d8a322210",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "4a8f0a52-afe1-4b56-9c58-90c2a6d47c5d",
+      "originNodeId": "4a764e82-032c-46aa-9333-54cb6a6298e6",
+      "destinationNodeId": "aea0dcc7-1ed9-4e08-80a7-9f8a2de1845c",
+      "condition": "EnumerationCase=true",
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "2d1780ef-93b4-4809-b5ec-ef0f23c446d2",
+      "originNodeId": "4a764e82-032c-46aa-9333-54cb6a6298e6",
+      "destinationNodeId": "93d5cbb2-97e4-4625-914b-ca2f9258465e",
+      "condition": "EnumerationCase=false",
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "09ebca4c-8aff-400b-8a89-1fe875ddebfe",
+      "originNodeId": "93d5cbb2-97e4-4625-914b-ca2f9258465e",
+      "destinationNodeId": "ef2582c8-82c6-4a49-b7f8-a4e7b780c133",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 2,
+      "destinationConnectionIndex": 0
+    },
+    {
+      "edgeId": "5b19f86c-e22a-4169-966e-92298a25bac2",
+      "originNodeId": "ef2582c8-82c6-4a49-b7f8-a4e7b780c133",
+      "destinationNodeId": "aea0dcc7-1ed9-4e08-80a7-9f8a2de1845c",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 2
+    },
+    {
+      "edgeId": "4e74b637-324c-4893-b19b-63574bdd6f10",
+      "originNodeId": "aea0dcc7-1ed9-4e08-80a7-9f8a2de1845c",
+      "destinationNodeId": "c8e41150-3b16-4054-b520-bb4875e2a797",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "2634892b-94ab-460e-a8f1-cdd91486e937"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "2634892b-94ab-460e-a8f1-cdd91486e937",
+    "19729fe5-6df0-4a05-8705-06105249d724",
+    "4a764e82-032c-46aa-9333-54cb6a6298e6",
+    "aea0dcc7-1ed9-4e08-80a7-9f8a2de1845c",
+    "c8e41150-3b16-4054-b520-bb4875e2a797",
+    "0a02556c-aa3a-4138-b3b9-7864021b88d4",
+    "00c0f200-73b7-4da2-8a15-907d8a322210",
+    "dddfa401-1945-4541-bf42-b052e67dbd8a",
+    "4cd839f2-cad8-4ba7-b395-fbe8252a0e74",
+    "f770ff09-6b7d-4eb2-92c4-2ae69431bfcc",
+    "318bcabd-63df-4f4f-bde4-46ed1262b89d",
+    "3436b91c-bf63-45e6-a9a1-ad04b199973b",
+    "6567cbc5-88bc-4f66-9b23-4e19214d8615",
+    "b0ec1e4a-11da-4924-9ec5-b8eb7d8b9125",
+    "20c89689-1975-4ae5-9cf0-3f3b69147017",
+    "3dba609e-3481-4d58-a5f4-90987a3b2812",
+    "38432e04-c75e-4c13-b134-d1ae64fcc51c",
+    "770cb2e5-11ee-4fde-8e64-02e7706e7eba",
+    "528a5c71-353f-4b9a-9587-ca2da6e2cccc",
+    "586837cd-5f8a-4dca-8fbf-dabded82f40e",
+    "ac7a700d-4e03-4126-b62f-a268b3e13304",
+    "1a6f016f-e441-465d-9b79-4d37281c6287",
+    "3ccf5173-444c-47ad-a91e-4b5830f3a13a",
+    "b13591d0-d9fc-4d8b-89cd-7277dd74f4fc",
+    "ce75278e-ac08-48f4-9ae4-278a93dad318",
+    "93d5cbb2-97e4-4625-914b-ca2f9258465e",
+    "ef2582c8-82c6-4a49-b7f8-a4e7b780c133"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.VAL_Registration_Validate\r\nNODES=29; EDGES=32\r\n1. START\r\n2. ACTION CreateVariableAction: create variable IsValid=true\r\n3. DECISION Is full name not empty? expression=trim($Registration/FullName) != \u0027\u0027\r\n4. BRANCH when EnumerationCase=true\r\n  5. NODE ExclusiveMerge: ExclusiveMerge\r\n  6. DECISION Is email address not empty? expression=trim($Registration/EmailAddress) != \u0027\u0027\r\n  7. BRANCH when EnumerationCase=true\r\n    8. NODE ExclusiveMerge: ExclusiveMerge\r\n    9. DECISION Is User name not empty? expression=trim($Registration/UserName) != \u0027\u0027\r\n    10. BRANCH when EnumerationCase=true\r\n      11. NODE ExclusiveMerge: ExclusiveMerge\r\n      12. DECISION Is Password not empty? expression=trim($Registration/Password) != \u0027\u0027\r\n      13. BRANCH when EnumerationCase=true\r\n        14. NODE ExclusiveMerge: ExclusiveMerge\r\n        15. DECISION Is Role not empty? expression=$Registration/Role != empty\r\n        16. BRANCH when EnumerationCase=true\r\n          17. NODE ExclusiveMerge: ExclusiveMerge\r\n          18. DECISION do passwords match? expression=$Registration/Password = $Registration/ConfirmPassword\r\n          19. BRANCH when EnumerationCase=true\r\n            20. NODE ExclusiveMerge: ExclusiveMerge\r\n            21. END\r\n          22. BRANCH when EnumerationCase=false\r\n            23. ACTION ChangeVariableAction: change variable IsValid=false\r\n            24. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n            25. REF ExclusiveMerge\r\n        26. BRANCH when EnumerationCase=false\r\n          27. ACTION ChangeVariableAction: change variable IsValid=false\r\n          28. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n          29. REF ExclusiveMerge\r\n      30. BRANCH when EnumerationCase=false\r\n        31. ACTION ChangeVariableAction: change variable IsValid=false\r\n        32. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n        33. REF ExclusiveMerge\r\n    34. BRANCH when EnumerationCase=false\r\n      35. ACTION ChangeVariableAction: change variable IsValid=false\r\n      36. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n      37. REF ExclusiveMerge\r\n  38. BRANCH when EnumerationCase=false\r\n    39. ACTION ChangeVariableAction: change variable IsValid=false\r\n    40. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n    41. REF ExclusiveMerge\r\n42. BRANCH when EnumerationCase=false\r\n  43. ACTION ChangeVariableAction: change variable IsValid=false\r\n  44. ACTION ValidationFeedbackAction: ValidationFeedbackAction (errorHandlingType=Rollback)\r\n  45. REF ExclusiveMerge",
+  "retrieveActions": [],
+  "decisionActions": [
+    {
+      "nodeId": "00c0f200-73b7-4da2-8a15-907d8a322210",
+      "summary": "Is User name not empty? expression=trim($Registration/UserName) != \u0027\u0027 Is User name not empty? expression=trim($Registration/UserName) != \u0027\u0027",
+      "caption": "Is User name not empty?",
+      "expression": "trim($Registration/UserName) != \u0027\u0027 Is User name not empty? expression=trim($Registration/UserName) != \u0027\u0027"
+    },
+    {
+      "nodeId": "318bcabd-63df-4f4f-bde4-46ed1262b89d",
+      "summary": "Is Role not empty? expression=$Registration/Role != empty Is Role not empty? expression=$Registration/Role != empty",
+      "caption": "Is Role not empty?",
+      "expression": "$Registration/Role != empty Is Role not empty? expression=$Registration/Role != empty"
+    },
+    {
+      "nodeId": "4a764e82-032c-46aa-9333-54cb6a6298e6",
+      "summary": "Is full name not empty? expression=trim($Registration/FullName) != \u0027\u0027 Is full name not empty? expression=trim($Registration/FullName) != \u0027\u0027",
+      "caption": "Is full name not empty?",
+      "expression": "trim($Registration/FullName) != \u0027\u0027 Is full name not empty? expression=trim($Registration/FullName) != \u0027\u0027"
+    },
+    {
+      "nodeId": "4cd839f2-cad8-4ba7-b395-fbe8252a0e74",
+      "summary": "Is Password not empty? expression=trim($Registration/Password) != \u0027\u0027 Is Password not empty? expression=trim($Registration/Password) != \u0027\u0027",
+      "caption": "Is Password not empty?",
+      "expression": "trim($Registration/Password) != \u0027\u0027 Is Password not empty? expression=trim($Registration/Password) != \u0027\u0027"
+    },
+    {
+      "nodeId": "6567cbc5-88bc-4f66-9b23-4e19214d8615",
+      "summary": "do passwords match? expression=$Registration/Password = $Registration/ConfirmPassword do passwords match? expression=$Registration/Password = $Registration/ConfirmPassword",
+      "caption": "do passwords match?",
+      "expression": "$Registration/Password = $Registration/ConfirmPassword do passwords match? expression=$Registration/Password = $Registration/ConfirmPassword"
+    },
+    {
+      "nodeId": "c8e41150-3b16-4054-b520-bb4875e2a797",
+      "summary": "Is email address not empty? expression=trim($Registration/EmailAddress) != \u0027\u0027 Is email address not empty? expression=trim($Registration/EmailAddress) != \u0027\u0027",
+      "caption": "Is email address not empty?",
+      "expression": "trim($Registration/EmailAddress) != \u0027\u0027 Is email address not empty? expression=trim($Registration/EmailAddress) != \u0027\u0027"
+    }
+  ],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "19729fe5-6df0-4a05-8705-06105249d724",
+      "actionKind": "Create",
+      "summary": "CreateVariableAction: create variable IsValid=true create variable IsValid=true",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "1a6f016f-e441-465d-9b79-4d37281c6287",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "3dba609e-3481-4d58-a5f4-90987a3b2812",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "586837cd-5f8a-4dca-8fbf-dabded82f40e",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "770cb2e5-11ee-4fde-8e64-02e7706e7eba",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "93d5cbb2-97e4-4625-914b-ca2f9258465e",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    },
+    {
+      "nodeId": "b13591d0-d9fc-4d8b-89cd-7277dd74f4fc",
+      "actionKind": "Change",
+      "summary": "ChangeVariableAction: change variable IsValid=false change variable IsValid=false",
+      "entity": null,
+      "memberSummary": null
+    }
+  ],
+  "callEdges": [
+    {
+      "callerModule": "Inspection",
+      "callerFlow": "Inspection.ACT_Registration_Save",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "458bce14-c541-4dae-ae04-156044617ac1",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.VAL_Registration_Validate",
+      "isInternal": true
+    }
+  ]
+}

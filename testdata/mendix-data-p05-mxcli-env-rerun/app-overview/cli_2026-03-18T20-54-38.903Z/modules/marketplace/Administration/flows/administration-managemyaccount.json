@@ -1,0 +1,149 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.ManageMyAccount",
+                  "stableId":  "84ecc384-a258-4435-897a-3ae24109eddb",
+                  "slug":  "administration-managemyaccount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-managemyaccount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-managemyaccount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/flows/administration-managemyaccount.json",
+                  "l2Logical":  "flow:Administration.ManageMyAccount",
+                  "sourceRun":  "cli_2026-03-18T20-54-38.903Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/marketplace/Administration/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/marketplace/Administration/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/flows/INDEX.json"
+              },
+    "flowId":  "84ecc384-a258-4435-897a-3ae24109eddb",
+    "kind":  "Microflow",
+    "qualifiedName":  "Administration.ManageMyAccount",
+    "module":  "Administration",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "-- Unknown activity type: *microflows.InheritanceSplit",
+                      "detail":  "-- Unknown activity type: *microflows.InheritanceSplit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "*microflows.CastAction",
+                      "detail":  "-- Unknown action: *microflows.CastAction",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show page Administration.MyAccount",
+                      "detail":  "SHOW PAGE Administration.MyAccount($Account = $Account)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-514c3f6e8484",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-fc75bc36040f",
+                      "originNodeId":  "n002-action",
+                      "destinationNodeId":  "n003-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-1aaa2bd7b031",
+                      "originNodeId":  "n003-action",
+                      "destinationNodeId":  "n004-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-cb85d5f69026",
+                      "originNodeId":  "n004-show",
+                      "destinationNodeId":  "n005-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-action",
+                                         "n003-action",
+                                         "n004-show",
+                                         "n005-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Administration.ManageMyAccount\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+                            {
+                                "nodeId":  "n004-show",
+                                "summary":  "show page Administration.MyAccount",
+                                "targetPage":  "Administration.MyAccount"
+                            }
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+
+                  ]
+}

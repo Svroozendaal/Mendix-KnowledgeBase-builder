@@ -1,0 +1,278 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Notification",
+    "qualifiedName": "Notification.SE_Notification_SendToInspectors",
+    "stableId": "6fb3fe1e-1357-4f6b-8e91-08fbb96f8e90",
+    "slug": "notification-se-notification-sendtoinspectors",
+    "l0Path": "knowledge-base/modules/Notification/flows/notification-se-notification-sendtoinspectors.abstract.md",
+    "l1Path": "knowledge-base/modules/Notification/flows/notification-se-notification-sendtoinspectors.overview.md",
+    "l2Path": "app-overview/current/modules/Notification/flows/notification-se-notification-sendtoinspectors.json",
+    "l2Logical": "flow:Notification.SE_Notification_SendToInspectors",
+    "sourceRun": "cli_2026-03-18T20-52-48.461Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Notification/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Notification/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Notification/flows/INDEX.json"
+  },
+  "flowId": "6fb3fe1e-1357-4f6b-8e91-08fbb96f8e90",
+  "kind": "Microflow",
+  "qualifiedName": "Notification.SE_Notification_SendToInspectors",
+  "module": "Notification",
+  "nodes": [
+    {
+      "nodeId": "e28ccadc-2f7e-4db9-98a2-bbdacaec56d4",
+      "nodeType": "ActionActivity",
+      "label": "ChangeListAction: change NotificationList_ToCommit (type=Add, value=$NewNotification)",
+      "detail": "change NotificationList_ToCommit (type=Add, value=$NewNotification)",
+      "loopOwnerId": "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "dc45ca9e-d89b-4d2f-a9d2-bc21be332151",
+      "nodeType": "ActionActivity",
+      "label": "CommitAction: commit NotificationList_ToCommit (refreshInClient=false, withEvents=true)",
+      "detail": "commit NotificationList_ToCommit (refreshInClient=false, withEvents=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f61cf5aa-0be8-4989-a452-a645f0f1e585",
+      "nodeType": "ActionActivity",
+      "label": "CreateListAction: CreateListAction (output=NotificationList_ToCommit, entity=Notification.Notification, errorHandlingType=Rollback)",
+      "detail": "CreateListAction (output=NotificationList_ToCommit, entity=Notification.Notification, errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "0b9ae13f-306c-4169-b5d5-44c6b8470bed",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Notification.Notification as NewNotification (Title=\u0027Task: \u0027 \u002B $IteratorTask/Title \u002B \u0027 is due today.\u0027, Notification_Account=$Account_Inspector, AssociatedObject=$IteratorTask/TaskID)",
+      "detail": "create Notification.Notification as NewNotification (Title=\u0027Task: \u0027 \u002B $IteratorTask/Title \u002B \u0027 is due today.\u0027, Notification_Account=$Account_Inspector, AssociatedObject=$IteratorTask/TaskID)",
+      "loopOwnerId": "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "abeda3cd-fc29-439d-b8c8-6d681ee351fc",
+      "nodeType": "ActionActivity",
+      "label": "MicroflowCallAction: call microflow Inspection.SUB_Account_GetFromInspector -\u003E Account_Inspector",
+      "detail": "call microflow Inspection.SUB_Account_GetFromInspector -\u003E Account_Inspector",
+      "loopOwnerId": "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+      "isExecutable": true,
+      "calls": [
+        {
+          "callKind": "Microflow",
+          "targetFlowName": "Inspection.SUB_Account_GetFromInspector",
+          "sourceNodeId": "abeda3cd-fc29-439d-b8c8-6d681ee351fc"
+        }
+      ]
+    },
+    {
+      "nodeId": "1ff59e39-5369-46d5-a3b9-6a9c8afebd83",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve Inspector over association Task_Inspector from IteratorTask",
+      "detail": "retrieve Inspector over association Task_Inspector from IteratorTask",
+      "loopOwnerId": "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "5f047945-b271-4926-a4f6-00cf22330aa9",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve TaskList from Inspection.Task",
+      "detail": "retrieve TaskList from Inspection.Task",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "d3abf398-8968-4b2a-bc81-882c54fef4ec",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+      "nodeType": "LoopedActivity",
+      "label": "iterate TaskList as IteratorTask",
+      "detail": "iterate TaskList as IteratorTask",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "bb590522-f07c-4c51-9194-c900b7d5d7eb",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "e48be422-3794-4181-aca2-f55c7a363235",
+      "originNodeId": "bb590522-f07c-4c51-9194-c900b7d5d7eb",
+      "destinationNodeId": "5f047945-b271-4926-a4f6-00cf22330aa9",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "f6c4236f-c13b-42ba-937f-14be82172896",
+      "originNodeId": "5f047945-b271-4926-a4f6-00cf22330aa9",
+      "destinationNodeId": "f61cf5aa-0be8-4989-a452-a645f0f1e585",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "2932b099-3d1b-4269-99dd-cad767656e4e",
+      "originNodeId": "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+      "destinationNodeId": "dc45ca9e-d89b-4d2f-a9d2-bc21be332151",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "48ef872c-1c19-42f9-b87f-46ebe921a925",
+      "originNodeId": "1ff59e39-5369-46d5-a3b9-6a9c8afebd83",
+      "destinationNodeId": "abeda3cd-fc29-439d-b8c8-6d681ee351fc",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "5f0dd51b-cc3c-497b-9bee-ad98b84ff40b",
+      "originNodeId": "abeda3cd-fc29-439d-b8c8-6d681ee351fc",
+      "destinationNodeId": "0b9ae13f-306c-4169-b5d5-44c6b8470bed",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "eef69776-950e-4957-90ac-a8a8cfe65a5f",
+      "originNodeId": "f61cf5aa-0be8-4989-a452-a645f0f1e585",
+      "destinationNodeId": "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "098ac1e7-ea6d-443f-a0dc-b7e9256a5f24",
+      "originNodeId": "0b9ae13f-306c-4169-b5d5-44c6b8470bed",
+      "destinationNodeId": "e28ccadc-2f7e-4db9-98a2-bbdacaec56d4",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "a95077db-fe8a-4f31-97b1-edd90a2725f1",
+      "originNodeId": "dc45ca9e-d89b-4d2f-a9d2-bc21be332151",
+      "destinationNodeId": "d3abf398-8968-4b2a-bc81-882c54fef4ec",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [
+    {
+      "callKind": "Microflow",
+      "targetFlowName": "Inspection.SUB_Account_GetFromInspector",
+      "sourceNodeId": "abeda3cd-fc29-439d-b8c8-6d681ee351fc"
+    }
+  ],
+  "startNodeIds": [
+    "bb590522-f07c-4c51-9194-c900b7d5d7eb"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "bb590522-f07c-4c51-9194-c900b7d5d7eb",
+    "5f047945-b271-4926-a4f6-00cf22330aa9",
+    "f61cf5aa-0be8-4989-a452-a645f0f1e585",
+    "1144bdab-eec5-418a-8fba-c540c80e1ebd",
+    "0b9ae13f-306c-4169-b5d5-44c6b8470bed",
+    "1ff59e39-5369-46d5-a3b9-6a9c8afebd83",
+    "abeda3cd-fc29-439d-b8c8-6d681ee351fc",
+    "e28ccadc-2f7e-4db9-98a2-bbdacaec56d4",
+    "dc45ca9e-d89b-4d2f-a9d2-bc21be332151",
+    "d3abf398-8968-4b2a-bc81-882c54fef4ec"
+  ],
+  "pseudocode": "FLOW Microflow: Notification.SE_Notification_SendToInspectors\r\nNODES=6; EDGES=5\r\n1. START\r\n2. ACTION RetrieveAction: retrieve TaskList from Inspection.Task\r\n3. ACTION CreateListAction: CreateListAction (output=NotificationList_ToCommit, entity=Notification.Notification, errorHandlingType=Rollback)\r\n4. LOOP iterate TaskList as IteratorTask\r\n  5. LOOP BODY\r\n    6. ACTION CreateObjectAction: create Notification.Notification as NewNotification (Title=\u0027Task: \u0027 \u002B $IteratorTask/Title \u002B \u0027 is due today.\u0027, Notification_Account=$Account_Inspector, AssociatedObject=$IteratorTask/TaskID)\r\n    7. ACTION RetrieveAction: retrieve Inspector over association Task_Inspector from IteratorTask\r\n    8. ACTION MicroflowCallAction: call microflow Inspection.SUB_Account_GetFromInspector -\u003E Account_Inspector\r\n    9. ACTION ChangeListAction: change NotificationList_ToCommit (type=Add, value=$NewNotification)\r\n10. ACTION CommitAction: commit NotificationList_ToCommit (refreshInClient=false, withEvents=true)\r\n11. END",
+  "retrieveActions": [
+    {
+      "nodeId": "1ff59e39-5369-46d5-a3b9-6a9c8afebd83",
+      "summary": "RetrieveAction: retrieve Inspector over association Task_Inspector from IteratorTask retrieve Inspector over association Task_Inspector from IteratorTask",
+      "sourceKind": "Association",
+      "entity": null,
+      "association": "Task_Inspector",
+      "xPath": null
+    },
+    {
+      "nodeId": "5f047945-b271-4926-a4f6-00cf22330aa9",
+      "summary": "RetrieveAction: retrieve TaskList from Inspection.Task retrieve TaskList from Inspection.Task",
+      "sourceKind": "Database",
+      "entity": "Inspection.Task",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "0b9ae13f-306c-4169-b5d5-44c6b8470bed",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Notification.Notification as NewNotification (Title=\u0027Task: \u0027 \u002B $IteratorTask/Title \u002B \u0027 is due today.\u0027, Notification_Account=$Account_Inspector, AssociatedObject=$IteratorTask/TaskID) create Not...",
+      "entity": "Notification.Notification",
+      "memberSummary": "Title=\u0027Task: \u0027 \u002B $IteratorTask/Title \u002B \u0027 is due today.\u0027, Notification_Account=$Account_Inspector, AssociatedObject=$IteratorTask/TaskID"
+    },
+    {
+      "nodeId": "dc45ca9e-d89b-4d2f-a9d2-bc21be332151",
+      "actionKind": "Commit",
+      "summary": "CommitAction: commit NotificationList_ToCommit (refreshInClient=false, withEvents=true) commit NotificationList_ToCommit (refreshInClient=false, withEvents=true)",
+      "entity": null,
+      "memberSummary": "refreshInClient=false, withEvents=true"
+    },
+    {
+      "nodeId": "e28ccadc-2f7e-4db9-98a2-bbdacaec56d4",
+      "actionKind": "Change",
+      "summary": "ChangeListAction: change NotificationList_ToCommit (type=Add, value=$NewNotification) change NotificationList_ToCommit (type=Add, value=$NewNotification)",
+      "entity": null,
+      "memberSummary": "type=Add, value=$NewNotification"
+    },
+    {
+      "nodeId": "f61cf5aa-0be8-4989-a452-a645f0f1e585",
+      "actionKind": "Commit",
+      "summary": "CreateListAction: CreateListAction (output=NotificationList_ToCommit, entity=Notification.Notification, errorHandlingType=Rollback) CreateListAction (output=NotificationList_ToCommit, entity=Notification.Notification, er...",
+      "entity": "Notification.Notification",
+      "memberSummary": "output=NotificationList_ToCommit, entity=Notification.Notification, errorHandlingType=Rollback"
+    }
+  ],
+  "callEdges": [
+    {
+      "callerModule": "Notification",
+      "callerFlow": "Notification.SE_Notification_SendToInspectors",
+      "callerKind": "Microflow",
+      "callKind": "Microflow",
+      "sourceNodeId": "abeda3cd-fc29-439d-b8c8-6d681ee351fc",
+      "targetModule": "Inspection",
+      "targetFlow": "Inspection.SUB_Account_GetFromInspector",
+      "isInternal": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+﻿{
+    "appName":  "Inspection",
+    "kbRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p67-default\\knowledge-base",
+    "generatedAtUtc":  "2026-03-18T21:14:08.2630423Z",
+    "overallPass":  true,
+    "filesChecked":  388,
+    "issueCount":  0,
+    "issues":  [
+
+               ],
+    "semanticMetrics":  {
+                            "ExpectedCustomPages":  8,
+                            "EntityThreshold":  90,
+                            "PageCoveragePercent":  100,
+                            "ExpectedCustomEntities":  12,
+                            "ExpectedCustomFlows":  0,
+                            "EntityPass":  true,
+                            "FlowThreshold":  90,
+                            "EntityCoveragePercent":  100,
+                            "PageThreshold":  95,
+                            "FlowPass":  true,
+                            "PagePass":  true,
+                            "FlowCoveragePercent":  100
+                        }
+}

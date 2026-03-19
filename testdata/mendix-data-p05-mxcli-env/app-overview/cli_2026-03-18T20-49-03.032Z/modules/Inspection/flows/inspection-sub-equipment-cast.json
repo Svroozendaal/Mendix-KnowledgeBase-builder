@@ -1,0 +1,196 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.SUB_Equipment_Cast",
+                  "stableId":  "5a631376-c575-4fcc-a851-c633040dd279",
+                  "slug":  "inspection-sub-equipment-cast",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-sub-equipment-cast.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-sub-equipment-cast.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-sub-equipment-cast.json",
+                  "l2Logical":  "flow:Inspection.SUB_Equipment_Cast",
+                  "sourceRun":  "cli_2026-03-18T20-49-03.032Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "5a631376-c575-4fcc-a851-c633040dd279",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.SUB_Equipment_Cast",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-loop",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "LOOP $IteratorEquipment IN $EquipmentList",
+                      "detail":  "LOOP $IteratorEquipment IN $EquipmentList",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "-- Unknown activity type: *microflows.InheritanceSplit",
+                      "detail":  "-- Unknown activity type: *microflows.InheritanceSplit",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "*microflows.CastAction",
+                      "detail":  "-- Unknown action: *microflows.CastAction",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-add",
+                      "nodeType":  "ActionActivity",
+                      "label":  "ADD $Accessory TO $AccessoryList",
+                      "detail":  "ADD $Accessory TO $AccessoryList",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-continue",
+                      "nodeType":  "ActionActivity",
+                      "label":  "CONTINUE",
+                      "detail":  "CONTINUE",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-8b23532667fb",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-loop",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-50c27a7515c8",
+                      "originNodeId":  "n002-loop",
+                      "destinationNodeId":  "n003-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-d22e82e794fb",
+                      "originNodeId":  "n003-action",
+                      "destinationNodeId":  "n004-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-99ac22336524",
+                      "originNodeId":  "n004-action",
+                      "destinationNodeId":  "n005-add",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-7119d36c6c6e",
+                      "originNodeId":  "n005-add",
+                      "destinationNodeId":  "n006-continue",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-7c7ac9bf3f0b",
+                      "originNodeId":  "n006-continue",
+                      "destinationNodeId":  "n007-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-loop",
+                                         "n003-action",
+                                         "n004-action",
+                                         "n005-add",
+                                         "n006-continue",
+                                         "n007-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.SUB_Equipment_Cast\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.SE_Equipment_OrderNew",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n004-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.SUB_Equipment_Cast",
+                          "isInternal":  true
+                      }
+                  ]
+}

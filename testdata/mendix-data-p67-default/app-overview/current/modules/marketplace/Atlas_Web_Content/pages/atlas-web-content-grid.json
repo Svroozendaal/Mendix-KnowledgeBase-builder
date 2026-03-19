@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Atlas_Web_Content",
+                  "qualifiedName":  "Atlas_Web_Content.Grid",
+                  "stableId":  "Atlas_Web_Content.Grid",
+                  "slug":  "atlas-web-content-grid",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-grid.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-grid.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/atlas-web-content-grid.json",
+                  "l2Logical":  "page:Atlas_Web_Content.Grid",
+                  "sourceRun":  "cli_2026-03-18T21-10-02.160Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T21-10-02.160Z/modules/marketplace/Atlas_Web_Content/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T21-10-02.160Z/modules/marketplace/Atlas_Web_Content/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/INDEX.json"
+              },
+    "qualifiedName":  "Atlas_Web_Content.Grid",
+    "name":  "Grid",
+    "title":  "Grid",
+    "layout":  null,
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+
+                    ],
+    "clientActions":  [
+
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

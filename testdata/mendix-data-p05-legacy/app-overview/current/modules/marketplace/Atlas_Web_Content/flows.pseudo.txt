@@ -1,0 +1,14 @@
+# Flows: Atlas_Web_Content
+Flows: 2
+
+FLOW Nanoflow: Atlas_Web_Content.ACT_Login
+NODES=4; EDGES=2
+1. START
+2. ACTION JavaScriptActionCallAction: call javascript action NanoflowCommons.SignIn
+3. END
+
+FLOW Nanoflow: Atlas_Web_Content.DS_LoginContext
+NODES=3; EDGES=2
+1. START
+2. ACTION CreateObjectAction: create Atlas_Web_Content.LoginContext as NewLoginContext
+3. END

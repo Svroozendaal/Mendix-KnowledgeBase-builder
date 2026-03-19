@@ -1,0 +1,88 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.Task_NewEdit",
+                  "stableId":  "Inspection.Task_NewEdit",
+                  "slug":  "inspection-task-newedit",
+                  "l0Path":  "knowledge-base/modules/Inspection/pages/inspection-task-newedit.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/pages/inspection-task-newedit.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/pages/inspection-task-newedit.json",
+                  "l2Logical":  "page:Inspection.Task_NewEdit",
+                  "sourceRun":  "cli_2026-03-18T20-57-13.045Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/Inspection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/Inspection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/pages/INDEX.json"
+              },
+    "qualifiedName":  "Inspection.Task_NewEdit",
+    "name":  "Task_NewEdit",
+    "title":  "Edit Smart Task",
+    "layout":  "Inspection.Emixa_Custom",
+    "allowedRoles":  [
+                         "Inspection.Inspector",
+                         "Inspection.Manager"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "Task",
+                           "entityType":  "Inspection.Task"
+                       }
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        {
+                            "sourceId":  "dataView5",
+                            "sourceType":  "Parameter",
+                            "entity":  "Inspection.Task",
+                            "constraint":  null,
+                            "flowName":  null,
+                            "summary":  "Parameter datasource: $Task"
+                        },
+                        {
+                            "sourceId":  "dataView1",
+                            "sourceType":  "Microflow",
+                            "entity":  null,
+                            "constraint":  null,
+                            "flowName":  "Inspection.DS_UserRole_GetFromCurrentUser",
+                            "summary":  "Microflow datasource: Inspection.DS_UserRole_GetFromCurrentUser"
+                        }
+                    ],
+    "clientActions":  [
+                          {
+                              "actionId":  "actionButton3",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_CoverPhoto_Create",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_CoverPhoto_Create"
+                          },
+                          {
+                              "actionId":  "actionButton2",
+                              "actionType":  "CancelChangesClientAction",
+                              "summary":  "CancelChangesClientAction",
+                              "targetPage":  null,
+                              "flowName":  null
+                          },
+                          {
+                              "actionId":  "actionButton6",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Task_SetToDone",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Task_SetToDone"
+                          },
+                          {
+                              "actionId":  "actionButton1",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Task_Save",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Task_Save"
+                          }
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

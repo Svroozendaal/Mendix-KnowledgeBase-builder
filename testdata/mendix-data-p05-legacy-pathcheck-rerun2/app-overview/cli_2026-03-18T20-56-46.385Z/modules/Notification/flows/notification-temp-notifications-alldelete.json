@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Notification",
+    "qualifiedName": "Notification.TEMP_Notifications_AllDelete",
+    "stableId": "8c1b0fd0-5c95-4a7f-936c-1377583545c3",
+    "slug": "notification-temp-notifications-alldelete",
+    "l0Path": "knowledge-base/modules/Notification/flows/notification-temp-notifications-alldelete.abstract.md",
+    "l1Path": "knowledge-base/modules/Notification/flows/notification-temp-notifications-alldelete.overview.md",
+    "l2Path": "app-overview/current/modules/Notification/flows/notification-temp-notifications-alldelete.json",
+    "l2Logical": "flow:Notification.TEMP_Notifications_AllDelete",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Notification/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Notification/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Notification/flows/INDEX.json"
+  },
+  "flowId": "8c1b0fd0-5c95-4a7f-936c-1377583545c3",
+  "kind": "Microflow",
+  "qualifiedName": "Notification.TEMP_Notifications_AllDelete",
+  "module": "Notification",
+  "nodes": [
+    {
+      "nodeId": "423465b8-050b-4028-b78c-44bc78a6fa97",
+      "nodeType": "ActionActivity",
+      "label": "DeleteAction: delete NotificationList (refreshInClient=false)",
+      "detail": "delete NotificationList (refreshInClient=false)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "d10164c7-fbd6-4c28-8825-fa6fd4bc2278",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve NotificationList from Notification.Notification",
+      "detail": "retrieve NotificationList from Notification.Notification",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f369ff01-2fff-4597-920e-9bbd49d653c5",
+      "nodeType": "ActionActivity",
+      "label": "ShowMessageAction: show message (text=All notifications deleted., type=Information, blocking=true)",
+      "detail": "show message (text=All notifications deleted., type=Information, blocking=true)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "afb2a3ab-9798-418b-a775-c2d74590943a",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "e3e4819d-5e0e-4e3d-92b2-60f49e6bd658",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "e6eb3331-95d6-4dfa-a2f6-b8c68fc8fe37",
+      "originNodeId": "e3e4819d-5e0e-4e3d-92b2-60f49e6bd658",
+      "destinationNodeId": "d10164c7-fbd6-4c28-8825-fa6fd4bc2278",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "2d2e1d27-1c88-4f72-b6ab-d352c19e90b7",
+      "originNodeId": "d10164c7-fbd6-4c28-8825-fa6fd4bc2278",
+      "destinationNodeId": "423465b8-050b-4028-b78c-44bc78a6fa97",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "919d0b2f-71b1-4737-b068-7ece8eb0aa38",
+      "originNodeId": "423465b8-050b-4028-b78c-44bc78a6fa97",
+      "destinationNodeId": "f369ff01-2fff-4597-920e-9bbd49d653c5",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "de8fd3b4-08a9-4df2-a6a8-80ef903b80cc",
+      "originNodeId": "f369ff01-2fff-4597-920e-9bbd49d653c5",
+      "destinationNodeId": "afb2a3ab-9798-418b-a775-c2d74590943a",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "e3e4819d-5e0e-4e3d-92b2-60f49e6bd658"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "e3e4819d-5e0e-4e3d-92b2-60f49e6bd658",
+    "d10164c7-fbd6-4c28-8825-fa6fd4bc2278",
+    "423465b8-050b-4028-b78c-44bc78a6fa97",
+    "f369ff01-2fff-4597-920e-9bbd49d653c5",
+    "afb2a3ab-9798-418b-a775-c2d74590943a"
+  ],
+  "pseudocode": "FLOW Microflow: Notification.TEMP_Notifications_AllDelete\r\nNODES=5; EDGES=4\r\n1. START\r\n2. ACTION RetrieveAction: retrieve NotificationList from Notification.Notification\r\n3. ACTION DeleteAction: delete NotificationList (refreshInClient=false)\r\n4. ACTION ShowMessageAction: show message (text=All notifications deleted., type=Information, blocking=true)\r\n5. END",
+  "retrieveActions": [
+    {
+      "nodeId": "d10164c7-fbd6-4c28-8825-fa6fd4bc2278",
+      "summary": "RetrieveAction: retrieve NotificationList from Notification.Notification retrieve NotificationList from Notification.Notification",
+      "sourceKind": "Database",
+      "entity": "Notification.Notification",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [
+    {
+      "nodeId": "423465b8-050b-4028-b78c-44bc78a6fa97",
+      "actionKind": "Delete",
+      "summary": "DeleteAction: delete NotificationList (refreshInClient=false) delete NotificationList (refreshInClient=false)",
+      "entity": null,
+      "memberSummary": "refreshInClient=false"
+    }
+  ],
+  "callEdges": []
+}

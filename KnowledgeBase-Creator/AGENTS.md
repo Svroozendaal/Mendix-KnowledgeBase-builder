@@ -16,7 +16,7 @@ Prefer `/enrichkb` when `mendix-data/app-overview/<run-folder>` and `mendix-data
 
 This package creates and enriches a Mendix knowledge base. The process has two phases:
 
-1. **Pipeline phase** (PowerShell) - deterministic data extraction from `.mpr` export.
+1. **Pipeline phase** (PowerShell) - deterministic data extraction from `.mpr` (`MxCli` default, legacy fallback available).
 2. **Enrichment phase** (AI) - semantic narratives, business logic explanations, and gap resolution.
 
 ## Input and Output
@@ -34,7 +34,7 @@ This package creates and enriches a Mendix knowledge base. The process has two p
 .\wizard\run-initkb.ps1 -OpenVsCode
 ```
 
-This runs the deterministic pipeline (dump -> parse -> scaffold -> seed templates -> compose -> validate -> quality gate -> benchmark), writes `creator-link.json` and `INITKB_HANDOFF.md`, and can open the target `mendix-data` workspace for manual phase-2 enrichment.
+This runs the deterministic pipeline (extract -> scaffold -> seed templates -> compose -> validate -> quality gate -> benchmark), writes `creator-link.json` and `INITKB_HANDOFF.md`, and can open the target `mendix-data` workspace for manual phase-2 enrichment.
 
 ### Phase 2: AI Enrichment
 

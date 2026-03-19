@@ -1,0 +1,114 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.Equipment_Overview",
+                  "stableId":  "Inspection.Equipment_Overview",
+                  "slug":  "inspection-equipment-overview",
+                  "l0Path":  "knowledge-base/modules/Inspection/pages/inspection-equipment-overview.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/pages/inspection-equipment-overview.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/pages/inspection-equipment-overview.json",
+                  "l2Logical":  "page:Inspection.Equipment_Overview",
+                  "sourceRun":  "cli_2026-03-18T20-47-05.912Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-47-05.912Z/modules/Inspection/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/pages/INDEX.json"
+              },
+    "qualifiedName":  "Inspection.Equipment_Overview",
+    "name":  "Equipment_Overview",
+    "title":  "Equipment Overview",
+    "layout":  "Inspection.Emixa_Custom",
+    "allowedRoles":  [
+                         "Inspection.Inspector",
+                         "Inspection.Manager"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        {
+                            "sourceId":  "dataGrid2",
+                            "sourceType":  "Database",
+                            "entity":  "Inspection.Accessory",
+                            "constraint":  null,
+                            "flowName":  null,
+                            "summary":  "Database datasource: Inspection.Accessory"
+                        },
+                        {
+                            "sourceId":  "dataGrid3",
+                            "sourceType":  "Database",
+                            "entity":  "Inspection.Tool",
+                            "constraint":  null,
+                            "flowName":  null,
+                            "summary":  "Database datasource: Inspection.Tool"
+                        },
+                        {
+                            "sourceId":  "dataView1",
+                            "sourceType":  "Microflow",
+                            "entity":  null,
+                            "constraint":  null,
+                            "flowName":  "Inspection.DS_Booking_RetrieveUpcomming",
+                            "summary":  "Microflow datasource: Inspection.DS_Booking_RetrieveUpcomming"
+                        }
+                    ],
+    "clientActions":  [
+                          {
+                              "actionId":  "actionButton1",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Accessory_Create",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Accessory_Create"
+                          },
+                          {
+                              "actionId":  "actionButton7",
+                              "actionType":  "PageClientAction",
+                              "summary":  "PageClientAction, page=Inspection.Assessory_NewEdit",
+                              "targetPage":  "Inspection.Assessory_NewEdit",
+                              "flowName":  null
+                          },
+                          {
+                              "actionId":  "actionButton2",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Assessory_Delete",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Assessory_Delete"
+                          },
+                          {
+                              "actionId":  "actionButton6",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Tool_Create",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Tool_Create"
+                          },
+                          {
+                              "actionId":  "actionButton4",
+                              "actionType":  "PageClientAction",
+                              "summary":  "PageClientAction, page=Inspection.Tool_NewEdit",
+                              "targetPage":  "Inspection.Tool_NewEdit",
+                              "flowName":  null
+                          },
+                          {
+                              "actionId":  "actionButton8",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Inspection.ACT_Tool_Delete",
+                              "targetPage":  null,
+                              "flowName":  "Inspection.ACT_Tool_Delete"
+                          }
+                      ],
+    "navigationProvenance":  [
+                                 {
+                                     "provenanceId":  "nav-da4df37641fa",
+                                     "sourceType":  "MenuItem",
+                                     "summary":  "Menu item \"Equipment management\" in profile Responsive",
+                                     "page":  "Inspection.Equipment_Overview",
+                                     "userRole":  null,
+                                     "flowName":  null
+                                 }
+                             ]
+}

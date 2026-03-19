@@ -1,0 +1,58 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.Account_New",
+                  "stableId":  "Administration.Account_New",
+                  "slug":  "administration-account-new",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-account-new.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-account-new.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/pages/administration-account-new.json",
+                  "l2Logical":  "page:Administration.Account_New",
+                  "sourceRun":  "cli_2026-03-18T20-53-14.243Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-53-14.243Z/modules/marketplace/Administration/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-53-14.243Z/modules/marketplace/Administration/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/pages/INDEX.json"
+              },
+    "qualifiedName":  "Administration.Account_New",
+    "name":  "Account_New",
+    "title":  "New Account",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "Administration.Administrator"
+                     ],
+    "parameters":  [
+                       {
+                           "name":  "AccountPasswordData",
+                           "entityType":  "Administration.AccountPasswordData"
+                       }
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+                        {
+                            "sourceId":  "dataView2",
+                            "sourceType":  "Parameter",
+                            "entity":  "Administration.AccountPasswordData",
+                            "constraint":  null,
+                            "flowName":  null,
+                            "summary":  "Parameter datasource: $AccountPasswordData"
+                        }
+                    ],
+    "clientActions":  [
+                          {
+                              "actionId":  "microflowButton1",
+                              "actionType":  "MicroflowClientAction",
+                              "summary":  "MicroflowClientAction, flow=Administration.SaveNewAccount",
+                              "targetPage":  null,
+                              "flowName":  "Administration.SaveNewAccount"
+                          }
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

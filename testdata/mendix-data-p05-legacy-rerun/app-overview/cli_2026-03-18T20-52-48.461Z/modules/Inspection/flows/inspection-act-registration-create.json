@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_Registration_Create",
+    "stableId": "e8c69001-be3e-4ea4-b744-d5c1fd2a49f8",
+    "slug": "inspection-act-registration-create",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-registration-create.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-registration-create.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-registration-create.json",
+    "l2Logical": "flow:Inspection.ACT_Registration_Create",
+    "sourceRun": "cli_2026-03-18T20-52-48.461Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "e8c69001-be3e-4ea4-b744-d5c1fd2a49f8",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_Registration_Create",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "5edca729-cafe-4c1c-b9af-ff30f8e71222",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Inspection.Registration as NewRegistration",
+      "detail": "create Inspection.Registration as NewRegistration",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "9fdfb437-7a46-495a-80c4-dc3bd66fb67f",
+      "nodeType": "ActionActivity",
+      "label": "ShowPageAction: show page Inspection.Registration_NewEdit",
+      "detail": "show page Inspection.Registration_NewEdit",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "45a4487b-c5d3-45c6-a641-d903d5fa8036",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "95d06bc1-4815-4122-a081-335abc2fe539",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "c872f598-39fd-4f54-b1da-4562a39d41b0",
+      "originNodeId": "95d06bc1-4815-4122-a081-335abc2fe539",
+      "destinationNodeId": "5edca729-cafe-4c1c-b9af-ff30f8e71222",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "9528d028-0ccc-4c1a-8529-d97d5a8500ed",
+      "originNodeId": "5edca729-cafe-4c1c-b9af-ff30f8e71222",
+      "destinationNodeId": "9fdfb437-7a46-495a-80c4-dc3bd66fb67f",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "c741c068-d7c0-4d26-a284-bc435fef7241",
+      "originNodeId": "9fdfb437-7a46-495a-80c4-dc3bd66fb67f",
+      "destinationNodeId": "45a4487b-c5d3-45c6-a641-d903d5fa8036",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "95d06bc1-4815-4122-a081-335abc2fe539"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "95d06bc1-4815-4122-a081-335abc2fe539",
+    "5edca729-cafe-4c1c-b9af-ff30f8e71222",
+    "9fdfb437-7a46-495a-80c4-dc3bd66fb67f",
+    "45a4487b-c5d3-45c6-a641-d903d5fa8036"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_Registration_Create\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create Inspection.Registration as NewRegistration\r\n3. ACTION ShowPageAction: show page Inspection.Registration_NewEdit\r\n4. END",
+  "retrieveActions": [],
+  "decisionActions": [],
+  "showPageActions": [
+    {
+      "nodeId": "9fdfb437-7a46-495a-80c4-dc3bd66fb67f",
+      "summary": "ShowPageAction: show page Inspection.Registration_NewEdit show page Inspection.Registration_NewEdit",
+      "targetPage": "Inspection.Registration_NewEdit"
+    }
+  ],
+  "mutationActions": [
+    {
+      "nodeId": "5edca729-cafe-4c1c-b9af-ff30f8e71222",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Inspection.Registration as NewRegistration create Inspection.Registration as NewRegistration",
+      "entity": "Inspection.Registration",
+      "memberSummary": null
+    }
+  ],
+  "callEdges": []
+}

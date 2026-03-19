@@ -1,0 +1,127 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_Task_Create",
+    "stableId": "3c89fd88-4394-4091-aeeb-7a5b0b0c4f5e",
+    "slug": "inspection-act-task-create",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-task-create.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-task-create.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-task-create.json",
+    "l2Logical": "flow:Inspection.ACT_Task_Create",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "3c89fd88-4394-4091-aeeb-7a5b0b0c4f5e",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_Task_Create",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "c021dbff-1c6a-42bb-99c6-ec9b33f2f4f3",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Inspection.Task as NewTask (Created=[%CurrentDateTime%], Status=Inspection.Enum_TaskStatus.To_do, Task_InspectionItem=$InspectionItem)",
+      "detail": "create Inspection.Task as NewTask (Created=[%CurrentDateTime%], Status=Inspection.Enum_TaskStatus.To_do, Task_InspectionItem=$InspectionItem)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "dcc9cd54-109b-433c-8b2b-7a2911e54f0f",
+      "nodeType": "ActionActivity",
+      "label": "ShowPageAction: show page Inspection.Task_NewEdit",
+      "detail": "show page Inspection.Task_NewEdit",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "6596dd5b-cca0-4447-abd6-8ba0c7fc19ce",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "5dcd4a41-0aca-4997-9061-d97616145a21",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "4b8d85af-95a9-4ad5-be2c-2ae89a841ea9",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "99328ccf-2b2a-48b4-9378-f0566122ee2b",
+      "originNodeId": "4b8d85af-95a9-4ad5-be2c-2ae89a841ea9",
+      "destinationNodeId": "c021dbff-1c6a-42bb-99c6-ec9b33f2f4f3",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "1bc235de-089b-4572-b229-a9dfa2171665",
+      "originNodeId": "c021dbff-1c6a-42bb-99c6-ec9b33f2f4f3",
+      "destinationNodeId": "dcc9cd54-109b-433c-8b2b-7a2911e54f0f",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "c8c66157-4514-4ca0-9661-02067995ce18",
+      "originNodeId": "dcc9cd54-109b-433c-8b2b-7a2911e54f0f",
+      "destinationNodeId": "6596dd5b-cca0-4447-abd6-8ba0c7fc19ce",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "4b8d85af-95a9-4ad5-be2c-2ae89a841ea9"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "4b8d85af-95a9-4ad5-be2c-2ae89a841ea9",
+    "c021dbff-1c6a-42bb-99c6-ec9b33f2f4f3",
+    "dcc9cd54-109b-433c-8b2b-7a2911e54f0f",
+    "6596dd5b-cca0-4447-abd6-8ba0c7fc19ce"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_Task_Create\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create Inspection.Task as NewTask (Created=[%CurrentDateTime%], Status=Inspection.Enum_TaskStatus.To_do, Task_InspectionItem=$InspectionItem)\r\n3. ACTION ShowPageAction: show page Inspection.Task_NewEdit\r\n4. END",
+  "retrieveActions": [],
+  "decisionActions": [],
+  "showPageActions": [
+    {
+      "nodeId": "dcc9cd54-109b-433c-8b2b-7a2911e54f0f",
+      "summary": "ShowPageAction: show page Inspection.Task_NewEdit show page Inspection.Task_NewEdit",
+      "targetPage": "Inspection.Task_NewEdit"
+    }
+  ],
+  "mutationActions": [
+    {
+      "nodeId": "c021dbff-1c6a-42bb-99c6-ec9b33f2f4f3",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Inspection.Task as NewTask (Created=[%CurrentDateTime%], Status=Inspection.Enum_TaskStatus.To_do, Task_InspectionItem=$InspectionItem) create Inspection.Task as NewTask (Created=[%CurrentDateTi...",
+      "entity": "Inspection.Task",
+      "memberSummary": "Created=[%CurrentDateTime%], Status=Inspection.Enum_TaskStatus.To_do, Task_InspectionItem=$InspectionItem"
+    }
+  ],
+  "callEdges": []
+}

@@ -1,0 +1,36 @@
+# All Modules Overview
+Total modules: 9
+
+MODULE Administration (Marketplace)
+  Roles: Administrator, User
+  Entities: 2, Flows: 9, Pages: 10, Constants: 0
+
+MODULE Atlas_Core (Marketplace)
+  Entities: 0, Flows: 0, Pages: 0, Constants: 0
+
+MODULE Atlas_Web_Content (Marketplace)
+  Roles: UserRole
+  Entities: 1, Flows: 2, Pages: 0, Constants: 0
+
+MODULE DataWidgets (Marketplace)
+  Roles: User
+  Entities: 0, Flows: 0, Pages: 0, Constants: 0
+
+MODULE Inspection (Custom)
+  Roles: Administrator, Anonymous, Inspector, Manager
+  Entities: 12, Flows: 41, Pages: 18, Constants: 0
+
+MODULE NanoflowCommons (Marketplace)
+  Roles: User
+  Entities: 2, Flows: 0, Pages: 0, Constants: 0
+
+MODULE Notification (Custom)
+  Roles: Administrator, Inspector, Manager
+  Entities: 1, Flows: 5, Pages: 3, Constants: 0
+
+MODULE System (System)
+  Roles: Administrator, User
+  Entities: 41, Flows: 1, Pages: 0, Constants: 0
+
+MODULE Unknown
+  Entities: 0, Flows: 0, Pages: 0, Constants: 0

@@ -1,0 +1,52 @@
+{
+  "projectSecurity": {
+    "securityLevel": "CheckEverything",
+    "adminUserName": "MxAdmin",
+    "enableGuestAccess": true,
+    "guestUserRoleName": "Anonymous",
+    "userRoles": [
+      {
+        "name": "Administrator",
+        "moduleRoles": [
+          "Administration.Administrator",
+          "System.Administrator",
+          "Inspection.Administrator",
+          "Notification.Administrator"
+        ],
+        "manageAllRoles": true,
+        "checkSecurity": true
+      },
+      {
+        "name": "Inspector",
+        "moduleRoles": [
+          "Administration.User",
+          "System.User",
+          "Inspection.Inspector",
+          "Notification.Inspector"
+        ],
+        "manageAllRoles": false,
+        "checkSecurity": true
+      },
+      {
+        "name": "Manager",
+        "moduleRoles": [
+          "Administration.User",
+          "System.User",
+          "Inspection.Manager",
+          "Notification.Manager"
+        ],
+        "manageAllRoles": false,
+        "checkSecurity": true
+      },
+      {
+        "name": "Anonymous",
+        "moduleRoles": [
+          "System.User",
+          "Inspection.Anonymous"
+        ],
+        "manageAllRoles": false,
+        "checkSecurity": true
+      }
+    ]
+  }
+}

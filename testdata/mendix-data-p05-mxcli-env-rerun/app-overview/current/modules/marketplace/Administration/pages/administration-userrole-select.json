@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.UserRole_Select",
+                  "stableId":  "Administration.UserRole_Select",
+                  "slug":  "administration-userrole-select",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-userrole-select.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/pages/administration-userrole-select.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/pages/administration-userrole-select.json",
+                  "l2Logical":  "page:Administration.UserRole_Select",
+                  "sourceRun":  "cli_2026-03-18T20-54-38.903Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/marketplace/Administration/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/marketplace/Administration/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/pages/INDEX.json"
+              },
+    "qualifiedName":  "Administration.UserRole_Select",
+    "name":  "UserRole_Select",
+    "title":  "Select user roles",
+    "layout":  "Atlas_Core.PopupLayout",
+    "allowedRoles":  [
+                         "Administration.Administrator"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  true,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+
+                    ],
+    "clientActions":  [
+
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

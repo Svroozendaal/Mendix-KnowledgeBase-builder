@@ -1,0 +1,691 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.VAL_Task_Validate",
+                  "stableId":  "e3e58a5f-2f78-4371-813b-2b62ad3c646b",
+                  "slug":  "inspection-val-task-validate",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-val-task-validate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-val-task-validate.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-val-task-validate.json",
+                  "l2Logical":  "flow:Inspection.VAL_Task_Validate",
+                  "sourceRun":  "cli_2026-03-18T20-54-38.903Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "e3e58a5f-2f78-4371-813b-2b62ad3c646b",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.VAL_Task_Validate",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-declare",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DECLARE $IsValid Boolean = true",
+                      "detail":  "DECLARE $IsValid Boolean = true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-call",
+                      "nodeType":  "ActionActivity",
+                      "label":  "call microflow Inspection.DS_UserRole_GetFromCurrentUser -\u003e UserRole",
+                      "detail":  "$UserRole = CALL MICROFLOW Inspection.DS_UserRole_GetFromCurrentUser() ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "Inspection.DS_UserRole_GetFromCurrentUser",
+                                        "sourceNodeId":  "n003-call"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$UserRole/Name = \u0027Manager\u0027 or $UserRole/Name = \u0027Administrator\u0027",
+                      "detail":  "IF expression=$UserRole/Name = \u0027Manager\u0027 or $UserRole/Name = \u0027Administrator\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=true",
+                      "detail":  "IF expression=true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=trim($Task/Description) != \u0027\u0027",
+                      "detail":  "IF expression=trim($Task/Description) != \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Task/Description MESSAGE \u0027Description is empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Task/Description MESSAGE \u0027Description is empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n009-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n010-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Task/Title MESSAGE \u0027Title is empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Task/Title MESSAGE \u0027Title is empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n011-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Task/Priority != empty",
+                      "detail":  "IF expression=$Task/Priority != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n012-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Task/Created != empty",
+                      "detail":  "IF expression=$Task/Created != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n013-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Task/Status != empty",
+                      "detail":  "IF expression=$Task/Status != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n014-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n015-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Task/Status MESSAGE \u0027Status is empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Task/Status MESSAGE \u0027Status is empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n016-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n017-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Task/Created MESSAGE \u0027Create date is empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Task/Created MESSAGE \u0027Create date is empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n018-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Task/DueDate != empty",
+                      "detail":  "IF expression=$Task/DueDate != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n019-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n020-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Task/DueDate MESSAGE \u0027Due date is empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Task/DueDate MESSAGE \u0027Due date is empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n021-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n022-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Task/Priority MESSAGE \u0027Priority is empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Task/Priority MESSAGE \u0027Priority is empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n023-return",
+                      "nodeType":  "ActionActivity",
+                      "label":  "return $IsValid",
+                      "detail":  "RETURN $IsValid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n024-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=trim($Task/AdditionalRemarks) != \u0027\u0027",
+                      "detail":  "IF expression=trim($Task/AdditionalRemarks) != \u0027\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n025-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n026-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Task/AdditionalRemarks MESSAGE \u0027Remarks are empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Task/AdditionalRemarks MESSAGE \u0027Remarks are empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n027-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-8d39552ccfcb",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-declare",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-70eee3f6d3c7",
+                      "originNodeId":  "n002-declare",
+                      "destinationNodeId":  "n003-call",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-964620e9e4b1",
+                      "originNodeId":  "n003-call",
+                      "destinationNodeId":  "n004-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-0d2f17505415",
+                      "originNodeId":  "n004-decision",
+                      "destinationNodeId":  "n005-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-be9304e5c3c3",
+                      "originNodeId":  "n005-decision",
+                      "destinationNodeId":  "n006-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-a583e71aad77",
+                      "originNodeId":  "n006-decision",
+                      "destinationNodeId":  "n007-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-741aeeaf7842",
+                      "originNodeId":  "n007-set",
+                      "destinationNodeId":  "n008-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-00225418ab79",
+                      "originNodeId":  "n008-validation",
+                      "destinationNodeId":  "n009-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-f6c834eb5c5f",
+                      "originNodeId":  "n009-set",
+                      "destinationNodeId":  "n010-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-a8c365d047b6",
+                      "originNodeId":  "n010-validation",
+                      "destinationNodeId":  "n011-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c88f288e5949",
+                      "originNodeId":  "n011-decision",
+                      "destinationNodeId":  "n012-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-3040e36fd2c5",
+                      "originNodeId":  "n012-decision",
+                      "destinationNodeId":  "n013-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-18c025e54ee7",
+                      "originNodeId":  "n013-decision",
+                      "destinationNodeId":  "n014-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-98d976482ea5",
+                      "originNodeId":  "n014-set",
+                      "destinationNodeId":  "n015-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-99e5e0846885",
+                      "originNodeId":  "n015-validation",
+                      "destinationNodeId":  "n016-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-b97e2cd598d1",
+                      "originNodeId":  "n016-set",
+                      "destinationNodeId":  "n017-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-73815cc9e647",
+                      "originNodeId":  "n017-validation",
+                      "destinationNodeId":  "n018-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-b38ac4b2a1e7",
+                      "originNodeId":  "n018-decision",
+                      "destinationNodeId":  "n019-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-44a9210be81a",
+                      "originNodeId":  "n019-set",
+                      "destinationNodeId":  "n020-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-5c580dbc76a3",
+                      "originNodeId":  "n020-validation",
+                      "destinationNodeId":  "n021-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-e06c92683b2e",
+                      "originNodeId":  "n021-set",
+                      "destinationNodeId":  "n022-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-e31f6580a282",
+                      "originNodeId":  "n022-validation",
+                      "destinationNodeId":  "n023-return",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-8c9dbd194c31",
+                      "originNodeId":  "n023-return",
+                      "destinationNodeId":  "n024-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-f703c86fdd1e",
+                      "originNodeId":  "n024-decision",
+                      "destinationNodeId":  "n025-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-2ccbed9e66e0",
+                      "originNodeId":  "n025-set",
+                      "destinationNodeId":  "n026-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c41c81528a89",
+                      "originNodeId":  "n026-validation",
+                      "destinationNodeId":  "n027-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "Inspection.DS_UserRole_GetFromCurrentUser",
+                      "sourceNodeId":  "n003-call"
+                  }
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-declare",
+                                         "n003-call",
+                                         "n004-decision",
+                                         "n005-decision",
+                                         "n006-decision",
+                                         "n007-set",
+                                         "n008-validation",
+                                         "n009-set",
+                                         "n010-validation",
+                                         "n011-decision",
+                                         "n012-decision",
+                                         "n013-decision",
+                                         "n014-set",
+                                         "n015-validation",
+                                         "n016-set",
+                                         "n017-validation",
+                                         "n018-decision",
+                                         "n019-set",
+                                         "n020-validation",
+                                         "n021-set",
+                                         "n022-validation",
+                                         "n023-return",
+                                         "n024-decision",
+                                         "n025-set",
+                                         "n026-validation",
+                                         "n027-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.VAL_Task_Validate\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n004-decision",
+                                "summary":  "IF $UserRole/Name = \u0027Manager\u0027 or $UserRole/Name = \u0027Administrator\u0027",
+                                "caption":  "IF",
+                                "expression":  "$UserRole/Name = \u0027Manager\u0027 or $UserRole/Name = \u0027Administrator\u0027"
+                            },
+                            {
+                                "nodeId":  "n005-decision",
+                                "summary":  "IF true",
+                                "caption":  "IF",
+                                "expression":  "true"
+                            },
+                            {
+                                "nodeId":  "n006-decision",
+                                "summary":  "IF trim($Task/Description) != \u0027\u0027",
+                                "caption":  "IF",
+                                "expression":  "trim($Task/Description) != \u0027\u0027"
+                            },
+                            {
+                                "nodeId":  "n011-decision",
+                                "summary":  "IF $Task/Priority != empty",
+                                "caption":  "IF",
+                                "expression":  "$Task/Priority != empty"
+                            },
+                            {
+                                "nodeId":  "n012-decision",
+                                "summary":  "IF $Task/Created != empty",
+                                "caption":  "IF",
+                                "expression":  "$Task/Created != empty"
+                            },
+                            {
+                                "nodeId":  "n013-decision",
+                                "summary":  "IF $Task/Status != empty",
+                                "caption":  "IF",
+                                "expression":  "$Task/Status != empty"
+                            },
+                            {
+                                "nodeId":  "n018-decision",
+                                "summary":  "IF $Task/DueDate != empty",
+                                "caption":  "IF",
+                                "expression":  "$Task/DueDate != empty"
+                            },
+                            {
+                                "nodeId":  "n024-decision",
+                                "summary":  "IF trim($Task/AdditionalRemarks) != \u0027\u0027",
+                                "caption":  "IF",
+                                "expression":  "trim($Task/AdditionalRemarks) != \u0027\u0027"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.ACT_Task_Save",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n002-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.VAL_Task_Validate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.ACT_Task_SetToDone",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n002-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.VAL_Task_Validate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.VAL_Task_Validate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n003-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.DS_UserRole_GetFromCurrentUser",
+                          "isInternal":  true
+                      }
+                  ]
+}

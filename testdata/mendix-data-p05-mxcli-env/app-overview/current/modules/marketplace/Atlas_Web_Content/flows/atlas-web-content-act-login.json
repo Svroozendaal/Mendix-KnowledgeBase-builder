@@ -1,0 +1,82 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Atlas_Web_Content",
+                  "qualifiedName":  "Atlas_Web_Content.ACT_Login",
+                  "stableId":  "e2363cb5-a2f3-4a0b-80a0-8dba02bd2bdb",
+                  "slug":  "atlas-web-content-act-login",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/flows/atlas-web-content-act-login.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/flows/atlas-web-content-act-login.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Atlas_Web_Content/flows/atlas-web-content-act-login.json",
+                  "l2Logical":  "flow:Atlas_Web_Content.ACT_Login",
+                  "sourceRun":  "cli_2026-03-18T20-49-03.032Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/marketplace/Atlas_Web_Content/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/marketplace/Atlas_Web_Content/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Atlas_Web_Content/flows/INDEX.json"
+              },
+    "flowId":  "e2363cb5-a2f3-4a0b-80a0-8dba02bd2bdb",
+    "kind":  "Nanoflow",
+    "qualifiedName":  "Atlas_Web_Content.ACT_Login",
+    "module":  "Atlas_Web_Content",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-8254085d5192",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-end"
+                                     ],
+    "pseudocode":  "FLOW Nanoflow: Atlas_Web_Content.ACT_Login\r\nInstalled mxcli cannot describe nanoflows directly on this machine.\r\n1. START\r\n2. END",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+
+                  ]
+}

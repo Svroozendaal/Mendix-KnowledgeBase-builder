@@ -1,0 +1,25 @@
+﻿{
+    "appName":  "Emixa_InspectionApp_P05_InitKb_MxCli",
+    "kbRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p05-initkb-mxcli\\knowledge-base",
+    "generatedAtUtc":  "2026-03-18T20:48:20.3457088Z",
+    "overallPass":  true,
+    "filesChecked":  386,
+    "issueCount":  0,
+    "issues":  [
+
+               ],
+    "semanticMetrics":  {
+                            "ExpectedCustomPages":  8,
+                            "EntityThreshold":  90,
+                            "PageCoveragePercent":  100,
+                            "ExpectedCustomEntities":  12,
+                            "ExpectedCustomFlows":  0,
+                            "EntityPass":  true,
+                            "FlowThreshold":  90,
+                            "EntityCoveragePercent":  100,
+                            "PageThreshold":  95,
+                            "FlowPass":  true,
+                            "PagePass":  true,
+                            "FlowCoveragePercent":  100
+                        }
+}

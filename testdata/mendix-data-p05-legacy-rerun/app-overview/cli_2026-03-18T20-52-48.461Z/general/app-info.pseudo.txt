@@ -1,0 +1,17 @@
+# Application Info
+Schema version: 2.0
+Generated: 2026-03-18 20:52:54Z
+Source: C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\mendix-data-p05-legacy-rerun\dumps\2026-03-18T20-52-48.461Z_Inspection\working-dump.json
+
+## Summary
+Modules: 9
+Entities: 59
+Associations: 63
+Enumerations: 25
+Flows: 58 (Microflows: 54, Nanoflows: 2, Rules: 2, Workflows: 0)
+
+## Security
+Security level: CheckEverything
+Admin user: MxAdmin
+Guest access: yes
+Guest role: Anonymous

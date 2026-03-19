@@ -1,0 +1,13 @@
+﻿{
+    "schemaVersion":  "1.0",
+    "creatorRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator",
+    "creatorInitkbRunner":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator\\wizard\\run-initkb.ps1",
+    "appName":  "Inspection",
+    "extractionMode":  "MxCli",
+    "mprPath":  "C:\\Workspaces\\Mendix\\Emixa_InspectionApp\\Emixa_InspectionApp.mpr",
+    "dataRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p67-default2",
+    "knowledgeBaseRoot":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p67-default2\\knowledge-base",
+    "lastRunFolder":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p67-default2\\app-overview\\cli_2026-03-18T21-15-38.461Z",
+    "currentAliasPath":  "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\mendix-data-p67-default2\\app-overview\\current",
+    "updatedAtUtc":  "2026-03-18T21:17:00Z"
+}

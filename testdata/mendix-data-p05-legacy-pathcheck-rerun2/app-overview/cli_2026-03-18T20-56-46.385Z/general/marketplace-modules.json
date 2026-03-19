@@ -1,0 +1,63 @@
+{
+  "modules": [
+    {
+      "module": "Administration",
+      "moduleRoles": [
+        {
+          "name": "Administrator",
+          "description": ""
+        },
+        {
+          "name": "User",
+          "description": ""
+        }
+      ],
+      "entityCount": 2,
+      "flowCount": 9,
+      "pageCount": 10
+    },
+    {
+      "module": "Atlas_Core",
+      "moduleRoles": [],
+      "entityCount": 0,
+      "flowCount": 0,
+      "pageCount": 0
+    },
+    {
+      "module": "Atlas_Web_Content",
+      "moduleRoles": [
+        {
+          "name": "UserRole",
+          "description": ""
+        }
+      ],
+      "entityCount": 1,
+      "flowCount": 2,
+      "pageCount": 0
+    },
+    {
+      "module": "DataWidgets",
+      "moduleRoles": [
+        {
+          "name": "User",
+          "description": ""
+        }
+      ],
+      "entityCount": 0,
+      "flowCount": 0,
+      "pageCount": 0
+    },
+    {
+      "module": "NanoflowCommons",
+      "moduleRoles": [
+        {
+          "name": "User",
+          "description": ""
+        }
+      ],
+      "entityCount": 2,
+      "flowCount": 0,
+      "pageCount": 0
+    }
+  ]
+}

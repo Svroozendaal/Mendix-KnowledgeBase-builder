@@ -21,8 +21,8 @@ Run:
 The wizard guides you through:
 
 1. Selecting the source `.mpr` file.
-2. Auto-detecting the correct Mendix `mx.exe` (with manual override).
-3. Running the full pipeline (dump -> parser -> scaffold -> compose -> validate -> quality -> benchmark).
+2. Choosing extraction mode (`MxCli` by default, `LegacyDumpParser` as explicit fallback).
+3. Running the full pipeline (extract -> scaffold -> compose -> validate -> quality -> benchmark).
 4. Showing the Mendix app folder path that was used as source.
 
 By default, output is written to:
@@ -32,7 +32,7 @@ By default, output is written to:
 Generated structure:
 
 - `mendix-data/app-overview/<run-folder>/` - parsed model exports
-- `mendix-data/dumps/<timestamp>_<app>/` - raw dump files
+- `mendix-data/dumps/<timestamp>_<app>/` - raw dump files (legacy extractor only)
 - `mendix-data/knowledge-base/` - the standalone AI-navigable KB
   - `knowledge-base/.agents/` - AI interpretation agents (shipped with KB)
   - `knowledge-base/CLAUDE.md` - AI bootstrap entry point
@@ -40,7 +40,7 @@ Generated structure:
 
 Each `mendix-data` folder is treated as one app workspace. The generated knowledge base lives directly inside `knowledge-base`, not inside `knowledge-base/<app-name>`.
 The `knowledge-base/` folder is self-contained and can be copied/shared standalone.
-If a non-empty `mendix-data` folder already exists, a fresh parser run now fails instead of overwriting it.
+If a non-empty `mendix-data` folder already exists, a fresh extraction run now fails instead of overwriting it.
 
 ## AI-Assisted KB Creation
 
@@ -87,6 +87,13 @@ Runtime precedence:
 2. `.env` values
 3. Built-in defaults
 
+Extraction mode contract:
+
+- `-ExtractionMode LegacyDumpParser|MxCli` on `run-initkb.ps1` and `run-dump-parser.ps1`
+- `KB_EXTRACTION_MODE=LegacyDumpParser|MxCli` via process environment or `.env`
+- Prompt 06 default: `MxCli`
+- `LegacyDumpParser` remains available as explicit fallback
+
 Common settings:
 
 - `APP_NAME`
@@ -95,6 +102,7 @@ Common settings:
 - `STUDIO_PRO_PATH` / `MENDIX_STUDIO_PRO_PATH` (fallback when `MENDIX_MX_EXE` is not set)
 - `MENDIX_DATA_ROOT` (default: `../mendix-data` in script mode)
 - `MENDIX_MODULES` (default: `*`)
+- `KB_EXTRACTION_MODE` (`LegacyDumpParser|MxCli`, default: `MxCli`)
 - `STRICT_MODE` (`true|false`, default: `false`)
 - `CUSTOM_SCENARIOS_PATH` (optional)
 - `DUMP_FILE_PATH` (for `-SkipDump` without `-SkipParser`)
@@ -127,6 +135,18 @@ Pipeline primitive only:
 
 ```powershell
 .\wizard\run-dump-parser.ps1
+```
+
+Explicit legacy fallback:
+
+```powershell
+.\wizard\run-dump-parser.ps1 -ExtractionMode LegacyDumpParser
+```
+
+Explicit MxCli mode:
+
+```powershell
+.\wizard\run-dump-parser.ps1 -ExtractionMode MxCli
 ```
 
 Resume from existing parser run folder:

@@ -1,0 +1,59 @@
+---
+objectType: page
+module: Inspection
+qualifiedName: Inspection.InspectorPhoto_NewEdit
+stableId: Inspection.InspectorPhoto_NewEdit
+slug: inspection-inspectorphoto-newedit
+layer: L1
+l0: inspection-inspectorphoto-newedit.abstract.md
+l2Path: ../../../../app-overview/current/modules/Inspection/pages/inspection-inspectorphoto-newedit.json
+l2Logical: page:Inspection.InspectorPhoto_NewEdit
+sourceRun: cli_2026-03-18T20-52-48.461Z
+collectionL0: INDEX.abstract.md
+collectionL1: ../PAGES.md
+---
+# Page Overview: Inspection.InspectorPhoto_NewEdit
+
+## Summary
+
+- Edit profile image. Likely supports create/edit interactions for inspector photo because it accepts page parameters.
+- L0: [abstract](inspection-inspectorphoto-newedit.abstract.md)
+- L2: [json](../../../../app-overview/current/modules/Inspection/pages/inspection-inspectorphoto-newedit.json)
+
+## Roles and Entry Provenance
+
+- Roles: Inspection.Manager
+- Entry provenance: ShowPageAction
+
+## Parameters
+
+- InspectorPhoto:Inspection.InspectorPhoto
+
+## Datasource Summary
+
+- No datasource metadata was exported for this page; it may rely on parameter-driven context rather than a standalone datasource. Check L2 JSON if exact binding matters.
+
+## Client Actions
+
+- actionId=9a4d5b66-a3db-42c6-9047-45ef447ac59c; actionType=CancelChangesClientAction; summary=CancelChangesClientAction
+- actionId=602e7feb-6cbe-456c-9064-77c23dc626cc; actionType=NoClientAction; summary=NoClientAction
+- actionId=2ad5a022-af80-4eb8-860a-dc237854056b; actionType=SaveChangesClientAction; summary=SaveChangesClientAction
+
+## Shown by Flows
+
+- Inspection.ACT_InspectorPhoto_Create
+
+## Navigation/Homepage Provenance
+
+- No navigation or homepage provenance was exported; the clearest exported evidence is the flow link shown above.
+
+## Warnings/Unknowns
+
+- No material warnings from deterministic export synthesis.
+
+## Source
+
+- Stable JSON: [json](../../../../app-overview/current/modules/Inspection/pages/inspection-inspectorphoto-newedit.json)
+- Aggregate export: [pages.json](../../../../app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/pages.json)
+- Aggregate pseudo: [pages.pseudo.txt](../../../../app-overview/cli_2026-03-18T20-52-48.461Z/modules/Inspection/pages.pseudo.txt)
+- Traceability: sourceRun=cli_2026-03-18T20-52-48.461Z

@@ -1,0 +1,9 @@
+# Domain Model: Atlas_Web_Content
+Entities: 1, Associations: 0, Enumerations: 0
+
+## Entities
+- ENTITY Atlas_Web_Content.LoginContext (persistent)
+  - ATTR Password: StringAttributeType
+  - ATTR RememberMe: BooleanAttributeType
+  - ATTR Username: StringAttributeType
+  - ATTR ValidationMessage: StringAttributeType

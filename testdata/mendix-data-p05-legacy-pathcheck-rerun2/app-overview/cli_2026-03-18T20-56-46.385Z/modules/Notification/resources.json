@@ -1,0 +1,12 @@
+{
+  "module": "Notification",
+  "constants": [],
+  "scheduledEvents": [
+    {
+      "qualifiedName": "Notification.SE_Notification_SendToInspectors",
+      "name": "SE_Notification_SendToInspectors",
+      "documentation": null
+    }
+  ],
+  "otherResources": []
+}

@@ -14,10 +14,11 @@ App-specific skills are used when:
 
 | Skill | Folder | Description |
 |---|---|---|
+| Mendix MxCLI | `mendix-mxcli/` | Validated `mxcli` command contract for extraction defaults and read-only live-query escalation |
 | Mendix SDK | `mendix-sdk/` | Mendix SDK usage and model manipulation |
 | Mendix Studio Pro 10 | `mendix-studio-pro-10/` | Studio Pro 10 extension development constraints |
-| Mendix Model Overview Export | `mendix-model-overview-export/` | Building full-model overview exports (v2.0 structured format) from single dumps |
-| Mendix Model Dump Inspection | `mendix-model-dump-inspection/` | Inspecting raw `mx dump-mpr` output: parser library and rule library for extraction |
+| Mendix Model Overview Export | `mendix-model-overview-export/` | Building full-model overview exports (v2.0 structured format) for the creator pipeline (`MxCli` default) |
+| Mendix Model Dump Inspection | `mendix-model-dump-inspection/` | Legacy dump-parser inspection workflow for explicit fallback mode only |
 | Mendix Overview General Interpretation | `mendix-overview-general-interpretation/` | Converting app-level export artefacts into KB Markdown (app overview, module landscape, security, call graph) |
 | Mendix Overview Module Interpretation | `mendix-overview-module-interpretation/` | Converting per-module export artefacts into KB Markdown (domain, flows, pages, resources) |
 | Mendix Overview Routing Synthesis | `mendix-overview-routing-synthesis/` | Building cross-reference routing layer (by-entity, by-page, by-flow, cross-module) |

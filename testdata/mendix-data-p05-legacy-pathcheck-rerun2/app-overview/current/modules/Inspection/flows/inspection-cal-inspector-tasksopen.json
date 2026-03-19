@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.CAL_Inspector_TasksOpen",
+    "stableId": "862134f9-de13-44d3-a001-6902d40a1e68",
+    "slug": "inspection-cal-inspector-tasksopen",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-cal-inspector-tasksopen.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-cal-inspector-tasksopen.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-cal-inspector-tasksopen.json",
+    "l2Logical": "flow:Inspection.CAL_Inspector_TasksOpen",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "862134f9-de13-44d3-a001-6902d40a1e68",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.CAL_Inspector_TasksOpen",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "be1f30a7-8d6e-44d7-994b-9a87842a8e1d",
+      "nodeType": "ActionActivity",
+      "label": "AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)",
+      "detail": "AggregateListAction (output=Count, errorHandlingType=Rollback)",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "3f5e25a4-3ade-4bb1-8d01-16614176b35d",
+      "nodeType": "ActionActivity",
+      "label": "RetrieveAction: retrieve TaskList_Open from Inspection.Task",
+      "detail": "retrieve TaskList_Open from Inspection.Task",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "cf68e4ab-5a62-4be9-af75-f6bb3e5a0bdf",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "dc2819b3-3259-4c5e-9878-f687418b8fae",
+      "nodeType": "MicroflowParameterObject",
+      "label": "MicroflowParameterObject",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": false,
+      "calls": []
+    },
+    {
+      "nodeId": "d43372f2-f63b-4739-a843-61720b4d402b",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "aeb7336b-73f4-4454-88f7-341910c7c78e",
+      "originNodeId": "d43372f2-f63b-4739-a843-61720b4d402b",
+      "destinationNodeId": "3f5e25a4-3ade-4bb1-8d01-16614176b35d",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "9f28a542-8a0f-4c31-8f78-51dcea479cef",
+      "originNodeId": "3f5e25a4-3ade-4bb1-8d01-16614176b35d",
+      "destinationNodeId": "be1f30a7-8d6e-44d7-994b-9a87842a8e1d",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "e53c4500-39ea-4e1e-b78b-2438dbff906c",
+      "originNodeId": "be1f30a7-8d6e-44d7-994b-9a87842a8e1d",
+      "destinationNodeId": "cf68e4ab-5a62-4be9-af75-f6bb3e5a0bdf",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "d43372f2-f63b-4739-a843-61720b4d402b"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "d43372f2-f63b-4739-a843-61720b4d402b",
+    "3f5e25a4-3ade-4bb1-8d01-16614176b35d",
+    "be1f30a7-8d6e-44d7-994b-9a87842a8e1d",
+    "cf68e4ab-5a62-4be9-af75-f6bb3e5a0bdf"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.CAL_Inspector_TasksOpen\r\nNODES=5; EDGES=3\r\n1. START\r\n2. ACTION RetrieveAction: retrieve TaskList_Open from Inspection.Task\r\n3. ACTION AggregateListAction: AggregateListAction (output=Count, errorHandlingType=Rollback)\r\n4. END",
+  "retrieveActions": [
+    {
+      "nodeId": "3f5e25a4-3ade-4bb1-8d01-16614176b35d",
+      "summary": "RetrieveAction: retrieve TaskList_Open from Inspection.Task retrieve TaskList_Open from Inspection.Task",
+      "sourceKind": "Database",
+      "entity": "Inspection.Task",
+      "association": null,
+      "xPath": null
+    }
+  ],
+  "decisionActions": [],
+  "showPageActions": [],
+  "mutationActions": [],
+  "callEdges": []
+}

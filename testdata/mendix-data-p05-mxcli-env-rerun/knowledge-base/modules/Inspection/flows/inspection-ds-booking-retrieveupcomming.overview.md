@@ -1,0 +1,59 @@
+---
+objectType: flow
+module: Inspection
+qualifiedName: Inspection.DS_Booking_RetrieveUpcomming
+stableId: 1fa008c0-9989-4f08-9bf9-4192f50a3dd9
+slug: inspection-ds-booking-retrieveupcomming
+layer: L1
+l0: inspection-ds-booking-retrieveupcomming.abstract.md
+l2Path: ../../../../app-overview/current/modules/Inspection/flows/inspection-ds-booking-retrieveupcomming.json
+l2Logical: flow:Inspection.DS_Booking_RetrieveUpcomming
+sourceRun: cli_2026-03-18T20-54-38.903Z
+collectionL0: INDEX.abstract.md
+collectionL1: ../FLOWS.md
+---
+# Flow Overview: Inspection.DS_Booking_RetrieveUpcomming
+
+## Summary
+
+- Likely supplies data to callers or pages rather than driving user navigation directly.
+- L0: [abstract](inspection-ds-booking-retrieveupcomming.abstract.md)
+- L2: [json](../../../../app-overview/current/modules/Inspection/flows/inspection-ds-booking-retrieveupcomming.json)
+
+## Main Steps
+
+- retrieve over association $Tool/Inspection.Booking_Equipment
+
+## Trigger/Input/Output Context
+
+- Kind: Microflow
+- Entry/call context: No inbound caller was exported; the entry point may be navigation, background execution, or an export gap.
+- Output/UI context: No page output was exported; check L2 JSON if the exact user-facing effect matters.
+
+## Key Entities Touched
+
+- No entity names were resolved from exported nodes; inspect L2 JSON if exact read/write scope matters.
+
+## Called / Called By
+
+- Calls: none
+- Called by: none
+
+## Shown Pages
+
+- No ShowPageAction was exported for this flow; it may serve validation, background processing, or delegate work to other flows.
+
+## Important Retrieves/Decisions/Mutations
+
+- nodeId=n002-retrieve; sourceKind=Association; association=$Tool/Inspection.Booking_Equipment; summary=retrieve over association $Tool/Inspection.Booking_Equipment
+
+## Warnings/Unknowns
+
+- Behavioural actions exist without explicit entity tags.
+
+## Source
+
+- Stable JSON: [json](../../../../app-overview/current/modules/Inspection/flows/inspection-ds-booking-retrieveupcomming.json)
+- Aggregate export: [flows.json](../../../../app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.json)
+- Aggregate pseudo: [flows.pseudo.txt](../../../../app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.pseudo.txt)
+- Traceability: sourceRun=cli_2026-03-18T20-54-38.903Z

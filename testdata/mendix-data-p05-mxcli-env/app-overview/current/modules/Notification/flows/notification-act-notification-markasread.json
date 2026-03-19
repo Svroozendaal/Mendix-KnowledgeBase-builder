@@ -1,0 +1,109 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Notification",
+                  "qualifiedName":  "Notification.ACT_Notification_MarkAsRead",
+                  "stableId":  "8dc114fc-d9fe-4b54-ac9e-d8a89885e315",
+                  "slug":  "notification-act-notification-markasread",
+                  "l0Path":  "knowledge-base/modules/Notification/flows/notification-act-notification-markasread.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Notification/flows/notification-act-notification-markasread.overview.md",
+                  "l2Path":  "app-overview/current/modules/Notification/flows/notification-act-notification-markasread.json",
+                  "l2Logical":  "flow:Notification.ACT_Notification_MarkAsRead",
+                  "sourceRun":  "cli_2026-03-18T20-49-03.032Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Notification/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Notification/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Notification/flows/INDEX.json"
+              },
+    "flowId":  "8dc114fc-d9fe-4b54-ac9e-d8a89885e315",
+    "kind":  "Microflow",
+    "qualifiedName":  "Notification.ACT_Notification_MarkAsRead",
+    "module":  "Notification",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-change",
+                      "nodeType":  "ActionActivity",
+                      "label":  "change $Notification (isRead = true)",
+                      "detail":  "CHANGE $Notification (isRead = true)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-2353a3665b1f",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-change",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-1040c64c2adf",
+                      "originNodeId":  "n002-change",
+                      "destinationNodeId":  "n003-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-change",
+                                         "n003-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Notification.ACT_Notification_MarkAsRead\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n002-change",
+                                "actionKind":  "Change",
+                                "summary":  "change $Notification (isRead = true)",
+                                "entity":  "Notification.Notification",
+                                "memberSummary":  "isRead = true"
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}

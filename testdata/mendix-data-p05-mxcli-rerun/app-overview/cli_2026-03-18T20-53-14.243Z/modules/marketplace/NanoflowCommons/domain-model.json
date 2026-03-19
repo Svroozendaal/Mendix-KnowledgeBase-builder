@@ -1,0 +1,211 @@
+{
+    "module":  "NanoflowCommons",
+    "domainModel":  {
+                        "entities":  [
+                                         {
+                                             "name":  "NanoflowCommons.Geolocation",
+                                             "isPersistable":  false,
+                                             "generalization":  null,
+                                             "attributes":  [
+                                                                {
+                                                                    "name":  "Timestamp",
+                                                                    "type":  "DateTimeAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Latitude",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Longitude",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Altitude",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Accuracy",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "AltitudeAccuracy",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Heading",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Speed",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                }
+                                                            ],
+                                             "accessRules":  [
+                                                                 {
+                                                                     "ruleKey":  "rule-1",
+                                                                     "moduleRoles":  [
+                                                                                         "NanoflowCommons.User"
+                                                                                     ],
+                                                                     "allowCreate":  true,
+                                                                     "allowDelete":  true,
+                                                                     "defaultMemberAccessRights":  null,
+                                                                     "xPathConstraint":  null,
+                                                                     "xPathEvidence":  null,
+                                                                     "memberAccesses":  [
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.Timestamp",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.Latitude",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.Longitude",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.Altitude",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.Accuracy",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.AltitudeAccuracy",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.Heading",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Geolocation.Speed",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            }
+                                                                                        ]
+                                                                 }
+                                                             ]
+                                         },
+                                         {
+                                             "name":  "NanoflowCommons.Position",
+                                             "isPersistable":  false,
+                                             "generalization":  null,
+                                             "attributes":  [
+                                                                {
+                                                                    "name":  "Latitude",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                },
+                                                                {
+                                                                    "name":  "Longitude",
+                                                                    "type":  "StringAttributeType",
+                                                                    "enumerationName":  null,
+                                                                    "length":  null,
+                                                                    "defaultValue":  null,
+                                                                    "validationSummary":  null
+                                                                }
+                                                            ],
+                                             "accessRules":  [
+                                                                 {
+                                                                     "ruleKey":  "rule-1",
+                                                                     "moduleRoles":  [
+                                                                                         "NanoflowCommons.User"
+                                                                                     ],
+                                                                     "allowCreate":  true,
+                                                                     "allowDelete":  true,
+                                                                     "defaultMemberAccessRights":  null,
+                                                                     "xPathConstraint":  null,
+                                                                     "xPathEvidence":  null,
+                                                                     "memberAccesses":  [
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Position.Latitude",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            },
+                                                                                            {
+                                                                                                "memberName":  "NanoflowCommons.Position.Longitude",
+                                                                                                "memberKind":  "Attribute",
+                                                                                                "accessRights":  "None"
+                                                                                            }
+                                                                                        ]
+                                                                 }
+                                                             ]
+                                         }
+                                     ],
+                        "associations":  [
+
+                                         ],
+                        "enumerations":  [
+                                             {
+                                                 "name":  "NanoflowCommons.Enum_DistanceUnit",
+                                                 "values":  [
+                                                                "KILOMETER",
+                                                                "NAUTICAL_MILE",
+                                                                "STATUTE_MILE"
+                                                            ]
+                                             },
+                                             {
+                                                 "name":  "NanoflowCommons.GeocodingProvider",
+                                                 "values":  [
+                                                                "Geocodio",
+                                                                "Google",
+                                                                "LocationIQ",
+                                                                "MapQuest"
+                                                            ]
+                                             },
+                                             {
+                                                 "name":  "NanoflowCommons.Platform",
+                                                 "values":  [
+                                                                "Hybrid_mobile",
+                                                                "Native_mobile",
+                                                                "Web"
+                                                            ]
+                                             }
+                                         ]
+                    }
+}

@@ -1,0 +1,214 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.SUB_Accessory_Order",
+                  "stableId":  "066fa293-6d5e-44fa-8b35-ff9633fe29d8",
+                  "slug":  "inspection-sub-accessory-order",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-sub-accessory-order.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-sub-accessory-order.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-sub-accessory-order.json",
+                  "l2Logical":  "flow:Inspection.SUB_Accessory_Order",
+                  "sourceRun":  "cli_2026-03-18T20-53-14.243Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-53-14.243Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-53-14.243Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "066fa293-6d5e-44fa-8b35-ff9633fe29d8",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.SUB_Accessory_Order",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "@annotation \u0027Order new stock\u0027",
+                      "detail":  "@annotation \u0027Order new stock\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-loop",
+                      "nodeType":  "LoopedActivity",
+                      "label":  "LOOP $IteratorAccessory IN $AccessoryListToOrder",
+                      "detail":  "LOOP $IteratorAccessory IN $AccessoryListToOrder",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$IteratorAccessory/AmountInStock = 0",
+                      "detail":  "IF expression=$IteratorAccessory/AmountInStock = 0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-change",
+                      "nodeType":  "ActionActivity",
+                      "label":  "change $IteratorAccessory (AmountInStock = 10, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock)",
+                      "detail":  "CHANGE $IteratorAccessory (AmountInStock = 10, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-change",
+                      "nodeType":  "ActionActivity",
+                      "label":  "change $IteratorAccessory (AmountInStock = $IteratorAccessory/AmountInStock + 5, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock)",
+                      "detail":  "CHANGE $IteratorAccessory (AmountInStock = $IteratorAccessory/AmountInStock + 5, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-514c3f6e8484",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-e02fd765cd42",
+                      "originNodeId":  "n002-action",
+                      "destinationNodeId":  "n003-loop",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-7dc91f13499b",
+                      "originNodeId":  "n003-loop",
+                      "destinationNodeId":  "n004-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-4e5cf3122753",
+                      "originNodeId":  "n004-decision",
+                      "destinationNodeId":  "n005-change",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-1ca9bb0af811",
+                      "originNodeId":  "n005-change",
+                      "destinationNodeId":  "n006-change",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-8c998b2c7f13",
+                      "originNodeId":  "n006-change",
+                      "destinationNodeId":  "n007-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-action",
+                                         "n003-loop",
+                                         "n004-decision",
+                                         "n005-change",
+                                         "n006-change",
+                                         "n007-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.SUB_Accessory_Order\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n004-decision",
+                                "summary":  "IF $IteratorAccessory/AmountInStock = 0",
+                                "caption":  "IF",
+                                "expression":  "$IteratorAccessory/AmountInStock = 0"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n005-change",
+                                "actionKind":  "Change",
+                                "summary":  "change $IteratorAccessory (AmountInStock = 10, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock)",
+                                "entity":  null,
+                                "memberSummary":  "AmountInStock = 10, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock"
+                            },
+                            {
+                                "nodeId":  "n006-change",
+                                "actionKind":  "Change",
+                                "summary":  "change $IteratorAccessory (AmountInStock = $IteratorAccessory/AmountInStock + 5, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock)",
+                                "entity":  null,
+                                "memberSummary":  "AmountInStock = $IteratorAccessory/AmountInStock + 5, EquipmentStatus = Inspection.ENUM_Accessory_Status.In_Stock"
+                            }
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.SE_Equipment_OrderNew",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n007-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.SUB_Accessory_Order",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,131 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.SUB_Account_GetFromInspector",
+                  "stableId":  "bd0d867e-42f7-4673-b7d3-a8f98a0e686d",
+                  "slug":  "inspection-sub-account-getfrominspector",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-sub-account-getfrominspector.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-sub-account-getfrominspector.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-sub-account-getfrominspector.json",
+                  "l2Logical":  "flow:Inspection.SUB_Account_GetFromInspector",
+                  "sourceRun":  "cli_2026-03-18T20-44-56.521Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-44-56.521Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-44-56.521Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "bd0d867e-42f7-4673-b7d3-a8f98a0e686d",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.SUB_Account_GetFromInspector",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve over association $Inspector/Inspection.Inspector_Account",
+                      "detail":  "RETRIEVE $Account_Inspector FROM ASSOCIATION $Inspector/Inspection.Inspector_Account",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-return",
+                      "nodeType":  "ActionActivity",
+                      "label":  "return $Account_Inspector",
+                      "detail":  "RETURN $Account_Inspector",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-219b08a9c5f9",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-df28dbc4662f",
+                      "originNodeId":  "n002-retrieve",
+                      "destinationNodeId":  "n003-return",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-8d7e9296605f",
+                      "originNodeId":  "n003-return",
+                      "destinationNodeId":  "n004-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-retrieve",
+                                         "n003-return",
+                                         "n004-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.SUB_Account_GetFromInspector\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n002-retrieve",
+                                "summary":  "retrieve over association $Inspector/Inspection.Inspector_Account",
+                                "sourceKind":  "Association",
+                                "entity":  null,
+                                "association":  "$Inspector/Inspection.Inspector_Account",
+                                "xPath":  null
+                            }
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,18 @@
+# Application Info
+Schema version: 2.0
+Generated: 2026-03-18 20:44:57Z
+Source MPR: C:\Workspaces\Mendix\Emixa_InspectionApp\Emixa_InspectionApp.mpr
+Source dump: none (mxcli)
+
+## Summary
+Modules: 7
+Entities: 18
+Associations: 10
+Enumerations: 11
+Flows: 55 (Microflows: 53, Nanoflows: 2, Rules: , Workflows: 0)
+
+## Security
+Security level: CheckEverything
+Admin user: MxAdmin
+Guest access: yes
+Guest role: Anonymous

@@ -1,0 +1,912 @@
+{
+  "module": "Administration",
+  "pages": [
+    {
+      "qualifiedName": "Administration.Account_Edit",
+      "name": "Account_Edit",
+      "title": "Edit Account",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "Administration.Administrator"
+      ],
+      "parameters": [
+        {
+          "name": "Account",
+          "entityType": "Administration.Account"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "89c080a3-8ddf-4fa3-87a7-18305abd8b55",
+          "actionType": "CancelChangesClientAction",
+          "summary": "CancelChangesClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "ac044ad1-1a6c-4b92-8c68-fd833e4c9982",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Administration.ShowPasswordForm",
+          "targetPage": null,
+          "flowName": "Administration.ShowPasswordForm"
+        },
+        {
+          "actionId": "2c932d4d-de5a-54c1-b1e9-18b198b9933c",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "2e061e05-246b-4d10-866d-3dc4ed3e6326",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "3877f88b-9a87-4e90-b3f9-40b99f5b8c3b",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "5082de30-0a93-4bdb-a6b7-7d6a1bc6557d",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "519bf048-c755-47ef-86f7-4a150d4132e6",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "52ff2f93-34ee-4f2f-b40a-a7724f60814a",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "5ed647a2-bf2c-5b94-a8f7-899e41f491d6",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "62bd5532-6431-4ed0-89ed-39ac3ff9df0e",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "726b2b90-fc75-4799-bf1a-bee14861ebb3",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "7c76c95b-a632-4203-950f-4740c7c779f2",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "8c15423d-ab2a-4d5a-9471-ffa657e1b7ea",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "93536b62-8d65-47f0-be16-270fbe9213c2",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "9ced20f4-e204-4dc2-9461-5b5ec8e43152",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "a12d95a2-cfb6-4d38-98d5-849be2e9cb4e",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "acea9e69-36e2-43ab-9e3b-d49e69525aa3",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "bab40f62-8b81-4a73-9e34-994d8066440e",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "d6bdadc9-61bd-4396-aed1-fc305aaeda0f",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "e96d1c77-2a1f-4758-a508-7a58983ae360",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "ec787428-9bd3-45f4-9f6e-a9a4ac1106cd",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "ed72a509-5f48-4612-b89c-df41d5f66a9e",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "ef1e0885-f41b-5d94-a8c4-5f1adfd87f5f",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "aa5b92ed-323d-4660-b92e-c6a89d469c5e",
+          "actionType": "SaveChangesClientAction",
+          "summary": "SaveChangesClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.Account_New",
+      "name": "Account_New",
+      "title": "New Account",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "Administration.Administrator"
+      ],
+      "parameters": [
+        {
+          "name": "AccountPasswordData",
+          "entityType": "Administration.AccountPasswordData"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "1568aa0d-c04c-4605-a733-e7726c18625b",
+          "actionType": "CancelChangesClientAction",
+          "summary": "CancelChangesClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "7c3fff45-24cb-4f65-a686-d3565770821f",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Administration.SaveNewAccount",
+          "targetPage": null,
+          "flowName": "Administration.SaveNewAccount"
+        },
+        {
+          "actionId": "029d5ed1-e71c-405b-a7f1-6631ad3a3e8d",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "112ed60d-6aa3-4467-940b-6efd01aa2718",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "11867f33-8a52-5cb2-ab08-d0c4cfa04b27",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "165a6ec6-7138-46ae-b4a9-f3f840b0c4a0",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "2cff286b-8f7c-54ef-ba74-d4788800da72",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "3a36035f-5afe-4c8a-8ba8-6efc782ada33",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "3b35cb2d-c06c-45dc-9a85-3971cff892ad",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "45a3530e-3d25-410d-9661-5ca92cd56e90",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "5391745e-c65b-4825-9094-6750d8237dcf",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "5561ee7c-dca0-49e4-8def-51f9ba1f4499",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "5a221555-8238-5ad4-a406-1ead0567d58f",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "649316dc-cc86-49dc-9123-b4632126c9aa",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "83f90adb-6448-48dc-a849-1a5b7646c893",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "94ce7c95-eb09-4b98-94ad-1d45b454ec5f",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "a8641d56-f472-4236-b040-797e69958529",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "adb0e3c8-40b0-4852-82c5-c2e15429ce50",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "c0be29a8-f2e9-49c5-a418-3d7baa98bf0d",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "c10edff3-10a2-4b26-8b21-aad5ea685e5a",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "c81537ce-4525-4e99-99da-ccf5285d2128",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "cd2803bf-037a-40e6-845d-ddf52f580604",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "d6b90147-2449-43cb-9fcf-dcc9f13a7fc9",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "e0f4dda7-db7d-424f-8a72-c779a10551ae",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "e6ec8f91-8c8c-4ba1-8789-68dd192d34b2",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "e75508ce-01be-5f57-81a8-c7f02e16c90e",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "fa372b25-4b2c-469b-8689-30717e17855b",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.Account_Overview",
+      "name": "Account_Overview",
+      "title": "Accounts",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "Administration.Administrator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "5d7401b0-01e5-417f-8a36-ac91859dbf60",
+          "actionType": "DeleteClientAction",
+          "summary": "DeleteClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "0078c796-e8ff-49ea-9d27-c8fb2a78445e",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Administration.NewAccount",
+          "targetPage": null,
+          "flowName": "Administration.NewAccount"
+        },
+        {
+          "actionId": "932a005f-f6db-4346-b9ac-aeb2bc620659",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Administration.NewWebServiceAccount",
+          "targetPage": null,
+          "flowName": "Administration.NewWebServiceAccount"
+        },
+        {
+          "actionId": "a3ae35bd-28c3-4fd6-a6f5-3a8e5896f1fd",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "eb80bbf3-33d8-5e03-a9fd-beccca67aff5",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "063b816f-a4b8-4f0a-9a16-0ff72b49009c",
+          "actionType": "PageClientAction",
+          "summary": "PageClientAction, page=Administration.Account_Edit",
+          "targetPage": "Administration.Account_Edit",
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": [
+        {
+          "provenanceId": "0b4d8362-e92f-4078-9fb9-a346089903b1",
+          "sourceType": "MenuItem",
+          "summary": "Menu item \u0022Accounts\u0022 in profile Responsive",
+          "page": "Administration.Account_Overview",
+          "userRole": null,
+          "flowName": null
+        }
+      ]
+    },
+    {
+      "qualifiedName": "Administration.ActiveSessions",
+      "name": "ActiveSessions",
+      "title": "Active Sessions",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "Administration.Administrator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "6840a9df-95c1-49b2-9504-bc2000aa9364",
+          "actionType": "DeleteClientAction",
+          "summary": "DeleteClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "d28259bf-58c8-4624-ae99-84f953d5a58b",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.ChangeMyPasswordForm",
+      "name": "ChangeMyPasswordForm",
+      "title": "Change Password",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [
+        {
+          "name": "AccountPasswordData",
+          "entityType": "Administration.AccountPasswordData"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "2dd7175f-6384-44a5-bcac-26ec4b9459ae",
+          "actionType": "CancelChangesClientAction",
+          "summary": "CancelChangesClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "c931dd90-116d-4d88-bea6-7d4122ebd40b",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Administration.ChangeMyPassword",
+          "targetPage": null,
+          "flowName": "Administration.ChangeMyPassword"
+        },
+        {
+          "actionId": "12dad571-478c-4916-aab0-76ac02f21f64",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "15de8cf9-27c9-4f73-a5d2-00c84ff7921a",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "2ba29ee5-79ef-4699-8a00-66d1747f46b6",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "46e369dd-9cfe-4c45-bf22-56031280bd71",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "59e2b752-966b-4872-973b-051fe33a2e62",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "6345cd66-d2a9-4a2a-96b3-e281125cab46",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "723124a2-0f35-5986-9d1f-170e0b9b1a89",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "9a7c87f9-58d1-4172-8a03-1e1f7f889de9",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "c6093555-42c2-59c0-b828-129c91105e40",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "e0c24313-de3d-58c9-a319-000564bca24e",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "f29cbac4-617b-4dec-9cab-cbff94097302",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "f6d5d9c2-a568-4b4d-b883-831c11d0ea8f",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.ChangePasswordForm",
+      "name": "ChangePasswordForm",
+      "title": "Change Password",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [
+        {
+          "name": "AccountPasswordData",
+          "entityType": "Administration.AccountPasswordData"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "55edf0fe-72c7-41f4-905d-cd898b86a8b7",
+          "actionType": "CancelChangesClientAction",
+          "summary": "CancelChangesClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "e121e727-bf72-46b0-ac82-5a57ed929bf0",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Administration.ChangePassword",
+          "targetPage": null,
+          "flowName": "Administration.ChangePassword"
+        },
+        {
+          "actionId": "1d849cd7-a038-4164-9139-92336941789a",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "4a21707f-0305-4db9-807d-ab0aa9f51a75",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "606fff12-1a18-451a-b824-285cf9dc6fa7",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "6a8c70ce-6f76-4aa9-9b27-a2c2199f8c94",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "6e832ad6-7437-45db-bb47-b5c26e75fd7b",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "c9b3fd01-7a93-4cfc-87f8-69149e8ba737",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "d2e6bf4c-f013-50f2-ae7e-f44c1e243fd8",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "f0c373e7-94e2-5df1-826d-f1a8a86c3a7d",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.MyAccount",
+      "name": "MyAccount",
+      "title": "My Account",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [],
+      "parameters": [
+        {
+          "name": "Account",
+          "entityType": "Administration.Account"
+        }
+      ],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "930309ef-00d5-4906-9fb9-7e5182d3c847",
+          "actionType": "CancelChangesClientAction",
+          "summary": "CancelChangesClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "2f4bdaee-5973-4320-bc17-409425f9e445",
+          "actionType": "MicroflowClientAction",
+          "summary": "MicroflowClientAction, flow=Administration.ShowMyPasswordForm",
+          "targetPage": null,
+          "flowName": "Administration.ShowMyPasswordForm"
+        },
+        {
+          "actionId": "16b12a68-c96b-5372-83df-10e185254027",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "20e9cfc4-f852-4712-86d4-a4746ed84ffb",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "38e2d32a-2f9c-4ac9-bd6a-5549689b04f7",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "54796c1b-e3f8-4270-afb1-439a64b19712",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "6f32abbe-71b8-4685-8194-84eadb79f511",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "a93099e4-b88e-4108-9e23-8abf3b7eff7b",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "c3e52b13-9146-42ed-8292-e1a8519ec8cb",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "d54d8278-0c8f-496c-8749-69bb9a85b1de",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "d649b14d-78e8-53b6-ad4d-5bff5e459385",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        },
+        {
+          "actionId": "abc589fb-6154-4eac-bf33-91c3cced29c3",
+          "actionType": "SaveChangesClientAction",
+          "summary": "SaveChangesClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.RuntimeInstances",
+      "name": "RuntimeInstances",
+      "title": "Runtime Instances",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "Administration.Administrator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "546d416b-be8b-4259-8a33-2debac6f2fed",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.ScheduledEvents",
+      "name": "ScheduledEvents",
+      "title": "Scheduled Events",
+      "layout": "Atlas_Core.Atlas_Default",
+      "allowedRoles": [
+        "Administration.Administrator"
+      ],
+      "parameters": [],
+      "isPopup": false,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [
+        {
+          "actionId": "a7869489-eda9-4ce0-b75f-0341d052842c",
+          "actionType": "NoClientAction",
+          "summary": "NoClientAction",
+          "targetPage": null,
+          "flowName": null
+        }
+      ],
+      "navigationProvenance": []
+    },
+    {
+      "qualifiedName": "Administration.UserRole_Select",
+      "name": "UserRole_Select",
+      "title": "Select user roles",
+      "layout": "Atlas_Core.PopupLayout",
+      "allowedRoles": [
+        "Administration.Administrator"
+      ],
+      "parameters": [],
+      "isPopup": true,
+      "popupWidth": 0,
+      "popupHeight": 0,
+      "popupResizable": true,
+      "url": null,
+      "excluded": false,
+      "dataSources": [],
+      "clientActions": [],
+      "navigationProvenance": []
+    }
+  ],
+  "snippets": []
+}

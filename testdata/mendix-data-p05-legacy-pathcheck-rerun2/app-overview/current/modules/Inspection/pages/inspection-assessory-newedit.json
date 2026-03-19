@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.Assessory_NewEdit",
+    "stableId": "Inspection.Assessory_NewEdit",
+    "slug": "inspection-assessory-newedit",
+    "l0Path": "knowledge-base/modules/Inspection/pages/inspection-assessory-newedit.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/pages/inspection-assessory-newedit.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/pages/inspection-assessory-newedit.json",
+    "l2Logical": "page:Inspection.Assessory_NewEdit",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/pages/INDEX.json"
+  },
+  "qualifiedName": "Inspection.Assessory_NewEdit",
+  "name": "Assessory_NewEdit",
+  "title": "Edit Equipment",
+  "layout": "Atlas_Core.PopupLayout",
+  "allowedRoles": [
+    "Inspection.Manager"
+  ],
+  "parameters": [
+    {
+      "name": "Accessory",
+      "entityType": "Inspection.Accessory"
+    }
+  ],
+  "isPopup": true,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": null,
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "02855449-7e0e-4cbe-893d-ae39747d5feb",
+      "actionType": "CancelChangesClientAction",
+      "summary": "CancelChangesClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "121068ff-7a01-4f7f-b91c-534dd78ffb28",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "1e9ad059-264a-4ae1-931d-b4ab88bbdfe9",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "30cb3b4d-956d-42b6-947d-74a9bf85d515",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "3c0b25c4-9608-4e57-8a39-d6f02ecd4c28",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "5fb1867b-33a2-4f67-8caf-afaf857f5aab",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "68762b68-411f-469a-9e14-698649553ff1",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "83f9013d-726f-4cea-be50-ed6ad5b2d3f7",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "c7d1ff00-a782-49f3-996c-c0a93efc888c",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "086af02b-1bb5-4b6c-a013-febd913a2e8a",
+      "actionType": "SaveChangesClientAction",
+      "summary": "SaveChangesClientAction",
+      "targetPage": null,
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": []
+}

@@ -1,0 +1,270 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.VAL_Tool_Validate",
+                  "stableId":  "43b0ec21-c41a-4461-9604-e9a6a19d87d5",
+                  "slug":  "inspection-val-tool-validate",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-val-tool-validate.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-val-tool-validate.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-val-tool-validate.json",
+                  "l2Logical":  "flow:Inspection.VAL_Tool_Validate",
+                  "sourceRun":  "cli_2026-03-18T20-54-38.903Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "43b0ec21-c41a-4461-9604-e9a6a19d87d5",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.VAL_Tool_Validate",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-declare",
+                      "nodeType":  "ActionActivity",
+                      "label":  "DECLARE $IsValid Boolean = true",
+                      "detail":  "DECLARE $IsValid Boolean = true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Tool/ReservationDate != empty",
+                      "detail":  "IF expression=$Tool/ReservationDate != empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Tool/ReservationDate MESSAGE \u0027Date is empty\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Tool/ReservationDate MESSAGE \u0027Date is empty\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Tool/ReservationDate \u003e= [%CurrentDateTime%]",
+                      "detail":  "IF expression=$Tool/ReservationDate \u003e= [%CurrentDateTime%]",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-set",
+                      "nodeType":  "ActionActivity",
+                      "label":  "SET $IsValid = false",
+                      "detail":  "SET $IsValid = false",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-validation",
+                      "nodeType":  "ActionActivity",
+                      "label":  "VALIDATION FEEDBACK $Tool/ReservationDate MESSAGE \u0027Date must be in the future\u0027",
+                      "detail":  "VALIDATION FEEDBACK $Tool/ReservationDate MESSAGE \u0027Date must be in the future\u0027",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n009-return",
+                      "nodeType":  "ActionActivity",
+                      "label":  "return $IsValid",
+                      "detail":  "RETURN $IsValid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n010-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-8d39552ccfcb",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-declare",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-2b76f99a222e",
+                      "originNodeId":  "n002-declare",
+                      "destinationNodeId":  "n003-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-25f329f4029a",
+                      "originNodeId":  "n003-decision",
+                      "destinationNodeId":  "n004-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-88f1b37ccda4",
+                      "originNodeId":  "n004-set",
+                      "destinationNodeId":  "n005-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-296236bf58ca",
+                      "originNodeId":  "n005-validation",
+                      "destinationNodeId":  "n006-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-a583e71aad77",
+                      "originNodeId":  "n006-decision",
+                      "destinationNodeId":  "n007-set",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-741aeeaf7842",
+                      "originNodeId":  "n007-set",
+                      "destinationNodeId":  "n008-validation",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-f7fc08bb34f2",
+                      "originNodeId":  "n008-validation",
+                      "destinationNodeId":  "n009-return",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-d285decd92bf",
+                      "originNodeId":  "n009-return",
+                      "destinationNodeId":  "n010-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-declare",
+                                         "n003-decision",
+                                         "n004-set",
+                                         "n005-validation",
+                                         "n006-decision",
+                                         "n007-set",
+                                         "n008-validation",
+                                         "n009-return",
+                                         "n010-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.VAL_Tool_Validate\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n003-decision",
+                                "summary":  "IF $Tool/ReservationDate != empty",
+                                "caption":  "IF",
+                                "expression":  "$Tool/ReservationDate != empty"
+                            },
+                            {
+                                "nodeId":  "n006-decision",
+                                "summary":  "IF $Tool/ReservationDate \u003e= [%CurrentDateTime%]",
+                                "caption":  "IF",
+                                "expression":  "$Tool/ReservationDate \u003e= [%CurrentDateTime%]"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.ACT_Tool_Validate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n004-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.VAL_Tool_Validate",
+                          "isInternal":  true
+                      }
+                  ]
+}

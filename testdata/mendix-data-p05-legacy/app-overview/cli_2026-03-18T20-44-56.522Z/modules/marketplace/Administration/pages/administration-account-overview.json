@@ -1,0 +1,86 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Administration",
+    "qualifiedName": "Administration.Account_Overview",
+    "stableId": "Administration.Account_Overview",
+    "slug": "administration-account-overview",
+    "l0Path": "knowledge-base/modules/_marktplace/Administration/pages/administration-account-overview.abstract.md",
+    "l1Path": "knowledge-base/modules/_marktplace/Administration/pages/administration-account-overview.overview.md",
+    "l2Path": "app-overview/current/modules/marketplace/Administration/pages/administration-account-overview.json",
+    "l2Logical": "page:Administration.Account_Overview",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/marketplace/Administration/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/marketplace/Administration/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/marketplace/Administration/pages/INDEX.json"
+  },
+  "qualifiedName": "Administration.Account_Overview",
+  "name": "Account_Overview",
+  "title": "Accounts",
+  "layout": "Atlas_Core.Atlas_Default",
+  "allowedRoles": [
+    "Administration.Administrator"
+  ],
+  "parameters": [],
+  "isPopup": false,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": null,
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "5d7401b0-01e5-417f-8a36-ac91859dbf60",
+      "actionType": "DeleteClientAction",
+      "summary": "DeleteClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "0078c796-e8ff-49ea-9d27-c8fb2a78445e",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Administration.NewAccount",
+      "targetPage": null,
+      "flowName": "Administration.NewAccount"
+    },
+    {
+      "actionId": "932a005f-f6db-4346-b9ac-aeb2bc620659",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Administration.NewWebServiceAccount",
+      "targetPage": null,
+      "flowName": "Administration.NewWebServiceAccount"
+    },
+    {
+      "actionId": "a3ae35bd-28c3-4fd6-a6f5-3a8e5896f1fd",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "eb80bbf3-33d8-5e03-a9fd-beccca67aff5",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "063b816f-a4b8-4f0a-9a16-0ff72b49009c",
+      "actionType": "PageClientAction",
+      "summary": "PageClientAction, page=Administration.Account_Edit",
+      "targetPage": "Administration.Account_Edit",
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": [
+    {
+      "provenanceId": "0b4d8362-e92f-4078-9fb9-a346089903b1",
+      "sourceType": "MenuItem",
+      "summary": "Menu item \u0022Accounts\u0022 in profile Responsive",
+      "page": "Administration.Account_Overview",
+      "userRole": null,
+      "flowName": null
+    }
+  ]
+}

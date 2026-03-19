@@ -1,0 +1,190 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.DS_UserRole_GetFromCurrentUser",
+                  "stableId":  "f30baa04-ff29-4fbc-8040-32becd095cec",
+                  "slug":  "inspection-ds-userrole-getfromcurrentuser",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-ds-userrole-getfromcurrentuser.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-ds-userrole-getfromcurrentuser.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-ds-userrole-getfromcurrentuser.json",
+                  "l2Logical":  "flow:Inspection.DS_UserRole_GetFromCurrentUser",
+                  "sourceRun":  "cli_2026-03-18T21-10-02.160Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T21-10-02.160Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T21-10-02.160Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "f30baa04-ff29-4fbc-8040-32becd095cec",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.DS_UserRole_GetFromCurrentUser",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve from Administration.Account WHERE id = $currentUser LIMIT 1",
+                      "detail":  "RETRIEVE $AccountCurrent FROM Administration.Account WHERE id = $currentUser LIMIT 1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve over association $AccountCurrent/System.UserRoles",
+                      "detail":  "RETRIEVE $UserRoleList FROM ASSOCIATION $AccountCurrent/System.UserRoles",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "$ManagerRole = LIST OPERATION ...",
+                      "detail":  "$ManagerRole = LIST OPERATION ...",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-return",
+                      "nodeType":  "ActionActivity",
+                      "label":  "return $ManagerRole",
+                      "detail":  "RETURN $ManagerRole",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-219b08a9c5f9",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-793d2746575f",
+                      "originNodeId":  "n002-retrieve",
+                      "destinationNodeId":  "n003-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-b21af6985f4f",
+                      "originNodeId":  "n003-retrieve",
+                      "destinationNodeId":  "n004-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-cb497e9981f8",
+                      "originNodeId":  "n004-action",
+                      "destinationNodeId":  "n005-return",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-f4394d35b626",
+                      "originNodeId":  "n005-return",
+                      "destinationNodeId":  "n006-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-retrieve",
+                                         "n003-retrieve",
+                                         "n004-action",
+                                         "n005-return",
+                                         "n006-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.DS_UserRole_GetFromCurrentUser\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n002-retrieve",
+                                "summary":  "retrieve from Administration.Account WHERE id = $currentUser LIMIT 1",
+                                "sourceKind":  "Database",
+                                "entity":  "Administration.Account",
+                                "association":  null,
+                                "xPath":  "id = $currentUser"
+                            },
+                            {
+                                "nodeId":  "n003-retrieve",
+                                "summary":  "retrieve over association $AccountCurrent/System.UserRoles",
+                                "sourceKind":  "Association",
+                                "entity":  null,
+                                "association":  "$AccountCurrent/System.UserRoles",
+                                "xPath":  null
+                            }
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.VAL_Task_Validate",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n003-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.DS_UserRole_GetFromCurrentUser",
+                          "isInternal":  true
+                      }
+                  ]
+}

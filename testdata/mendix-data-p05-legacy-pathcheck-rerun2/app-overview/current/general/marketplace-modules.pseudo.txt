@@ -1,0 +1,21 @@
+# Marketplace Modules
+Total: 5
+
+MODULE Administration
+  Roles: Administrator, User
+  Entities: 2, Flows: 9, Pages: 10
+
+MODULE Atlas_Core
+  Entities: 0, Flows: 0, Pages: 0
+
+MODULE Atlas_Web_Content
+  Roles: UserRole
+  Entities: 1, Flows: 2, Pages: 0
+
+MODULE DataWidgets
+  Roles: User
+  Entities: 0, Flows: 0, Pages: 0
+
+MODULE NanoflowCommons
+  Roles: User
+  Entities: 2, Flows: 0, Pages: 0

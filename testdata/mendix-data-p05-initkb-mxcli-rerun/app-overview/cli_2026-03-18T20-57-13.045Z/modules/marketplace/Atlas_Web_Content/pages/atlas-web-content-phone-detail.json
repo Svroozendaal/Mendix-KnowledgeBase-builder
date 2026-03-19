@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Atlas_Web_Content",
+                  "qualifiedName":  "Atlas_Web_Content.Phone_Detail",
+                  "stableId":  "Atlas_Web_Content.Phone_Detail",
+                  "slug":  "atlas-web-content-phone-detail",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-phone-detail.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-phone-detail.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/atlas-web-content-phone-detail.json",
+                  "l2Logical":  "page:Atlas_Web_Content.Phone_Detail",
+                  "sourceRun":  "cli_2026-03-18T20-57-13.045Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/marketplace/Atlas_Web_Content/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/marketplace/Atlas_Web_Content/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/INDEX.json"
+              },
+    "qualifiedName":  "Atlas_Web_Content.Phone_Detail",
+    "name":  "Phone_Detail",
+    "title":  "Phone_Detail",
+    "layout":  null,
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+
+                    ],
+    "clientActions":  [
+
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

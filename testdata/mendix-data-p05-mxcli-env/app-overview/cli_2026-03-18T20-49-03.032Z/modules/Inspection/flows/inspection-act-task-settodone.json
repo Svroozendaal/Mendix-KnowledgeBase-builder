@@ -1,0 +1,276 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_Task_SetToDone",
+                  "stableId":  "03114587-dc6f-4348-a516-efcf027a6b7a",
+                  "slug":  "inspection-act-task-settodone",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-task-settodone.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-task-settodone.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-task-settodone.json",
+                  "l2Logical":  "flow:Inspection.ACT_Task_SetToDone",
+                  "sourceRun":  "cli_2026-03-18T20-49-03.032Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-49-03.032Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "03114587-dc6f-4348-a516-efcf027a6b7a",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_Task_SetToDone",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-call",
+                      "nodeType":  "ActionActivity",
+                      "label":  "call microflow Inspection.VAL_Task_Validate -\u003e IsValid",
+                      "detail":  "$IsValid = CALL MICROFLOW Inspection.VAL_Task_Validate(Task = $Task) ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "Inspection.VAL_Task_Validate",
+                                        "sourceNodeId":  "n002-call"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$IsValid",
+                      "detail":  "IF expression=$IsValid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-call",
+                      "nodeType":  "ActionActivity",
+                      "label":  "call microflow Notification.SUB_Notification_SendToManager",
+                      "detail":  "CALL MICROFLOW Notification.SUB_Notification_SendToManager(Task = $Task) ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "Notification.SUB_Notification_SendToManager",
+                                        "sourceNodeId":  "n004-call"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-change",
+                      "nodeType":  "ActionActivity",
+                      "label":  "change $Task (Status = Inspection.Enum_TaskStatus.Done)",
+                      "detail":  "CHANGE $Task (Status = Inspection.Enum_TaskStatus.Done)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show message (Task has been set to done., type=Information)",
+                      "detail":  "SHOW MESSAGE \u0027Task has been set to done.\u0027 TYPE Information",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-close",
+                      "nodeType":  "ActionActivity",
+                      "label":  "close page",
+                      "detail":  "CLOSE PAGE",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show message (Please fill out the empty fields., type=Information)",
+                      "detail":  "SHOW MESSAGE \u0027Please fill out the empty fields.\u0027 TYPE Information",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n009-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-2e52dbb7e877",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-call",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-00d62b7988a4",
+                      "originNodeId":  "n002-call",
+                      "destinationNodeId":  "n003-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-a9c04bb9de7b",
+                      "originNodeId":  "n003-decision",
+                      "destinationNodeId":  "n004-call",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c599a4341cf2",
+                      "originNodeId":  "n004-call",
+                      "destinationNodeId":  "n005-change",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-eda40d6262e4",
+                      "originNodeId":  "n005-change",
+                      "destinationNodeId":  "n006-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-e401fb963841",
+                      "originNodeId":  "n006-show",
+                      "destinationNodeId":  "n007-close",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-d910510f90fc",
+                      "originNodeId":  "n007-close",
+                      "destinationNodeId":  "n008-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-9ece9d8288c6",
+                      "originNodeId":  "n008-show",
+                      "destinationNodeId":  "n009-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "Inspection.VAL_Task_Validate",
+                      "sourceNodeId":  "n002-call"
+                  },
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "Notification.SUB_Notification_SendToManager",
+                      "sourceNodeId":  "n004-call"
+                  }
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-call",
+                                         "n003-decision",
+                                         "n004-call",
+                                         "n005-change",
+                                         "n006-show",
+                                         "n007-close",
+                                         "n008-show",
+                                         "n009-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_Task_SetToDone\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n003-decision",
+                                "summary":  "IF $IsValid",
+                                "caption":  "IF",
+                                "expression":  "$IsValid"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n005-change",
+                                "actionKind":  "Change",
+                                "summary":  "change $Task (Status = Inspection.Enum_TaskStatus.Done)",
+                                "entity":  "Inspection.Task",
+                                "memberSummary":  "Status = Inspection.Enum_TaskStatus.Done"
+                            }
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.ACT_Task_SetToDone",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n002-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.VAL_Task_Validate",
+                          "isInternal":  true
+                      },
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.ACT_Task_SetToDone",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n004-call",
+                          "targetModule":  "Notification",
+                          "targetFlow":  "Notification.SUB_Notification_SendToManager",
+                          "isInternal":  false
+                      }
+                  ]
+}

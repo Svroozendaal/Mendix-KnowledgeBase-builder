@@ -1,0 +1,134 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_CoverPhoto_Create",
+                  "stableId":  "0a219153-da4e-4dc9-a00d-b445796ebdaf",
+                  "slug":  "inspection-act-coverphoto-create",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-coverphoto-create.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-coverphoto-create.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-coverphoto-create.json",
+                  "l2Logical":  "flow:Inspection.ACT_CoverPhoto_Create",
+                  "sourceRun":  "cli_2026-03-18T20-57-13.045Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-57-13.045Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "0a219153-da4e-4dc9-a00d-b445796ebdaf",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_CoverPhoto_Create",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Inspection.CoverPhoto (Task_CoverPhoto = $Task)",
+                      "detail":  "$NewInspectorPhoto = CREATE Inspection.CoverPhoto (Task_CoverPhoto = $Task)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show page Inspection.CoverPhoto_NewEdit",
+                      "detail":  "SHOW PAGE Inspection.CoverPhoto_NewEdit($CoverPhoto = $NewInspectorPhoto)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-c580dab24234",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-82ec8daa7274",
+                      "originNodeId":  "n002-create",
+                      "destinationNodeId":  "n003-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c03f054bbd76",
+                      "originNodeId":  "n003-show",
+                      "destinationNodeId":  "n004-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-create",
+                                         "n003-show",
+                                         "n004-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_CoverPhoto_Create\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+
+                        ],
+    "showPageActions":  [
+                            {
+                                "nodeId":  "n003-show",
+                                "summary":  "show page Inspection.CoverPhoto_NewEdit",
+                                "targetPage":  "Inspection.CoverPhoto_NewEdit"
+                            }
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n002-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Inspection.CoverPhoto (Task_CoverPhoto = $Task)",
+                                "entity":  "Inspection.CoverPhoto",
+                                "memberSummary":  "(Task_CoverPhoto = $Task)"
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}

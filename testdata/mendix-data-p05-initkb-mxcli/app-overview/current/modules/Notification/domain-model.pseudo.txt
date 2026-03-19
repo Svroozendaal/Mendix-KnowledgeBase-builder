@@ -1,0 +1,26 @@
+# Domain Model: Notification
+Entities: 1, Associations: 1, Enumerations: 0
+
+## Entities
+- ENTITY Notification.Notification (persistent)
+  - ATTR AssociatedObject: LongAttributeType
+  - ATTR isRead: BooleanAttributeType
+  - ATTR Message: StringAttributeType
+  - ATTR Title: StringAttributeType
+  - ACCESS_RULE rule-1 [Notification.Inspector] Create=no, Delete=yes, Default=Unknown
+    - MEMBER Notification.Notification.Title: ReadOnly
+    - MEMBER Notification.Notification.Message: ReadOnly
+    - MEMBER Notification.Notification.isRead: ReadOnly
+    - MEMBER Notification.Notification.AssociatedObject: None
+    - MEMBER Notification.Notification_Account: ReadOnly
+  - ACCESS_RULE rule-2 [Notification.Manager] Create=no, Delete=yes, Default=Unknown
+    - MEMBER Notification.Notification.Title: ReadWrite
+    - MEMBER Notification.Notification.Message: ReadWrite
+    - MEMBER Notification.Notification.isRead: ReadOnly
+    - MEMBER Notification.Notification.AssociatedObject: None
+    - MEMBER Notification.Notification_Account: ReadWrite
+
+## Associations
+- ASSOC Notification.Notification_Account: Notification.Notification [*-*] Administration.Account
+
+## Enumerations

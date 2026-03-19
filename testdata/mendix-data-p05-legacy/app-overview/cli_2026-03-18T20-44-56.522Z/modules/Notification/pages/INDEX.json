@@ -1,0 +1,49 @@
+{
+  "objectType": "page-collection",
+  "module": "Notification",
+  "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+  "l0Path": "knowledge-base/modules/Notification/pages/INDEX.abstract.md",
+  "l1Path": "knowledge-base/modules/Notification/PAGES.md",
+  "l2Path": "app-overview/current/modules/Notification/pages/INDEX.json",
+  "items": [
+    {
+      "objectType": "page",
+      "qualifiedName": "Notification.Notification_Overview_Read",
+      "stableId": "Notification.Notification_Overview_Read",
+      "slug": "notification-notification-overview-read",
+      "title": "Read notifications",
+      "roleCount": 2,
+      "l0Path": "knowledge-base/modules/Notification/pages/notification-notification-overview-read.abstract.md",
+      "l1Path": "knowledge-base/modules/Notification/pages/notification-notification-overview-read.overview.md",
+      "l2Path": "app-overview/current/modules/Notification/pages/notification-notification-overview-read.json",
+      "l2Logical": "page:Notification.Notification_Overview_Read",
+      "sourceRun": "cli_2026-03-18T20-44-56.522Z"
+    },
+    {
+      "objectType": "page",
+      "qualifiedName": "Notification.Notification_Overview_Unread",
+      "stableId": "Notification.Notification_Overview_Unread",
+      "slug": "notification-notification-overview-unread",
+      "title": "Unread notifications",
+      "roleCount": 2,
+      "l0Path": "knowledge-base/modules/Notification/pages/notification-notification-overview-unread.abstract.md",
+      "l1Path": "knowledge-base/modules/Notification/pages/notification-notification-overview-unread.overview.md",
+      "l2Path": "app-overview/current/modules/Notification/pages/notification-notification-overview-unread.json",
+      "l2Logical": "page:Notification.Notification_Overview_Unread",
+      "sourceRun": "cli_2026-03-18T20-44-56.522Z"
+    },
+    {
+      "objectType": "page",
+      "qualifiedName": "Notification.Script_Overview",
+      "stableId": "Notification.Script_Overview",
+      "slug": "notification-script-overview",
+      "title": "Script Overview",
+      "roleCount": 1,
+      "l0Path": "knowledge-base/modules/Notification/pages/notification-script-overview.abstract.md",
+      "l1Path": "knowledge-base/modules/Notification/pages/notification-script-overview.overview.md",
+      "l2Path": "app-overview/current/modules/Notification/pages/notification-script-overview.json",
+      "l2Logical": "page:Notification.Script_Overview",
+      "sourceRun": "cli_2026-03-18T20-44-56.522Z"
+    }
+  ]
+}

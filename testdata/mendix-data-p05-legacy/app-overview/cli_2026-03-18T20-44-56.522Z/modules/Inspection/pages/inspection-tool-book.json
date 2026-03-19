@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "objectType": "page",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.Tool_Book",
+    "stableId": "Inspection.Tool_Book",
+    "slug": "inspection-tool-book",
+    "l0Path": "knowledge-base/modules/Inspection/pages/inspection-tool-book.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/pages/inspection-tool-book.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/pages/inspection-tool-book.json",
+    "l2Logical": "page:Inspection.Tool_Book",
+    "sourceRun": "cli_2026-03-18T20-44-56.522Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/pages.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-44-56.522Z/modules/Inspection/pages.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/pages/INDEX.json"
+  },
+  "qualifiedName": "Inspection.Tool_Book",
+  "name": "Tool_Book",
+  "title": "Edit Equipment",
+  "layout": "Atlas_Core.PopupLayout",
+  "allowedRoles": [
+    "Inspection.Manager"
+  ],
+  "parameters": [
+    {
+      "name": "Tool",
+      "entityType": "Inspection.Tool"
+    }
+  ],
+  "isPopup": true,
+  "popupWidth": 0,
+  "popupHeight": 0,
+  "popupResizable": true,
+  "url": null,
+  "excluded": false,
+  "dataSources": [],
+  "clientActions": [
+    {
+      "actionId": "db47cd72-498f-4d4b-b488-6e5ca2a7937c",
+      "actionType": "CancelChangesClientAction",
+      "summary": "CancelChangesClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "08e9c036-5073-4127-a774-4afc304806b7",
+      "actionType": "MicroflowClientAction",
+      "summary": "MicroflowClientAction, flow=Inspection.ACT_Tool_Validate",
+      "targetPage": null,
+      "flowName": "Inspection.ACT_Tool_Validate"
+    },
+    {
+      "actionId": "84de5ce3-6bf5-45f8-8ae3-776c7f506ded",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "9843b70b-e00b-45a5-900e-1d349a0945dc",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    },
+    {
+      "actionId": "eb3ef844-d942-4d0c-8def-176a511bb6ae",
+      "actionType": "NoClientAction",
+      "summary": "NoClientAction",
+      "targetPage": null,
+      "flowName": null
+    }
+  ],
+  "navigationProvenance": []
+}

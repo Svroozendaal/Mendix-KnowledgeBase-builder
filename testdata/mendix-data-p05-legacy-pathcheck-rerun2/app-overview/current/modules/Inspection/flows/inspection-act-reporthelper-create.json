@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "objectType": "flow",
+    "module": "Inspection",
+    "qualifiedName": "Inspection.ACT_ReportHelper_Create",
+    "stableId": "ee715edb-77a3-4a1b-a7d7-1c557d01867d",
+    "slug": "inspection-act-reporthelper-create",
+    "l0Path": "knowledge-base/modules/Inspection/flows/inspection-act-reporthelper-create.abstract.md",
+    "l1Path": "knowledge-base/modules/Inspection/flows/inspection-act-reporthelper-create.overview.md",
+    "l2Path": "app-overview/current/modules/Inspection/flows/inspection-act-reporthelper-create.json",
+    "l2Logical": "flow:Inspection.ACT_ReportHelper_Create",
+    "sourceRun": "cli_2026-03-18T20-56-46.385Z",
+    "aggregateJson": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.json",
+    "aggregatePseudo": "app-overview/cli_2026-03-18T20-56-46.385Z/modules/Inspection/flows.pseudo.txt",
+    "collectionIndex": "app-overview/current/modules/Inspection/flows/INDEX.json"
+  },
+  "flowId": "ee715edb-77a3-4a1b-a7d7-1c557d01867d",
+  "kind": "Microflow",
+  "qualifiedName": "Inspection.ACT_ReportHelper_Create",
+  "module": "Inspection",
+  "nodes": [
+    {
+      "nodeId": "1af0a6d0-4afa-4dca-b873-f321f632c9ed",
+      "nodeType": "ActionActivity",
+      "label": "CreateObjectAction: create Inspection.ReportHelper as NewReportHelper",
+      "detail": "create Inspection.ReportHelper as NewReportHelper",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "401f3810-c590-4392-aaf3-870581f95542",
+      "nodeType": "ActionActivity",
+      "label": "ShowPageAction: show page Inspection.Report_NewEdit",
+      "detail": "show page Inspection.Report_NewEdit",
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "11dc4737-7a24-412f-ba98-2419625505bc",
+      "nodeType": "EndEvent",
+      "label": "EndEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    },
+    {
+      "nodeId": "f92bf309-5e02-4758-835b-47ada2350fc5",
+      "nodeType": "StartEvent",
+      "label": "StartEvent",
+      "detail": null,
+      "loopOwnerId": null,
+      "isExecutable": true,
+      "calls": []
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "d44ee74d-361a-4253-be99-84c5ff8948bb",
+      "originNodeId": "f92bf309-5e02-4758-835b-47ada2350fc5",
+      "destinationNodeId": "1af0a6d0-4afa-4dca-b873-f321f632c9ed",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "373bf7c9-50c8-4bb1-ace2-9853c7fb5fdc",
+      "originNodeId": "1af0a6d0-4afa-4dca-b873-f321f632c9ed",
+      "destinationNodeId": "401f3810-c590-4392-aaf3-870581f95542",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    },
+    {
+      "edgeId": "fbbeeeb8-0108-4ced-84cf-68a41fd64909",
+      "originNodeId": "401f3810-c590-4392-aaf3-870581f95542",
+      "destinationNodeId": "11dc4737-7a24-412f-ba98-2419625505bc",
+      "condition": null,
+      "isErrorHandler": false,
+      "originConnectionIndex": 1,
+      "destinationConnectionIndex": 3
+    }
+  ],
+  "calls": [],
+  "startNodeIds": [
+    "f92bf309-5e02-4758-835b-47ada2350fc5"
+  ],
+  "primaryExecutionOrderNodeIds": [
+    "f92bf309-5e02-4758-835b-47ada2350fc5",
+    "1af0a6d0-4afa-4dca-b873-f321f632c9ed",
+    "401f3810-c590-4392-aaf3-870581f95542",
+    "11dc4737-7a24-412f-ba98-2419625505bc"
+  ],
+  "pseudocode": "FLOW Microflow: Inspection.ACT_ReportHelper_Create\r\nNODES=4; EDGES=3\r\n1. START\r\n2. ACTION CreateObjectAction: create Inspection.ReportHelper as NewReportHelper\r\n3. ACTION ShowPageAction: show page Inspection.Report_NewEdit\r\n4. END",
+  "retrieveActions": [],
+  "decisionActions": [],
+  "showPageActions": [
+    {
+      "nodeId": "401f3810-c590-4392-aaf3-870581f95542",
+      "summary": "ShowPageAction: show page Inspection.Report_NewEdit show page Inspection.Report_NewEdit",
+      "targetPage": "Inspection.Report_NewEdit"
+    }
+  ],
+  "mutationActions": [
+    {
+      "nodeId": "1af0a6d0-4afa-4dca-b873-f321f632c9ed",
+      "actionKind": "Create",
+      "summary": "CreateObjectAction: create Inspection.ReportHelper as NewReportHelper create Inspection.ReportHelper as NewReportHelper",
+      "entity": "Inspection.ReportHelper",
+      "memberSummary": null
+    }
+  ],
+  "callEdges": []
+}

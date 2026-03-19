@@ -1,0 +1,226 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Administration",
+                  "qualifiedName":  "Administration.SaveNewAccount",
+                  "stableId":  "137d9cb9-393b-40d1-b0d4-34ab92277360",
+                  "slug":  "administration-savenewaccount",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-savenewaccount.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Administration/flows/administration-savenewaccount.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Administration/flows/administration-savenewaccount.json",
+                  "l2Logical":  "flow:Administration.SaveNewAccount",
+                  "sourceRun":  "cli_2026-03-18T21-10-02.160Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T21-10-02.160Z/modules/marketplace/Administration/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T21-10-02.160Z/modules/marketplace/Administration/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Administration/flows/INDEX.json"
+              },
+    "flowId":  "137d9cb9-393b-40d1-b0d4-34ab92277360",
+    "kind":  "Microflow",
+    "qualifiedName":  "Administration.SaveNewAccount",
+    "module":  "Administration",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve over association $AccountPasswordData/Administration.AccountPasswordData_Account",
+                      "detail":  "RETRIEVE $Account FROM ASSOCIATION $AccountPasswordData/Administration.AccountPasswordData_Account",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$AccountPasswordData/NewPassword = $AccountPasswordData/ConfirmPassword",
+                      "detail":  "IF expression=$AccountPasswordData/NewPassword = $AccountPasswordData/ConfirmPassword",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "@caption \u0027Set password and save account\u0027 CHANGE $Account (Password = $AccountPasswordData/NewPassword)",
+                      "detail":  "@caption \u0027Set password and save account\u0027 CHANGE $Account (Password = $AccountPasswordData/NewPassword)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-delete",
+                      "nodeType":  "ActionActivity",
+                      "label":  "delete $AccountPasswordData",
+                      "detail":  "DELETE $AccountPasswordData",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-close",
+                      "nodeType":  "ActionActivity",
+                      "label":  "close page",
+                      "detail":  "CLOSE PAGE",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show message (The entered passwords do not match., type=Error)",
+                      "detail":  "SHOW MESSAGE \u0027The entered passwords do not match.\u0027 TYPE Error",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-219b08a9c5f9",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c5b7b5fcda46",
+                      "originNodeId":  "n002-retrieve",
+                      "destinationNodeId":  "n003-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-0f6401b1c059",
+                      "originNodeId":  "n003-decision",
+                      "destinationNodeId":  "n004-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-e150177413e6",
+                      "originNodeId":  "n004-action",
+                      "destinationNodeId":  "n005-delete",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-8cb74695b262",
+                      "originNodeId":  "n005-delete",
+                      "destinationNodeId":  "n006-close",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-24316410aea1",
+                      "originNodeId":  "n006-close",
+                      "destinationNodeId":  "n007-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-52947f2cdb5a",
+                      "originNodeId":  "n007-show",
+                      "destinationNodeId":  "n008-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-retrieve",
+                                         "n003-decision",
+                                         "n004-action",
+                                         "n005-delete",
+                                         "n006-close",
+                                         "n007-show",
+                                         "n008-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Administration.SaveNewAccount\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n002-retrieve",
+                                "summary":  "retrieve over association $AccountPasswordData/Administration.AccountPasswordData_Account",
+                                "sourceKind":  "Association",
+                                "entity":  null,
+                                "association":  "$AccountPasswordData/Administration.AccountPasswordData_Account",
+                                "xPath":  null
+                            }
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n003-decision",
+                                "summary":  "IF $AccountPasswordData/NewPassword = $AccountPasswordData/ConfirmPassword",
+                                "caption":  "IF",
+                                "expression":  "$AccountPasswordData/NewPassword = $AccountPasswordData/ConfirmPassword"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n005-delete",
+                                "actionKind":  "Delete",
+                                "summary":  "delete $AccountPasswordData",
+                                "entity":  "Administration.AccountPasswordData",
+                                "memberSummary":  null
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}

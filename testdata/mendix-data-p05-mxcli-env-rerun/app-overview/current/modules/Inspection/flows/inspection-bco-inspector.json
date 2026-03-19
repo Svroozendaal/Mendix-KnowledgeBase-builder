@@ -1,0 +1,205 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.BCo_Inspector",
+                  "stableId":  "fec16b8c-4bf1-4157-be70-ca001f0c5b56",
+                  "slug":  "inspection-bco-inspector",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-bco-inspector.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-bco-inspector.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-bco-inspector.json",
+                  "l2Logical":  "flow:Inspection.BCo_Inspector",
+                  "sourceRun":  "cli_2026-03-18T20-54-38.903Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-18T20-54-38.903Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "fec16b8c-4bf1-4157-be70-ca001f0c5b56",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.BCo_Inspector",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve from System.UserRole WHERE Name = \u0027Inspector\u0027 LIMIT 1",
+                      "detail":  "RETRIEVE $UserRole_Inspector FROM System.UserRole WHERE Name = \u0027Inspector\u0027 LIMIT 1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Inspector/Inspection.Inspector_Account = empty",
+                      "detail":  "IF expression=$Inspector/Inspection.Inspector_Account = empty",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Administration.Account (FullName = $Inspector/Name, Email = $Inspector/EmailAddress, Name = $Inspector/EmailAddress, Password = \u0027Mendix123456\u0027, UserRoles = $UserRole_Inspector, Inspector_Account = $Inspector)",
+                      "detail":  "$NewAccount = CREATE Administration.Account (FullName = $Inspector/Name, Email = $Inspector/EmailAddress, Name = $Inspector/EmailAddress, Password = \u0027Mendix123456\u0027, UserRoles = $UserRole_Inspector, Inspector_Account = $Inspector)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-return",
+                      "nodeType":  "ActionActivity",
+                      "label":  "return $true",
+                      "detail":  "RETURN $true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-return",
+                      "nodeType":  "ActionActivity",
+                      "label":  "return $true",
+                      "detail":  "RETURN $true",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-219b08a9c5f9",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c5b7b5fcda46",
+                      "originNodeId":  "n002-retrieve",
+                      "destinationNodeId":  "n003-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-32d2154c8b17",
+                      "originNodeId":  "n003-decision",
+                      "destinationNodeId":  "n004-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-87697543868d",
+                      "originNodeId":  "n004-create",
+                      "destinationNodeId":  "n005-return",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-e6b9873fbebc",
+                      "originNodeId":  "n005-return",
+                      "destinationNodeId":  "n006-return",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c0c71ae4cec4",
+                      "originNodeId":  "n006-return",
+                      "destinationNodeId":  "n007-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-retrieve",
+                                         "n003-decision",
+                                         "n004-create",
+                                         "n005-return",
+                                         "n006-return",
+                                         "n007-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.BCo_Inspector\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n002-retrieve",
+                                "summary":  "retrieve from System.UserRole WHERE Name = \u0027Inspector\u0027 LIMIT 1",
+                                "sourceKind":  "Database",
+                                "entity":  "System.UserRole",
+                                "association":  null,
+                                "xPath":  "Name = \u0027Inspector\u0027"
+                            }
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n003-decision",
+                                "summary":  "IF $Inspector/Inspection.Inspector_Account = empty",
+                                "caption":  "IF",
+                                "expression":  "$Inspector/Inspection.Inspector_Account = empty"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n004-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Administration.Account (FullName = $Inspector/Name, Email = $Inspector/EmailAddress, Name = $Inspector/EmailAddress, Password = \u0027Mendix123456\u0027, UserRoles = $UserRole_Inspector, Inspector_Account = $Inspector)",
+                                "entity":  "Administration.Account",
+                                "memberSummary":  "(FullName = $Inspector/Name, Email = $Inspector/EmailAddress, Name = $Inspector/EmailAddress, Password = \u0027Mendix123456\u0027, UserRoles = $UserRole_Inspector, Inspector_Account = $Inspector)"
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}
