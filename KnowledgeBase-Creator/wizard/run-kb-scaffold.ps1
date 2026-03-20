@@ -100,7 +100,7 @@ function Get-ModuleRelativePath {
     )
 
     $base = if ([string]$Module.Category -eq "Marketplace") {
-        "modules/_marktplace/$($Module.Name)"
+        "modules/_marketplace/$($Module.Name)"
     } else {
         "modules/$($Module.Name)"
     }
@@ -121,24 +121,28 @@ function Get-ModulesFromKbRoot {
         return @()
     }
 
-    foreach ($dir in @(Get-ChildItem $modulesDir -Directory | Where-Object { $_.Name -ne "_marktplace" } | Sort-Object Name)) {
+    foreach ($dir in @(Get-ChildItem $modulesDir -Directory | Where-Object { @("_marketplace", "_marktplace") -notcontains $_.Name } | Sort-Object Name)) {
         $modules.Add([pscustomobject]@{
             Name = $dir.Name
             Category = "Unknown"
         }) | Out-Null
     }
 
-    $marketplaceDir = Join-Path $modulesDir "_marktplace"
-    if (Test-Path $marketplaceDir -PathType Container) {
-        foreach ($dir in @(Get-ChildItem $marketplaceDir -Directory | Sort-Object Name)) {
-            $modules.Add([pscustomobject]@{
-                Name = $dir.Name
-                Category = "Marketplace"
-            }) | Out-Null
+    foreach ($marketplaceDir in @(
+            (Join-Path $modulesDir "_marketplace"),
+            (Join-Path $modulesDir "_marktplace")
+        )) {
+        if (Test-Path $marketplaceDir -PathType Container) {
+            foreach ($dir in @(Get-ChildItem $marketplaceDir -Directory | Sort-Object Name)) {
+                $modules.Add([pscustomobject]@{
+                    Name = $dir.Name
+                    Category = "Marketplace"
+                }) | Out-Null
+            }
         }
     }
 
-    return @($modules | Sort-Object Name)
+    return @($modules | Sort-Object Name, Category -Unique)
 }
 
 function Get-DisplayPath {
@@ -314,7 +318,7 @@ $expectedModuleDirectories = @(
 ) | ForEach-Object { [System.IO.Path]::GetFullPath($_) }
 $modulesRoot = Join-Path $kbRoot "modules"
 if (Test-Path $modulesRoot -PathType Container) {
-    $existingModuleDirs = Get-ChildItem -Path $modulesRoot -Directory -Recurse | Where-Object { $_.FullName -ne (Join-Path $modulesRoot "_marktplace") }
+    $existingModuleDirs = Get-ChildItem -Path $modulesRoot -Directory -Recurse | Where-Object { @("_marketplace", "_marktplace") -notcontains $_.Name }
     foreach ($dir in @($existingModuleDirs | Sort-Object FullName -Descending)) {
         if ($expectedModuleDirectories -notcontains $dir.FullName) {
             Remove-Item -Path $dir.FullName -Recurse -Force

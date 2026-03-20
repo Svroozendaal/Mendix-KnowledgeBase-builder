@@ -567,18 +567,32 @@ internal sealed class WizardForm : Form
 
             if (exitCode == 2)
             {
-                AppendLog("Claude CLI not found. Install it to use AI enrichment.");
-                MessageBox.Show(
-                    this,
-                    $"Claude CLI not found.{Environment.NewLine}{Environment.NewLine}Install with:{Environment.NewLine}npm install -g @anthropic-ai/claude-code{Environment.NewLine}{Environment.NewLine}Then authenticate with:{Environment.NewLine}claude login",
-                    "Claude CLI required",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                if (aiSettings.Provider == AiProvider.CodexCli)
+                {
+                    AppendLog("Codex CLI not found. Install it to use AI enrichment.");
+                    MessageBox.Show(
+                        this,
+                        $"Codex CLI not found.{Environment.NewLine}{Environment.NewLine}Install with:{Environment.NewLine}npm install -g @openai/codex",
+                        "Codex CLI required",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
+                else
+                {
+                    AppendLog("Claude CLI not found. Install it to use AI enrichment.");
+                    MessageBox.Show(
+                        this,
+                        $"Claude CLI not found.{Environment.NewLine}{Environment.NewLine}Install with:{Environment.NewLine}npm install -g @anthropic-ai/claude-code{Environment.NewLine}{Environment.NewLine}Then authenticate with:{Environment.NewLine}claude login",
+                        "Claude CLI required",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
                 return;
             }
 
-            if (exitCode == 3)
+            if (exitCode == 3 && aiSettings.Provider != AiProvider.CodexCli)
             {
                 AppendLog("Claude CLI authentication failed.");
                 MessageBox.Show(
@@ -694,7 +708,14 @@ internal sealed class WizardForm : Form
 
             if (exitCode == 2)
             {
-                AppendLog("Claude CLI not found.");
+                if (aiSettings.Provider == AiProvider.CodexCli)
+                {
+                    AppendLog("Codex CLI not found. Install with: npm install -g @openai/codex");
+                }
+                else
+                {
+                    AppendLog("Claude CLI not found. Install with: npm install -g @anthropic-ai/claude-code");
+                }
                 return;
             }
 

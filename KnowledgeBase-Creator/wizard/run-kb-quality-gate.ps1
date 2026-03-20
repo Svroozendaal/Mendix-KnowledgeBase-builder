@@ -417,7 +417,7 @@ function Get-KbModuleDirectories {
         return @()
     }
 
-    foreach ($dir in @(Get-ChildItem $modulesDir -Directory | Where-Object { $_.Name -ne "_marktplace" } | Sort-Object Name)) {
+    foreach ($dir in @(Get-ChildItem $modulesDir -Directory | Where-Object { @("_marketplace", "_marktplace") -notcontains $_.Name } | Sort-Object Name)) {
         $result.Add([pscustomobject]@{
             Name = $dir.Name
             FullName = $dir.FullName
@@ -425,18 +425,22 @@ function Get-KbModuleDirectories {
         }) | Out-Null
     }
 
-    $marketplaceDir = Join-Path $modulesDir "_marktplace"
-    if (Test-Path $marketplaceDir -PathType Container) {
-        foreach ($dir in @(Get-ChildItem $marketplaceDir -Directory | Sort-Object Name)) {
-            $result.Add([pscustomobject]@{
-                Name = $dir.Name
-                FullName = $dir.FullName
-                Category = "Marketplace"
-            }) | Out-Null
+    foreach ($marketplaceDir in @(
+            (Join-Path $modulesDir "_marketplace"),
+            (Join-Path $modulesDir "_marktplace")
+        )) {
+        if (Test-Path $marketplaceDir -PathType Container) {
+            foreach ($dir in @(Get-ChildItem $marketplaceDir -Directory | Sort-Object Name)) {
+                $result.Add([pscustomobject]@{
+                    Name = $dir.Name
+                    FullName = $dir.FullName
+                    Category = "Marketplace"
+                }) | Out-Null
+            }
         }
     }
 
-    return @($result | Sort-Object Name)
+    return @($result | Sort-Object Name, Category -Unique)
 }
 
 # Root and app-level files
@@ -791,6 +795,7 @@ if (Test-Path $byEntityCrossFile -PathType Leaf) {
                 $entityModule = $entityParts[0]
                 $domainCandidates = @(
                     (Join-Path (Join-Path $modulesDir $entityModule) "DOMAIN.md"),
+                    (Join-Path (Join-Path (Join-Path $modulesDir "_marketplace") $entityModule) "DOMAIN.md"),
                     (Join-Path (Join-Path (Join-Path $modulesDir "_marktplace") $entityModule) "DOMAIN.md")
                 )
                 $domainFile = $domainCandidates | Where-Object { Test-Path $_ -PathType Leaf } | Select-Object -First 1

@@ -1,6 +1,0 @@
-# Pages: Atlas_Core
-Pages: 0, Snippets: 2
-
-## Snippets
-- SNIPPET Atlas_Core.FeedbackWidget (Web)
-- SNIPPET Atlas_Core.LanguageSelectorWidget (Web)

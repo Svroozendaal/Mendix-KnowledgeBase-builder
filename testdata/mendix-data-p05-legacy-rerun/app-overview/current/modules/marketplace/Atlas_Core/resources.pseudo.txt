@@ -1,2 +1,0 @@
-# Resources: Atlas_Core
-Constants: 0, Scheduled Events: 0

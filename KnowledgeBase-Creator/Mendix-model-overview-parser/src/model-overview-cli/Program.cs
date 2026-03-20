@@ -534,7 +534,7 @@ static string GetModuleExportRelativePath(OverviewModule module)
 static string GetModuleKnowledgeBaseRelativePath(OverviewModule module)
 {
     return string.Equals(module.Category, "Marketplace", StringComparison.OrdinalIgnoreCase)
-        ? Path.Combine("knowledge-base", "modules", "_marktplace", SanitizeToken(module.Module))
+        ? Path.Combine("knowledge-base", "modules", "_marketplace", SanitizeToken(module.Module))
         : Path.Combine("knowledge-base", "modules", SanitizeToken(module.Module));
 }
 

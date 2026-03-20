@@ -1,0 +1,8 @@
+﻿Target KB root: C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data\knowledge-base
+
+app\APP_OVERVIEW.md <= app\APP_OVERVIEW.md
+app\MODULE_LANDSCAPE.md <= app\MODULE_LANDSCAPE.md
+app\SECURITY.md <= app\SECURITY.md
+app\CALL_GRAPH.md <= app\CALL_GRAPH.md
+modules\Inspection\INTERPRETATION.md <= modules\Inspection\INTERPRETATION.md
+modules\Notification\INTERPRETATION.md <= modules\Notification\INTERPRETATION.md

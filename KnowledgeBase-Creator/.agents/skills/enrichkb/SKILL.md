@@ -51,18 +51,29 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
    - `modules/<Name>/PAGES.md` — page inventory with L0/L1/L2 links
    - `modules/<Name>/pages/INDEX.abstract.md` — collection L0 for page triage
    - Individual L1 page overviews (`pages/<slug>.overview.md`) as needed
-   - `modules/<Name>/INTERPRETATION.md` — the only writable file
+   - `modules/<Name>/INTERPRETATION.md` — writable module narrative file
    - `lastRunFolder/modules/<Name>/domain-model.pseudo.txt` — prefer targeted reads for large files
    - `lastRunFolder/modules/<Name>/flows.pseudo.txt` — prefer targeted reads for large files
    - `lastRunFolder/modules/<Name>/pages.pseudo.txt` — prefer targeted reads for large files
    - `lastRunFolder/modules/<Name>/resources.pseudo.txt`
-5. Write module narrative only to `modules/<Name>/INTERPRETATION.md`.
+5. Write module narrative only to `modules/<Name>/INTERPRETATION.md` (app-level narrative writes are handled in step 3).
 6. Resolve items in `_reports/UNKNOWN_TODO.md` when the source run folder provides enough evidence.
 7. Re-run scaffold validation and quality gate from the creator package.
 
 ## Guardrails
 
 - Never rerun dump, parser, scaffold, or compose in this command.
+- `/enrichkb` is an explicitly authorised write workflow:
+  - app-level narrative writes are allowed in:
+    - `app/APP_OVERVIEW.md`
+    - `app/MODULE_LANDSCAPE.md`
+    - `app/SECURITY.md`
+    - `app/CALL_GRAPH.md`
+  - module-level narrative writes are allowed in:
+    - `modules/<Name>/INTERPRETATION.md`
+  - `_reports/UNKNOWN_TODO.md` may be updated when resolving items.
+- Generic KB "read-only" rules apply to normal interpretation only; they do not block `/enrichkb`.
+- Reading source data in `lastRunFolder` is allowed for this workflow.
 - Never remove export-backed data.
 - For module docs, write only inside `INTERPRETATION.md`:
   - `## Module Purpose`
@@ -76,7 +87,9 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
 - Use collection abstracts (`INDEX.abstract.md`) and L0 files for triage before reading full L1 overviews.
 - Do not preload all custom-module pseudo exports in one pass.
 - Prefer heading-targeted reads/searches for large files instead of full raw-file loads.
-- Inspect detailed quality-gate issues from `_reports/quality-gate-latest.md` or by rerunning with `-ShowAllIssues`.
+- Do not parse wizard/terminal run logs for enrichment content.
+- Do not read `CURRENT_RUN.md`, console transcripts, or validation reports (`quality-gate-latest.*`, `l2-contract-debt.*`, scaffold output) during normal enrichment.
+- Read validation reports only when diagnosing a specific failed post-enrichment validation.
 
 ## Completion report
 

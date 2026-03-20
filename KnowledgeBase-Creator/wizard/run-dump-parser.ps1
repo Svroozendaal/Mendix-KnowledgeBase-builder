@@ -315,7 +315,7 @@ function Get-ModuleRelativePath {
     )
 
     $base = if ([string]$Module.Category -eq "Marketplace") {
-        "modules/_marktplace/$($Module.Name)"
+        "modules/_marketplace/$($Module.Name)"
     } else {
         "modules/$($Module.Name)"
     }

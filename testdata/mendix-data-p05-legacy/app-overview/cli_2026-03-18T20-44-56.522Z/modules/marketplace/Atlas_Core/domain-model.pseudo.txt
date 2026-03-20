@@ -1,2 +1,0 @@
-# Domain Model: Atlas_Core
-Entities: 0, Associations: 0, Enumerations: 0

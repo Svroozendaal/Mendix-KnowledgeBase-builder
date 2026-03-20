@@ -582,6 +582,7 @@ internal static class WizardRuntime
         }
 
         return Directory.GetDirectories(appOverviewRoot)
+            .Where(d => !string.Equals(Path.GetFileName(d), "current", StringComparison.OrdinalIgnoreCase))
             .Where(d => File.Exists(Path.Combine(d, "manifest.json")))
             .OrderByDescending(d => new DirectoryInfo(d).LastWriteTimeUtc)
             .FirstOrDefault();

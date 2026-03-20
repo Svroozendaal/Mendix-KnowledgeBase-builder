@@ -1544,11 +1544,11 @@ Confidence: Export-backed
 
 - Start at [ROUTING.md](ROUTING.md), then open a route index or module collection abstract first.
 - Use [app/APP_OVERVIEW.md](app/APP_OVERVIEW.md) for app mission and key behaviours.
-- Use ``modules/<Module>/`` for app and system modules, and ``modules/_marktplace/<Module>/`` for marketplace modules.
+- Use ``modules/<Module>/`` for app and system modules, and ``modules/_marketplace/<Module>/`` for marketplace modules.
 - Use ``routes/`` files for cross-cut indexes by entity, page, and flow.
 - Open collection abstracts first, then object overview files second.
 
-**RAW DATA ACCESS BLOCKED.** Do NOT open files in ``app-overview/`` or ``dumps/`` without explicit user approval. If the KB cannot answer a question, stop and ask the user before escalating to raw data — it costs significantly more tokens and time.
+**RAW DATA ACCESS BLOCKED.** Do NOT open files in ``app-overview/`` or ``dumps/`` without explicit user approval. If the KB cannot answer a question, stop and ask the user before escalating to raw data - it costs significantly more tokens and time.
 
 Confidence: Export-backed
 
@@ -1585,7 +1585,10 @@ Approval is still required before:
 ## KB Commands
 
 - This KB remains read-only for normal interpretation.
-- ``/enrichkb`` is the explicit in-place AI enrichment command.
+- Authorised write workflows are:
+  - ``/enrichkb`` for in-place narrative enrichment
+  - explicit creator-approved live KB improvement runs
+- In authorised write workflows, KB narrative files may be updated in place.
 - ``/initkb`` remains available as a compatibility entry point and rebuild handoff.
 - Both commands use ``_sources/creator-link.json`` to find the linked ``lastRunFolder``.
 - If the source run folder is missing, ``/initkb`` should fall back to a creator-side rebuild handoff.
@@ -1883,7 +1886,7 @@ $appMissionSummary = "The application centres on the custom modules $((Join-OrDe
 
 $quickstartPath = Join-Path $kbRoot "QUICKSTART.md"
 $quickstartContent = @"
-# Quick Start — $AppName
+# Quick Start - $AppName
 
 Generated at: $generatedAtUtc | Format: $kbFormatVersion | Enriched: $enrichedStatus
 
@@ -1913,7 +1916,7 @@ $($qsRoleSummary -join "`n")
 | Understand a module | ``modules/<Name>/README.md`` |
 | See cross-module dependencies | ``routes/cross-module.md`` |
 | Check security | ``app/SECURITY.md`` |
-| Plan a feature | ``/develop`` → ``.agents/agents/DEVELOPMENT_TEAM.md`` |
+| Plan a feature | ``/develop`` -> ``.agents/agents/DEVELOPMENT_TEAM.md`` |
 
 ## Agent Routing
 
@@ -1929,7 +1932,8 @@ $($qsRoleSummary -join "`n")
 
 ## Scope Rules
 
-- This KB is **read-only**. Exception: ``/enrichkb`` can add AI narrative.
+- This KB is **read-only** for normal interpretation.
+- Authorised write workflows are ``/enrichkb`` and explicit creator-approved live KB improvement runs.
 - Only cite what is in the KB. Do not fabricate.
 - Only target **custom modules** for development. Marketplace/system modules are reference-only.
 - Use UK English.
@@ -3065,7 +3069,7 @@ $keywordRows = New-Object System.Collections.Generic.List[string]
 foreach ($kw in @($keywordMap.Keys | Sort-Object)) {
     $entry = $keywordMap[$kw]
 
-    # Entity links → DOMAIN.md#entity-anchor
+    # Entity links -> DOMAIN.md#entity-anchor
     $entityLinks = @($entry.Entities | Sort-Object | ForEach-Object {
         $eName = $_
         if ($eName -match "\(enum\)$") {
@@ -3084,7 +3088,7 @@ foreach ($kw in @($keywordMap.Keys | Sort-Object)) {
     })
     $entities = if ($entityLinks.Count -gt 0) { $entityLinks -join ", " } else { "" }
 
-    # Module links → README.md
+    # Module links -> README.md
     $moduleLinks = @($entry.Modules | Sort-Object | ForEach-Object {
         $mName = $_
         if ($moduleDocPathsByName.ContainsKey($mName)) {
@@ -3097,7 +3101,7 @@ foreach ($kw in @($keywordMap.Keys | Sort-Object)) {
     })
     $modules = if ($moduleLinks.Count -gt 0) { $moduleLinks -join ", " } else { "" }
 
-    # Page links → page abstract
+    # Page links -> page abstract
     $pageLinks = @($entry.Pages | Sort-Object | ForEach-Object {
         $pName = $_
         $pFact = $pageFacts | Where-Object { $_.qualifiedName -eq $pName } | Select-Object -First 1
@@ -3111,7 +3115,7 @@ foreach ($kw in @($keywordMap.Keys | Sort-Object)) {
     })
     $pages = if ($pageLinks.Count -gt 0) { $pageLinks -join ", " } else { "" }
 
-    # Flow links → flow overview, Tier 1 first
+    # Flow links -> flow overview, Tier 1 first
     $tier1Flows = @($entry.Flows | Where-Object {
         $f = $flowFacts[$_]
         $f -and $f.tier -eq 1
@@ -3149,7 +3153,7 @@ This file maps business keywords to KB artefacts. Use it as the first step in fe
 1. Extract keywords from the user's question.
 2. Look up each keyword in the table below.
 3. Follow the links to the relevant KB files.
-4. Read those files for detail — do not scan unrelated files.
+4. Read those files for detail - do not scan unrelated files.
 
 ## Index
 
@@ -3340,3 +3344,4 @@ Write-Host "Run folder: $RunFolder"
 Write-Host "Output: $kbRoot"
 Write-Host "Unknown TODO report: $unknownTodoReportPath"
 Write-Host "L2 contract debt report: $($l2DebtReport.MarkdownPath)"
+

@@ -27,6 +27,7 @@ Your job is to be the single point of contact. The developer talks to you; you t
 | Planner | `PLANNER.md` | Phase 4: Detailed Solution | Sequence and structure the work |
 | Todo Maker | `TODO_MAKER.md` | Phase 7: Implementation Plan | Break the plan into actionable tasks |
 | Mendix Syntax | `MENDIX_SYNTAX.md` | Phase 7: Implementation Plan | Enrich tasks with precise Mendix syntax |
+| Mendix CLI Executor | `MENDIX_CLI_EXECUTOR.md` | Optional Phase 8: Apply Plan | Apply approved plans to the linked `.mpr` via gated `mxcli` execution |
 | KB Flow Tracer | `KB_FLOW_TRACER.md` | Phase 2: Investigation (when needed) | Trace flow chains touched by the story |
 | Best Practice Recommender | `BEST_PRACTICE_RECOMMENDER.md` | Phase 4: Detailed Solution (when needed) | Check proposed solution against conventions |
 
@@ -194,6 +195,18 @@ The workflow has 7 phases with approval gates. Each phase follows a strict patte
    - Derive the slug from the user story title: lowercase, spaces replaced with hyphens, special characters removed, max 50 characters.
    - If `_plans/` does not exist, create it.
 10. Present the saved plan location to the developer.
+
+---
+
+### Optional Phase 8: Apply Plan (`/applyplan`)
+
+1. This phase is **not automatic**. Run only when the developer explicitly asks to apply the approved plan.
+2. Handoff to **Mendix CLI Executor** (`MENDIX_CLI_EXECUTOR.md`) and use the `/applyplan` skill.
+3. Keep the Development Team role orchestration-only:
+   - confirm the exact plan file (`_plans/STORY_<slug>.md`),
+   - confirm developer intent to execute,
+   - delegate execution workflow to Mendix CLI Executor.
+4. Do not run `mxcli exec` from this agent.
 
 ## Plan File Format
 

@@ -1,5 +1,0 @@
-# Resources: Notification
-Constants: 0, Scheduled Events: 1
-
-## Scheduled Events
-SCHEDULED_EVENT Notification.SE_Notification_SendToInspectors

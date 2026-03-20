@@ -5,9 +5,15 @@ Use this file with `.agents/AGENTS.md`.
 
 ## Scope Reminder
 
-This workflow is for reading and interpreting a pre-built knowledge base. The one controlled exception is `/enrichkb`, which may enrich this KB in place by reading the linked app-overview run folder from `_sources/creator-link.json`. `/initkb` remains a compatibility entry point and should behave the same when no rebuild is needed. Neither command may rerun pipelines or access Mendix tooling.
+This workflow is for reading and interpreting a pre-built knowledge base. Controlled exceptions are `/enrichkb`, `/initkb`, and `/applyplan`.
+
+- `/enrichkb` may enrich this KB in place by reading the linked app-overview run folder from `_sources/creator-link.json`.
+- `/initkb` remains a compatibility entry point and should behave the same when no rebuild is needed.
+- `/applyplan` is an explicit post-plan execution flow that may use gated `mxcli` commands against the linked `.mpr`.
 
 `/develop` is another controlled exception: it may create implementation plan files in the `_plans/` folder at KB root. It does not modify any existing KB content.
+
+`/applyplan` is another controlled exception: it may create execution artefacts in `_plans/_execution/` and apply approved plan batches to the linked `.mpr` only after preview and explicit confirmation.
 
 ## Workflow
 
@@ -45,12 +51,13 @@ Before answering any question about the application:
 | "What scheduled events exist?" | `modules/<module>/RESOURCES.md` or `modules/_marktplace/<module>/RESOURCES.md` | Iterate all modules |
 | "How should I build X?" | Relevant `modules/*/FLOWS.md` and `modules/_marktplace/*/FLOWS.md` | Existing patterns, then recommend |
 | "Interpret this user story" | `app/SECURITY.md` | `routes/by-entity.md`, `routes/by-flow.md` |
-| "How does feature X work?" | `routes/by-flow.md`, `routes/by-entity.md` (keyword search) | `modules/<module>/README.md`, `INTERPRETATION.md` → KB Feature Interpreter |
-| "What features does this app have?" | `app/APP_OVERVIEW.md`, `app/MODULE_LANDSCAPE.md` | `modules/*/README.md` Capability Maps → KB Feature Interpreter |
-| "Trace flow X" / "What happens when X runs?" | `routes/by-flow.md` (locate flow) | L1 overview → `flow-chain-tracing` skill → KB Flow Tracer |
-| "What is affected if I change X?" | `routes/by-flow.md` or `routes/by-entity.md` | `impact-analysis` skill → KB Analyst |
-| "Explain the X process" | `routes/by-flow.md` (keyword search) | L0/L1 overviews, `INTERPRETATION.md` → KB Feature Interpreter |
+| "How does feature X work?" | `routes/by-flow.md`, `routes/by-entity.md` (keyword search) | `modules/<module>/README.md`, `INTERPRETATION.md` -> KB Feature Interpreter |
+| "What features does this app have?" | `app/APP_OVERVIEW.md`, `app/MODULE_LANDSCAPE.md` | `modules/*/README.md` Capability Maps -> KB Feature Interpreter |
+| "Trace flow X" / "What happens when X runs?" | `routes/by-flow.md` (locate flow) | L1 overview -> `flow-chain-tracing` skill -> KB Flow Tracer |
+| "What is affected if I change X?" | `routes/by-flow.md` or `routes/by-entity.md` | `impact-analysis` skill -> KB Analyst |
+| "Explain the X process" | `routes/by-flow.md` (keyword search) | L0/L1 overviews, `INTERPRETATION.md` -> KB Feature Interpreter |
 | "Implement this user story" / `/develop` | `.agents/agents/DEVELOPMENT_TEAM.md` | Full 7-phase orchestrated workflow |
+| "Apply approved plan" / `/applyplan` | `.agents/agents/MENDIX_CLI_EXECUTOR.md` | Preview-gated, phase-batched `mxcli` execution workflow |
 
 ## Feature-Level Query Workflow
 
@@ -91,15 +98,45 @@ When a user asks about the blast radius of a change:
 When a developer provides a user story or feature request:
 
 1. Route to **Development Team**.
-2. Phase 1 — **Intake**: Development Team delegates to **User Story Interpreter** to parse and map the story. Asks clarifying questions about where to develop.
-3. Phase 2 — **Investigation**: Delegates to **KB Feature Interpreter** (with `feature-search`) and optionally **KB Flow Tracer** (with `flow-chain-tracing`) and **KB Analyst** to find related elements.
-4. Phase 3 — **High-Level Solution**: Delegates to **Mendix Developer** for a conceptual, functional solution. Flags high-impact flows. Iterates with developer.
-5. Phase 4 — **Detailed Solution**: Delegates to **Mendix Developer** and **Planner** for a structured conceptual design. Optionally consults **Best Practice Recommender**.
-6. Phase 5 — **Impact Analysis**: Delegates to **KB Analyst** (with `impact-analysis`) for full blast radius assessment.
-7. Phase 6 — **Security Review**: Delegates to **KB Security Reviewer** for access rules, role assignments, and XPath constraints.
-8. Phase 7 — **Implementation Plan**: Delegates to **Todo Maker** for single-artifact task breakdown. Saves to `_plans/STORY_<slug>.md`.
+2. Phase 1 - **Intake**: Development Team delegates to **User Story Interpreter** to parse and map the story. Asks clarifying questions about where to develop.
+3. Phase 2 - **Investigation**: Delegates to **KB Feature Interpreter** (with `feature-search`) and optionally **KB Flow Tracer** (with `flow-chain-tracing`) and **KB Analyst** to find related elements.
+4. Phase 3 - **High-Level Solution**: Delegates to **Mendix Developer** for a conceptual, functional solution. Flags high-impact flows. Iterates with developer.
+5. Phase 4 - **Detailed Solution**: Delegates to **Mendix Developer** and **Planner** for a structured conceptual design. Optionally consults **Best Practice Recommender**.
+6. Phase 5 - **Impact Analysis**: Delegates to **KB Analyst** (with `impact-analysis`) for full blast radius assessment.
+7. Phase 6 - **Security Review**: Delegates to **KB Security Reviewer** for access rules, role assignments, and XPath constraints.
+8. Phase 7 - **Implementation Plan**: Delegates to **Todo Maker** for single-artifact task breakdown. Saves to `_plans/STORY_<slug>.md`.
+9. Optional handoff: when the developer explicitly asks to apply the approved plan, hand off to **Mendix CLI Executor** via `/applyplan`.
 
-Each phase has an approval gate. The developer must confirm before the next phase begins. For small-scope stories, phases 3+4 and 5+6 may be bundled.
+Each phase has an approval gate. The developer must confirm before the next phase begins. For small-scope stories, phases 3+4 and phases 5+6 may be bundled.
+
+## ApplyPlan Workflow (`/applyplan`)
+
+When a developer explicitly asks to apply an approved implementation plan:
+
+1. Route to **Mendix CLI Executor**.
+2. Resolve plan path from `_plans/STORY_<slug>.md`.
+3. Resolve `.mpr` from `_sources/creator-link.json -> mprPath`.
+4. Run preflight checks:
+   - `mxcli --version`
+   - `mprPath` exists and is `.mpr`
+   - app-local assets exist: `.ai-context/skills` and `.claude/commands`
+5. Build phase-batched scripts under `_plans/_execution/STORY_<slug>/`:
+   - Foundation
+   - Logic
+   - UI
+   - Security
+   - Integration
+6. Before each batch execution, run:
+   - `mxcli check <batch>.mdl`
+   - `mxcli check <batch>.mdl -p <app.mpr> --references`
+   - `mxcli diff -p <app.mpr> <batch>.mdl --format struct`
+7. Present preview and require explicit developer confirmation before each `mxcli exec`.
+8. Apply confirmed batches using `mxcli exec <batch>.mdl -p <app.mpr>`.
+9. Run quick validation after apply:
+   - `mxcli docker check -p <app.mpr>`
+   - `mxcli lint -p <app.mpr> --format json`
+   - `mxcli report -p <app.mpr> --format json`
+10. Save final execution report (PASS/FAIL by phase and validation step) under `_plans/_execution/STORY_<slug>/`.
 
 ## Out-of-Scope Requests
 
@@ -108,8 +145,8 @@ If a user asks you to do any of the following, decline and explain:
 - "Add the AI narrative layer to this KB" -> Use `/enrichkb` to enrich the current KB in place when creator-link metadata and `lastRunFolder` are present
 - "Regenerate the KB from source" -> Use `/initkb` to delegate back to the KnowledgeBase Creator package when creator-link metadata is present; otherwise tell them to rerun the creator pipeline externally
 - "Run the dump/parser/scaffold" -> This is handled by the pipeline, not by agents
-- "Open/modify the .mpr file" -> Agents cannot access Mendix Studio Pro or model files
-- "Update the KB files" -> Only `/enrichkb` or the compatibility entry `/initkb` may add AI enrichment. All other direct KB mutations are out of scope
+- "Open/modify the .mpr file" -> Only `/applyplan` may do this through the gated Mendix CLI Executor workflow
+- "Update the KB files" -> Only `/enrichkb`, `/initkb`, or `_plans/` outputs from `/develop` and `/applyplan` are allowed
 - "Connect to an API / database" -> Agents only read local KB markdown files
 
 ## Definition of Done

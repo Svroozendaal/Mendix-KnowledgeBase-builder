@@ -48,7 +48,9 @@ Approval is still required before:
 - This KB remains read-only for normal interpretation.
 - `/enrichkb` is the explicit in-place AI enrichment command.
 - `/initkb` remains available as a compatibility entry point and rebuild handoff.
-- Both commands use `_sources/creator-link.json` to find the linked `lastRunFolder`.
+- `/applyplan` is the explicit plan-execution command for approved `_plans/STORY_<slug>.md` files.
+- `/applyplan` must resolve `.mpr` from `_sources/creator-link.json -> mprPath`, run preview checks first, and require explicit confirmation before `mxcli exec`.
+- All linkage-aware commands use `_sources/creator-link.json` as their source of truth.
 - If the source run folder is missing, `/initkb` should fall back to a creator-side rebuild handoff.
 
 ## Confidence levels

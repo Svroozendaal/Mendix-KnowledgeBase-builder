@@ -40,6 +40,12 @@ This matrix records the real installed `mxcli` contract that the prompt track is
 | Catalog pages | `mxcli -p <app.mpr> -c "SELECT ModuleName, Name, QualifiedName FROM CATALOG.pages WHERE ModuleName='Atlas_Web_Content' AND Name='Tablet_SelectWithTemplateGrid_Select'"` | table | Validated with caveat | `QualifiedName` can be truncated (`...`) while `Name` remains complete. |
 | Full catalog refresh | `mxcli -p <app.mpr> -c "REFRESH CATALOG FULL; SELECT SourceType, TargetType, RefKind FROM CATALOG.refs LIMIT 5"` | table | Validated | Baseline confirmed `retrieve`, `show_page`, `create`, and `call` ref kinds. |
 | Project security | `mxcli -p <app.mpr> -c "SHOW PROJECT SECURITY"` | text | Validated | Works through `-c`. |
+| Script syntax check | `mxcli check <script.mdl>` | text | Validated (interface) | Command contract validated with `mxcli check --help`. |
+| Script reference check | `mxcli check <script.mdl> -p <app.mpr> --references` | text | Validated (interface) | Required pre-exec gate for `/applyplan`. |
+| Script diff preview | `mxcli diff -p <app.mpr> <script.mdl> --format struct` | text | Validated (interface) | Required preview gate before any mutation. |
+| Script execution | `mxcli exec <script.mdl> -p <app.mpr>` | text | Validated (interface) | Mutation command; must be confirmation-gated. |
+| Project validation | `mxcli docker check -p <app.mpr>` | text | Validated (interface) | Required quick validation after apply. |
+| Local change diff | `mxcli diff-local -p <app.mpr> --format struct` | text | Validated (interface) | Optional evidence step; requires MPR v2 + git tracked `mprcontents`. |
 
 ## Rejected Commands or Modes
 
@@ -106,3 +112,22 @@ Prompt 07 defines a read-only `mxcli-live` escalation set for KB reader workflow
 9. `mxcli -p <app.mpr> -c "SHOW PROJECT SECURITY"`
 
 Commands outside this allowlist remain approval-gated for reader workflows.
+
+## ApplyPlan Mutation Command Set
+
+Prompt 08 defines a separate `/applyplan` execution flow for approved `_plans/STORY_<slug>.md` plans. The command set is:
+
+1. `mxcli check <batch>.mdl`
+2. `mxcli check <batch>.mdl -p <app.mpr> --references`
+3. `mxcli diff -p <app.mpr> <batch>.mdl --format struct`
+4. `mxcli exec <batch>.mdl -p <app.mpr>`
+5. `mxcli docker check -p <app.mpr>`
+6. `mxcli lint -p <app.mpr> --format json`
+7. `mxcli report -p <app.mpr> --format json`
+8. Optional: `mxcli diff-local -p <app.mpr> --format struct`
+
+Execution guardrails:
+
+- `/develop` remains planning-only; `/applyplan` is separate.
+- `mxcli exec` is never auto-run; explicit user confirmation is required after diff preview.
+- Execution artefacts must be written under `_plans/_execution/STORY_<slug>/`.

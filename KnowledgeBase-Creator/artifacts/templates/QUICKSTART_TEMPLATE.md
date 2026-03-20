@@ -28,6 +28,7 @@ Generated at: {{GeneratedAt}} | Format: {{FormatVersion}} | Enriched: {{Enriched
 | See cross-module dependencies | `routes/cross-module.md` |
 | Check security | `app/SECURITY.md` |
 | Plan a feature | `/develop` → `.agents/agents/DEVELOPMENT_TEAM.md` |
+| Apply an approved plan | `/applyplan` -> `.agents/agents/MENDIX_CLI_EXECUTOR.md` |
 
 ## Agent Routing
 
@@ -43,7 +44,7 @@ Generated at: {{GeneratedAt}} | Format: {{FormatVersion}} | Enriched: {{Enriched
 
 ## Scope Rules
 
-- This KB is **read-only**. Exception: `/enrichkb` can add AI narrative.
+- This KB is **read-only** for normal interpretation. Controlled exceptions: `/enrichkb`, `/initkb`, `/applyplan`.
 - Only cite what is in the KB. Do not fabricate.
 - Only target **custom modules** for development. Marketplace/system modules are reference-only.
 - Use UK English.

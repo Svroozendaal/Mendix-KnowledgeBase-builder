@@ -180,6 +180,35 @@ Current live-query contract:
 - Allowlisted read-only commands only (see capability matrix and `mendix-mxcli` skill)
 - Confidence labels include `mxcli-live` alongside `export-backed`, `inferred`, and `unknown`
 
+### Stage 8 - Development Team ApplyPlan Execution
+
+Add a separate post-planning `/applyplan` workflow that can apply approved `_plans/STORY_<slug>.md` changes to the linked `.mpr` using gated `mxcli` execution batches.
+
+Current implementation anchor:
+
+- `KnowledgeBase-Creator/artifacts/.agents/agents/MENDIX_CLI_EXECUTOR.md`
+- `KnowledgeBase-Creator/artifacts/.agents/skills/applyplan/SKILL.md`
+- `KnowledgeBase-Creator/artifacts/.agents/agents/DEVELOPMENT_TEAM.md`
+- `KnowledgeBase-Creator/artifacts/templates/CLAUDE_MD_TEMPLATE.md`
+- `KnowledgeBase-Creator/artifacts/templates/KNOWLEDGEBASE_READER.md`
+
+Current applyplan contract:
+
+- `/develop` remains planning-only; `/applyplan` is explicit and separate.
+- `.mpr` resolution uses `_sources/creator-link.json -> mprPath` only.
+- Required app-local asset contract: `.ai-context/skills` and `.claude/commands`.
+- Phase-batched execution: Foundation, Logic, UI, Security, Integration.
+- Mandatory preview per phase before mutation:
+  - `mxcli check <batch>.mdl`
+  - `mxcli check <batch>.mdl -p <app.mpr> --references`
+  - `mxcli diff -p <app.mpr> <batch>.mdl --format struct`
+- Hard confirmation gate before each `mxcli exec <batch>.mdl -p <app.mpr>`.
+- Required quick validation after apply:
+  - `mxcli docker check -p <app.mpr>`
+  - `mxcli lint -p <app.mpr> --format json`
+  - `mxcli report -p <app.mpr> --format json`
+- Execution artefacts are written under `_plans/_execution/STORY_<slug>/`.
+
 ## Required Architectural Rules
 
 - Treat `.app-info/development/prompts/MxCLI integration/App information/` as research, not source of truth.
@@ -191,6 +220,7 @@ Current live-query contract:
 - Keep default extraction at `MxCli` unless validation evidence requires temporary rollback.
 - Keep the legacy extraction path available as explicit fallback until deprecation is explicitly approved.
 - Keep reader escalation static-first; do not treat live queries as primary narrative source.
+- Keep `/applyplan` preview-first and confirmation-gated; do not auto-run mutation during `/develop`.
 
 ## Validation Reference
 

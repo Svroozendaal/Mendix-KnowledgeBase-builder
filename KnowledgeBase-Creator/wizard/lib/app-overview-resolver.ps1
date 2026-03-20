@@ -157,7 +157,7 @@ function Get-OverviewModuleCatalog {
         }
 
         $kbRelativeDir = if ($category -eq "Marketplace") {
-            "modules/_marktplace/$moduleName"
+            "modules/_marketplace/$moduleName"
         } else {
             "modules/$moduleName"
         }

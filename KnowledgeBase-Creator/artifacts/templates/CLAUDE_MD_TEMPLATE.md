@@ -13,7 +13,13 @@ For full detail, read:
 
 ## Scope
 
-This knowledge base is a **read-only artifact for normal interpretation**. The one explicit enrichment command is `/enrichkb`, which may enrich this KB in place by using the linked source run folder from `_sources/creator-link.json`. `/initkb` remains available as a compatibility entry point and rebuild handoff. Do not run pipelines, access `.mpr` files, or interact with external systems from this folder.
+This knowledge base is a **read-only artifact for normal interpretation**. Controlled commands are `/enrichkb`, `/initkb`, and `/applyplan`.
+
+- `/enrichkb` may enrich this KB in place by using the linked source run folder from `_sources/creator-link.json`.
+- `/initkb` remains a compatibility entry point and rebuild handoff.
+- `/applyplan` may apply an approved `_plans/STORY_<slug>.md` to the linked `.mpr` through a preview-gated, confirmation-required workflow.
+
+Do not run pipelines or direct Mendix tooling commands from this folder outside these controlled commands.
 
 ## Quick start
 
@@ -23,5 +29,6 @@ This knowledge base is a **read-only artifact for normal interpretation**. The o
 - **Security roles** -> `app/SECURITY.md`
 - **Add the AI narrative layer to this KB?** -> `/enrichkb`
 - **Rebuild from source?** -> `/initkb`
+- **Apply an approved plan to the linked app?** -> `/applyplan`
 
 Generated at: {{GENERATED_AT_UTC}} | Format version: {{KB_FORMAT_VERSION}}

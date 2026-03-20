@@ -46,6 +46,8 @@ Prompt 01 creates or updates these artefacts. Every later prompt must keep them 
 | 05 | [05-CREATOR_PIPELINE_DUAL_PATH.md](05-CREATOR_PIPELINE_DUAL_PATH.md) | High | 04 | Add the new extractor to the creator as a selectable dual path. |
 | 06 | [06-SWITCHOVER_DOCS_AGENTS_AND_SKILLS.md](06-SWITCHOVER_DOCS_AGENTS_AND_SKILLS.md) | High | 05 | Make `mxcli` the default and update docs, agents, and skills. |
 | 07 | [07-LIVE_QUERY_ENHANCEMENTS.md](07-LIVE_QUERY_ENHANCEMENTS.md) | Medium | 06 | Add read-only `mxcli` live-query enhancements without weakening the static-KB-first model. |
+| 08 | [08-DEVELOPMENT_TEAM_APPLYPLAN_MXCLI_EXECUTION.md](08-DEVELOPMENT_TEAM_APPLYPLAN_MXCLI_EXECUTION.md) | Medium | 07 | Add a separate `/applyplan` execution flow that applies approved plans to `.mpr` via gated `mxcli` batches. |
+| 09 | [09-DEVELOPMENT_TEAM_PERFORMANCE_TOKEN_EFFICIENCY_REVIEW.md](09-DEVELOPMENT_TEAM_PERFORMANCE_TOKEN_EFFICIENCY_REVIEW.md) | Medium | 08 | Audit `/develop` end-to-end for token and latency hotspots, then produce a measured optimisation plan with optional validation section. |
 
 ## Dependency Graph
 
@@ -57,6 +59,8 @@ Prompt 01 (Target Architecture and Baseline)
         -> Prompt 05 (Creator Pipeline Dual Path)
           -> Prompt 06 (Switchover, Docs, Agents, and Skills)
             -> Prompt 07 (Live Query Enhancements)
+              -> Prompt 08 (Development Team ApplyPlan MxCLI Execution)
+                -> Prompt 09 (Development Team /develop Performance and Token Efficiency Review)
 ```
 
 ## Baseline Validation Commands
