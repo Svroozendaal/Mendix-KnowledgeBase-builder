@@ -1,0 +1,158 @@
+# Flows: Inspection
+Flows: 39
+
+FLOW Microflow: Inspection.DS_UserRole_GetFromCurrentUser
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.DS_Task_GetFromNotification
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.OCH_Task_Refresh
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.DSL_Inspector_Selectable
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.DS_Inspector_GetFromCurrentUSer
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.CAL_Inspector_TasksOpen
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.BCo_Inspector
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.DS_Booking_RetrieveUpcomming
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.CAL_Inspector_TasksOverdue
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.SE_Booking_DeleteOlderThenToday
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.VAL_Registration_Validate
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.VAL_Inspector_Validate
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.VAL_Tool_Validate
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.VAL_Task_Validate
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.SUB_Equipment_Cast
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.SUB_Accessory_Order
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.SE_Equipment_OrderNew
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.SUB_Booking_Delete
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.SUB_Account_GetFromInspector
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Tool_Validate
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_InspectorPhoto_Create
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Inspector_Save
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Registration_Save
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Registration_Create
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_CoverPhoto_Save
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Assessory_Book
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Accessory_Create
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_CoverPhoto_Create
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Assessory_Delete
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Report_ApplyFilters
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Tool_Book
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Task_SetToInProgress
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Tool_Delete
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Tool_Create
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Task_SetToDone
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_ReportHelper_Create
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Report_Generate
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Task_Save
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Inspection.ACT_Task_Create
+Linearised execution evidence from mxcli describe output
+System.String[]

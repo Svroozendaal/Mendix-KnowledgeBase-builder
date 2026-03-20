@@ -1,0 +1,29 @@
+﻿{
+    "appName":  "Mastering Advanced XPaths - Starting point",
+    "kbRoot":  "C:\\Workspaces\\Mendix\\Emixa_InspectionApp\\mendix-data\\knowledge-base",
+    "generatedAtUtc":  "2026-03-19T15:59:10.7421229Z",
+    "overallPass":  false,
+    "filesChecked":  388,
+    "issueCount":  1,
+    "issues":  [
+                   {
+                       "Severity":  "error",
+                       "File":  "C:\\Workspaces\\Mendix\\Emixa_InspectionApp\\mendix-data\\knowledge-base\\_sources\\creator-link.json",
+                       "Message":  "creator-link.json lastRunFolder does not match the resolved immutable run folder."
+                   }
+               ],
+    "semanticMetrics":  {
+                            "ExpectedCustomPages":  8,
+                            "EntityThreshold":  90,
+                            "PageCoveragePercent":  100,
+                            "ExpectedCustomEntities":  12,
+                            "ExpectedCustomFlows":  0,
+                            "EntityPass":  true,
+                            "FlowThreshold":  90,
+                            "EntityCoveragePercent":  100,
+                            "PageThreshold":  95,
+                            "FlowPass":  true,
+                            "PagePass":  true,
+                            "FlowCoveragePercent":  100
+                        }
+}

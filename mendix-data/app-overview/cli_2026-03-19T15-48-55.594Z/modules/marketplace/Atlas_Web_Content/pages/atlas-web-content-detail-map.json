@@ -1,0 +1,42 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Atlas_Web_Content",
+                  "qualifiedName":  "Atlas_Web_Content.Detail_Map",
+                  "stableId":  "Atlas_Web_Content.Detail_Map",
+                  "slug":  "atlas-web-content-detail-map",
+                  "l0Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-detail-map.abstract.md",
+                  "l1Path":  "knowledge-base/modules/_marktplace/Atlas_Web_Content/pages/atlas-web-content-detail-map.overview.md",
+                  "l2Path":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/atlas-web-content-detail-map.json",
+                  "l2Logical":  "page:Atlas_Web_Content.Detail_Map",
+                  "sourceRun":  "cli_2026-03-19T15-48-55.594Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/marketplace/Atlas_Web_Content/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/marketplace/Atlas_Web_Content/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/marketplace/Atlas_Web_Content/pages/INDEX.json"
+              },
+    "qualifiedName":  "Atlas_Web_Content.Detail_Map",
+    "name":  "Detail_Map",
+    "title":  "Detail_Map",
+    "layout":  null,
+    "allowedRoles":  [
+
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+
+                    ],
+    "clientActions":  [
+
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

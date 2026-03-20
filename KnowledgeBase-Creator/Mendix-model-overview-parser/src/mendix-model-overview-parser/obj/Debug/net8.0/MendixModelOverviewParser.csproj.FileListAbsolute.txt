@@ -1,0 +1,12 @@
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\bin\Debug\net8.0\MendixModelOverviewParser.deps.json
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\bin\Debug\net8.0\MendixModelOverviewParser.dll
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\bin\Debug\net8.0\MendixModelOverviewParser.pdb
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\MendixModelOverviewParser.GeneratedMSBuildEditorConfig.editorconfig
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\MendixModelOverviewParser.AssemblyInfoInputs.cache
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\MendixModelOverviewParser.AssemblyInfo.cs
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\MendixModelOverviewParser.csproj.CoreCompileInputs.cache
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\MendixModelOverviewParser.sourcelink.json
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\MendixModelOverviewParser.dll
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\refint\MendixModelOverviewParser.dll
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\MendixModelOverviewParser.pdb
+C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\Mendix-model-overview-parser\src\mendix-model-overview-parser\obj\Debug\net8.0\ref\MendixModelOverviewParser.dll

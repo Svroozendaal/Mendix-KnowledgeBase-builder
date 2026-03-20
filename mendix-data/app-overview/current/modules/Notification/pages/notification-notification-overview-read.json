@@ -1,0 +1,49 @@
+{
+    "_meta":  {
+                  "objectType":  "page",
+                  "module":  "Notification",
+                  "qualifiedName":  "Notification.Notification_Overview_Read",
+                  "stableId":  "Notification.Notification_Overview_Read",
+                  "slug":  "notification-notification-overview-read",
+                  "l0Path":  "knowledge-base/modules/Notification/pages/notification-notification-overview-read.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Notification/pages/notification-notification-overview-read.overview.md",
+                  "l2Path":  "app-overview/current/modules/Notification/pages/notification-notification-overview-read.json",
+                  "l2Logical":  "page:Notification.Notification_Overview_Read",
+                  "sourceRun":  "cli_2026-03-19T15-48-55.594Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/Notification/pages.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/Notification/pages.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Notification/pages/INDEX.json"
+              },
+    "qualifiedName":  "Notification.Notification_Overview_Read",
+    "name":  "Notification_Overview_Read",
+    "title":  "Read notifications",
+    "layout":  "Notification.Notification_Layout",
+    "allowedRoles":  [
+                         "Notification.Inspector",
+                         "Notification.Manager"
+                     ],
+    "parameters":  [
+
+                   ],
+    "isPopup":  false,
+    "popupWidth":  0,
+    "popupHeight":  0,
+    "popupResizable":  true,
+    "url":  null,
+    "excluded":  false,
+    "dataSources":  [
+
+                    ],
+    "clientActions":  [
+                          {
+                              "actionId":  "actionButton2",
+                              "actionType":  "DeleteClientAction",
+                              "summary":  "DeleteClientAction",
+                              "targetPage":  null,
+                              "flowName":  null
+                          }
+                      ],
+    "navigationProvenance":  [
+
+                             ]
+}

@@ -1,0 +1,38 @@
+# Flows: Administration
+Flows: 9
+
+FLOW Microflow: Administration.SaveNewAccount
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.RetrieveTimeZones
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.ShowPasswordForm
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.ShowMyPasswordForm
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.NewWebServiceAccount
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.ChangePassword
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.ChangeMyPassword
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.NewAccount
+Linearised execution evidence from mxcli describe output
+System.String[]
+
+FLOW Microflow: Administration.ManageMyAccount
+Linearised execution evidence from mxcli describe output
+System.String[]

@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ModelOverviewCli/1.0.0": {
+        "dependencies": {
+          "MendixModelOverviewParser": "1.0.0"
+        },
+        "runtime": {
+          "ModelOverviewCli.dll": {}
+        }
+      },
+      "MendixModelOverviewParser/1.0.0": {
+        "runtime": {
+          "MendixModelOverviewParser.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ModelOverviewCli/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MendixModelOverviewParser/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

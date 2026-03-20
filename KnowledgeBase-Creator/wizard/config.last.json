@@ -1,0 +1,16 @@
+{
+  "lastMprPath": "C:\\Workspaces\\Mendix\\Mastering Advanced XPaths - Starting point-main\\Mastering Advanced XPaths - Starting point.mpr",
+  "lastAppName": "Mastering Advanced XPaths - Starting point",
+  "lastInstallRoot": "C:\\Program Files\\Mendix",
+  "lastMxExePath": "C:\\Program Files\\Mendix\\11.8.0\\modeler\\mx.exe",
+  "lastDataRoot": "C:\\Workspaces\\Mendix\\Mastering Advanced XPaths - Starting point-main\\mendix-data",
+  "lastClaudePath": null,
+  "autoEnrichAfterPipeline": false,
+  "aiSettings": {
+    "provider": 1,
+    "claudeCliPath": "asfdasdf",
+    "codexCliPath": "C:\\Users\\Simon\\AppData\\Roaming\\npm\\codex",
+    "claudeApiKey": null,
+    "claudeApiModel": "claude-sonnet-4-20250514"
+  }
+}

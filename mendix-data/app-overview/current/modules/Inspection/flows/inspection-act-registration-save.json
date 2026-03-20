@@ -1,0 +1,362 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_Registration_Save",
+                  "stableId":  "fc8368f4-f101-4670-b2c7-7f227e771641",
+                  "slug":  "inspection-act-registration-save",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-registration-save.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-registration-save.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-registration-save.json",
+                  "l2Logical":  "flow:Inspection.ACT_Registration_Save",
+                  "sourceRun":  "cli_2026-03-19T15-48-55.594Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "fc8368f4-f101-4670-b2c7-7f227e771641",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_Registration_Save",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-call",
+                      "nodeType":  "ActionActivity",
+                      "label":  "call microflow Inspection.VAL_Registration_Validate -\u003e IsValid",
+                      "detail":  "$IsValid = CALL MICROFLOW Inspection.VAL_Registration_Validate(Registration = $Registration) ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+                                    {
+                                        "callKind":  "Microflow",
+                                        "targetFlowName":  "Inspection.VAL_Registration_Validate",
+                                        "sourceNodeId":  "n002-call"
+                                    }
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$IsValid",
+                      "detail":  "IF expression=$IsValid",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Administration.Account (Name = $Registration/UserName, Password = $Registration/Password, FullName = $Registration/FullName, Email = $Registration/EmailAddress)",
+                      "detail":  "$NewAccount = CREATE Administration.Account (Name = $Registration/UserName, Password = $Registration/Password, FullName = $Registration/FullName, Email = $Registration/EmailAddress)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-close",
+                      "nodeType":  "ActionActivity",
+                      "label":  "close page",
+                      "detail":  "CLOSE PAGE",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Registration/Role = Inspection.Enum_Registration_UserRole.Inspector",
+                      "detail":  "IF expression=$Registration/Role = Inspection.Enum_Registration_UserRole.Inspector",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve from System.UserRole WHERE Name = \u0027Inspector\u0027 LIMIT 1",
+                      "detail":  "RETRIEVE $UserRole_Inspector FROM System.UserRole WHERE Name = \u0027Inspector\u0027 LIMIT 1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-create",
+                      "nodeType":  "ActionActivity",
+                      "label":  "create Inspection.Inspector (Name = $Registration/UserName, Inspector_Account = $NewAccount)",
+                      "detail":  "$NewInspector = CREATE Inspection.Inspector (Name = $Registration/UserName, Inspector_Account = $NewAccount)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n009-change",
+                      "nodeType":  "ActionActivity",
+                      "label":  "change $NewAccount (System.UserRoles = $UserRole_Inspector)",
+                      "detail":  "CHANGE $NewAccount (System.UserRoles = $UserRole_Inspector)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n010-retrieve",
+                      "nodeType":  "ActionActivity",
+                      "label":  "retrieve from System.UserRole WHERE Name = \u0027Manager\u0027 LIMIT 1",
+                      "detail":  "RETRIEVE $UserRole_Manager FROM System.UserRole WHERE Name = \u0027Manager\u0027 LIMIT 1",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n011-change",
+                      "nodeType":  "ActionActivity",
+                      "label":  "change $NewAccount (System.UserRoles = $UserRole_Manager)",
+                      "detail":  "CHANGE $NewAccount (System.UserRoles = $UserRole_Manager)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n012-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-2e52dbb7e877",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-call",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-00d62b7988a4",
+                      "originNodeId":  "n002-call",
+                      "destinationNodeId":  "n003-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-32d2154c8b17",
+                      "originNodeId":  "n003-decision",
+                      "destinationNodeId":  "n004-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-652675313889",
+                      "originNodeId":  "n004-create",
+                      "destinationNodeId":  "n005-close",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-07172e38635e",
+                      "originNodeId":  "n005-close",
+                      "destinationNodeId":  "n006-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-39ca793bc68a",
+                      "originNodeId":  "n006-decision",
+                      "destinationNodeId":  "n007-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-b694ca10d424",
+                      "originNodeId":  "n007-retrieve",
+                      "destinationNodeId":  "n008-create",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-4a6773e8fa82",
+                      "originNodeId":  "n008-create",
+                      "destinationNodeId":  "n009-change",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-9c42cec96921",
+                      "originNodeId":  "n009-change",
+                      "destinationNodeId":  "n010-retrieve",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-fdcbb0778ea3",
+                      "originNodeId":  "n010-retrieve",
+                      "destinationNodeId":  "n011-change",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-0757b6139ec2",
+                      "originNodeId":  "n011-change",
+                      "destinationNodeId":  "n012-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+                  {
+                      "callKind":  "Microflow",
+                      "targetFlowName":  "Inspection.VAL_Registration_Validate",
+                      "sourceNodeId":  "n002-call"
+                  }
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-call",
+                                         "n003-decision",
+                                         "n004-create",
+                                         "n005-close",
+                                         "n006-decision",
+                                         "n007-retrieve",
+                                         "n008-create",
+                                         "n009-change",
+                                         "n010-retrieve",
+                                         "n011-change",
+                                         "n012-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_Registration_Save\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+                            {
+                                "nodeId":  "n007-retrieve",
+                                "summary":  "retrieve from System.UserRole WHERE Name = \u0027Inspector\u0027 LIMIT 1",
+                                "sourceKind":  "Database",
+                                "entity":  "System.UserRole",
+                                "association":  null,
+                                "xPath":  "Name = \u0027Inspector\u0027"
+                            },
+                            {
+                                "nodeId":  "n010-retrieve",
+                                "summary":  "retrieve from System.UserRole WHERE Name = \u0027Manager\u0027 LIMIT 1",
+                                "sourceKind":  "Database",
+                                "entity":  "System.UserRole",
+                                "association":  null,
+                                "xPath":  "Name = \u0027Manager\u0027"
+                            }
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n003-decision",
+                                "summary":  "IF $IsValid",
+                                "caption":  "IF",
+                                "expression":  "$IsValid"
+                            },
+                            {
+                                "nodeId":  "n006-decision",
+                                "summary":  "IF $Registration/Role = Inspection.Enum_Registration_UserRole.Inspector",
+                                "caption":  "IF",
+                                "expression":  "$Registration/Role = Inspection.Enum_Registration_UserRole.Inspector"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n004-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Administration.Account (Name = $Registration/UserName, Password = $Registration/Password, FullName = $Registration/FullName, Email = $Registration/EmailAddress)",
+                                "entity":  "Administration.Account",
+                                "memberSummary":  "(Name = $Registration/UserName, Password = $Registration/Password, FullName = $Registration/FullName, Email = $Registration/EmailAddress)"
+                            },
+                            {
+                                "nodeId":  "n008-create",
+                                "actionKind":  "Create",
+                                "summary":  "create Inspection.Inspector (Name = $Registration/UserName, Inspector_Account = $NewAccount)",
+                                "entity":  "Inspection.Inspector",
+                                "memberSummary":  "(Name = $Registration/UserName, Inspector_Account = $NewAccount)"
+                            },
+                            {
+                                "nodeId":  "n009-change",
+                                "actionKind":  "Change",
+                                "summary":  "change $NewAccount (System.UserRoles = $UserRole_Inspector)",
+                                "entity":  "System.UserRole",
+                                "memberSummary":  "System.UserRoles = $UserRole_Inspector"
+                            },
+                            {
+                                "nodeId":  "n011-change",
+                                "actionKind":  "Change",
+                                "summary":  "change $NewAccount (System.UserRoles = $UserRole_Manager)",
+                                "entity":  "System.UserRole",
+                                "memberSummary":  "System.UserRoles = $UserRole_Manager"
+                            }
+                        ],
+    "callEdges":  [
+                      {
+                          "callerModule":  "Inspection",
+                          "callerFlow":  "Inspection.ACT_Registration_Save",
+                          "callerKind":  "Microflow",
+                          "callKind":  "Microflow",
+                          "sourceNodeId":  "n002-call",
+                          "targetModule":  "Inspection",
+                          "targetFlow":  "Inspection.VAL_Registration_Validate",
+                          "isInternal":  true
+                      }
+                  ]
+}

@@ -1,0 +1,280 @@
+{
+    "_meta":  {
+                  "objectType":  "flow",
+                  "module":  "Inspection",
+                  "qualifiedName":  "Inspection.ACT_Assessory_Book",
+                  "stableId":  "55c66afc-5ad1-4865-aa64-1fb050493d8e",
+                  "slug":  "inspection-act-assessory-book",
+                  "l0Path":  "knowledge-base/modules/Inspection/flows/inspection-act-assessory-book.abstract.md",
+                  "l1Path":  "knowledge-base/modules/Inspection/flows/inspection-act-assessory-book.overview.md",
+                  "l2Path":  "app-overview/current/modules/Inspection/flows/inspection-act-assessory-book.json",
+                  "l2Logical":  "flow:Inspection.ACT_Assessory_Book",
+                  "sourceRun":  "cli_2026-03-19T15-48-55.594Z",
+                  "aggregateJson":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/Inspection/flows.json",
+                  "aggregatePseudo":  "app-overview/cli_2026-03-19T15-48-55.594Z/modules/Inspection/flows.pseudo.txt",
+                  "collectionIndex":  "app-overview/current/modules/Inspection/flows/INDEX.json"
+              },
+    "flowId":  "55c66afc-5ad1-4865-aa64-1fb050493d8e",
+    "kind":  "Microflow",
+    "qualifiedName":  "Inspection.ACT_Assessory_Book",
+    "module":  "Inspection",
+    "nodes":  [
+                  {
+                      "nodeId":  "n001-start",
+                      "nodeType":  "StartEvent",
+                      "label":  "StartEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n002-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Accessory/AmountInStock != 0",
+                      "detail":  "IF expression=$Accessory/AmountInStock != 0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n003-change",
+                      "nodeType":  "ActionActivity",
+                      "label":  "change $Accessory (AmountInStock = $Accessory/AmountInStock - 1)",
+                      "detail":  "CHANGE $Accessory (AmountInStock = $Accessory/AmountInStock - 1)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n004-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Accessory/AmountInStock \u003e 10",
+                      "detail":  "IF expression=$Accessory/AmountInStock \u003e 10",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n005-commit",
+                      "nodeType":  "ActionActivity",
+                      "label":  "commit $Accessory WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                      "detail":  "COMMIT $Accessory WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n006-decision",
+                      "nodeType":  "ExclusiveSplit",
+                      "label":  "IF expression=$Accessory/AmountInStock = 0",
+                      "detail":  "IF expression=$Accessory/AmountInStock = 0",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n007-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "@color Purple CHANGE $Accessory (EquipmentStatus = Inspection.ENUM_Accessory_Status.Out_of_stock)",
+                      "detail":  "@color Purple CHANGE $Accessory (EquipmentStatus = Inspection.ENUM_Accessory_Status.Out_of_stock)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n008-action",
+                      "nodeType":  "ActionActivity",
+                      "label":  "@color Purple CHANGE $Accessory (EquipmentStatus = Inspection.ENUM_Accessory_Status.Almost_out_of_stock)",
+                      "detail":  "@color Purple CHANGE $Accessory (EquipmentStatus = Inspection.ENUM_Accessory_Status.Almost_out_of_stock)",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n009-show",
+                      "nodeType":  "ActionActivity",
+                      "label":  "show message (This assessory is currently out of stock., type=Information)",
+                      "detail":  "SHOW MESSAGE \u0027This assessory is currently out of stock.\u0027 TYPE Information",
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  },
+                  {
+                      "nodeId":  "n010-end",
+                      "nodeType":  "EndEvent",
+                      "label":  "EndEvent",
+                      "detail":  null,
+                      "loopOwnerId":  null,
+                      "isExecutable":  true,
+                      "calls":  [
+
+                                ]
+                  }
+              ],
+    "edges":  [
+                  {
+                      "edgeId":  "edge-1380141f6da4",
+                      "originNodeId":  "n001-start",
+                      "destinationNodeId":  "n002-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-49347f7bd1d7",
+                      "originNodeId":  "n002-decision",
+                      "destinationNodeId":  "n003-change",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-82943842ac93",
+                      "originNodeId":  "n003-change",
+                      "destinationNodeId":  "n004-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-082bf600350c",
+                      "originNodeId":  "n004-decision",
+                      "destinationNodeId":  "n005-commit",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-23735cc36d1c",
+                      "originNodeId":  "n005-commit",
+                      "destinationNodeId":  "n006-decision",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-64682d6309ab",
+                      "originNodeId":  "n006-decision",
+                      "destinationNodeId":  "n007-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-639ba1c7e1c3",
+                      "originNodeId":  "n007-action",
+                      "destinationNodeId":  "n008-action",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-c8c519b910d7",
+                      "originNodeId":  "n008-action",
+                      "destinationNodeId":  "n009-show",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  },
+                  {
+                      "edgeId":  "edge-529da4352f39",
+                      "originNodeId":  "n009-show",
+                      "destinationNodeId":  "n010-end",
+                      "condition":  null,
+                      "isErrorHandler":  false,
+                      "originConnectionIndex":  null,
+                      "destinationConnectionIndex":  null
+                  }
+              ],
+    "calls":  [
+
+              ],
+    "startNodeIds":  [
+                         "n001-start"
+                     ],
+    "primaryExecutionOrderNodeIds":  [
+                                         "n001-start",
+                                         "n002-decision",
+                                         "n003-change",
+                                         "n004-decision",
+                                         "n005-commit",
+                                         "n006-decision",
+                                         "n007-action",
+                                         "n008-action",
+                                         "n009-show",
+                                         "n010-end"
+                                     ],
+    "pseudocode":  "FLOW Microflow: Inspection.ACT_Assessory_Book\r\nLinearised execution evidence from mxcli describe output\r\nSystem.String[]",
+    "retrieveActions":  [
+
+                        ],
+    "decisionActions":  [
+                            {
+                                "nodeId":  "n002-decision",
+                                "summary":  "IF $Accessory/AmountInStock != 0",
+                                "caption":  "IF",
+                                "expression":  "$Accessory/AmountInStock != 0"
+                            },
+                            {
+                                "nodeId":  "n004-decision",
+                                "summary":  "IF $Accessory/AmountInStock \u003e 10",
+                                "caption":  "IF",
+                                "expression":  "$Accessory/AmountInStock \u003e 10"
+                            },
+                            {
+                                "nodeId":  "n006-decision",
+                                "summary":  "IF $Accessory/AmountInStock = 0",
+                                "caption":  "IF",
+                                "expression":  "$Accessory/AmountInStock = 0"
+                            }
+                        ],
+    "showPageActions":  [
+
+                        ],
+    "mutationActions":  [
+                            {
+                                "nodeId":  "n003-change",
+                                "actionKind":  "Change",
+                                "summary":  "change $Accessory (AmountInStock = $Accessory/AmountInStock - 1)",
+                                "entity":  "Inspection.Accessory",
+                                "memberSummary":  "AmountInStock = $Accessory/AmountInStock - 1"
+                            },
+                            {
+                                "nodeId":  "n005-commit",
+                                "actionKind":  "Commit",
+                                "summary":  "commit $Accessory WITH EVENTS REFRESH ON ERROR ROLLBACK",
+                                "entity":  "Inspection.Accessory",
+                                "memberSummary":  null
+                            }
+                        ],
+    "callEdges":  [
+
+                  ]
+}

@@ -1,0 +1,142 @@
+# Pages: Inspection
+Pages: 18, Snippets: 4
+
+## Pages
+
+PAGE Inspection.InspectorPhoto_NewEdit
+  Title: "Edit profile image"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Manager
+  Parameters: InspectorPhoto (Inspection.InspectorPhoto)
+  Data sources: Parameter datasource: $InspectorPhoto
+  Client actions: CancelChangesClientAction | SaveChangesClientAction
+
+PAGE Inspection.Registration_NewEdit
+  Title: "Edit Registration"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Parameters: Registration (Inspection.Registration)
+  Data sources: Parameter datasource: $Registration
+  Client actions: MicroflowClientAction, flow=Inspection.ACT_Registration_Save
+
+PAGE Inspection.Inspector_NewEdit
+  Title: "Edit Inspector"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Administrator, Inspection.Manager
+  Parameters: Inspector (Inspection.Inspector)
+  Data sources: Parameter datasource: $Inspector
+  Client actions: MicroflowClientAction, flow=Inspection.ACT_InspectorPhoto_Create | PageClientAction, page=Inspection.InspectorPhoto_NewEdit | CancelChangesClientAction | MicroflowClientAction, flow=Inspection.ACT_Inspector_Save
+
+PAGE Inspection.Inspector_Overview
+  Title: "Inspectors"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Administrator, Inspection.Manager
+  Client actions: CreateObjectClientAction, page=Inspection.Inspector_NewEdit | DeleteClientAction | PageClientAction, page=Inspection.Inspector_NewEdit
+
+PAGE Inspection.Report_NewEdit
+  Title: "Generate report"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Administrator, Inspection.Manager
+  Parameters: ReportHelper (Inspection.ReportHelper)
+  Data sources: Parameter datasource: $ReportHelper
+  Client actions: MicroflowClientAction, flow=Inspection.ACT_Report_Generate | MicroflowClientAction, flow=Inspection.ACT_Report_ApplyFilters
+
+PAGE Inspection.Tool_Book
+  Title: "Edit Equipment"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Manager
+  Parameters: Tool (Inspection.Tool)
+  Data sources: Parameter datasource: $Tool
+  Client actions: CancelChangesClientAction | MicroflowClientAction, flow=Inspection.ACT_Tool_Validate
+
+PAGE Inspection.Tool_NewEdit
+  Title: "Edit Equipment"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Manager
+  Parameters: Tool (Inspection.Tool)
+  Data sources: Parameter datasource: $Tool
+  Client actions: CancelChangesClientAction | SaveChangesClientAction
+
+PAGE Inspection.Task_NewEdit
+  Title: "Edit Smart Task"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Inspector, Inspection.Manager
+  Parameters: Task (Inspection.Task)
+  Data sources: Parameter datasource: $Task | Microflow datasource: Inspection.DS_UserRole_GetFromCurrentUser
+  Client actions: MicroflowClientAction, flow=Inspection.ACT_CoverPhoto_Create | CancelChangesClientAction | MicroflowClientAction, flow=Inspection.ACT_Task_SetToDone | MicroflowClientAction, flow=Inspection.ACT_Task_Save
+
+PAGE Inspection.Task_Overview
+  Title: "Tasks"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Inspector, Inspection.Manager
+  Client actions: MicroflowClientAction, flow=Inspection.ACT_ReportHelper_Create
+
+PAGE Inspection.CoverPhoto_NewEdit
+  Title: "Edit profile image"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Manager
+  Parameters: CoverPhoto (Inspection.CoverPhoto)
+  Data sources: Parameter datasource: $CoverPhoto
+  Client actions: CancelChangesClientAction | MicroflowClientAction, flow=Inspection.ACT_CoverPhoto_Save
+
+PAGE Inspection.Dashboard_Home
+  Title: "Dashboard"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Administrator, Inspection.Inspector, Inspection.Manager
+  Client actions: PageClientAction, page=Inspection.Task_Overview | PageClientAction, page=Inspection.InspectionItem_Overview | PageClientAction, page=Inspection.InspectionItem_Overview | PageClientAction, page=Inspection.Inspector_Overview | PageClientAction, page=Inspection.Inspector_Account_NewEdit
+  Navigation provenance: Role-based homepage in profile Responsive for role Administrator | Role-based homepage in profile Responsive for role Manager | Role-based homepage in profile Responsive for role Inspector
+
+PAGE Inspection.Account_LoginPage_SplitLeft
+  Title: "Emixa Inspection App"
+  Layout: Inspection.Emixa_Login
+  Allowed roles: Inspection.Anonymous
+  Client actions: MicroflowClientAction, flow=Inspection.ACT_Registration_Create
+  Navigation provenance: Homepage in profile Responsive
+  URL: loginpage-splitleft
+
+PAGE Inspection.Assessory_NewEdit
+  Title: "Edit Equipment"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Manager
+  Parameters: Accessory (Inspection.Accessory)
+  Data sources: Parameter datasource: $Accessory
+  Client actions: CancelChangesClientAction | SaveChangesClientAction
+
+PAGE Inspection.Equipment_Overview
+  Title: "Equipment Overview"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Inspector, Inspection.Manager
+  Data sources: Database datasource: Inspection.Accessory | Database datasource: Inspection.Tool | Microflow datasource: Inspection.DS_Booking_RetrieveUpcomming
+  Client actions: MicroflowClientAction, flow=Inspection.ACT_Accessory_Create | PageClientAction, page=Inspection.Assessory_NewEdit | MicroflowClientAction, flow=Inspection.ACT_Assessory_Delete | MicroflowClientAction, flow=Inspection.ACT_Tool_Create | PageClientAction, page=Inspection.Tool_NewEdit | MicroflowClientAction, flow=Inspection.ACT_Tool_Delete
+
+PAGE Inspection.InspectionItem_Overview
+  Title: "Inspection Items"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Inspector, Inspection.Manager
+  Client actions: CreateObjectClientAction, page=Inspection.InspectionItem_NewEdit | MicroflowClientAction, flow=Inspection.ACT_Task_Create | PageClientAction, page=Inspection.InspectionItem_NewEdit
+
+PAGE Inspection.Inspector_Account_NewEdit
+  Title: "Inspector Account New edit"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Inspector
+  Client actions: CancelChangesClientAction | SaveChangesClientAction
+
+PAGE Inspection.InspectionItem_FromDashboard
+  Title: "Inspection Items"
+  Layout: Inspection.Emixa_Custom
+  Allowed roles: Inspection.Administrator, Inspection.Inspector, Inspection.Manager
+  Parameters: InspectionItem (Inspection.InspectionItem)
+  Data sources: Parameter datasource: $InspectionItem
+
+PAGE Inspection.InspectionItem_NewEdit
+  Title: "Edit Inspection Item"
+  Layout: Atlas_Core.PopupLayout (popup 0x0, resizable=yes)
+  Allowed roles: Inspection.Manager
+  Parameters: InspectionItem (Inspection.InspectionItem)
+  Data sources: Parameter datasource: $InspectionItem
+  Client actions: CancelChangesClientAction | SaveChangesClientAction
+
+## Snippets
+- SNIPPET Inspection.SNP_Task_Overview (Web)
+- SNIPPET Inspection.SNP_Task_Select (Web)
+- SNIPPET Inspection.SNP_InspectionItem_Details (Web)
+- SNIPPET Inspection.SNP_InspectionItem_Image (Web)
