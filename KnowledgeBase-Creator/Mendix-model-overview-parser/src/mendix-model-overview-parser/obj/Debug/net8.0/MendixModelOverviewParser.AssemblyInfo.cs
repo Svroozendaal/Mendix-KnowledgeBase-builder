@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MendixModelOverviewParser")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a20e3d8bea3953fc0c742b3a753a9e4bf28f1138")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f96630b8cf960f256550ca1203dc245bd418f80")]
 [assembly: System.Reflection.AssemblyProductAttribute("MendixModelOverviewParser")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MendixModelOverviewParser")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
