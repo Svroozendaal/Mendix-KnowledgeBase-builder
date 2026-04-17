@@ -19,10 +19,10 @@ $runToken = (Get-Date).ToUniversalTime().ToString("yyyyMMddHHmmss")
 $generatedRunRoot = Join-Path $tempOutputRootPath "run_$runToken"
 $generatedKbFolder = Join-Path $generatedRunRoot $AppName
 
-$scaffoldScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-scaffold.ps1"
-$composeScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-compose.ps1"
-$qualityScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-quality-gate.ps1"
-$benchmarkScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-kb-semantic-benchmark.ps1"
+$scaffoldScript = Join-Path $repoRoot "KnowledgeBase-Creator/cli/run-kb-scaffold.ps1"
+$composeScript = Join-Path $repoRoot "KnowledgeBase-Creator/cli/run-kb-compose.ps1"
+$qualityScript = Join-Path $repoRoot "KnowledgeBase-Creator/cli/run-kb-quality-gate.ps1"
+$benchmarkScript = Join-Path $repoRoot "KnowledgeBase-Creator/cli/run-kb-semantic-benchmark.ps1"
 
 if (-not (Test-Path $referenceRunFolderPath -PathType Container)) {
     throw "Reference run folder not found: $referenceRunFolderPath"

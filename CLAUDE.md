@@ -27,7 +27,7 @@ If the knowledge base cannot answer a question:
 4. **Wait for explicit user approval** before accessing any file under `app-overview/` or `dumps/`.
 5. If the user declines, report the gap and suggest a KB update via `KNOWLEDGEBASE_CREATOR` or `GAPSMITH`.
 
-This policy does **not** apply to KB-pipeline agents (`KNOWLEDGEBASE_CREATOR`, `OVERVIEW_KB_BUILDER`, `GAPSMITH`, `OVERVIEWSMITH`) whose job is to process raw data into the knowledge base.
+This policy does **not** apply to KB-pipeline agents (`KNOWLEDGEBASE_CREATOR`, `KNOWLEDGEBASE_INTERPRETER`, `GAPSMITH`, `OVERVIEWSMITH`) whose job is to process or interpret the knowledge base.
 
 ## About This Repository
 
@@ -36,11 +36,9 @@ This is the **Mendix KnowledgeBase Builder** â€” a pipeline that converts M
 ### Key entry points
 
 - **Portable KB creator package**: `KnowledgeBase-Creator/`
-- **Launch the standalone creator**: `KnowledgeBase-Creator/KnowledgeBaseCreator.exe`
-- **Advanced script bootstrap**: `KnowledgeBase-Creator/wizard/run-dump-parser.ps1`
+- **CLI entry point**: `KnowledgeBase-Creator/cli/run-initkb.ps1`
+- **Pipeline bootstrap**: `KnowledgeBase-Creator/cli/run-dump-parser.ps1`
 - **AI start file**: `KnowledgeBase-Creator/AGENTS.md`
-- **Understand a generated KB**: read `READER.md` inside `KnowledgeBase-Creator/mendix-data/knowledge-base/`
-- **KnowledgeBase Copilot** (AI chat UI): `KnowledgeBase-Copilot/` — Node.js + React app for conversational KB queries
-- **Copilot quick start**: `cd KnowledgeBase-Copilot && npm install && npm run dev`
-- **Mendix extension**: `KnowledgeBase-Copilot/mendix-extension/` — Studio Pro dockable pane
+- **Public tool skills**: `tool-usage/knowledgebase/` and `tool-usage/knowledgebase-reader/`
+- **Understand a generated KB**: read `READER.md` inside `mendix-data/knowledge-base/`
 - **Unified extension spec**: `.app-info/product-plan/12-UNIFIED_EXTENSION_SPEC.md`

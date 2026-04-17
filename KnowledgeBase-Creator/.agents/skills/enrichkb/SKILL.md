@@ -1,13 +1,13 @@
 ---
 name: enrichkb
-description: Kick off phase-2 AI enrichment for an existing knowledge base without rerunning dump, parser, scaffold, or compose. Use when `mendix-data/app-overview/<run-folder>` and `mendix-data/knowledge-base/` already exist and you only want the AI narrative layer.
+description: Kick off creator-side AI enrichment for an existing knowledge base without rerunning dump, parser, scaffold, or compose. Use when `mendix-data/app-overview/<run-folder>` and `mendix-data/knowledge-base/` already exist and you only want the AI narrative layer.
 ---
 
 # ENRICHKB
 
 ## Purpose
 
-Use `/enrichkb` from the `KnowledgeBase-Creator` package when the deterministic pipeline has already completed and only the AI enrichment phase should run.
+Use `/enrichkb` from the `KnowledgeBase-Creator` package when the deterministic pipeline has already completed and only the creator-side AI enrichment phase should run.
 
 ## Input resolution
 
@@ -28,12 +28,10 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
 
 ## Procedure
 
-1. Bootstrap once per session — read only these KB files for orientation:
-   - `ROUTING.md` (in the knowledge base root)
+1. Bootstrap once per session - read only these KB files for orientation:
+   - `ROUTING.md` in the knowledge base root
    - `_reports/UNKNOWN_TODO.md`
-   Do NOT read AGENTS.md, KNOWLEDGEBASE_CREATOR.md, OVERVIEW_KB_BUILDER.md,
-   or AI_WORKFLOW.md — the caller already provides enrichment guidance via the
-   general-interpretation and module-interpretation skill files.
+   Do NOT read `AGENTS.md`, `KNOWLEDGEBASE_CREATOR.md`, `KNOWLEDGEBASE_INTERPRETER.md`, or `AI_WORKFLOW.md` - the caller already provides enrichment guidance via the supporting skill files.
 2. Read app-level source pseudo files:
    - `general/app-info.pseudo.txt`
    - `general/user-roles.pseudo.txt`
@@ -43,22 +41,22 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
    - `app/SECURITY.md`
    - `app/CALL_GRAPH.md`
 4. Enrich custom modules one at a time. For each module, load:
-   - `modules/<Name>/README.md` — module hub and navigation
-   - `modules/<Name>/DOMAIN.md` — entity shape and lifecycle
-   - `modules/<Name>/FLOWS.md` — flow catalogue with L0/L1/L2 links
-   - `modules/<Name>/flows/INDEX.abstract.md` — collection L0 for flow triage
-   - Individual L1 flow overviews (`flows/<slug>.overview.md`) for Tier 1 flows
-   - `modules/<Name>/PAGES.md` — page inventory with L0/L1/L2 links
-   - `modules/<Name>/pages/INDEX.abstract.md` — collection L0 for page triage
-   - Individual L1 page overviews (`pages/<slug>.overview.md`) as needed
-   - `modules/<Name>/INTERPRETATION.md` — writable module narrative file
-   - `lastRunFolder/modules/<Name>/domain-model.pseudo.txt` — prefer targeted reads for large files
-   - `lastRunFolder/modules/<Name>/flows.pseudo.txt` — prefer targeted reads for large files
-   - `lastRunFolder/modules/<Name>/pages.pseudo.txt` — prefer targeted reads for large files
+   - `modules/<Name>/README.md`
+   - `modules/<Name>/DOMAIN.md`
+   - `modules/<Name>/FLOWS.md`
+   - `modules/<Name>/flows/INDEX.abstract.md`
+   - individual L1 flow overviews as needed
+   - `modules/<Name>/PAGES.md`
+   - `modules/<Name>/pages/INDEX.abstract.md`
+   - individual L1 page overviews as needed
+   - `modules/<Name>/INTERPRETATION.md`
+   - `lastRunFolder/modules/<Name>/domain-model.pseudo.txt`
+   - `lastRunFolder/modules/<Name>/flows.pseudo.txt`
+   - `lastRunFolder/modules/<Name>/pages.pseudo.txt`
    - `lastRunFolder/modules/<Name>/resources.pseudo.txt`
-5. Write module narrative only to `modules/<Name>/INTERPRETATION.md` (app-level narrative writes are handled in step 3).
+5. Write module narrative only to `modules/<Name>/INTERPRETATION.md`.
 6. Resolve items in `_reports/UNKNOWN_TODO.md` when the source run folder provides enough evidence.
-7. Re-run scaffold validation and quality gate from the creator package.
+7. Re-run scaffold validation and the quality gate from the creator package.
 
 ## Guardrails
 
@@ -72,7 +70,7 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
   - module-level narrative writes are allowed in:
     - `modules/<Name>/INTERPRETATION.md`
   - `_reports/UNKNOWN_TODO.md` may be updated when resolving items.
-- Generic KB "read-only" rules apply to normal interpretation only; they do not block `/enrichkb`.
+- Generic KB read-only rules apply to normal interpretation only; they do not block `/enrichkb`.
 - Reading source data in `lastRunFolder` is allowed for this workflow.
 - Never remove export-backed data.
 - For module docs, write only inside `INTERPRETATION.md`:
@@ -80,16 +78,15 @@ If `lastRunFolder` is missing or does not exist, stop and tell the user to run `
   - `## Domain Narrative`
   - `## Flow Narrative`
   - `## Page Narrative`
-- Never change pointer/evidence blocks, required headings, table structures, anchors, or link targets.
-- Never edit L0 abstract or L1 overview files — these are pipeline-owned.
+- Never change pointer blocks, evidence blocks, required headings, table structures, anchors, or link targets.
+- Never edit L0 abstract or L1 overview files - these are pipeline-owned.
 - Mark AI-added narratives as `Confidence: Inferred`.
 - Prioritise custom modules over marketplace and system modules.
-- Use collection abstracts (`INDEX.abstract.md`) and L0 files for triage before reading full L1 overviews.
+- Use collection abstracts for triage before reading full L1 overviews.
 - Do not preload all custom-module pseudo exports in one pass.
-- Prefer heading-targeted reads/searches for large files instead of full raw-file loads.
-- Do not parse wizard/terminal run logs for enrichment content.
-- Do not read `CURRENT_RUN.md`, console transcripts, or validation reports (`quality-gate-latest.*`, `l2-contract-debt.*`, scaffold output) during normal enrichment.
-- Read validation reports only when diagnosing a specific failed post-enrichment validation.
+- Prefer heading-targeted reads or searches for large files instead of full raw-file loads.
+- Do not parse CLI or terminal run logs for enrichment content.
+- Do not read `CURRENT_RUN.md`, console transcripts, or validation reports during normal enrichment unless diagnosing a failed post-enrichment validation.
 
 ## Completion report
 

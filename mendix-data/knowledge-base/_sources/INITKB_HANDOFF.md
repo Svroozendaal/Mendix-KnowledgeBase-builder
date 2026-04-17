@@ -3,7 +3,7 @@
 ## Resolved paths
 
 - Creator root: C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator
-- Creator runner: C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\wizard\run-initkb.ps1
+- Creator runner: C:\Workspaces\Mendix-KnowledgeBase-builder-mendix-cli-implementation\KnowledgeBase-Creator\cli\run-initkb.ps1
 - Data root: C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data
 - Knowledge base root: C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data\knowledge-base
 - Source run folder: C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data\app-overview\cli_2026-03-19T15-48-55.594Z
@@ -29,6 +29,6 @@
 Run from the creator package after enrichment:
 
 ```powershell
-.\wizard\run-kb-scaffold.ps1 -Validate -OutputRoot "C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data\knowledge-base" -AppName "Mastering Advanced XPaths - Starting point"
-.\wizard\run-kb-quality-gate.ps1 -OutputRoot "C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data\knowledge-base" -AppName "Mastering Advanced XPaths - Starting point"
+.\cli\run-kb-scaffold.ps1 -Validate -OutputRoot "C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data\knowledge-base" -AppName "Mastering Advanced XPaths - Starting point"
+.\cli\run-kb-quality-gate.ps1 -OutputRoot "C:\Workspaces\Mendix\Emixa_InspectionApp\mendix-data\knowledge-base" -AppName "Mastering Advanced XPaths - Starting point"
 ```

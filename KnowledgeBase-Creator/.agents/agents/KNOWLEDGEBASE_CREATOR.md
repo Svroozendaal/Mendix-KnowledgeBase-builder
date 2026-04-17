@@ -1,64 +1,62 @@
 # KNOWLEDGEBASE_CREATOR
 ## Role
 
-Top-level orchestrator for creating and enriching the knowledge base.
+Top-level orchestrator for creating and enriching a knowledge base from source.
 
-## Two-Phase Process
+## Contract
 
-### Phase 1: Pipeline (PowerShell)
+This agent owns the full creator flow:
 
-The pipeline handles all deterministic data extraction. Run it first:
+1. Resolve the source application and target output paths.
+2. Run the deterministic pipeline.
+3. Run creator-side AI enrichment.
+4. Revalidate the generated KB.
+5. Report the outcome.
 
-```powershell
-.\wizard\run-dump-parser.ps1
-```
+## Deterministic Pipeline
 
-This executes 8 steps:
-1. Dump `.mpr` via `mx.exe`
-2. Parse dump into structured exports
-3. Scaffold KB folder structure
-4. Seed templates and `.agents/` framework
-5. Compose all markdown files with export-backed data
-6. Validate scaffold completeness
-7. Run quality gate
-8. Run semantic benchmark
-
-**Wait for the pipeline to complete before proceeding to Phase 2.**
-
-Check the output for:
-- `Quality gate status: pass` - required
-- `Benchmark status: pass` or `fail` - non-strict mode allows fail
-- `KB folder:` path - note this for Phase 2
-
-### Phase 2: Enrichment (AI)
-
-After the pipeline completes, delegate enrichment to `OVERVIEW_KB_BUILDER`:
-
-1. Read `mendix-data/knowledge-base/ROUTING.md` to see what was generated.
-2. Read `mendix-data/knowledge-base/_reports/UNKNOWN_TODO.md` for unresolved items.
-3. Identify the source run folder from the pipeline output.
-4. Hand off to `.agents/agents/OVERVIEW_KB_BUILDER.md` with:
-   - The KB root path (`mendix-data/knowledge-base/`)
-   - The source run folder path
-   - The app name
-   - The list of custom modules to prioritise
-
-### Post-Enrichment Validation
-
-After enrichment, re-run validation:
+Preferred runner:
 
 ```powershell
-.\wizard\run-kb-scaffold.ps1 -Validate -OutputRoot mendix-data/knowledge-base -AppName <app-name>
-.\wizard\run-kb-quality-gate.ps1 -OutputRoot mendix-data/knowledge-base -AppName <app-name>
+.\cli\run-initkb.ps1 -OpenVsCode
 ```
 
-## Completion Contract
+The runner is responsible for:
+
+1. resolving the source `.mpr`
+2. selecting the extraction mode
+3. generating app-overview exports
+4. scaffolding the KB
+5. composing export-backed markdown
+6. running scaffold validation, quality gate, and benchmark
+7. writing `creator-link.json` and `INITKB_HANDOFF.md`
+
+Treat the pipeline as ready for enrichment only when the quality gate passes and both the KB root and source run folder exist.
+
+## Enrichment Phase
+
+After the pipeline completes:
+
+1. Use `.agents/skills/enrichkb/SKILL.md` as the enrichment workflow.
+2. Use the supporting Mendix enrichment skills for app-level, module-level, and routing enrichment.
+3. Prioritise custom modules.
+4. Keep deterministic files and evidence structures intact.
+
+## Post-Enrichment Validation
+
+```powershell
+.\cli\run-kb-scaffold.ps1 -Validate -OutputRoot mendix-data/knowledge-base -AppName <app-name>
+.\cli\run-kb-quality-gate.ps1 -OutputRoot mendix-data/knowledge-base -AppName <app-name>
+```
+
+## Completion Report
 
 Report:
-- App name
-- Source run folder
-- Module count (total, custom, marketplace)
-- Pipeline results (quality gate, benchmark scores)
-- Enrichment summary (files enriched, narratives added, unknowns resolved)
-- Remaining gaps
-- Validation results after enrichment
+
+- app name
+- KB root
+- source run folder
+- pipeline results
+- enrichment summary
+- remaining gaps
+- post-enrichment validation results

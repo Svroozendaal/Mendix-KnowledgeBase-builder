@@ -1,17 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "VVZ2nv2I9E4=",
+  "dgSpecHash": "kTLHf6di2BI=",
   "success": true,
-  "projectFilePath": "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator\\wizard\\src\\KnowledgeBaseCreator.Wizard\\KnowledgeBaseCreator.Wizard.csproj",
+  "projectFilePath": "C:\\Workspace\\Mendix-KnowledgeBase-builder - CLI\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator\\wizard\\src\\KnowledgeBaseCreator.Wizard\\KnowledgeBaseCreator.Wizard.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.24\\microsoft.net.illink.tasks.8.0.24.nupkg.sha512",
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.24\\microsoft.netcore.app.ref.8.0.24.nupkg.sha512",
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.24\\microsoft.netcore.app.runtime.win-x64.8.0.24.nupkg.sha512",
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.24\\microsoft.windowsdesktop.app.ref.8.0.24.nupkg.sha512",
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.24\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.24.nupkg.sha512",
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.24\\microsoft.aspnetcore.app.ref.8.0.24.nupkg.sha512",
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.24\\microsoft.aspnetcore.app.runtime.win-x64.8.0.24.nupkg.sha512",
-    "C:\\Users\\Simon\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.24\\microsoft.netcore.app.host.win-x64.8.0.24.nupkg.sha512"
+    "C:\\Users\\SimonvanRoozendaal\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.25\\microsoft.net.illink.tasks.8.0.25.nupkg.sha512",
+    "C:\\Users\\SimonvanRoozendaal\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.25\\microsoft.netcore.app.runtime.win-x64.8.0.25.nupkg.sha512",
+    "C:\\Users\\SimonvanRoozendaal\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.25\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.25.nupkg.sha512",
+    "C:\\Users\\SimonvanRoozendaal\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.25\\microsoft.aspnetcore.app.runtime.win-x64.8.0.25.nupkg.sha512"
   ],
   "logs": []
 }

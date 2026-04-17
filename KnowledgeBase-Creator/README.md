@@ -1,177 +1,112 @@
 # KnowledgeBase Creator
 
-Standalone Windows toolchain for generating an AI-usable Mendix knowledge base from a `.mpr` file while preserving the KB file contract.
+Standalone CLI toolset for generating and enriching an AI-usable Mendix knowledge base from a `.mpr` file while preserving the KB file contract.
 
-Root layout contract:
+This package is now CLI-only. The Windows wizard executable, Copilot UI, and Mendix extension have been removed.
 
-- `.env`
-- `AGENTS.md`
-- `README.md`
-- `KnowledgeBaseCreator.exe`
-- all folders
+## Public Entry Points
 
-## Default Entry Point (Wizard EXE)
+Public repo-level skills:
 
-Run:
+- `../tool-usage/knowledgebase/SKILL.md` - end-to-end KB creation
+- `../tool-usage/knowledgebase-reader/SKILL.md` - KB interpretation and routing
 
-```powershell
-.\KnowledgeBaseCreator.exe
-```
+Creator-package internals:
 
-The wizard guides you through:
+- `.\cli\run-initkb.ps1` - preferred end-to-end runner
+- `.\cli\run-enrichkb.ps1` - enrichment-only runner
+- `.\cli\run-dump-parser.ps1` - deterministic pipeline primitive
+- `.\AGENTS.md` - creator bootstrap for AI agents
 
-1. Selecting the source `.mpr` file.
-2. Choosing extraction mode (`MxCli` by default, `LegacyDumpParser` as explicit fallback).
-3. Running the full pipeline (extract -> scaffold -> compose -> validate -> quality -> benchmark).
-4. Showing the Mendix app folder path that was used as source.
+## Output Layout
 
-By default, output is written to:
-
-`<mpr-folder>\mendix-data\`
+By default, output is written to `<mpr-folder>\mendix-data\`.
 
 Generated structure:
 
 - `mendix-data/app-overview/<run-folder>/` - parsed model exports
-- `mendix-data/dumps/<timestamp>_<app>/` - raw dump files (legacy extractor only)
-- `mendix-data/knowledge-base/` - the standalone AI-navigable KB
-  - `knowledge-base/.agents/` - AI interpretation agents (shipped with KB)
-  - `knowledge-base/CLAUDE.md` - AI bootstrap entry point
-  - `knowledge-base/_sources/creator-link.json` - linkage back to this creator package for `/enrichkb` and `/initkb`
+- `mendix-data/dumps/<timestamp>_<app>/` - raw dump files for the legacy extractor only
+- `mendix-data/knowledge-base/` - standalone KB output
+  - `knowledge-base/.agents/` - rich interpretation agents shipped with the KB
+  - `knowledge-base/READER.md` - KB reader entry point
+  - `knowledge-base/_sources/creator-link.json` - linkage back to this creator package
 
-Each `mendix-data` folder is treated as one app workspace. The generated knowledge base lives directly inside `knowledge-base`, not inside `knowledge-base/<app-name>`.
-The `knowledge-base/` folder is self-contained and can be copied/shared standalone.
-If a non-empty `mendix-data` folder already exists, a fresh extraction run now fails instead of overwriting it.
+Each `mendix-data` folder is treated as one app workspace. The generated KB lives directly inside `knowledge-base/`.
 
-## AI-Assisted KB Creation
+## Environment Contract
 
-Use the `/initkb` slash command from inside `KnowledgeBase-Creator` to run the full pipeline and then guide AI enrichment with the existing creator agents and skills:
-
-```
-/initkb
-```
-
-This is a creator-package command, not a generated-KB command. It runs the pipeline (Phase 1), continues with semantic enrichment guidance (Phase 2), and finishes with scaffold and quality-gate revalidation. See `AGENTS.md` for the full creation workflow.
-
-If the pipeline already completed and you only want phase 2 AI enrichment, use:
-
-```text
-/enrichkb
-```
-
-Inside a generated KB, `/enrichkb` is the explicit in-place AI enrichment command. `/initkb` remains available as the full rebuild or compatibility path.
-
-The executable backend behind `/initkb` is:
-
-```powershell
-.\wizard\run-initkb.ps1
-```
-
-## Script Locations
-
-Core pipeline scripts live in `wizard/`:
-
-- `wizard/run-initkb.ps1`
-- `wizard/run-dump-parser.ps1`
-- `wizard/run-kb-scaffold.ps1`
-- `wizard/run-kb-compose.ps1`
-- `wizard/run-kb-quality-gate.ps1`
-- `wizard/run-kb-semantic-benchmark.ps1`
-
-## `.env` + Environment Contract
-
-Script mode still supports `.env` in `KnowledgeBase-Creator/.env`.
+`.env` in `KnowledgeBase-Creator/.env` is still supported.
 
 Runtime precedence:
 
 1. Process environment variables
-2. `.env` values
+2. `.env`
 3. Built-in defaults
-
-Extraction mode contract:
-
-- `-ExtractionMode LegacyDumpParser|MxCli` on `run-initkb.ps1` and `run-dump-parser.ps1`
-- `KB_EXTRACTION_MODE=LegacyDumpParser|MxCli` via process environment or `.env`
-- Prompt 06 default: `MxCli`
-- `LegacyDumpParser` remains available as explicit fallback
 
 Common settings:
 
 - `APP_NAME`
-- `MPR_FILE_PATH` (or `MENDIX_MPR_PATH`)
-- `MENDIX_MX_EXE` (preferred explicit `mx.exe` path)
-- `STUDIO_PRO_PATH` / `MENDIX_STUDIO_PRO_PATH` (fallback when `MENDIX_MX_EXE` is not set)
-- `MENDIX_DATA_ROOT` (default: `../mendix-data` in script mode)
-- `MENDIX_MODULES` (default: `*`)
-- `KB_EXTRACTION_MODE` (`LegacyDumpParser|MxCli`, default: `MxCli`)
-- `STRICT_MODE` (`true|false`, default: `false`)
-- `CUSTOM_SCENARIOS_PATH` (optional)
-- `DUMP_FILE_PATH` (for `-SkipDump` without `-SkipParser`)
+- `MPR_FILE_PATH` or `MENDIX_MPR_PATH`
+- `MENDIX_MX_EXE`
+- `STUDIO_PRO_PATH` or `MENDIX_STUDIO_PRO_PATH`
+- `MENDIX_DATA_ROOT`
+- `MENDIX_MODULES`
+- `KB_EXTRACTION_MODE` (`LegacyDumpParser|MxCli`, default `MxCli`)
+- `STRICT_MODE`
+- `CUSTOM_SCENARIOS_PATH`
+- `DUMP_FILE_PATH`
 
-Backward-compatible aliases remain accepted (`MENDIX_APP_PATH`, `STRICT_QUALITY_GATE`, `CUSTOM_SCENARIOS`, `DUMP_PATH`).
+Backward-compatible aliases still resolve where supported by the scripts.
 
-When no MPR path is configured, script mode also auto-detects a single `.mpr` in the parent folder of `KnowledgeBase-Creator` (or in `KnowledgeBase-Creator` itself).
+## CLI Usage
 
-## Script Usage (Advanced / CI)
-
-Full run:
+Full creation flow:
 
 ```powershell
-.\wizard\run-initkb.ps1 -OpenVsCode
+.\cli\run-initkb.ps1 -OpenVsCode
 ```
 
-AI enrichment only:
-
-```text
-/enrichkb
-```
-
-Target an existing generated KB:
+Enrichment only:
 
 ```powershell
-.\wizard\run-initkb.ps1 -KnowledgeBaseRoot "C:\path\to\knowledge-base" -OpenVsCode
+.\cli\run-enrichkb.ps1 -KnowledgeBaseRoot "C:\path\to\knowledge-base"
 ```
 
 Pipeline primitive only:
 
 ```powershell
-.\wizard\run-dump-parser.ps1
+.\cli\run-dump-parser.ps1
 ```
 
 Explicit legacy fallback:
 
 ```powershell
-.\wizard\run-dump-parser.ps1 -ExtractionMode LegacyDumpParser
+.\cli\run-dump-parser.ps1 -ExtractionMode LegacyDumpParser
 ```
 
 Explicit MxCli mode:
 
 ```powershell
-.\wizard\run-dump-parser.ps1 -ExtractionMode MxCli
+.\cli\run-dump-parser.ps1 -ExtractionMode MxCli
 ```
 
-Resume from existing parser run folder:
+Resume from an existing run folder:
 
 ```powershell
-.\wizard\run-dump-parser.ps1 -SkipDump -SkipParser -SkipScaffold -RunFolder "mendix-data/app-overview/cli_2026-03-05T14-38-13.865Z"
+.\cli\run-dump-parser.ps1 -SkipDump -SkipParser -SkipScaffold -RunFolder "mendix-data/app-overview/cli_2026-03-05T14-38-13.865Z"
 ```
 
-## Quality + Benchmark Policy
+## Quality and Benchmark
 
-- `run-kb-quality-gate.ps1` fails on structural issues or semantic coverage below thresholds:
-  - Page-flow linkage: `>=95%`
-  - Flow entity coverage: `>=90%`
-  - Entity lifecycle mapping: `>=90%`
-- `run-kb-semantic-benchmark.ps1` always runs structural scenarios:
-  - pass requires `>=80/100` and no critical failures.
-- App-specific benchmark is optional (`-CustomScenarios`):
-  - pass requires `>=85/100` and no critical failures.
-- Final benchmark score:
-  - structural-only when no custom scenarios;
-  - weighted score when both run (default weights: structural `0.7`, custom `0.3`).
+- `run-kb-quality-gate.ps1` fails on structural issues or semantic coverage below thresholds.
+- `run-kb-semantic-benchmark.ps1` always runs structural scenarios.
+- App-specific custom scenarios remain optional.
 
-## CI Regression
+Do not report completion unless scaffold validation and the quality gate both pass.
+
+## Regression
 
 - Reference export fixture: `tests/reference/app-overview/cli_reference_minimal`
 - Baseline KB snapshot: `tests/reference/baseline-kb/ReferenceApp`
 - Regression runner: `KnowledgeBase-Creator/scripts/run-reference-regression.ps1`
-- GitHub Actions workflow: `.github/workflows/kb-regression.yml` (runs on PR + push to `main`)
+- CI workflow: `.github/workflows/kb-regression.yml`

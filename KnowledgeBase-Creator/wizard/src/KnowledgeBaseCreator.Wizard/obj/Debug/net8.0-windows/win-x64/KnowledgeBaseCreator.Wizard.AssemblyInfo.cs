@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KnowledgeBaseCreator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+950ac97fe3da97f0b7be6decb7826d29cc3ef00c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b2747f3145a7c06aa80dad4d1a6cdf6ba07a3e0")]
 [assembly: System.Reflection.AssemblyProductAttribute("KnowledgeBaseCreator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KnowledgeBaseCreator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

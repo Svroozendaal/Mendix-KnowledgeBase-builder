@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj": {}
+    "C:\\Workspace\\Mendix-KnowledgeBase-builder - CLI\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj": {}
   },
   "projects": {
-    "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj": {
+    "C:\\Workspace\\Mendix-KnowledgeBase-builder - CLI\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj",
+        "projectUniqueName": "C:\\Workspace\\Mendix-KnowledgeBase-builder - CLI\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj",
         "projectName": "MendixModelOverviewParser",
-        "projectPath": "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj",
-        "packagesPath": "C:\\Users\\Simon\\.nuget\\packages\\",
-        "outputPath": "C:\\Workspaces\\Mendix-KnowledgeBase-builder-mendix-cli-implementation\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\obj\\",
+        "projectPath": "C:\\Workspace\\Mendix-KnowledgeBase-builder - CLI\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\MendixModelOverviewParser.csproj",
+        "packagesPath": "C:\\Users\\SimonvanRoozendaal\\.nuget\\packages\\",
+        "outputPath": "C:\\Workspace\\Mendix-KnowledgeBase-builder - CLI\\Mendix-KnowledgeBase-builder\\KnowledgeBase-Creator\\Mendix-model-overview-parser\\src\\mendix-model-overview-parser\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Simon\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\SimonvanRoozendaal\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -54,26 +53,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.24, 8.0.24]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.24, 8.0.24]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.24, 8.0.24]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.419/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

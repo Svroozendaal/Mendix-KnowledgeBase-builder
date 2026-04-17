@@ -1,13 +1,13 @@
 ---
 name: initkb
-description: Run the full KnowledgeBase Creator workflow from the creator package. Use when the user wants to initialise, rebuild, or regenerate a Mendix knowledge base by calling the targetable `wizard/run-initkb.ps1` backend and then continuing with manual AI enrichment.
+description: Run the full KnowledgeBase Creator workflow from the creator package. Use when the user wants to initialise, rebuild, or regenerate a Mendix knowledge base by calling the targetable `cli/run-initkb.ps1` backend and then continuing with creator-side AI enrichment.
 ---
 
 # INITKB
 
 ## Purpose
 
-Use `/initkb` as the creator-side shortcut backed by `.\wizard\run-initkb.ps1`.
+Use `/initkb` as the creator-side shortcut backed by `.\cli\run-initkb.ps1`.
 
 If the deterministic pipeline has already completed and only phase 2 is needed, use `/enrichkb` instead.
 
@@ -16,13 +16,13 @@ If the deterministic pipeline has already completed and only phase 2 is needed, 
 Run from the `KnowledgeBase-Creator` root:
 
 ```powershell
-.\wizard\run-initkb.ps1 -OpenVsCode
+.\cli\run-initkb.ps1 -OpenVsCode
 ```
 
 To rebuild an existing generated KB from the creator package:
 
 ```powershell
-.\wizard\run-initkb.ps1 -KnowledgeBaseRoot "<path-to-knowledge-base>" -OpenVsCode
+.\cli\run-initkb.ps1 -KnowledgeBaseRoot "<path-to-knowledge-base>" -OpenVsCode
 ```
 
 ## Preconditions
@@ -30,17 +30,17 @@ To rebuild an existing generated KB from the creator package:
 Before invoking the runner, verify:
 
 - `.env` exists when the runner must fall back to creator defaults
-- `.\wizard\run-initkb.ps1` exists in the creator package
+- `.\cli\run-initkb.ps1` exists in the creator package
 - either `MprPath` or creator defaults can resolve the source `.mpr`
 - either `MxPath` or creator defaults can resolve `mx.exe`
 
 ## Runner behaviour
 
-`.\wizard\run-initkb.ps1` is responsible for:
+`.\cli\run-initkb.ps1` is responsible for:
 
 - normalising `DataRoot` or `KnowledgeBaseRoot`
 - archiving an existing non-empty `mendix-data` workspace before rebuild
-- running `wizard/run-dump-parser.ps1`
+- running `cli/run-dump-parser.ps1`
 - writing `knowledge-base/_sources/creator-link.json`
 - writing `knowledge-base/_sources/INITKB_HANDOFF.md`
 - optionally opening the resolved `mendix-data` workspace in VS Code
@@ -59,10 +59,9 @@ After the runner completes:
 
 1. Read `AGENTS.md`
 2. Read `.agents/agents/KNOWLEDGEBASE_CREATOR.md`
-3. Read `.agents/agents/OVERVIEW_KB_BUILDER.md`
-4. Read the generated `knowledge-base/_sources/INITKB_HANDOFF.md`
+3. Read the generated `knowledge-base/_sources/INITKB_HANDOFF.md`
 
-Use the handoff file as the source of truth for the KB path, source run folder, archive path, revalidation commands, and ready-to-paste enrichment prompt.
+Use the handoff file as the source of truth for the KB path, source run folder, archive path, and revalidation commands.
 
 Prioritise custom modules. Do not change required headings, table structures, or link targets.
 

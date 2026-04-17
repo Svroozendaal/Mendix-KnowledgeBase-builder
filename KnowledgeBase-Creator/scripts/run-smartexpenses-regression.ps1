@@ -12,8 +12,8 @@ $ErrorActionPreference = "Stop"
 
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = (Resolve-Path (Join-Path $scriptRoot "..\..")).Path
-$runDumpParserScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/run-dump-parser.ps1"
-$resolverScript = Join-Path $repoRoot "KnowledgeBase-Creator/wizard/lib/app-overview-resolver.ps1"
+$runDumpParserScript = Join-Path $repoRoot "KnowledgeBase-Creator/cli/run-dump-parser.ps1"
+$resolverScript = Join-Path $repoRoot "KnowledgeBase-Creator/cli/lib/app-overview-resolver.ps1"
 . $resolverScript
 
 function Write-JsonUtf8NoBom {

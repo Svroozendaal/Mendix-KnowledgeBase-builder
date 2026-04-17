@@ -1,0 +1,1056 @@
+using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
+
+namespace KnowledgeBaseCreator.Wizard;
+
+internal enum AiProvider
+{
+    ClaudeCli,
+    CodexCli,
+    ClaudeApi,
+}
+
+internal enum ExtractionMode
+{
+    LegacyDumpParser,
+    MxCli,
+}
+
+internal sealed class AiSettings
+{
+    public AiProvider Provider { get; set; } = AiProvider.ClaudeCli;
+
+    // Claude CLI
+    public string? ClaudeCliPath { get; set; }
+
+    // Codex CLI
+    public string? CodexCliPath { get; set; }
+
+    // Claude API
+    public string? ClaudeApiKey { get; set; }
+    public string? ClaudeApiModel { get; set; } = "claude-sonnet-4-20250514";
+}
+
+internal sealed class WizardConfig
+{
+    public string? LastMprPath { get; set; }
+    public string? LastAppName { get; set; }
+    public string? LastInstallRoot { get; set; }
+    public string? LastMxExePath { get; set; }
+    public string? LastDataRoot { get; set; }
+    public string? LastClaudePath { get; set; }
+    [JsonPropertyName("LastExtractionMode")]
+    public string? LastExtractionMode { get; set; }
+    public bool? AutoEnrichAfterPipeline { get; set; }
+    public AiSettings? AiSettings { get; set; }
+}
+
+internal sealed class ModuleInfo
+{
+    public string Name { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public int EntityCount { get; set; }
+    public int FlowCount { get; set; }
+    public int PageCount { get; set; }
+}
+
+internal sealed class DetectionResult
+{
+    public bool Success { get; set; }
+    public bool UsedFallback { get; set; }
+    public string? RequiredVersion { get; set; }
+    public string? SelectedMxPath { get; set; }
+    public string? Error { get; set; }
+    public List<string> DiscoveredMxPaths { get; } = new();
+}
+
+internal static class WizardRuntime
+{
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        WriteIndented = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    };
+
+    public static string FindWizardRoot(string startPath)
+    {
+        foreach (var candidate in EnumerateAncestorPaths(startPath))
+        {
+            if (File.Exists(Path.Combine(candidate, "run-dump-parser.ps1")))
+            {
+                return candidate;
+            }
+
+            var childWizard = Path.Combine(candidate, "wizard");
+            if (File.Exists(Path.Combine(childWizard, "run-dump-parser.ps1")))
+            {
+                return childWizard;
+            }
+        }
+
+        foreach (var candidate in EnumerateAncestorPaths(Environment.CurrentDirectory))
+        {
+            if (File.Exists(Path.Combine(candidate, "run-dump-parser.ps1")))
+            {
+                return candidate;
+            }
+
+            var childWizard = Path.Combine(candidate, "wizard");
+            if (File.Exists(Path.Combine(childWizard, "run-dump-parser.ps1")))
+            {
+                return childWizard;
+            }
+        }
+
+        throw new DirectoryNotFoundException("Could not locate wizard root (missing run-dump-parser.ps1).");
+    }
+
+    public static WizardConfig LoadConfig(string path)
+    {
+        if (!File.Exists(path))
+        {
+            return new WizardConfig();
+        }
+
+        try
+        {
+            var json = File.ReadAllText(path);
+            return JsonSerializer.Deserialize<WizardConfig>(json, JsonOptions) ?? new WizardConfig();
+        }
+        catch
+        {
+            return new WizardConfig();
+        }
+    }
+
+    public static void SaveConfig(string path, WizardConfig config)
+    {
+        var json = JsonSerializer.Serialize(config, JsonOptions);
+        File.WriteAllText(path, json);
+    }
+
+    public static string ResolveInstallRootDefault(WizardConfig config)
+    {
+        if (!string.IsNullOrWhiteSpace(config.LastInstallRoot))
+        {
+            return config.LastInstallRoot!;
+        }
+
+        var envRoot = Environment.GetEnvironmentVariable("MENDIX_INSTALL_ROOT");
+        if (!string.IsNullOrWhiteSpace(envRoot))
+        {
+            return envRoot.Trim();
+        }
+
+        return @"C:\Program Files\Mendix";
+    }
+
+    public static ExtractionMode ResolveExtractionModeDefault(WizardConfig config)
+    {
+        if (!string.IsNullOrWhiteSpace(config.LastExtractionMode))
+        {
+            if (Enum.TryParse<ExtractionMode>(config.LastExtractionMode, ignoreCase: true, out var parsed))
+                return parsed;
+        }
+
+        var envValue = Environment.GetEnvironmentVariable("KB_EXTRACTION_MODE");
+        if (!string.IsNullOrWhiteSpace(envValue) &&
+            Enum.TryParse<ExtractionMode>(envValue.Trim(), ignoreCase: true, out var envMode))
+        {
+            return envMode;
+        }
+
+        return ExtractionMode.MxCli;
+    }
+
+    public static string ValidateMprPath(string path)
+    {
+        var fullPath = Path.GetFullPath(path.Trim().Trim('"'));
+        if (!File.Exists(fullPath))
+        {
+            throw new FileNotFoundException($"MPR file not found: {fullPath}");
+        }
+        if (!string.Equals(Path.GetExtension(fullPath), ".mpr", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new ArgumentException($"File is not an .mpr: {fullPath}");
+        }
+        return fullPath;
+    }
+
+    public static string ValidateMxPath(string path)
+    {
+        var fullPath = Path.GetFullPath(path.Trim().Trim('"'));
+        if (!File.Exists(fullPath))
+        {
+            throw new FileNotFoundException($"mx.exe not found: {fullPath}");
+        }
+        if (!string.Equals(Path.GetFileName(fullPath), "mx.exe", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new ArgumentException($"Path is not mx.exe: {fullPath}");
+        }
+        return fullPath;
+    }
+
+    public static string GetSuggestedDataRoot(string mprPath)
+    {
+        return Path.Combine(Path.GetDirectoryName(mprPath)!, "mendix-data");
+    }
+
+    public static string NormalizeDataRootInput(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            throw new ArgumentException("Output data root is required.");
+        }
+
+        var fullPath = Path.GetFullPath(path.Trim().Trim('"'));
+        if (File.Exists(fullPath))
+        {
+            throw new ArgumentException($"Output data root points to a file: {fullPath}");
+        }
+
+        if (string.Equals(Path.GetFileName(fullPath), "knowledge-base", StringComparison.OrdinalIgnoreCase))
+        {
+            var parent = Directory.GetParent(fullPath)?.FullName;
+            if (string.IsNullOrWhiteSpace(parent))
+            {
+                throw new ArgumentException($"Could not derive mendix-data folder from knowledge-base path: {fullPath}");
+            }
+
+            return parent;
+        }
+
+        return fullPath;
+    }
+
+    public static DetectionResult DetectMxPath(string mprPath, string installRoot)
+    {
+        var result = new DetectionResult();
+
+        if (!Directory.Exists(installRoot))
+        {
+            result.Error = $"Install root not found: {installRoot}";
+            return result;
+        }
+
+        var candidates = GetCandidateMxPaths(installRoot).ToList();
+        result.DiscoveredMxPaths.AddRange(candidates);
+        if (candidates.Count == 0)
+        {
+            result.Error = $"No mx.exe files found under {installRoot}";
+            return result;
+        }
+
+        var probeMx = candidates[0];
+        if (!TryRunShowVersion(probeMx, mprPath, out var showVersionOutput, out var showVersionError))
+        {
+            result.Error = $"Failed to run `mx.exe show-version`: {showVersionError}";
+            return result;
+        }
+
+        var requiredVersion = ParseVersion(showVersionOutput);
+        if (string.IsNullOrWhiteSpace(requiredVersion))
+        {
+            result.Error = $"Could not parse Mendix version from output: {showVersionOutput}";
+            return result;
+        }
+
+        result.RequiredVersion = requiredVersion;
+
+        var exactCandidates = new[]
+        {
+            Path.Combine(installRoot, requiredVersion, "modeler", "mx.exe"),
+            Path.Combine(installRoot, requiredVersion, "mx.exe"),
+        };
+
+        foreach (var candidate in exactCandidates)
+        {
+            if (File.Exists(candidate))
+            {
+                result.Success = true;
+                result.SelectedMxPath = candidate;
+                result.UsedFallback = false;
+                return result;
+            }
+        }
+
+        var fallback = FindMajorMinorFallback(requiredVersion, installRoot);
+        if (!string.IsNullOrWhiteSpace(fallback))
+        {
+            result.Success = true;
+            result.SelectedMxPath = fallback;
+            result.UsedFallback = true;
+            return result;
+        }
+
+        result.Error = $"No matching mx.exe installation found for required version {requiredVersion}.";
+        return result;
+    }
+
+    public static async Task<int> RunPipelineAsync(
+        string packageRoot,
+        string wizardRoot,
+        string mprPath,
+        string appName,
+        string? mxPath,
+        string dataRoot,
+        ExtractionMode extractionMode,
+        Action<string>? log = null)
+    {
+        var runScript = Path.Combine(wizardRoot, "run-dump-parser.ps1");
+        if (!File.Exists(runScript))
+        {
+            throw new FileNotFoundException($"Pipeline script not found: {runScript}");
+        }
+
+        var psi = new ProcessStartInfo
+        {
+            FileName = "powershell",
+            UseShellExecute = false,
+            WorkingDirectory = packageRoot,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true,
+        };
+        psi.ArgumentList.Add("-NoProfile");
+        psi.ArgumentList.Add("-ExecutionPolicy");
+        psi.ArgumentList.Add("Bypass");
+        psi.ArgumentList.Add("-File");
+        psi.ArgumentList.Add(runScript);
+
+        psi.Environment["MPR_FILE_PATH"] = mprPath;
+        psi.Environment["APP_NAME"] = appName;
+        psi.Environment["MENDIX_DATA_ROOT"] = dataRoot;
+        psi.Environment["MENDIX_APP_PATH"] = Path.GetDirectoryName(mprPath)!;
+        psi.Environment["KB_EXTRACTION_MODE"] = extractionMode.ToString();
+
+        if (extractionMode == ExtractionMode.LegacyDumpParser)
+        {
+            if (string.IsNullOrWhiteSpace(mxPath))
+            {
+                throw new InvalidOperationException("LegacyDumpParser mode requires mx.exe.");
+            }
+
+            psi.Environment["MENDIX_MX_EXE"] = mxPath;
+            var studioProPath = InferStudioProPath(mxPath);
+            if (!string.IsNullOrWhiteSpace(studioProPath))
+            {
+                psi.Environment["STUDIO_PRO_PATH"] = studioProPath;
+                psi.Environment["MENDIX_STUDIO_PRO_PATH"] = studioProPath;
+            }
+        }
+
+        using var process = new Process { StartInfo = psi, EnableRaisingEvents = true };
+        process.OutputDataReceived += (_, e) => { if (!string.IsNullOrWhiteSpace(e.Data)) { log?.Invoke(e.Data); } };
+        process.ErrorDataReceived += (_, e) => { if (!string.IsNullOrWhiteSpace(e.Data)) { log?.Invoke($"[ERR] {e.Data}"); } };
+
+        if (!process.Start())
+        {
+            throw new InvalidOperationException("Failed to start PowerShell pipeline process.");
+        }
+
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        await process.WaitForExitAsync().ConfigureAwait(false);
+        return process.ExitCode;
+    }
+
+    public static List<ModuleInfo> LoadModuleList(string kbRoot)
+    {
+        var sourcesDir = Path.Combine(kbRoot, "_sources");
+        var creatorLinkPath = Path.Combine(sourcesDir, "creator-link.json");
+        if (!File.Exists(creatorLinkPath))
+        {
+            return [];
+        }
+
+        string? runFolder = null;
+        try
+        {
+            var linkJson = File.ReadAllText(creatorLinkPath);
+            using var doc = JsonDocument.Parse(linkJson);
+            if (doc.RootElement.TryGetProperty("lastRunFolder", out var rf))
+                runFolder = rf.GetString();
+
+            // If lastRunFolder doesn't exist, try currentAliasPath
+            if (string.IsNullOrWhiteSpace(runFolder) || !Directory.Exists(runFolder))
+            {
+                if (doc.RootElement.TryGetProperty("currentAliasPath", out var ca))
+                {
+                    var candidate = ca.GetString();
+                    if (!string.IsNullOrWhiteSpace(candidate) && Directory.Exists(candidate))
+                        runFolder = candidate;
+                }
+            }
+
+            // Fall back: derive from KB root
+            if (string.IsNullOrWhiteSpace(runFolder) || !Directory.Exists(runFolder))
+            {
+                var dataRoot = Directory.GetParent(kbRoot)?.FullName;
+                if (!string.IsNullOrWhiteSpace(dataRoot))
+                {
+                    var localCurrent = Path.Combine(dataRoot, "app-overview", "current");
+                    if (Directory.Exists(localCurrent))
+                        runFolder = localCurrent;
+                }
+            }
+        }
+        catch
+        {
+            return [];
+        }
+
+        if (string.IsNullOrWhiteSpace(runFolder))
+            return [];
+
+        var allModulesPath = Path.Combine(runFolder, "general", "all-modules.json");
+        if (!File.Exists(allModulesPath))
+            return [];
+
+        try
+        {
+            var modulesJson = File.ReadAllText(allModulesPath);
+            using var doc = JsonDocument.Parse(modulesJson);
+
+            if (!doc.RootElement.TryGetProperty("modules", out var modulesArray))
+                return [];
+
+            var result = new List<ModuleInfo>();
+            foreach (var m in modulesArray.EnumerateArray())
+            {
+                var name = m.TryGetProperty("module", out var n) ? n.GetString() : null;
+                var category = m.TryGetProperty("category", out var c) ? c.GetString() : "Unknown";
+                if (string.IsNullOrWhiteSpace(name)) continue;
+
+                result.Add(new ModuleInfo
+                {
+                    Name = name!,
+                    Category = category ?? "Unknown",
+                    EntityCount = m.TryGetProperty("entityCount", out var ec) ? ec.GetInt32() : 0,
+                    FlowCount = m.TryGetProperty("flowCount", out var fc) ? fc.GetInt32() : 0,
+                    PageCount = m.TryGetProperty("pageCount", out var pc) ? pc.GetInt32() : 0,
+                });
+            }
+
+            return result;
+        }
+        catch
+        {
+            return [];
+        }
+    }
+
+    public static async Task<int> UpdateKbAgentsAsync(
+        string packageRoot,
+        string kbRoot,
+        Action<string>? log = null)
+    {
+        var agentsSource = Path.Combine(packageRoot, "artifacts", ".agents");
+        if (!Directory.Exists(agentsSource))
+        {
+            log?.Invoke($"ERROR: Agents source not found: {agentsSource}");
+            return 1;
+        }
+
+        var agentsDest = Path.Combine(kbRoot, ".agents");
+
+        return await Task.Run(() =>
+        {
+            try
+            {
+                if (Directory.Exists(agentsDest))
+                {
+                    log?.Invoke($"Removing existing .agents folder: {agentsDest}");
+                    Directory.Delete(agentsDest, recursive: true);
+                }
+
+                log?.Invoke($"Copying agents from: {agentsSource}");
+                CopyDirectoryRecursive(agentsSource, agentsDest);
+                log?.Invoke($"Agents updated: {agentsDest}");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                log?.Invoke($"ERROR: {ex.Message}");
+                return 1;
+            }
+        });
+    }
+
+    private static void CopyDirectoryRecursive(string source, string destination)
+    {
+        Directory.CreateDirectory(destination);
+
+        foreach (var file in Directory.GetFiles(source))
+        {
+            File.Copy(file, Path.Combine(destination, Path.GetFileName(file)), overwrite: true);
+        }
+
+        foreach (var dir in Directory.GetDirectories(source))
+        {
+            CopyDirectoryRecursive(dir, Path.Combine(destination, Path.GetFileName(dir)));
+        }
+    }
+
+    public static async Task<int> RunEnrichmentAsync(
+        string packageRoot,
+        string wizardRoot,
+        string kbRoot,
+        string appName,
+        string? claudePath,
+        AiSettings? aiSettings = null,
+        string[]? enrichModules = null,
+        Action<string>? log = null)
+    {
+        var runScript = Path.Combine(wizardRoot, "run-enrichkb.ps1");
+        if (!File.Exists(runScript))
+        {
+            throw new FileNotFoundException($"Enrichment script not found: {runScript}");
+        }
+
+        var psi = new ProcessStartInfo
+        {
+            FileName = "powershell",
+            UseShellExecute = false,
+            WorkingDirectory = packageRoot,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true,
+        };
+        psi.ArgumentList.Add("-NoProfile");
+        psi.ArgumentList.Add("-ExecutionPolicy");
+        psi.ArgumentList.Add("Bypass");
+        psi.ArgumentList.Add("-File");
+        psi.ArgumentList.Add(runScript);
+
+        psi.Environment["KNOWLEDGE_BASE_ROOT"] = kbRoot;
+        psi.Environment["APP_NAME"] = appName;
+        psi.Environment["CREATOR_ROOT"] = packageRoot;
+
+        // Pass AI provider settings via environment variables
+        // These are picked up by wizard/lib/ai-provider.ps1
+        if (aiSettings is not null)
+        {
+            psi.Environment["AI_PROVIDER"] = aiSettings.Provider.ToString();
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.ClaudeCliPath))
+                psi.Environment["CLAUDE_CLI_PATH"] = aiSettings.ClaudeCliPath;
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.CodexCliPath))
+                psi.Environment["CODEX_CLI_PATH"] = aiSettings.CodexCliPath;
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.ClaudeApiKey))
+                psi.Environment["ANTHROPIC_API_KEY"] = aiSettings.ClaudeApiKey;
+
+            if (!string.IsNullOrWhiteSpace(aiSettings.ClaudeApiModel))
+                psi.Environment["CLAUDE_API_MODEL"] = aiSettings.ClaudeApiModel;
+        }
+        else if (!string.IsNullOrWhiteSpace(claudePath))
+        {
+            psi.Environment["CLAUDE_CLI_PATH"] = claudePath;
+        }
+
+        // Pass module filter (comma-separated list of module names)
+        if (enrichModules is { Length: > 0 })
+        {
+            psi.Environment["ENRICH_MODULES"] = string.Join(",", enrichModules);
+        }
+
+        using var process = new Process { StartInfo = psi, EnableRaisingEvents = true };
+        process.OutputDataReceived += (_, e) => { if (!string.IsNullOrWhiteSpace(e.Data)) { log?.Invoke(e.Data); } };
+        process.ErrorDataReceived += (_, e) => { if (!string.IsNullOrWhiteSpace(e.Data)) { log?.Invoke($"[ERR] {e.Data}"); } };
+
+        if (!process.Start())
+        {
+            throw new InvalidOperationException("Failed to start PowerShell enrichment process.");
+        }
+
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        await process.WaitForExitAsync().ConfigureAwait(false);
+        return process.ExitCode;
+    }
+
+    public static string? FindLatestRunFolder(string dataRoot)
+    {
+        var appOverviewRoot = Path.Combine(dataRoot, "app-overview");
+        if (!Directory.Exists(appOverviewRoot))
+        {
+            return null;
+        }
+
+        return Directory.GetDirectories(appOverviewRoot)
+            .Where(d => !string.Equals(Path.GetFileName(d), "current", StringComparison.OrdinalIgnoreCase))
+            .Where(d => File.Exists(Path.Combine(d, "manifest.json")))
+            .OrderByDescending(d => new DirectoryInfo(d).LastWriteTimeUtc)
+            .FirstOrDefault();
+    }
+
+    public static string WriteCreatorLink(
+        string packageRoot,
+        string kbRoot,
+        string dataRoot,
+        string appName,
+        string mprPath,
+        string runFolder,
+        ExtractionMode extractionMode)
+    {
+        var sourcesDir = Path.Combine(kbRoot, "_sources");
+        Directory.CreateDirectory(sourcesDir);
+
+        var payload = new Dictionary<string, object>
+        {
+            ["schemaVersion"] = "1.0",
+            ["creatorRoot"] = packageRoot,
+            ["appName"] = appName,
+            ["extractionMode"] = extractionMode.ToString(),
+            ["mprPath"] = mprPath,
+            ["dataRoot"] = dataRoot,
+            ["knowledgeBaseRoot"] = kbRoot,
+            ["lastRunFolder"] = runFolder,
+            ["currentAliasPath"] = Path.Combine(Path.GetDirectoryName(runFolder) ?? string.Empty, "current"),
+            ["updatedAtUtc"] = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"),
+        };
+
+        var linkPath = Path.Combine(sourcesDir, "creator-link.json");
+        var json = JsonSerializer.Serialize(payload, JsonOptions);
+        File.WriteAllText(linkPath, json);
+        return linkPath;
+    }
+
+    public static (bool Found, string? Path) DetectClaudeCli(string? userPath = null)
+    {
+        if (!string.IsNullOrWhiteSpace(userPath))
+        {
+            var fullPath = Path.GetFullPath(userPath.Trim().Trim('"'));
+            if (File.Exists(fullPath))
+            {
+                return (true, PreferCmdShim(fullPath));
+            }
+        }
+
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "where",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            psi.ArgumentList.Add("claude");
+
+            using var process = Process.Start(psi);
+            if (process is not null)
+            {
+                var output = process.StandardOutput.ReadToEnd().Trim();
+                process.WaitForExit();
+                if (process.ExitCode == 0 && !string.IsNullOrWhiteSpace(output))
+                {
+                    var firstLine = output.Split('\n', StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+                    if (File.Exists(firstLine))
+                    {
+                        // Prefer .cmd shim — extensionless npm shims are bash
+                        // scripts that Process.Start cannot execute on Windows.
+                        var resolved = PreferCmdShim(firstLine);
+                        return (true, resolved);
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // where command failed; continue to fallback checks
+        }
+
+        var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+        string?[] candidates =
+        [
+            string.IsNullOrWhiteSpace(localAppData) ? null : Path.Combine(localAppData, "Programs", "claude", "claude.exe"),
+            string.IsNullOrWhiteSpace(appData) ? null : Path.Combine(appData, "npm", "claude.cmd"),
+            string.IsNullOrWhiteSpace(localAppData) ? null : Path.Combine(localAppData, "Microsoft", "WinGet", "Links", "claude.exe"),
+        ];
+
+        foreach (var candidate in candidates)
+        {
+            if (!string.IsNullOrWhiteSpace(candidate) && File.Exists(candidate))
+            {
+                return (true, candidate);
+            }
+        }
+
+        return (false, null);
+    }
+
+    public static (bool Found, string? Path) DetectCodexCli(string? userPath = null)
+    {
+        if (!string.IsNullOrWhiteSpace(userPath))
+        {
+            var fullPath = Path.GetFullPath(userPath.Trim().Trim('"'));
+            if (File.Exists(fullPath))
+            {
+                return (true, fullPath);
+            }
+        }
+
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "where",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            psi.ArgumentList.Add("codex");
+
+            using var process = Process.Start(psi);
+            if (process is not null)
+            {
+                var output = process.StandardOutput.ReadToEnd().Trim();
+                process.WaitForExit();
+                if (process.ExitCode == 0 && !string.IsNullOrWhiteSpace(output))
+                {
+                    var firstLine = output.Split('\n', StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+                    if (File.Exists(firstLine))
+                    {
+                        return (true, firstLine);
+                    }
+                }
+            }
+        }
+        catch
+        {
+            // where command failed
+        }
+
+        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        string?[] candidates =
+        [
+            string.IsNullOrWhiteSpace(appData) ? null : Path.Combine(appData, "npm", "codex.cmd"),
+        ];
+
+        foreach (var candidate in candidates)
+        {
+            if (!string.IsNullOrWhiteSpace(candidate) && File.Exists(candidate))
+            {
+                return (true, candidate);
+            }
+        }
+
+        return (false, null);
+    }
+
+    public static (bool Found, string? Path, string? Version, string? Error) DetectMxCli()
+    {
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "where",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            psi.ArgumentList.Add("mxcli");
+
+            using var process = Process.Start(psi);
+            if (process is null)
+                return (false, null, null, "Unable to start PATH lookup for mxcli.");
+
+            var output = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit();
+            if (process.ExitCode != 0 || string.IsNullOrWhiteSpace(output))
+                return (false, null, null, "mxcli not found on PATH.");
+
+            var firstLine = output.Split('\n', StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+            if (!File.Exists(firstLine))
+                return (false, null, null, "mxcli path resolved from PATH does not exist.");
+
+            var versionPsi = new ProcessStartInfo
+            {
+                FileName = firstLine,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
+            versionPsi.ArgumentList.Add("--version");
+
+            using var versionProcess = Process.Start(versionPsi);
+            if (versionProcess is null)
+                return (false, firstLine, null, "Failed to execute mxcli --version.");
+
+            var stdout = versionProcess.StandardOutput.ReadToEnd().Trim();
+            var stderr = versionProcess.StandardError.ReadToEnd().Trim();
+            versionProcess.WaitForExit();
+
+            if (versionProcess.ExitCode != 0)
+            {
+                var err = string.IsNullOrWhiteSpace(stderr) ? $"mxcli --version failed with exit code {versionProcess.ExitCode}." : stderr;
+                return (false, firstLine, null, err);
+            }
+
+            return (true, firstLine, stdout, null);
+        }
+        catch (Exception ex)
+        {
+            return (false, null, null, ex.Message);
+        }
+    }
+
+    public static bool ValidateClaudeApiKey(string? apiKey)
+    {
+        return !string.IsNullOrWhiteSpace(apiKey) && apiKey.Trim().StartsWith("sk-ant-");
+    }
+
+    /// <summary>
+    /// On Windows, extensionless npm shims are bash scripts that Process.Start
+    /// cannot execute. If a .cmd variant exists alongside, prefer it.
+    /// </summary>
+    private static string PreferCmdShim(string path)
+    {
+        var ext = Path.GetExtension(path);
+        if (string.IsNullOrEmpty(ext))
+        {
+            var cmdVariant = path + ".cmd";
+            if (File.Exists(cmdVariant))
+                return cmdVariant;
+        }
+        return path;
+    }
+
+    private static IEnumerable<string> GetCandidateMxPaths(string installRoot)
+    {
+        foreach (var directory in Directory.GetDirectories(installRoot))
+        {
+            var modelerMx = Path.Combine(directory, "modeler", "mx.exe");
+            if (File.Exists(modelerMx))
+            {
+                yield return modelerMx;
+            }
+
+            var rootMx = Path.Combine(directory, "mx.exe");
+            if (File.Exists(rootMx))
+            {
+                yield return rootMx;
+            }
+        }
+    }
+
+    private static bool TryRunShowVersion(string mxPath, string mprPath, out string stdout, out string error)
+    {
+        var psi = new ProcessStartInfo
+        {
+            FileName = mxPath,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+        };
+        psi.ArgumentList.Add("show-version");
+        psi.ArgumentList.Add(mprPath);
+
+        using var process = Process.Start(psi);
+        if (process is null)
+        {
+            stdout = string.Empty;
+            error = "Could not start mx.exe process.";
+            return false;
+        }
+
+        stdout = process.StandardOutput.ReadToEnd().Trim();
+        var stderr = process.StandardError.ReadToEnd().Trim();
+        process.WaitForExit();
+
+        if (process.ExitCode != 0)
+        {
+            error = string.IsNullOrWhiteSpace(stderr) ? $"exit code {process.ExitCode}" : stderr;
+            return false;
+        }
+
+        error = string.Empty;
+        return true;
+    }
+
+    private static string? ParseVersion(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return null;
+        }
+
+        var match = Regex.Match(text, @"\b\d+\.\d+(?:\.\d+){0,2}\b");
+        return match.Success ? match.Value : null;
+    }
+
+    private static string? FindMajorMinorFallback(string requiredVersion, string installRoot)
+    {
+        var parts = requiredVersion.Split('.', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length < 2)
+        {
+            return null;
+        }
+
+        var majorMinor = $"{parts[0]}.{parts[1]}";
+        var directories = Directory.GetDirectories(installRoot)
+            .Select(path => new DirectoryInfo(path))
+            .Where(info =>
+            {
+                var name = info.Name;
+                return name.Equals(majorMinor, StringComparison.OrdinalIgnoreCase)
+                    || name.Equals($"{majorMinor}.x", StringComparison.OrdinalIgnoreCase)
+                    || name.StartsWith($"{majorMinor}.", StringComparison.OrdinalIgnoreCase);
+            })
+            .OrderByDescending(info => info.Name, StringComparer.OrdinalIgnoreCase);
+
+        foreach (var directory in directories)
+        {
+            var modelerMx = Path.Combine(directory.FullName, "modeler", "mx.exe");
+            if (File.Exists(modelerMx))
+            {
+                return modelerMx;
+            }
+
+            var rootMx = Path.Combine(directory.FullName, "mx.exe");
+            if (File.Exists(rootMx))
+            {
+                return rootMx;
+            }
+        }
+
+        return null;
+    }
+
+    private static string? InferStudioProPath(string mxPath)
+    {
+        var parent = Directory.GetParent(mxPath);
+        if (parent is null)
+        {
+            return null;
+        }
+
+        if (parent.Name.Equals("modeler", StringComparison.OrdinalIgnoreCase))
+        {
+            return parent.Parent?.FullName;
+        }
+
+        return parent.FullName;
+    }
+
+    public static Task<int> AddCopilotAsync(
+        string packageRoot,
+        string appFolder,
+        Action<string>? log = null)
+    {
+        var copilotSource = Path.Combine(packageRoot, "artifacts", "CoPilot");
+        if (!Directory.Exists(copilotSource))
+        {
+            log?.Invoke($"ERROR: CoPilot artifact not found: {copilotSource}");
+            return Task.FromResult(1);
+        }
+
+        var copilotDll = Path.Combine(copilotSource, "KbCopilotExtension.dll");
+        if (!File.Exists(copilotDll))
+        {
+            log?.Invoke($"ERROR: CoPilot DLL not found in artifacts: {copilotDll}");
+            log?.Invoke("Run build-extension.ps1 in KnowledgeBase-Copilot/ to build the extension first.");
+            return Task.FromResult(1);
+        }
+
+        var extensionsDir = Path.Combine(appFolder, "extensions");
+        var copilotDest = Path.Combine(extensionsDir, "kb-copilot");
+
+        return Task.Run(() =>
+        {
+            try
+            {
+                Directory.CreateDirectory(extensionsDir);
+
+                if (Directory.Exists(copilotDest))
+                {
+                    log?.Invoke($"Removing existing copilot: {copilotDest}");
+                    Directory.Delete(copilotDest, recursive: true);
+                }
+
+                log?.Invoke($"Copying CoPilot to: {copilotDest}");
+                CopyDirectoryRecursive(copilotSource, copilotDest);
+
+                log?.Invoke("CoPilot extension installed successfully.");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                log?.Invoke($"ERROR: {ex.Message}");
+                return 1;
+            }
+        });
+    }
+
+    public static string? FindStudioProExe(string? mxPath, string? installRoot)
+    {
+        // Try to find studiopro.exe near mx.exe
+        if (!string.IsNullOrWhiteSpace(mxPath) && File.Exists(mxPath))
+        {
+            var mxDir = Path.GetDirectoryName(mxPath)!;
+
+            // mx.exe is typically at <version>/modeler/mx.exe
+            // studiopro.exe is at <version>/modeler/studiopro.exe
+            var candidate = Path.Combine(mxDir, "studiopro.exe");
+            if (File.Exists(candidate))
+                return candidate;
+
+            // Also check parent directory
+            var parent = Directory.GetParent(mxDir);
+            if (parent is not null)
+            {
+                candidate = Path.Combine(parent.FullName, "modeler", "studiopro.exe");
+                if (File.Exists(candidate))
+                    return candidate;
+            }
+        }
+
+        // Fallback: search under install root
+        if (!string.IsNullOrWhiteSpace(installRoot) && Directory.Exists(installRoot))
+        {
+            // Find newest version directory containing studiopro.exe
+            var candidates = Directory.GetDirectories(installRoot)
+                .Select(d => Path.Combine(d, "modeler", "studiopro.exe"))
+                .Where(File.Exists)
+                .OrderByDescending(p => new FileInfo(p).LastWriteTimeUtc)
+                .ToList();
+
+            if (candidates.Count > 0)
+                return candidates[0];
+        }
+
+        return null;
+    }
+
+    public static void OpenMendixApp(string studioProPath, string mprPath)
+    {
+        var psi = new ProcessStartInfo
+        {
+            FileName = studioProPath,
+            UseShellExecute = true,
+        };
+        psi.ArgumentList.Add("--enable-extension-development");
+        psi.ArgumentList.Add(mprPath);
+
+        Process.Start(psi);
+    }
+
+    private static IEnumerable<string> EnumerateAncestorPaths(string path)
+    {
+        var directory = new DirectoryInfo(path);
+        while (directory is not null)
+        {
+            yield return directory.FullName;
+            directory = directory.Parent;
+        }
+    }
+}
