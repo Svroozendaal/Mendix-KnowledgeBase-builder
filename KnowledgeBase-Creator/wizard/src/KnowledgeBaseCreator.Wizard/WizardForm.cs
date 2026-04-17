@@ -384,17 +384,10 @@ internal sealed class WizardForm : Form
             AppendLog("Pipeline completed successfully.");
             AppendLog($"Knowledge base: {kbRoot}");
 
-            var runFolder = WizardRuntime.FindLatestRunFolder(dataRoot);
-            if (!string.IsNullOrWhiteSpace(runFolder))
-            {
-                creatorLinkPath = WizardRuntime.WriteCreatorLink(
-                    _packageRoot, kbRoot, dataRoot, appName, mprPath, runFolder);
-                AppendLog($"Creator link written: {creatorLinkPath}");
-            }
-            else
-            {
-                AppendLog("WARNING: Could not find run folder — creator-link.json not written.");
-            }
+            var runFolder = WizardRuntime.FindLatestRunFolder(dataRoot) ?? string.Empty;
+            creatorLinkPath = WizardRuntime.WriteCreatorLink(
+                _packageRoot, kbRoot, dataRoot, appName, mprPath, runFolder);
+            AppendLog($"Creator link written: {creatorLinkPath}");
 
             AppendLog($"Mendix app folder: {Path.GetDirectoryName(mprPath)}");
 
